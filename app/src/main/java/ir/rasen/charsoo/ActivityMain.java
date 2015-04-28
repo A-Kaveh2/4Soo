@@ -188,7 +188,7 @@ public class ActivityMain extends ActionBarActivity implements View.OnClickListe
             case R.id.rl_home:
                 if (llFooterHome.getVisibility() == View.VISIBLE)
                     return;
-                getSupportActionBar().show();
+                //getSupportActionBar().show();
 
                 rlHome.setBackgroundColor(Color.BLACK);
                 rlUser.setBackgroundColor(Color.DKGRAY);
@@ -214,7 +214,7 @@ public class ActivityMain extends ActionBarActivity implements View.OnClickListe
                 if (llFooterSearch.getVisibility() == View.VISIBLE)
                     return;
 
-                getSupportActionBar().hide();
+                //getSupportActionBar().hide();
 
                 rlHome.setBackgroundColor(Color.DKGRAY);
                 rlUser.setBackgroundColor(Color.DKGRAY);
@@ -242,7 +242,7 @@ public class ActivityMain extends ActionBarActivity implements View.OnClickListe
                 if (llFooterUser.getVisibility() == View.VISIBLE)
                     return;
 
-                getSupportActionBar().hide();
+                //getSupportActionBar().hide();
 
                 rlHome.setBackgroundColor(Color.DKGRAY);
                 rlUser.setBackgroundColor(Color.BLACK);
@@ -269,7 +269,7 @@ public class ActivityMain extends ActionBarActivity implements View.OnClickListe
                 break;
 
             case R.id.rl_businesses2:
-                getSupportActionBar().hide();
+                //getSupportActionBar().hide();
 
                 initialUserBusinessesTab();
                 break;

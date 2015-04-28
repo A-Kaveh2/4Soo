@@ -2,13 +2,16 @@ package ir.rasen.charsoo.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -226,6 +229,40 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                         holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
                     }
 
+                }
+            });
+            final GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    if (items.get(position).isLiked) {
+                        //unlike the post
+
+                        new Unlike(context, LoginInfo.getUserId(context), items.get(position).id).execute();
+                        items.get(position).isLiked = false;
+                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
+                    } else {
+                        //like the post
+
+                        new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
+                        items.get(position).isLiked = true;
+                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                    }
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+
+                }
+            };
+
+            final GestureDetector detector = new GestureDetector(listener);
+            detector.setOnDoubleTapListener(listener);
+
+            holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    return detector.onTouchEvent(motionEvent);
                 }
             });
 

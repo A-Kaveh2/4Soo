@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.text.DecimalFormat;
 
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
@@ -43,12 +44,13 @@ import ir.rasen.charsoo.webservices.post.UpdatePost;
 public class ActivityAddPost extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
 
 
-    EditTextFont editTextTitle, editTextDescription, editTextPrice, editTextCode,editTextHashtags;
+    EditTextFont editTextTitle, editTextDescription, editTextPrice, editTextCode, editTextHashtags;
     ProgressDialog progressDialog;
     ImageView imageViewPostPicture;
     String filePath, postPictureString;
     int businessId;
     int postId = 0;
+    int counter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +65,7 @@ public class ActivityAddPost extends ActionBarActivity implements View.OnClickLi
 
             //setProgressBarIndeterminateVisibility(true);
             //setProgressBarVisibility(true);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             String s = e.getMessage();
         }
 
@@ -95,12 +96,48 @@ public class ActivityAddPost extends ActionBarActivity implements View.OnClickLi
         editTextCode = (EditTextFont) findViewById(R.id.edt_code);
 
         if (postId != 0) {
-                ((MyApplication) getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_POST);
-                progressDialog.show();
-                new GetPost(ActivityAddPost.this, LoginInfo.getUserId(ActivityAddPost.this),businessId, postId, Post.GetPostType.BUSINESS, ActivityAddPost.this).execute();
-                imageViewPostPicture.setEnabled(false);
+            ((MyApplication) getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_POST);
+            progressDialog.show();
+            new GetPost(ActivityAddPost.this, LoginInfo.getUserId(ActivityAddPost.this), businessId, postId, Post.GetPostType.BUSINESS, ActivityAddPost.this).execute();
+            imageViewPostPicture.setEnabled(false);
         }
 
+
+
+        editTextPrice.addTextChangedListener(new TextWatcher() {
+            String oldText;
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                oldText = charSequence.toString();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+                if (charSequence.toString().equals(oldText))
+                    return;
+                /*String price = editTextPrice.getText().toString();
+                int commaCount = price.length() - price.replace(",", "").length();
+                if ((price.length() - counter) % 3 == 0) {
+                    editTextPrice.setText(price + ",");
+                    counter++;
+                }*/
+
+                String price = editTextPrice.getText().toString().replace(",","");
+                if(price.equals(""))
+                    return;
+                double amount = Double.parseDouble(price);
+                DecimalFormat formatter = new DecimalFormat("#,###");
+                price = formatter.format(amount);
+                editTextPrice.setText(price);
+                editTextPrice.setSelection(price.length());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         //process hashtags
         editTextHashtags.addTextChangedListener(new TextWatcher() {
             String oldText;
@@ -178,7 +215,7 @@ public class ActivityAddPost extends ActionBarActivity implements View.OnClickLi
             editTextTitle.setError(Validation.getErrorMessage());
             return;
         }
-        if (postId== 0 && postPictureString.equals("")) {
+        if (postId == 0 && postPictureString.equals("")) {
             new DialogMessage(ActivityAddPost.this, getString(R.string.choose_post_picture)).show();
             return;
         }
@@ -225,21 +262,21 @@ public class ActivityAddPost extends ActionBarActivity implements View.OnClickLi
                 editTextTitle.setText(post.title);
                 //download and display the post picture
                 DownloadImages downloadImages = new DownloadImages(ActivityAddPost.this);
-                downloadImages.download(post.pictureId, Image_M.MEDIUM, imageViewPostPicture,false);
+                downloadImages.download(post.pictureId, Image_M.MEDIUM, imageViewPostPicture, false);
 
                 editTextDescription.setText(post.description);
                 String hashtags = "";
-                for (String hashtag: post.hashtagList){
-                    hashtags += "#"+hashtag;
+                for (String hashtag : post.hashtagList) {
+                    hashtags += "#" + hashtag;
                 }
-                editTextHashtags.setText(hashtags+" ");
+                editTextHashtags.setText(hashtags + " ");
 
                 editTextPrice.setText(post.price);
                 editTextCode.setText(post.code);
             } else if (currentWebservice == WebservicesHandler.Webservices.ADD_POST || currentWebservice == WebservicesHandler.Webservices.UPDATE_POST) {
                 //it is AddPost or UpdatePost. The postAdapter which calls this activity needs to be updated
-                ((MyApplication) getApplication()).post= new Post();
-                ((MyApplication) getApplication()).post= (Post) result;
+                ((MyApplication) getApplication()).post = new Post();
+                ((MyApplication) getApplication()).post = (Post) result;
                 Intent i = getIntent();
                 setResult(RESULT_OK, i);
                 finish();
