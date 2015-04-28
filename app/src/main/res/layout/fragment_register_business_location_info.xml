@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_margin="15dp">
+
+            <Spinner
+                android:id="@+id/spinner_states"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edit_text_back"
+                android:layout_marginLeft="5dp"
+                android:gravity="right" />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/city"
+
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:layout_marginTop="30dp"
+                android:maxLength="@integer/restriction_identifier_length"
+                android:singleLine="true"
+                android:layout_marginRight="5dp"
+               />
+
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/street"
+                android:textColorHint="@color/Black"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:singleLine="true"
+                android:layout_marginTop="30dp"
+             />
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_large_x"
+                android:text="@string/location_on_map"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                android:textColor="@color/Black" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/map_height" />
+            <ir.rasen.charsoo.ui.ButtonFont
+                android:id="@+id/btn_map"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/choose_location_on_map"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/selector_button_login"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_larger" />
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

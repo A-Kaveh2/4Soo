@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/ll_action_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:background="@color/Black"
+        android:weightSum="100">
+
+        <RelativeLayout
+            android:id="@+id/rl_base_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="33.333333">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_centerInParent="true">
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/White"
+                    android:layout_marginRight="2dp"
+                    android:text="@string/level1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_store_mall_directory_white_24dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_indicator_base"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/indicator_height"
+                android:background="@color/DarkOrange"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_contact_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="33.333333">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_centerInParent="true">
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/White"
+                    android:layout_marginRight="2dp"
+                    android:text="@string/level2" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_info_white_24dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_indicator_contact"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/indicator_height"
+                android:background="@color/DarkOrange"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_location_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="33.333333">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_centerInParent="true">
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/White"
+                    android:layout_marginRight="2dp"
+                    android:text="@string/level3" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_place_white_24dp" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_indicator_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/indicator_height"
+                android:background="@color/DarkOrange"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_action_bar" />
+
+</RelativeLayout>

@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMain"
+    android:gravity="center">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <ImageView
+                android:layout_width="@dimen/register_profile_picture_height"
+                android:layout_height="@dimen/register_profile_picture_height"
+                android:id="@+id/imageView_user_picture"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/selector_button_choose_pitcure_landscape" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/register_profile_picture_height"
+                android:layout_toLeftOf="@+id/imageView_user_picture"
+                android:gravity="center">
+
+                <ir.rasen.charsoo.ui.EditTextFont
+                    android:id="@+id/edt_title"
+                    android:layout_width="match_parent"
+                    android:hint="@string/title"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_register"
+                    android:nextFocusDown="@+id/edt_description"
+                    android:singleLine="true"
+                    android:maxLength="@integer/restriction_identifier_length"
+
+                    android:layout_marginRight="5dp" />
+
+            </RelativeLayout>
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_description"
+                android:layout_width="match_parent"
+                android:hint="@string/description"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_user_picture"
+                android:textSize="@dimen/font_size_register"
+                android:singleLine="true"
+                android:maxLength="@integer/restriction_description"
+                android:layout_marginTop="30dp"
+                android:nextFocusDown="@+id/edt_hashtags" />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_hashtags"
+                android:layout_width="match_parent"
+                android:hint="@string/hashtags"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_description"
+                android:textSize="@dimen/font_size_register"
+                android:singleLine="true"
+                android:maxLength="@integer/restriction_description"
+                android:layout_marginTop="30dp"
+                android:nextFocusDown="@+id/edt_price" />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_price"
+                android:layout_width="match_parent"
+                android:hint="@string/price"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_hashtags"
+                android:textSize="@dimen/font_size_register"
+                android:inputType="numberDecimal"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:layout_marginTop="20dp"
+                android:maxLength="@integer/restriction_identifier_length"
+                android:nextFocusDown="@+id/editText_password_repeat" />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_price"
+                android:hint="@string/product_code"
+                android:singleLine="true"
+                android:gravity="right|center_vertical"
+                android:textSize="@dimen/font_size_register"
+                android:maxLength="@integer/restriction_identifier_length"
+                android:layout_marginTop="20dp" />
+
+            <ir.rasen.charsoo.ui.ButtonFont
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/submit"
+                android:background="@drawable/selector_button_login"
+                android:layout_marginTop="30dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_larger"
+                android:layout_below="@+id/edt_code" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

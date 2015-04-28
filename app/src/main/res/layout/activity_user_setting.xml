@@ -1,0 +1,153 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMain"
+    android:gravity="center">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/relativeLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/DeepSkyBlue"
+                android:textSize="@dimen/font_size_user_setting_title"
+                android:text="@string/friends"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/textView_title_friends" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checkBox_friends"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:button="@drawable/selector_check_box"
+                android:layout_alignParentTop="true" />
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:id="@+id/textView_friends_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/friends_set"
+                android:textColor="@color/Black"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textView_title_friends" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/DimGray"
+                android:layout_below="@+id/textView_friends_text"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/DeepSkyBlue"
+                android:textSize="@dimen/font_size_user_setting_title"
+                android:text="@string/businesses"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/textView_title_businesses" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checkBox_businesses"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:button="@drawable/selector_check_box"
+                android:layout_alignParentTop="true" />
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:id="@+id/textView_businesses_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/businesses_set"
+                android:textColor="@color/Black"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textView_title_businesses" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/DimGray"
+                android:layout_below="@+id/textView_businesses_text"
+                android:layout_marginTop="10dp"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/DeepSkyBlue"
+                android:textSize="@dimen/font_size_user_setting_title"
+                android:text="@string/reviews"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/textView_title_reviews" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/checkBox_reviews"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:button="@drawable/selector_check_box"
+                android:layout_alignParentTop="true" />
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:id="@+id/textView_reviews_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/reviews_set"
+                android:textColor="@color/Black"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/textView_title_reviews" />
+
+
+
+        </RelativeLayout>
+
+        <ir.rasen.charsoo.ui.ButtonFont
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/submit"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/selector_button_login"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size_larger" />
+    </LinearLayout>
+
+</RelativeLayout>

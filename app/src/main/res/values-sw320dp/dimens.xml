@@ -1,0 +1,88 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="base_adapter_item_height">70dp</dimen>
+    <dimen name="adapter_user_image_height">48dp</dimen>
+    <dimen name="adapter_business_image_height_margin_bottom">24dp</dimen>
+    <dimen name="adapter_item_height">66dp</dimen>
+    <dimen name="adapter_friend_request_item_width">122dp</dimen>
+    <dimen name="comment_notification_adapter_post_image_height">52dp</dimen>
+    <dimen name="post_adapter_small_icon">20dp</dimen>
+    <dimen name="post_adapter_icon">35dp</dimen>
+
+    <!--Margins-->
+    <dimen name="base_adapter_item_text_margin">2dp</dimen>
+    <dimen name="base_adapter_item_margin">10dp</dimen>
+    <dimen name="adapter_item_margin">3dp</dimen>
+    <dimen name="post_adapter_small_icons_margin">10dp</dimen>
+    <dimen name="post_adapter_comments_bottom_margin">20dp</dimen>
+    <dimen name="post_adapter_icons_margin">15dp</dimen>
+    <dimen name="post_adapter_description_margin">15dp</dimen>
+    <dimen name="base_adapter_item_image_margin">12dp</dimen>
+    <dimen name="comment_adapter_item_more_margin">2dp</dimen>
+    <dimen name="action_bar_items_margin">5dp</dimen>
+    <dimen name="drawer_edit_button_margin">15dp</dimen>
+    <dimen name="user_profile_margin">15dp</dimen>
+    <dimen name="work_time_margi">5dp</dimen>
+    <dimen name="work_time_layouts_margin">10dp</dimen>
+    <!--Margins-->
+
+    <!--Font sized-->
+    <dimen name="font_rial">12dp</dimen>
+    <dimen name="font_size_adapter_item_title">14dp</dimen>
+    <dimen name="font_size_drawer_businesses">18dp</dimen>
+    <dimen name="font_size_drawer_businesses_title">18dp</dimen>
+    <dimen name="font_size_adapter_item_text">12dp</dimen>
+    <dimen name="font_size_header">14dp</dimen>
+    <dimen name="font_size_register">12dp</dimen>
+    <dimen name="font_size_user_setting_title">20dp</dimen>
+    <dimen name="font_size_action_bar_title">22dp</dimen>
+    <dimen name="font_user_profile_edit_text">14dp</dimen>
+    <!--Font sized-->
+
+
+    <dimen name="shadow_Width">2dp</dimen>
+    <dimen name="large">16dp</dimen>
+    <dimen name="medium">8dp</dimen>
+    <dimen name="small">5dp</dimen>
+    <dimen name="et_height">32dp</dimen>
+    <dimen name="dialog_button">12dp</dimen>
+    <dimen name="line_height">4dp</dimen>
+    <dimen name="font_circle_button">@dimen/font_large</dimen>
+    <dimen name="font_small_v">9dp</dimen>
+    <dimen name="font_small">10dp</dimen>
+    <dimen name="font_small_x">12dp</dimen>
+    <dimen name="font_medium">14.5dp</dimen>
+    <dimen name="font_medium_x">15.5dp</dimen>
+    <dimen name="font_large">17dp</dimen>
+    <dimen name="font_large_x">20dp</dimen>
+    <dimen name="font_large_xx">50dp</dimen>
+    <dimen name="popup_corner_radius">5dp</dimen>
+    <dimen name="post_item_divider">2dp</dimen>
+    <dimen name="action_bar_custome_height">50dp</dimen>
+    <dimen name="action_bar_items_length">40dp</dimen>
+    <dimen name="header_switch_hight">70dp</dimen>
+    <dimen name="header_switch_inner_item_hight">45dp</dimen>
+    <dimen name="header_switch_hight_halft">25dp</dimen>
+    <dimen name="header_switch_footer_hight_halft">15dp</dimen>
+    <dimen name="drawer_header_height_blue_section">180dp</dimen>
+    <dimen name="drawer_header_business_height_blue_section">80dp</dimen>
+    <dimen name="drawer_header_height">220dp</dimen>
+    <dimen name="drawer_header_business_height">120dp</dimen>
+    <dimen name="drawer_user_picture_height">100dp</dimen>
+    <dimen name="drawer_header_inner_items_height">40dp</dimen>
+    <dimen name="drawer_header_inner_items_with_icons_height">40dp</dimen>
+    <dimen name="register_profile_picture_height">100dp</dimen>
+    <dimen name="user_profile_picture_height">80dp</dimen>
+    <integer name="image_quality">100</integer>
+    <integer name="image_size">640</integer>
+    <dimen name="indicator_height">4dp</dimen>
+    <dimen name="day_button_width">80dp</dimen>
+    <dimen name="day_button_height">30dp</dimen>
+    <dimen name="time_edit_text_width">70dp</dimen>
+    <dimen name="map_height">300dp</dimen>
+
+
+</resources>

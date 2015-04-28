@@ -1,0 +1,29 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ir.rasen.charsoo.ui.ButtonFont
+        android:id="@+id/btn_blocked_users"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/blockeds"
+        android:background="@drawable/selector_button_login"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_larger"
+        android:layout_alignParentTop="true" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_below="@+id/btn_blocked_users"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listView" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>
+

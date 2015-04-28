@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White">
+
+        <LinearLayout
+            android:id="@+id/ll_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ir.rasen.charsoo.ui.GridViewWithHeaderAndFooter
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_drawer"
+            android:layout_width="240dp"
+            android:layout_gravity="right"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/White">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+
+                <LinearLayout
+                    android:id="@+id/ll_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/DeepSkyBlue">
+
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="@dimen/drawer_user_picture_height"
+                        android:layout_height="@dimen/drawer_user_picture_height"
+                        android:id="@+id/imageView_business_picture" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Large Text"
+                        android:layout_marginTop="10dp"
+                        android:textSize="@dimen/font_size_drawer_businesses_title"
+                        android:textColor="@color/White"
+                        android:id="@+id/textView_drawer_identifier" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="@dimen/adapter_user_image_height"
+                    android:layout_height="@dimen/adapter_user_image_height"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="@dimen/drawer_edit_button_margin">
+
+                    <ir.rasen.charsoo.ui.ImageViewCircle
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@color/DarkOrange"
+                        android:id="@+id/imageView" />
+
+                    <ImageView
+                        android:id="@+id/imageView_drawer_edit"
+                        android:layout_width="@dimen/post_adapter_icon"
+                        android:layout_height="@dimen/post_adapter_icon"
+                        android:src="@drawable/selector_edit_button"
+                        android:layout_centerInParent="true" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gray" />
+
+            <LinearLayout
+                android:id="@+id/ll_drawer_new_post"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drawer_header_inner_items_with_icons_height"
+                android:gravity="right|center_vertical"
+                android:orientation="horizontal"
+                android:background="@drawable/selector_popup_middle_item">
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/new_product"
+                    android:textSize="@dimen/font_size_adapter_item_title"
+                    android:textColor="@color/Black"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/textView" />
+
+                <ImageView
+                    android:layout_width="@dimen/post_adapter_icon"
+                    android:layout_height="@dimen/post_adapter_icon"
+                    android:id="@+id/imageView3"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_add_circle_grey" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@color/Gray" />
+
+            <LinearLayout
+                android:id="@+id/ll_drawer_businesses_list"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:gravity="right|center_vertical"
+                android:orientation="horizontal"
+                android:background="@drawable/selector_popup_middle_item">
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/business_list"
+                    android:textSize="@dimen/font_size_drawer_businesses"
+                    android:textColor="@color/Black"
+                    android:layout_marginRight="15dp" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/listView_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp" />
+
+
+        </LinearLayout>
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+</RelativeLayout>

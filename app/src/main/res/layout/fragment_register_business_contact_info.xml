@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="15dp">
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/Black"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:maxLength="11"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                 />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/mobile"
+                android:layout_marginTop="30dp"
+                android:textColorHint="@color/Black"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:maxLength="11"
+                android:inputType="numberDecimal"
+                android:singleLine="true"
+                 />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_wesite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/website"
+                android:layout_marginTop="30dp"
+                android:textColorHint="@color/Black"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:singleLine="true"
+                android:inputType="textWebEditText"
+               />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:layout_marginTop="30dp"
+                android:textColorHint="@color/Black"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:singleLine="true"
+                android:inputType="textEmailAddress"
+                 />
+
+            <ir.rasen.charsoo.ui.ButtonFont
+                android:id="@+id/btn_work_time"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/work_time"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/selector_button_login"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_larger" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,342 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMain"
+    android:gravity="center">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:paddingBottom="20dp"
+            android:background="@color/White"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/rl_header">
+
+                <ImageView
+                    android:id="@+id/imageView_cover"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_camera_footer"
+                    android:layout_alignParentBottom="true">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentBottom="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/action_bar_custome_height"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/shape_gradiant_down"
+                            android:gravity="right|center_vertical"
+                            android:layout_alignParentEnd="true">
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_footer_blank"
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="@dimen/header_switch_footer_hight_halft"
+                            android:background="@color/White"
+                            android:layout_alignParentBottom="true" />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/action_bar_custome_height"
+                android:gravity="center_vertical"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_gradiant_up">
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView_back"
+                    android:layout_marginLeft="15dp"
+                    android:background="@drawable/ic_arrow_back_white_24dp" />
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_user"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_below="@+id/rl_header"
+                android:gravity="center">
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:id="@+id/editText_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ABAN"
+                    android:textColor="@color/Black"
+                    android:padding="3dp"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_user_profile_edit_text"
+                    android:gravity="right|center_vertical" />
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_below="@+id/editText_name"
+                    android:id="@+id/editText_identifier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ABAN"
+                    android:padding="3dp"
+                    android:textColor="@color/DarkOrange"
+                    android:enabled="false"
+                    android:textSize="@dimen/font_user_profile_edit_text"
+                    android:layout_marginTop="10dp"
+                    android:gravity="right|center_vertical" />
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_user"
+                android:orientation="vertical"
+                android:layout_margin="30dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/user_profile_margin">
+
+
+                    <ImageView
+                        android:id="@+id/imageView_description"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_description_blue_24dp" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/edt_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/Black"
+                        android:layout_marginRight="10dp"
+                        android:inputType="textEmailAddress"
+                        android:gravity="right|center_vertical"
+                        android:nextFocusDown="@+id/edt_day"
+                        android:textSize="@dimen/font_user_profile_edit_text"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imageView_description" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/user_profile_margin">
+
+
+                    <ImageView
+                        android:id="@+id/imageView_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone_blue_24dp" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/edt_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/Black"
+                        android:layout_marginRight="10dp"
+                        android:inputType="textEmailAddress"
+                        android:gravity="right|center_vertical"
+                        android:nextFocusDown="@+id/edt_day"
+                        android:textSize="@dimen/font_user_profile_edit_text"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imageView_phone" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/user_profile_margin">
+
+
+                    <ImageView
+                        android:id="@+id/imageView_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_phone_android_blue_24dp" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/edt_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/Black"
+                        android:layout_marginRight="10dp"
+                        android:inputType="textEmailAddress"
+                        android:gravity="right|center_vertical"
+                        android:nextFocusDown="@+id/edt_day"
+                        android:textSize="@dimen/font_user_profile_edit_text"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imageView_mobile" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/user_profile_margin">
+
+
+                    <ImageView
+                        android:id="@+id/imageView_time"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_access_time_blue_24dp" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/edt_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/Black"
+                        android:layout_marginRight="10dp"
+                        android:inputType="textEmailAddress"
+                        android:gravity="right|center_vertical"
+                        android:nextFocusDown="@+id/edt_day"
+                        android:textSize="@dimen/font_user_profile_edit_text"
+
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imageView_time" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/user_profile_margin">
+
+
+                    <ImageView
+                        android:id="@+id/imageView_website"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_public_blue_24dp" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/edt_wesite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/Black"
+                        android:inputType="textEmailAddress"
+                        android:gravity="right|center_vertical"
+                        android:nextFocusDown="@+id/edt_day"
+                        android:textSize="@dimen/font_user_profile_edit_text"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imageView_website" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/user_profile_margin"
+                    android:layout_marginBottom="@dimen/user_profile_margin">
+
+
+                    <ImageView
+                        android:id="@+id/imageView_email"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_email_blue_24dp" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/Black"
+                        android:inputType="textEmailAddress"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right|center_vertical"
+                        android:nextFocusDown="@+id/edt_day"
+                        android:textSize="@dimen/font_user_profile_edit_text"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imageView_email" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/selector_button_login">
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:text="@string/map"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:layout_toLeftOf="@+id/imageView_map"
+                        android:textSize="@dimen/text_size_larger"/>
+                    <ImageView
+                        android:id="@+id/imageView_map"
+                        android:layout_width="@dimen/button_icon_height"
+                        android:layout_height="@dimen/button_icon_height"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+
+                        android:src="@drawable/ic_map_white_24dp"/>
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

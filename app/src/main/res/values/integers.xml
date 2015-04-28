@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Restrictions-->
+    <integer name="restriction_identifier_length">25</integer>
+    <integer name="restriction_description">255</integer>
+    <integer name="image_weight">15</integer>
+    <integer name="text_weight">55</integer>
+
+    <integer name="dialog_header_weight">10</integer>
+    <integer name="dialog_body_weight">2</integer>
+    <integer name="popup_item_width">300</integer>
+    <integer name="dialog_item_width">400</integer>
+    <integer name="popup_item_height">80</integer>
+    <integer name="edit_text_padding">2</integer>
+    <integer name="divider_super">4</integer>
+    <integer name="divider_child">2</integer>
+    <integer name="font_size_dialog_header">20</integer>
+
+    <integer name="dialog_row_width_weight">8</integer>
+    <integer name="dialog_row_width_height">12</integer>
+    <integer name="lazy_load_limitation">20</integer>
+    <integer name="interval_time">10000</integer>
+
+    <integer name="squar_image_corner">10</integer>
+
+
+
+
+
+
+
+
+</resources>

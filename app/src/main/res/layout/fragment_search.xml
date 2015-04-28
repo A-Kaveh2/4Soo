@@ -1,0 +1,157 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/DeepSkyBlue"
+        android:layout_height="@dimen/button_height">
+
+        <ir.rasen.charsoo.ui.EditTextFont
+            android:imeOptions="actionSearch"
+            android:id="@+id/edt_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_title"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/Black"
+            android:singleLine="true"
+            android:inputType="text"
+            android:maxLength="@integer/restriction_identifier_length"
+            android:background="@color/White"
+            android:drawableRight="@drawable/ic_search_black_24dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_tab"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ll_header"
+        android:background="@color/DeepSkyBlue"
+        android:weightSum="100">
+
+        <RelativeLayout
+            android:id="@+id/rl_businesses"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="33.33333">
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/White"
+                android:textSize="@dimen/font_large"
+                android:text="@string/businesses" />
+
+            <LinearLayout
+                android:id="@+id/ll_indicator_businesses"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/indicator_height"
+                android:background="@color/DarkOrange"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_posts"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="33.33333">
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/White"
+                android:textSize="@dimen/font_large"
+                android:text="@string/posts" />
+
+            <LinearLayout
+                android:id="@+id/ll_indicator_posts"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/indicator_height"
+                android:background="@color/DarkOrange"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_users"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="33.33333">
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="@color/White"
+                android:textSize="@dimen/font_large"
+                android:text="@string/users" />
+
+            <LinearLayout
+                android:id="@+id/ll_indicator_users"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/indicator_height"
+                android:background="@color/DarkOrange"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_filters"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_tab"
+        android:layout_margin="20dp">
+
+        <ir.rasen.charsoo.ui.TextViewFont
+            android:id="@+id/textViewFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filters"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/font_large"
+            android:textColor="@color/Black" />
+
+        <Spinner
+            android:layout_below="@+id/textViewFilters"
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text_back"
+            android:gravity="right" />
+
+        <Spinner
+            android:id="@+id/spinner_sub_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/spinner_category"
+            android:background="@drawable/shape_edit_text_back"
+            android:gravity="right" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/spinner_sub_category"/>
+
+    </RelativeLayout>
+</RelativeLayout>
+

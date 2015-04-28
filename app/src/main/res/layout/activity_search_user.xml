@@ -1,0 +1,40 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/DeepSkyBlue"
+        android:visibility="gone"
+        android:layout_height="@dimen/button_height">
+
+        <ir.rasen.charsoo.ui.EditTextFont
+            android:imeOptions="actionSearch"
+            android:id="@+id/edt_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/user_identifier"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/Black"
+            android:singleLine="true"
+            android:inputType="text"
+            android:maxLength="@integer/restriction_identifier_length"
+            android:background="@color/White"
+            android:drawableRight="@drawable/ic_search_black_24dp" />
+    </LinearLayout>
+
+    <ListView
+        android:layout_below="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listView" />
+
+</RelativeLayout>
+

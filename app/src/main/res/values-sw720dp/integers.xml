@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="dialog_row_width_weight">6</integer>
+    <integer name="dialog_row_width_height">17</integer>
+    <integer name="font_size_dialog_header">30</integer>
+</resources>

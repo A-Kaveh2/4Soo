@@ -1,0 +1,25 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMain">
+
+    <ir.rasen.charsoo.ui.ButtonFont
+        android:id="@+id/btn_creat_new_business"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="@dimen/button_height"
+        android:text="@string/create_new_business"
+        android:background="@drawable/selector_button_login"
+        android:layout_margin="20dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_larger" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btn_creat_new_business"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_list_view_item">
+
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/adapter_item_margin"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_image_post"
+            android:layout_width="@dimen/adapter_item_height"
+            android:layout_height="@dimen/adapter_item_height"
+            android:layout_alignParentLeft="true"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/comment_notification_adapter_post_image_height"
+                android:layout_height="@dimen/comment_notification_adapter_post_image_height"
+                android:id="@+id/imageView_comment_adapter_item_image_post"
+                android:layout_margin="2dp"
+                android:src="@drawable/ic_launcher"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_margin="@dimen/base_adapter_item_text_margin"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/ll_image_user"
+            android:layout_toRightOf="@+id/ll_image_post"
+            android:layout_centerInParent="true"
+            android:gravity="right|center_vertical"
+            android:orientation="vertical">
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:textSize="@dimen/font_size_adapter_item_title"
+                android:text="Large Text"
+                android:textColor="@color/Black"
+                android:id="@+id/textView_comment_adapter_item_title" />
+
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right|center"
+                android:text="Large Text\nText\nText"
+                android:textSize="@dimen/font_size_adapter_item_text"
+                android:id="@+id/textView_comment_adapter_item_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_image_user"
+            android:layout_width="@dimen/adapter_item_height"
+            android:layout_height="@dimen/adapter_item_height"
+            android:layout_alignParentRight="true"
+            android:gravity="center">
+
+            <ir.rasen.charsoo.ui.ImageViewCircle
+                android:layout_width="@dimen/adapter_user_image_height"
+                android:layout_height="@dimen/adapter_user_image_height"
+                android:id="@+id/imageView_comment_adapter_item_image_user"
+                android:src="@drawable/ic_launcher"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

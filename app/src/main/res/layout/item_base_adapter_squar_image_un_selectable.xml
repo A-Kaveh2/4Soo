@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:gravity="right"
+        android:layout_margin="@dimen/adapter_item_margin"
+        android:layout_height="@dimen/base_adapter_item_height"
+        android:weightSum="1">
+
+
+        <ir.rasen.charsoo.ui.TextViewFont
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="right|center"
+            android:textSize="@dimen/font_size_adapter_item_title"
+            android:text="Large Text"
+            android:layout_margin="@dimen/base_adapter_item_text_margin"
+            android:textColor="@color/Black"
+            android:id="@+id/textView_base_adapter_item_title" />
+
+        <LinearLayout
+            android:layout_width="@dimen/adapter_item_height"
+            android:layout_height="@dimen/adapter_item_height"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="@dimen/adapter_user_image_height"
+                android:layout_height="@dimen/adapter_user_image_height"
+                android:id="@+id/imageView_base_adapter_item_image" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

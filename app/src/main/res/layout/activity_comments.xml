@@ -1,0 +1,61 @@
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/rl_send_comment"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listView" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_send_comment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_switch_hight"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true">
+        <ir.rasen.charsoo.ui.EditTextFont
+            android:id="@+id/edt_comment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/comment_context"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="right|center_vertical"
+            android:textColor="@color/Black"
+            android:singleLine="true"
+            android:layout_toLeftOf="@+id/rl_send"
+            android:background="@drawable/shape_edit_text_back"/>
+        <RelativeLayout
+            android:layout_width="@dimen/header_switch_hight"
+            android:layout_height="@dimen/header_switch_hight"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/rl_send"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:layout_width="@dimen/header_switch_hight"
+                android:layout_height="@dimen/header_switch_hight"
+                android:id="@+id/imageView_cirecle"
+
+                android:src="@drawable/button_circle_red" />
+
+            <ImageView
+                android:id="@+id/imageView_send"
+                android:layout_width="@dimen/header_switch_inner_item_hight"
+                android:layout_height="@dimen/header_switch_inner_item_hight"
+                android:layout_centerInParent="true"
+                android:src="@drawable/selector_button_send" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
+

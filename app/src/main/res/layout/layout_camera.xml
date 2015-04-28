@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/White">
+
+        <FrameLayout
+            android:id="@+id/camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+
+        </FrameLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_camera_cover"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/White"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:background="@color/DeepSkyBlue"/>
+
+            <ImageView
+                android:id="@+id/imageView_capture"
+                android:text="@string/submit"
+                android:layout_width="@dimen/register_profile_picture_height"
+                android:layout_height="@dimen/register_profile_picture_height"
+                android:layout_centerInParent="true"
+                android:src="@drawable/selector_button_camera"
+                android:layout_marginBottom="30dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

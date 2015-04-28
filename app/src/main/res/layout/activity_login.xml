@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMain"
+    android:gravity="center">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/relativeLayout">
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_login_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email"
+                android:textColorHint="@color/Black"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:drawableRight="@drawable/ic_email_blue_24dp" />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/edt_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edt_login_email"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:selectAllOnFocus="true"
+                android:textColorHint="@color/Black"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/Black"
+                android:singleLine="true"
+                android:gravity="right|center_vertical"
+                android:drawableRight="@drawable/ic_lock_blue_24dp" />
+
+            <LinearLayout
+                android:id="@+id/ll_login_btns"
+                android:layout_below="@+id/edt_login_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/edt_login_password"
+                android:layout_alignRight="@id/edt_login_password"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
+                <ir.rasen.charsoo.ui.ButtonFont
+                    android:id="@+id/btn_login_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="@string/login"
+                    android:background="@drawable/selector_button_login"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_larger" />
+
+                <ir.rasen.charsoo.ui.ButtonFont
+                    android:id="@+id/btn_login_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:text="@string/register"
+                    android:background="@drawable/selector_button_register"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/text_size_larger" />
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:id="@+id/btn_login_forget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/Black"
+                    android:text="@string/forgot_password"
+                    android:textSize="@dimen/text_size_large"
+                    android:layout_marginTop="20dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
