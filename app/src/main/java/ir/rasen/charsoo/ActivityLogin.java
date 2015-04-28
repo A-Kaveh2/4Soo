@@ -39,6 +39,7 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
 
 
+        //for the test I need to disable automatically going to ActivityMain
        /* if (LoginInfo.isLoggedIn(this)) {
             Intent intent = new Intent(this, ActivityMain.class);
             startActivity(intent);
@@ -91,7 +92,7 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
                 myApplication.setCurrentWebservice(WebservicesHandler.Webservices.FORGET_PASSWORD);
                 break;
             case R.id.btn_login_register:
-
+                //The main function commented here because of the test
                 /*Intent intent = new Intent(ActivityLogin.this, ActivityRegisterUser.class);
                 startActivity(intent);*/
                 Intent intent = new Intent(this, ActivityMain.class);
