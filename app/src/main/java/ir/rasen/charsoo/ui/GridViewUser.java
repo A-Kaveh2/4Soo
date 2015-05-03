@@ -95,7 +95,7 @@ public class GridViewUser implements IWebserviceResponse {
 
 
         if (!hasHeader) {
-            viewHeader = ((Activity) activity).getLayoutInflater().inflate(R.layout.layout_user_grid_header, null);
+            viewHeader = ( activity).getLayoutInflater().inflate(R.layout.layout_user_grid_header, null);
             imageViewMore = (ImageView) viewHeader.findViewById(R.id.imageView_more);
             imageViewSearch = (ImageView) viewHeader.findViewById(R.id.imageView_search);
             imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);

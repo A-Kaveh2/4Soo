@@ -141,6 +141,166 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_size_header"
             android:layout_marginRight="10dp"
+            android:id="@+id/textView_business_name"
+            android:textColor="@color/Black" />
+
+        <ir.rasen.charsoo.ui.TextViewFont
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_header"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/textView_business_identifier"
+            android:textColor="@color/DarkOrange" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginRight="30dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView_friends"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/selector_button_business_follower" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/textView_friends_number"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_header"
+                        android:text="12345"
+                        android:visibility="gone"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/Black"
+                        android:gravity="center"
+                        android:background="@drawable/shape_button_green_followers" />
+                </RelativeLayout>
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_header"
+                    android:text="@string/friends"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/Gray" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView_reviews"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/selector_button_business_review" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/textView_reviews_number"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_header"
+                        android:text="12345"
+                        android:visibility="gone"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/Black"
+                        android:gravity="center"
+                        android:background="@drawable/shape_button_green_followers" />
+                </RelativeLayout>
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_header"
+                    android:text="@string/reviews"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/Gray" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="30dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageView_businesses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/selector_button_business_contact_info" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/textView_businesses_number"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_header"
+                        android:text="12345"
+                        android:visibility="gone"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/Black"
+                        android:gravity="center"
+                        android:background="@drawable/shape_button_green_followers" />
+                </RelativeLayout>
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_header"
+                    android:text="@string/businesses"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:textColor="@color/Gray" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="right">
+
+        <ir.rasen.charsoo.ui.TextViewFont
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_header"
+            android:layout_marginRight="10dp"
             android:id="@+id/textView_user_name"
             android:textColor="@color/Black" />
 

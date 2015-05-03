@@ -38,6 +38,7 @@ public class PopupCameraGallery extends MyPopup {
         textViewCamera.setLayoutParams(params);
         textViewCamera.setText(activity.getResources().getString(R.string.camera));
         textViewCamera.setBackgroundResource(R.drawable.selector_popup_top_item);
+        textViewCamera.setTextSize(activity.getResources().getDimension(R.dimen.popup_font));
 
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width,1);
         TextViewFont textViewDevider = new TextViewFont(activity);
@@ -50,6 +51,7 @@ public class PopupCameraGallery extends MyPopup {
         textViewGallery.setLayoutParams(params);
         textViewGallery.setText(activity.getResources().getString(R.string.gallery));
         textViewGallery.setBackgroundResource(R.drawable.selector_popup_bottom_item);
+        textViewGallery.setTextSize(activity.getResources().getDimension(R.dimen.popup_font));
 
         LinearLayout ll_body = getBody();
         ll_body.addView(textViewCamera);

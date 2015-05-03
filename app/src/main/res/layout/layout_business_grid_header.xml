@@ -48,6 +48,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/shape_gradiant_down"
+                android:visibility="gone"
                 android:gravity="right|center_vertical"
                 android:layout_alignParentEnd="true">
 

@@ -83,6 +83,7 @@
     <dimen name="day_button_height">30dp</dimen>
     <dimen name="time_edit_text_width">70dp</dimen>
     <dimen name="map_height">300dp</dimen>
+    <dimen name="popup_font">18dp</dimen>
 
 
 </resources>

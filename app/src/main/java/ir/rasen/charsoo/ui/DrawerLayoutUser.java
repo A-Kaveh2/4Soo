@@ -3,6 +3,7 @@ package ir.rasen.charsoo.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.google.android.gms.analytics.ac;
 
 import ir.rasen.charsoo.ActivityBusiness;
 import ir.rasen.charsoo.ActivityLogin;
@@ -88,14 +91,16 @@ public class DrawerLayoutUser {
         (drawerLayout.findViewById(R.id.ll_drawer_contact_us)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "Open contact us page", Toast.LENGTH_LONG).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(activity.getResources().getString(R.string.url_contact_us)));
+                activity.startActivity(browserIntent);
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });
         (drawerLayout.findViewById(R.id.ll_drawer_guide)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(activity, "Open guide page", Toast.LENGTH_LONG).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(activity.getResources().getString(R.string.url_guide)));
+                activity.startActivity(browserIntent);
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });

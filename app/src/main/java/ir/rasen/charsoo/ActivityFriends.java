@@ -22,6 +22,7 @@ import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.ui.ButtonFont;
 import ir.rasen.charsoo.webservices.friend.GetUserFriends;
 import ir.rasen.charsoo.webservices.user.GetFollowingBusinesses;
 
@@ -36,8 +37,6 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
     ArrayList<BaseAdapterItem> sampleFriends;
     private View listFooterView;
     SwipeRefreshLayout swipeLayout;
-
-
 
     private enum Status {FIRST_TIME, LOADING_MORE,REFRESHING, NONE}
 
@@ -122,6 +121,12 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
         progressDialog.show();
         new GetUserFriends(ActivityFriends.this,visitedUserId,ActivityFriends.this).execute();
 
+        (findViewById(R.id.btn_friend_requests)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 

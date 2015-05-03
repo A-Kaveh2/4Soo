@@ -485,6 +485,8 @@
     <string name="level1">مرحله یک</string>
     <string name="level2">مرحله دو</string>
     <string name="level3">مرحله سه</string>
+    <string name="url_guide">http://www.google.com</string>
+    <string name="url_contact_us">http://www.google.com</string>
 
 
     <string-array name="states">
