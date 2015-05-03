@@ -36,6 +36,7 @@
     <string name="search">جستجو</string>
     <string name="search_title">عنوان جستجو</string>
     <string name="products">محصولات</string>
+    <string name="product">محصول</string>
     <string name="enter_search_keywords">متنی را جهت جستجو وارد نمایید.</string>
     <string name="no_location_found">مکان شما تشخیص داده نشده است, لطفأ مکانی را جهت جستجو انتخاب نمایید.</string>
 
@@ -55,6 +56,7 @@
     <string name="forgot_password_sent">کلمه ی عبور شما از طریق ایمیل برایتان ارسال خواهد شد.</string>
     <!-- REGISTER PAGE -->
     <string name="register">ثبت نام</string>
+    <string name="register_business">ثبت نام کسب و کار</string>
     <string name="forgot_password">فراموشی رمز عبور</string>
     <string name="username">نام کاربری</string>
     <string name="user_identifier">نام کاربری کاربر</string>
@@ -271,6 +273,7 @@
     <string name="block_done">کاربر مورد نظر مسدود شد</string>
     <string name="block_error">مسدود سازی انجام نشد. مجددا سعی کنید</string>
     <string name="block_follower">مسدود سازی دنبال کننده</string>
+    <string name="blocked">مسدود شده ها</string>
     <string name="block_user">مسدود کردن کاربر</string>
     <string name="popup_block_follower">آیا میخواهید دسترسی کاربر به کسب و کار خود را مسدود نمایید؟</string>
     <string name="unblock_follower">آزادسازی حساب</string>
@@ -468,6 +471,8 @@
     <string name="street">آدرس کامل</string>
     <string name="location_on_map">موقعیت روی نقشه</string>
     <string name="choose_location_on_map">انتخاب موقعیت بر روی نقشه</string>
+    <string name="choose_location">انتخاب موقعیت</string>
+    <string name="display_location">نمایش موقعیت</string>
     <string name="title">عنوان</string>
     <string name="price">قیمت</string>
     <string name="rial">ریال</string>
@@ -477,6 +482,7 @@
     <string name="followed_business_page">دنبال شد</string>
     <string name="comment_context">متن نظر</string>
     <string name="choose_user_picture">یک تصویر انتخاب کنید</string>
+    <string name="user_profile">پروفایل کاربری</string>
     <string name="choose_user_sex">جنسیت را انتخاب کنید</string>
     <string name="try_again">مجددا سعی کنید</string>
     <string name="users">کاربران</string>
@@ -487,6 +493,7 @@
     <string name="level3">مرحله سه</string>
     <string name="url_guide">http://www.google.com</string>
     <string name="url_contact_us">http://www.google.com</string>
+
 
 
     <string-array name="states">

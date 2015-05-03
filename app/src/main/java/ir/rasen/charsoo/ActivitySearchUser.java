@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterUserSearchResult;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
@@ -55,10 +56,7 @@ public class ActivitySearchUser extends ActionBarActivity implements IWebservice
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.search_users));
         //editTextSearch = (EditTextFont)findViewById(R.id.edt_search);
 
         results = new ArrayList<>();

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Params;
 
 
@@ -28,10 +29,7 @@ public class ActivityUserBusinesses extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_businesses);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.businesses));
         ListView listView = (ListView) findViewById(R.id.listView);
         userBusinesses = ((MyApplication) getApplication()).userBusinesses;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
@@ -20,7 +22,7 @@ import ir.rasen.charsoo.webservices.DownloadCoverImage;
 import ir.rasen.charsoo.webservices.business.GetBusinessContactInfo;
 
 
-public class ActivityContactInfo extends Activity implements IWebserviceResponse {
+public class ActivityContactInfo extends ActionBarActivity implements IWebserviceResponse {
 
 
     ProgressDialog progressDialog;
@@ -30,6 +32,7 @@ public class ActivityContactInfo extends Activity implements IWebserviceResponse
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_info);
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.call_info));
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

@@ -28,6 +28,7 @@ import ir.rasen.charsoo.dialog.PopupCancelSharePost;
 import ir.rasen.charsoo.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.dialog.PopupReportPostActivity;
 import ir.rasen.charsoo.dialog.PopupReportPostAdapter;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
@@ -85,10 +86,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.product));
         postId = getIntent().getExtras().getInt(Params.POST_ID);
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
         final String postType = getIntent().getExtras().getString(Params.POST_TYPE);

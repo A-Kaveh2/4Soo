@@ -30,6 +30,15 @@
     <!--Margins-->
 
     <!--Font sized-->
+
+    <dimen name="font_size_base">9dp</dimen>
+
+    <dimen name="text_size_small">14dp</dimen>
+    <dimen name="text_size_normal">15dp</dimen>
+    <dimen name="text_size_large">16dp</dimen>
+    <dimen name="text_size_larger">20dp</dimen>
+    <dimen name="text_size_largest">24dp</dimen>
+
     <dimen name="font_rial">12dp</dimen>
     <dimen name="font_size_adapter_item_title">14dp</dimen>
     <dimen name="font_size_drawer_businesses">18dp</dimen>

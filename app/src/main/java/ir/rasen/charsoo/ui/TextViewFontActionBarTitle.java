@@ -6,23 +6,19 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import ir.rasen.charsoo.ActivityLogin;
-import ir.rasen.charsoo.R;
-
-public class TextViewFont extends TextView {
-    public TextViewFont(Context context, AttributeSet attrs, int defStyle) {
+public class TextViewFontActionBarTitle extends TextView {
+    public TextViewFontActionBarTitle(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
-    public TextViewFont(Context context, AttributeSet attrs) {
+    public TextViewFontActionBarTitle(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public TextViewFont(Context context) {
+    public TextViewFontActionBarTitle(Context context) {
         super(context);
         init();
     }
@@ -40,22 +36,22 @@ public class TextViewFont extends TextView {
 
             switch (screenSize) {
                 case Configuration.SCREENLAYOUT_SIZE_SMALL:
-                    baseFontSize = 8;
+                    baseFontSize = 18;
                     break;
                 case Configuration.SCREENLAYOUT_SIZE_NORMAL:
                     if (density < DisplayMetrics.DENSITY_XHIGH)
-                        baseFontSize = 11;
+                        baseFontSize = 18;
                     else
-                        baseFontSize = 14;
+                        baseFontSize = 20;
                     break;
                 case Configuration.SCREENLAYOUT_SIZE_LARGE:
-                    baseFontSize = 15;
+                    baseFontSize = 21;
                     break;
                 case Configuration.SCREENLAYOUT_SIZE_XLARGE:
-                    baseFontSize = 18;
+                    baseFontSize = 22;
                     break;
                 case Configuration.SCREENLAYOUT_SIZE_UNDEFINED:
-                    baseFontSize = 11;
+                    baseFontSize = 18;
                     break;
 
             }

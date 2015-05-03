@@ -1,6 +1,7 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,7 @@ import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.dialog.PopupCameraGallery;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
@@ -35,6 +38,7 @@ import ir.rasen.charsoo.interfaces.IAddPost;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.EditTextFont;
 import ir.rasen.charsoo.ui.ImageViewCircle;
+import ir.rasen.charsoo.ui.TextViewFontActionBarTitle;
 import ir.rasen.charsoo.webservices.DownloadImages;
 import ir.rasen.charsoo.webservices.post.AddPost;
 import ir.rasen.charsoo.webservices.post.GetPost;
@@ -69,9 +73,7 @@ public class ActivityAddPost extends ActionBarActivity implements View.OnClickLi
             String s = e.getMessage();
         }
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.new_product));
 
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
         try {

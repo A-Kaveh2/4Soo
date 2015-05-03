@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.ui.ButtonFont;
 
@@ -35,10 +36,7 @@ public class ActivityMapChoose extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.choose_location));
         setContentView(R.layout.activity_map);
 
 

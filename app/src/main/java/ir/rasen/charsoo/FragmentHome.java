@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -52,7 +53,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_gridview_swip_header_footer,
+        View view = inflater.inflate(R.layout.fragment_home,
                 container, false);
 
         try {
@@ -79,6 +80,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
                 status = Status.REFRESHING;
                 results.clear();
                 new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+                gridView.setEnabled(false);
             }
         });
         swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
@@ -176,6 +178,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
 
     @Override
     public void getResult(Object result) {
+        gridView.setEnabled(true);
         if (progressDialog.isShowing())
             progressDialog.dismiss();
         if (swipeLayout.isRefreshing())
@@ -206,8 +209,5 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
     }
 
-    public void setText(String item) {
-        TextView view = (TextView) getView().findViewById(R.id.textView3);
-        view.setText(item);
-    }
+
 }

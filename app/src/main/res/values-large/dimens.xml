@@ -1,0 +1,29 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+
+    <dimen name="font_size_base">12dp</dimen>
+
+    <dimen name="text_size_small">16dp</dimen>
+    <dimen name="text_size_normal">17dp</dimen>
+    <dimen name="text_size_large">18dp</dimen>
+    <dimen name="text_size_larger">22dp</dimen>
+    <dimen name="text_size_largest">26dp</dimen>
+
+    <dimen name="font_rial">14dp</dimen>
+    <dimen name="font_size_adapter_item_title">16dp</dimen>
+    <dimen name="font_size_drawer_businesses">20dp</dimen>
+    <dimen name="font_size_drawer_businesses_title">21dp</dimen>
+    <dimen name="font_size_adapter_item_text">22dp</dimen>
+    <dimen name="font_size_header">23dp</dimen>
+    <dimen name="font_size_register">24dp</dimen>
+    <dimen name="font_size_user_setting_title">25dp</dimen>
+    <dimen name="font_size_action_bar_title">26dp</dimen>
+    <dimen name="font_user_profile_edit_text">27dp</dimen>
+
+
+
+
+</resources>

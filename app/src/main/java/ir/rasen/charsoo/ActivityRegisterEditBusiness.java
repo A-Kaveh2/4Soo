@@ -26,6 +26,7 @@ import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.dialog.PopupCameraGallery;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ResultStatus;
@@ -88,11 +89,14 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
 
         Bundle bundle = new Bundle();
         if (businessId != 0) {
+            ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.profile_edit_business));
             new GetBusinessProfileInfo(ActivityRegisterEditBusiness.this, businessId, ActivityRegisterEditBusiness.this).execute();
             bundle.putBoolean(Params.IS_EDITTING, true);
             progressDialog.show();
-        } else
+        } else {
+            ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.register_business));
             bundle.putBoolean(Params.IS_EDITTING, false);
+        }
 
         fragmentBaseInfo.setArguments(bundle);
         fragmentContactInfo.setArguments(bundle);

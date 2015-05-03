@@ -121,6 +121,7 @@ public class GridViewUser implements IWebserviceResponse {
             int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
             imageViewCover.setLayoutParams(params);
+
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(profilePictureId, imageViewCover);
 

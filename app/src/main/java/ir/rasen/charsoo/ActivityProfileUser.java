@@ -30,6 +30,7 @@ import ir.rasen.charsoo.dialog.DialogChangePassword;
 import ir.rasen.charsoo.dialog.DialogClearSearchHistoryConfirmation;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.dialog.PopupCameraGallery;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
@@ -51,7 +52,7 @@ import ir.rasen.charsoo.webservices.user.UpdateSetting;
 import ir.rasen.charsoo.webservices.user.UpdateUserProfile;
 
 
-public class ActivityProfileUser extends Activity implements View.OnClickListener, IWebserviceResponse, IChangePassword {
+public class ActivityProfileUser extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangePassword {
 
 
     ProgressDialog progressDialog;
@@ -67,7 +68,7 @@ public class ActivityProfileUser extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_user);
-
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.user_profile));
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

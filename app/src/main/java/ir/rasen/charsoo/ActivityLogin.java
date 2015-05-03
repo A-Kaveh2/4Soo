@@ -1,17 +1,23 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.dialog.DialogForgetPassword;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
@@ -19,6 +25,8 @@ import ir.rasen.charsoo.helper.Validation;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.EditTextFont;
 import ir.rasen.charsoo.helper.WebservicesHandler;
+import ir.rasen.charsoo.ui.TextViewFont;
+import ir.rasen.charsoo.ui.TextViewFontActionBarTitle;
 import ir.rasen.charsoo.webservices.user.Login;
 
 
@@ -35,8 +43,7 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.login));
 
 
         //for the test I need to disable automatically going to ActivityMain
@@ -44,6 +51,28 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
             Intent intent = new Intent(this, ActivityMain.class);
             startActivity(intent);
             return;
+        }*/
+
+       /* int screenSize = getResources().getConfiguration().screenLayout &
+                Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        switch(screenSize) {
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                Toast.makeText(ActivityLogin.this, "SMALL", Toast.LENGTH_SHORT).show();
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                Toast.makeText(ActivityLogin.this, "NORMAL", Toast.LENGTH_SHORT).show();
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                Toast.makeText(ActivityLogin.this, "LARGE", Toast.LENGTH_SHORT).show();
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                Toast.makeText(ActivityLogin.this, "XLARGE", Toast.LENGTH_SHORT).show();
+                break;
+            case Configuration.SCREENLAYOUT_SIZE_UNDEFINED:
+                Toast.makeText(ActivityLogin.this, "UNDEFINED", Toast.LENGTH_SHORT).show();
+                break;
+
         }*/
 
         myApplication = (MyApplication) getApplication();

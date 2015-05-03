@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterFriendshipRequest;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
@@ -48,10 +49,7 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_listview_swip);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.friend_requests));
         try {
             sampleRequests = TestUnit.getBaseAdapterItems(getResources());
         } catch (Exception e) {

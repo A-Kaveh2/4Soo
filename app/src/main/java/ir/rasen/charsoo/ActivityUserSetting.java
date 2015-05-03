@@ -17,6 +17,7 @@ import android.widget.TextView;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.dialog.DialogForgetPassword;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Permission;
 import ir.rasen.charsoo.helper.ResultStatus;
@@ -41,15 +42,8 @@ public class ActivityUserSetting extends ActionBarActivity implements IWebservic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.settings));
 
-        LayoutInflater inflator = LayoutInflater.from(this);
-        View v = inflator.inflate(R.layout.layout_action_bar_title, null);
-       ((TextViewFont) v.findViewById(R.id.textView)).setText(getResources().getString(R.string.settings));
-        getSupportActionBar().setCustomView(v);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

@@ -13,6 +13,7 @@ import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Params;
 
 public class ActivityMapDisplay extends ActionBarActivity {
@@ -24,9 +25,7 @@ public class ActivityMapDisplay extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.display_location));
 
         double lat = getIntent().getExtras().getDouble(Params.LATITUDE);
         double lng = getIntent().getExtras().getDouble(Params.LONGITUDE);

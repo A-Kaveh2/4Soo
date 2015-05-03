@@ -1,6 +1,7 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,12 +18,14 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterBlockedUsers;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.ui.TextViewFontActionBarTitle;
 import ir.rasen.charsoo.webservices.business.GetBlockedUsers;
 import ir.rasen.charsoo.webservices.post.GetTimeLinePosts;
 
@@ -49,10 +52,8 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_listview_swip);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.blocked));
         try {
             sampleBlockedUsers = TestUnit.getBaseAdapterItems(getResources());
         } catch (Exception e) {

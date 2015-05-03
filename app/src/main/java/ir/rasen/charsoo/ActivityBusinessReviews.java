@@ -19,6 +19,7 @@ import ir.rasen.charsoo.adapters.AdapterBusinessReview;
 import ir.rasen.charsoo.classes.Review;
 import ir.rasen.charsoo.dialog.DialogAddReview;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
@@ -48,10 +49,7 @@ public class ActivityBusinessReviews extends ActionBarActivity implements IWebse
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_reviews);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.reviews));
         try {
             sampleResults = TestUnit.getUserReviewAdapterItems();
         } catch (Exception e) {

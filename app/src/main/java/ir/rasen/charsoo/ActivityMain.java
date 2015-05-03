@@ -31,7 +31,7 @@ import ir.rasen.charsoo.interfaces.IUpdateTimeLine;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 
 
-public class ActivityMain extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs, IGoToRegisterBusinessActivity {
+public class ActivityMain extends Activity implements View.OnClickListener, IWebserviceResponse, IChangeTabs, IGoToRegisterBusinessActivity {
 
 
     ImageView imageViewHome, imageViewSearch, imageViewUser, imageViewBusinesses;
@@ -51,7 +51,7 @@ public class ActivityMain extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+       /* getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
@@ -59,7 +59,7 @@ public class ActivityMain extends ActionBarActivity implements View.OnClickListe
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.layout_action_bar_home, null);
         getSupportActionBar().setCustomView(v);
-
+*/
         progressDialog = new ProgressDialog(this);
 
         fragmentHome = new FragmentHome();
