@@ -51,6 +51,8 @@ public class PopupReportCancelSharePost extends MyPopup implements IWebserviceRe
         textViewCancelShare.setGravity(Gravity.CENTER);
         textViewCancelShare.setLayoutParams(params);
         textViewCancelShare.setText(context.getResources().getString(R.string.cancel_share));
+        textViewCancelShare.setTextSize(18);
+
         textViewCancelShare.setBackgroundResource(R.drawable.selector_popup_top_item);
 
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width, 1);
@@ -63,6 +65,7 @@ public class PopupReportCancelSharePost extends MyPopup implements IWebserviceRe
         textViewReport.setGravity(Gravity.CENTER);
         textViewReport.setLayoutParams(params);
         textViewReport.setText(context.getResources().getString(R.string.report));
+        textViewReport.setTextSize(18);
         textViewReport.setBackgroundResource(R.drawable.selector_popup_bottom_item);
 
         LinearLayout ll_body = getBody();

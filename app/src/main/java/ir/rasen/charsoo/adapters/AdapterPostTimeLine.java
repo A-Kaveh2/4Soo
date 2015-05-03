@@ -45,14 +45,24 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
     private IReportPost iReportPost;
     GridView gridView;
 
+    private GestureDetector gestureDetector;
+
 
 
     public AdapterPostTimeLine(Context context, ArrayList<Post> items) {
         this.context = context;
         this.items = items;
-            downloadImages = new DownloadImages(context);
+        downloadImages = new DownloadImages(context);
         screedWidth = context.getResources().getDisplayMetrics().widthPixels;
         iReportPost = this;
+
+        // Gesture detection
+       /* gestureDetector = new GestureDetector(context, new MyGestureDetector());
+        gestureListener = new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        };*/
 
     }
 
@@ -129,13 +139,13 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder = (Holder) view.getTag();
 
         //all post's types have these three fields
-        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, holder.imageViewProfileImage,true);
+        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, holder.imageViewProfileImage, true);
         holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
         holder.textViewBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Business.goBusinessHomeInfoPage(context,items.get(position).businessID);
+                Business.goBusinessHomeInfoPage(context, items.get(position).businessID);
 
             }
         });
@@ -145,7 +155,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.llAnnouncementSection.setVisibility(View.GONE);
             holder.llCompleteSection.setVisibility(View.VISIBLE);
 
-            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, holder.imageViewPost,false);
+            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, holder.imageViewPost, false);
             holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
             holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
@@ -187,21 +197,21 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewComment1UserIdentifier.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    User.goUserHomeInfoPage(context,items.get(position).lastThreeComments.get(0).userID);
+                    User.goUserHomeInfoPage(context, items.get(position).lastThreeComments.get(0).userID);
 
                 }
             });
             holder.textViewComment2UserIdentifier.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    User.goUserHomeInfoPage(context,items.get(position).lastThreeComments.get(1).userID);
+                    User.goUserHomeInfoPage(context, items.get(position).lastThreeComments.get(1).userID);
 
                 }
             });
             holder.textViewComment3UserIdentifier.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    User.goUserHomeInfoPage(context,items.get(position).lastThreeComments.get(2).userID);
+                    User.goUserHomeInfoPage(context, items.get(position).lastThreeComments.get(2).userID);
 
                 }
             });
@@ -209,7 +219,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.imageViewComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Comment.openCommentActivity(context,false,items.get(position).id,items.get(position).businessID);
+                    Comment.openCommentActivity(context, false, items.get(position).id, items.get(position).businessID);
                 }
             });
             holder.imageViewLike.setOnClickListener(new View.OnClickListener() {
@@ -231,40 +241,14 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
                 }
             });
-            final GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onDoubleTap(MotionEvent e) {
-                    if (items.get(position).isLiked) {
-                        //unlike the post
 
-                        new Unlike(context, LoginInfo.getUserId(context), items.get(position).id).execute();
-                        items.get(position).isLiked = false;
-                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
-                    } else {
-                        //like the post
-
-                        new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
-                        items.get(position).isLiked = true;
-                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
-                    }
-                    return true;
-                }
-
-                @Override
-                public void onLongPress(MotionEvent e) {
-
-                }
-            };
-
-            final GestureDetector detector = new GestureDetector(listener);
-            detector.setOnDoubleTapListener(listener);
-
+            gestureDetector = new GestureDetector(context, new MyGestureDetector(position,holder.imageViewLike));
             holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    return detector.onTouchEvent(motionEvent);
+                public boolean onTouch(View v, MotionEvent event) {
+                    return gestureDetector.onTouchEvent(event);
                 }
             });
+
 
             holder.imageViewShare.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -279,7 +263,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                     } else {
                         //share the post
 
-                        new Share(context, LoginInfo.getUserId(context), items.get(position).id,null).execute();
+                        new Share(context, LoginInfo.getUserId(context), items.get(position).id, null).execute();
 
                         items.get(position).isShared = true;
                         holder.imageViewShare.setImageResource(R.drawable.ic_reply_blue);
@@ -304,7 +288,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewAnnouncementUserIdentifier.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    User.goUserHomeInfoPage(context,items.get(position).userId);
+                    User.goUserHomeInfoPage(context, items.get(position).userId);
                 }
             });
 
@@ -312,7 +296,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewAnnouncementBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Business.goBusinessHomeInfoPage(context,items.get(position).businessID);
+                    Business.goBusinessHomeInfoPage(context, items.get(position).businessID);
                 }
             });
 
@@ -332,8 +316,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         items.get(position).isReported = true;
         imageViewMore.setVisibility(View.GONE);
     }
-
-
 
 
     private class Holder {
@@ -369,4 +351,44 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         TextViewFont textViewAnnouncementBusinessStaticPart;
 
     }
+
+    class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
+        int position;
+        ImageView imageViewLike;
+
+        public MyGestureDetector(int position,ImageView imageViewLike ) {
+            this.position = position;
+            this.imageViewLike = imageViewLike;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            return false;
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            if (items.get(position).isLiked) {
+                //unlike the post
+
+                new Unlike(context, LoginInfo.getUserId(context), items.get(position).id).execute();
+                items.get(position).isLiked = false;
+                imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
+            } else {
+                //like the post
+
+                new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
+                items.get(position).isLiked = true;
+                imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+            }
+            return true;
+        }
+    }
+
 }

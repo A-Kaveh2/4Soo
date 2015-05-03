@@ -6,9 +6,11 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -76,6 +78,8 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
     DownloadImages downloadImages;
     Post.GetPostType getPostType;
     int postId, businessId;
+
+    private GestureDetector gestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +192,13 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
                     }
                 }
 
+            }
+        });
+
+        gestureDetector = new GestureDetector(ActivityPost.this, new MyGestureDetector());
+        imageViewPost.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
             }
         });
 
@@ -370,5 +381,40 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
         post.isReported = true;
         if (!post.isShared)
             this.imageViewMore.setVisibility(View.GONE);
+    }
+
+    class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
+
+
+
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            return false;
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            if (post.isLiked) {
+                //unlike the post
+
+                new Unlike(ActivityPost.this, LoginInfo.getUserId(ActivityPost.this),post.id).execute();
+                post.isLiked = false;
+                imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
+            } else {
+                //like the post
+
+                new Like(ActivityPost.this, LoginInfo.getUserId(ActivityPost.this), post.id).execute();
+                post.isLiked = true;
+                imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+            }
+            return true;
+        }
     }
 }
