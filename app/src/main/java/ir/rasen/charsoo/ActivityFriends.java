@@ -1,6 +1,7 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.adapters.AdapterFriends;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
+import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
@@ -45,7 +47,7 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_listview_swip);
+        setContentView(R.layout.activity_friends);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,7 +59,8 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
         }
 
         visitedUserId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
-
+        if(visitedUserId != LoginInfo.getUserId(this))
+            (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
 
         friends = new ArrayList<>();
         status = Status.FIRST_TIME;
@@ -124,9 +127,12 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
         (findViewById(R.id.btn_friend_requests)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent1 = new Intent(ActivityFriends.this, ActivityFriendRequests.class);
+                intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
+                startActivity(intent1);
             }
         });
+
     }
 
 

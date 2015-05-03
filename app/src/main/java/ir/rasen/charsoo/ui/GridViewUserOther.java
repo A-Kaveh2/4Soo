@@ -44,7 +44,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
 
-    ImageView imageViewSwitch, imageViewCover,imageViewCirecle;
+    ImageView imageViewSwitch, imageViewCover,imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews,textViewIdentifier,textViewName;
     ButtonFont buttonFriendStatus;
     ArrayList<SearchItemPost> searchItemPosts;
@@ -69,6 +69,11 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
         imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
         imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
+
+        imageViewFriends = (ImageView) viewHeader.findViewById(R.id.imageView_friends);
+        imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
+        imageViewFollowingBusinesses = (ImageView) viewHeader.findViewById(R.id.imageView_businesses);
+
         textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
         textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
         textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
@@ -135,7 +140,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         downloadCoverImage.download(user.profilePictureId, imageViewCover);
 
 
-        textViewBusinesses.setOnClickListener(new View.OnClickListener() {
+        imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
@@ -148,7 +153,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                     new DialogMessage(context, context.getString(R.string.err_permission_businesses)).show();
             }
         });
-        textViewFriends.setOnClickListener(new View.OnClickListener() {
+        imageViewFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
@@ -162,7 +167,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
             }
         });
 
-        textViewReviews.setOnClickListener(new View.OnClickListener() {
+        imageViewReviews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)

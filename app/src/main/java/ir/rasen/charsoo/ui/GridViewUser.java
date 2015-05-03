@@ -47,8 +47,8 @@ public class GridViewUser implements IWebserviceResponse {
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
 
-    ImageView imageViewSearch, imageViewMore, imageViewSwitch, imageViewCover,imageViewCirecle;
-    TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewRequests,textViewIdentifier,textViewName;
+    ImageView imageViewSearch, imageViewMore, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses;
+    TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewRequests, textViewIdentifier, textViewName;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
     Activity activity;
@@ -59,10 +59,10 @@ public class GridViewUser implements IWebserviceResponse {
     ArrayList<Post> posts;
     int visitedUserId;
     boolean hasHeader, hasRequest;
-    String userIdentifier,userName;
+    String userIdentifier, userName;
 
 
-    public GridViewUser(Activity activity,String userIdentifier,String userName, int profilePictureId, boolean hasRequest, int visitedUserId, GridViewHeader gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewUser(Activity activity, String userIdentifier, String userName, int profilePictureId, boolean hasRequest, int visitedUserId, GridViewHeader gridViewHeader, DrawerLayout drawerLayout) {
         this.activity = activity;
         this.profilePictureId = profilePictureId;
         this.gridViewHeader = gridViewHeader;
@@ -95,19 +95,23 @@ public class GridViewUser implements IWebserviceResponse {
 
 
         if (!hasHeader) {
-            viewHeader = ( activity).getLayoutInflater().inflate(R.layout.layout_user_grid_header, null);
+            viewHeader = (activity).getLayoutInflater().inflate(R.layout.layout_user_grid_header, null);
             imageViewMore = (ImageView) viewHeader.findViewById(R.id.imageView_more);
             imageViewSearch = (ImageView) viewHeader.findViewById(R.id.imageView_search);
             imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
             imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
             imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
+
+            imageViewFriends = (ImageView) viewHeader.findViewById(R.id.imageView_friends);
+            imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
+            imageViewFollowingBusinesses = (ImageView) viewHeader.findViewById(R.id.imageView_businesses);
+
             textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
             textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
             textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
             textViewRequests = (TextViewFont) viewHeader.findViewById(R.id.textView_friend_requests);
             textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_user_identifier);
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_user_name);
-
             textViewIdentifier.setText(String.valueOf(userIdentifier));
             textViewName.setText(String.valueOf(userName));
 
@@ -139,7 +143,7 @@ public class GridViewUser implements IWebserviceResponse {
                 }
             });
 
-            textViewBusinesses.setOnClickListener(new View.OnClickListener() {
+            imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityFollowingBusinesses.class);
@@ -147,7 +151,7 @@ public class GridViewUser implements IWebserviceResponse {
                     activity.startActivity(intent1);
                 }
             });
-            textViewFriends.setOnClickListener(new View.OnClickListener() {
+            imageViewFriends.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityFriends.class);
@@ -156,15 +160,15 @@ public class GridViewUser implements IWebserviceResponse {
                 }
             });
 
-            textViewRequests.setOnClickListener(new View.OnClickListener() {
+           /* textViewRequests.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityFriendRequests.class);
                     intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
                     activity.startActivity(intent1);
                 }
-            });
-            textViewReviews.setOnClickListener(new View.OnClickListener() {
+            });*/
+            imageViewReviews.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityUserReviews.class);
@@ -172,8 +176,6 @@ public class GridViewUser implements IWebserviceResponse {
                     activity.startActivity(intent1);
                 }
             });
-
-
 
 
             imageViewSwitch.setOnClickListener(new View.OnClickListener() {
@@ -237,8 +239,7 @@ public class GridViewUser implements IWebserviceResponse {
         if (posts.size() == 0) {
             imageViewSwitch.setVisibility(View.GONE);
             imageViewCirecle.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             imageViewSwitch.setVisibility(View.VISIBLE);
             imageViewCirecle.setVisibility(View.VISIBLE);
         }
