@@ -13,6 +13,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.ActivityAddEditPost;
+import ir.rasen.charsoo.ActivityRegisterEditBusiness;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.PopupEditDeleteBusiness;
@@ -42,7 +43,7 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
     public void changeProfilePicture(String picture){
         ((ImageView)mDrawerLayout.findViewById(R.id.imageView_business_picture)).setImageBitmap(Image_M.getBitmapFromString(picture));
     }
-    public void Initial(final Activity activity, DrawerLayout drawerLayout, ArrayList<User.UserBusinesses> businessListItems, final int displayedBusinessId,final int displayBusinessProfilePictureId, ISelectBusiness iSelectBusiness,final IChangeBusiness iChangeBusiness) {
+    public void Initial(final Activity activity, DrawerLayout drawerLayout, ArrayList<User.UserBusinesses> businessListItems, final int displayedBusinessId,final int displayBusinessProfilePictureId, ISelectBusiness iSelectBusiness) {
         //businessHashTable: <businessIdentifier,businessId>
         items = businessListItems;
         selectedBusinessId = displayedBusinessId;
@@ -59,8 +60,12 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
         ( drawerLayout.findViewById(R.id.imageView_drawer_edit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupEditDeleteBusiness p = new PopupEditDeleteBusiness(activity,selectedBusinessId,businessIdentifier, iChangeBusiness);
-                p.show();
+                /*PopupEditDeleteBusiness p = new PopupEditDeleteBusiness(activity,selectedBusinessId,businessIdentifier, iChangeBusiness);
+                p.show();*/
+                Intent intent = new Intent(activity, ActivityRegisterEditBusiness.class);
+                intent.putExtra(Params.BUSINESS_ID,displayedBusinessId);
+                intent.putExtra(Params.BUSINESS_IDENTIFIER,businessIdentifier);
+                activity.startActivityForResult(intent,Params.ACTION_EDIT_BUSINESS);
             }
         });
 

@@ -28,7 +28,7 @@ import ir.rasen.charsoo.webservices.business.GetBusinessHomeInfo;
 import ir.rasen.charsoo.webservices.post.GetBusinessPosts;
 
 
-public class ActivityBusiness extends Activity implements ISelectBusiness, IWebserviceResponse, IChangeBusiness {
+public class ActivityBusiness extends Activity implements ISelectBusiness, IWebserviceResponse{
 
     private DrawerLayout mDrawerLayout;
     ProgressDialog progressDialog;
@@ -80,7 +80,7 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
             gridView.setVisibility(View.VISIBLE);
             business = (Business) result;
 
-            drawerLayoutBusiness.Initial(this, mDrawerLayout, ((MyApplication) getApplication()).userBusinesses, selectedBusinessId, business.profilePictureId, ActivityBusiness.this, ActivityBusiness.this);
+            drawerLayoutBusiness.Initial(this, mDrawerLayout, ((MyApplication) getApplication()).userBusinesses, selectedBusinessId, business.profilePictureId, ActivityBusiness.this);
 
 
             gridViewBusiness = new GridViewBusiness(this, business, gridView, mDrawerLayout);
@@ -109,26 +109,19 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
             if (requestCode == Params.ACTION_ADD_POST) {
                 gridViewBusiness.notifyDataSetChanged(((MyApplication) getApplication()).post);
             } else if (requestCode == Params.ACTION_EDIT_BUSINESS) {
-                String picture = data.getStringExtra(Params.PROFILE_PICTURE);
-                drawerLayoutBusiness.changeProfilePicture(picture);
-                gridViewBusiness.changeProfilePicture(picture);
+                if (data.getStringExtra(Params.TYPE).equals(Business.ChangeType.EDIT.name())) {
+                    String picture = data.getStringExtra(Params.PROFILE_PICTURE);
+                    drawerLayoutBusiness.changeProfilePicture(picture);
+                    gridViewBusiness.changeProfilePicture(picture);
+                } else if (data.getStringExtra(Params.TYPE).equals(Business.ChangeType.DELETE.name())) {
+                    Intent i = getIntent();
+                    i.putExtra(Params.BUSINESS_ID, data.getIntExtra(Params.BUSINESS_ID, 0));
+                    setResult(RESULT_OK, i);
+                    finish();
+                }
             }
         }
 
     }
 
-    @Override
-    public void notifyDeleteBusiness(int businessId) {
-        Intent i = getIntent();
-        i.putExtra(Params.BUSINESS_ID, businessId);
-        setResult(RESULT_OK, i);
-        finish();
-
-    }
-
-   /* @Override
-    public void notifyChangeBusiness(Business business) {
-        drawerLayoutBusiness.Initial(this, mDrawerLayout, ((MyApplication) getApplication()).userBusinesses, business.id, business.profilePictureId, ActivityBusiness.this, ActivityBusiness.this);
-        gridViewBusiness.changeCoverPicture(business.profilePictureId);
-    }*/
 }

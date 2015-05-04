@@ -40,6 +40,7 @@ public class ActivityMapChoose extends ActionBarActivity {
             if (marker != null)
                 marker.remove();
             marker = googleMap.addMarker(new MarkerOptions().position(loc));
+            menuItemTik.setVisible(true);
             if(googleMap != null){
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,14.0f));
             }

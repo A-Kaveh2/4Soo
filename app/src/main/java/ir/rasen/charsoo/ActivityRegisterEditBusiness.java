@@ -26,6 +26,7 @@ import java.io.File;
 
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
+import ir.rasen.charsoo.dialog.DialogDeleteBusinessConfirmation;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.dialog.PopupCameraGallery;
 import ir.rasen.charsoo.helper.ActionBar_M;
@@ -33,6 +34,7 @@ import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.interfaces.IChangeBusiness;
 import ir.rasen.charsoo.interfaces.IGetCallForTakePicture;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.TextViewFontActionBarTitle;
@@ -40,7 +42,7 @@ import ir.rasen.charsoo.webservices.business.GetBusinessProfileInfo;
 import ir.rasen.charsoo.webservices.business.RegisterBusiness;
 import ir.rasen.charsoo.webservices.business.UpdateBusinessProfileInfo;
 
-public class ActivityRegisterEditBusiness extends ActionBarActivity implements IWebserviceResponse, IGetCallForTakePicture {
+public class ActivityRegisterEditBusiness extends ActionBarActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
 
     FragmentRegisterBusinessBaseInfo fragmentBaseInfo;
     FragmentRegisterBusinessContactInfo fragmentContactInfo;
@@ -95,12 +97,12 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
 
         Bundle bundle = new Bundle();
         if (businessId != 0) {
-            ((TextViewFontActionBarTitle)v.findViewById(R.id.textView_title)).setText(getString(R.string.profile_edit_business));
+            ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(getString(R.string.profile_edit_business));
             new GetBusinessProfileInfo(ActivityRegisterEditBusiness.this, businessId, ActivityRegisterEditBusiness.this).execute();
             bundle.putBoolean(Params.IS_EDITTING, true);
             progressDialog.show();
         } else {
-            ((TextViewFontActionBarTitle)v.findViewById(R.id.textView_title)).setText(getString(R.string.register_business));
+            ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(getString(R.string.register_business));
             bundle.putBoolean(Params.IS_EDITTING, false);
         }
         getSupportActionBar().setCustomView(v);
@@ -152,7 +154,11 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_next_button, menu);
+        if (businessId != 0)
+            inflater.inflate(R.menu.menu_next_delete, menu);
+        else
+            inflater.inflate(R.menu.menu_next_button, menu);
+
         this.menuItemNext = menu.findItem(R.id.action_next);
         return true;
     }
@@ -161,6 +167,10 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
+            return true;
+        } else if (item.getItemId() == R.id.action_delete) {
+
+            new DialogDeleteBusinessConfirmation(ActivityRegisterEditBusiness.this, businessId, ActivityRegisterEditBusiness.this).show();
             return true;
         } else if (item.getItemId() == R.id.action_next) {
             switch (fragmentCurrent) {
@@ -227,7 +237,8 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
             ft.commit();
         } else if (result instanceof ResultStatus) {
             Intent i = getIntent();
-            i.putExtra(Params.PROFILE_PICTURE,((MyApplication) getApplication()).business.profilePicture);
+            i.putExtra(Params.PROFILE_PICTURE, ((MyApplication) getApplication()).business.profilePicture);
+            i.putExtra(Params.TYPE, Business.ChangeType.EDIT.name());
             setResult(RESULT_OK, i);
             finish();
         }
@@ -273,5 +284,15 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
             }
         }
     }
+
+    @Override
+    public void notifyDeleteBusiness(int businessId) {
+        Intent i = getIntent();
+        i.putExtra(Params.BUSINESS_ID, businessId);
+        i.putExtra(Params.TYPE, Business.ChangeType.DELETE.name());
+        setResult(RESULT_OK, i);
+        finish();
+    }
+
 
 }

@@ -43,6 +43,7 @@ public class Business {
     public boolean isFollowing;
     public float rate;
 
+    public static enum ChangeType{EDIT,DELETE};
 
     public static void goBusinessHomeInfoPage(Context context,int businessId) {
         Intent intent = new Intent(context, ActivityBusinessOther.class);
