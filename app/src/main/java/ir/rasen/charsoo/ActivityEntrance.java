@@ -204,7 +204,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_add_post)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityAddPost.class);
+                Intent intent = new Intent(ActivityEntrance.this, ActivityAddEditPost.class);
                 intent.putExtra(Params.BUSINESS_ID, 1);
                 startActivity(intent);
             }
@@ -212,7 +212,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_update_post)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityAddPost.class);
+                Intent intent = new Intent(ActivityEntrance.this, ActivityAddEditPost.class);
                 intent.putExtra(Params.BUSINESS_ID, 1);
                 intent.putExtra(Params.POST_ID, 1);
                 startActivity(intent);

@@ -3,6 +3,7 @@ package ir.rasen.charsoo;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -32,6 +33,18 @@ public class ActivityMapChoose extends ActionBarActivity {
     Marker marker;
     MenuItem menuItemTik;
 
+    private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
+        @Override
+        public void onMyLocationChange(Location location) {
+            LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+            if (marker != null)
+                marker.remove();
+            marker = googleMap.addMarker(new MarkerOptions().position(loc));
+            if(googleMap != null){
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,14.0f));
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +65,18 @@ public class ActivityMapChoose extends ActionBarActivity {
 
             if (mapView != null) {
                 googleMap = mapView.getMap();
-                googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
                 googleMap.setMyLocationEnabled(true);
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+                googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
+
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                         latLng, 4));
                 // Zoom in, animating the camera.
                 googleMap.animateCamera(CameraUpdateFactory.zoomTo(4), 2000,
                         null);
-                googleMap.getUiSettings().setZoomControlsEnabled(true);
+
 
             }
             googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {

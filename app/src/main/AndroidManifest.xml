@@ -100,7 +100,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ActivityAddPost"
+            android:name=".ActivityAddEditPost"
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait" />
         <activity
@@ -154,8 +154,10 @@
             android:name=".ActivityPost"
             android:screenOrientation="portrait" />
         <activity
-
             android:name=".ActivityMain2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityProfilePicture"
             android:screenOrientation="portrait" />
 
 

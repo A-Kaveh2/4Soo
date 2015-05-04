@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.DrawerLayout;
@@ -12,30 +11,25 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityEntrance;
 import ir.rasen.charsoo.ActivityFollowingBusinesses;
-import ir.rasen.charsoo.ActivityFriendRequests;
 import ir.rasen.charsoo.ActivityFriends;
+import ir.rasen.charsoo.ActivityProfilePicture;
 import ir.rasen.charsoo.ActivitySearchUser;
 import ir.rasen.charsoo.ActivityUserReviews;
-import ir.rasen.charsoo.FragmentUser;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
 import ir.rasen.charsoo.adapters.AdapterPostShared;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.SearchItemPost;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.DownloadCoverImage;
-import ir.rasen.charsoo.webservices.post.GetBusinessPosts;
 import ir.rasen.charsoo.webservices.post.GetSharedPosts;
 
 /**
@@ -125,6 +119,18 @@ public class GridViewUser implements IWebserviceResponse {
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(profilePictureId, imageViewCover);
 
+
+            imageViewCover.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(activity, ActivityProfilePicture.class);
+                    intent.putExtra(Params.USER_IDENTIFIER, userIdentifier);
+                    intent.putExtra(Params.PROFILE_PICTURE_ID, profilePictureId);
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.slide_enter_down,
+                            R.anim.slide_exit_down);
+                }
+            });
             imageViewMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -16,7 +16,6 @@
             android:id="@+id/imageView_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/selector_image_cover"
             android:scaleType="fitXY" />
 
         <LinearLayout
@@ -97,6 +96,7 @@
                     android:id="@+id/textView_businesses"
                     android:textColor="@color/White" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_footer_blank"
                 android:layout_width="match_parent"
@@ -130,8 +130,8 @@
         </RelativeLayout>
 
 
-
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -288,7 +288,6 @@
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>

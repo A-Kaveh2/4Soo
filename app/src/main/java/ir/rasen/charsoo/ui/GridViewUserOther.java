@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.ActivityFollowingBusinesses;
 import ir.rasen.charsoo.ActivityFriends;
+import ir.rasen.charsoo.ActivityProfilePicture;
 import ir.rasen.charsoo.ActivityUserReviews;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
@@ -59,7 +60,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     IWebserviceResponse iWebserviceResponse;
 
 
-    public GridViewUserOther(final Activity context, User displayedUser, GridViewHeader gViewHeader) {
+    public GridViewUserOther(final Activity context, final User displayedUser, GridViewHeader gViewHeader) {
         this.context = context;
         this.user = displayedUser;
         this.gridViewHeader = gViewHeader;
@@ -139,6 +140,17 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         DownloadCoverImage downloadCoverImage = new DownloadCoverImage(context);
         downloadCoverImage.download(user.profilePictureId, imageViewCover);
 
+        imageViewCover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityProfilePicture.class);
+                intent.putExtra(Params.USER_IDENTIFIER, displayedUser.userIdentifier);
+                intent.putExtra(Params.PROFILE_PICTURE_ID, displayedUser.profilePictureId);
+                context.startActivity(intent);
+                context.overridePendingTransition(R.anim.slide_enter_down,
+                        R.anim.slide_exit_down);
+            }
+        });
 
         imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
             @Override

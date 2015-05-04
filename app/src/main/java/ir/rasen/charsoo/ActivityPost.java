@@ -2,7 +2,6 @@ package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
@@ -27,7 +26,6 @@ import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.dialog.PopupCancelSharePost;
 import ir.rasen.charsoo.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.dialog.PopupReportPostActivity;
-import ir.rasen.charsoo.dialog.PopupReportPostAdapter;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
@@ -170,7 +168,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
             public void onClick(View view) {
                 if (getPostType == Post.GetPostType.BUSINESS) {
                     //it is edit
-                    Intent intent = new Intent(ActivityPost.this, ActivityAddPost.class);
+                    Intent intent = new Intent(ActivityPost.this, ActivityAddEditPost.class);
                     intent.putExtra(Params.BUSINESS_ID, businessId);
                     intent.putExtra(Params.POST_ID, postId);
                     startActivity(intent);
@@ -309,7 +307,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
         textViewShareNumber.setText(String.valueOf(post.shareNumber));
         textViewDescription.setText(TextProcessor.removeHashtags(post.description));
         textViewTitle.setText(TextProcessor.removeHashtags(post.title));
-        textViewPrice.setText(TextProcessor.getPriceWithFormat(post.price));
+        textViewPrice.setText(post.price);
 
         ArrayList<Comment> lastThreeComments = post.lastThreeComments;
         if (lastThreeComments.size() > 0) {

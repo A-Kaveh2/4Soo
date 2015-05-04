@@ -161,7 +161,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
             holder.textViewDescription.setText(TextProcessor.removeHashtags(items.get(position).description));
             holder.textViewTitle.setText(TextProcessor.removeHashtags(items.get(position).title));
-            holder.textViewPrice.setText(TextProcessor.getPriceWithFormat(items.get(position).price));
+            holder.textViewPrice.setText(items.get(position).price);
 
             ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
             if (lastThreeComments.size() > 0) {

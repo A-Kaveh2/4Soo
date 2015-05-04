@@ -329,6 +329,7 @@
 
     <!-- PRODUCT -->
     <string name="new_product">محصول جدید</string>
+    <string name="edit_product">ویرایش محصول</string>
     <string name="product_description">توضیحات محصول</string>
 
     <!-- WEEK DAYS -->

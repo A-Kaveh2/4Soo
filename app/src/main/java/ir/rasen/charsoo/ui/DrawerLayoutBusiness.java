@@ -12,9 +12,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityAddPost;
+import ir.rasen.charsoo.ActivityAddEditPost;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.PopupEditDeleteBusiness;
 import ir.rasen.charsoo.helper.Image_M;
@@ -74,7 +73,7 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
         ( drawerLayout.findViewById(R.id.ll_drawer_new_post)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, ActivityAddPost.class);
+                Intent intent = new Intent(activity, ActivityAddEditPost.class);
                 intent.putExtra(Params.BUSINESS_ID,displayedBusinessId);
                 activity.startActivityForResult(intent,Params.ACTION_ADD_POST);
                 mDrawerLayout.closeDrawer(Gravity.RIGHT);

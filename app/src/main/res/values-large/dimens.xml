@@ -5,6 +5,8 @@
 
 
     <dimen name="font_size_base">12dp</dimen>
+    <dimen name="popup_font">14dp</dimen>
+
 
     <dimen name="text_size_small">16dp</dimen>
     <dimen name="text_size_normal">17dp</dimen>

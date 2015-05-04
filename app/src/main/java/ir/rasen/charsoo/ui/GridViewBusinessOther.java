@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.ActivityBusinessFollowers;
 import ir.rasen.charsoo.ActivityBusinessReviews;
 import ir.rasen.charsoo.ActivityContactInfo;
+import ir.rasen.charsoo.ActivityProfilePicture;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
 import ir.rasen.charsoo.adapters.AdapterPostShared;
@@ -114,6 +115,17 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(business.profilePictureId, imageViewCover);
 
+            imageViewCover.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(activity, ActivityProfilePicture.class);
+                    intent.putExtra(Params.USER_IDENTIFIER, business.businessIdentifier);
+                    intent.putExtra(Params.PROFILE_PICTURE_ID, business.profilePictureId);
+                    activity.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.slide_enter_down,
+                            R.anim.slide_exit_down);
+                }
+            });
 
             if (business.isFollowing) {
                 buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, activity.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);

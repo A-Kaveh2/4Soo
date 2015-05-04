@@ -33,7 +33,7 @@ public class TextProcessor {
         this.context = context;
     }
 
-    public static String getPriceWithFormat(String price) {
+ /*   public static String getPriceWithFormat(String price) {
 
         ArrayList<Character> list = new ArrayList<>();
         char[] array = price.toCharArray();
@@ -58,11 +58,11 @@ public class TextProcessor {
         for (Character c : listReverted) {
             result += String.valueOf(c);
         }
-       /* if (list.size() % 3 == 0)
+       *//* if (list.size() % 3 == 0)
             return result.substring(0,result.length()-2)
-        return result;*/
+        return result;*//*
         return price;
-    }
+    }*/
 
     public static String timeToTimeAgo(Context context, int time) {
 

@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityAddPost;
+import ir.rasen.charsoo.ActivityAddEditPost;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.Comment;
 import ir.rasen.charsoo.classes.Post;
@@ -121,7 +121,7 @@ public class AdapterPostBusiness extends BaseAdapter implements IDeletePost {
         holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
         holder.textViewDescription.setText(items.get(position).description);
         holder.textViewTitle.setText(TextProcessor.removeHashtags(items.get(position).title));
-        holder.textViewPrice.setText(TextProcessor.getPriceWithFormat(items.get(position).price));
+        holder.textViewPrice.setText(items.get(position).price);
 
         ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
         if (lastThreeComments.size() > 0) {
@@ -172,7 +172,7 @@ public class AdapterPostBusiness extends BaseAdapter implements IDeletePost {
         holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityAddPost.class);
+                Intent intent = new Intent(context, ActivityAddEditPost.class);
                 intent.putExtra(Params.BUSINESS_ID,items.get(position).businessID);
                 intent.putExtra(Params.POST_ID,items.get(position).id);
                 context.startActivity(intent);
