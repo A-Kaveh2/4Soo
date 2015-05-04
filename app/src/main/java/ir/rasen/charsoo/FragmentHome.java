@@ -80,7 +80,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
                 status = Status.REFRESHING;
                 results.clear();
                 new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
-                gridView.setEnabled(false);
+                //gridView.setEnabled(false);
             }
         });
         swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
@@ -178,7 +178,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
 
     @Override
     public void getResult(Object result) {
-        gridView.setEnabled(true);
+        //gridView.setEnabled(true);
         if (progressDialog.isShowing())
             progressDialog.dismiss();
         if (swipeLayout.isRefreshing())

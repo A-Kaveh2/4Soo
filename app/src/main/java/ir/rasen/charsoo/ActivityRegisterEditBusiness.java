@@ -8,12 +8,14 @@ package ir.rasen.charsoo;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -33,6 +35,7 @@ import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.interfaces.IGetCallForTakePicture;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.ui.TextViewFontActionBarTitle;
 import ir.rasen.charsoo.webservices.business.GetBusinessProfileInfo;
 import ir.rasen.charsoo.webservices.business.RegisterBusiness;
 import ir.rasen.charsoo.webservices.business.UpdateBusinessProfileInfo;
@@ -65,6 +68,9 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.layout_action_bar_home, null);
+
         ((MyApplication) getApplication()).business = new Business();
 
         progressDialog = new ProgressDialog(this);
@@ -89,14 +95,15 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
 
         Bundle bundle = new Bundle();
         if (businessId != 0) {
-            ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.profile_edit_business));
+            ((TextViewFontActionBarTitle)v.findViewById(R.id.textView_title)).setText(getString(R.string.profile_edit_business));
             new GetBusinessProfileInfo(ActivityRegisterEditBusiness.this, businessId, ActivityRegisterEditBusiness.this).execute();
             bundle.putBoolean(Params.IS_EDITTING, true);
             progressDialog.show();
         } else {
-            ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.register_business));
+            ((TextViewFontActionBarTitle)v.findViewById(R.id.textView_title)).setText(getString(R.string.register_business));
             bundle.putBoolean(Params.IS_EDITTING, false);
         }
+        getSupportActionBar().setCustomView(v);
 
         fragmentBaseInfo.setArguments(bundle);
         fragmentContactInfo.setArguments(bundle);

@@ -37,7 +37,7 @@ import java.util.ArrayList;
  */
 public class GridViewWithHeaderAndFooter extends GridView {
 
-    private  View headerView;
+    private View headerView;
 
     public static boolean DEBUG = false;
 
@@ -126,7 +126,7 @@ public class GridViewWithHeaderAndFooter extends GridView {
         headerView = v;
     }
 
-    public View getHeaderView(){
+    public View getHeaderView() {
         return headerView;
     }
 
@@ -316,20 +316,20 @@ public class GridViewWithHeaderAndFooter extends GridView {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public int getVerticalSpacing(){
+    public int getVerticalSpacing() {
         int value = 0;
 
         try {
             int currentapiVersion = Build.VERSION.SDK_INT;
-            if (currentapiVersion < Build.VERSION_CODES.JELLY_BEAN){
+            if (currentapiVersion < Build.VERSION_CODES.JELLY_BEAN) {
                 Field field = this.getClass().getSuperclass().getDeclaredField("mVerticalSpacing");
                 field.setAccessible(true);
                 value = field.getInt(this);
-            } else{
+            } else {
                 value = super.getVerticalSpacing();
             }
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
         }
 
@@ -337,20 +337,20 @@ public class GridViewWithHeaderAndFooter extends GridView {
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public int getHorizontalSpacing(){
+    public int getHorizontalSpacing() {
         int value = 0;
 
         try {
             int currentapiVersion = Build.VERSION.SDK_INT;
-            if (currentapiVersion < Build.VERSION_CODES.JELLY_BEAN){
+            if (currentapiVersion < Build.VERSION_CODES.JELLY_BEAN) {
                 Field field = this.getClass().getSuperclass().getDeclaredField("mHorizontalSpacing");
                 field.setAccessible(true);
                 value = field.getInt(this);
-            } else{
+            } else {
                 value = super.getHorizontalSpacing();
             }
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
 
         }
 
@@ -614,8 +614,13 @@ public class GridViewWithHeaderAndFooter extends GridView {
 
             // Footer (off-limits positions will throw an IndexOutOfBoundsException)
             final int footerPosition = adjPosition - adapterCount;
-            return footerPosition % mNumColumns == 0
-                    && mFooterViewInfos.get(footerPosition / mNumColumns).isSelectable;
+            if ((footerPosition / mNumColumns) < mFooterViewInfos.size())
+                return footerPosition % mNumColumns == 0
+                        && mFooterViewInfos.get(footerPosition / mNumColumns).isSelectable;
+            else
+                return footerPosition % mNumColumns == 0
+                        && mFooterViewInfos.get(0).isSelectable;
+
         }
 
         @Override
