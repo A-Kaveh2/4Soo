@@ -70,22 +70,23 @@
                 android:maxLength="@integer/restriction_description"
                 android:singleLine="true" />
 
-            <Spinner
-                android:id="@+id/spinner_category"
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:id="@+id/textView_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:text="@string/category"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/shape_edit_text_back"
                 android:gravity="right" />
 
-            <Spinner
-                android:id="@+id/spinner_sub_category"
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:id="@+id/textView_sub_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/subcategory"
                 android:background="@drawable/shape_edit_text_back"
-                android:gravity="right"
-                android:layout_marginBottom="40dp"/>
+                android:gravity="right" />
 
 
         </LinearLayout>

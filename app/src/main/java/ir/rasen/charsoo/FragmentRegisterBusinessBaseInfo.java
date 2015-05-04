@@ -23,6 +23,8 @@ import ir.rasen.charsoo.classes.Category;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.SubCategory;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.dialog.PopupCategories;
+import ir.rasen.charsoo.dialog.PopupSubCategories;
 import ir.rasen.charsoo.helper.ImageHelper;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
@@ -31,30 +33,34 @@ import ir.rasen.charsoo.helper.TextProcessor;
 import ir.rasen.charsoo.helper.Validation;
 import ir.rasen.charsoo.helper.WebservicesHandler;
 import ir.rasen.charsoo.interfaces.IGetCallForTakePicture;
+import ir.rasen.charsoo.interfaces.ISelectCategory;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.EditTextFont;
+import ir.rasen.charsoo.ui.TextViewFont;
 import ir.rasen.charsoo.webservices.DownloadImages;
 import ir.rasen.charsoo.webservices.business.GetBusinessGategories;
 import ir.rasen.charsoo.webservices.business.GetBusinessSubcategories;
 
-public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebserviceResponse {
+public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
 
     private ProgressDialog progressDialog;
-    private EditTextFont editTextName, editTextIdentifier, editTextDescription,editTextHashtags;
-    private Spinner spinnerCategory, spinnerSubCategory;
+    private EditTextFont editTextName, editTextIdentifier, editTextDescription, editTextHashtags;
+    TextViewFont textViewCategories, textViewSubCategories;
     private String name, identifier, description;
     private int categoryId, subCategoryId;
     private MyApplication myApplication;
     private ArrayList<Category> categories;
     private ArrayList<SubCategory> subCategories;
     private ImageView imageViewPicture;
-    private  IGetCallForTakePicture iGetCallForTakePicture;
+    private IGetCallForTakePicture iGetCallForTakePicture;
     private boolean isEditing;
     private Business editingBusiness;
+    int selectedCategoryPosition, selectedSubCategoryPosition;
+    ISelectCategory iSelectCategory;
+    int subcategoryId = 0;
 
-
-    public void setPicture(Bitmap bitmap){
-        imageViewPicture.setImageBitmap(ImageHelper.getRoundedCornerBitmap(bitmap,20));
+    public void setPicture(Bitmap bitmap) {
+        imageViewPicture.setImageBitmap(ImageHelper.getRoundedCornerBitmap(bitmap, 20));
     }
 
     @Override
@@ -73,8 +79,8 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register_business_base_info,
                 container, false);
-
-
+        iSelectCategory = this;
+        isEditing = getArguments().getBoolean(Params.IS_EDITTING);
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -83,9 +89,13 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         editTextHashtags = (EditTextFont) view.findViewById(R.id.edt_hashtags);
         editTextIdentifier = (EditTextFont) view.findViewById(R.id.edt_identifier);
         editTextName = (EditTextFont) view.findViewById(R.id.edt_name);
-        spinnerCategory = (Spinner) view.findViewById(R.id.spinner_category);
-        spinnerSubCategory = (Spinner) view.findViewById(R.id.spinner_sub_category);
-        imageViewPicture = (ImageView)view.findViewById(R.id.imageView_picture);
+
+        textViewCategories = (TextViewFont) view.findViewById(R.id.textView_category);
+        textViewSubCategories = (TextViewFont) view.findViewById(R.id.textView_sub_category);
+        textViewCategories.setEnabled(false);
+        textViewSubCategories.setEnabled(false);
+
+        imageViewPicture = (ImageView) view.findViewById(R.id.imageView_picture);
         imageViewPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,8 +103,25 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
             }
         });
 
-        spinnerCategory.setEnabled(false);
-        spinnerSubCategory.setEnabled(false);
+        textViewCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isEditing)
+                    new PopupCategories(getActivity(), categories, selectedCategoryPosition, iSelectCategory).show();
+                else
+                    new PopupCategories(getActivity(), categories, -1, iSelectCategory).show();
+            }
+        });
+
+        textViewSubCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isEditing)
+                    new PopupSubCategories(getActivity(), subCategories, selectedSubCategoryPosition, iSelectCategory).show();
+                else
+                    new PopupSubCategories(getActivity(), subCategories, -1, iSelectCategory).show();
+            }
+        });
 
         //process hashtags
         editTextHashtags.addTextChangedListener(new TextWatcher() {
@@ -123,41 +150,24 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         progressDialog.show();
         new GetBusinessGategories(getActivity(), FragmentRegisterBusinessBaseInfo.this).execute();
 
-        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                progressDialog.show();
-                myApplication.setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
 
-                progressDialog.show();
-                new GetBusinessSubcategories(getActivity(), categories.get(position).id
-                        , FragmentRegisterBusinessBaseInfo.this).execute();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
 
         //if the user is editing the business
-        isEditing = getArguments().getBoolean(Params.IS_EDITTING);
-        if(isEditing){
-            editingBusiness = ((MyApplication)getActivity().getApplication()).business;
+
+        if (isEditing) {
+            editingBusiness = ((MyApplication) getActivity().getApplication()).business;
             DownloadImages downloadImages = new DownloadImages(getActivity());
-            downloadImages.download(editingBusiness.profilePictureId,Image_M.MEDIUM,imageViewPicture,true);
+            downloadImages.download(editingBusiness.profilePictureId, Image_M.MEDIUM, imageViewPicture, true);
             editTextName.setText(editingBusiness.name);
             editTextIdentifier.setText(editingBusiness.businessIdentifier);
             editTextIdentifier.setEnabled(false);
             editTextDescription.setText(editingBusiness.description);
             String hashtags = "";
-            for (String hashtag: editingBusiness.hashtagList){
-                hashtags += "#"+hashtag;
+            for (String hashtag : editingBusiness.hashtagList) {
+                hashtags += "#" + hashtag;
             }
 
-            editTextHashtags.setText(hashtags+" ");
+            editTextHashtags.setText(hashtags + " ");
         }
         return view;
     }
@@ -170,39 +180,29 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
             //get business categories
             if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY) {
                 categories = (ArrayList<Category>) result;
-                categories.add(0,new Category(0,getString(R.string.category)));
+                textViewCategories.setEnabled(true);
 
-                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
-                        R.layout.layout_spinner_back, Category.getCategoryListString(categories));
-                dataAdapter.setDropDownViewResource(R.layout.layout_spinner_back_drop_down);
-                spinnerCategory.setAdapter(dataAdapter);
 
-                //get subcategory for first category
                 myApplication.setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
-                spinnerCategory.setEnabled(true);
-
-                if(isEditing){
-                    for (int i = 0;i<categories.size();i++)
-                        if (editingBusiness.category.equals(categories.get(i).name)){
+                if (isEditing) {
+                    for (int i = 0; i < categories.size(); i++)
+                        if (editingBusiness.category.equals(categories.get(i).name)) {
                             //this is the editingBusiness' category
-                            spinnerCategory.setSelection(i);
+                            selectedCategoryPosition = i;
                             break;
                         }
                 }
             } else if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY) {
                 subCategories = (ArrayList<SubCategory>) result;
-                subCategories.add(0,new SubCategory(0,getString(R.string.subcategory)));
-                ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
-                        R.layout.layout_spinner_back, SubCategory.getSubCategoryListString(subCategories));
-                dataAdapter.setDropDownViewResource(R.layout.layout_spinner_back_drop_down);
-                spinnerSubCategory.setAdapter(dataAdapter);
-                spinnerSubCategory.setEnabled(true);
+                subCategories.add(0, new SubCategory(0, getString(R.string.subcategory)));
+                textViewSubCategories.setEnabled(true);
 
-                if(isEditing){
-                    for (int i = 0;i<subCategories.size();i++)
-                        if (editingBusiness.subcategory.equals(subCategories.get(i).name)){
+                if (isEditing) {
+                    for (int i = 0; i < subCategories.size(); i++)
+                        if (editingBusiness.subcategory.equals(subCategories.get(i).name)) {
                             //this is the editingBusiness' category
-                            spinnerSubCategory.setSelection(i);
+                            selectedSubCategoryPosition = i;
+                            subCategoryId = subCategories.get(i).id;
                             break;
                         }
                 }
@@ -219,27 +219,43 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
 
     public boolean isVerified() {
 
-        if(!Validation.validateName(getActivity(),editTextName.getText().toString()).isValid()){
+        if (!Validation.validateName(getActivity(), editTextName.getText().toString()).isValid()) {
             editTextName.setError(Validation.getErrorMessage());
             return false;
         }
-        if(!Validation.validateIdentifier(getActivity(),editTextIdentifier.getText().toString()).isValid()){
+        if (!Validation.validateIdentifier(getActivity(), editTextIdentifier.getText().toString()).isValid()) {
             editTextIdentifier.setError(Validation.getErrorMessage());
             return false;
         }
-        if(spinnerCategory.getSelectedItemPosition() == 0 || spinnerSubCategory.getSelectedItemPosition() == 0){
+        if (subcategoryId == 0) {
             new DialogMessage(getActivity(), getString(R.string.err_choose_spinner_item)).show();
             return false;
         }
 
         //initial MyApplication.business to pass the data
-        ((MyApplication)getActivity().getApplication()).business.name = editTextName.getText().toString();
-        ((MyApplication)getActivity().getApplication()).business.businessIdentifier = editTextIdentifier.getText().toString();
-        ((MyApplication)getActivity().getApplication()).business.categoryID = categories.get(spinnerCategory.getSelectedItemPosition()).id;
-        ((MyApplication)getActivity().getApplication()).business.subCategoryID = categories.get(spinnerSubCategory.getSelectedItemPosition()).id;
-        ((MyApplication)getActivity().getApplication()).business.description = editTextDescription.getText().toString();
-        ((MyApplication)getActivity().getApplication()).business.hashtagList = TextProcessor.getHashtags(editTextHashtags.getText().toString());
+        ((MyApplication) getActivity().getApplication()).business.name = editTextName.getText().toString();
+        ((MyApplication) getActivity().getApplication()).business.businessIdentifier = editTextIdentifier.getText().toString();
+        ((MyApplication) getActivity().getApplication()).business.categoryID = categories.get(selectedCategoryPosition).id;
+        ((MyApplication) getActivity().getApplication()).business.subCategoryID = subCategories.get(selectedSubCategoryPosition).id;
+        ((MyApplication) getActivity().getApplication()).business.description = editTextDescription.getText().toString();
+        ((MyApplication) getActivity().getApplication()).business.hashtagList = TextProcessor.getHashtags(editTextHashtags.getText().toString());
 
         return true;
+    }
+
+    @Override
+    public void notifySelectCategory(int categoryListPosition) {
+        if(categoryListPosition != selectedCategoryPosition)
+            subcategoryId = 0;
+        textViewCategories.setText(categories.get(categoryListPosition).name);
+        progressDialog.show();
+        ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
+        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, FragmentRegisterBusinessBaseInfo.this).execute();
+    }
+
+    @Override
+    public void notifySelectSubcategory(int subcategoryListPosition) {
+        this.subcategoryId = subCategories.get(subcategoryListPosition).id;
+        textViewSubCategories.setText(subCategories.get(subcategoryListPosition).name);
     }
 }

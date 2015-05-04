@@ -11,18 +11,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -32,33 +28,38 @@ import ir.rasen.charsoo.classes.Category;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.SubCategory;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.dialog.PopupCategories;
+import ir.rasen.charsoo.dialog.PopupSubCategories;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.WebservicesHandler;
+import ir.rasen.charsoo.interfaces.ISelectCategory;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.EditTextFont;
+import ir.rasen.charsoo.ui.TextViewFont;
 import ir.rasen.charsoo.webservices.business.GetBusinessGategories;
 import ir.rasen.charsoo.webservices.business.GetBusinessSubcategories;
 
-public class FragmentSearch extends Fragment implements IWebserviceResponse {
+public class FragmentSearch extends Fragment implements IWebserviceResponse, ISelectCategory {
 
     EditTextFont editTextSearch;
-    LinearLayout llIndicatorBusinesses, llIndicatorPosts,llIndicatorUsers;
+    LinearLayout llIndicatorBusinesses, llIndicatorPosts, llIndicatorUsers;
     private ProgressDialog progressDialog;
     private GoogleMap googleMap;
     MapView mapView;
     LatLng choosedLatLng;
     ArrayList<String> subcategoriesStr;
+    int subcategoryId = 0;
 
-    private enum SearchType {BUSINESSES, POSTS,USERS}
+    private enum SearchType {BUSINESSES, POSTS, USERS}
 
     ;
     private SearchType searchType;
     RelativeLayout rlFilters;
-    private Spinner spinnerCategory, spinnerSubCategory;
     private ArrayList<Category> categories;
     private ArrayList<SubCategory> subCategories;
-
+    ISelectCategory iSelectCategory;
+    TextViewFont textViewCategories, textViewSubCategories;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,16 +67,35 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
         View view = inflater.inflate(R.layout.fragment_search,
                 container, false);
 
+        iSelectCategory = this;
         searchType = SearchType.BUSINESSES;
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading SearchFragment");
 
+        textViewCategories = (TextViewFont) view.findViewById(R.id.textView_category);
+        textViewSubCategories = (TextViewFont) view.findViewById(R.id.textView_sub_category);
+        textViewCategories.setEnabled(false);
+        textViewSubCategories.setEnabled(false);
 
         llIndicatorBusinesses = (LinearLayout) view.findViewById(R.id.ll_indicator_businesses);
         llIndicatorPosts = (LinearLayout) view.findViewById(R.id.ll_indicator_posts);
         llIndicatorUsers = (LinearLayout) view.findViewById(R.id.ll_indicator_users);
         rlFilters = (RelativeLayout) view.findViewById(R.id.rl_filters);
+
+        textViewCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PopupCategories(getActivity(), categories, -1, iSelectCategory).show();
+            }
+        });
+
+        textViewSubCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PopupSubCategories(getActivity(), subCategories, -1, iSelectCategory).show();
+            }
+        });
 
         (view.findViewById(R.id.rl_businesses)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,26 +162,6 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
             }
         });
 
-        spinnerCategory = (Spinner) view.findViewById(R.id.spinner_category);
-        spinnerSubCategory = (Spinner) view.findViewById(R.id.spinner_sub_category);
-
-        spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position != 0 && position != 1) {
-                    progressDialog.show();
-                    ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
-                    new GetBusinessSubcategories(getActivity(), categories.get(position).id, FragmentSearch.this).execute();
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
 
         //Map section
         MapsInitializer.initialize(this.getActivity());
@@ -188,10 +188,9 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
                     }
                 });
             } catch (Exception e) {
-                new DialogMessage(getActivity(),getString(R.string.err_map_loading)+getString(R.string.err_map_loading_description)).show();
+                new DialogMessage(getActivity(), getString(R.string.err_map_loading) + getString(R.string.err_map_loading_description)).show();
             }
         }
-
         //Map section
 
         recursivelyCallHandler();
@@ -208,46 +207,12 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getActivity().getApplication()).isHomeCreated) {
-                    if (((MyApplication) getActivity().getApplication()).isSearchCreated) {
-
-                        initializeCategories();
-                    } else {
-                        ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
-                        new GetBusinessGategories(getActivity(), FragmentSearch.this).execute();
-                    }
+                    ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
+                    new GetBusinessGategories(getActivity(), FragmentSearch.this).execute();
                 } else
                     recursivelyCallHandler();
             }
         }, 500);
-    }
-
-
-    private void initializeCategories() {
-
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(getActivity(),
-                R.layout.layout_spinner_back, Category.getCategoryListString(categories));
-        dataAdapter.setDropDownViewResource(R.layout.layout_spinner_back_drop_down);
-        spinnerCategory.setAdapter(dataAdapter);
-
-        //get subcategory for first category
-        if (((MyApplication) getActivity().getApplication()).isSearchCreated) {
-            initializeSubcategories();
-
-        } else {
-            ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
-            new GetBusinessSubcategories(getActivity(), categories.get(1).id, FragmentSearch.this).execute();
-            spinnerCategory.setEnabled(true);
-            ((MyApplication) getActivity().getApplication()).isSearchCreated = true;
-
-        }
-    }
-
-    private void initializeSubcategories() {
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.layout_spinner_back, subcategoriesStr);
-        dataAdapter.setDropDownViewResource(R.layout.layout_spinner_back_drop_down);
-        spinnerSubCategory.setAdapter(dataAdapter);
-        spinnerSubCategory.setEnabled(true);
     }
 
     @Override
@@ -257,14 +222,13 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
             //get business categories
             if (((MyApplication) getActivity().getApplication()).getCurrentWebservice() == WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY) {
                 categories = (ArrayList<Category>) result;
-                categories.add(0, new Category(0, getString(R.string.category)));
-                initializeCategories();
+                textViewCategories.setEnabled(true);
+                ((MyApplication) getActivity().getApplication()).isSearchCreated = true;
             } else if (((MyApplication) getActivity().getApplication()).getCurrentWebservice() == WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY) {
                 subCategories = (ArrayList<SubCategory>) result;
-                subCategories.add(0, new SubCategory(0, getString(R.string.subcategory)));
                 progressDialog.dismiss();
                 subcategoriesStr = SubCategory.getSubCategoryListString(subCategories);
-                initializeSubcategories();
+                textViewSubCategories.setEnabled(true);
             }
         }
     }
@@ -277,11 +241,7 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
 
     private boolean search() {
         if (searchType == SearchType.BUSINESSES) {
-           /* if(!Validation.validateIdentifier(getActivity(),editTextSearch.getText().toString()).isValid()){
-                editTextSearch.setError(Validation.getErrorMessage());
-                return false;
-            }*/
-            if (spinnerSubCategory.getSelectedItemPosition() == 0) {
+            if (subcategoryId == 0) {
                 new DialogMessage(getActivity(), getString(R.string.choose_category_search)).show();
                 return false;
             }
@@ -294,15 +254,14 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
             intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
             intent.putExtra(Params.LATITUDE, String.valueOf(choosedLatLng.latitude));
             intent.putExtra(Params.LONGITUDE, String.valueOf(choosedLatLng.longitude));
-            intent.putExtra(Params.SUB_CATEGORY_ID, subCategories.get(spinnerSubCategory.getSelectedItemPosition()).id);
+            intent.putExtra(Params.SUB_CATEGORY_ID, subcategoryId);
             startActivity(intent);
 
         } else if (searchType == SearchType.POSTS) {
             Intent intent = new Intent(getActivity(), ActivitySearchPostResult.class);
             intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
             startActivity(intent);
-        }
-        else if (searchType == SearchType.USERS){
+        } else if (searchType == SearchType.USERS) {
             Intent intent = new Intent(getActivity(), ActivitySearchUser.class);
             intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
             startActivity(intent);
@@ -316,4 +275,22 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse {
         mapView.onResume();
         super.onResume();
     }
+
+
+    @Override
+    public void notifySelectCategory(int categoryListPosition) {
+        int i = categoryListPosition;
+        textViewCategories.setText(categories.get(categoryListPosition).name);
+        progressDialog.show();
+        ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
+        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, FragmentSearch.this).execute();
+    }
+
+    @Override
+    public void notifySelectSubcategory(int subcategoryListPosition) {
+        this.subcategoryId = subCategories.get(subcategoryListPosition).id;
+        textViewSubCategories.setText(subCategories.get(subcategoryListPosition).name);
+    }
+
+
 }
