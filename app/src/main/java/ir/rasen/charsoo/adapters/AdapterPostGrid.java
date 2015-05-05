@@ -99,7 +99,7 @@ public class AdapterPostGrid extends BaseAdapter {
         if (items.get(position).postPictureId == 0 && items.get(position).postPicture != null && !items.get(position).postPicture.equals(""))
             imageView.setImageBitmap(Image_M.getBitmapFromString(items.get(position).postPicture));
         else
-            downloadImages.download(items.get(position).postPictureId, Image_M.MEDIUM, imageView, false);
+            downloadImages.download(items.get(position).postPictureId, Image_M.MEDIUM, Image_M.ImageType.POST, imageView, false);
         if (imageView != null)
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override

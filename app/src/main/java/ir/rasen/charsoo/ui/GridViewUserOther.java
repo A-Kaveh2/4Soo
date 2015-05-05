@@ -24,6 +24,7 @@ import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.FriendshipRelation;
+import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ResultStatus;
@@ -138,7 +139,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
         imageViewCover.setLayoutParams(params);
         DownloadCoverImage downloadCoverImage = new DownloadCoverImage(context);
-        downloadCoverImage.download(user.profilePictureId, imageViewCover);
+        downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
 
         imageViewCover.setOnClickListener(new View.OnClickListener() {
             @Override

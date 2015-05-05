@@ -117,7 +117,7 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewCover.setLayoutParams(params);
 
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
-            downloadCoverImage.download(profilePictureId, imageViewCover);
+            downloadCoverImage.download(profilePictureId, imageViewCover, Image_M.ImageType.USER);
 
 
             imageViewCover.setOnClickListener(new View.OnClickListener() {

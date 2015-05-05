@@ -14,6 +14,7 @@ import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
+import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
@@ -43,7 +44,7 @@ public class ActivityContactInfo extends ActionBarActivity implements IWebservic
 
 
         DownloadCoverImage downloadCoverImage = new DownloadCoverImage(this);
-        downloadCoverImage.download(myApplication.business.profilePictureId, (ImageView) findViewById(R.id.imageView_cover));
+        downloadCoverImage.download(myApplication.business.profilePictureId, (ImageView) findViewById(R.id.imageView_cover), Image_M.ImageType.BUSINESS);
 
         ((TextViewFont) findViewById(R.id.editText_name)).setText(myApplication.business.name);
         ((TextViewFont) findViewById(R.id.editText_identifier)).setText(myApplication.business.businessIdentifier);

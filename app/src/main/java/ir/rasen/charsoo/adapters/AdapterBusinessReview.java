@@ -84,7 +84,7 @@ public class AdapterBusinessReview extends BaseAdapter  {
             holder = (Holder) view.getTag();
 
         //download business profile picture with customized class via imageId
-        downloadImages.download(reviews.get(position).userPicutreId, Image_M.SMALL, holder.imageViewImage,false);
+        downloadImages.download(reviews.get(position).userPicutreId, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
         holder.textViewIdentifier.setText(reviews.get(position).userName);
         holder.textViewText.setText(reviews.get(position).text);
         holder.ratingBar.setRating(reviews.get(position).rate);

@@ -297,11 +297,11 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
     }
 
     public void initialize() {
-        downloadImages.download(post.businessProfilePictureId, Image_M.SMALL, imageViewProfileImage, true);
+        downloadImages.download(post.businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, imageViewProfileImage, true);
         textViewDate.setText(PersianDate.getCreationDate(ActivityPost.this, post.creationDate));
         textViewBusinessIdentifier.setText(post.businessUserName);
 
-        downloadImages.download(post.pictureId, Image_M.LARGE, imageViewPost, false);
+        downloadImages.download(post.pictureId, Image_M.LARGE, Image_M.ImageType.POST, imageViewPost, false);
         textViewLikeNumber.setText(String.valueOf(post.likeNumber));
         textViewCommentNumber.setText(String.valueOf(post.commentNumber));
         textViewShareNumber.setText(String.valueOf(post.shareNumber));

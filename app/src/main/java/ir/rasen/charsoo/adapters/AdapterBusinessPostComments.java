@@ -79,7 +79,7 @@ public class AdapterBusinessPostComments extends BaseAdapter implements IComment
 
 
         //download image with customized class via imageId
-        downloadImages.download(comments.get(position).userProfilePictureID, Image_M.SMALL, holder.imageViewImage,false);
+        downloadImages.download(comments.get(position).userProfilePictureID, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
         holder.textViewUserIdentifier.setText(comments.get(position).username);
         holder.textViewText.setText(comments.get(position).text);
 

@@ -39,7 +39,7 @@ public class DownloadImages {
     private String storagePath;
     private Context context;
     private ArrayList<DownloadImage> downloadQueue;
-
+    private Image_M.ImageType imageType;
 
     public DownloadImages(Context context) {
         isDownloadStarted = false;
@@ -50,9 +50,10 @@ public class DownloadImages {
         images = new Hashtable<>();
     }
 
-    public void download(int imageID, int imageSize, ImageView imageView,boolean isRounded) {
+    public void download(int imageID, int imageSize, Image_M.ImageType imageType, ImageView imageView, boolean isRounded) {
         //imageSize: 1=large, 2=medium, 3= small
 
+        this.imageType = imageType;
         if (imageView == null)
             return;
         int key = Integer.valueOf(String.valueOf(imageID) + String.valueOf(imageSize));
@@ -70,7 +71,9 @@ public class DownloadImages {
         if (isImageInStorage(imageID, imageSize)) {
             Bitmap bitmap = BitmapFactory.decodeFile(storagePath + "/" + String.valueOf(imageID) + "_" + String.valueOf(imageSize) + ".jpg");
             if (bitmap == null)
-                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_person_outline_blue_24dp);
+                bitmap = BitmapFactory.decodeResource(context.getResources(),Image_M.getDefaultImage(imageType));
+
+
             images.put(key, bitmap);
             try {
                 if (isRounded)
@@ -87,7 +90,7 @@ public class DownloadImages {
         if (!isDownloadStarted) {
             isDownloadStarted = true;
             downloadQueue.add(new DownloadImage(imageID, imageSize, imageView));
-            new DownloadImageThread(context,isRounded).execute();
+            new DownloadImageThread(context, isRounded).execute();
         } else {
             downloadQueue.add(new DownloadImage(imageID, imageSize, imageView));
         }
@@ -120,7 +123,7 @@ public class DownloadImages {
         private Context context;
         private boolean isRounded;
 
-        public DownloadImageThread(Context context,boolean isRounded) {
+        public DownloadImageThread(Context context, boolean isRounded) {
             this.context = context;
             this.isRounded = isRounded;
         }
@@ -158,7 +161,7 @@ public class DownloadImages {
             int key = Integer.valueOf(String.valueOf(downloadQueue.get(0).imageID) + String.valueOf(downloadQueue.get(0).imageSize));
 
             if (result == null) {
-                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_person_outline_blue_24dp);
+                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), Image_M.getDefaultImage(imageType));
                 images.put(key, bitmap);
                 downloadQueue.get(0).imageView.setImageBitmap(bitmap);
             } else {
@@ -174,7 +177,7 @@ public class DownloadImages {
             }
 
             downloadQueue.remove(0);
-            new DownloadImageThread(context,isRounded).execute();
+            new DownloadImageThread(context, isRounded).execute();
 
         }
     }

@@ -82,7 +82,7 @@ public class AdapterUserReview extends BaseAdapter implements  IReviewChange {
             holder = (Holder) view.getTag();
 
         //download business profile picture with customized class via imageId
-        downloadImages.download(reviews.get(position).businessPicutreId, Image_M.SMALL, holder.imageViewImage,true);
+        downloadImages.download(reviews.get(position).businessPicutreId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage,true);
         holder.textViewIdentifier.setText(reviews.get(position).businessUserName);
         holder.textViewText.setText(reviews.get(position).text);
         holder.ratingBar.setRating(reviews.get(position).rate);

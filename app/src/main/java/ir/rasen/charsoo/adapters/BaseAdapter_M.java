@@ -78,7 +78,7 @@ public class BaseAdapter_M extends BaseAdapter {
         });
 
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, holder.imageViewImage,isRounderCorner);
+        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.POST, holder.imageViewImage,isRounderCorner);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
 
         return view;

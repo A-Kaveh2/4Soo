@@ -245,7 +245,7 @@ public class ActivityAddEditPost extends ActionBarActivity implements View.OnCli
                 editTextTitle.setText(post.title);
                 //download and display the post picture
                 DownloadImages downloadImages = new DownloadImages(ActivityAddEditPost.this);
-                downloadImages.download(post.pictureId, Image_M.MEDIUM, imageViewPostPicture, false);
+                downloadImages.download(post.pictureId, Image_M.MEDIUM, Image_M.ImageType.POST, imageViewPostPicture, false);
 
                 editTextDescription.setText(post.description);
                 String hashtags = "";

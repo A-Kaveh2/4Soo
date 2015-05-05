@@ -80,7 +80,7 @@ public class AdapterBlockedUsers extends BaseAdapter {
             holder = (Holder) view.getTag();
 
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, holder.imageViewImage,false);
+        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
         holder.imageViewUnblock.setOnClickListener(new View.OnClickListener() {
             @Override

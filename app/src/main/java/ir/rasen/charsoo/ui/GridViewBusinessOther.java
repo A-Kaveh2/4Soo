@@ -24,6 +24,7 @@ import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ResultStatus;
@@ -113,7 +114,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
             imageViewCover.setLayoutParams(params);
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
-            downloadCoverImage.download(business.profilePictureId, imageViewCover);
+            downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
 
             imageViewCover.setOnClickListener(new View.OnClickListener() {
                 @Override

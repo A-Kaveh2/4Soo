@@ -139,7 +139,7 @@ public class GridViewBusiness implements IWebserviceResponse {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
             imageViewCover.setLayoutParams(params);
             downloadCoverImage = new DownloadCoverImage(activity);
-            downloadCoverImage.download(business.profilePictureId, imageViewCover);
+            downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
 
             imageViewCover.setOnClickListener(new View.OnClickListener() {
                 @Override

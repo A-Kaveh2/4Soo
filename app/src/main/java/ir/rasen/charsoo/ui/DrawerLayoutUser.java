@@ -41,7 +41,7 @@ public class DrawerLayoutUser {
 
 
         DownloadImages downloadImages = new DownloadImages(activity);
-        downloadImages.download(user.profilePictureId, Image_M.MEDIUM, (ImageViewCircle) drawerLayout.findViewById(R.id.imageView_user_picture),false);
+        downloadImages.download(user.profilePictureId, Image_M.MEDIUM, Image_M.ImageType.USER, (ImageViewCircle) drawerLayout.findViewById(R.id.imageView_user_picture),false);
 
         (drawerLayout.findViewById(R.id.imageView_drawer_edit)).setOnClickListener(new View.OnClickListener() {
             @Override

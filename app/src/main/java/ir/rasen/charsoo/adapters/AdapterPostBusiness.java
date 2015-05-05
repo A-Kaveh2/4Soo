@@ -108,14 +108,14 @@ public class AdapterPostBusiness extends BaseAdapter implements IDeletePost {
         holder.llAnnouncementSection.setVisibility(View.GONE);
 
         //all post's types have these three fields
-        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, holder.imageViewProfileImage,true);
+        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage,true);
         holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
 
         if (items.get(position).picture!= null && !items.get(position).picture.equals("") && items.get(position).pictureId == 0 )
             holder.imageViewPost.setImageBitmap(Image_M.getBitmapFromString(items.get(position).picture));
         else
-        downloadImages.download(items.get(position).pictureId, Image_M.LARGE, holder.imageViewPost,false);
+        downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost,false);
         holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
         holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
         holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));

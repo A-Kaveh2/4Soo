@@ -14,6 +14,7 @@ import android.os.Environment;
 import android.util.Base64;
 import android.graphics.Bitmap.Config;
 import android.graphics.PorterDuff.Mode;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,6 +32,27 @@ public class Image_M {
     public static int MEDIUM = 2;
     public static int SMALL = 3;
     public static int COVER = 4;
+
+    public static enum ImageType {USER, BUSINESS, POST}
+
+    ;
+
+    public static int getDefaultImage(ImageType imageType) {
+        int imageId = 0;
+        switch (imageType) {
+            case BUSINESS:
+                imageId = R.drawable.ic_person_grey600_36dp;
+                break;
+            case POST:
+                imageId = R.drawable.ic_person_grey600_36dp;
+                break;
+            case USER:
+                imageId = R.drawable.ic_person_grey600_36dp;
+                break;
+
+        }
+        return imageId;
+    }
 
     public static String getBase64String(String imageFilePath) {
         Bitmap bm = BitmapFactory.decodeFile(imageFilePath);

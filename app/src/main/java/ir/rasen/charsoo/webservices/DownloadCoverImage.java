@@ -33,6 +33,7 @@ public class DownloadCoverImage {
     private String storagePath;
     private Context context;
     private int key;
+    private Image_M.ImageType imageType;
 
 
     public DownloadCoverImage(Context context) {
@@ -42,15 +43,15 @@ public class DownloadCoverImage {
                 context.getResources().getString(R.string.download_storage_path);
     }
 
-    public void download(int imageID, ImageView imageView) {
+    public void download(int imageID, ImageView imageView, Image_M.ImageType imageType) {
         //imageSize: 1=large, 2=medium, 3= small
-
+        this.imageType = imageType;
         key = Integer.valueOf(String.valueOf(imageID) + Image_M.COVER);
 
         if (isImageInStorage(key)) {
             Bitmap bitmap = BitmapFactory.decodeFile(storagePath + "/" + String.valueOf(key) + ".jpg");
             if (bitmap == null)
-                bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher);
+                bitmap = BitmapFactory.decodeResource(context.getResources(),Image_M.getDefaultImage(imageType));
             try {
                 imageView.setImageBitmap(bitmap);
                 //imageView.setImageBitmap(Image_M.getRoundedCornerBitmap(bitmap,(int)context.getResources().getDimension(R.dimen.base_adapter_item_height)));

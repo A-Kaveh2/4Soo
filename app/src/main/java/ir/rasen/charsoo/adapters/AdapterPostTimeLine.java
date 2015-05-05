@@ -131,7 +131,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder = (Holder) view.getTag();
 
         //all post's types have these three fields
-        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, holder.imageViewProfileImage, true);
+        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
         holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
         holder.textViewBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +147,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.llAnnouncementSection.setVisibility(View.GONE);
             holder.llCompleteSection.setVisibility(View.VISIBLE);
 
-            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, holder.imageViewPost, false);
+            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, false);
             holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
             holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));

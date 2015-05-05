@@ -722,6 +722,7 @@ public class GridViewWithHeaderAndFooter extends GridView {
             }
             // Footer
             final int footerPosition = adjPosition - adapterCount;
+            int i = getCount();
             if (footerPosition < getCount()) {
                 View footViewContainer = mFooterViewInfos
                         .get(footerPosition / mNumColumns).viewContainer;
@@ -739,6 +740,7 @@ public class GridViewWithHeaderAndFooter extends GridView {
                 }
             }
             throw new ArrayIndexOutOfBoundsException(position);
+
         }
 
         @Override

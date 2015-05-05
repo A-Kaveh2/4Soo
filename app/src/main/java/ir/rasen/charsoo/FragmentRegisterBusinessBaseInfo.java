@@ -157,7 +157,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         if (isEditing) {
             editingBusiness = ((MyApplication) getActivity().getApplication()).business;
             DownloadImages downloadImages = new DownloadImages(getActivity());
-            downloadImages.download(editingBusiness.profilePictureId, Image_M.MEDIUM, imageViewPicture, true);
+            downloadImages.download(editingBusiness.profilePictureId, Image_M.MEDIUM, Image_M.ImageType.BUSINESS, imageViewPicture, true);
             editTextName.setText(editingBusiness.name);
             editTextIdentifier.setText(editingBusiness.businessIdentifier);
             editTextIdentifier.setEnabled(false);

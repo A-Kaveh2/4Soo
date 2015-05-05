@@ -70,7 +70,7 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
         });
 
         DownloadImages downloadImages = new DownloadImages(activity);
-        downloadImages.download(displayBusinessProfilePictureId,Image_M.MEDIUM,(ImageView)drawerLayout.findViewById(R.id.imageView_business_picture),true);
+        downloadImages.download(displayBusinessProfilePictureId,Image_M.MEDIUM, Image_M.ImageType.BUSINESS,(ImageView)drawerLayout.findViewById(R.id.imageView_business_picture),true);
 
         textViewIdentifier = (TextViewFont) drawerLayout.findViewById(R.id.textView_drawer_identifier);
         textViewIdentifier.setText(businessIdentifier);

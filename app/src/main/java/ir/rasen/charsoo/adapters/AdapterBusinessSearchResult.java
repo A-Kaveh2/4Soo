@@ -79,7 +79,7 @@ public class AdapterBusinessSearchResult extends BaseAdapter {
             }
         });
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, holder.imageViewImage,true);
+        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage,true);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
 
         return view;

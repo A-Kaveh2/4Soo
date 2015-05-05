@@ -52,7 +52,7 @@ public class ActivityProfilePicture extends ActionBarActivity  {
         ActionBar_M.setActionBar(getSupportActionBar(), this,userIdentifier);
 
         DownloadImages downloadImages = new DownloadImages(this);
-        downloadImages.download(profilePictureId,Image_M.LARGE,(ImageView)findViewById(R.id.imageView_profile_picture),false);
+        downloadImages.download(profilePictureId,Image_M.LARGE, Image_M.ImageType.USER,(ImageView)findViewById(R.id.imageView_profile_picture),false);
 
 
     }

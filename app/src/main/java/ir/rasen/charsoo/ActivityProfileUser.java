@@ -119,7 +119,7 @@ public class ActivityProfileUser extends ActionBarActivity implements View.OnCli
             //GetUserProfileInfo result
             user = (User) result;
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(this);
-            downloadCoverImage.download(user.profilePictureId, imageViewCover);
+            downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
 
             //initial view
             editTextName.setText(user.name);

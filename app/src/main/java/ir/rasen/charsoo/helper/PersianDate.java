@@ -188,6 +188,7 @@ public class PersianDate {
 
         return creationDate;
     }
+
     public static String getCreationDateInSecond(Context context, int seconds) {
         Resources resources = context.getResources();
         String creationDate = "";
@@ -203,22 +204,29 @@ public class PersianDate {
             //less than a minute, creation date will display in seconds
             creationDate = seconds + resources.getString(R.string.second);
 
-        } else if (hours >= DAY_HOURS && hours < WEEK_HOURS) {
+        } else if (seconds > MINUTE_IN_SECOND && seconds <= HOUR_IN_SECOND) {
+            //more than a minute and less than an hour, creation date will display in minutes
+            creationDate = seconds / MINUTE_IN_SECOND + resources.getString(R.string.minute);
+
+        } else if (seconds > HOUR_IN_SECOND && seconds <= DAY_IN_SECOND) {
+            //more than an hour and less than a day, creation date will display in hours
+            creationDate = seconds / HOUR_IN_SECOND + resources.getString(R.string.hour);
+
+        } else if (seconds > DAY_IN_SECOND && seconds <= WEEK_IN_SECOND) {
             //more than a day and less than a week, creation date will display in days
-            creationDate = hours / DAY_HOURS + resources.getString(R.string.day);
+            creationDate = seconds / DAY_IN_SECOND + resources.getString(R.string.day);
 
-        } else if (hours >= WEEK_HOURS && hours < MONTH_HOURS) {
+        } else if (seconds > WEEK_IN_SECOND && seconds <= MONTH_IN_SECOND) {
             //more than a week and less than a month, creation date will display in weeks
-            creationDate = hours / WEEK_HOURS + resources.getString(R.string.week);
+            creationDate = seconds / WEEK_IN_SECOND + resources.getString(R.string.week);
 
-        } else if (hours >= MONTH_HOURS && hours < YEAR_HOURS) {
+        } else if (seconds > MONTH_IN_SECOND && seconds <= YEAR_IN_SECOND) {
             //more than a month and less than a year, creation date will display in months
-            creationDate = hours / MONTH_HOURS + resources.getString(R.string.month);
+            creationDate = seconds / MONTH_IN_SECOND + resources.getString(R.string.month);
 
-        } else if (hours >= YEAR_HOURS) {
+        } else if (seconds > YEAR_IN_SECOND) {
             //more than a year, creation date will display in years
-            creationDate = hours / YEAR_HOURS + resources.getString(R.string.year);
-
+            creationDate = seconds / YEAR_IN_SECOND + resources.getString(R.string.year);
         }
 
         return creationDate;
