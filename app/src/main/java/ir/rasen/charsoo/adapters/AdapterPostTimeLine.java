@@ -56,14 +56,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         screedWidth = context.getResources().getDisplayMetrics().widthPixels;
         iReportPost = this;
 
-        // Gesture detection
-       /* gestureDetector = new GestureDetector(context, new MyGestureDetector());
-        gestureListener = new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                return gestureDetector.onTouchEvent(event);
-            }
-        };*/
-
     }
 
     public void loadMore(ArrayList<Post> newItem) {

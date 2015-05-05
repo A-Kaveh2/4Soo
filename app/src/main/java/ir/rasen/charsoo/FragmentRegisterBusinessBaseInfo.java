@@ -47,8 +47,6 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
     private ProgressDialog progressDialog;
     private EditTextFont editTextName, editTextIdentifier, editTextDescription, editTextHashtags;
     TextViewFont textViewCategories,textViewSubcategories;
-    private String name, identifier, description;
-    private int categoryId, subCategoryId;
     private MyApplication myApplication;
     private ArrayList<Category> categories;
     private ArrayList<SubCategory> subCategories;
@@ -58,7 +56,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
     private Business editingBusiness;
     int selectedCategoryPosition, selectedSubCategoryPosition;
     ISelectCategory iSelectCategory;
-    int subcategoryId = 0;
+    boolean isSubcategorySelected = false;
 
     public void setPicture(Bitmap bitmap) {
         imageViewPicture.setImageBitmap(ImageHelper.getRoundedCornerBitmap(bitmap, 20));
@@ -208,7 +206,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
                             //this is the editingBusiness' category
                             selectedSubCategoryPosition = i;
                             textViewSubcategories.setText(subCategories.get(i).name);
-                            subCategoryId = subCategories.get(i).id;
+                            isSubcategorySelected = true;
                             break;
                         }
                 }
@@ -233,7 +231,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
             editTextIdentifier.setError(Validation.getErrorMessage());
             return false;
         }
-        if (subcategoryId == 0) {
+        if (!isSubcategorySelected) {
             new DialogMessage(getActivity(), getString(R.string.err_choose_spinner_item)).show();
             return false;
         }
@@ -253,11 +251,12 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
     public void notifySelectCategory(int categoryListPosition) {
         //if user select another category, he should select a subcategory either.
         if(categoryListPosition != selectedCategoryPosition) {
-            subcategoryId = 0;
+            isSubcategorySelected = false;
             textViewSubcategories.setEnabled(false);
             textViewSubcategories.setText(getString(R.string.subcategory));
         }
 
+        this.selectedCategoryPosition = categoryListPosition;
         textViewCategories.setText(categories.get(categoryListPosition).name);
         progressDialog.show();
         ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
@@ -266,7 +265,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
 
     @Override
     public void notifySelectSubcategory(int subcategoryListPosition) {
-        this.subcategoryId = subCategories.get(subcategoryListPosition).id;
+        this.selectedSubCategoryPosition = subcategoryListPosition;
         textViewSubcategories.setText(subCategories.get(subcategoryListPosition).name);
     }
 }

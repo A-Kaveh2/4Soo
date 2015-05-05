@@ -23,6 +23,15 @@ public class PersianDate {
     private static int MONTH_HOURS = 30 * DAY_HOURS;
     private static int YEAR_HOURS = 365 * DAY_HOURS;
 
+
+    private static int MINUTE_IN_SECOND = 60;
+    private static int HOUR_IN_SECOND = 60 * MINUTE_IN_SECOND;
+    private static int DAY_IN_SECOND = 24 * HOUR_IN_SECOND;
+    private static int WEEK_IN_SECOND = 7 * DAY_IN_SECOND;
+    private static int MONTH_IN_SECOND = 30 * WEEK_IN_SECOND;
+    private static int YEAR_IN_SECOND = 12 * MONTH_IN_SECOND;
+
+
     private Resources resources;
 
 
@@ -179,6 +188,41 @@ public class PersianDate {
 
         return creationDate;
     }
+    public static String getCreationDateInSecond(Context context, int seconds) {
+        Resources resources = context.getResources();
+        String creationDate = "";
+
+        if (seconds < 0) {
+            //this is the future!
+            creationDate = resources.getString(R.string.err);
+        } else if (seconds == 0) {
+            //it is completely fresh!
+            creationDate = "1" + resources.getString(R.string.second);
+
+        } else if (seconds > 0 && seconds <= MINUTE_IN_SECOND) {
+            //less than a minute, creation date will display in seconds
+            creationDate = seconds + resources.getString(R.string.second);
+
+        } else if (hours >= DAY_HOURS && hours < WEEK_HOURS) {
+            //more than a day and less than a week, creation date will display in days
+            creationDate = hours / DAY_HOURS + resources.getString(R.string.day);
+
+        } else if (hours >= WEEK_HOURS && hours < MONTH_HOURS) {
+            //more than a week and less than a month, creation date will display in weeks
+            creationDate = hours / WEEK_HOURS + resources.getString(R.string.week);
+
+        } else if (hours >= MONTH_HOURS && hours < YEAR_HOURS) {
+            //more than a month and less than a year, creation date will display in months
+            creationDate = hours / MONTH_HOURS + resources.getString(R.string.month);
+
+        } else if (hours >= YEAR_HOURS) {
+            //more than a year, creation date will display in years
+            creationDate = hours / YEAR_HOURS + resources.getString(R.string.year);
+
+        }
+
+        return creationDate;
+    }
 
     public static String getBirthDateString(String day, String month, String year) {
         return year + "/" + month + "/" + day;
@@ -189,10 +233,10 @@ public class PersianDate {
     }
 
     public static String getMonthFromBirthDateString(String birthDate) {
-        return birthDate.substring(birthDate.indexOf("/") + 1, birthDate.lastIndexOf("/") );
+        return birthDate.substring(birthDate.indexOf("/") + 1, birthDate.lastIndexOf("/"));
     }
 
     public static String getYearFromBirthDateString(String birthDate) {
-        return birthDate.substring(0,birthDate.indexOf("/"));
+        return birthDate.substring(0, birthDate.indexOf("/"));
     }
 }
