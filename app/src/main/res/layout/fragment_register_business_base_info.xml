@@ -53,7 +53,6 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/description"
                 android:layout_marginTop="20dp"
-
                 android:gravity="right|center_vertical"
                 android:textColor="@color/Black"
                 android:maxLength="@integer/restriction_description"
@@ -75,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/category"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape_edit_text_back"
                 android:gravity="right" />
 
@@ -83,10 +82,17 @@
                 android:id="@+id/textView_sub_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/subcategory"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/shape_edit_text_back"
                 android:gravity="right" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+
+
 
 
         </LinearLayout>

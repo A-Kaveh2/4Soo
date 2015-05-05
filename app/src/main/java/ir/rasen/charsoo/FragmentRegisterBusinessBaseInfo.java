@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -45,7 +46,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
 
     private ProgressDialog progressDialog;
     private EditTextFont editTextName, editTextIdentifier, editTextDescription, editTextHashtags;
-    TextViewFont textViewCategories, textViewSubCategories;
+    TextViewFont textViewCategories,textViewSubcategories;
     private String name, identifier, description;
     private int categoryId, subCategoryId;
     private MyApplication myApplication;
@@ -91,9 +92,9 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         editTextName = (EditTextFont) view.findViewById(R.id.edt_name);
 
         textViewCategories = (TextViewFont) view.findViewById(R.id.textView_category);
-        textViewSubCategories = (TextViewFont) view.findViewById(R.id.textView_sub_category);
+        textViewSubcategories = (TextViewFont) view.findViewById(R.id.textView_sub_category);
         textViewCategories.setEnabled(false);
-        textViewSubCategories.setEnabled(false);
+        textViewSubcategories.setEnabled(false);
 
         imageViewPicture = (ImageView) view.findViewById(R.id.imageView_picture);
         imageViewPicture.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +103,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
                 iGetCallForTakePicture.notifyCallForTakePicture();
             }
         });
+
 
         textViewCategories.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,14 +114,14 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
                     new PopupCategories(getActivity(), categories, -1, iSelectCategory).show();
             }
         });
-
-        textViewSubCategories.setOnClickListener(new View.OnClickListener() {
+        textViewSubcategories.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (isEditing)
                     new PopupSubCategories(getActivity(), subCategories, selectedSubCategoryPosition, iSelectCategory).show();
                 else
                     new PopupSubCategories(getActivity(), subCategories, -1, iSelectCategory).show();
+                return false;
             }
         });
 
@@ -181,7 +183,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
             if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY) {
                 categories = (ArrayList<Category>) result;
                 textViewCategories.setEnabled(true);
-
+                editTextIdentifier.requestFocus();
 
                 myApplication.setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
                 if (isEditing) {
@@ -189,19 +191,23 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
                         if (editingBusiness.category.equals(categories.get(i).name)) {
                             //this is the editingBusiness' category
                             selectedCategoryPosition = i;
+                            textViewCategories.setText(categories.get(i).name);
+                            notifySelectCategory(i);
                             break;
                         }
+
                 }
             } else if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY) {
                 subCategories = (ArrayList<SubCategory>) result;
-                subCategories.add(0, new SubCategory(0, getString(R.string.subcategory)));
-                textViewSubCategories.setEnabled(true);
-
+                //subCategories.add(0, new SubCategory(0, getString(R.string.subcategory)));
+                textViewSubcategories.setEnabled(true);
+                editTextIdentifier.requestFocus();
                 if (isEditing) {
                     for (int i = 0; i < subCategories.size(); i++)
                         if (editingBusiness.subcategory.equals(subCategories.get(i).name)) {
                             //this is the editingBusiness' category
                             selectedSubCategoryPosition = i;
+                            textViewSubcategories.setText(subCategories.get(i).name);
                             subCategoryId = subCategories.get(i).id;
                             break;
                         }
@@ -245,8 +251,13 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
 
     @Override
     public void notifySelectCategory(int categoryListPosition) {
-        if(categoryListPosition != selectedCategoryPosition)
+        //if user select another category, he should select a subcategory either.
+        if(categoryListPosition != selectedCategoryPosition) {
             subcategoryId = 0;
+            textViewSubcategories.setEnabled(false);
+            textViewSubcategories.setText(getString(R.string.subcategory));
+        }
+
         textViewCategories.setText(categories.get(categoryListPosition).name);
         progressDialog.show();
         ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
@@ -256,6 +267,6 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
     @Override
     public void notifySelectSubcategory(int subcategoryListPosition) {
         this.subcategoryId = subCategories.get(subcategoryListPosition).id;
-        textViewSubCategories.setText(subCategories.get(subcategoryListPosition).name);
+        textViewSubcategories.setText(subCategories.get(subcategoryListPosition).name);
     }
 }
