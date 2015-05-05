@@ -43,11 +43,14 @@ public class SendComment extends AsyncTask<Void, Void, Integer> {
     protected Integer doInBackground(Void... voids) {
         WebserviceGET webserviceGET = null;
         try {
-            webserviceGET = new WebserviceGET(URLs.SEND_COMMENT, new ArrayList<>(
-                    Arrays.asList(String.valueOf(userID), String.valueOf(postID), comment)));
+            ArrayList arrayList = new ArrayList<>(
+                    Arrays.asList(String.valueOf(userID), String.valueOf(postID), comment));
+            webserviceGET = new WebserviceGET(URLs.SEND_COMMENT,arrayList );
         }
         catch (Exception e){
+
             String s = e.getMessage();
+            return  null;
         }
 
 

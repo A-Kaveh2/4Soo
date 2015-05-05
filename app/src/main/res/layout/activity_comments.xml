@@ -25,7 +25,8 @@
         <ir.rasen.charsoo.ui.EditTextFont
             android:id="@+id/edt_comment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:hint="@string/comment_context"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"

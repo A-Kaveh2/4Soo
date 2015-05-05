@@ -36,7 +36,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     AdapterPostTimeLine adapterPostTimeLine;
-    GridViewWithHeaderAndFooter gridView;
+    ListView gridView;
     ArrayList<Post> results;
     ArrayList<Post> sampleResults;
     private View listFooterView;
@@ -92,7 +92,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
 
-        gridView = (GridViewWithHeaderAndFooter) view.findViewById(R.id.gridView);
+        gridView = (ListView) view.findViewById(R.id.gridView);
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             int currentFirstVisibleItem
                     ,

@@ -80,10 +80,10 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
-        if (gridView == null) {
+        /*if (gridView == null) {
             gridView = (GridView) viewGroup;
             gridView.setSelector(new ColorDrawable(0x00ffffff));
-        }
+        }*/
         final Holder holder;
 
         if (view == null) {
@@ -156,19 +156,53 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewPrice.setText(items.get(position).price);
 
             ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
-            if (lastThreeComments.size() > 0) {
+            if(lastThreeComments.size() == 0){
+                holder.textViewComment1UserIdentifier.setVisibility(View.GONE);
+                holder.textViewComment1.setVisibility(View.GONE);
+
+                holder.textViewComment2UserIdentifier.setVisibility(View.GONE);
+                holder.textViewComment2.setVisibility(View.GONE);
+
+                holder.textViewComment3UserIdentifier.setVisibility(View.GONE);
+                holder.textViewComment3.setVisibility(View.GONE);
+            }
+            if (lastThreeComments.size() == 1) {
                 holder.textViewComment1UserIdentifier.setText(items.get(position).lastThreeComments.get(0).username);
                 holder.textViewComment1.setText(items.get(position).lastThreeComments.get(0).text);
                 holder.textViewComment1UserIdentifier.setVisibility(View.VISIBLE);
                 holder.textViewComment1.setVisibility(View.VISIBLE);
+
+                holder.textViewComment2UserIdentifier.setVisibility(View.GONE);
+                holder.textViewComment2.setVisibility(View.GONE);
+
+                holder.textViewComment3UserIdentifier.setVisibility(View.GONE);
+                holder.textViewComment3.setVisibility(View.GONE);
             }
-            if (lastThreeComments.size() > 1) {
+            if (lastThreeComments.size() == 2) {
+                holder.textViewComment1UserIdentifier.setText(items.get(position).lastThreeComments.get(0).username);
+                holder.textViewComment1.setText(items.get(position).lastThreeComments.get(0).text);
+                holder.textViewComment1UserIdentifier.setVisibility(View.VISIBLE);
+                holder.textViewComment1.setVisibility(View.VISIBLE);
+
                 holder.textViewComment2UserIdentifier.setText(items.get(position).lastThreeComments.get(1).username);
                 holder.textViewComment2.setText(items.get(position).lastThreeComments.get(1).text);
                 holder.textViewComment2UserIdentifier.setVisibility(View.VISIBLE);
                 holder.textViewComment2.setVisibility(View.VISIBLE);
+
+                holder.textViewComment3UserIdentifier.setVisibility(View.GONE);
+                holder.textViewComment3.setVisibility(View.GONE);
             }
-            if (lastThreeComments.size() > 2) {
+            if (lastThreeComments.size() == 3) {
+                holder.textViewComment1UserIdentifier.setText(items.get(position).lastThreeComments.get(0).username);
+                holder.textViewComment1.setText(items.get(position).lastThreeComments.get(0).text);
+                holder.textViewComment1UserIdentifier.setVisibility(View.VISIBLE);
+                holder.textViewComment1.setVisibility(View.VISIBLE);
+
+                holder.textViewComment2UserIdentifier.setText(items.get(position).lastThreeComments.get(1).username);
+                holder.textViewComment2.setText(items.get(position).lastThreeComments.get(1).text);
+                holder.textViewComment2UserIdentifier.setVisibility(View.VISIBLE);
+                holder.textViewComment2.setVisibility(View.VISIBLE);
+
                 holder.textViewComment3UserIdentifier.setText(items.get(position).lastThreeComments.get(2).username);
                 holder.textViewComment3.setText(items.get(position).lastThreeComments.get(2).text);
                 holder.textViewComment3UserIdentifier.setVisibility(View.VISIBLE);

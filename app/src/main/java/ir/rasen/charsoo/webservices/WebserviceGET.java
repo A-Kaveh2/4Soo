@@ -8,6 +8,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.classes.MyApplication;
@@ -33,6 +34,12 @@ public class WebserviceGET {
             }
         }
         url = url.replaceAll ( " ", "%20" );
+       /* try {
+            url = URLEncoder.encode(url, "UTF-8");
+        }
+        catch (Exception e){
+            String s = e.getMessage();
+        }*/
         httpGet = new HttpGet(url);
 
     }

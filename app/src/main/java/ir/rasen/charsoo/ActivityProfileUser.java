@@ -102,8 +102,7 @@ public class ActivityProfileUser extends ActionBarActivity implements View.OnCli
         spinnerSex.setAdapter(dataAdapter);
 
         int screenWidth = getResources().getDisplayMetrics().widthPixels;
-        coverPictureHieght = (screenWidth / 3) * 2;
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, coverPictureHieght);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
         imageViewCover.setLayoutParams(params);
 
         progressDialog.show();
