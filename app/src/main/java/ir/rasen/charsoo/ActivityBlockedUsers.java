@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.Footer;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterBlockedUsers;
@@ -38,20 +40,19 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
     ListView listView;
     ArrayList<BaseAdapterItem> blockedUsers;
     ArrayList<BaseAdapterItem> sampleBlockedUsers;
-    private View listFooterView;
 
-    //for the test
 
+    private Footer footer;
 
     private enum Status {FIRST_TIME, LOADING_MORE, NONE,REFRESHING}
 
     private Status status;
-    SwipeRefreshLayout swipeLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_listview_swip);
+        setContentView(R.layout.layout_listview);
 
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.blocked));
         try {
@@ -96,28 +97,8 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
             }
         });
 
-        listFooterView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
-        listFooterView.setVisibility(View.GONE);
-        listView.addFooterView(listFooterView, null, false);
-
-        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (status == Status.LOADING_MORE) {
-                    swipeLayout.setRefreshing(false);
-                    return;
-                }
-
-                status = Status.REFRESHING;
-                blockedUsers.clear();
-                new GetBlockedUsers(ActivityBlockedUsers.this, businessId,0,getResources().getInteger(R.integer.lazy_load_limitation), ActivityBlockedUsers.this).execute();
-            }
-        });
-        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        footer = new Footer(this);
+        listView.addFooterView(footer.getFooterView(), null, false);
 
         progressDialog.show();
         new GetBlockedUsers(ActivityBlockedUsers.this, businessId,0,getResources().getInteger(R.integer.lazy_load_limitation), ActivityBlockedUsers.this).execute();
@@ -130,7 +111,7 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
-        listFooterView.setVisibility(View.VISIBLE);
+        footer.setVisibility(View.VISIBLE);
         new GetBlockedUsers(ActivityBlockedUsers.this, businessId,blockedUsers.get(blockedUsers.size()-1).getId(),getResources().getInteger(R.integer.lazy_load_limitation), ActivityBlockedUsers.this).execute();
     }
 
@@ -156,8 +137,7 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
-        if(swipeLayout.isRefreshing())
-            swipeLayout.setRefreshing(false);
+
         if (result instanceof ArrayList) {
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
             blockedUsers.addAll(temp);
@@ -168,7 +148,7 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
                 listView.setAdapter(adapterBlockedUsers);
             } else {
                 //it is loading more
-                listFooterView.setVisibility(View.GONE);
+                footer.setVisibility(View.GONE);
                 adapterBlockedUsers.loadMore(temp);
             }
             status = Status.NONE;

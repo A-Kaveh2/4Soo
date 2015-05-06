@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.Footer;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -25,14 +26,16 @@ import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.helper.PullToRefreshList;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.interfaces.IPullToRefresh;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.friend.GetUserFriendRequests;
 import ir.rasen.charsoo.webservices.friend.GetUserFriends;
 
 
-public class ActivityFriendRequests extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityFriendRequests extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int visitedUserId;
@@ -43,11 +46,24 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
 
 
     //pull_to_refresh_lib
-    private PullToRefreshListView pullToRefreshListView;
-    private Footer footer;
+    //private PullToRefreshListView pullToRefreshListView;
+    //private Footer footer;
+    PullToRefreshList pullToRefreshListView;
+
+    @Override
+    public void notifyRefresh() {
+        status = Status.REFRESHING;
+        requests.clear();
+        new GetUserFriendRequests(ActivityFriendRequests.this, LoginInfo.getUserId(ActivityFriendRequests.this), ActivityFriendRequests.this).execute();
+    }
+
+    @Override
+    public void notifyLoadMore() {
+        loadMoreData();
+    }
 
 
-    private enum Status {FIRST_TIME, LOADING_MORE,REFRESHING, NONE}
+    private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
     private Status status;
 
@@ -66,52 +82,27 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
 
         requests = new ArrayList<>();
         status = Status.FIRST_TIME;
-
+        
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_refresh_list);
-        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
-            @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                status = Status.REFRESHING;
-                requests.clear();
-                new GetUserFriendRequests(ActivityFriendRequests.this, LoginInfo.getUserId(ActivityFriendRequests.this),ActivityFriendRequests.this).execute();
-            }
-        });
-        pullToRefreshListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
-
-            @Override
-            public void onLastItemVisible() {
-
-                if (!pullToRefreshListView.isRefreshing()
-                        && requests.size() > 0 && requests.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
-                    footer.setVisibility(View.VISIBLE);
-                    //loadMoreData();
-                }
-            }
-        });
-
-        listView = pullToRefreshListView.getRefreshableView();
-        registerForContextMenu(listView);
-        footer = new Footer(this);
-        listView.addFooterView(footer.getFooterView(), null, false);
+        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityFriendRequests.this);
+        listView = pullToRefreshListView.getListView();
 
         progressDialog.show();
-        new GetUserFriendRequests(ActivityFriendRequests.this,visitedUserId,ActivityFriendRequests.this).execute();
+        new GetUserFriendRequests(ActivityFriendRequests.this, visitedUserId, ActivityFriendRequests.this).execute();
     }
 
 
-    // LOAD MORE DATA
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
-        status = Status.LOADING_MORE;
+        Toast.makeText(ActivityFriendRequests.this, "Load more data", Toast.LENGTH_LONG).show();
+        //this webservice doesn't support load more by the now!
+
+       /* status = Status.LOADING_MORE;
         //listFooterView.setVisibility(View.VISIBLE);
         footer.setVisibility(View.GONE);
-        new GetUserFriendRequests(ActivityFriendRequests.this,visitedUserId,ActivityFriendRequests.this).execute();
-
-
-
+        new GetUserFriendRequests(ActivityFriendRequests.this,visitedUserId,ActivityFriendRequests.this).execute();*/
     }
 
     @Override
@@ -142,18 +133,18 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
             requests.addAll(temp);
 
+            pullToRefreshListView.setResultSize(requests.size());
 
             if (status == Status.FIRST_TIME) {
-                adapterFriendshipRequest = new AdapterFriendshipRequest(ActivityFriendRequests.this,requests);
+                adapterFriendshipRequest = new AdapterFriendshipRequest(ActivityFriendRequests.this, requests);
                 listView.setAdapter(adapterFriendshipRequest);
-            } else  if (status == Status.REFRESHING){
+            } else if (status == Status.REFRESHING) {
                 adapterFriendshipRequest.notifyDataSetChanged();
                 pullToRefreshListView.onRefreshComplete();
-            }
-            else {
+            } else {
                 //it is loading more
                 adapterFriendshipRequest.loadMore(temp);
-                footer.setVisibility(View.GONE);
+                pullToRefreshListView.setFooterVisibility(View.GONE);
             }
             status = Status.NONE;
         }
