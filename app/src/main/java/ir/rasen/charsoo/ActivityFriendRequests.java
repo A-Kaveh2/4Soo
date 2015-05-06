@@ -13,6 +13,10 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.Footer;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterFriendshipRequest;
@@ -36,9 +40,11 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     ListView listView;
     ArrayList<BaseAdapterItem> requests;
     ArrayList<BaseAdapterItem> sampleRequests;
-    private View listFooterView;
-    SwipeRefreshLayout swipeLayout;
 
+
+    //pull_to_refresh_lib
+    private PullToRefreshListView pullToRefreshListView;
+    private Footer footer;
 
 
     private enum Status {FIRST_TIME, LOADING_MORE,REFRESHING, NONE}
@@ -48,7 +54,7 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_listview_swip);
+        setContentView(R.layout.layout_listview_pull_to_refresh);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.friend_requests));
         try {
             sampleRequests = TestUnit.getBaseAdapterItems(getResources());
@@ -64,63 +70,35 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        pullToRefreshListView = (PullToRefreshListView) findViewById(R.id.pull_refresh_list);
+        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onRefresh() {
-                if (status == Status.LOADING_MORE) {
-                    swipeLayout.setRefreshing(false);
-                    return;
-                }
-
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 status = Status.REFRESHING;
                 requests.clear();
                 new GetUserFriendRequests(ActivityFriendRequests.this, LoginInfo.getUserId(ActivityFriendRequests.this),ActivityFriendRequests.this).execute();
-
             }
         });
-        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        pullToRefreshListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
 
-        listView = (ListView) findViewById(R.id.listView);
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int currentFirstVisibleItem
-                    ,
-                    currentVisibleItemCount
-                    ,
-                    currentScrollState;
+            @Override
+            public void onLastItemVisible() {
 
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                this.currentFirstVisibleItem = firstVisibleItem;
-                this.currentVisibleItemCount = visibleItemCount;
-            }
-
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                this.currentScrollState = scrollState;
-                this.isScrollCompleted();
-            }
-
-            private void isScrollCompleted() {
-                if (this.currentVisibleItemCount > 0 && this.currentScrollState == SCROLL_STATE_IDLE) {
-                    if (status != Status.LOADING_MORE
-                            && requests.size() > 0 && requests.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
-                        //loadMoreData();
-                    }
+                if (!pullToRefreshListView.isRefreshing()
+                        && requests.size() > 0 && requests.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
+                    footer.setVisibility(View.VISIBLE);
+                    //loadMoreData();
                 }
             }
         });
 
-        listFooterView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
-        listFooterView.setVisibility(View.GONE);
-        listView.addFooterView(listFooterView, null, false);
-
+        listView = pullToRefreshListView.getRefreshableView();
+        registerForContextMenu(listView);
+        footer = new Footer(this);
+        listView.addFooterView(footer.getFooterView(), null, false);
 
         progressDialog.show();
         new GetUserFriendRequests(ActivityFriendRequests.this,visitedUserId,ActivityFriendRequests.this).execute();
-
-
     }
 
 
@@ -128,8 +106,8 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
-        listFooterView.setVisibility(View.VISIBLE);
-
+        //listFooterView.setVisibility(View.VISIBLE);
+        footer.setVisibility(View.GONE);
         new GetUserFriendRequests(ActivityFriendRequests.this,visitedUserId,ActivityFriendRequests.this).execute();
 
 
@@ -158,6 +136,8 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
+
+
         if (result instanceof ArrayList) {
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
             requests.addAll(temp);
@@ -166,10 +146,14 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
             if (status == Status.FIRST_TIME) {
                 adapterFriendshipRequest = new AdapterFriendshipRequest(ActivityFriendRequests.this,requests);
                 listView.setAdapter(adapterFriendshipRequest);
-            } else {
+            } else  if (status == Status.REFRESHING){
+                adapterFriendshipRequest.notifyDataSetChanged();
+                pullToRefreshListView.onRefreshComplete();
+            }
+            else {
                 //it is loading more
-                listFooterView.setVisibility(View.GONE);
                 adapterFriendshipRequest.loadMore(temp);
+                footer.setVisibility(View.GONE);
             }
             status = Status.NONE;
         }

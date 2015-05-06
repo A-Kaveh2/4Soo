@@ -2,6 +2,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/White"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:id="@+id/imageView_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_home_white_36dp" />
+            android:src="@drawable/logo_4soo" />
     </LinearLayout>
 
     <LinearLayout
@@ -33,16 +34,17 @@
         android:background="@drawable/shape_action_bar"/>
 
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/pull_refresh_list"
         android:layout_below="@id/ll_divider"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#19000000"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="3dp"
-            android:id="@+id/gridView" />
-    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

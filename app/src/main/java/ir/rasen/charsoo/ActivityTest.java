@@ -145,7 +145,7 @@ public class ActivityTest extends ActionBarActivity implements IBaseAdapterOnCli
                 break;
             case "button_grid_posts":
                /* AdapterPostGrid adapterPostGrid = new AdapterPostGrid(ActivityTest.this,TestUnit.getPostAdapterGridItems());
-                gridView.setAdapter(adapterPostGrid);*/
+                listView.setAdapter(adapterPostGrid);*/
                 break;
 
         }

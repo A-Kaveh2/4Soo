@@ -108,10 +108,9 @@ public class AdapterFriendshipRequest extends BaseAdapter {
 
 
     private void answerNo(int position,Holder holder) {
-        holder.imageViewNo.setImageResource(R.drawable.ic_close_black_24dp);
-        holder.imageViewYes.setVisibility(View.GONE);
-        notifyDataSetChanged();
         new AnswerRequestFriendship(context,LoginInfo.getUserId(context), items.get(position).getId(), false).execute();
+        items.remove(position);
+        notifyDataSetChanged();
 
     }
 

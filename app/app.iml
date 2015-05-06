@@ -89,6 +89,7 @@
     <orderEntry type="library" exported="" name="stickylistheaders-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="play-services-6.5.87" level="project" />
     <orderEntry type="module" module-name="crop-lib" exported="" />
+    <orderEntry type="module" module-name="pull_to_refresh_lib" exported="" />
   </component>
 </module>
 

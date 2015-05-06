@@ -6,8 +6,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'se.emilsjolander:stickylistheaders:2.5.2'
     compile project(":libs:crop-lib")
-
-
+    compile project(":libs:pull_to_refresh_lib")
 }
 
 android {

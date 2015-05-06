@@ -6,17 +6,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.GridView;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.handmark.pulltorefresh.library.Footer;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 
@@ -29,26 +31,26 @@ import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.GridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.webservices.friend.GetUserFriendRequests;
 import ir.rasen.charsoo.webservices.post.GetTimeLinePosts;
 
 public class FragmentHome extends Fragment implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     AdapterPostTimeLine adapterPostTimeLine;
-    ListView gridView;
+    ListView listView;
     ArrayList<Post> results;
     ArrayList<Post> sampleResults;
-    private View listFooterView;
-    String searchKeyWord;
-    String latitude;
-    String longitude;
-    int subCategoryId;
+
+
+    //pull_to_refresh_lib
+    private PullToRefreshListView pullToRefreshListView;
+    private Footer footer;
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
     private Status status;
-    SwipeRefreshLayout swipeLayout;
+    //SwipeRefreshLayout swipeLayout;
     BroadcastReceiver timeLineUpdateReceiver;
 
 
@@ -65,73 +67,43 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
         }
 
 
-
         results = new ArrayList<>();
         status = Status.FIRST_TIME;
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading TimeLine");
 
-        swipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
+        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
             @Override
-            public void onRefresh() {
-                if (status == Status.LOADING_MORE) {
-                    swipeLayout.setRefreshing(false);
-                    return;
-                }
-
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
                 status = Status.REFRESHING;
                 results.clear();
                 new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
-                //gridView.setEnabled(false);
             }
         });
-        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
-        gridView = (ListView) view.findViewById(R.id.gridView);
-        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int currentFirstVisibleItem
-                    ,
-                    currentVisibleItemCount
-                    ,
-                    currentScrollState;
+        pullToRefreshListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
 
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                this.currentFirstVisibleItem = firstVisibleItem;
-                this.currentVisibleItemCount = visibleItemCount;
-            }
+            @Override
+            public void onLastItemVisible() {
 
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                this.currentScrollState = scrollState;
-                this.isScrollCompleted();
-            }
-
-            private void isScrollCompleted() {
-                if (this.currentVisibleItemCount > 0 && this.currentScrollState == SCROLL_STATE_IDLE) {
-                    if (status != Status.LOADING_MORE
-                            && results.size() > 0 && results.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
-                        loadMoreData();
-                    }
+                if (!pullToRefreshListView.isRefreshing()
+                        && results.size() > 0 && results.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
+                    loadMoreData();
                 }
             }
         });
 
-        listFooterView = ((LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
-        listFooterView.setVisibility(View.GONE);
-        gridView.addFooterView(listFooterView);
+        listView = pullToRefreshListView.getRefreshableView();
+        registerForContextMenu(listView);
+        footer = new Footer(getActivity());
+        listView.addFooterView(footer.getFooterView(), null, false);
 
-        MyApplication myApplication = (MyApplication) getActivity().getApplication();
-        if (myApplication.isHomeCreated) {
-            initialize(myApplication.homePosts);
-        } else {
-            progressDialog.show();
-            new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
-            myApplication.isHomeCreated = true;
-        }
+
+        status = Status.FIRST_TIME;
+        progressDialog.show();
+        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
 
         timeLineUpdateReceiver = new BroadcastReceiver() {
             @Override
@@ -139,10 +111,10 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
                 Bundle bundle = intent.getExtras();
                 switch (bundle.getString(Params.UPATE_TIME_LINE_TYPE)) {
                     case Params.UPATE_TIME_LINE_TYPE_SHARE:
-                        updateShare(true,bundle.getInt(Params.POST_ID));
+                        updateShare(true, bundle.getInt(Params.POST_ID));
                         break;
                     case Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE:
-                        updateShare(false,bundle.getInt(Params.POST_ID));
+                        updateShare(false, bundle.getInt(Params.POST_ID));
                         break;
                 }
 
@@ -161,43 +133,49 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
     }
 
     private void initialize(ArrayList<Post> results) {
-        if (status == Status.FIRST_TIME) {
-            adapterPostTimeLine = new AdapterPostTimeLine(getActivity(), results);
-            gridView.setAdapter(adapterPostTimeLine);
-        } else {
-            //it is loading more
-            listFooterView.setVisibility(View.GONE);
-        }
-        status = Status.NONE;
+        MyApplication myApplication = (MyApplication) getActivity().getApplication();
+        myApplication.isHomeCreated = true;
+
+        adapterPostTimeLine = new AdapterPostTimeLine(getActivity(), results);
+        listView.setAdapter(adapterPostTimeLine);
     }
 
     // LOAD MORE DATA
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
-        listFooterView.setVisibility(View.VISIBLE);
-
+        footer.setVisibility(View.VISIBLE);
         new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), results.get(results.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
     }
 
     @Override
     public void getResult(Object result) {
-        //gridView.setEnabled(true);
+        //listView.setEnabled(true);
         if (progressDialog.isShowing())
             progressDialog.dismiss();
-        if (swipeLayout.isRefreshing())
-            swipeLayout.setRefreshing(false);
+
         if (result instanceof ArrayList) {
             ArrayList<Post> temp = (ArrayList<Post>) result;
             results.addAll(temp);
-            ((MyApplication) getActivity().getApplication()).homePosts = results;
-            initialize(results);
-            if (status != Status.FIRST_TIME)
+
+            if (status == Status.FIRST_TIME) {
+                ((MyApplication) getActivity().getApplication()).homePosts = results;
+                initialize(results);
+            } else if (status == Status.REFRESHING) {
+                adapterPostTimeLine.notifyDataSetChanged();
+                pullToRefreshListView.onRefreshComplete();
+                ((MyApplication) getActivity().getApplication()).homePosts = results;
+            } else if (status == Status.LOADING_MORE) {
                 adapterPostTimeLine.loadMore(temp);
+                ((MyApplication) getActivity().getApplication()).homePosts.addAll(temp);
+                footer.setVisibility(View.GONE);
+            }
+
+
         }
     }
 
-    public void updateShare(boolean isShared,int postId) {
+    public void updateShare(boolean isShared, int postId) {
         for (int i = 0; i < results.size(); i++) {
             if (results.get(i).id == postId) {
                 results.get(i).isShared = isShared;

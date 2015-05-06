@@ -32,8 +32,8 @@ public class ActivityTestUser extends Activity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //DrawerLayoutUser.Initial(this, mDrawerLayout, TestUnit.getUser());
-        //final GridViewHeader gridView = (GridViewHeader) findViewById(R.id.gridView);
-        //GridViewUser.InitialGridViewUser(this, 2022, TestUnit.getPostAdapterSharedListItems(), gridView, mDrawerLayout);
+        //final GridViewHeader listView = (GridViewHeader) findViewById(R.id.listView);
+        //GridViewUser.InitialGridViewUser(this, 2022, TestUnit.getPostAdapterSharedListItems(), listView, mDrawerLayout);
 
 
     }
