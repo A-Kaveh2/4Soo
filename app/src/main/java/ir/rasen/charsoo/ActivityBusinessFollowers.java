@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterFollowers;
@@ -22,14 +24,16 @@ import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.helper.PullToRefreshList;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.interfaces.IPullToRefresh;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.business.GetBusinessFollowers;
 import ir.rasen.charsoo.webservices.comment.GetAllCommentNotifications;
 
 
-public class ActivityBusinessFollowers extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityBusinessFollowers extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int businessId;
@@ -38,12 +42,28 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
     ArrayList<BaseAdapterItem> followers;
     //for the test
     ArrayList<BaseAdapterItem> sampleFollowers;
-    SwipeRefreshLayout swipeLayout;
-    private View  listFooterView;
 
-    private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
+    @Override
+    public void notifyRefresh() {
+        status = Status.REFRESHING;
+        followers.clear();
+        new GetBusinessFollowers(ActivityBusinessFollowers.this, businessId, ActivityBusinessFollowers.this).execute();
+    }
+
+    @Override
+    public void notifyLoadMore() {
+        loadMoreData();
+    }
+
+    /*SwipeRefreshLayout swipeLayout;
+    private View  listFooterView;
+*/
+    private enum Status {
+        FIRST_TIME, LOADING_MORE, REFRESHING, NONE
+    }
 
     private Status status;
+    PullToRefreshList pullToRefreshListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +73,12 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
         //for the test
         try {
             sampleFollowers = TestUnit.getBaseAdapterItems(getResources());
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
         int userId = getIntent().getExtras().getInt(Params.USER_ID);
-        if(userId != LoginInfo.getUserId(this))
+        if (userId != LoginInfo.getUserId(this))
             (findViewById(R.id.btn_blocked_users)).setVisibility(View.GONE);
         followers = new ArrayList<>();
         status = Status.FIRST_TIME;
@@ -67,7 +86,7 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+       /* swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -86,9 +105,13 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
         swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+                android.R.color.holo_red_light);*/
 
-        listView = (ListView) findViewById(R.id.listView);
+        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityBusinessFollowers.this);
+        listView = pullToRefreshListView.getListView();
+
+
+       /* listView = (ListView) findViewById(R.id.listView);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             int currentFirstVisibleItem,currentVisibleItemCount,currentScrollState;
 
@@ -116,7 +139,7 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
         listFooterView.setVisibility(View.GONE);
         listView.addFooterView(listFooterView, null, false);
 
-
+*/
         progressDialog.show();
         new GetBusinessFollowers(ActivityBusinessFollowers.this, businessId, ActivityBusinessFollowers.this).execute();
 
@@ -134,11 +157,10 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
     // LOAD MORE DATA
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
-        status = Status.LOADING_MORE;
-
-            listFooterView.setVisibility(View.VISIBLE);
-
-        new GetBusinessFollowers(ActivityBusinessFollowers.this, businessId, ActivityBusinessFollowers.this).execute();
+        //this webservice doesn't support load more yet.
+       /* status = Status.LOADING_MORE;
+        pullToRefreshListView.setFooterVisibility(View.VISIBLE);
+        new GetBusinessFollowers(ActivityBusinessFollowers.this, businessId, ActivityBusinessFollowers.this).execute();*/
     }
 
     @Override
@@ -166,16 +188,19 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
         if (result instanceof ArrayList) {
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
             followers.addAll(temp);
-            if(status == Status.REFRESHING)
-                swipeLayout.setRefreshing(false);
 
-            if (status == Status.FIRST_TIME || status == Status.REFRESHING) {
+            pullToRefreshListView.setResultSize(followers.size());
+
+            if (status == Status.FIRST_TIME) {
                 adapterFollowers = new AdapterFollowers(ActivityBusinessFollowers.this, followers);
                 listView.setAdapter(adapterFollowers);
+            } else if (status == Status.REFRESHING) {
+                adapterFollowers.notifyDataSetChanged();
+                pullToRefreshListView.onRefreshComplete();
             } else {
                 //it is loading more
 
-                listFooterView.setVisibility(View.GONE);
+                pullToRefreshListView.setFooterVisibility(View.GONE);
                 adapterFollowers.loadMore(temp);
             }
             status = Status.NONE;

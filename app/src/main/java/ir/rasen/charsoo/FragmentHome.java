@@ -28,13 +28,15 @@ import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.helper.PullToRefreshList;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.interfaces.IPullToRefresh;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.friend.GetUserFriendRequests;
 import ir.rasen.charsoo.webservices.post.GetTimeLinePosts;
 
-public class FragmentHome extends Fragment implements IWebserviceResponse {
+public class FragmentHome extends Fragment implements IWebserviceResponse,IPullToRefresh {
 
     ProgressDialog progressDialog;
     AdapterPostTimeLine adapterPostTimeLine;
@@ -44,15 +46,27 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
 
 
     //pull_to_refresh_lib
-    private PullToRefreshListView pullToRefreshListView;
-    private Footer footer;
+    //private PullToRefreshListView pullToRefreshListView;
+
+
+    @Override
+    public void notifyRefresh() {
+        status = Status.REFRESHING;
+        results.clear();
+        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+    }
+
+    @Override
+    public void notifyLoadMore() {
+        loadMoreData();
+    }
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
     private Status status;
     //SwipeRefreshLayout swipeLayout;
     BroadcastReceiver timeLineUpdateReceiver;
-
+    PullToRefreshList pullToRefreshListView;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -66,39 +80,14 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
 
         }
 
-
         results = new ArrayList<>();
         status = Status.FIRST_TIME;
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading TimeLine");
 
-        pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list);
-        pullToRefreshListView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ListView>() {
-            @Override
-            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
-                status = Status.REFRESHING;
-                results.clear();
-                new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
-            }
-        });
-
-        pullToRefreshListView.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
-
-            @Override
-            public void onLastItemVisible() {
-
-                if (!pullToRefreshListView.isRefreshing()
-                        && results.size() > 0 && results.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
-                    loadMoreData();
-                }
-            }
-        });
-
-        listView = pullToRefreshListView.getRefreshableView();
-        registerForContextMenu(listView);
-        footer = new Footer(getActivity());
-        listView.addFooterView(footer.getFooterView(), null, false);
+        pullToRefreshListView = new PullToRefreshList(getActivity(), (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list), FragmentHome.this);
+        listView = pullToRefreshListView.getListView();
 
 
         status = Status.FIRST_TIME;
@@ -121,8 +110,6 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(timeLineUpdateReceiver, new IntentFilter(Params.UPATE_TIME_LINE));
-
-
         return view;
     }
 
@@ -144,7 +131,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
-        footer.setVisibility(View.VISIBLE);
+        pullToRefreshListView.setFooterVisibility(View.VISIBLE);
         new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), results.get(results.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
     }
 
@@ -158,6 +145,8 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
             ArrayList<Post> temp = (ArrayList<Post>) result;
             results.addAll(temp);
 
+            pullToRefreshListView.setResultSize(results.size());
+
             if (status == Status.FIRST_TIME) {
                 ((MyApplication) getActivity().getApplication()).homePosts = results;
                 initialize(results);
@@ -168,7 +157,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse {
             } else if (status == Status.LOADING_MORE) {
                 adapterPostTimeLine.loadMore(temp);
                 ((MyApplication) getActivity().getApplication()).homePosts.addAll(temp);
-                footer.setVisibility(View.GONE);
+                pullToRefreshListView.setFooterVisibility(View.GONE);
             }
 
 

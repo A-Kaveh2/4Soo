@@ -5,99 +5,104 @@
     tools:context=".ActivityMain"
     android:gravity="center">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
-
-        <ir.rasen.charsoo.ui.ImageViewCircle
-            android:layout_width="@dimen/register_profile_picture_height"
-            android:layout_height="@dimen/register_profile_picture_height"
-            android:id="@+id/imageView_user_picture"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_account_orange" />
+        android:layout_height="wrap_content">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/imageView_user_picture"
-            android:gravity="center">
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
 
-            <EditText
-                android:id="@+id/editText_identifier"
+            <ir.rasen.charsoo.ui.ImageViewCircle
+                android:layout_width="@dimen/register_profile_picture_height"
+                android:layout_height="@dimen/register_profile_picture_height"
+                android:id="@+id/imageView_user_picture"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_account_orange" />
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:hint="@string/identifier_field_hint"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_size_register"
-                android:nextFocusDown="@+id/editText_name"
-                android:singleLine="true"
-                android:drawableRight="@drawable/ic_person_blue_24dp"
-                android:layout_marginRight="5dp" />
+                android:layout_toLeftOf="@+id/imageView_user_picture"
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/editText_identifier"
+                    android:layout_width="match_parent"
+                    android:hint="@string/identifier_field_hint"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_register"
+                    android:nextFocusDown="@+id/editText_name"
+                    android:singleLine="true"
+                    android:drawableRight="@drawable/ic_person_blue_24dp"
+                    android:layout_marginRight="5dp" />
+
+                <ir.rasen.charsoo.ui.EditTextFont
+                    android:id="@+id/editText_name"
+                    android:layout_width="match_parent"
+                    android:hint="@string/user_name_field_hint"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/editText_identifier"
+                    android:textSize="@dimen/font_size_register"
+                    android:singleLine="true"
+                    android:drawableRight="@drawable/ic_person_blue_24dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:nextFocusDown="@+id/editText_email" />
+            </RelativeLayout>
 
             <ir.rasen.charsoo.ui.EditTextFont
-                android:id="@+id/editText_name"
+                android:id="@+id/editText_email"
                 android:layout_width="match_parent"
-                android:hint="@string/user_name_field_hint"
+                android:hint="@string/email_field_hint"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/editText_identifier"
+                android:layout_below="@+id/imageView_user_picture"
                 android:textSize="@dimen/font_size_register"
+                android:inputType="textEmailAddress"
                 android:singleLine="true"
-                android:drawableRight="@drawable/ic_person_blue_24dp"
+                android:drawableRight="@drawable/ic_email_blue_24dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="5dp"
-                android:nextFocusDown="@+id/editText_email"/>
+                android:nextFocusDown="@+id/editText_password" />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/editText_password"
+                android:layout_width="match_parent"
+                android:hint="@string/password_field_hint"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText_email"
+                android:textSize="@dimen/font_size_register"
+                android:inputType="textPassword"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:drawableRight="@drawable/ic_lock_blue_24dp"
+                android:layout_marginTop="20dp"
+                android:nextFocusDown="@+id/editText_password_repeat" />
+
+            <ir.rasen.charsoo.ui.EditTextFont
+                android:id="@+id/editText_password_repeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText_password"
+                android:hint="@string/password_repeat_field_hint"
+                android:singleLine="true"
+                android:gravity="right|center_vertical"
+                android:inputType="textPassword"
+                android:textSize="@dimen/font_size_register"
+                android:drawableRight="@drawable/ic_lock_blue_24dp"
+                android:layout_marginTop="20dp" />
+
+            <ir.rasen.charsoo.ui.ButtonFont
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/register"
+                android:background="@drawable/selector_button_login"
+                android:layout_marginTop="30dp"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_size_larger"
+                android:layout_below="@+id/editText_password_repeat" />
         </RelativeLayout>
-
-        <ir.rasen.charsoo.ui.EditTextFont
-            android:id="@+id/editText_email"
-            android:layout_width="match_parent"
-            android:hint="@string/email_field_hint"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView_user_picture"
-            android:textSize="@dimen/font_size_register"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:drawableRight="@drawable/ic_email_blue_24dp"
-            android:layout_marginTop="20dp"
-            android:nextFocusDown="@+id/editText_password"/>
-
-        <ir.rasen.charsoo.ui.EditTextFont
-            android:id="@+id/editText_password"
-            android:layout_width="match_parent"
-            android:hint="@string/password_field_hint"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText_email"
-            android:textSize="@dimen/font_size_register"
-            android:inputType="textPassword"
-            android:gravity="right|center_vertical"
-            android:singleLine="true"
-            android:drawableRight="@drawable/ic_lock_blue_24dp"
-            android:layout_marginTop="20dp"
-            android:nextFocusDown="@+id/editText_password_repeat"/>
-
-        <ir.rasen.charsoo.ui.EditTextFont
-            android:id="@+id/editText_password_repeat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editText_password"
-            android:hint="@string/password_repeat_field_hint"
-            android:singleLine="true"
-            android:gravity="right|center_vertical"
-            android:inputType="textPassword"
-            android:textSize="@dimen/font_size_register"
-            android:drawableRight="@drawable/ic_lock_blue_24dp"
-            android:layout_marginTop="20dp" />
-
-        <ir.rasen.charsoo.ui.ButtonFont
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:text="@string/register"
-            android:background="@drawable/selector_button_login"
-            android:layout_marginTop="30dp"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_larger"
-            android:layout_below="@+id/editText_password_repeat"/>
-    </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

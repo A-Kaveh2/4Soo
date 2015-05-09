@@ -163,6 +163,7 @@ public class GridViewUser implements IWebserviceResponse {
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityFriends.class);
                     intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
+                    intent1.putExtra(Params.HAS_REQUEST,hasRequest);
                     activity.startActivity(intent1);
                 }
             });

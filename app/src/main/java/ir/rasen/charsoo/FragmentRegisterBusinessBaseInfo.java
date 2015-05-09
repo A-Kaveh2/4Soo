@@ -267,5 +267,6 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
     public void notifySelectSubcategory(int subcategoryListPosition) {
         this.selectedSubCategoryPosition = subcategoryListPosition;
         textViewSubcategories.setText(subCategories.get(subcategoryListPosition).name);
+        isSubcategorySelected = true;
     }
 }

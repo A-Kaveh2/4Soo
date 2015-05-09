@@ -33,10 +33,16 @@ public class ActivityMapChoose extends ActionBarActivity {
     Marker marker;
     MenuItem menuItemTik;
     boolean isEditingLocationInitialized = false;
+    boolean isFirstTime = true;
+
     private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
         @Override
         public void onMyLocationChange(Location location) {
             LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
+            if(isFirstTime) {
+                choosedLatLng = loc;
+                isFirstTime = false;
+            }
             if(!isEditingLocationInitialized) {
                 marker = googleMap.addMarker(new MarkerOptions().position(loc));
                 menuItemTik.setVisible(true);

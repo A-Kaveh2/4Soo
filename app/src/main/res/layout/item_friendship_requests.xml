@@ -19,17 +19,18 @@
             android:layout_alignParentLeft="true"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="@dimen/adapter_user_image_height"
-                android:layout_height="@dimen/adapter_user_image_height"
-                android:id="@+id/imageView_yes"
-                android:src="@drawable/ic_check_grey"/>
 
             <ImageView
                 android:layout_width="@dimen/adapter_user_image_height"
                 android:layout_height="@dimen/adapter_user_image_height"
                 android:id="@+id/imageView_no"
-                android:src="@drawable/ic_close_grey"/>
+                android:src="@drawable/ic_close_grey600_24dp" />
+
+            <ImageView
+                android:layout_width="@dimen/adapter_user_image_height"
+                android:layout_height="@dimen/adapter_user_image_height"
+                android:id="@+id/imageView_yes"
+                android:src="@drawable/ic_check_grey600_24dp" />
         </LinearLayout>
 
         <ir.rasen.charsoo.ui.TextViewFont

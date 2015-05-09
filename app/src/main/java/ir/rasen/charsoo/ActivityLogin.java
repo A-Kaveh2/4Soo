@@ -47,32 +47,10 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
 
 
         //for the test I need to disable automatically going to ActivityMain
-       /* if (LoginInfo.isLoggedIn(this)) {
+      /*  if (LoginInfo.isLoggedIn(this)) {
             Intent intent = new Intent(this, ActivityMain.class);
             startActivity(intent);
             return;
-        }*/
-
-       /* int screenSize = getResources().getConfiguration().screenLayout &
-                Configuration.SCREENLAYOUT_SIZE_MASK;
-
-        switch(screenSize) {
-            case Configuration.SCREENLAYOUT_SIZE_SMALL:
-                Toast.makeText(ActivityLogin.this, "SMALL", Toast.LENGTH_SHORT).show();
-                break;
-            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
-                Toast.makeText(ActivityLogin.this, "NORMAL", Toast.LENGTH_SHORT).show();
-                break;
-            case Configuration.SCREENLAYOUT_SIZE_LARGE:
-                Toast.makeText(ActivityLogin.this, "LARGE", Toast.LENGTH_SHORT).show();
-                break;
-            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
-                Toast.makeText(ActivityLogin.this, "XLARGE", Toast.LENGTH_SHORT).show();
-                break;
-            case Configuration.SCREENLAYOUT_SIZE_UNDEFINED:
-                Toast.makeText(ActivityLogin.this, "UNDEFINED", Toast.LENGTH_SHORT).show();
-                break;
-
         }*/
 
         myApplication = (MyApplication) getApplication();
@@ -122,7 +100,7 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
                 break;
             case R.id.btn_login_register:
                 //The main function commented here because of the test
-                /*Intent intent = new Intent(ActivityLogin.this, ActivityRegisterUser.class);
+              /*  Intent intent = new Intent(ActivityLogin.this, ActivityRegisterUser.class);
                 startActivity(intent);*/
                 Intent intent = new Intent(this, ActivityMain.class);
                 startActivity(intent);

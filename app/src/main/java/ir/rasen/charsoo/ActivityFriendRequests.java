@@ -46,8 +46,6 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
 
 
     //pull_to_refresh_lib
-    //private PullToRefreshListView pullToRefreshListView;
-    //private Footer footer;
     PullToRefreshList pullToRefreshListView;
 
     @Override
@@ -82,7 +80,7 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
 
         requests = new ArrayList<>();
         status = Status.FIRST_TIME;
-        
+
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
@@ -100,8 +98,7 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
         //this webservice doesn't support load more by the now!
 
        /* status = Status.LOADING_MORE;
-        //listFooterView.setVisibility(View.VISIBLE);
-        footer.setVisibility(View.GONE);
+         pullToRefreshListView.setFooterVisibility(View.VISIBLE);
         new GetUserFriendRequests(ActivityFriendRequests.this,visitedUserId,ActivityFriendRequests.this).execute();*/
     }
 
@@ -127,7 +124,6 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
-
 
         if (result instanceof ArrayList) {
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;

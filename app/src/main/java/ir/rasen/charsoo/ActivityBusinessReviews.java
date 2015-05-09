@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterBusinessReview;
@@ -22,14 +24,16 @@ import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.helper.PullToRefreshList;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IAddReview;
+import ir.rasen.charsoo.interfaces.IPullToRefresh;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.review.GetBusinessReviews;
 
 
-public class ActivityBusinessReviews extends ActionBarActivity implements IWebserviceResponse, IAddReview {
+public class ActivityBusinessReviews extends ActionBarActivity implements IWebserviceResponse, IAddReview, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int businessId;
@@ -37,9 +41,22 @@ public class ActivityBusinessReviews extends ActionBarActivity implements IWebse
     ListView listView;
     ArrayList<Review> results;
     ArrayList<Review> sampleResults;
-    private View listFooterView;
-    SwipeRefreshLayout swipeLayout;
 
+
+    //pull_to_refresh_lib
+    PullToRefreshList pullToRefreshListView;
+
+    @Override
+    public void notifyRefresh() {
+        status = Status.REFRESHING;
+        results.clear();
+        new GetBusinessReviews(ActivityBusinessReviews.this, businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
+    }
+
+    @Override
+    public void notifyLoadMore() {
+        loadMoreData();
+    }
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
@@ -66,57 +83,8 @@ public class ActivityBusinessReviews extends ActionBarActivity implements IWebse
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (status == Status.LOADING_MORE) {
-                    swipeLayout.setRefreshing(false);
-                    return;
-                }
-
-                status = Status.REFRESHING;
-                results.clear();
-                new GetBusinessReviews(ActivityBusinessReviews.this, businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
-
-            }
-        });
-        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-
-        listView = (ListView) findViewById(R.id.listView);
-        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int currentFirstVisibleItem
-                    ,
-                    currentVisibleItemCount
-                    ,
-                    currentScrollState;
-
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                this.currentFirstVisibleItem = firstVisibleItem;
-                this.currentVisibleItemCount = visibleItemCount;
-            }
-
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-                this.currentScrollState = scrollState;
-                this.isScrollCompleted();
-            }
-
-            private void isScrollCompleted() {
-                if (this.currentVisibleItemCount > 0 && this.currentScrollState == SCROLL_STATE_IDLE) {
-                    if (status != Status.LOADING_MORE
-                            && results.size() > 0 && results.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
-                        loadMoreData();
-                    }
-                }
-            }
-        });
-
-        listFooterView = ((LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
-        listFooterView.setVisibility(View.GONE);
-        listView.addFooterView(listFooterView, null, false);
+        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityBusinessReviews.this);
+        listView = pullToRefreshListView.getListView();
 
 
         progressDialog.show();
@@ -136,7 +104,7 @@ public class ActivityBusinessReviews extends ActionBarActivity implements IWebse
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
-        listFooterView.setVisibility(View.VISIBLE);
+        pullToRefreshListView.setFooterVisibility(View.VISIBLE);
         new GetBusinessReviews(ActivityBusinessReviews.this, businessId, results.get(results.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
     }
 
@@ -164,15 +132,21 @@ public class ActivityBusinessReviews extends ActionBarActivity implements IWebse
         if (result instanceof ArrayList) {
             ArrayList<Review> temp = (ArrayList<Review>) result;
             results.addAll(temp);
-            if(Review.submitBefore(ActivityBusinessReviews.this,temp))
+
+            if (Review.submitBefore(ActivityBusinessReviews.this, temp))
                 (findViewById(R.id.rl_add)).setVisibility(View.GONE);
+
+            pullToRefreshListView.setResultSize(results.size());
 
             if (status == Status.FIRST_TIME) {
                 adapterBusinessReview = new AdapterBusinessReview(ActivityBusinessReviews.this, results);
                 listView.setAdapter(adapterBusinessReview);
+            } else if (status == Status.REFRESHING) {
+                adapterBusinessReview.notifyDataSetChanged();
+                pullToRefreshListView.onRefreshComplete();
             } else {
                 //it is loading more
-                listFooterView.setVisibility(View.GONE);
+                pullToRefreshListView.setFooterVisibility(View.GONE);
                 adapterBusinessReview.loadMore(temp);
             }
             status = Status.NONE;
