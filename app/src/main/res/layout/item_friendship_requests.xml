@@ -21,15 +21,17 @@
 
 
             <ImageView
-                android:layout_width="@dimen/adapter_user_image_height"
-                android:layout_height="@dimen/adapter_user_image_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageView_no"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/ic_close_grey600_24dp" />
 
             <ImageView
-                android:layout_width="@dimen/adapter_user_image_height"
-                android:layout_height="@dimen/adapter_user_image_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageView_yes"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/ic_check_grey600_24dp" />
         </LinearLayout>
 

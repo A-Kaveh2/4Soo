@@ -18,6 +18,7 @@
     <dimen name="font_size_drawer_businesses_title">22dp</dimen>
     <dimen name="font_size_adapter_item_text">23dp</dimen>
     <dimen name="font_size_header">24dp</dimen>
+    <dimen name="font_size_about_me">21dp</dimen>
     <dimen name="font_size_register">25dp</dimen>
     <dimen name="font_size_user_setting_title">26dp</dimen>
     <dimen name="font_size_action_bar_title">27dp</dimen>

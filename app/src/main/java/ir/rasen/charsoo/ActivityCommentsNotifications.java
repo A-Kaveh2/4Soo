@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.adapters.AdapterCommentNotification;
@@ -21,30 +23,45 @@ import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.helper.PullToRefreshList;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.interfaces.IPullToRefresh;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.comment.GetAllCommentNotifications;
 
 
-public class ActivityCommentsNotifications extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityCommentsNotifications extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int businessId;
     AdapterCommentNotification adapterCommentNotification;
     ListView listView;
     ArrayList<CommentNotification> commentNotifications;
-    SwipeRefreshLayout swipeLayout;
-    private View  listFooterView;
+
+    @Override
+    public void notifyRefresh() {
+        status = Status.REFRESHING;
+        commentNotifications.clear();
+        new GetAllCommentNotifications(ActivityCommentsNotifications.this, businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityCommentsNotifications.this).execute();
+    }
+
+    @Override
+    public void notifyLoadMore() {
+        loadMoreData();
+    }
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
     private Status status;
 
+    //pull_to_refresh_lib
+    PullToRefreshList pullToRefreshListView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_listview_swip);
+        setContentView(R.layout.layout_listview_pull_to_refresh);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.comments));
 
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
@@ -54,7 +71,7 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        /*swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -102,6 +119,9 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
         listFooterView.setVisibility(View.GONE);
         listView.addFooterView(listFooterView, null, false);
 
+*/
+        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityCommentsNotifications.this);
+        listView = pullToRefreshListView.getListView();
 
         progressDialog.show();
         new GetAllCommentNotifications(ActivityCommentsNotifications.this, LoginInfo.getUserId(ActivityCommentsNotifications.this), 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityCommentsNotifications.this).execute();
@@ -114,11 +134,8 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
-
-            listFooterView.setVisibility(View.VISIBLE);
-
+        pullToRefreshListView.setFooterVisibility(View.VISIBLE);
         new GetAllCommentNotifications(ActivityCommentsNotifications.this, businessId, commentNotifications.get(commentNotifications.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), ActivityCommentsNotifications.this).execute();
-
     }
 
     @Override
@@ -146,16 +163,18 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
         if (result instanceof ArrayList) {
             ArrayList<CommentNotification> temp = (ArrayList<CommentNotification>) result;
             commentNotifications.addAll(temp);
-            if(status == Status.REFRESHING)
-                swipeLayout.setRefreshing(false);
+
+            pullToRefreshListView.setResultSize(commentNotifications.size());
 
             if (status == Status.FIRST_TIME || status == Status.REFRESHING) {
                 adapterCommentNotification = new AdapterCommentNotification(ActivityCommentsNotifications.this, commentNotifications);
                 listView.setAdapter(adapterCommentNotification);
+            } else if (status == Status.REFRESHING) {
+                adapterCommentNotification.notifyDataSetChanged();
+                pullToRefreshListView.onRefreshComplete();
             } else {
                 //it is loading more
-
-                listFooterView.setVisibility(View.GONE);
+                pullToRefreshListView.setFooterVisibility(View.GONE);
                 adapterCommentNotification.loadMore(temp);
             }
             status = Status.NONE;

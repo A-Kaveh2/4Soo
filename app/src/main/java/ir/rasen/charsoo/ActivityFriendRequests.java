@@ -1,9 +1,11 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -89,6 +91,10 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
 
         progressDialog.show();
         new GetUserFriendRequests(ActivityFriendRequests.this, visitedUserId, ActivityFriendRequests.this).execute();
+
+        //notify FragmentUser to hide request announcement
+        Intent intent = new Intent(Params.REMOVE_REQUEST_ANNOUNCEMENT);
+        LocalBroadcastManager.getInstance(ActivityFriendRequests.this).sendBroadcast(intent);
     }
 
 

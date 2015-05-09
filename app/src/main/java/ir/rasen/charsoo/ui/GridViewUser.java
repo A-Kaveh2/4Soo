@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.DrawerLayout;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,26 +14,33 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 import ir.rasen.charsoo.ActivityFollowingBusinesses;
 import ir.rasen.charsoo.ActivityFriends;
 import ir.rasen.charsoo.ActivityProfilePicture;
 import ir.rasen.charsoo.ActivitySearchUser;
 import ir.rasen.charsoo.ActivityUserReviews;
+import ir.rasen.charsoo.FragmentUser;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
 import ir.rasen.charsoo.adapters.AdapterPostShared;
+import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
+import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.Image_M;
+import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.SearchItemPost;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.DownloadCoverImage;
 import ir.rasen.charsoo.webservices.post.GetSharedPosts;
+import ir.rasen.charsoo.webservices.user.GetUserHomeInfo;
 
 /**
  * Created by android on 3/14/2015.
@@ -41,8 +51,8 @@ public class GridViewUser implements IWebserviceResponse {
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
 
-    ImageView imageViewSearch, imageViewMore, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses;
-    TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewRequests, textViewIdentifier, textViewName;
+    ImageView imageViewSearch, imageViewMore, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewHasRequest;
+    TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewIdentifier, textViewName, textViewAboutMe;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
     Activity activity;
@@ -53,22 +63,26 @@ public class GridViewUser implements IWebserviceResponse {
     ArrayList<Post> posts;
     int visitedUserId;
     boolean hasHeader, hasRequest;
-    String userIdentifier, userName;
+    String userIdentifier, userName, aboutMe;
 
 
-    public GridViewUser(Activity activity, String userIdentifier, String userName, int profilePictureId, boolean hasRequest, int visitedUserId, GridViewHeader gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewUser(Activity activity, User user, int visitedUserId, GridViewHeader gridViewHeader, DrawerLayout drawerLayout) {
         this.activity = activity;
-        this.profilePictureId = profilePictureId;
+        this.profilePictureId = user.profilePictureId;
         this.gridViewHeader = gridViewHeader;
         this.drawerLayout = drawerLayout;
         this.visitedUserId = visitedUserId;
         this.hasHeader = false;
-        this.hasRequest = hasRequest;
-        this.userIdentifier = userIdentifier;
-        this.userName = userName;
-
+        this.userIdentifier = user.userIdentifier;
+        this.userName = user.name;
+        this.hasRequest = (user.friendRequestNumber > 0) ? true : false;
+        this.aboutMe = user.aboutMe;
     }
 
+
+    public void hideRequestAnnouncement() {
+        imageViewHasRequest.setVisibility(View.GONE);
+    }
 
     public void initialProfilePicture(String userPictureString) {
         imageViewCover.setImageBitmap(Image_M.getBitmapFromString(userPictureString));
@@ -97,21 +111,41 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
 
             imageViewFriends = (ImageView) viewHeader.findViewById(R.id.imageView_friends);
+            imageViewHasRequest = (ImageView) viewHeader.findViewById(R.id.imageView_has_request);
             imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
             imageViewFollowingBusinesses = (ImageView) viewHeader.findViewById(R.id.imageView_businesses);
 
             textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
             textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
             textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
-            textViewRequests = (TextViewFont) viewHeader.findViewById(R.id.textView_friend_requests);
+
             textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_user_identifier);
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_user_name);
+            textViewAboutMe = (TextViewFont) viewHeader.findViewById(R.id.textView_user_about_me);
+
             textViewIdentifier.setText(String.valueOf(userIdentifier));
-            textViewName.setText(String.valueOf(userName));
+
+            SpannableStringBuilder builder = new SpannableStringBuilder();
+
+            String userId = userIdentifier+"@"  ;
+            SpannableString redSpannable = new SpannableString(userId);
+            redSpannable.setSpan(new ForegroundColorSpan(activity.getResources().getColor(R.color.button_on_dark)), 0, userId.length(), 0);
+
+
+            builder.append(userName);
+            builder.append("(" );
+            builder.append(redSpannable);
+            builder.append(")");
+
+            textViewName.setText(builder, TextView.BufferType.SPANNABLE);
+
+            if (!aboutMe.equals("null"))
+                textViewAboutMe.setText(aboutMe);
 
 
             if (!hasRequest)
-                textViewRequests.setVisibility(View.GONE);
+                imageViewHasRequest.setVisibility(View.GONE);
+
             int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
             imageViewCover.setLayoutParams(params);
@@ -163,7 +197,7 @@ public class GridViewUser implements IWebserviceResponse {
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityFriends.class);
                     intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
-                    intent1.putExtra(Params.HAS_REQUEST,hasRequest);
+                    intent1.putExtra(Params.HAS_REQUEST, hasRequest);
                     activity.startActivity(intent1);
                 }
             });

@@ -139,7 +139,7 @@
         android:gravity="right">
 
         <ir.rasen.charsoo.ui.TextViewFont
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_size_header"
             android:layout_marginRight="10dp"
@@ -147,10 +147,21 @@
             android:textColor="@color/Black" />
 
         <ir.rasen.charsoo.ui.TextViewFont
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_size_header"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/textView_user_about_me"
+            android:textColor="@color/Black" />
+
+        <ir.rasen.charsoo.ui.TextViewFont
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_size_header"
             android:layout_marginRight="10dp"
+            android:visibility="gone"
+
             android:layout_marginTop="5dp"
             android:id="@+id/textView_user_identifier"
             android:textColor="@color/DarkOrange" />
@@ -174,11 +185,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
+
                     <ImageView
                         android:id="@+id/imageView_friends"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/selector_button_business_follower" />
+                    <ImageView
+                        android:id="@+id/imageView_has_request"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_info_orange_24dp"/>
 
                     <ir.rasen.charsoo.ui.TextViewFont
                         android:id="@+id/textView_friends_number"

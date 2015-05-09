@@ -179,7 +179,6 @@
                         android:gravity="right|center_vertical"
                         android:textSize="@dimen/font_user_profile_edit_text"
                         android:singleLine="true"
-
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/imageView_about_me_icon" />
 

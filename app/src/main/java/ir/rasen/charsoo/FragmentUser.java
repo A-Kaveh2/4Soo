@@ -44,7 +44,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     GridViewUser gridViewUser;
     static IUpdateUserProfile iUpdateUserProfile;
     ArrayList<Post> sharedPosts;
-    BroadcastReceiver cancelShareReceiver;
+    BroadcastReceiver cancelShareReceiver, removeRequestAnnouncement;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -91,6 +91,14 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(cancelShareReceiver, new IntentFilter(Params.CANCEL_USER_SHARE_POST));
 
 
+        removeRequestAnnouncement = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle bundle = intent.getExtras();
+                gridViewUser.hideRequestAnnouncement();
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(removeRequestAnnouncement, new IntentFilter(Params.REMOVE_REQUEST_ANNOUNCEMENT));
         return view;
     }
 
@@ -120,7 +128,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         DrawerLayoutUser.Initial(getActivity(), mDrawerLayout, user, (IGoToRegisterBusinessActivity) getActivity());
         boolean hasRequest = false;
 
-        gridViewUser = new GridViewUser(getActivity(), user.userIdentifier, user.name, user.profilePictureId, (user.friendRequestNumber > 0) ? true : false, visitedUserId, gridView, mDrawerLayout);
+        gridViewUser = new GridViewUser(getActivity(),user, visitedUserId, gridView, mDrawerLayout);
         if (((MyApplication) getActivity().getApplication()).isUserCreated) {
             try {
                 gridViewUser.InitialGridViewUser(sharedPosts);
