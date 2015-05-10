@@ -167,7 +167,7 @@ public class Validation {
 
     public static Validation validateWebsite(Context context, String website) {
         if (!website.equals("")&& !Patterns.WEB_URL.matcher(website).matches())
-            return new Validation(false, context.getResources().getString(R.string.enter_correct_value));
+            return new Validation(false, context.getResources().getString(R.string.enter_correct_website));
         else
             return new Validation(true, "null");
     }

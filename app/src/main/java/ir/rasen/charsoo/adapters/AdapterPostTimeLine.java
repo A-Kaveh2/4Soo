@@ -2,6 +2,7 @@ package ir.rasen.charsoo.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,13 +12,15 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
+import ir.rasen.charsoo.FragmentUser;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.Comment;
+import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.PopupReportPostAdapter;
@@ -26,12 +29,13 @@ import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.PersianDate;
 import ir.rasen.charsoo.helper.TextProcessor;
 import ir.rasen.charsoo.interfaces.IReportPost;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.TextViewFont;
 import ir.rasen.charsoo.webservices.DownloadImages;
 import ir.rasen.charsoo.webservices.post.Like;
 import ir.rasen.charsoo.webservices.post.Share;
 import ir.rasen.charsoo.webservices.post.Unlike;
+import ir.rasen.charsoo.animation.Anim;
+import ir.rasen.charsoo.webservices.user.GetUserHomeInfo;
 
 /**
  * Created by android on 3/7/2015.
@@ -46,7 +50,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
     GridView gridView;
 
     private GestureDetector gestureDetector;
-
 
 
     public AdapterPostTimeLine(Context context, ArrayList<Post> items) {
@@ -84,57 +87,62 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             gridView = (GridView) viewGroup;
             gridView.setSelector(new ColorDrawable(0x00ffffff));
         }*/
-        final Holder holder;
-
-        if (view == null) {
-            holder = new Holder();
-            view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list, viewGroup, false);
+        final Holder holder = new Holder();
+        view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list, viewGroup, false);
 
 
-            holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
-            holder.textViewBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_business_identifier);
-            holder.textViewDate = (TextViewFont) view.findViewById(R.id.textView_date);
+        holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
+        holder.textViewBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_business_identifier);
+        holder.textViewDate = (TextViewFont) view.findViewById(R.id.textView_date);
 
-            //complete section
-            holder.llCompleteSection = (LinearLayout) view.findViewById(R.id.ll_complete_post_section);
-            holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
-            //to display post picture as square
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
-            holder.imageViewPost.setLayoutParams(params);
+        //complete section
+        holder.llCompleteSection = (LinearLayout) view.findViewById(R.id.ll_complete_post_section);
+        holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
+        holder.imageViewPostLike = (ImageView) view.findViewById(R.id.imageView_post_like);
 
-            holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
-            holder.imageViewComment = (ImageView) view.findViewById(R.id.imageView_comment);
-            holder.imageViewShare = (ImageView) view.findViewById(R.id.imageView_share);
-            holder.imageViewMore = (ImageView) view.findViewById(R.id.imageView_more);
-            holder.textViewLikeNumber = (TextViewFont) view.findViewById(R.id.textView_like_number);
-            holder.textViewCommentNumber = (TextViewFont) view.findViewById(R.id.textView_comment_number);
-            holder.textViewShareNumber = (TextViewFont) view.findViewById(R.id.textView_share_number);
-            holder.textViewDescription = (TextViewFont) view.findViewById(R.id.textView_description);
-            holder.textViewComment1 = (TextViewFont) view.findViewById(R.id.textView_comment1);
-            holder.textViewComment1UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment1_user_identifier);
-            holder.textViewComment2 = (TextViewFont) view.findViewById(R.id.textView_comment2);
-            holder.textViewComment2UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment2_user_identifier);
-            holder.textViewComment3 = (TextViewFont) view.findViewById(R.id.textView_comment3);
-            holder.textViewTitle = (TextViewFont) view.findViewById(R.id.textView_title);
-            holder.textViewPrice = (TextViewFont) view.findViewById(R.id.textView_price);
-            holder.textViewComment3UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment3_user_identifier);
+        //to display post picture as square
+        RelativeLayout.LayoutParams params = new RelativeLayout
+                .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
+        holder.imageViewPost.setLayoutParams(params);
 
-            //announcement parts
-            holder.llAnnouncementSection = (LinearLayout) view.findViewById(R.id.ll_announcement);
-            holder.textViewAnnouncementUserIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_userIdentifier);
-            holder.textViewAnnouncementBusinessStaticPart = (TextViewFont) view.findViewById(R.id.textView_announcement_business_static_part);
-            holder.textViewAnnouncementBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_business_identifier);
+        holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
+        holder.imageViewComment = (ImageView) view.findViewById(R.id.imageView_comment);
+        holder.imageViewShare = (ImageView) view.findViewById(R.id.imageView_share);
+        holder.imageViewMore = (ImageView) view.findViewById(R.id.imageView_more);
+        holder.textViewLikeNumber = (TextViewFont) view.findViewById(R.id.textView_like_number);
+        holder.textViewCommentNumber = (TextViewFont) view.findViewById(R.id.textView_comment_number);
+        holder.textViewShareNumber = (TextViewFont) view.findViewById(R.id.textView_share_number);
+        holder.textViewDescription = (TextViewFont) view.findViewById(R.id.textView_description);
+        holder.textViewComment1 = (TextViewFont) view.findViewById(R.id.textView_comment1);
+        holder.textViewComment1UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment1_user_identifier);
+        holder.textViewComment2 = (TextViewFont) view.findViewById(R.id.textView_comment2);
+        holder.textViewComment2UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment2_user_identifier);
+        holder.textViewComment3 = (TextViewFont) view.findViewById(R.id.textView_comment3);
+        holder.textViewTitle = (TextViewFont) view.findViewById(R.id.textView_title);
+        holder.textViewPrice = (TextViewFont) view.findViewById(R.id.textView_price);
+        holder.textViewComment3UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment3_user_identifier);
 
-            view.setTag(holder);
+        //announcement parts
+        holder.llAnnouncementSection = (LinearLayout) view.findViewById(R.id.ll_announcement);
+        holder.textViewAnnouncementUserIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_userIdentifier);
+        holder.textViewAnnouncementBusinessStaticPart = (TextViewFont) view.findViewById(R.id.textView_announcement_business_static_part);
+        holder.textViewAnnouncementBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_business_identifier);
 
-        } else
-            holder = (Holder) view.getTag();
+        //view.setTag(holder);
+
 
         //all post's types have these three fields
         downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
         holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
         holder.textViewBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Business.goBusinessHomeInfoPage(context, items.get(position).businessID);
+
+            }
+        });
+        holder.imageViewProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Business.goBusinessHomeInfoPage(context, items.get(position).businessID);
@@ -156,7 +164,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewPrice.setText(items.get(position).price);
 
             ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
-            if(lastThreeComments.size() == 0){
+            if (lastThreeComments.size() == 0) {
                 holder.textViewComment1UserIdentifier.setVisibility(View.GONE);
                 holder.textViewComment1.setVisibility(View.GONE);
 
@@ -166,6 +174,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                 holder.textViewComment3UserIdentifier.setVisibility(View.GONE);
                 holder.textViewComment3.setVisibility(View.GONE);
             }
+
             if (lastThreeComments.size() == 1) {
                 holder.textViewComment1UserIdentifier.setText(items.get(position).lastThreeComments.get(0).username);
                 holder.textViewComment1.setText(items.get(position).lastThreeComments.get(0).text);
@@ -268,12 +277,21 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                 }
             });
 
-            gestureDetector = new GestureDetector(context, new MyGestureDetector(position,holder.imageViewLike));
+            gestureDetector = new GestureDetector(context, new MyGestureDetector(position, holder.imageViewLike, holder.imageViewPostLike));
+
             holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
                     return gestureDetector.onTouchEvent(event);
                 }
             });
+          /*  holder.imageViewPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Anim.fadeIn(holder.imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE);
+
+                }
+            });*/
 
 
             holder.imageViewShare.setOnClickListener(new View.OnClickListener() {
@@ -353,6 +371,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         //complete post section
         LinearLayout llCompleteSection;
         ImageView imageViewPost;
+        ImageView imageViewPostLike;
         TextViewFont textViewLikeNumber;
         TextViewFont textViewCommentNumber;
         TextViewFont textViewShareNumber;
@@ -381,11 +400,19 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
     class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
         int position;
         ImageView imageViewLike;
+        ImageView imageViewPostLike;
 
-        public MyGestureDetector(int position,ImageView imageViewLike ) {
+        public MyGestureDetector(int position, ImageView imageViewLike, ImageView imageViewPostLike) {
             this.position = position;
             this.imageViewLike = imageViewLike;
+            this.imageViewPostLike = imageViewPostLike;
         }
+
+      /*  @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            imageViewPostLike.setVisibility(View.VISIBLE);
+            return super.onSingleTapConfirmed(e);
+        }*/
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -400,6 +427,8 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
         @Override
         public boolean onDoubleTap(MotionEvent e) {
+
+
             if (items.get(position).isLiked) {
                 //unlike the post
 
@@ -409,6 +438,15 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             } else {
                 //like the post
 
+                imageViewPostLike.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //imageViewPostLike.setVisibility(View.INVISIBLE);
+                    }
+                }, 700);
+                //Anim.fadeOut(imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE,View.INVISIBLE);
                 new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
                 items.get(position).isLiked = true;
                 imageViewLike.setImageResource(R.drawable.ic_favorite_red);

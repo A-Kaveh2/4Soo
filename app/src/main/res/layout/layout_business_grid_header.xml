@@ -17,24 +17,42 @@
             android:layout_height="100dp"
             android:scaleType="fitXY" />
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/ll_action_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/action_bar_custome_height"
-            android:gravity="right|center_vertical"
             android:layout_alignParentTop="true"
             android:orientation="horizontal"
             android:background="@drawable/shape_gradiant_up">
 
             <ImageView
-
-                android:layout_width="@dimen/action_bar_items_length"
-                android:layout_height="@dimen/action_bar_items_length"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageView_more"
-                android:background="@drawable/selector_action_bar_more" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_more_vert_white_24dp" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_back"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_arrow_back_white_24dp" />
 
-        </LinearLayout>
+            <ir.rasen.charsoo.ui.TextViewFont
+                android:id="@+id/textView_business_identifier_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/White"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/imageView_back"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,6 +129,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:id="@+id/textView_business_identifier"
+            android:visibility="gone"
             android:textColor="@color/DarkOrange" />
 
 
@@ -244,7 +263,6 @@
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>

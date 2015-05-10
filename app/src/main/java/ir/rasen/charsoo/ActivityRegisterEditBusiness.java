@@ -73,7 +73,7 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
         LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.layout_action_bar_home, null);
 
-        ((MyApplication) getApplication()).business = new Business();
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -119,6 +119,8 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
         //then goes to the fragment
         if (businessId == 0)
             ft.commit();
+
+        Business b = ((MyApplication) getApplication()).business;
 
     }
 

@@ -91,6 +91,7 @@
     <string name="enter_password_5_digits">لطفأ رمز عبور حدأقل 5 رقمی را وارد نمایید.</string>
     <string name="enter_same_passwords">رمز های عبور وارد شده مطابقت ندارند.</string>
     <string name="enter_correct_value">مقدار ناصحیح</string>
+    <string name="enter_correct_website">آدرس وب سایت را درست وارد کنید</string>
     <string name="enter_non_empty_value">مقدار وارد کنید</string>
     <string name="enter_correct_hour">مقدار مجاز بین 1 الی 24 می باشد</string>
     <string name="fill">این فیلد را پر کنید</string>

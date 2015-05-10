@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.InputType;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;

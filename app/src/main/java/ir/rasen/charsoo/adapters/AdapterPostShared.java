@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -99,7 +100,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
 
                 holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
                 //to display post picture as square
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
                 holder.imageViewPost.setLayoutParams(params);
 
                 holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
@@ -129,6 +130,13 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
             holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
 
             holder.textViewBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Business.goBusinessHomeInfoPage(context, items.get(position).businessID);
+
+                }
+            });
+            holder.imageViewProfileImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Business.goBusinessHomeInfoPage(context, items.get(position).businessID);
@@ -254,7 +262,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
 
         }
         catch (Exception e){
-
+            String s = e.getMessage();
         }
         return view;
     }

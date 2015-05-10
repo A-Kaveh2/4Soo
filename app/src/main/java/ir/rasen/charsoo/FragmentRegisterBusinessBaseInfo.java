@@ -150,10 +150,9 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         progressDialog.show();
         new GetBusinessGategories(getActivity(), FragmentRegisterBusinessBaseInfo.this).execute();
 
-
+        Business b = ((MyApplication) getActivity().getApplication()).business;
 
         //if the user is editing the business
-
         if (isEditing) {
             editingBusiness = ((MyApplication) getActivity().getApplication()).business;
             DownloadImages downloadImages = new DownloadImages(getActivity());

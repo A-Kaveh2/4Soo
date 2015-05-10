@@ -79,6 +79,8 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
             progressDialog.dismiss();
             gridView.setVisibility(View.VISIBLE);
             business = (Business) result;
+            ((MyApplication) getApplication()).business = new Business();
+            ((MyApplication) getApplication()).business = business;
 
             drawerLayoutBusiness.Initial(this, mDrawerLayout, ((MyApplication) getApplication()).userBusinesses, selectedBusinessId, business.profilePictureId, ActivityBusiness.this);
 
@@ -86,6 +88,9 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
             gridViewBusiness = new GridViewBusiness(this, business, gridView, mDrawerLayout);
             gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>());
             new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
+
+            Business b = ((MyApplication) getApplication()).business;
+
         }
         if (result instanceof ArrayList) {
             //this is GetBusinessPosts' result

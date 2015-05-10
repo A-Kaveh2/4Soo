@@ -55,7 +55,7 @@ public class GridViewBusiness implements IWebserviceResponse {
     AdapterPostBusiness adapterPostBusiness;
     private boolean isThreeColumn = true;
     boolean isLoadingMore = false;
-    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle;
+    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewBack;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
     View listFooterView;
     View viewHeader;
@@ -126,9 +126,11 @@ public class GridViewBusiness implements IWebserviceResponse {
             imageViewFollowers = (ImageView) viewHeader.findViewById(R.id.imageView_followers);
             imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
             imageViewContactInfo = (ImageView) viewHeader.findViewById(R.id.imageView_conatct_info);
+            imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
             textViewFollowersNumber = (TextViewFont) viewHeader.findViewById(R.id.textView_followers_number22);
-            textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_business_identifier);
+            textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_business_identifier_header);
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_business_name);
+
 
 
             textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
@@ -208,7 +210,12 @@ public class GridViewBusiness implements IWebserviceResponse {
                     }
                 }
             });
-
+            imageViewBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.finish();
+                }
+            });
 
             gridViewHeader.addHeaderView(viewHeader);
             hasHeader = true;

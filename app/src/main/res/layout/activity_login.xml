@@ -25,8 +25,9 @@
                 android:textColorHint="@color/Black"
                 android:gravity="right|center_vertical"
                 android:textColor="@color/Black"
-                android:inputType="textEmailAddress"
+                android:inputType="textEmailAddress|textNoSuggestions"
                 android:singleLine="true"
+
                 android:drawableRight="@drawable/ic_email_blue_24dp" />
 
             <ir.rasen.charsoo.ui.EditTextFont

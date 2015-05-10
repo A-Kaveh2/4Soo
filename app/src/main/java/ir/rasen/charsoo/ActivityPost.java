@@ -132,18 +132,22 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
 
             }
         });
+        imageViewProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Business.goBusinessHomeInfoPage(ActivityPost.this, post.businessID);
+            }
+        });
         textViewComment1UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 User.goUserHomeInfoPage(ActivityPost.this, post.lastThreeComments.get(0).userID);
-
             }
         });
         textViewComment2UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 User.goUserHomeInfoPage(ActivityPost.this, post.lastThreeComments.get(1).userID);
-
             }
         });
         textViewComment3UserIdentifier.setOnClickListener(new View.OnClickListener() {
