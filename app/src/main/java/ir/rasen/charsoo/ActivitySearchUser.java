@@ -182,12 +182,13 @@ public class ActivitySearchUser extends ActionBarActivity implements IWebservice
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
-       /* InputMethodManager imm = (InputMethodManager)getSystemService(
-                Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(editTextSearch.getWindowToken(), 0);
-*/
         if (result instanceof ArrayList) {
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
+            if(temp.size()== 0) {
+                (findViewById(R.id.textView_no_result)).setVisibility(View.VISIBLE);
+                return;
+            }
+
             results.addAll(temp);
 
 

@@ -101,7 +101,6 @@ public class ActivitySearchBusinessResult extends ActionBarActivity implements I
         listFooterView.setVisibility(View.GONE);
         listView.addFooterView(listFooterView, null, false);
 
-
         progressDialog.show();
         new SearchBusinessesLocation(ActivitySearchBusinessResult.this,searchKeyWord,subCategoryId,latitude,longitude,0,getResources().getInteger(R.integer.lazy_load_limitation),ActivitySearchBusinessResult.this).execute();
 
@@ -141,8 +140,10 @@ public class ActivitySearchBusinessResult extends ActionBarActivity implements I
         progressDialog.dismiss();
         if (result instanceof ArrayList) {
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
-            if(temp.size()== 0)
+            if(temp.size()== 0) {
+                (findViewById(R.id.textView_no_result)).setVisibility(View.VISIBLE);
                 return;
+            }
             results.addAll(temp);
 
 

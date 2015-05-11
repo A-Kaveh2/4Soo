@@ -1,13 +1,8 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,17 +17,14 @@ import ir.rasen.charsoo.adapters.AdapterBlockedUsers;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
-import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.TextViewFontActionBarTitle;
 import ir.rasen.charsoo.webservices.business.GetBlockedUsers;
-import ir.rasen.charsoo.webservices.post.GetTimeLinePosts;
 
 
-public class ActivityBlockedUsers extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityBusinessBlockedUsers extends ActionBarActivity implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     int businessId;
@@ -101,7 +93,7 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
         listView.addFooterView(footer.getFooterView(), null, false);
 
         progressDialog.show();
-        new GetBlockedUsers(ActivityBlockedUsers.this, businessId,0,getResources().getInteger(R.integer.lazy_load_limitation), ActivityBlockedUsers.this).execute();
+        new GetBlockedUsers(ActivityBusinessBlockedUsers.this, businessId,0,getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessBlockedUsers.this).execute();
 
 
     }
@@ -112,7 +104,7 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
         footer.setVisibility(View.VISIBLE);
-        new GetBlockedUsers(ActivityBlockedUsers.this, businessId,blockedUsers.get(blockedUsers.size()-1).getId(),getResources().getInteger(R.integer.lazy_load_limitation), ActivityBlockedUsers.this).execute();
+        new GetBlockedUsers(ActivityBusinessBlockedUsers.this, businessId,blockedUsers.get(blockedUsers.size()-1).getId(),getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessBlockedUsers.this).execute();
     }
 
     @Override
@@ -144,7 +136,7 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
 
 
             if (status == Status.FIRST_TIME || status == Status.REFRESHING) {
-                adapterBlockedUsers = new AdapterBlockedUsers(ActivityBlockedUsers.this, businessId, blockedUsers);
+                adapterBlockedUsers = new AdapterBlockedUsers(ActivityBusinessBlockedUsers.this, businessId, blockedUsers);
                 listView.setAdapter(adapterBlockedUsers);
             } else {
                 //it is loading more
@@ -158,6 +150,6 @@ public class ActivityBlockedUsers extends ActionBarActivity implements IWebservi
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBlockedUsers.this, ServerAnswer.getError(ActivityBlockedUsers.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessBlockedUsers.this, ServerAnswer.getError(ActivityBusinessBlockedUsers.this, errorCode)).show();
     }
 }

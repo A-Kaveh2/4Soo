@@ -64,7 +64,6 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
     private Status status;
-    //SwipeRefreshLayout swipeLayout;
     BroadcastReceiver timeLineUpdateReceiver;
     PullToRefreshList pullToRefreshListView;
 

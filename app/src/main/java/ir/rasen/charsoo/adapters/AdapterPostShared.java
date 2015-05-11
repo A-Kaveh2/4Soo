@@ -2,6 +2,7 @@ package ir.rasen.charsoo.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -229,12 +230,12 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
                 }
             });
 
-            gestureDetector = new GestureDetector(context, new MyGestureDetector(position,holder.imageViewLike));
+           /* gestureDetector = new GestureDetector(context, new MyGestureDetector(position,holder.imageViewLike));
             holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
                     return gestureDetector.onTouchEvent(event);
                 }
-            });
+            });*/
 
             holder.imageViewShare.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -318,42 +319,5 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
 
     }
 
-    class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
-        int position;
-        ImageView imageViewLike;
 
-        public MyGestureDetector(int position,ImageView imageViewLike ) {
-            this.position = position;
-            this.imageViewLike = imageViewLike;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-
-            return false;
-        }
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            if (items.get(position).isLiked) {
-                //unlike the post
-
-                new Unlike(context, LoginInfo.getUserId(context), items.get(position).id).execute();
-                items.get(position).isLiked = false;
-                imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
-            } else {
-                //like the post
-
-                new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
-                items.get(position).isLiked = true;
-                imageViewLike.setImageResource(R.drawable.ic_favorite_red);
-            }
-            return true;
-        }
-    }
 }

@@ -63,6 +63,7 @@
                 <RelativeLayout
                     android:layout_width="@dimen/adapter_user_image_height"
                     android:layout_height="@dimen/adapter_user_image_height"
+                    android:visibility="gone"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="20dp"
                     android:layout_alignParentLeft="true"

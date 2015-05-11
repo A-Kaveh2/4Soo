@@ -446,7 +446,7 @@
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="identifier_field_hint">نام کاربری</string>
-    <string name="identifier_business">نام کاربری کسب و کار</string>
+    <string name="identifier_business">شناسه کاربری (انگلیسی)</string>
     <string name="description">توضیحات</string>
     <string name="user_name_field_hint">نام</string>
     <string name="email_field_hint">ایمیل</string>
@@ -492,12 +492,14 @@
     <string name="try_again">مجددا سعی کنید</string>
     <string name="users">کاربران</string>
     <string name="cancel_share">لغو اشتراک گذاری</string>
-    <string name="hashtags">هشتگ ها</string>
+    <string name="hashtags">هشتگ (مثل: #کتاب)</string>
     <string name="level1">مرحله یک</string>
     <string name="level2">مرحله دو</string>
     <string name="level3">مرحله سه</string>
     <string name="url_guide">http://www.google.com</string>
     <string name="url_contact_us">http://www.google.com</string>
+    <string name="hashtag_guide">هشتگ ها جهت جستجو مورد استفاده قرار می گیرند.</string>
+    <string name="no_result">جستجوی شما نتیجه ای دربر نداشت.</string>
 
 
 

@@ -1,7 +1,6 @@
 package ir.rasen.charsoo;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -43,7 +42,7 @@ public class ActivityUserBusinesses extends ActionBarActivity {
         (findViewById(R.id.btn_creat_new_business)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityUserBusinesses.this, ActivityRegisterEditBusiness.class);
+                Intent intent = new Intent(ActivityUserBusinesses.this, ActivityBusinessRegisterEdit.class);
                 startActivityForResult(intent, Params.ACTION_REGISTER_BUSINESS);
             }
         });

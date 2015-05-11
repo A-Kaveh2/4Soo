@@ -12,10 +12,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -42,7 +39,7 @@ import ir.rasen.charsoo.webservices.DownloadImages;
 import ir.rasen.charsoo.webservices.business.GetBusinessGategories;
 import ir.rasen.charsoo.webservices.business.GetBusinessSubcategories;
 
-public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
+public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
 
     private ProgressDialog progressDialog;
     private EditTextFont editTextName, editTextIdentifier, editTextDescription, editTextHashtags;
@@ -93,6 +90,8 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         textViewSubcategories = (TextViewFont) view.findViewById(R.id.textView_sub_category);
         textViewCategories.setEnabled(false);
         textViewSubcategories.setEnabled(false);
+        textViewCategories.setTextSize(editTextIdentifier.getTextSize()-10);
+        textViewSubcategories.setTextSize(editTextIdentifier.getTextSize()-10);
 
         imageViewPicture = (ImageView) view.findViewById(R.id.imageView_picture);
         imageViewPicture.setOnClickListener(new View.OnClickListener() {
@@ -148,7 +147,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         myApplication.setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
 
         progressDialog.show();
-        new GetBusinessGategories(getActivity(), FragmentRegisterBusinessBaseInfo.this).execute();
+        new GetBusinessGategories(getActivity(), FragmentBusinessRegisterBaseInfo.this).execute();
 
         Business b = ((MyApplication) getActivity().getApplication()).business;
 
@@ -259,7 +258,7 @@ public class FragmentRegisterBusinessBaseInfo extends Fragment implements IWebse
         textViewCategories.setText(categories.get(categoryListPosition).name);
         progressDialog.show();
         ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
-        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, FragmentRegisterBusinessBaseInfo.this).execute();
+        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, FragmentBusinessRegisterBaseInfo.this).execute();
     }
 
     @Override

@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityAddEditPost;
+import ir.rasen.charsoo.ActivityPostAddEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.Comment;
 import ir.rasen.charsoo.classes.Post;
@@ -172,7 +172,7 @@ public class AdapterPostBusiness extends BaseAdapter implements IDeletePost {
         holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityAddEditPost.class);
+                Intent intent = new Intent(context, ActivityPostAddEdit.class);
                 intent.putExtra(Params.BUSINESS_ID,items.get(position).businessID);
                 intent.putExtra(Params.POST_ID,items.get(position).id);
                 context.startActivity(intent);

@@ -28,8 +28,7 @@ import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.dialog.DialogDeleteBusinessConfirmation;
 import ir.rasen.charsoo.dialog.DialogMessage;
-import ir.rasen.charsoo.dialog.PopupCameraGallery;
-import ir.rasen.charsoo.helper.ActionBar_M;
+import ir.rasen.charsoo.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ResultStatus;
@@ -42,11 +41,11 @@ import ir.rasen.charsoo.webservices.business.GetBusinessProfileInfo;
 import ir.rasen.charsoo.webservices.business.RegisterBusiness;
 import ir.rasen.charsoo.webservices.business.UpdateBusinessProfileInfo;
 
-public class ActivityRegisterEditBusiness extends ActionBarActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
+public class ActivityBusinessRegisterEdit extends ActionBarActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
 
-    FragmentRegisterBusinessBaseInfo fragmentBaseInfo;
-    FragmentRegisterBusinessContactInfo fragmentContactInfo;
-    FragmentRegisterBusinessLocationInfo fragmentLocationInfo;
+    FragmentBusinessRegisterBaseInfo fragmentBaseInfo;
+    FragmentBusinessRegisterContactInfo fragmentContactInfo;
+    FragmentBusinessRegisterLocationInfo fragmentLocationInfo;
     ProgressDialog progressDialog;
     String filePath, businessPictureString;
 
@@ -82,9 +81,9 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
         llIndicatorContact = (LinearLayout) findViewById(R.id.ll_indicator_contact);
         llIndicatorLocation = (LinearLayout) findViewById(R.id.ll_indicator_location);
 
-        fragmentBaseInfo = new FragmentRegisterBusinessBaseInfo();
-        fragmentContactInfo = new FragmentRegisterBusinessContactInfo();
-        fragmentLocationInfo = new FragmentRegisterBusinessLocationInfo();
+        fragmentBaseInfo = new FragmentBusinessRegisterBaseInfo();
+        fragmentContactInfo = new FragmentBusinessRegisterContactInfo();
+        fragmentLocationInfo = new FragmentBusinessRegisterLocationInfo();
         fragmentCurrent = Fragments.BASE_INFO;
 
 
@@ -98,7 +97,7 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
         Bundle bundle = new Bundle();
         if (businessId != 0) {
             ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(getString(R.string.profile_edit_business));
-            new GetBusinessProfileInfo(ActivityRegisterEditBusiness.this, businessId, ActivityRegisterEditBusiness.this).execute();
+            new GetBusinessProfileInfo(ActivityBusinessRegisterEdit.this, businessId, ActivityBusinessRegisterEdit.this).execute();
             bundle.putBoolean(Params.IS_EDITTING, true);
             progressDialog.show();
         } else {
@@ -172,7 +171,7 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
             return true;
         } else if (item.getItemId() == R.id.action_delete) {
 
-            new DialogDeleteBusinessConfirmation(ActivityRegisterEditBusiness.this, businessId, ActivityRegisterEditBusiness.this).show();
+            new DialogDeleteBusinessConfirmation(ActivityBusinessRegisterEdit.this, businessId, ActivityBusinessRegisterEdit.this).show();
             return true;
         } else if (item.getItemId() == R.id.action_next) {
             switch (fragmentCurrent) {
@@ -209,9 +208,9 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
 
                         if (businessId != 0)
                             //it is editing
-                            new UpdateBusinessProfileInfo(ActivityRegisterEditBusiness.this, ((MyApplication) getApplication()).business, ActivityRegisterEditBusiness.this).execute();
+                            new UpdateBusinessProfileInfo(ActivityBusinessRegisterEdit.this, ((MyApplication) getApplication()).business, ActivityBusinessRegisterEdit.this).execute();
                         else
-                            new RegisterBusiness(ActivityRegisterEditBusiness.this, ((MyApplication) getApplication()).business, ActivityRegisterEditBusiness.this).execute();
+                            new RegisterBusiness(ActivityBusinessRegisterEdit.this, ((MyApplication) getApplication()).business, ActivityBusinessRegisterEdit.this).execute();
 
                     }
                     break;
@@ -249,12 +248,12 @@ public class ActivityRegisterEditBusiness extends ActionBarActivity implements I
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityRegisterEditBusiness.this, ServerAnswer.getError(ActivityRegisterEditBusiness.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessRegisterEdit.this, ServerAnswer.getError(ActivityBusinessRegisterEdit.this, errorCode)).show();
     }
 
     @Override
     public void notifyCallForTakePicture() {
-        new PopupCameraGallery(ActivityRegisterEditBusiness.this).show();
+        new PopupSelectCameraGallery(ActivityBusinessRegisterEdit.this).show();
     }
 
     @Override

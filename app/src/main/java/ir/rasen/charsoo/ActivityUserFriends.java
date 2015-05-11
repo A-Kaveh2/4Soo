@@ -1,26 +1,22 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.adapters.AdapterCommentNotification;
-import ir.rasen.charsoo.classes.CommentNotification;
+import ir.rasen.charsoo.adapters.AdapterFriends;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
+import ir.rasen.charsoo.helper.BaseAdapterItem;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.PullToRefreshList;
@@ -28,22 +24,24 @@ import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IPullToRefresh;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.comment.GetAllCommentNotifications;
+import ir.rasen.charsoo.webservices.friend.GetUserFriends;
 
 
-public class ActivityCommentsNotifications extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityUserFriends extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
-    int businessId;
-    AdapterCommentNotification adapterCommentNotification;
+    int visitedUserId;
+    AdapterFriends adapterFriends;
     ListView listView;
-    ArrayList<CommentNotification> commentNotifications;
+    ArrayList<BaseAdapterItem> friends;
+    ArrayList<BaseAdapterItem> sampleFriends;
 
     @Override
     public void notifyRefresh() {
         status = Status.REFRESHING;
-        commentNotifications.clear();
-        new GetAllCommentNotifications(ActivityCommentsNotifications.this, businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityCommentsNotifications.this).execute();
+        friends.clear();
+        new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
+
     }
 
     @Override
@@ -61,21 +59,40 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_listview_pull_to_refresh);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.comments));
+        setContentView(R.layout.activity_friends);
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.friends));
+        boolean hasRequest = false;
+        try {
+            sampleFriends = TestUnit.getBaseAdapterItems(getResources());
+            hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
+        } catch (Exception e) {
 
-        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
-        commentNotifications = new ArrayList<>();
+        }
+
+        visitedUserId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
+        if (visitedUserId != LoginInfo.getUserId(this) || !hasRequest)
+            (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
+
+        friends = new ArrayList<>();
         status = Status.FIRST_TIME;
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityCommentsNotifications.this);
+        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityUserFriends.this);
         listView = pullToRefreshListView.getListView();
 
         progressDialog.show();
-        new GetAllCommentNotifications(ActivityCommentsNotifications.this, LoginInfo.getUserId(ActivityCommentsNotifications.this), 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityCommentsNotifications.this).execute();
+        new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
+
+        (findViewById(R.id.btn_friend_requests)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(ActivityUserFriends.this, ActivityUserFriendRequests.class);
+                intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
+                startActivity(intent1);
+            }
+        });
 
     }
 
@@ -83,9 +100,11 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
     // LOAD MORE DATA
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
-        status = Status.LOADING_MORE;
+
+        //this webservice doesn't support load more yet.
+        /*status = Status.LOADING_MORE;
         pullToRefreshListView.setFooterVisibility(View.VISIBLE);
-        new GetAllCommentNotifications(ActivityCommentsNotifications.this, businessId, commentNotifications.get(commentNotifications.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), ActivityCommentsNotifications.this).execute();
+        new GetUserFriends(ActivityFriends.this, visitedUserId, ActivityFriends.this).execute();*/
     }
 
     @Override
@@ -111,21 +130,20 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
     public void getResult(Object result) {
         progressDialog.dismiss();
         if (result instanceof ArrayList) {
-            ArrayList<CommentNotification> temp = (ArrayList<CommentNotification>) result;
-            commentNotifications.addAll(temp);
+            ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
+            friends.addAll(temp);
+            pullToRefreshListView.setResultSize(friends.size());
 
-            pullToRefreshListView.setResultSize(commentNotifications.size());
-
-            if (status == Status.FIRST_TIME || status == Status.REFRESHING) {
-                adapterCommentNotification = new AdapterCommentNotification(ActivityCommentsNotifications.this, commentNotifications);
-                listView.setAdapter(adapterCommentNotification);
+            if (status == Status.FIRST_TIME) {
+                adapterFriends = new AdapterFriends(ActivityUserFriends.this, visitedUserId, friends);
+                listView.setAdapter(adapterFriends);
             } else if (status == Status.REFRESHING) {
-                adapterCommentNotification.notifyDataSetChanged();
+                adapterFriends.notifyDataSetChanged();
                 pullToRefreshListView.onRefreshComplete();
             } else {
                 //it is loading more
                 pullToRefreshListView.setFooterVisibility(View.GONE);
-                adapterCommentNotification.loadMore(temp);
+                adapterFriends.loadMore(temp);
             }
             status = Status.NONE;
 
@@ -135,6 +153,6 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityCommentsNotifications.this, ServerAnswer.getError(ActivityCommentsNotifications.this, errorCode)).show();
+        new DialogMessage(ActivityUserFriends.this, ServerAnswer.getError(ActivityUserFriends.this, errorCode)).show();
     }
 }

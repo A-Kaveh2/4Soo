@@ -27,7 +27,7 @@ import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.ButtonFont;
 import ir.rasen.charsoo.ui.EditTextFont;
 
-public class FragmentRegisterBusinessLocationInfo extends Fragment  {
+public class FragmentBusinessRegisterLocationInfo extends Fragment  {
 
     private Spinner spinnerStates;
     EditTextFont editTextCity, editTextStreet;

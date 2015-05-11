@@ -1,11 +1,7 @@
 package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,77 +12,53 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.adapters.AdapterFriends;
+import ir.rasen.charsoo.adapters.AdapterFollowingBusinesses;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
-import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.ButtonFont;
-import ir.rasen.charsoo.webservices.friend.GetUserFriends;
 import ir.rasen.charsoo.webservices.user.GetFollowingBusinesses;
 
 
-public class ActivityFriends extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityUserFollowingBusinesses extends ActionBarActivity implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     int visitedUserId;
-    AdapterFriends adapterFriends;
+    AdapterFollowingBusinesses adapterFollowingBusinesses;
     ListView listView;
-    ArrayList<BaseAdapterItem> friends;
-    ArrayList<BaseAdapterItem> sampleFriends;
+    ArrayList<BaseAdapterItem> businesses;
+    ArrayList<BaseAdapterItem> sampleBusinesses;
     private View listFooterView;
-    SwipeRefreshLayout swipeLayout;
 
-    private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
+    //for the test
+
+
+    private enum Status {FIRST_TIME, LOADING_MORE, NONE}
 
     private Status status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.friends));
-        boolean hasRequest = false;
+        setContentView(R.layout.layout_listview);
+        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.businesses));
         try {
-            sampleFriends = TestUnit.getBaseAdapterItems(getResources());
-            hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
+            sampleBusinesses = TestUnit.getBaseAdapterItems(getResources());
         } catch (Exception e) {
 
         }
 
         visitedUserId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
-        if (visitedUserId != LoginInfo.getUserId(this) || !hasRequest)
-            (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
 
-        friends = new ArrayList<>();
+        businesses = new ArrayList<>();
         status = Status.FIRST_TIME;
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                if (status == Status.LOADING_MORE) {
-                    swipeLayout.setRefreshing(false);
-                    return;
-                }
-
-                status = Status.REFRESHING;
-                friends.clear();
-                new GetUserFriends(ActivityFriends.this, visitedUserId, ActivityFriends.this).execute();
-
-            }
-        });
-        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
 
         listView = (ListView) findViewById(R.id.listView);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -109,7 +81,7 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
             private void isScrollCompleted() {
                 if (this.currentVisibleItemCount > 0 && this.currentScrollState == SCROLL_STATE_IDLE) {
                     if (status != Status.LOADING_MORE
-                            && friends.size() > 0 && friends.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
+                            && businesses.size() > 0 && businesses.size() % getResources().getInteger(R.integer.lazy_load_limitation) == 0) {
                         //loadMoreData();
                     }
                 }
@@ -122,16 +94,7 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
 
 
         progressDialog.show();
-        new GetUserFriends(ActivityFriends.this, visitedUserId, ActivityFriends.this).execute();
-
-        (findViewById(R.id.btn_friend_requests)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityFriends.this, ActivityFriendRequests.class);
-                intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
-                startActivity(intent1);
-            }
-        });
+        new GetFollowingBusinesses(ActivityUserFollowingBusinesses.this,visitedUserId,ActivityUserFollowingBusinesses.this).execute();
 
     }
 
@@ -143,7 +106,9 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
 
         listFooterView.setVisibility(View.VISIBLE);
 
-        new GetUserFriends(ActivityFriends.this, visitedUserId, ActivityFriends.this).execute();
+        new GetFollowingBusinesses(ActivityUserFollowingBusinesses.this,visitedUserId,ActivityUserFollowingBusinesses.this).execute();
+
+
     }
 
     @Override
@@ -168,20 +133,18 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
-        if (swipeLayout.isRefreshing())
-            swipeLayout.setRefreshing(false);
         if (result instanceof ArrayList) {
             ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
-            friends.addAll(temp);
+            businesses.addAll(temp);
 
 
             if (status == Status.FIRST_TIME) {
-                adapterFriends = new AdapterFriends(ActivityFriends.this, visitedUserId, friends);
-                listView.setAdapter(adapterFriends);
+                adapterFollowingBusinesses = new AdapterFollowingBusinesses(ActivityUserFollowingBusinesses.this,visitedUserId,businesses,progressDialog);
+                listView.setAdapter(adapterFollowingBusinesses);
             } else {
                 //it is loading more
                 listFooterView.setVisibility(View.GONE);
-                adapterFriends.loadMore(temp);
+                adapterFollowingBusinesses.loadMore(temp);
             }
             status = Status.NONE;
 
@@ -191,6 +154,6 @@ public class ActivityFriends extends ActionBarActivity implements IWebserviceRes
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityFriends.this, ServerAnswer.getError(ActivityFriends.this, errorCode)).show();
+        new DialogMessage(ActivityUserFollowingBusinesses.this, ServerAnswer.getError(ActivityUserFollowingBusinesses.this, errorCode)).show();
     }
 }

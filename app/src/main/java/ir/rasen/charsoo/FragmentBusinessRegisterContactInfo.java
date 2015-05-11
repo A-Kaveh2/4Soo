@@ -3,9 +3,7 @@ package ir.rasen.charsoo;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -15,16 +13,13 @@ import android.view.ViewGroup;
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.Validation;
 import ir.rasen.charsoo.helper.WorkTime;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.ButtonFont;
 import ir.rasen.charsoo.ui.EditTextFont;
 
-public class FragmentRegisterBusinessContactInfo extends Fragment {
+public class FragmentBusinessRegisterContactInfo extends Fragment {
 
 
     EditTextFont editTextPhone, editTextMobile, editTextWebsite, editTextEmail;
@@ -39,8 +34,6 @@ public class FragmentRegisterBusinessContactInfo extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register_business_contact_info,
                 container, false);
 
-
-
         editTextEmail = (EditTextFont) view.findViewById(R.id.edt_email);
         editTextMobile = (EditTextFont) view.findViewById(R.id.edt_mobile);
         editTextWebsite = (EditTextFont) view.findViewById(R.id.edt_wesite);
@@ -50,7 +43,7 @@ public class FragmentRegisterBusinessContactInfo extends Fragment {
         buttonWorkTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ActivityWorkTime.class);
+                Intent intent = new Intent(getActivity(), ActivityBusinessWorkTime.class);
                 if (isEditing) {
                     intent.putExtra(Params.IS_EDITTING, true);
                 } else {

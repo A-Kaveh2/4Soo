@@ -37,7 +37,7 @@ public class EditTextFont extends EditText {
 
     private void init() {
         if (!isInEditMode()) {
-            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/b_yekan.ttf");
+            Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/yekan.ttf");
             setTypeface(tf);
         }
     }

@@ -5,17 +5,11 @@ package ir.rasen.charsoo;
  */
 
 
-import android.app.Activity;
-
 import android.app.Fragment;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -27,9 +21,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import ir.rasen.charsoo.adapters.ScreenSlidePagerAdapter;
-
-public class ActivityRegisterBusiness_ViewPager extends ActionBarActivity implements
+public class ActivityRegisterBusiness_ViewPager_not_used extends ActionBarActivity implements
         ActionBar.TabListener {
 
 
@@ -101,9 +93,9 @@ public class ActivityRegisterBusiness_ViewPager extends ActionBarActivity implem
 
     private List<Fragment> getFragments() {
         List<Fragment> fList = new ArrayList<Fragment>();
-        fList.add(new FragmentRegisterBusinessBaseInfo());
-        fList.add(new FragmentRegisterBusinessContactInfo());
-        fList.add(new FragmentRegisterBusinessLocationInfo());
+        fList.add(new FragmentBusinessRegisterBaseInfo());
+        fList.add(new FragmentBusinessRegisterContactInfo());
+        fList.add(new FragmentBusinessRegisterLocationInfo());
         return fList;
     }
 

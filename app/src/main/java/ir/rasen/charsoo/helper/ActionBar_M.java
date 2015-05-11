@@ -26,5 +26,17 @@ public class ActionBar_M {
         actionBar.setCustomView(v);
     }
 
+    public static void setActionBarNoBack(android.support.v7.app.ActionBar actionBar, Context context, String title) {
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setBackgroundDrawable(new ColorDrawable(context.getResources().getColor(R.color.DeepSkyBlue)));
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.layout_action_bar_home, null);
+        ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(title);
+        actionBar.setCustomView(v);
+    }
+
 
 }

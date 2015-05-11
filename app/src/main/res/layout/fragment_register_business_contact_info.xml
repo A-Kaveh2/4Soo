@@ -54,7 +54,7 @@
                 android:gravity="right|center_vertical"
                 android:textColor="@color/Black"
                 android:singleLine="true"
-                android:inputType="textWebEditText"
+                android:inputType="textWebEditText|textNoSuggestions"
                />
 
             <ir.rasen.charsoo.ui.EditTextFont

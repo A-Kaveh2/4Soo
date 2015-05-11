@@ -36,5 +36,13 @@
         android:layout_height="match_parent"
         android:id="@+id/listView" />
 
+    <ir.rasen.charsoo.ui.TextViewFont
+        android:id="@+id/textView_no_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_results_found"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
 </RelativeLayout>
 

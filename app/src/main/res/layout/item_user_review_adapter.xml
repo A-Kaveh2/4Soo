@@ -10,6 +10,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/adapter_item_margin"
+        android:gravity="center_vertical"
         android:layout_height="wrap_content">
 
         <LinearLayout
@@ -17,7 +18,8 @@
             android:layout_marginRight="@dimen/base_adapter_item_text_margin"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/ll_image_user"
-            android:gravity="right"
+            android:gravity="right|center_vertical"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/img_more"
             android:orientation="vertical">
 
@@ -41,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
-                android:text="Large Text\nText\nText"
+                android:text="Large Text"
                 android:textSize="@dimen/font_size_adapter_item_text"
                 android:textColor="@color/Black"
                 android:id="@+id/textView_review_adapter_item_text" />
@@ -67,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="9dp"
+            android:layout_marginLeft="10dp"
             android:visibility="gone"
             android:src="@drawable/selector_button_more" />
     </RelativeLayout>

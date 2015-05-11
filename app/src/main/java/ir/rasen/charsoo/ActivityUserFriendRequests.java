@@ -2,22 +2,15 @@ package ir.rasen.charsoo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.handmark.pulltorefresh.library.Footer;
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
@@ -34,10 +27,9 @@ import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.interfaces.IPullToRefresh;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.friend.GetUserFriendRequests;
-import ir.rasen.charsoo.webservices.friend.GetUserFriends;
 
 
-public class ActivityFriendRequests extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityUserFriendRequests extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int visitedUserId;
@@ -54,7 +46,7 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     public void notifyRefresh() {
         status = Status.REFRESHING;
         requests.clear();
-        new GetUserFriendRequests(ActivityFriendRequests.this, LoginInfo.getUserId(ActivityFriendRequests.this), ActivityFriendRequests.this).execute();
+        new GetUserFriendRequests(ActivityUserFriendRequests.this, LoginInfo.getUserId(ActivityUserFriendRequests.this), ActivityUserFriendRequests.this).execute();
     }
 
     @Override
@@ -86,21 +78,21 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityFriendRequests.this);
+        pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityUserFriendRequests.this);
         listView = pullToRefreshListView.getListView();
 
         progressDialog.show();
-        new GetUserFriendRequests(ActivityFriendRequests.this, visitedUserId, ActivityFriendRequests.this).execute();
+        new GetUserFriendRequests(ActivityUserFriendRequests.this, visitedUserId, ActivityUserFriendRequests.this).execute();
 
         //notify FragmentUser to hide request announcement
         Intent intent = new Intent(Params.REMOVE_REQUEST_ANNOUNCEMENT);
-        LocalBroadcastManager.getInstance(ActivityFriendRequests.this).sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(ActivityUserFriendRequests.this).sendBroadcast(intent);
     }
 
 
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
-        Toast.makeText(ActivityFriendRequests.this, "Load more data", Toast.LENGTH_LONG).show();
+        Toast.makeText(ActivityUserFriendRequests.this, "Load more data", Toast.LENGTH_LONG).show();
         //this webservice doesn't support load more by the now!
 
        /* status = Status.LOADING_MORE;
@@ -138,7 +130,7 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
             pullToRefreshListView.setResultSize(requests.size());
 
             if (status == Status.FIRST_TIME) {
-                adapterFriendshipRequest = new AdapterFriendshipRequest(ActivityFriendRequests.this, requests);
+                adapterFriendshipRequest = new AdapterFriendshipRequest(ActivityUserFriendRequests.this, requests);
                 listView.setAdapter(adapterFriendshipRequest);
             } else if (status == Status.REFRESHING) {
                 adapterFriendshipRequest.notifyDataSetChanged();
@@ -155,6 +147,6 @@ public class ActivityFriendRequests extends ActionBarActivity implements IWebser
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityFriendRequests.this, ServerAnswer.getError(ActivityFriendRequests.this, errorCode)).show();
+        new DialogMessage(ActivityUserFriendRequests.this, ServerAnswer.getError(ActivityUserFriendRequests.this, errorCode)).show();
     }
 }

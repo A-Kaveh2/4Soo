@@ -1,10 +1,8 @@
 package ir.rasen.charsoo.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,23 +11,17 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import com.google.android.gms.internal.dr;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityBusiness;
 import ir.rasen.charsoo.ActivityBusinessFollowers;
 import ir.rasen.charsoo.ActivityBusinessReviews;
-import ir.rasen.charsoo.ActivityContactInfo;
-import ir.rasen.charsoo.ActivityEntrance;
+import ir.rasen.charsoo.ActivityBusinessContactInfo;
 import ir.rasen.charsoo.ActivityProfilePicture;
-import ir.rasen.charsoo.FragmentHome;
+import ir.rasen.charsoo.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostBusiness;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
-import ir.rasen.charsoo.adapters.AdapterPostShared;
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
@@ -39,12 +31,9 @@ import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.SearchItemPost;
 import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TestUnit;
-import ir.rasen.charsoo.interfaces.IAddPost;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.DownloadCoverImage;
 import ir.rasen.charsoo.webservices.post.GetBusinessPosts;
-import ir.rasen.charsoo.webservices.post.GetTimeLinePosts;
 
 /**
  * Created by android on 3/14/2015.
@@ -55,7 +44,7 @@ public class GridViewBusiness implements IWebserviceResponse {
     AdapterPostBusiness adapterPostBusiness;
     private boolean isThreeColumn = true;
     boolean isLoadingMore = false;
-    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewBack;
+    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewBack,imageViewEdit;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
     View listFooterView;
     View viewHeader;
@@ -119,6 +108,7 @@ public class GridViewBusiness implements IWebserviceResponse {
 
         if (!hasHeader) {
             viewHeader = ((Activity) activity).getLayoutInflater().inflate(R.layout.layout_business_grid_header, null);
+
             imageViewMore = (ImageView) viewHeader.findViewById(R.id.imageView_more);
             imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
             imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
@@ -127,6 +117,8 @@ public class GridViewBusiness implements IWebserviceResponse {
             imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
             imageViewContactInfo = (ImageView) viewHeader.findViewById(R.id.imageView_conatct_info);
             imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
+            imageViewEdit = (ImageView) viewHeader.findViewById(R.id.imageView_edit);
+
             textViewFollowersNumber = (TextViewFont) viewHeader.findViewById(R.id.textView_followers_number22);
             textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_business_identifier_header);
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_business_name);
@@ -143,6 +135,15 @@ public class GridViewBusiness implements IWebserviceResponse {
             downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
 
+            imageViewEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
+                    intent.putExtra(Params.BUSINESS_ID,business.id);
+                    intent.putExtra(Params.BUSINESS_IDENTIFIER,business.businessIdentifier);
+                    activity.startActivityForResult(intent, Params.ACTION_EDIT_BUSINESS);
+                }
+            });
             imageViewCover.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -185,7 +186,7 @@ public class GridViewBusiness implements IWebserviceResponse {
             imageViewContactInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityContactInfo.class);
+                    Intent intent = new Intent(activity, ActivityBusinessContactInfo.class);
                     MyApplication myApplication = (MyApplication) ((Activity) activity).getApplication();
                     myApplication.business = business;
                     activity.startActivity(intent);

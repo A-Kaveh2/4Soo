@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.dialog.DialogMessage;
-import ir.rasen.charsoo.dialog.PopupCameraGallery;
+import ir.rasen.charsoo.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
@@ -36,7 +36,7 @@ import ir.rasen.charsoo.webservices.post.GetPost;
 import ir.rasen.charsoo.webservices.post.UpdatePost;
 
 
-public class ActivityAddEditPost extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
+public class ActivityPostAddEdit extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
 
 
     EditTextFont editTextTitle, editTextDescription, editTextPrice, editTextCode, editTextHashtags;
@@ -79,7 +79,7 @@ public class ActivityAddEditPost extends ActionBarActivity implements View.OnCli
         if (postId != 0) {
             ((MyApplication) getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_POST);
             progressDialog.show();
-            new GetPost(ActivityAddEditPost.this, LoginInfo.getUserId(ActivityAddEditPost.this), businessId, postId, Post.GetPostType.BUSINESS, ActivityAddEditPost.this).execute();
+            new GetPost(ActivityPostAddEdit.this, LoginInfo.getUserId(ActivityPostAddEdit.this), businessId, postId, Post.GetPostType.BUSINESS, ActivityPostAddEdit.this).execute();
             imageViewPostPicture.setEnabled(false);
             ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.edit_product));
         }
@@ -135,7 +135,7 @@ public class ActivityAddEditPost extends ActionBarActivity implements View.OnCli
             public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
                 if (charSequence.toString().equals(oldText))
                     return;
-                TextProcessor.processEdtHashtags(editTextHashtags.getText().toString(), editTextHashtags, ActivityAddEditPost.this);
+                TextProcessor.processEdtHashtags(editTextHashtags.getText().toString(), editTextHashtags, ActivityPostAddEdit.this);
             }
 
             @Override
@@ -189,18 +189,18 @@ public class ActivityAddEditPost extends ActionBarActivity implements View.OnCli
                 submit();
                 break;
             case R.id.imageView_user_picture:
-                new PopupCameraGallery(ActivityAddEditPost.this).show();
+                new PopupSelectCameraGallery(ActivityPostAddEdit.this).show();
                 break;
         }
     }
 
     private void submit() {
-        if (!Validation.validateTitle(ActivityAddEditPost.this, editTextTitle.getText().toString()).isValid()) {
+        if (!Validation.validateTitle(ActivityPostAddEdit.this, editTextTitle.getText().toString()).isValid()) {
             editTextTitle.setError(Validation.getErrorMessage());
             return;
         }
         if (postId == 0 && postPictureString.equals("")) {
-            new DialogMessage(ActivityAddEditPost.this, getString(R.string.choose_post_picture)).show();
+            new DialogMessage(ActivityPostAddEdit.this, getString(R.string.choose_post_picture)).show();
             return;
         }
 
@@ -218,11 +218,11 @@ public class ActivityAddEditPost extends ActionBarActivity implements View.OnCli
             //the user is updating the post
             post.id = postId;
             ((MyApplication) getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.UPDATE_POST);
-            new UpdatePost(ActivityAddEditPost.this, post, ActivityAddEditPost.this).execute();
+            new UpdatePost(ActivityPostAddEdit.this, post, ActivityPostAddEdit.this).execute();
         } else {
             //the user is adding new post
             ((MyApplication) getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.ADD_POST);
-            new AddPost(ActivityAddEditPost.this, post, ActivityAddEditPost.this).execute();
+            new AddPost(ActivityPostAddEdit.this, post, ActivityPostAddEdit.this).execute();
         }
     }
 
@@ -245,7 +245,7 @@ public class ActivityAddEditPost extends ActionBarActivity implements View.OnCli
                 Post post = (Post) result;
                 editTextTitle.setText(post.title);
                 //download and display the post picture
-                DownloadImages downloadImages = new DownloadImages(ActivityAddEditPost.this);
+                DownloadImages downloadImages = new DownloadImages(ActivityPostAddEdit.this);
                 downloadImages.download(post.pictureId, Image_M.MEDIUM, Image_M.ImageType.POST, imageViewPostPicture, false);
 
                 editTextDescription.setText(post.description);
@@ -272,6 +272,6 @@ public class ActivityAddEditPost extends ActionBarActivity implements View.OnCli
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityAddEditPost.this, ServerAnswer.getError(ActivityAddEditPost.this, errorCode)).show();
+        new DialogMessage(ActivityPostAddEdit.this, ServerAnswer.getError(ActivityPostAddEdit.this, errorCode)).show();
     }
 }

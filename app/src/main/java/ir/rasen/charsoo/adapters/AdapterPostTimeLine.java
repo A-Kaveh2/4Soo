@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.google.android.gms.internal.ic;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.FragmentUser;
@@ -26,6 +28,7 @@ import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.PopupReportPostAdapter;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.helper.MyGestureDetector;
 import ir.rasen.charsoo.helper.PersianDate;
 import ir.rasen.charsoo.helper.TextProcessor;
 import ir.rasen.charsoo.interfaces.IReportPost;
@@ -34,8 +37,7 @@ import ir.rasen.charsoo.webservices.DownloadImages;
 import ir.rasen.charsoo.webservices.post.Like;
 import ir.rasen.charsoo.webservices.post.Share;
 import ir.rasen.charsoo.webservices.post.Unlike;
-import ir.rasen.charsoo.animation.Anim;
-import ir.rasen.charsoo.webservices.user.GetUserHomeInfo;
+
 
 /**
  * Created by android on 3/7/2015.
@@ -49,7 +51,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
     private IReportPost iReportPost;
     GridView gridView;
 
-    private GestureDetector gestureDetector;
+
 
 
     public AdapterPostTimeLine(Context context, ArrayList<Post> items) {
@@ -277,13 +279,15 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                 }
             });
 
-            gestureDetector = new GestureDetector(context, new MyGestureDetector(position, holder.imageViewLike, holder.imageViewPostLike));
+
+            holder.gestureDetector = new GestureDetector(context, new MyGestureDetector(context,items.get(position).id,items.get(position).isLiked, holder.imageViewLike, holder.imageViewPostLike));
 
             holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
-                    return gestureDetector.onTouchEvent(event);
+                    return holder.gestureDetector.onTouchEvent(event);
                 }
             });
+
           /*  holder.imageViewPost.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -395,9 +399,11 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         TextViewFont textViewAnnouncementBusinessIdentifier;
         TextViewFont textViewAnnouncementBusinessStaticPart;
 
+        GestureDetector gestureDetector;
+
     }
 
-    class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
+    /*class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
         int position;
         ImageView imageViewLike;
         ImageView imageViewPostLike;
@@ -407,12 +413,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             this.imageViewLike = imageViewLike;
             this.imageViewPostLike = imageViewPostLike;
         }
-
-      /*  @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
-            imageViewPostLike.setVisibility(View.VISIBLE);
-            return super.onSingleTapConfirmed(e);
-        }*/
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
@@ -431,6 +431,15 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
             if (items.get(position).isLiked) {
                 //unlike the post
+                imageViewPostLike.setImageResource(R.drawable.ic_favorite_grey);
+                imageViewPostLike.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imageViewPostLike.setVisibility(View.INVISIBLE);
+                    }
+                }, 700);
 
                 new Unlike(context, LoginInfo.getUserId(context), items.get(position).id).execute();
                 items.get(position).isLiked = false;
@@ -438,12 +447,13 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             } else {
                 //like the post
 
+                imageViewPostLike.setImageResource(R.drawable.ic_favorite_red);
                 imageViewPostLike.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        //imageViewPostLike.setVisibility(View.INVISIBLE);
+                        imageViewPostLike.setVisibility(View.INVISIBLE);
                     }
                 }, 700);
                 //Anim.fadeOut(imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE,View.INVISIBLE);
@@ -454,5 +464,5 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             return true;
         }
     }
-
+*/
 }

@@ -2,23 +2,14 @@ package ir.rasen.charsoo;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.io.File;
-
 import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.DialogMessage;
-import ir.rasen.charsoo.dialog.PopupCameraGallery;
 import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.Validation;
@@ -26,11 +17,9 @@ import ir.rasen.charsoo.helper.WorkTime;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.ButtonFont;
 import ir.rasen.charsoo.ui.EditTextFont;
-import ir.rasen.charsoo.ui.ImageViewCircle;
-import ir.rasen.charsoo.webservices.user.RegisterUser;
 
 
-public class ActivityWorkTime extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
+public class ActivityBusinessWorkTime extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
 
 
     EditTextFont editTextTimeOpenHour, editTextTimeOpenMinute, editTextTimeCloseHour, editTextTimeCloseMinute;
@@ -189,24 +178,24 @@ public class ActivityWorkTime extends ActionBarActivity implements View.OnClickL
             case R.id.btn_submit:
                 //if user doesn't choose any days
                 if (!(sat || sun || mon || tue || wed || thr || fri)) {
-                    new DialogMessage(ActivityWorkTime.this, getString(R.string.err_choose_days)).show();
+                    new DialogMessage(ActivityBusinessWorkTime.this, getString(R.string.err_choose_days)).show();
                     return;
                 }
 
-                if (!Validation.validateHour(ActivityWorkTime.this, editTextTimeOpenHour.getText().toString()).isValid()) {
+                if (!Validation.validateHour(ActivityBusinessWorkTime.this, editTextTimeOpenHour.getText().toString()).isValid()) {
                     editTextTimeOpenHour.setError(Validation.getErrorMessage());
                     return;
                 }
-                if (!Validation.validateMinute(ActivityWorkTime.this, editTextTimeOpenMinute.getText().toString()).isValid()) {
+                if (!Validation.validateMinute(ActivityBusinessWorkTime.this, editTextTimeOpenMinute.getText().toString()).isValid()) {
                     editTextTimeOpenMinute.setError(Validation.getErrorMessage());
                     return;
                 }
-                if (!Validation.validateHour(ActivityWorkTime.this, editTextTimeCloseHour.getText().toString()).isValid()) {
+                if (!Validation.validateHour(ActivityBusinessWorkTime.this, editTextTimeCloseHour.getText().toString()).isValid()) {
                     editTextTimeCloseHour.setError(Validation.getErrorMessage());
                     return;
                 }
 
-                if (!Validation.validateMinute(ActivityWorkTime.this, editTextTimeCloseMinute.getText().toString()).isValid()) {
+                if (!Validation.validateMinute(ActivityBusinessWorkTime.this, editTextTimeCloseMinute.getText().toString()).isValid()) {
                     editTextTimeCloseMinute.setError(Validation.getErrorMessage());
                     return;
                 }
@@ -268,6 +257,6 @@ public class ActivityWorkTime extends ActionBarActivity implements View.OnClickL
     @Override
     public void getError(Integer errorCode) {
 
-        new DialogMessage(ActivityWorkTime.this, ServerAnswer.getError(ActivityWorkTime.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessWorkTime.this, ServerAnswer.getError(ActivityBusinessWorkTime.this, errorCode)).show();
     }
 }

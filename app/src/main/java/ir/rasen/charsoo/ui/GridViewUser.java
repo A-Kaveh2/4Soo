@@ -17,30 +17,26 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
-import ir.rasen.charsoo.ActivityFollowingBusinesses;
-import ir.rasen.charsoo.ActivityFriends;
+import ir.rasen.charsoo.ActivityUserFollowingBusinesses;
+import ir.rasen.charsoo.ActivityUserFriends;
 import ir.rasen.charsoo.ActivityProfilePicture;
+import ir.rasen.charsoo.ActivityProfileUser;
 import ir.rasen.charsoo.ActivitySearchUser;
 import ir.rasen.charsoo.ActivityUserReviews;
-import ir.rasen.charsoo.FragmentUser;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
 import ir.rasen.charsoo.adapters.AdapterPostShared;
-import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.SearchItemPost;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.DownloadCoverImage;
 import ir.rasen.charsoo.webservices.post.GetSharedPosts;
-import ir.rasen.charsoo.webservices.user.GetUserHomeInfo;
 
 /**
  * Created by android on 3/14/2015.
@@ -51,7 +47,7 @@ public class GridViewUser implements IWebserviceResponse {
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
 
-    ImageView imageViewSearch, imageViewMore, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewHasRequest;
+    ImageView imageViewSearch, imageViewMore, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewHasRequest,imageViewEdit;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewIdentifier, textViewName, textViewAboutMe;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
@@ -114,6 +110,7 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewHasRequest = (ImageView) viewHeader.findViewById(R.id.imageView_has_request);
             imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
             imageViewFollowingBusinesses = (ImageView) viewHeader.findViewById(R.id.imageView_businesses);
+            imageViewEdit = (ImageView) viewHeader.findViewById(R.id.imageView_edit);
 
             textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
             textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
@@ -153,7 +150,13 @@ public class GridViewUser implements IWebserviceResponse {
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(profilePictureId, imageViewCover, Image_M.ImageType.USER);
 
-
+            imageViewEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(activity, ActivityProfileUser.class);
+                    activity.startActivity(intent);
+                }
+            });
             imageViewCover.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -187,7 +190,7 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent1 = new Intent(activity, ActivityFollowingBusinesses.class);
+                    Intent intent1 = new Intent(activity, ActivityUserFollowingBusinesses.class);
                     intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
                     activity.startActivity(intent1);
                 }
@@ -195,7 +198,7 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewFriends.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent1 = new Intent(activity, ActivityFriends.class);
+                    Intent intent1 = new Intent(activity, ActivityUserFriends.class);
                     intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
                     intent1.putExtra(Params.HAS_REQUEST, hasRequest);
                     activity.startActivity(intent1);

@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.ActivityBusinessFollowers;
 import ir.rasen.charsoo.ActivityBusinessReviews;
-import ir.rasen.charsoo.ActivityContactInfo;
+import ir.rasen.charsoo.ActivityBusinessContactInfo;
 import ir.rasen.charsoo.ActivityProfilePicture;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
@@ -169,7 +168,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             imageViewContactInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityContactInfo.class);
+                    Intent intent = new Intent(activity, ActivityBusinessContactInfo.class);
                     MyApplication myApplication = (MyApplication) ((Activity) activity).getApplication();
                     myApplication.business = business;
                     activity.startActivity(intent);

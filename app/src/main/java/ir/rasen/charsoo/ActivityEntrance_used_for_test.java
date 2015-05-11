@@ -10,7 +10,7 @@ import android.view.View;
 import ir.rasen.charsoo.helper.Params;
 
 
-public class ActivityEntrance extends ActionBarActivity {
+public class ActivityEntrance_used_for_test extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +18,14 @@ public class ActivityEntrance extends ActionBarActivity {
         setContentView(R.layout.activity_entrance);
 
 
-        final Intent intent = new Intent(ActivityEntrance.this, ActivityLogin.class);
+        final Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityLogin.class);
         startActivity(intent);
 
 
         (findViewById(R.id.button_login)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityLogin.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityLogin.class);
                 startActivity(intent);
             }
         });
@@ -47,7 +47,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_post_adapter_comment)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityComments.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityComments.class);
                 intent1.putExtra(Params.POST_ID, 1);
                 intent1.putExtra(Params.POST_OWNER_BUSINESS_ID, 1);
                 startActivity(intent1);
@@ -56,7 +56,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_adapter_comment_notification)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityCommentsNotifications.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityCommentsNotifications.class);
                 intent1.putExtra(Params.BUSINESS_ID, 1);
                 startActivity(intent1);
             }
@@ -64,7 +64,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_adapter_user_reviews)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityUserReviews.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityUserReviews.class);
                 intent1.putExtra(Params.VISITED_USER_ID, 3);
                 startActivity(intent1);
             }
@@ -86,7 +86,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_adapter_business_reviews)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityBusinessReviews.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityBusinessReviews.class);
                 intent1.putExtra(Params.BUSINESS_ID, 1);
                 startActivity(intent1);
             }
@@ -94,7 +94,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_friends)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityFriends.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityUserFriends.class);
                 intent1.putExtra(Params.VISITED_USER_ID, 3);
                 startActivity(intent1);
             }
@@ -103,7 +103,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_followers)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityBusinessFollowers.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityBusinessFollowers.class);
                 intent1.putExtra(Params.BUSINESS_ID, 1);
                 startActivity(intent1);
             }
@@ -111,7 +111,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_following_businesses)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityFollowingBusinesses.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityUserFollowingBusinesses.class);
                 intent1.putExtra(Params.VISITED_USER_ID, 3);
                 startActivity(intent1);
             }
@@ -119,7 +119,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_user_search_result)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivitySearchUser.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivitySearchUser.class);
                 intent1.putExtra(Params.SEARCH_KEY_WORD, "key");
                 startActivity(intent1);
             }
@@ -127,7 +127,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_business_search_result)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivitySearchBusinessResult.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivitySearchBusinessResult.class);
                 intent1.putExtra(Params.SEARCH_KEY_WORD, "key");
                 intent1.putExtra(Params.LATITUDE, "35.265321");
                 intent1.putExtra(Params.LONGITUDE, "53.265987");
@@ -138,7 +138,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_friends_request)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivityFriendRequests.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivityUserFriendRequests.class);
                 startActivity(intent1);
             }
         });
@@ -152,29 +152,23 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_grid_posts)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(ActivityEntrance.this, ActivitySearchPostResult.class);
+                Intent intent1 = new Intent(ActivityEntrance_used_for_test.this, ActivitySearchPostResult.class);
                 intent1.putExtra(Params.SEARCH_KEY_WORD, "key");
                 startActivity(intent1);
             }
         });
-        (findViewById(R.id.button_user_home)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityTestUser.class);
-                startActivity(intent);
-            }
-        });
+
         (findViewById(R.id.button_business_home)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityBusiness.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityBusiness.class);
                 startActivity(intent);
             }
         });
         (findViewById(R.id.button_map_display)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityMapDisplay.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityMapDisplay.class);
                 intent.putExtra(Params.LATITUDE, 35.7014396);
                 intent.putExtra(Params.LONGITUDE, 51.3498186);
                 startActivity(intent);
@@ -183,28 +177,28 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_map_choose)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityMapChoose.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityMapChoose.class);
                 startActivity(intent);
             }
         });
         (findViewById(R.id.button_register_business)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityRegisterEditBusiness.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityBusinessRegisterEdit.class);
                 startActivity(intent);
             }
         });
         (findViewById(R.id.button_work_time)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityWorkTime.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityBusinessWorkTime.class);
                 startActivity(intent);
             }
         });
         (findViewById(R.id.button_add_post)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityAddEditPost.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityPostAddEdit.class);
                 intent.putExtra(Params.BUSINESS_ID, 1);
                 startActivity(intent);
             }
@@ -212,7 +206,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_update_post)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityAddEditPost.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityPostAddEdit.class);
                 intent.putExtra(Params.BUSINESS_ID, 1);
                 intent.putExtra(Params.POST_ID, 1);
                 startActivity(intent);
@@ -221,7 +215,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_blocked_users)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityBlockedUsers.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityBusinessBlockedUsers.class);
                 intent.putExtra(Params.BUSINESS_ID, 1);
                 startActivity(intent);
             }
@@ -229,7 +223,7 @@ public class ActivityEntrance extends ActionBarActivity {
         (findViewById(R.id.button_contact_info)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityEntrance.this, ActivityContactInfo.class);
+                Intent intent = new Intent(ActivityEntrance_used_for_test.this, ActivityBusinessContactInfo.class);
                 startActivity(intent);
             }
         });

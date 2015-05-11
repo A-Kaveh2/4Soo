@@ -1,54 +1,39 @@
 package ir.rasen.charsoo;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.google.android.gms.internal.da;
-
 import java.io.File;
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.DialogChangePassword;
 import ir.rasen.charsoo.dialog.DialogClearSearchHistoryConfirmation;
 import ir.rasen.charsoo.dialog.DialogMessage;
-import ir.rasen.charsoo.dialog.PopupCameraGallery;
+import ir.rasen.charsoo.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.Permission;
 import ir.rasen.charsoo.helper.PersianDate;
 import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.Sex;
 import ir.rasen.charsoo.helper.Validation;
-import ir.rasen.charsoo.helper.WebservicesHandler;
 import ir.rasen.charsoo.interfaces.IChangePassword;
-import ir.rasen.charsoo.interfaces.IUpdateUserProfile;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.EditTextFont;
-import ir.rasen.charsoo.ui.TextViewFont;
 import ir.rasen.charsoo.webservices.DownloadCoverImage;
 import ir.rasen.charsoo.webservices.user.GetUserProfileInfo;
-import ir.rasen.charsoo.webservices.user.UpdateSetting;
 import ir.rasen.charsoo.webservices.user.UpdateUserProfile;
 
 
@@ -162,7 +147,7 @@ public class ActivityProfileUser extends ActionBarActivity implements View.OnCli
                 finish();
                 break;
             case R.id.imageView_camera:
-                new PopupCameraGallery(ActivityProfileUser.this).show();
+                new PopupSelectCameraGallery(ActivityProfileUser.this).show();
                 break;
             case R.id.btn_change_password:
                 new DialogChangePassword(ActivityProfileUser.this, ActivityProfileUser.this).show();

@@ -2,14 +2,13 @@ package ir.rasen.charsoo.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import ir.rasen.charsoo.ActivityRegisterEditBusiness;
+import ir.rasen.charsoo.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.interfaces.IChangeBusiness;
@@ -60,7 +59,7 @@ public class PopupEditDeleteBusiness extends MyPopup {
         textViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, ActivityRegisterEditBusiness.class);
+                Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
                 intent.putExtra(Params.BUSINESS_ID,businessId);
                 intent.putExtra(Params.BUSINESS_IDENTIFIER,businessIdentifier);
                 activity.startActivityForResult(intent,Params.ACTION_EDIT_BUSINESS);

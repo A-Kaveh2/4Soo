@@ -55,10 +55,10 @@
             android:name=".ActivityBusiness"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityEntrance"
+            android:name=".ActivityEntrance_used_for_test"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityRegisterUser"
+            android:name=".ActivityUserRegister"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
@@ -74,7 +74,7 @@
             android:name=".ActivityUserSetting"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityContactInfo"
+            android:name=".ActivityBusinessContactInfo"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityProfileUser"
@@ -87,27 +87,27 @@
             android:name=".ActivityMapDisplay"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityRegisterBusiness_ViewPager"
+            android:name=".ActivityRegisterBusiness_ViewPager_not_used"
             android:theme="@style/CustomActionBarTheme"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityRegisterEditBusiness"
+            android:name=".ActivityBusinessRegisterEdit"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityWorkTime"
+            android:name=".ActivityBusinessWorkTime"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ActivityAddEditPost"
+            android:name=".ActivityPostAddEdit"
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityCommentsNotifications"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBlockedUsers"
+            android:name=".ActivityBusinessBlockedUsers"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityBusinessFollowers"
@@ -117,13 +117,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity
-            android:name=".ActivityFollowingBusinesses"
+            android:name=".ActivityUserFollowingBusinesses"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityFriends"
+            android:name=".ActivityUserFriends"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityFriendRequests"
+            android:name=".ActivityUserFriendRequests"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivitySearchUser"

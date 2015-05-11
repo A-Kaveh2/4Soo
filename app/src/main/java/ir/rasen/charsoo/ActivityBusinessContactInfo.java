@@ -1,6 +1,5 @@
 package ir.rasen.charsoo;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
@@ -23,7 +21,7 @@ import ir.rasen.charsoo.webservices.DownloadCoverImage;
 import ir.rasen.charsoo.webservices.business.GetBusinessContactInfo;
 
 
-public class ActivityContactInfo extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityBusinessContactInfo extends ActionBarActivity implements IWebserviceResponse {
 
 
     ProgressDialog progressDialog;
@@ -52,7 +50,7 @@ public class ActivityContactInfo extends ActionBarActivity implements IWebservic
         findViewById(R.id.rl_map).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityContactInfo.this, ActivityMapDisplay.class);
+                Intent intent = new Intent(ActivityBusinessContactInfo.this, ActivityMapDisplay.class);
                 intent.putExtra(Params.LATITUDE, Double.valueOf(business.location_m.getLatitude()));
                 intent.putExtra(Params.LONGITUDE, Double.valueOf(business.location_m.getLongitude()));
                 startActivity(intent);
@@ -83,6 +81,7 @@ public class ActivityContactInfo extends ActionBarActivity implements IWebservic
         ((TextViewFont) findViewById(R.id.edt_description)).setText(business.description);
         ((TextViewFont) findViewById(R.id.edt_phone)).setText(business.phone);
         ((TextViewFont) findViewById(R.id.edt_mobile)).setText(business.mobile);
+        ((TextViewFont) findViewById(R.id.edt_address)).setText(business.state+","+business.city+","+business.address);
         String open = business.workTime.getTimeWorkOpenWebservice();
         String close = business.workTime.getTimeWorkCloseWebservice();
         String workTime = getString(R.string.from) + " " + open + " " + getString(R.string.until) + " " + close;
@@ -95,6 +94,6 @@ public class ActivityContactInfo extends ActionBarActivity implements IWebservic
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityContactInfo.this, ServerAnswer.getError(ActivityContactInfo.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessContactInfo.this, ServerAnswer.getError(ActivityBusinessContactInfo.this, errorCode)).show();
     }
 }

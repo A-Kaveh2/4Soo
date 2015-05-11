@@ -44,7 +44,7 @@ public class FragmentUserBusinesses extends Fragment {
         (view.findViewById(R.id.btn_creat_new_business)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ActivityRegisterEditBusiness.class);
+                Intent intent = new Intent(getActivity(), ActivityBusinessRegisterEdit.class);
                 startActivityForResult(intent, Params.ACTION_REGISTER_BUSINESS);
             }
         });
@@ -61,7 +61,7 @@ public class FragmentUserBusinesses extends Fragment {
         if (activity == null)
             return;
         try {
-            Intent intent = new Intent(activity, ActivityRegisterEditBusiness.class);
+            Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
             startActivityForResult(intent, Params.ACTION_REGISTER_BUSINESS);
         } catch (Exception e) {
             String s = e.getMessage();

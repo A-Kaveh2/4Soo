@@ -20,7 +20,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/rl_header">
 
                 <ImageView
@@ -34,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/ll_camera_footer"
+                    android:visibility="gone"
                     android:layout_alignParentBottom="true">
 
 
@@ -71,6 +72,7 @@
                 android:id="@+id/ll_action_bar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/action_bar_custome_height"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:layout_alignParentTop="true"
                 android:orientation="horizontal"
@@ -279,8 +281,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/user_profile_margin"
-                    android:layout_marginBottom="@dimen/user_profile_margin">
+                    android:layout_marginTop="@dimen/user_profile_margin">
 
 
                     <ImageView
@@ -305,6 +306,35 @@
                         android:layout_toLeftOf="@+id/imageView_email" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/user_profile_margin"
+                    android:layout_marginBottom="@dimen/user_profile_margin">
+
+
+                    <ImageView
+                        android:id="@+id/imageView_address"
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_place_blue_24dp" />
+
+                    <ir.rasen.charsoo.ui.TextViewFont
+                        android:id="@+id/edt_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/Black"
+                        android:inputType="textEmailAddress"
+                        android:layout_marginRight="10dp"
+                        android:gravity="right|center_vertical"
+                        android:nextFocusDown="@+id/edt_day"
+                        android:textSize="@dimen/font_user_profile_edit_text"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imageView_address" />
+                </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/rl_map"
@@ -312,6 +342,7 @@
                     android:layout_height="@dimen/button_height"
                     android:layout_marginTop="30dp"
                     android:background="@drawable/selector_button_login">
+
                     <ir.rasen.charsoo.ui.TextViewFont
                         android:text="@string/map"
                         android:layout_width="match_parent"
@@ -319,7 +350,8 @@
                         android:gravity="center"
                         android:textColor="@android:color/white"
                         android:layout_toLeftOf="@+id/imageView_map"
-                        android:textSize="@dimen/text_size_larger"/>
+                        android:textSize="@dimen/text_size_larger" />
+
                     <ImageView
                         android:id="@+id/imageView_map"
                         android:layout_width="@dimen/button_icon_height"
@@ -328,9 +360,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
 
-                        android:src="@drawable/ic_map_white_24dp"/>
+                        android:src="@drawable/ic_map_white_24dp" />
                 </RelativeLayout>
-
 
 
             </LinearLayout>

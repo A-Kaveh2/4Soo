@@ -3,6 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/White"
     android:orientation="vertical">
 
     <ir.rasen.charsoo.ui.ButtonFont
@@ -16,17 +17,22 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/text_size_larger" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
-        android:layout_below="@+id/btn_friend_requests"
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/pull_refresh_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="#19000000"
+        android:background="@color/White"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/btn_friend_requests"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true" />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listView" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+
 
 
 </RelativeLayout>

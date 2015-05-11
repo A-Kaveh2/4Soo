@@ -1,20 +1,15 @@
 package ir.rasen.charsoo.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import ir.rasen.charsoo.ActivityRegisterEditBusiness;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.interfaces.IChangeBusiness;
 import ir.rasen.charsoo.interfaces.IReportPost;
 import ir.rasen.charsoo.interfaces.IUpdateTimeLine;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;

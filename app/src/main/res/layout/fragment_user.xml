@@ -72,6 +72,7 @@
                     android:layout_height="@dimen/adapter_user_image_height"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
+                    android:visibility="gone"
                     android:layout_marginBottom="@dimen/drawer_edit_button_margin"
                     android:layout_marginLeft="@dimen/drawer_edit_button_margin">
 

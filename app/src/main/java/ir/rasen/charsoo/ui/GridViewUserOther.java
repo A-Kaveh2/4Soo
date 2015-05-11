@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -13,8 +12,8 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityFollowingBusinesses;
-import ir.rasen.charsoo.ActivityFriends;
+import ir.rasen.charsoo.ActivityUserFollowingBusinesses;
+import ir.rasen.charsoo.ActivityUserFriends;
 import ir.rasen.charsoo.ActivityProfilePicture;
 import ir.rasen.charsoo.ActivityUserReviews;
 import ir.rasen.charsoo.R;
@@ -159,7 +158,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                 if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
                     return;
                 if (user.permissions.followedBusiness) {
-                    Intent intent1 = new Intent(context, ActivityFollowingBusinesses.class);
+                    Intent intent1 = new Intent(context, ActivityUserFollowingBusinesses.class);
                     intent1.putExtra(Params.VISITED_USER_ID, user.id);
                     context.startActivity(intent1);
                 } else
@@ -172,7 +171,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                 if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
                     return;
                 if (user.permissions.friends) {
-                    Intent intent1 = new Intent(context, ActivityFriends.class);
+                    Intent intent1 = new Intent(context, ActivityUserFriends.class);
                     intent1.putExtra(Params.VISITED_USER_ID, user.id);
                     context.startActivity(intent1);
                 } else

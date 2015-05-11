@@ -12,11 +12,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityAddEditPost;
-import ir.rasen.charsoo.ActivityRegisterEditBusiness;
+import ir.rasen.charsoo.ActivityPostAddEdit;
+import ir.rasen.charsoo.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.User;
-import ir.rasen.charsoo.dialog.PopupEditDeleteBusiness;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.interfaces.IChangeBusiness;
@@ -62,7 +61,7 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
             public void onClick(View view) {
                 /*PopupEditDeleteBusiness p = new PopupEditDeleteBusiness(activity,selectedBusinessId,businessIdentifier, iChangeBusiness);
                 p.show();*/
-                Intent intent = new Intent(activity, ActivityRegisterEditBusiness.class);
+                Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
                 intent.putExtra(Params.BUSINESS_ID,displayedBusinessId);
                 intent.putExtra(Params.BUSINESS_IDENTIFIER,businessIdentifier);
                 activity.startActivityForResult(intent,Params.ACTION_EDIT_BUSINESS);
@@ -78,7 +77,7 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
         ( drawerLayout.findViewById(R.id.ll_drawer_new_post)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, ActivityAddEditPost.class);
+                Intent intent = new Intent(activity, ActivityPostAddEdit.class);
                 intent.putExtra(Params.BUSINESS_ID,displayedBusinessId);
                 activity.startActivityForResult(intent,Params.ACTION_ADD_POST);
                 mDrawerLayout.closeDrawer(Gravity.RIGHT);

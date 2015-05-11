@@ -44,7 +44,7 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.login));
+        ActionBar_M.setActionBarNoBack(getSupportActionBar(), this, getResources().getString(R.string.login));
 
 
         //for the test I need to disable automatically going to ActivityMain

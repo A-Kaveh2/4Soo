@@ -172,7 +172,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
             public void onClick(View view) {
                 if (getPostType == Post.GetPostType.BUSINESS) {
                     //it is edit
-                    Intent intent = new Intent(ActivityPost.this, ActivityAddEditPost.class);
+                    Intent intent = new Intent(ActivityPost.this, ActivityPostAddEdit.class);
                     intent.putExtra(Params.BUSINESS_ID, businessId);
                     intent.putExtra(Params.POST_ID, postId);
                     startActivity(intent);

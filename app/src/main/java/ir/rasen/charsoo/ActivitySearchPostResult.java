@@ -138,6 +138,11 @@ public class ActivitySearchPostResult extends ActionBarActivity implements IWebs
         progressDialog.dismiss();
         if (result instanceof ArrayList) {
             ArrayList<SearchItemPost> temp = (ArrayList<SearchItemPost>) result;
+            if(temp.size()== 0) {
+                (findViewById(R.id.textView_no_result)).setVisibility(View.VISIBLE);
+                return;
+            }
+
             results.addAll(temp);
 
 

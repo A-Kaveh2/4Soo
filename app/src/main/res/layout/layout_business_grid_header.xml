@@ -65,12 +65,55 @@
                 android:layout_height="@dimen/action_bar_custome_height"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
-                android:background="@drawable/shape_gradiant_down"
-                android:visibility="gone"
+                android:background="@drawable/shape_gradiant_black"
                 android:gravity="right|center_vertical"
                 android:layout_alignParentEnd="true">
 
+                <ImageView
+                    android:id="@+id/imageView_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_edit_white_24dp"/>
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/requests"
+                    android:textSize="@dimen/font_size_header"
+                    android:visibility="gone"
+                    android:layout_marginRight="15dp"
+                    android:id="@+id/textView_friend_requests"
+                    android:textColor="@color/White" />
 
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/friends"
+                    android:visibility="gone"
+                    android:textSize="@dimen/font_size_header"
+                    android:layout_marginRight="15dp"
+                    android:id="@+id/textView_friends"
+                    android:textColor="@color/White" />
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reviews"
+                    android:visibility="gone"
+                    android:id="@+id/textView_reviews"
+                    android:textSize="@dimen/font_size_header"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/White" />
+
+                <ir.rasen.charsoo.ui.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_header"
+                    android:visibility="gone"
+                    android:text="@string/businesses"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/textView_businesses"
+                    android:textColor="@color/White" />
             </LinearLayout>
 
             <LinearLayout
