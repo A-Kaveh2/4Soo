@@ -4,30 +4,22 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.interfaces.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.interfaces.IChangeTabs;
-import ir.rasen.charsoo.interfaces.IUpdateTimeLine;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 
 
@@ -39,33 +31,21 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
     RelativeLayout rlHome, rlSearch, rlUser, rlBusinesses;
     FragmentManager fm;
     FragmentTransaction ft;
-    FragmentHome fragmentHome;
-    FragmentSearch fragmentSearch;
-    FragmentUser fragmentUser;
-    public FragmentUserBusinesses fragmentUserBusinesses;
     ProgressDialog progressDialog;
     int screenWidth;
+
+    private enum FragmentTag {HOME, SEARCH, BUSINESSES, USER}
+
+    ArrayList<FragmentTag> fragmentTagList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setDisplayShowCustomEnabled(true);
-
-        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.layout_action_bar_home, null);
-        getSupportActionBar().setCustomView(v);
-*/
         progressDialog = new ProgressDialog(this);
 
-        fragmentHome = new FragmentHome();
-        fragmentSearch = new FragmentSearch();
-        fragmentUser = new FragmentUser();
-        fragmentUserBusinesses = new FragmentUserBusinesses();
 
         fm = getFragmentManager();
         ft = fm.beginTransaction();
@@ -75,6 +55,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
         ft.hide(fm.findFragmentById(R.id.frag_user));
         ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
         ft.commit();
+        fragmentTagList.add(FragmentTag.HOME);
 
        /* ft.add(R.id.fragmentContainer, fragmentHome);
         ft.commit();*/
@@ -113,7 +94,65 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
 
     }
 
+    private void setFragment(FragmentTag fragmentTag) {
+        switch (fragmentTag) {
+            case HOME:
+                setSelection(rlHome.getId());
+                break;
+            case BUSINESSES:
+                setSelection(rlBusinesses.getId());
+                break;
+            case SEARCH:
+                setSelection(rlSearch.getId());
+                break;
+            case USER:
+                setSelection(rlUser.getId());
+                break;
+        }
+    }
 
+    private void exit() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void checkBack() {
+        switch (fragmentTagList.size()) {
+            case 0:
+                exit();
+                break;
+            case 1:
+                if (fragmentTagList.get(0) == FragmentTag.HOME)
+                    exit();
+                fragmentTagList.remove(0);
+                setFragment(FragmentTag.HOME);
+                break;
+            default:
+                fragmentTagList.remove(fragmentTagList.size() - 1);
+                setFragment(fragmentTagList.get(fragmentTagList.size()-1));
+                break;
+        }
+    }
+
+    private void addFragment(FragmentTag fragmentTag) {
+        int fragmentPosition = checkFragment(fragmentTag);
+        if (fragmentPosition == -1)
+            fragmentTagList.add(fragmentTag);
+        else {
+            fragmentTagList.remove(fragmentPosition);
+            fragmentTagList.add(fragmentTag);
+        }
+    }
+
+    private int checkFragment(FragmentTag fragmentTag) {
+        for (int i = 0; i < fragmentTagList.size(); i++) {
+            if (fragmentTag == fragmentTagList.get(i))
+                return i;
+        }
+        return -1;
+    }
 
     private void setParams(int width) {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -189,7 +228,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                 if (llFooterHome.getVisibility() == View.VISIBLE)
                     return;
                 //getSupportActionBar().show();
-
+                addFragment(FragmentTag.HOME);
                 rlHome.setBackgroundColor(Color.BLACK);
                 rlUser.setBackgroundColor(Color.DKGRAY);
                 rlSearch.setBackgroundColor(Color.DKGRAY);
@@ -215,7 +254,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                     return;
 
                 //getSupportActionBar().hide();
-
+                addFragment(FragmentTag.SEARCH);
                 rlHome.setBackgroundColor(Color.DKGRAY);
                 rlUser.setBackgroundColor(Color.DKGRAY);
                 rlSearch.setBackgroundColor(Color.BLACK);
@@ -243,7 +282,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                     return;
 
                 //getSupportActionBar().hide();
-
+                addFragment(FragmentTag.USER);
                 rlHome.setBackgroundColor(Color.DKGRAY);
                 rlUser.setBackgroundColor(Color.BLACK);
                 rlSearch.setBackgroundColor(Color.DKGRAY);
@@ -270,7 +309,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
 
             case R.id.rl_businesses2:
                 //getSupportActionBar().hide();
-
+                addFragment(FragmentTag.BUSINESSES);
                 initialUserBusinessesTab();
                 break;
         }
@@ -280,6 +319,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
     private void makeItThree() {
         rlBusinesses.setVisibility(View.GONE);
         setParams(screenWidth / 3);
+
     }
 
     private void makeItFour() {
@@ -315,7 +355,6 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
     }
 
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -347,7 +386,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        checkBack();
     }
 
     @Override
@@ -371,15 +410,14 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
 
     @Override
     public void notifyGo() {
-        if(((MyApplication)getApplication()).userBusinesses.size()== 0) {
+        if (((MyApplication) getApplication()).userBusinesses.size() == 0) {
             //we have to go to the FragmentUserBusinesses first and then go to registerBusinessActvitiy because we need get register result back to the fragment.
             FragmentUserBusinesses fragmentUserBusinesses = (FragmentUserBusinesses)
                     fm.findFragmentById(R.id.frag_user_businesses);
 
             if (fragmentUserBusinesses != null)
                 fragmentUserBusinesses.goToRegisterBusinessActivity();
-        }
-        else {
+        } else {
             initialUserBusinessesTab();
         }
     }

@@ -24,6 +24,7 @@ import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.helper.MyGestureDetector;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.PersianDate;
 import ir.rasen.charsoo.helper.TextProcessor;
@@ -103,6 +104,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
                 //to display post picture as square
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
                 holder.imageViewPost.setLayoutParams(params);
+                holder.imageViewPostLike = (ImageView) view.findViewById(R.id.imageView_post_like);
 
                 holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
                 holder.imageViewComment = (ImageView) view.findViewById(R.id.imageView_comment);
@@ -230,12 +232,13 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
                 }
             });
 
-           /* gestureDetector = new GestureDetector(context, new MyGestureDetector(position,holder.imageViewLike));
+            holder.gestureDetector = new GestureDetector(context, new MyGestureDetector(context,items.get(position).id,items.get(position).isLiked, holder.imageViewLike, holder.imageViewPostLike));
+
             holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
-                    return gestureDetector.onTouchEvent(event);
+                    return holder.gestureDetector.onTouchEvent(event);
                 }
-            });*/
+            });
 
             holder.imageViewShare.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -300,6 +303,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
         //complete post section
         LinearLayout llCompleteSection;
         ImageView imageViewPost;
+        ImageView imageViewPostLike;
         TextViewFont textViewLikeNumber;
         TextViewFont textViewCommentNumber;
         TextViewFont textViewShareNumber;
@@ -316,6 +320,8 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
         ImageView imageViewComment;
         ImageView imageViewShare;
         ImageView imageViewMore;
+
+        GestureDetector gestureDetector;
 
     }
 

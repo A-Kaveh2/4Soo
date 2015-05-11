@@ -28,7 +28,7 @@ import ir.rasen.charsoo.webservices.DownloadImages;
 /**
  * Created by android on 3/7/2015.
  */
-public class AdapterFollowers extends BaseAdapter {
+public class AdapterBusinessFollowers extends BaseAdapter {
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
@@ -36,7 +36,7 @@ public class AdapterFollowers extends BaseAdapter {
     ListView listView;
 
 
-    public AdapterFollowers(Context context, ArrayList<BaseAdapterItem> items) {
+    public AdapterBusinessFollowers(Context context, ArrayList<BaseAdapterItem> items) {
         this.context = context;
         this.items = items;
         downloadImages = new DownloadImages(context);

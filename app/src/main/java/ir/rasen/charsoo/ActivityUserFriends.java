@@ -13,7 +13,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.adapters.AdapterFriends;
+import ir.rasen.charsoo.adapters.AdapterUserFriends;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
@@ -31,7 +31,7 @@ public class ActivityUserFriends extends ActionBarActivity implements IWebservic
 
     ProgressDialog progressDialog;
     int visitedUserId;
-    AdapterFriends adapterFriends;
+    AdapterUserFriends adapterFriends;
     ListView listView;
     ArrayList<BaseAdapterItem> friends;
     ArrayList<BaseAdapterItem> sampleFriends;
@@ -135,7 +135,7 @@ public class ActivityUserFriends extends ActionBarActivity implements IWebservic
             pullToRefreshListView.setResultSize(friends.size());
 
             if (status == Status.FIRST_TIME) {
-                adapterFriends = new AdapterFriends(ActivityUserFriends.this, visitedUserId, friends);
+                adapterFriends = new AdapterUserFriends(ActivityUserFriends.this, visitedUserId, friends);
                 listView.setAdapter(adapterFriends);
             } else if (status == Status.REFRESHING) {
                 adapterFriends.notifyDataSetChanged();

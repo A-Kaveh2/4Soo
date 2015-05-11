@@ -10,17 +10,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import ir.rasen.charsoo.adapters.AdapterBusinessSearchResult;
-import ir.rasen.charsoo.adapters.AdapterFollowers;
-import ir.rasen.charsoo.adapters.AdapterFollowingBusinesses;
-import ir.rasen.charsoo.adapters.AdapterFriendshipRequest;
-import ir.rasen.charsoo.adapters.AdapterPostGrid;
+import ir.rasen.charsoo.adapters.AdapterBusinessFollowers;
+import ir.rasen.charsoo.adapters.AdapterUserFollowingBusinesses;
+import ir.rasen.charsoo.adapters.AdapterUserFriendshipRequest;
 import ir.rasen.charsoo.adapters.AdapterPostTimeLine;
 import ir.rasen.charsoo.adapters.AdapterUserSearchResult;
 import ir.rasen.charsoo.adapters.BaseAdapter_M;
 import ir.rasen.charsoo.adapters.AdapterBusinessPostComments;
 import ir.rasen.charsoo.adapters.AdapterBusinessReview;
 import ir.rasen.charsoo.adapters.AdapterCommentNotification;
-import ir.rasen.charsoo.adapters.AdapterFriends;
+import ir.rasen.charsoo.adapters.AdapterUserFriends;
 import ir.rasen.charsoo.adapters.AdapterPostComments;
 import ir.rasen.charsoo.adapters.AdapterUserReview;
 import ir.rasen.charsoo.classes.Comment;
@@ -88,7 +87,7 @@ public class ActivityTest extends ActionBarActivity implements IBaseAdapterOnCli
                 break;
             case "button_friends":
                 try {
-                    AdapterFriends adapterFriends = new AdapterFriends(ActivityTest.this,3, TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()));
+                    AdapterUserFriends adapterFriends = new AdapterUserFriends(ActivityTest.this,3, TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()));
                     listView.setAdapter(adapterFriends);
                 }
                 catch (Exception e){
@@ -97,7 +96,7 @@ public class ActivityTest extends ActionBarActivity implements IBaseAdapterOnCli
                 break;
             case "button_followers":
                 try {
-                    AdapterFollowers adapterFollowers = new AdapterFollowers(ActivityTest.this, TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()));
+                    AdapterBusinessFollowers adapterFollowers = new AdapterBusinessFollowers(ActivityTest.this, TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()));
                     listView.setAdapter(adapterFollowers);
                 }
                 catch (Exception e){
@@ -106,7 +105,7 @@ public class ActivityTest extends ActionBarActivity implements IBaseAdapterOnCli
                 break;
             case "button_following_businesses":
                 try {
-                    AdapterFollowingBusinesses adapterFollowingBusinesses = new AdapterFollowingBusinesses(ActivityTest.this,3,TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()),progressDialog);
+                    AdapterUserFollowingBusinesses adapterFollowingBusinesses = new AdapterUserFollowingBusinesses(ActivityTest.this,3,TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()),progressDialog);
                     listView.setAdapter(adapterFollowingBusinesses);
                 }
                 catch (Exception e){
@@ -133,7 +132,7 @@ public class ActivityTest extends ActionBarActivity implements IBaseAdapterOnCli
                 break;
             case "button_friends_request":
                 try {
-                    AdapterFriendshipRequest adapterFriendshipRequest = new AdapterFriendshipRequest(ActivityTest.this,TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()));
+                    AdapterUserFriendshipRequest adapterFriendshipRequest = new AdapterUserFriendshipRequest(ActivityTest.this,TestUnit.getBaseAdapterItems(ActivityTest.this.getResources()));
                     listView.setAdapter(adapterFriendshipRequest);
                 } catch (Exception e) {
 

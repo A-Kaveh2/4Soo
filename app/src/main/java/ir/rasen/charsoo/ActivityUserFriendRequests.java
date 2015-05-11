@@ -15,7 +15,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.adapters.AdapterFriendshipRequest;
+import ir.rasen.charsoo.adapters.AdapterUserFriendshipRequest;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
@@ -33,7 +33,7 @@ public class ActivityUserFriendRequests extends ActionBarActivity implements IWe
 
     ProgressDialog progressDialog;
     int visitedUserId;
-    AdapterFriendshipRequest adapterFriendshipRequest;
+    AdapterUserFriendshipRequest adapterFriendshipRequest;
     ListView listView;
     ArrayList<BaseAdapterItem> requests;
     ArrayList<BaseAdapterItem> sampleRequests;
@@ -130,7 +130,7 @@ public class ActivityUserFriendRequests extends ActionBarActivity implements IWe
             pullToRefreshListView.setResultSize(requests.size());
 
             if (status == Status.FIRST_TIME) {
-                adapterFriendshipRequest = new AdapterFriendshipRequest(ActivityUserFriendRequests.this, requests);
+                adapterFriendshipRequest = new AdapterUserFriendshipRequest(ActivityUserFriendRequests.this, requests);
                 listView.setAdapter(adapterFriendshipRequest);
             } else if (status == Status.REFRESHING) {
                 adapterFriendshipRequest.notifyDataSetChanged();

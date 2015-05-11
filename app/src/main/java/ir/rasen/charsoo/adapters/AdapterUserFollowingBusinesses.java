@@ -23,7 +23,7 @@ import ir.rasen.charsoo.webservices.DownloadImages;
 /**
  * Created by android on 3/7/2015.
  */
-public class AdapterFollowingBusinesses extends BaseAdapter implements IUnfollowBusiness {
+public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfollowBusiness {
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
@@ -33,7 +33,7 @@ public class AdapterFollowingBusinesses extends BaseAdapter implements IUnfollow
     ProgressDialog progressDialog;
     int visitedUserId;
 
-    public AdapterFollowingBusinesses(Context context, int visitedUserId, ArrayList<BaseAdapterItem> items, ProgressDialog progressDialog) {
+    public AdapterUserFollowingBusinesses(Context context, int visitedUserId, ArrayList<BaseAdapterItem> items, ProgressDialog progressDialog) {
         this.context = context;
         this.items = items;
         downloadImages = new DownloadImages(context);

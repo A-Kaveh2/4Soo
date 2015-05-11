@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.adapters.AdapterFollowingBusinesses;
+import ir.rasen.charsoo.adapters.AdapterUserFollowingBusinesses;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
@@ -27,7 +27,7 @@ public class ActivityUserFollowingBusinesses extends ActionBarActivity implement
 
     ProgressDialog progressDialog;
     int visitedUserId;
-    AdapterFollowingBusinesses adapterFollowingBusinesses;
+    AdapterUserFollowingBusinesses adapterFollowingBusinesses;
     ListView listView;
     ArrayList<BaseAdapterItem> businesses;
     ArrayList<BaseAdapterItem> sampleBusinesses;
@@ -139,7 +139,7 @@ public class ActivityUserFollowingBusinesses extends ActionBarActivity implement
 
 
             if (status == Status.FIRST_TIME) {
-                adapterFollowingBusinesses = new AdapterFollowingBusinesses(ActivityUserFollowingBusinesses.this,visitedUserId,businesses,progressDialog);
+                adapterFollowingBusinesses = new AdapterUserFollowingBusinesses(ActivityUserFollowingBusinesses.this,visitedUserId,businesses,progressDialog);
                 listView.setAdapter(adapterFollowingBusinesses);
             } else {
                 //it is loading more

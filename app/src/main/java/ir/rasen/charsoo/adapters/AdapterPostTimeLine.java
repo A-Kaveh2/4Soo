@@ -288,16 +288,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                 }
             });
 
-          /*  holder.imageViewPost.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    Anim.fadeIn(holder.imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE);
-
-                }
-            });*/
-
-
             holder.imageViewShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -403,66 +393,4 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
     }
 
-    /*class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
-        int position;
-        ImageView imageViewLike;
-        ImageView imageViewPostLike;
-
-        public MyGestureDetector(int position, ImageView imageViewLike, ImageView imageViewPostLike) {
-            this.position = position;
-            this.imageViewLike = imageViewLike;
-            this.imageViewPostLike = imageViewPostLike;
-        }
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-
-            return false;
-        }
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-
-
-            if (items.get(position).isLiked) {
-                //unlike the post
-                imageViewPostLike.setImageResource(R.drawable.ic_favorite_grey);
-                imageViewPostLike.setVisibility(View.VISIBLE);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imageViewPostLike.setVisibility(View.INVISIBLE);
-                    }
-                }, 700);
-
-                new Unlike(context, LoginInfo.getUserId(context), items.get(position).id).execute();
-                items.get(position).isLiked = false;
-                imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
-            } else {
-                //like the post
-
-                imageViewPostLike.setImageResource(R.drawable.ic_favorite_red);
-                imageViewPostLike.setVisibility(View.VISIBLE);
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imageViewPostLike.setVisibility(View.INVISIBLE);
-                    }
-                }, 700);
-                //Anim.fadeOut(imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE,View.INVISIBLE);
-                new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
-                items.get(position).isLiked = true;
-                imageViewLike.setImageResource(R.drawable.ic_favorite_red);
-            }
-            return true;
-        }
-    }
-*/
 }

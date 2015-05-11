@@ -13,7 +13,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.adapters.AdapterFollowers;
+import ir.rasen.charsoo.adapters.AdapterBusinessFollowers;
 import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
@@ -31,7 +31,7 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
 
     ProgressDialog progressDialog;
     int businessId;
-    AdapterFollowers adapterFollowers;
+    AdapterBusinessFollowers adapterFollowers;
     ListView listView;
     ArrayList<BaseAdapterItem> followers;
     //for the test
@@ -132,7 +132,7 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
             pullToRefreshListView.setResultSize(followers.size());
 
             if (status == Status.FIRST_TIME) {
-                adapterFollowers = new AdapterFollowers(ActivityBusinessFollowers.this, followers);
+                adapterFollowers = new AdapterBusinessFollowers(ActivityBusinessFollowers.this, followers);
                 listView.setAdapter(adapterFollowers);
             } else if (status == Status.REFRESHING) {
                 adapterFollowers.notifyDataSetChanged();
