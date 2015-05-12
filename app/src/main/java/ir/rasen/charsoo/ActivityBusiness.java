@@ -30,6 +30,7 @@ import ir.rasen.charsoo.webservices.post.GetBusinessPosts;
 
 public class ActivityBusiness extends Activity implements ISelectBusiness, IWebserviceResponse {
 
+
     private DrawerLayout mDrawerLayout;
     ProgressDialog progressDialog;
     int selectedBusinessId, businessProfilePictureId;
