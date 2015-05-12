@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ import ir.rasen.charsoo.dialog.PopupReportPostActivity;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.helper.MyGestureDetector;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.PersianDate;
 import ir.rasen.charsoo.helper.ServerAnswer;
@@ -72,6 +74,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
     ImageView imageViewComment;
     ImageView imageViewShare;
     ImageView imageViewMore;
+    ImageView imageViewPostLike;
 
     Post post;
     DownloadImages downloadImages;
@@ -104,14 +107,17 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
         textViewBusinessIdentifier = (TextViewFont) findViewById(R.id.textView_business_identifier);
         textViewDate = (TextViewFont) findViewById(R.id.textView_date);
         llCompleteSection = (LinearLayout) findViewById(R.id.ll_complete_post_section);
+
         imageViewPost = (ImageView) findViewById(R.id.imageView_post);
         int screedWidth = getResources().getDisplayMetrics().widthPixels;
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
         imageViewPost.setLayoutParams(params);
+        imageViewPostLike = (ImageView)findViewById(R.id.imageView_post_like);
         imageViewLike = (ImageView) findViewById(R.id.imageView_like);
         imageViewComment = (ImageView) findViewById(R.id.imageView_comment);
         imageViewShare = (ImageView) findViewById(R.id.imageView_share);
         imageViewMore = (ImageView) findViewById(R.id.imageView_more);
+
         textViewLikeNumber = (TextViewFont) findViewById(R.id.textView_like_number);
         textViewCommentNumber = (TextViewFont) findViewById(R.id.textView_comment_number);
         textViewShareNumber = (TextViewFont) findViewById(R.id.textView_share_number);
@@ -195,12 +201,16 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
             }
         });
 
-        gestureDetector = new GestureDetector(ActivityPost.this, new MyGestureDetector());
+
+
         imageViewPost.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
+                if(post == null)
+                    return false;
                 return gestureDetector.onTouchEvent(event);
             }
         });
+
 
         imageViewShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -289,6 +299,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
         progressDialog.dismiss();
         if (result instanceof Post) {
             post = (Post) result;
+            gestureDetector = new GestureDetector(ActivityPost.this, new ir.rasen.charsoo.helper.MyGestureDetector(ActivityPost.this,post.id,post.isLiked, imageViewLike, imageViewPostLike));
             initialize();
         }
 
@@ -383,38 +394,5 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
             this.imageViewMore.setVisibility(View.GONE);
     }
 
-    class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
 
-
-
-
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-
-            return false;
-        }
-
-        @Override
-        public boolean onDown(MotionEvent e) {
-            return true;
-        }
-
-        @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            if (post.isLiked) {
-                //unlike the post
-
-                new Unlike(ActivityPost.this, LoginInfo.getUserId(ActivityPost.this),post.id).execute();
-                post.isLiked = false;
-                imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
-            } else {
-                //like the post
-
-                new Like(ActivityPost.this, LoginInfo.getUserId(ActivityPost.this), post.id).execute();
-                post.isLiked = true;
-                imageViewLike.setImageResource(R.drawable.ic_favorite_red);
-            }
-            return true;
-        }
-    }
 }
