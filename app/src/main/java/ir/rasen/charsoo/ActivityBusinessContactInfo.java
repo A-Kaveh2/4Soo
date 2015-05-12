@@ -30,7 +30,7 @@ public class ActivityBusinessContactInfo extends ActionBarActivity implements IW
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_info);
+        setContentView(R.layout.activity_business_contact_info);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.call_info));
 
         progressDialog = new ProgressDialog(this);

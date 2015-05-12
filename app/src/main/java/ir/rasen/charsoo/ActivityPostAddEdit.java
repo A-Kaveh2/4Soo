@@ -50,7 +50,7 @@ public class ActivityPostAddEdit extends ActionBarActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_post);
+        setContentView(R.layout.activity_post_add);
 
 
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);

@@ -59,7 +59,7 @@ public class ActivityUserFriends extends ActionBarActivity implements IWebservic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends);
+        setContentView(R.layout.activity_user_friends);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.friends));
         boolean hasRequest = false;
         try {

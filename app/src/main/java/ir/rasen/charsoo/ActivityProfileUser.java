@@ -52,7 +52,7 @@ public class ActivityProfileUser extends ActionBarActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_user);
+        setContentView(R.layout.activity_user_profile);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.user_profile));
 
         progressDialog = new ProgressDialog(this);

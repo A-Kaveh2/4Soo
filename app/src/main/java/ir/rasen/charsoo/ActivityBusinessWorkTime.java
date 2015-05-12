@@ -30,7 +30,7 @@ public class ActivityBusinessWorkTime extends ActionBarActivity implements View.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_work_time);
+        setContentView(R.layout.activity_business_work_time);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.work_time));
         boolean isEditting = false;
         try {

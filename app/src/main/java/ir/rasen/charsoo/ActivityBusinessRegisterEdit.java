@@ -64,7 +64,7 @@ public class ActivityBusinessRegisterEdit extends ActionBarActivity implements I
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_business);
+        setContentView(R.layout.activity_business_register);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -39,7 +39,7 @@ public class ActivityUserRegister extends ActionBarActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_user);
+        setContentView(R.layout.activity_use_registerr);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.register));
 
         progressDialog = new ProgressDialog(this);
