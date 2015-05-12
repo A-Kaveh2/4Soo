@@ -84,7 +84,7 @@ public class FragmentUserLogin extends Fragment implements IWebserviceResponse {
         myApplication.setCurrentWebservice(WebservicesHandler.Webservices.FORGET_PASSWORD);
     }
 
-    private void login(){
+    public void login(){
         if (!Validation.validateEmail(getActivity(), editTextEmail.getText().toString()).isValid()) {
             editTextEmail.setError(Validation.getErrorMessage());
             return;

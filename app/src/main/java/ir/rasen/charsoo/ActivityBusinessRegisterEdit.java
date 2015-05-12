@@ -73,7 +73,6 @@ public class ActivityBusinessRegisterEdit extends ActionBarActivity implements I
         View v = inflator.inflate(R.layout.layout_action_bar_home, null);
 
 
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 

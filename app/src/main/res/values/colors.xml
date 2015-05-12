@@ -1,36 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="white">#FFFFFF</color>
     <color name="popup_back">#5d5d5d</color>
-
-
     <color name="background_light">#696D76</color>
     <color name="background">#EEEEEE</color>
     <color name="background_dark">#1C2127</color>
-
     <color name="gray_lighter">#FAFAFA</color>
     <color name="gray_light">#EEEEEE</color>
     <color name="gray">#484F54</color>
     <color name="gray_dark">#2D3138</color>
-
     <color name="red">#F5524F</color>
     <color name="red_dark">#F04540</color>
     <color name="green">#44AA44</color>
     <color name="green_dark">#338833</color>
-
     <color name="text_details">#5EB4BF</color>
     <color name="button_on_dark">#539CB0</color>
     <color name="button_on_dark_darker">#3F6F94</color>
     <color name="button_on_dark_darker_opacity">#80256070</color>
-
     <color name="cover_background">#AD256070</color>
     <color name="splash_screen_background">#AD256070</color>
-
     <color name="opacity3">#33ffffff</color>
     <color name="opacity5">#77ffffff</color>
     <color name="opacity8">#BBffffff</color>
-
     <color name="menu_bg">#f5e1f5fe</color>
     <color name="dark_blue">#004185</color>
     <color name="light_blue">#1BB2C2</color>
@@ -39,14 +30,10 @@
     <color name="dark_gray">#B2B2B2</color>
     <color name="darker_gray">#595959</color>
     <color name="hint_color">#c7c7c7</color>
-
-
     <color name="notification_text">#FFFFFF</color>
-
     <drawable name="list_clicked">#ffe09cee</drawable>
     <drawable name="list_selected">#E0E</drawable>
     <drawable name="transparent">@android:color/transparent</drawable>
-
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
     <color name="LightYellow">#FFFFE0</color>
@@ -178,6 +165,7 @@
     <color name="MediumSpringGreen">#00FA9A</color>
     <color name="DarkTurquoise">#00CED1</color>
     <color name="DeepSkyBlue">#00BFFF</color>
+
     <color name="DarkCyan">#008B8B</color>
     <color name="Teal">#008080</color>
     <color name="Green">#008000</color>
@@ -187,18 +175,13 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
-
     <color name="pink">#E6037F</color>
     <color name="dark_pink">#B9126D</color>
-
-
     <color name="my_app_theme">#00bcd4</color>
     <color name="popup_selector">#80000000</color>
     <color name="list_view_item_select">#ff33b5e5</color>
-
-
-
     <color name="app_color">@color/DeepSkyBlue</color>
+    <color name="BlackTransparent">#40000000</color>
 
 
 

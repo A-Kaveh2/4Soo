@@ -39,7 +39,7 @@ public class ActivityUserRegister extends ActionBarActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_use_registerr);
+        setContentView(R.layout.activity_user_registerr);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.register));
 
         progressDialog = new ProgressDialog(this);
@@ -54,7 +54,6 @@ public class ActivityUserRegister extends ActionBarActivity implements View.OnCl
         editTextEmail = (EditTextFont) findViewById(R.id.editText_email);
         editTextPassword = (EditTextFont) findViewById(R.id.editText_password);
         editTextRepeatPassword = (EditTextFont) findViewById(R.id.editText_password_repeat);
-
     }
 
     @Override

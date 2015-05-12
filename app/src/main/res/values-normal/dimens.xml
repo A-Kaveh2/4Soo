@@ -24,6 +24,7 @@
     <dimen name="font_size_user_setting_title">21dp</dimen>
     <dimen name="font_size_action_bar_title">23dp</dimen>
     <dimen name="font_user_profile_edit_text">15dp</dimen>
+    <dimen name="font_size_login_register_indicator">25dp</dimen>
 
     
 
