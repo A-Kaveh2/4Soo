@@ -2,28 +2,17 @@ package ir.rasen.charsoo.dialog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityBusiness;
-import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterCategories;
 import ir.rasen.charsoo.classes.Category;
-import ir.rasen.charsoo.classes.User;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.interfaces.IReportPost;
 import ir.rasen.charsoo.interfaces.ISelectCategory;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.TextViewFont;
-import ir.rasen.charsoo.webservices.business.BlockUser;
 
 
 public class PopupCategories extends MyPopup {

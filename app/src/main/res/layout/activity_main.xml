@@ -23,28 +23,28 @@
 
 
             <fragment
-                class="ir.rasen.charsoo.FragmentHome"
+                class="ir.rasen.charsoo.view.fragment.FragmentHome"
                 android:id="@+id/frag_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/layout_gridview_swip_header_footer" />
 
             <fragment
-                class="ir.rasen.charsoo.FragmentSearch"
+                class="ir.rasen.charsoo.view.fragment.FragmentSearch"
                 android:id="@+id/frag_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_search" />
 
             <fragment
-                class="ir.rasen.charsoo.FragmentUser"
+                class="ir.rasen.charsoo.view.fragment.FragmentUser"
                 android:id="@+id/frag_user"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_user" />
 
             <fragment
-                class="ir.rasen.charsoo.FragmentUserBusinesses"
+                class="ir.rasen.charsoo.view.fragment.FragmentUserBusinesses"
                 android:id="@+id/frag_user_businesses"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

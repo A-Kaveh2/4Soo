@@ -1,34 +1,20 @@
 package ir.rasen.charsoo.ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.widget.DrawerLayout;
-import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.gms.analytics.ac;
-
-import ir.rasen.charsoo.ActivityBusiness;
-import ir.rasen.charsoo.ActivityLogin;
-import ir.rasen.charsoo.ActivityMain;
-import ir.rasen.charsoo.ActivityProfileUser;
-import ir.rasen.charsoo.ActivityUserBusinesses;
-import ir.rasen.charsoo.ActivityUserSetting;
+import ir.rasen.charsoo.view.activity.ActivityProfileUser;
+import ir.rasen.charsoo.view.activity.ActivityUserSetting;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.DialogExit;
 import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.interfaces.IGoToRegisterBusinessActivity;
-import ir.rasen.charsoo.interfaces.IUpdateUserProfile;
 import ir.rasen.charsoo.webservices.DownloadImages;
 
 /**

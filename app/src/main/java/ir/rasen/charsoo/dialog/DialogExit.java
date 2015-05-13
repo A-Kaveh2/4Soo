@@ -8,15 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import ir.rasen.charsoo.ActivityLogin;
-import ir.rasen.charsoo.ActivityProfileUser;
+import ir.rasen.charsoo.view.activity.ActivityLogin;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Review;
 import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.interfaces.IReviewChange;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.TextViewFont;
-import ir.rasen.charsoo.webservices.review.DeleteReview;
 
 
 public class DialogExit extends MyDialogOkCancel {

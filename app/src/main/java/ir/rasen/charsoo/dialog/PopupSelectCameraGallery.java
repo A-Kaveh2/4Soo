@@ -2,26 +2,15 @@ package ir.rasen.charsoo.dialog;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import ir.rasen.charsoo.ActivityCamera;
-import ir.rasen.charsoo.ActivityGallery;
+import ir.rasen.charsoo.view.activity.ActivityCamera;
+import ir.rasen.charsoo.view.activity.ActivityGallery;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Comment;
-import ir.rasen.charsoo.interfaces.ICommentChange;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.TextViewFont;
 
 
 public class PopupSelectCameraGallery extends MyPopup {

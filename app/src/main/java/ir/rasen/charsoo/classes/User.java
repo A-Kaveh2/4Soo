@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityUserOther;
+import ir.rasen.charsoo.view.activity.ActivityUserOther;
 import ir.rasen.charsoo.helper.FriendshipRelation;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.Permission;

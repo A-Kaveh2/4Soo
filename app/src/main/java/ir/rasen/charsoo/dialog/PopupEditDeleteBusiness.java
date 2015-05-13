@@ -8,7 +8,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import ir.rasen.charsoo.ActivityBusinessRegisterEdit;
+import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.interfaces.IChangeBusiness;

@@ -1,23 +1,15 @@
 package ir.rasen.charsoo.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import ir.rasen.charsoo.ActivityProfileUser;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.User;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.TestUnit;
-import ir.rasen.charsoo.interfaces.ICancelFriendship;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
 import ir.rasen.charsoo.ui.TextViewFont;
-import ir.rasen.charsoo.webservices.friend.RequestCancelFriendship;
 
 
 public class DialogClearSearchHistoryConfirmation extends MyDialogOkCancel {

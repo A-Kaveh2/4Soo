@@ -12,10 +12,10 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityUserFollowingBusinesses;
-import ir.rasen.charsoo.ActivityUserFriends;
-import ir.rasen.charsoo.ActivityProfilePicture;
-import ir.rasen.charsoo.ActivityUserReviews;
+import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
+import ir.rasen.charsoo.view.activity.ActivityUserFriends;
+import ir.rasen.charsoo.view.activity.ActivityProfilePicture;
+import ir.rasen.charsoo.view.activity.ActivityUserReviews;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;
 import ir.rasen.charsoo.adapters.AdapterPostShared;

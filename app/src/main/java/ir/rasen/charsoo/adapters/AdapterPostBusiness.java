@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityPostAddEdit;
+import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.Comment;
 import ir.rasen.charsoo.classes.Post;

@@ -14,11 +14,11 @@ import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityBusinessFollowers;
-import ir.rasen.charsoo.ActivityBusinessReviews;
-import ir.rasen.charsoo.ActivityBusinessContactInfo;
-import ir.rasen.charsoo.ActivityProfilePicture;
-import ir.rasen.charsoo.ActivityBusinessRegisterEdit;
+import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
+import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
+import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
+import ir.rasen.charsoo.view.activity.ActivityProfilePicture;
+import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.adapters.AdapterPostBusiness;
 import ir.rasen.charsoo.adapters.AdapterPostGrid;

@@ -1,15 +1,11 @@
 package ir.rasen.charsoo.classes;
 
 import android.app.Application;
-import android.util.DisplayMetrics;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityLogin;
 import ir.rasen.charsoo.helper.Alarm_M;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
-import ir.rasen.charsoo.helper.NetworkHandler;
 import ir.rasen.charsoo.helper.Permission;
 import ir.rasen.charsoo.helper.WebservicesHandler;
 import ir.rasen.charsoo.helper.WorkTime;

@@ -1,8 +1,6 @@
 package ir.rasen.charsoo.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,15 +12,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.google.android.gms.internal.ic;
-
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.FragmentUser;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.Comment;
-import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.dialog.PopupReportPostAdapter;

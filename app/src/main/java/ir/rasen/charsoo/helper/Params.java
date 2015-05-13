@@ -195,6 +195,7 @@ public class Params {
     public static String CANCEL_USER_SHARE_POST = "cancelUserSharePost";
     public static String UPATE_TIME_LINE_TYPE = "updateTimeLineType";
     public static String REMOVE_REQUEST_ANNOUNCEMENT = "removeRequestAnnouncement";
+    public static String UPDATE_USER_PROFILE_PCITURE = "updateUserProfilePicture";
     public static final String UPATE_TIME_LINE_TYPE_SHARE = "updateTimeLineTypeShare";
     public static final String UPATE_TIME_LINE_TYPE_CANCEL_SHARE = "updateTimeLineTypeCancelShare";
 

@@ -4,10 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.google.android.gms.internal.id;
-
-import ir.rasen.charsoo.ActivityCommentsNotifications;
-import ir.rasen.charsoo.ActivityMain;
+import ir.rasen.charsoo.view.activity.ActivityCommentsNotifications;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.CommentNotification;
 import ir.rasen.charsoo.interfaces.IWebserviceResponse;

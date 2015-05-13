@@ -35,7 +35,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ActivityLogin"
+            android:name=".view.activity.ActivityLogin"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:label="@string/app_name">
@@ -46,118 +46,118 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityTest"
+            android:name=".view.activity.ActivityTest"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityTestUser"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusiness"
+            android:name=".view.activity.ActivityBusiness"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityEntrance_used_for_test"
+            android:name=".view.activity.ActivityEntrance_used_for_test"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityUserRegister"
+            android:name=".view.activity.ActivityUserRegister"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityCamera"
+            android:name=".view.activity.ActivityCamera"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityGallery"
+            android:name=".view.activity.ActivityGallery"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityMain"
+            android:name=".view.activity.ActivityMain"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityUserSetting"
+            android:name=".view.activity.ActivityUserSetting"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusinessContactInfo"
+            android:name=".view.activity.ActivityBusinessContactInfo"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityProfileUser"
+            android:name=".view.activity.ActivityProfileUser"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
-            android:name=".ActivityMapChoose"
+            android:name=".view.activity.ActivityMapChoose"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityMapDisplay"
+            android:name=".view.activity.ActivityMapDisplay"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityRegisterBusiness_ViewPager_not_used"
+            android:name=".view.activity.ActivityRegisterBusiness_ViewPager_not_used"
             android:theme="@style/CustomActionBarTheme"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusinessRegisterEdit"
+            android:name=".view.activity.ActivityBusinessRegisterEdit"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusinessWorkTime"
+            android:name=".view.activity.ActivityBusinessWorkTime"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ActivityPostAddEdit"
+            android:name=".view.activity.ActivityPostAddEdit"
             android:windowSoftInputMode="stateVisible|adjustResize"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityCommentsNotifications"
+            android:name=".view.activity.ActivityCommentsNotifications"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusinessBlockedUsers"
+            android:name=".view.activity.ActivityBusinessBlockedUsers"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusinessFollowers"
+            android:name=".view.activity.ActivityBusinessFollowers"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityComments"
+            android:name=".view.activity.ActivityComments"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity
-            android:name=".ActivityUserFollowingBusinesses"
+            android:name=".view.activity.ActivityUserFollowingBusinesses"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityUserFriends"
+            android:name=".view.activity.ActivityUserFriends"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityUserFriendRequests"
+            android:name=".view.activity.ActivityUserFriendRequests"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivitySearchUser"
+            android:name=".view.activity.ActivitySearchUser"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivitySearchBusinessResult"
+            android:name=".view.activity.ActivitySearchBusinessResult"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivitySearchPostResult"
+            android:name=".view.activity.ActivitySearchPostResult"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityUserReviews"
+            android:name=".view.activity.ActivityUserReviews"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusinessReviews"
+            android:name=".view.activity.ActivityBusinessReviews"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ActivityUserBusinesses"
+            android:name=".view.activity.ActivityUserBusinesses"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityUserOther"
+            android:name=".view.activity.ActivityUserOther"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityBusinessOther"
+            android:name=".view.activity.ActivityBusinessOther"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityPost"
+            android:name=".view.activity.ActivityPost"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityMain2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityProfilePicture"
+            android:name=".view.activity.ActivityProfilePicture"
             android:screenOrientation="portrait" />
 
 

@@ -12,8 +12,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityPostAddEdit;
-import ir.rasen.charsoo.ActivityBusinessRegisterEdit;
+import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
+import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.helper.Image_M;

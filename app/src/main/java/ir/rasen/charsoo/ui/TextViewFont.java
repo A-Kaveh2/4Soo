@@ -6,10 +6,6 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import ir.rasen.charsoo.ActivityLogin;
-import ir.rasen.charsoo.R;
 
 public class TextViewFont extends TextView {
     public TextViewFont(Context context, AttributeSet attrs, int defStyle) {

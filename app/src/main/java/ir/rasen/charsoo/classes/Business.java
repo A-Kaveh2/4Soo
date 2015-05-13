@@ -5,7 +5,7 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityBusinessOther;
+import ir.rasen.charsoo.view.activity.ActivityBusinessOther;
 import ir.rasen.charsoo.helper.Location_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.WorkTime;

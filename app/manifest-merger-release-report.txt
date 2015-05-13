@@ -92,7 +92,7 @@ MERGED from com.android.support:support-v4:21.0.3:16:5
 		ADDED from AndroidManifest.xml:36:9
 	android:name
 		ADDED from AndroidManifest.xml:32:9
-activity#ir.rasen.charsoo.ActivityLogin
+activity#ir.rasen.charsoo.view.activity.ActivityLogin
 ADDED from AndroidManifest.xml:37:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:39:13
@@ -112,7 +112,7 @@ category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:45:17
 	android:name
 		ADDED from AndroidManifest.xml:45:27
-activity#ir.rasen.charsoo.ActivityTest
+activity#ir.rasen.charsoo.view.activity.ActivityTest
 ADDED from AndroidManifest.xml:48:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:50:13
@@ -124,7 +124,7 @@ ADDED from AndroidManifest.xml:51:9
 		ADDED from AndroidManifest.xml:53:13
 	android:name
 		ADDED from AndroidManifest.xml:52:13
-activity#ir.rasen.charsoo.ActivityBusiness
+activity#ir.rasen.charsoo.view.activity.ActivityBusiness
 ADDED from AndroidManifest.xml:54:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:56:13
@@ -142,25 +142,25 @@ ADDED from AndroidManifest.xml:60:9
 		ADDED from AndroidManifest.xml:62:13
 	android:name
 		ADDED from AndroidManifest.xml:61:13
-activity#ir.rasen.charsoo.ActivityCamera
+activity#ir.rasen.charsoo.view.activity.ActivityCamera
 ADDED from AndroidManifest.xml:63:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:65:13
 	android:name
 		ADDED from AndroidManifest.xml:64:13
-activity#ir.rasen.charsoo.ActivityGallery
+activity#ir.rasen.charsoo.view.activity.ActivityGallery
 ADDED from AndroidManifest.xml:66:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:68:13
 	android:name
 		ADDED from AndroidManifest.xml:67:13
-activity#ir.rasen.charsoo.ActivityMain
+activity#ir.rasen.charsoo.view.activity.ActivityMain
 ADDED from AndroidManifest.xml:69:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:71:13
 	android:name
 		ADDED from AndroidManifest.xml:70:13
-activity#ir.rasen.charsoo.ActivityUserSetting
+activity#ir.rasen.charsoo.view.activity.ActivityUserSetting
 ADDED from AndroidManifest.xml:72:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:74:13
@@ -172,7 +172,7 @@ ADDED from AndroidManifest.xml:75:9
 		ADDED from AndroidManifest.xml:77:13
 	android:name
 		ADDED from AndroidManifest.xml:76:13
-activity#ir.rasen.charsoo.ActivityProfileUser
+activity#ir.rasen.charsoo.view.activity.ActivityProfileUser
 ADDED from AndroidManifest.xml:78:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:80:13
@@ -180,13 +180,13 @@ ADDED from AndroidManifest.xml:78:9
 		ADDED from AndroidManifest.xml:81:13
 	android:name
 		ADDED from AndroidManifest.xml:79:13
-activity#ir.rasen.charsoo.ActivityMapChoose
+activity#ir.rasen.charsoo.view.activity.ActivityMapChoose
 ADDED from AndroidManifest.xml:82:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:84:13
 	android:name
 		ADDED from AndroidManifest.xml:83:13
-activity#ir.rasen.charsoo.ActivityMapDisplay
+activity#ir.rasen.charsoo.view.activity.ActivityMapDisplay
 ADDED from AndroidManifest.xml:85:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:87:13
@@ -224,7 +224,7 @@ ADDED from AndroidManifest.xml:101:9
 		ADDED from AndroidManifest.xml:103:13
 	android:name
 		ADDED from AndroidManifest.xml:102:13
-activity#ir.rasen.charsoo.ActivityCommentsNotifications
+activity#ir.rasen.charsoo.view.activity.ActivityCommentsNotifications
 ADDED from AndroidManifest.xml:105:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:107:13
@@ -236,13 +236,13 @@ ADDED from AndroidManifest.xml:108:9
 		ADDED from AndroidManifest.xml:110:13
 	android:name
 		ADDED from AndroidManifest.xml:109:13
-activity#ir.rasen.charsoo.ActivityBusinessFollowers
+activity#ir.rasen.charsoo.view.activity.ActivityBusinessFollowers
 ADDED from AndroidManifest.xml:111:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:113:13
 	android:name
 		ADDED from AndroidManifest.xml:112:13
-activity#ir.rasen.charsoo.ActivityComments
+activity#ir.rasen.charsoo.view.activity.ActivityComments
 ADDED from AndroidManifest.xml:114:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:116:13
@@ -268,55 +268,55 @@ ADDED from AndroidManifest.xml:124:9
 		ADDED from AndroidManifest.xml:126:13
 	android:name
 		ADDED from AndroidManifest.xml:125:13
-activity#ir.rasen.charsoo.ActivitySearchUser
+activity#ir.rasen.charsoo.view.activity.ActivitySearchUser
 ADDED from AndroidManifest.xml:127:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:129:13
 	android:name
 		ADDED from AndroidManifest.xml:128:13
-activity#ir.rasen.charsoo.ActivitySearchBusinessResult
+activity#ir.rasen.charsoo.view.activity.ActivitySearchBusinessResult
 ADDED from AndroidManifest.xml:130:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:132:13
 	android:name
 		ADDED from AndroidManifest.xml:131:13
-activity#ir.rasen.charsoo.ActivitySearchPostResult
+activity#ir.rasen.charsoo.view.activity.ActivitySearchPostResult
 ADDED from AndroidManifest.xml:133:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:135:13
 	android:name
 		ADDED from AndroidManifest.xml:134:13
-activity#ir.rasen.charsoo.ActivityUserReviews
+activity#ir.rasen.charsoo.view.activity.ActivityUserReviews
 ADDED from AndroidManifest.xml:136:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:138:13
 	android:name
 		ADDED from AndroidManifest.xml:137:13
-activity#ir.rasen.charsoo.ActivityBusinessReviews
+activity#ir.rasen.charsoo.view.activity.ActivityBusinessReviews
 ADDED from AndroidManifest.xml:139:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:141:13
 	android:name
 		ADDED from AndroidManifest.xml:140:13
-activity#ir.rasen.charsoo.ActivityUserBusinesses
+activity#ir.rasen.charsoo.view.activity.ActivityUserBusinesses
 ADDED from AndroidManifest.xml:143:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:145:13
 	android:name
 		ADDED from AndroidManifest.xml:144:13
-activity#ir.rasen.charsoo.ActivityUserOther
+activity#ir.rasen.charsoo.view.activity.ActivityUserOther
 ADDED from AndroidManifest.xml:146:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:148:13
 	android:name
 		ADDED from AndroidManifest.xml:147:13
-activity#ir.rasen.charsoo.ActivityBusinessOther
+activity#ir.rasen.charsoo.view.activity.ActivityBusinessOther
 ADDED from AndroidManifest.xml:149:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:151:13
 	android:name
 		ADDED from AndroidManifest.xml:150:13
-activity#ir.rasen.charsoo.ActivityPost
+activity#ir.rasen.charsoo.view.activity.ActivityPost
 ADDED from AndroidManifest.xml:152:9
 	android:screenOrientation
 		ADDED from AndroidManifest.xml:154:13

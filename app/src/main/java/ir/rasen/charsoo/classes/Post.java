@@ -3,17 +3,13 @@ package ir.rasen.charsoo.classes;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityPost;
-import ir.rasen.charsoo.dialog.PopupCancelSharePost;
-import ir.rasen.charsoo.dialog.PopupReportCancelSharePost;
-import ir.rasen.charsoo.dialog.PopupReportPostActivity;
+import ir.rasen.charsoo.view.activity.ActivityPost;
 import ir.rasen.charsoo.helper.Hashtag;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;

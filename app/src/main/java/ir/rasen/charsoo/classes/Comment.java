@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.ActivityComments;
+import ir.rasen.charsoo.view.activity.ActivityComments;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 
