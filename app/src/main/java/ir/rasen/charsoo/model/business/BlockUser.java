@@ -17,7 +17,7 @@ import ir.rasen.charsoo.model.WebserviceGET;
 /**
  * Created by android on 12/16/2014.
  */
-public class BlockUser extends AsyncTask<Void, Void, ResultStatus> {
+public class    BlockUser extends AsyncTask<Void, Void, ResultStatus> {
     private static final String TAG = "BlockUser";
 
     private IWebserviceResponse delegate = null;
