@@ -48,11 +48,11 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
 
 
         //for the test I need to disable automatically going to ActivityMain
-      /*  if (LoginInfo.isLoggedIn(this)) {
+        if (LoginInfo.isLoggedIn(this)) {
             Intent intent = new Intent(this, ActivityMain.class);
             startActivity(intent);
             return;
-        }*/
+        }
 
         myApplication = (MyApplication) getApplication();
         myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
@@ -101,10 +101,10 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
                 break;
             case R.id.btn_login_register:
                 //The main function commented here because of the test
-              /*  Intent intent = new Intent(ActivityLogin.this, ActivityRegisterUser.class);
-                startActivity(intent);*/
-                Intent intent = new Intent(this, ActivityMain.class);
+                Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
                 startActivity(intent);
+              /*  Intent intent = new Intent(this, ActivityMain.class);
+                startActivity(intent);*/
                 break;
         }
     }
