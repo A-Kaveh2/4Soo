@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Comment;
+import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.business.BlockUser;
+import ir.rasen.charsoo.model.business.BlockUser;
 
 
 public class DialogBlockUserConfirmation extends MyDialogOkCancel {

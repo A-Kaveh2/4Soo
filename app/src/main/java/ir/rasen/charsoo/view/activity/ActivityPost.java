@@ -19,32 +19,33 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Business;
-import ir.rasen.charsoo.classes.Comment;
-import ir.rasen.charsoo.classes.Post;
-import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.controller.helper.MyGestureDetector;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupCancelSharePost;
 import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.view.dialog.PopupReportPostActivity;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.PersianDate;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TextProcessor;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.PersianDate;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TextProcessor;
 import ir.rasen.charsoo.view.interface_m.IDeletePost;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.DownloadImages;
-import ir.rasen.charsoo.webservices.post.GetPost;
-import ir.rasen.charsoo.webservices.post.Like;
-import ir.rasen.charsoo.webservices.post.Share;
-import ir.rasen.charsoo.webservices.post.Unlike;
+import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.model.post.GetPost;
+import ir.rasen.charsoo.model.post.Like;
+import ir.rasen.charsoo.model.post.Share;
+import ir.rasen.charsoo.model.post.Unlike;
 
 
 public class ActivityPost extends ActionBarActivity implements IWebserviceResponse, IReportPost, IDeletePost, IUpdateTimeLine {
@@ -299,7 +300,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
         progressDialog.dismiss();
         if (result instanceof Post) {
             post = (Post) result;
-            gestureDetector = new GestureDetector(ActivityPost.this, new ir.rasen.charsoo.helper.MyGestureDetector(ActivityPost.this,post.id,post.isLiked, imageViewLike, imageViewPostLike));
+            gestureDetector = new GestureDetector(ActivityPost.this, new MyGestureDetector(ActivityPost.this,post.id,post.isLiked, imageViewLike, imageViewPostLike));
             initialize();
         }
 

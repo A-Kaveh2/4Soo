@@ -14,12 +14,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Business;
-import ir.rasen.charsoo.classes.MyApplication;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.Location_M;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.Validation;
+import ir.rasen.charsoo.controller.helper.Location_M;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.view.widget_customized.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityMapChoose;

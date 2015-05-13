@@ -15,22 +15,22 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Business;
-import ir.rasen.charsoo.classes.Comment;
-import ir.rasen.charsoo.classes.Post;
-import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.PopupReportPostAdapter;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.MyGestureDetector;
-import ir.rasen.charsoo.helper.PersianDate;
-import ir.rasen.charsoo.helper.TextProcessor;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.MyGestureDetector;
+import ir.rasen.charsoo.controller.helper.PersianDate;
+import ir.rasen.charsoo.controller.helper.TextProcessor;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.DownloadImages;
-import ir.rasen.charsoo.webservices.post.Like;
-import ir.rasen.charsoo.webservices.post.Share;
-import ir.rasen.charsoo.webservices.post.Unlike;
+import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.model.post.Like;
+import ir.rasen.charsoo.model.post.Share;
+import ir.rasen.charsoo.model.post.Unlike;
 
 
 /**

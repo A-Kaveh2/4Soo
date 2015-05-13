@@ -13,17 +13,17 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
-import ir.rasen.charsoo.classes.Post;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.SearchItemPost;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.SearchItemPost;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter;
-import ir.rasen.charsoo.webservices.search.SearchBusinessesLocation;
-import ir.rasen.charsoo.webservices.search.SearchPost;
+import ir.rasen.charsoo.model.search.SearchBusinessesLocation;
+import ir.rasen.charsoo.model.search.SearchPost;
 
 
 public class ActivitySearchPostResult extends ActionBarActivity implements IWebserviceResponse {

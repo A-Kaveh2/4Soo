@@ -19,22 +19,22 @@ import ir.rasen.charsoo.view.activity.ActivityUserReviews;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.adapter.AdapterPostShared;
-import ir.rasen.charsoo.classes.Post;
-import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.FriendshipRelation;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ResultStatus;
-import ir.rasen.charsoo.helper.SearchItemPost;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.FriendshipRelation;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ResultStatus;
+import ir.rasen.charsoo.controller.helper.SearchItemPost;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.ICancelFriendship;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.DownloadCoverImage;
-import ir.rasen.charsoo.webservices.friend.RequestCancelFriendship;
-import ir.rasen.charsoo.webservices.friend.RequestFriendship;
-import ir.rasen.charsoo.webservices.post.GetSharedPosts;
+import ir.rasen.charsoo.model.DownloadCoverImage;
+import ir.rasen.charsoo.model.friend.RequestCancelFriendship;
+import ir.rasen.charsoo.model.friend.RequestFriendship;
+import ir.rasen.charsoo.model.post.GetSharedPosts;
 
 /**
  * Created by android on 3/14/2015.

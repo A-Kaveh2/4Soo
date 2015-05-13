@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.post.CancelShare;
+import ir.rasen.charsoo.model.post.CancelShare;
 
 
 public class PopupCancelSharePost extends MyPopup {

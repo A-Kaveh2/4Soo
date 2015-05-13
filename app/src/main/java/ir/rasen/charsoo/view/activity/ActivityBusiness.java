@@ -12,20 +12,20 @@ import android.view.View;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Business;
-import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.classes.Post;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.DrawerLayoutBusiness;
 import ir.rasen.charsoo.view.widget_customized.GridViewBusiness;
 import ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter;
-import ir.rasen.charsoo.webservices.business.GetBusinessHomeInfo;
-import ir.rasen.charsoo.webservices.post.GetBusinessPosts;
+import ir.rasen.charsoo.model.business.GetBusinessHomeInfo;
+import ir.rasen.charsoo.model.post.GetBusinessPosts;
 
 
 public class ActivityBusiness extends Activity implements ISelectBusiness, IWebserviceResponse {

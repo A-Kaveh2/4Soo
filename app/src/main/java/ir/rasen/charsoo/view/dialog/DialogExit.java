@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.view.activity.ActivityLogin;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
 

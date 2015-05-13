@@ -14,16 +14,16 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterCommentNotification;
-import ir.rasen.charsoo.classes.CommentNotification;
+import ir.rasen.charsoo.controller.object.CommentNotification;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.PullToRefreshList;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.PullToRefreshList;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.comment.GetAllCommentNotifications;
+import ir.rasen.charsoo.model.comment.GetAllCommentNotifications;
 
 
 public class ActivityCommentsNotifications extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {

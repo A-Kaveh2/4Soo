@@ -9,17 +9,17 @@ import android.view.View;
 import android.widget.ImageView;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Business;
-import ir.rasen.charsoo.classes.MyApplication;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.DownloadCoverImage;
-import ir.rasen.charsoo.webservices.business.GetBusinessContactInfo;
+import ir.rasen.charsoo.model.DownloadCoverImage;
+import ir.rasen.charsoo.model.business.GetBusinessContactInfo;
 
 
 public class ActivityBusinessContactInfo extends ActionBarActivity implements IWebserviceResponse {

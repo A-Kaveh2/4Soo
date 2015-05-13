@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Review;
+import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.review.DeleteReview;
+import ir.rasen.charsoo.model.review.DeleteReview;
 
 
 public class DialogDeleteReviewConfirmation extends MyDialogOkCancel {

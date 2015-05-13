@@ -10,12 +10,12 @@ import android.view.View;
 import ir.rasen.charsoo.view.activity.ActivityProfileUser;
 import ir.rasen.charsoo.view.activity.ActivityUserSetting;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogExit;
-import ir.rasen.charsoo.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
-import ir.rasen.charsoo.webservices.DownloadImages;
+import ir.rasen.charsoo.model.DownloadImages;
 
 /**
  * Created by android on 3/15/2015.

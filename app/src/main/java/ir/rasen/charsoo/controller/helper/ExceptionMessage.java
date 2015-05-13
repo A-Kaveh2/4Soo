@@ -1,0 +1,14 @@
+package ir.rasen.charsoo.controller.helper;
+
+import android.content.res.Resources;
+
+import ir.rasen.charsoo.R;
+
+/**
+ * Created by android on 3/7/2015.
+ */
+public class ExceptionMessage {
+    public static String set(Resources resources, String exceptionMessage, String exceptionCode) {
+        return resources.getString(R.string.exception_code) + exceptionCode + "\n" + exceptionMessage;
+    }
+}

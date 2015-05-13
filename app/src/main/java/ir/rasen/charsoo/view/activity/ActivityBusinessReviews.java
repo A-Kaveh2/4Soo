@@ -14,19 +14,19 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterBusinessReview;
-import ir.rasen.charsoo.classes.Review;
+import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.view.dialog.DialogAddReview;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.PullToRefreshList;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.PullToRefreshList;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.view.interface_m.IAddReview;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.review.GetBusinessReviews;
+import ir.rasen.charsoo.model.review.GetBusinessReviews;
 
 
 public class ActivityBusinessReviews extends ActionBarActivity implements IWebserviceResponse, IAddReview, IPullToRefresh {

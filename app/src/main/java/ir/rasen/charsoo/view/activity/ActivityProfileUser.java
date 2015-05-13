@@ -17,27 +17,27 @@ import android.widget.Spinner;
 import java.io.File;
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogChangePassword;
 import ir.rasen.charsoo.view.dialog.DialogClearSearchHistoryConfirmation;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.PersianDate;
-import ir.rasen.charsoo.helper.ResultStatus;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.Sex;
-import ir.rasen.charsoo.helper.Validation;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.PersianDate;
+import ir.rasen.charsoo.controller.helper.ResultStatus;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.Sex;
+import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.view.interface_m.IChangePassword;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.webservices.DownloadCoverImage;
-import ir.rasen.charsoo.webservices.user.GetUserProfileInfo;
-import ir.rasen.charsoo.webservices.user.UpdateUserProfile;
+import ir.rasen.charsoo.model.DownloadCoverImage;
+import ir.rasen.charsoo.model.user.GetUserProfileInfo;
+import ir.rasen.charsoo.model.user.UpdateUserProfile;
 
 
 public class ActivityProfileUser extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangePassword {

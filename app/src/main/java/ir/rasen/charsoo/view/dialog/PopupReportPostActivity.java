@@ -11,7 +11,7 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.post.Report;
+import ir.rasen.charsoo.model.post.Report;
 
 
 public class PopupReportPostActivity extends MyPopup implements  IWebserviceResponse {

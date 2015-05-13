@@ -11,18 +11,18 @@ import android.view.View;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Post;
-import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.FriendshipRelation;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.FriendshipRelation;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewHeader;
 import ir.rasen.charsoo.view.widget_customized.GridViewUserOther;
-import ir.rasen.charsoo.webservices.post.GetSharedPosts;
-import ir.rasen.charsoo.webservices.user.GetUserHomeInfo;
+import ir.rasen.charsoo.model.post.GetSharedPosts;
+import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 
 
 public class ActivityUserOther extends Activity implements IWebserviceResponse {

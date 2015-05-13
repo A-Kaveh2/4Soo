@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.controller.helper.Params;
 
 
 public class ActivityEntrance_used_for_test extends ActionBarActivity {

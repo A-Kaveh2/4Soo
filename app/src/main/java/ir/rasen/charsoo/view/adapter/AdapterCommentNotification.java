@@ -11,11 +11,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.CommentNotification;
-import ir.rasen.charsoo.helper.Image_M;
+import ir.rasen.charsoo.controller.object.CommentNotification;
+import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.view.widget_customized.ImageViewCircle;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.DownloadImages;
+import ir.rasen.charsoo.model.DownloadImages;
 
 /**
  * Created by android on 3/7/2015.

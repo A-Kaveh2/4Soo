@@ -9,12 +9,12 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.BaseAdapterItem;
-import ir.rasen.charsoo.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
+import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.view.interface_m.IBaseAdapterOnClickTask;
 import ir.rasen.charsoo.view.widget_customized.ImageViewCircle;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.DownloadImages;
+import ir.rasen.charsoo.model.DownloadImages;
 
 /**
  * Created by android on 3/7/2015.

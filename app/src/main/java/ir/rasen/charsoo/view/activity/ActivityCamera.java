@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.CustomeCamera;
+import ir.rasen.charsoo.controller.helper.CustomeCamera;
 import ir.rasen.charsoo.view.interface_m.ICropResult;
 
 

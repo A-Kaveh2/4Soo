@@ -14,20 +14,20 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterPostComments;
-import ir.rasen.charsoo.classes.Comment;
+import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.PullToRefreshList;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TestUnit;
-import ir.rasen.charsoo.helper.Validation;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.PullToRefreshList;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.webservices.comment.GetPostAllComments;
-import ir.rasen.charsoo.webservices.comment.SendComment;
+import ir.rasen.charsoo.model.comment.GetPostAllComments;
+import ir.rasen.charsoo.model.comment.SendComment;
 
 
 public class ActivityComments extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {

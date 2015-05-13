@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.business.DeleteBusiness;
+import ir.rasen.charsoo.model.business.DeleteBusiness;
 
 
 public class DialogDeleteBusinessConfirmation extends MyDialogOkCancel {

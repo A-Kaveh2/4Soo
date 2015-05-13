@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterUserSearchResult;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.BaseAdapterItem;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.search.SearchUser;
+import ir.rasen.charsoo.model.search.SearchUser;
 
 
 public class ActivitySearchUser extends ActionBarActivity implements IWebserviceResponse {

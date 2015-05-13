@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterUserReview;
-import ir.rasen.charsoo.classes.Review;
+import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.review.GetUserReviews;
+import ir.rasen.charsoo.model.review.GetUserReviews;
 
 
 public class ActivityUserReviews extends ActionBarActivity implements IWebserviceResponse {

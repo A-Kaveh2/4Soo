@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.view.adapter.AdapterCategories;
-import ir.rasen.charsoo.classes.Category;
+import ir.rasen.charsoo.controller.object.Category;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 
 

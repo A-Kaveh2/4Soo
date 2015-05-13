@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.interface_m.IDeletePost;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.post.DeletePost;
+import ir.rasen.charsoo.model.post.DeletePost;
 
 
 public class DialogDeletePostConfirmation extends MyDialogOkCancel {

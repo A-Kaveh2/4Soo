@@ -9,17 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.MyApplication;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ResultStatus;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.Validation;
-import ir.rasen.charsoo.helper.WebservicesHandler;
+import ir.rasen.charsoo.controller.helper.ResultStatus;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityMain;
-import ir.rasen.charsoo.webservices.user.Login;
+import ir.rasen.charsoo.model.user.Login;
 
 public class FragmentUserLogin extends Fragment implements IWebserviceResponse {
 

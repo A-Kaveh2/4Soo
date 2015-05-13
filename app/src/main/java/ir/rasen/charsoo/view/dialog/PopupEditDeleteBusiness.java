@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 

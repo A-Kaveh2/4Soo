@@ -9,13 +9,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Comment;
-import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.comment.UpdateComment;
+import ir.rasen.charsoo.model.comment.UpdateComment;
 
 
 public class DialogEditComment extends MyDialogOkCancel {

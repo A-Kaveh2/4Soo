@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.User;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
-import ir.rasen.charsoo.webservices.DownloadImages;
+import ir.rasen.charsoo.model.DownloadImages;
 
 /**
  * Created by android on 3/15/2015.

@@ -22,18 +22,18 @@ import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterPostBusiness;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
-import ir.rasen.charsoo.classes.Business;
-import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.classes.Post;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.SearchItemPost;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.SearchItemPost;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.DownloadCoverImage;
-import ir.rasen.charsoo.webservices.post.GetBusinessPosts;
+import ir.rasen.charsoo.model.DownloadCoverImage;
+import ir.rasen.charsoo.model.post.GetBusinessPosts;
 
 /**
  * Created by android on 3/14/2015.

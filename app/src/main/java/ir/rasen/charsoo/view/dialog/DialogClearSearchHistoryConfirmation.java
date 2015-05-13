@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.User;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
 

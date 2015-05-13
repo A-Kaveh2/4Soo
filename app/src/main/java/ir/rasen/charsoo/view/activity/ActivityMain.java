@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;

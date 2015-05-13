@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.user.UnFollowBusiness;
+import ir.rasen.charsoo.model.user.UnFollowBusiness;
 
 
 public class DialogUnfollowBusinessConfirmation extends MyDialogOkCancel {

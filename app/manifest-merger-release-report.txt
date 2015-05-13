@@ -334,7 +334,7 @@ ADDED from AndroidManifest.xml:161:9
 		ADDED from AndroidManifest.xml:163:13
 	android:name
 		ADDED from AndroidManifest.xml:162:13
-receiver#ir.rasen.charsoo.helper.AlarmReciever
+receiver#ir.rasen.charsoo.controller.helper.AlarmReciever
 ADDED from AndroidManifest.xml:172:9
 	android:name
 		ADDED from AndroidManifest.xml:172:19

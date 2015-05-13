@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.interface_m;
 
-import ir.rasen.charsoo.classes.Review;
+import ir.rasen.charsoo.controller.object.Review;
 
 /**
  * Created by android on 3/9/2015.

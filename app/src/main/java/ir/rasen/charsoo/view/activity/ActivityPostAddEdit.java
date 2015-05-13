@@ -17,24 +17,24 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.classes.Post;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TextProcessor;
-import ir.rasen.charsoo.helper.Validation;
-import ir.rasen.charsoo.helper.WebservicesHandler;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TextProcessor;
+import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.webservices.DownloadImages;
-import ir.rasen.charsoo.webservices.post.AddPost;
-import ir.rasen.charsoo.webservices.post.GetPost;
-import ir.rasen.charsoo.webservices.post.UpdatePost;
+import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.model.post.AddPost;
+import ir.rasen.charsoo.model.post.GetPost;
+import ir.rasen.charsoo.model.post.UpdatePost;
 
 
 public class ActivityPostAddEdit extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {

@@ -16,16 +16,16 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.BaseAdapterItem;
-import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.PullToRefreshList;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.PullToRefreshList;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.business.GetBusinessFollowers;
+import ir.rasen.charsoo.model.business.GetBusinessFollowers;
 
 
 public class ActivityBusinessFollowers extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {

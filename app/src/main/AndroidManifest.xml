@@ -29,7 +29,7 @@
         android:value="@string/google_maps_key" />
 
     <application
-        android:name=".classes.MyApplication"
+        android:name=".controller.object.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -172,7 +172,7 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <receiver android:name=".helper.AlarmReciever" />
+        <receiver android:name=".controller.helper.AlarmReciever" />
 
     </application>
 

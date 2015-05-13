@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Comment;
+import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;

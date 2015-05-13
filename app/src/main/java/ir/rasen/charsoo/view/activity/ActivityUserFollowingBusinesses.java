@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.adapter.AdapterUserFollowingBusinesses;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.BaseAdapterItem;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.TestUnit;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.webservices.user.GetFollowingBusinesses;
+import ir.rasen.charsoo.model.user.GetFollowingBusinesses;
 
 
 public class ActivityUserFollowingBusinesses extends ActionBarActivity implements IWebserviceResponse {

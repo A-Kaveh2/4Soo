@@ -7,10 +7,10 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.ActionBar_M;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.webservices.DownloadImages;
+import ir.rasen.charsoo.controller.helper.ActionBar_M;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.model.DownloadImages;
 
 
 public class ActivityProfilePicture extends ActionBarActivity  {

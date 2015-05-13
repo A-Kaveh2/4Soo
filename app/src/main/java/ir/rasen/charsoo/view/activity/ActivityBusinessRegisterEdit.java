@@ -28,22 +28,22 @@ import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterBaseInfo;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterContactInfo;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterLocationInfo;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Business;
-import ir.rasen.charsoo.classes.MyApplication;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.view.dialog.DialogDeleteBusinessConfirmation;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ResultStatus;
-import ir.rasen.charsoo.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ResultStatus;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
-import ir.rasen.charsoo.webservices.business.GetBusinessProfileInfo;
-import ir.rasen.charsoo.webservices.business.RegisterBusiness;
-import ir.rasen.charsoo.webservices.business.UpdateBusinessProfileInfo;
+import ir.rasen.charsoo.model.business.GetBusinessProfileInfo;
+import ir.rasen.charsoo.model.business.RegisterBusiness;
+import ir.rasen.charsoo.model.business.UpdateBusinessProfileInfo;
 
 public class ActivityBusinessRegisterEdit extends ActionBarActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
 

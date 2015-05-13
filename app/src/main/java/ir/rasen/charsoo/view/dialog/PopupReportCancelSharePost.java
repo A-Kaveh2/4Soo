@@ -9,13 +9,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.post.CancelShare;
-import ir.rasen.charsoo.webservices.post.Report;
+import ir.rasen.charsoo.model.post.CancelShare;
+import ir.rasen.charsoo.model.post.Report;
 
 
 public class PopupReportCancelSharePost extends MyPopup implements IWebserviceResponse {

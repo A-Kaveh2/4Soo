@@ -25,15 +25,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Category;
-import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.classes.SubCategory;
+import ir.rasen.charsoo.controller.object.Category;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.SubCategory;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupCategories;
 import ir.rasen.charsoo.view.dialog.PopupSubCategories;
-import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.helper.WebservicesHandler;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
@@ -41,8 +41,8 @@ import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 import ir.rasen.charsoo.view.activity.ActivitySearchBusinessResult;
 import ir.rasen.charsoo.view.activity.ActivitySearchPostResult;
 import ir.rasen.charsoo.view.activity.ActivitySearchUser;
-import ir.rasen.charsoo.webservices.business.GetBusinessGategories;
-import ir.rasen.charsoo.webservices.business.GetBusinessSubcategories;
+import ir.rasen.charsoo.model.business.GetBusinessGategories;
+import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
 
 public class FragmentSearch extends Fragment implements IWebserviceResponse, ISelectCategory {
 

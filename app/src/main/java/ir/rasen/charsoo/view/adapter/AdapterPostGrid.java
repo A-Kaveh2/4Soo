@@ -13,12 +13,12 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.classes.Post;
-import ir.rasen.charsoo.helper.Image_M;
-import ir.rasen.charsoo.helper.SearchItemPost;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.view.widget_customized.GridViewHeader;
 import ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter;
-import ir.rasen.charsoo.webservices.DownloadImages;
+import ir.rasen.charsoo.model.DownloadImages;
 
 public class AdapterPostGrid extends BaseAdapter {
     private Activity activity;

@@ -10,13 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.classes.Review;
-import ir.rasen.charsoo.helper.Params;
+import ir.rasen.charsoo.controller.object.Review;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.webservices.review.UpdateReview;
+import ir.rasen.charsoo.model.review.UpdateReview;
 
 
 public class DialogEditReview extends MyDialogOkCancel {
