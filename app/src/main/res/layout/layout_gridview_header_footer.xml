@@ -4,13 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <ir.rasen.charsoo.ui.GridViewWithHeaderAndFooter
+    <ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="3dp"
         android:id="@+id/gridView" />
 
-    <ir.rasen.charsoo.ui.TextViewFont
+    <ir.rasen.charsoo.view.widget_customized.TextViewFont
         android:id="@+id/textView_no_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

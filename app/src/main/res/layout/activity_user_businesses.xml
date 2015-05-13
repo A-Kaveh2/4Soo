@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context=".ActivityMain">
 
-    <ir.rasen.charsoo.ui.ButtonFont
+    <ir.rasen.charsoo.view.widget_customized.ButtonFont
         android:id="@+id/btn_creat_new_business"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"

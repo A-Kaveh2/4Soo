@@ -14,20 +14,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.google.android.gms.internal.pu;
-
 import java.io.File;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.interfaces.IUpdateUserProfile;
-import ir.rasen.charsoo.view.fragment.FragmentUser;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.User;
-import ir.rasen.charsoo.dialog.DialogChangePassword;
-import ir.rasen.charsoo.dialog.DialogClearSearchHistoryConfirmation;
-import ir.rasen.charsoo.dialog.DialogMessage;
-import ir.rasen.charsoo.dialog.PopupSelectCameraGallery;
+import ir.rasen.charsoo.view.dialog.DialogChangePassword;
+import ir.rasen.charsoo.view.dialog.DialogClearSearchHistoryConfirmation;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.LoginInfo;
@@ -36,9 +32,9 @@ import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.Sex;
 import ir.rasen.charsoo.helper.Validation;
-import ir.rasen.charsoo.interfaces.IChangePassword;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.EditTextFont;
+import ir.rasen.charsoo.view.interface_m.IChangePassword;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.webservices.DownloadCoverImage;
 import ir.rasen.charsoo.webservices.user.GetUserProfileInfo;
 import ir.rasen.charsoo.webservices.user.UpdateUserProfile;

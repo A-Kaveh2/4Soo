@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import ir.rasen.charsoo.interfaces.ICropResult;
+import ir.rasen.charsoo.view.interface_m.ICropResult;
 
 
 /**

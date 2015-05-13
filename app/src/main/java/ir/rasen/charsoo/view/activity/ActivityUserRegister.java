@@ -15,15 +15,15 @@ import java.io.File;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.User;
-import ir.rasen.charsoo.dialog.DialogMessage;
-import ir.rasen.charsoo.dialog.PopupSelectCameraGallery;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Image_M;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.Validation;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.EditTextFont;
-import ir.rasen.charsoo.ui.ImageViewCircle;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.ImageViewCircle;
 import ir.rasen.charsoo.webservices.user.RegisterUser;
 
 

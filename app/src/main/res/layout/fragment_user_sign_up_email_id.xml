@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ir.rasen.charsoo.ui.ImageViewCircle
+            <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
                 android:layout_width="@dimen/register_profile_picture_height"
                 android:layout_height="@dimen/register_profile_picture_height"
                 android:id="@+id/imageView_user_picture"
@@ -29,7 +29,7 @@
                 android:layout_marginLeft="20dp"
                 android:id="@+id/rl_edit_text">
 
-                <ir.rasen.charsoo.ui.EditTextFont
+                <ir.rasen.charsoo.view.widget_customized.EditTextFont
                     android:id="@+id/editText_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                     android:singleLine="true"
                     android:drawableRight="@drawable/ic_email_blue_24dp" />
 
-                <ir.rasen.charsoo.ui.EditTextFont
+                <ir.rasen.charsoo.view.widget_customized.EditTextFont
                     android:id="@+id/editText_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                     android:gravity="right|center_vertical"
                     android:drawableRight="@drawable/ic_lock_blue_24dp" />
 
-                <ir.rasen.charsoo.ui.EditTextFont
+                <ir.rasen.charsoo.view.widget_customized.EditTextFont
                     android:id="@+id/editText_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

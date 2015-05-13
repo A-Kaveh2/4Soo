@@ -10,13 +10,13 @@ import android.widget.CheckBox;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Permission;
 import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.user.UpdateSetting;
 
 

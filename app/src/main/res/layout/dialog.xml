@@ -27,7 +27,7 @@
                 android:background="@color/my_app_theme"
                 android:orientation="horizontal">
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:id="@+id/tv_dialog_title"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

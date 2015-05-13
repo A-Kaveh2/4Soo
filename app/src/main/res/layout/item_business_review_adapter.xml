@@ -19,7 +19,7 @@
             android:gravity="right"
             android:orientation="vertical">
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
@@ -35,7 +35,7 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:isIndicator="true"/>
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
@@ -51,7 +51,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center">
 
-            <ir.rasen.charsoo.ui.ImageViewCircle
+            <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
                 android:layout_width="@dimen/adapter_user_image_height"
                 android:layout_height="@dimen/adapter_user_image_height"
                 android:id="@+id/imageView_review_adapter_item_image_user"

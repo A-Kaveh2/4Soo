@@ -12,7 +12,7 @@
         android:layout_height="@dimen/base_adapter_item_height">
 
 
-        <ir.rasen.charsoo.ui.TextViewFont
+        <ir.rasen.charsoo.view.widget_customized.TextViewFont
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="right|center"

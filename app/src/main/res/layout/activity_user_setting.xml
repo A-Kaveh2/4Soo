@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/DeepSkyBlue"
@@ -38,7 +38,7 @@
                 android:button="@drawable/selector_check_box"
                 android:layout_alignParentTop="true" />
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:id="@+id/textView_friends_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/DeepSkyBlue"
@@ -81,7 +81,7 @@
                 android:button="@drawable/selector_check_box"
                 android:layout_alignParentTop="true" />
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:id="@+id/textView_businesses_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp">
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/DeepSkyBlue"
@@ -125,7 +125,7 @@
                 android:button="@drawable/selector_check_box"
                 android:layout_alignParentTop="true" />
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:id="@+id/textView_reviews_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
 
         </RelativeLayout>
 
-        <ir.rasen.charsoo.ui.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.ButtonFont
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"

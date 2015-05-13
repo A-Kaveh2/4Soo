@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ir.rasen.charsoo.ui.GridViewWithHeaderAndFooter
+            <ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter
                 android:id="@+id/gridView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -48,7 +48,7 @@
                         android:layout_height="@dimen/drawer_user_picture_height"
                         android:id="@+id/imageView_business_picture" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -69,7 +69,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="@dimen/drawer_edit_button_margin">
 
-                    <ir.rasen.charsoo.ui.ImageViewCircle
+                    <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@color/DarkOrange"
@@ -100,7 +100,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/selector_popup_middle_item">
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
@@ -133,7 +133,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/selector_popup_middle_item">
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"

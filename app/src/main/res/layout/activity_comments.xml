@@ -27,7 +27,7 @@
         android:orientation="horizontal"
         android:layout_margin="5dp"
         android:layout_alignParentBottom="true">
-        <ir.rasen.charsoo.ui.EditTextFont
+        <ir.rasen.charsoo.view.widget_customized.EditTextFont
             android:id="@+id/edt_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,13 +1,12 @@
 package ir.rasen.charsoo.helper;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.ui.TextViewFontActionBarTitle;
+import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
 
 /**
  * Created by android on 5/3/2015.

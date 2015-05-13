@@ -13,16 +13,16 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.adapters.AdapterCommentNotification;
+import ir.rasen.charsoo.view.adapter.AdapterCommentNotification;
 import ir.rasen.charsoo.classes.CommentNotification;
-import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.PullToRefreshList;
 import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.interfaces.IPullToRefresh;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.comment.GetAllCommentNotifications;
 
 

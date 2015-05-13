@@ -99,7 +99,7 @@
                 android:layout_below="@+id/rl_header"
                 android:gravity="center">
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:id="@+id/editText_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                     android:textSize="@dimen/font_user_profile_edit_text"
                     android:gravity="right|center_vertical" />
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_below="@+id/editText_name"
                     android:id="@+id/editText_identifier"
                     android:layout_width="match_parent"
@@ -150,7 +150,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_description_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/edt_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -178,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_phone_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/edt_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_phone_android_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/edt_mobile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -234,7 +234,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_access_time_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/edt_time"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_public_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/edt_wesite"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -291,7 +291,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_email_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -320,7 +320,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_place_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/edt_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -343,7 +343,7 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/selector_button_login">
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:text="@string/map"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

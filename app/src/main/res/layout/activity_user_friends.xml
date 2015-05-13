@@ -6,7 +6,7 @@
     android:background="@color/White"
     android:orientation="vertical">
 
-    <ir.rasen.charsoo.ui.ButtonFont
+    <ir.rasen.charsoo.view.widget_customized.ButtonFont
         android:id="@+id/btn_friend_requests"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"

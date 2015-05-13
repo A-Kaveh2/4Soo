@@ -46,7 +46,7 @@
                 android:visibility="invisible"
                 android:layout_alignParentEnd="true">
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/friends"
@@ -55,7 +55,7 @@
                     android:id="@+id/textView_friends"
                     android:textColor="@color/White" />
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/reviews"
@@ -64,7 +64,7 @@
                     android:layout_marginRight="15dp"
                     android:textColor="@color/White" />
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_header"
@@ -92,7 +92,7 @@
             android:layout_marginLeft="15dp"
             android:layout_alignParentLeft="true">
 
-            <ir.rasen.charsoo.ui.ImageViewCircle
+            <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
                 android:layout_width="@dimen/header_switch_hight"
                 android:layout_height="@dimen/header_switch_hight"
                 android:id="@+id/imageView_cirecle"
@@ -115,7 +115,7 @@
         android:orientation="vertical"
         android:gravity="right">
 
-        <ir.rasen.charsoo.ui.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.ButtonFont
             android:id="@+id/btn_friend_satus"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height_small"
@@ -129,7 +129,7 @@
             android:textSize="@dimen/text_size_larger" />
 
 
-        <ir.rasen.charsoo.ui.TextViewFont
+        <ir.rasen.charsoo.view.widget_customized.TextViewFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_size_header"
@@ -137,7 +137,7 @@
             android:id="@+id/textView_user_name"
             android:textColor="@color/Black" />
 
-        <ir.rasen.charsoo.ui.TextViewFont
+        <ir.rasen.charsoo.view.widget_customized.TextViewFont
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/font_size_header"
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/selector_button_business_follower" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_friends_number"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
                         android:background="@drawable/shape_button_green_followers" />
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_header"
@@ -211,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/selector_button_business_review" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_reviews_number"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                         android:background="@drawable/shape_button_green_followers" />
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_header"
@@ -252,7 +252,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/selector_button_business_contact_info" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_businesses_number"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                         android:background="@drawable/shape_button_green_followers" />
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_header"

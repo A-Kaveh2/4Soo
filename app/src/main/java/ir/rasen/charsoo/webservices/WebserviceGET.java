@@ -8,11 +8,8 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.NetworkHandler;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.WebservicesHandler;

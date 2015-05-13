@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ir.rasen.charsoo.ui.GridViewHeader
+            <ir.rasen.charsoo.view.widget_customized.GridViewHeader
                 android:id="@+id/gridView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -41,12 +41,12 @@
                     android:orientation="vertical"
                     android:background="@color/DeepSkyBlue">
 
-                    <ir.rasen.charsoo.ui.ImageViewCircle
+                    <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
                         android:layout_width="@dimen/drawer_user_picture_height"
                         android:layout_height="@dimen/drawer_user_picture_height"
                         android:id="@+id/imageView_user_picture" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -56,7 +56,7 @@
                         android:textColor="@color/White"
                         android:id="@+id/textView_drawer_identifier" />
 
-                    <ir.rasen.charsoo.ui.TextViewFont
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -109,7 +109,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/selector_popup_middle_item">
 
-                        <ir.rasen.charsoo.ui.TextViewFont
+                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -135,7 +135,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/selector_popup_middle_item">
 
-                        <ir.rasen.charsoo.ui.TextViewFont
+                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -166,7 +166,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/selector_popup_middle_item">
 
-                        <ir.rasen.charsoo.ui.TextViewFont
+                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -185,7 +185,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/selector_popup_middle_item">
 
-                        <ir.rasen.charsoo.ui.TextViewFont
+                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -204,7 +204,7 @@
                         android:orientation="horizontal"
                         android:background="@drawable/selector_popup_middle_item">
 
-                        <ir.rasen.charsoo.ui.TextViewFont
+                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"

@@ -23,7 +23,7 @@
             android:layout_toRightOf="@+id/img_more"
             android:orientation="vertical">
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
@@ -39,7 +39,7 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:isIndicator="true"/>
 
-            <ir.rasen.charsoo.ui.TextViewFont
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="right|center"

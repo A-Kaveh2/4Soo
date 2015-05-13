@@ -19,7 +19,7 @@ import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.User;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.interfaces.IChangeTabs;
+import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.activity.ActivityBusiness;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 

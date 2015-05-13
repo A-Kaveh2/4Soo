@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.EditTextFont;
-import ir.rasen.charsoo.ui.ImageViewCircle;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.ImageViewCircle;
 
 public class FragmentUserSignUpeNamePassword extends Fragment implements IWebserviceResponse {
 

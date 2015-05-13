@@ -117,7 +117,7 @@
                 android:layout_below="@+id/rl_header"
                 android:gravity="center">
 
-                <ir.rasen.charsoo.ui.EditTextFont
+                <ir.rasen.charsoo.view.widget_customized.EditTextFont
                     android:id="@+id/editText_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     android:textSize="@dimen/font_user_profile_edit_text"
                     android:gravity="right|center_vertical" />
 
-                <ir.rasen.charsoo.ui.EditTextFont
+                <ir.rasen.charsoo.view.widget_customized.EditTextFont
                     android:layout_below="@+id/editText_name"
                     android:id="@+id/editText_identifier"
                     android:layout_width="match_parent"
@@ -169,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_description_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.EditTextFont
+                    <ir.rasen.charsoo.view.widget_customized.EditTextFont
                         android:id="@+id/editText_about_me"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
 
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_user_setting_title"
@@ -231,7 +231,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_email_blue_24dp" />
 
-                    <ir.rasen.charsoo.ui.EditTextFont
+                    <ir.rasen.charsoo.view.widget_customized.EditTextFont
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
                         android:gravity="right">
 
 
-                        <ir.rasen.charsoo.ui.EditTextFont
+                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
                             android:id="@+id/edt_year"
                             android:layout_width="0dp"
                             android:layout_weight="33.3333333"
@@ -284,7 +284,7 @@
                             android:textSize="@dimen/font_user_profile_edit_text"
                     />
 
-                        <ir.rasen.charsoo.ui.EditTextFont
+                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
                             android:id="@+id/edt_month"
                             android:layout_width="0dp"
                             android:layout_weight="33.3333333"
@@ -301,7 +301,7 @@
                             android:gravity="center"
                           />
 
-                        <ir.rasen.charsoo.ui.EditTextFont
+                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
                             android:id="@+id/edt_day"
                             android:layout_width="0dp"
                             android:inputType="numberDecimal"
@@ -322,7 +322,7 @@
 
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.ui.TextViewFont
+                <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_user_setting_title"
@@ -331,7 +331,7 @@
                     android:text="@string/account" />
 
 
-                <ir.rasen.charsoo.ui.ButtonFont
+                <ir.rasen.charsoo.view.widget_customized.ButtonFont
                     android:id="@+id/btn_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_user_profile_height"
@@ -341,7 +341,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_large" />
 
-                <ir.rasen.charsoo.ui.ButtonFont
+                <ir.rasen.charsoo.view.widget_customized.ButtonFont
                     android:id="@+id/btn_clear_search_history"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_user_profile_height"
@@ -352,7 +352,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/text_size_large" />
 
-                <ir.rasen.charsoo.ui.ButtonFont
+                <ir.rasen.charsoo.view.widget_customized.ButtonFont
                     android:id="@+id/btn_user_profile_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"

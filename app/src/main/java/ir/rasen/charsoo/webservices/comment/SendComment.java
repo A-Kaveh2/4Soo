@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import ir.rasen.charsoo.helper.Params;
-import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
 import ir.rasen.charsoo.helper.URLs;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.WebserviceGET;
 
 

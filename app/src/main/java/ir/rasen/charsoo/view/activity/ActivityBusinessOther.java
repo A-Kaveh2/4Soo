@@ -15,13 +15,13 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.Business;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.classes.Post;
-import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.GridViewBusinessOther;
-import ir.rasen.charsoo.ui.GridViewHeader;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.GridViewBusinessOther;
+import ir.rasen.charsoo.view.widget_customized.GridViewHeader;
 import ir.rasen.charsoo.webservices.business.GetBusinessHomeInfo;
 import ir.rasen.charsoo.webservices.post.GetBusinessPosts;
 

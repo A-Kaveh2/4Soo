@@ -19,9 +19,9 @@ import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.MyApplication;
 import ir.rasen.charsoo.helper.LoginInfo;
-import ir.rasen.charsoo.interfaces.IGoToRegisterBusinessActivity;
-import ir.rasen.charsoo.interfaces.IChangeTabs;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
+import ir.rasen.charsoo.view.interface_m.IChangeTabs;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 
 public class ActivityMain extends Activity implements View.OnClickListener, IWebserviceResponse, IChangeTabs, IGoToRegisterBusinessActivity {

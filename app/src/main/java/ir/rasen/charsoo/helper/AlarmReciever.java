@@ -7,7 +7,7 @@ import android.content.Intent;
 import ir.rasen.charsoo.view.activity.ActivityCommentsNotifications;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.CommentNotification;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.comment.GetLastCommentNotification;
 
 

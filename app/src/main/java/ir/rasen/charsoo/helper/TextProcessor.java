@@ -12,14 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.ListIterator;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.ui.EditTextFont;
-import ir.rasen.charsoo.ui.TextViewFont;
+import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
 
 /**

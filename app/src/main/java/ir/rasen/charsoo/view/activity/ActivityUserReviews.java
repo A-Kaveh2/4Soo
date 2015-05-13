@@ -13,14 +13,14 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.adapters.AdapterUserReview;
+import ir.rasen.charsoo.view.adapter.AdapterUserReview;
 import ir.rasen.charsoo.classes.Review;
-import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.Params;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.TestUnit;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.review.GetUserReviews;
 
 

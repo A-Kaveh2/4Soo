@@ -2,7 +2,6 @@ package ir.rasen.charsoo.webservices.post;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.json.JSONObject;
 
@@ -12,7 +11,7 @@ import java.util.Arrays;
 import ir.rasen.charsoo.classes.Post;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.URLs;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.webservices.WebserviceGET;
 
 

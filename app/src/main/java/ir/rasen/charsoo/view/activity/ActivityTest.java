@@ -10,27 +10,27 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.adapters.AdapterBusinessSearchResult;
-import ir.rasen.charsoo.adapters.AdapterBusinessFollowers;
-import ir.rasen.charsoo.adapters.AdapterUserFollowingBusinesses;
-import ir.rasen.charsoo.adapters.AdapterUserFriendshipRequest;
-import ir.rasen.charsoo.adapters.AdapterPostTimeLine;
-import ir.rasen.charsoo.adapters.AdapterUserSearchResult;
-import ir.rasen.charsoo.adapters.BaseAdapter_M;
-import ir.rasen.charsoo.adapters.AdapterBusinessPostComments;
-import ir.rasen.charsoo.adapters.AdapterBusinessReview;
-import ir.rasen.charsoo.adapters.AdapterCommentNotification;
-import ir.rasen.charsoo.adapters.AdapterUserFriends;
-import ir.rasen.charsoo.adapters.AdapterPostComments;
-import ir.rasen.charsoo.adapters.AdapterUserReview;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessSearchResult;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
+import ir.rasen.charsoo.view.adapter.AdapterUserFollowingBusinesses;
+import ir.rasen.charsoo.view.adapter.AdapterUserFriendshipRequest;
+import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
+import ir.rasen.charsoo.view.adapter.AdapterUserSearchResult;
+import ir.rasen.charsoo.view.adapter.BaseAdapter_M;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessPostComments;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessReview;
+import ir.rasen.charsoo.view.adapter.AdapterCommentNotification;
+import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
+import ir.rasen.charsoo.view.adapter.AdapterPostComments;
+import ir.rasen.charsoo.view.adapter.AdapterUserReview;
 import ir.rasen.charsoo.classes.Comment;
-import ir.rasen.charsoo.dialog.DialogEditComment;
-import ir.rasen.charsoo.dialog.PopupEditDeleteComment;
+import ir.rasen.charsoo.view.dialog.DialogEditComment;
+import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
 import ir.rasen.charsoo.helper.BaseAdapterItem;
 import ir.rasen.charsoo.helper.TestUnit;
-import ir.rasen.charsoo.interfaces.IBaseAdapterOnClickTask;
-import ir.rasen.charsoo.interfaces.ICommentChange;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IBaseAdapterOnClickTask;
+import ir.rasen.charsoo.view.interface_m.ICommentChange;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 
 public class ActivityTest extends ActionBarActivity implements IBaseAdapterOnClickTask, IWebserviceResponse,ICommentChange {

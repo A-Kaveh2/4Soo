@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.helper;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.widget.ListView;
 
@@ -11,7 +10,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.interfaces.IPullToRefresh;
+import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 
 /**
  * Created by android on 5/6/2015.

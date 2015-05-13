@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="@android:color/white" >
 
-	<ir.rasen.charsoo.ui.EditTextFont
+	<ir.rasen.charsoo.view.widget_customized.EditTextFont
     	android:id="@+id/edt_edit_comment_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2">
-        <ir.rasen.charsoo.ui.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.ButtonFont
             android:id="@+id/btn_edit_comment_submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
             android:textColor="@android:color/white"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:layout_margin="@dimen/activity_horizontal_margin_1of4" />
-        <ir.rasen.charsoo.ui.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.ButtonFont
             android:id="@+id/btn_edit_comment_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

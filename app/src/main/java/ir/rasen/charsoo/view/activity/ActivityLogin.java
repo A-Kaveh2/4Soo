@@ -10,15 +10,15 @@ import android.view.View;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.classes.MyApplication;
-import ir.rasen.charsoo.dialog.DialogForgetPassword;
-import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ActionBar_M;
 import ir.rasen.charsoo.helper.LoginInfo;
 import ir.rasen.charsoo.helper.ResultStatus;
 import ir.rasen.charsoo.helper.ServerAnswer;
 import ir.rasen.charsoo.helper.Validation;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
-import ir.rasen.charsoo.ui.EditTextFont;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.helper.WebservicesHandler;
 import ir.rasen.charsoo.webservices.user.Login;
 

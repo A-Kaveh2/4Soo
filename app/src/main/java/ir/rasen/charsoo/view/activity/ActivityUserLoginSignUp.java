@@ -22,9 +22,9 @@ import ir.rasen.charsoo.view.fragment.FragmentUserSignUpeEmailID;
 import ir.rasen.charsoo.view.fragment.FragmentUserSignUpeNamePassword;
 import ir.rasen.charsoo.view.fragment.FragmentUserSignUpePicture;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.helper.ServerAnswer;
-import ir.rasen.charsoo.interfaces.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 public class ActivityUserLoginSignUp extends ActionBarActivity implements IWebserviceResponse {
 

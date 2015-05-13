@@ -16,7 +16,7 @@
             android:orientation="vertical"
             android:layout_margin="15dp">
 
-            <ir.rasen.charsoo.ui.EditTextFont
+            <ir.rasen.charsoo.view.widget_customized.EditTextFont
                 android:id="@+id/edt_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 android:singleLine="true"
                  />
 
-            <ir.rasen.charsoo.ui.EditTextFont
+            <ir.rasen.charsoo.view.widget_customized.EditTextFont
                 android:id="@+id/edt_mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:singleLine="true"
                  />
 
-            <ir.rasen.charsoo.ui.EditTextFont
+            <ir.rasen.charsoo.view.widget_customized.EditTextFont
                 android:id="@+id/edt_wesite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:inputType="textWebEditText|textNoSuggestions"
                />
 
-            <ir.rasen.charsoo.ui.EditTextFont
+            <ir.rasen.charsoo.view.widget_customized.EditTextFont
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:inputType="textEmailAddress"
                  />
 
-            <ir.rasen.charsoo.ui.ButtonFont
+            <ir.rasen.charsoo.view.widget_customized.ButtonFont
                 android:id="@+id/btn_work_time"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
