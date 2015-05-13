@@ -21,11 +21,17 @@
             android:id="@+id/ll_action_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/action_bar_custome_height"
-            android:gravity="right|center_vertical"
+            android:gravity="center_vertical"
             android:layout_alignParentTop="true"
             android:orientation="horizontal"
             android:background="@drawable/shape_gradiant_up">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView_back"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/ic_arrow_back_white_24dp" />
 
         </LinearLayout>
 

@@ -64,7 +64,7 @@
             <ir.rasen.charsoo.view.widget_customized.EditTextFont
                 android:id="@+id/edt_price"
                 android:layout_width="match_parent"
-                android:hint="@string/price"
+                android:hint="@string/price_tooman"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edt_hashtags"
                 android:textSize="@dimen/font_size_register"

@@ -76,7 +76,6 @@ public class ActivityPostAddEdit extends ActionBarActivity implements View.OnCli
         editTextPrice = (EditTextFont) findViewById(R.id.edt_price);
         editTextCode = (EditTextFont) findViewById(R.id.edt_code);
 
-        editTextPrice.setHint(getString(R.string.price)+" ("+getString(R.string.rial)+")");
         if (postId != 0) {
             ((MyApplication) getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_POST);
             progressDialog.show();

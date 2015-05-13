@@ -480,6 +480,7 @@
     <string name="display_location">نمایش موقعیت</string>
     <string name="title">عنوان</string>
     <string name="price">قیمت</string>
+    <string name="price_tooman">قیمت (تومان)</string>
     <string name="rial">ریال</string>
     <string name="choose_post_picture">برای محصول خود یک تصویر انتخاب کنید</string>
     <string name="unblock">رفع</string>

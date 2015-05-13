@@ -45,7 +45,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     AdapterPostShared adapterPostBusiness;
     private boolean isThreeColumn = true;
     boolean isLoadingMore = false;
-    ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle;
+    ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewBack,imageViewContactInfo,imageViewCirecle;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
     View listFooterView;
     View viewHeader;
@@ -100,6 +100,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             imageViewFollowers = (ImageView) viewHeader.findViewById(R.id.imageView_followers);
             imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
             imageViewContactInfo = (ImageView) viewHeader.findViewById(R.id.imageView_conatct_info);
+            imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
+
             textViewFollowersNumber = (TextViewFont) viewHeader.findViewById(R.id.textView_followers_number22);
             buttonFollowStatus = (ButtonFont) viewHeader.findViewById(R.id.btn_follow_satus);
             textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_business_identifier);
@@ -143,6 +145,12 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                     } else {
                         new FollowBusiness(activity, LoginInfo.getUserId(activity), business.id, iWebserviceResponse).execute();
                     }
+                }
+            });
+            imageViewBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.finish();
                 }
             });
 

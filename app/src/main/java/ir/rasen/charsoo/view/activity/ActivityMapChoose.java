@@ -36,17 +36,16 @@ public class ActivityMapChoose extends ActionBarActivity {
         @Override
         public void onMyLocationChange(Location location) {
             LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
-            if(isFirstTime) {
-                choosedLatLng = loc;
-                isFirstTime = false;
-            }
+
             if(!isEditingLocationInitialized) {
                 marker = googleMap.addMarker(new MarkerOptions().position(loc));
                 menuItemTik.setVisible(true);
                 isEditingLocationInitialized = true;
             }
-            if(googleMap != null){
+            if(googleMap != null && isFirstTime){
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,14.0f));
+                choosedLatLng = loc;
+                isFirstTime = false;
             }
         }
     };
