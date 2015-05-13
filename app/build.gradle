@@ -5,8 +5,10 @@ dependencies {
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'se.emilsjolander:stickylistheaders:2.5.2'
+    compile 'joda-time:joda-time:2.7'
     compile project(":libs:crop-lib")
     compile project(":libs:pull_to_refresh_lib")
+
 }
 
 android {
