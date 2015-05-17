@@ -10,6 +10,9 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.handmark.pulltorefresh.library.*;
+import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
@@ -40,7 +43,7 @@ import ir.rasen.charsoo.model.post.GetSharedPosts;
  * Created by android on 3/14/2015.
  */
 public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship {
-    GridViewHeader gridViewHeader;
+    GridViewWithHeaderAndFooter gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
@@ -60,7 +63,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     IWebserviceResponse iWebserviceResponse;
 
 
-    public GridViewUserOther(final Activity context, final User displayedUser, GridViewHeader gViewHeader) {
+    public GridViewUserOther(final Activity context, final User displayedUser, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gViewHeader) {
         this.context = context;
         this.user = displayedUser;
         this.gridViewHeader = gViewHeader;
@@ -283,7 +286,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         new GetSharedPosts(context, user.id, posts.get(posts.size() - 1).id, context.getResources().getInteger(R.integer.lazy_load_limitation), GridViewUserOther.this).execute();
     }
 
-    private void prepareGridThreeColumn(GridViewHeader gridViewHeader) {
+    private void prepareGridThreeColumn(GridViewWithHeaderAndFooter gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

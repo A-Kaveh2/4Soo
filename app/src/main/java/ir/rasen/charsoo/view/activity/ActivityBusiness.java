@@ -48,7 +48,7 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
     //pull_to_refresh_lib
     PullToRefreshGrid pullToRefreshGridView;
 
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

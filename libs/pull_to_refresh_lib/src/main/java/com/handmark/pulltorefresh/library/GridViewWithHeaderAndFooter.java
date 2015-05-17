@@ -371,6 +371,9 @@ public class GridViewWithHeaderAndFooter extends GridView {
         }
         int mColumnWidth = getColumnWidthCompatible();
         View view = getAdapter().getView(numColumns * mHeaderViewInfos.size(), mViewForMeasureRowHeight, this);
+        if(view == null)
+            return -1;
+
         LayoutParams p = (LayoutParams) view.getLayoutParams();
         if (p == null) {
             p = new LayoutParams(-1, -2, 0);
