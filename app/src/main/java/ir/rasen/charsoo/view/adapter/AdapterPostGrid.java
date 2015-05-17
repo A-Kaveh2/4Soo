@@ -26,7 +26,7 @@ public class AdapterPostGrid extends BaseAdapter {
     private int screedWidth;
     DownloadImages downloadImages;
     GridViewWithHeaderAndFooter gridViewHF;
-    GridViewHeader gridView;
+    com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridView;
     int businessIdForBusinessPosts;
     Post.GetPostType getPostType;
 
@@ -67,7 +67,7 @@ public class AdapterPostGrid extends BaseAdapter {
                 gridViewHF.setHorizontalSpacing(9);
                 gridViewHF.setNumColumns(3);
             } catch (Exception e) {
-                gridView = (GridViewHeader) parent;
+                gridView = (com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter) parent;
                 gridView.setVerticalSpacing(3);
                 gridView.setHorizontalSpacing(9);
                 gridView.setNumColumns(3);

@@ -15,18 +15,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.PullToRefreshGrid;
+import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.view.activity.ActivityUserFriendRequests;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
+import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.DrawerLayoutUser;
@@ -35,17 +42,21 @@ import ir.rasen.charsoo.view.widget_customized.GridViewUser;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 
-public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile {
+public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh {
 
     private DrawerLayout mDrawerLayout;
-    private GridViewHeader gridView;
+    private GridViewWithHeaderAndFooter gridView;
     private int visitedUserId;
     ProgressDialog progressDialog;
     private User user;
     GridViewUser gridViewUser;
     static IUpdateUserProfile iUpdateUserProfile;
     ArrayList<Post> sharedPosts;
-    BroadcastReceiver cancelShareReceiver, removeRequestAnnouncement,updateUserProfilePicture;
+    BroadcastReceiver cancelShareReceiver, removeRequestAnnouncement, updateUserProfilePicture;
+    //PullToRefreshGridViewWithHeaderAndFooter pullToRefreshGridViewWithHeaderAndFooter;
+
+    //pull_to_refresh_lib
+    PullToRefreshGrid pullToRefreshGridView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,10 +74,10 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
+            pullToRefreshGridView = new PullToRefreshGrid(getActivity(),(PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF) , FragmentUser.this);
+            gridView = pullToRefreshGridView.getGridViewHeaderFooter();
 
             mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
-            gridView = (GridViewHeader) view.findViewById(R.id.gridView);
-
             recursivelyCallHandler();
 
         } catch (Exception e) {
@@ -77,7 +88,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                int postId = intent.getIntExtra(Params.POST_ID,0);
+                int postId = intent.getIntExtra(Params.POST_ID, 0);
 
                 //remove canceled post
                 cancelShare(postId);
@@ -85,7 +96,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 //update time line
                 Intent intentUpdateTimeLine = new Intent(Params.UPATE_TIME_LINE);
                 intentUpdateTimeLine.putExtra(Params.UPATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
-                intentUpdateTimeLine.putExtra(Params.POST_ID,postId);
+                intentUpdateTimeLine.putExtra(Params.POST_ID, postId);
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intentUpdateTimeLine);
             }
         };
@@ -139,7 +150,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         DrawerLayoutUser.Initial(getActivity(), mDrawerLayout, user, (IGoToRegisterBusinessActivity) getActivity());
         boolean hasRequest = false;
 
-        gridViewUser = new GridViewUser(getActivity(),user, visitedUserId, gridView, mDrawerLayout);
+        gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView, mDrawerLayout);
         if (((MyApplication) getActivity().getApplication()).isUserCreated) {
             try {
                 gridViewUser.InitialGridViewUser(sharedPosts);
@@ -175,8 +186,15 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 
         } else if (result instanceof ArrayList) {
             progressDialog.dismiss();
+
+
             //GetSharedPosts result
             sharedPosts = (ArrayList<Post>) result;
+            pullToRefreshGridView.setResultSize(sharedPosts.size());
+            if (pullToRefreshGridView.isRefreshing()) {
+                pullToRefreshGridView.onRefreshComplete();
+                gridView.removeHeaderView(gridView.getHeaderView());
+            }
             gridViewUser.InitialGridViewUser(sharedPosts);
         }
     }
@@ -203,7 +221,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         }
     }
 
-    public void cancelShare(int postId){
+    public void cancelShare(int postId) {
         for (int i = 0; i < sharedPosts.size(); i++) {
             if (sharedPosts.get(i).id == postId) {
                 sharedPosts.remove(i);
@@ -211,5 +229,17 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             }
         }
         gridViewUser.InitialGridViewUser(sharedPosts);
+    }
+
+    @Override
+    public void notifyRefresh() {
+        sharedPosts.clear();
+        ((MyApplication) getActivity().getApplication()).isUserCreated = false;
+        new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
+    }
+
+    @Override
+    public void notifyLoadMore() {
+        //GetUserHomeInfo doesn't support load more yet.
     }
 }

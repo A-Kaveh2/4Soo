@@ -15,9 +15,7 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import java.util.ArrayList;
-
 import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
 import ir.rasen.charsoo.view.activity.ActivityUserFriends;
 import ir.rasen.charsoo.view.activity.ActivityProfilePicture;
@@ -37,12 +35,13 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
+import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
 
 /**
  * Created by android on 3/14/2015.
  */
 public class GridViewUser implements IWebserviceResponse {
-    GridViewHeader gridViewHeader;
+    GridViewWithHeaderAndFooter gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
@@ -62,7 +61,7 @@ public class GridViewUser implements IWebserviceResponse {
     String userIdentifier, userName, aboutMe;
 
 
-    public GridViewUser(Activity activity, User user, int visitedUserId, GridViewHeader gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewUser(Activity activity, User user, int visitedUserId, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader, DrawerLayout drawerLayout) {
         this.activity = activity;
         this.profilePictureId = user.profilePictureId;
         this.gridViewHeader = gridViewHeader;
@@ -300,7 +299,7 @@ public class GridViewUser implements IWebserviceResponse {
         new GetSharedPosts(activity, visitedUserId, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewUser.this).execute();
     }
 
-    private void prepareGridThreeColumn(GridViewHeader gridViewHeader) {
+    private void prepareGridThreeColumn(GridViewWithHeaderAndFooter gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

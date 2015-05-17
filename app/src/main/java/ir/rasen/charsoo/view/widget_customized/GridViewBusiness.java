@@ -12,8 +12,9 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
+import com.handmark.pulltorefresh.library.*;
 
+import java.util.ArrayList;
 import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
 import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
 import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
@@ -39,7 +40,7 @@ import ir.rasen.charsoo.model.post.GetBusinessPosts;
  * Created by android on 3/14/2015.
  */
 public class GridViewBusiness implements IWebserviceResponse {
-    GridViewWithHeaderAndFooter gridViewHeader;
+    com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostBusiness adapterPostBusiness;
     private boolean isThreeColumn = true;
@@ -57,7 +58,7 @@ public class GridViewBusiness implements IWebserviceResponse {
     boolean hasHeader;
     DownloadCoverImage downloadCoverImage;
 
-    public GridViewBusiness(Activity activity, Business business, GridViewWithHeaderAndFooter gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader, DrawerLayout drawerLayout) {
         this.activity = activity;
         this.business = business;
         this.gridViewHeader = gridViewHeader;
@@ -279,7 +280,7 @@ public class GridViewBusiness implements IWebserviceResponse {
         new GetBusinessPosts(activity, LoginInfo.getUserId(activity), business.id, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewBusiness.this).execute();
     }
 
-    private void prepareGridThreeColumn(GridViewWithHeaderAndFooter gridViewHeader) {
+    private void prepareGridThreeColumn(com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
