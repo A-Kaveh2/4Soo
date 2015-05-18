@@ -1,5 +1,6 @@
 package ir.rasen.charsoo.controller.object;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -44,6 +45,10 @@ public class User {
 
 
 
+    public static class UserPicture{
+        public int pictureId;
+        public String pictureString;
+    }
 
     public static class UserBusinesses{
         public int businessId;
@@ -80,4 +85,6 @@ public class User {
     public static void clearSearchHistory(Context context){
         Toast.makeText(context,"Clear Search History",Toast.LENGTH_LONG).show();
     }
+
+
 }

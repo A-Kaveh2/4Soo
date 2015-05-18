@@ -17,7 +17,7 @@ import ir.rasen.charsoo.model.WebserviceGET;
 /**
  * Created by android on 12/16/2014.
  */
-public class ReviewBusiness extends AsyncTask<Void, Void, ResultStatus> {
+    public class ReviewBusiness extends AsyncTask<Void, Void, ResultStatus> {
     private static final String TAG = "ReviewBusiness";
 
     private IAddReview delegate = null;

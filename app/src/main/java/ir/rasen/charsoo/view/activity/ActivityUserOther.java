@@ -30,7 +30,7 @@ import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 
 
-public class ActivityUserOther extends Activity implements IWebserviceResponse,IPullToRefresh {
+public class ActivityUserOther extends Activity implements IWebserviceResponse, IPullToRefresh {
 
     private GridViewWithHeaderAndFooter gridView;
     private int visitedUserId;
@@ -70,7 +70,7 @@ public class ActivityUserOther extends Activity implements IWebserviceResponse,I
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        pullToRefreshGridView = new PullToRefreshGrid(ActivityUserOther.this,(PullToRefreshGridViewWithHeaderAndFooter) findViewById(R.id.gridView_HF) ,ActivityUserOther.this);
+        pullToRefreshGridView = new PullToRefreshGrid(ActivityUserOther.this, (PullToRefreshGridViewWithHeaderAndFooter) findViewById(R.id.gridView_HF), ActivityUserOther.this);
         gridView = pullToRefreshGridView.getGridViewHeaderFooter();
 
         progressDialog.show();
@@ -94,6 +94,10 @@ public class ActivityUserOther extends Activity implements IWebserviceResponse,I
             gridViewUser.InitialGridViewUser(new ArrayList<Post>());
             if (user.friendshipRelationStatus == FriendshipRelation.Status.FRIEND)
                 new GetSharedPosts(ActivityUserOther.this, visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityUserOther.this).execute();
+            else {
+                if (pullToRefreshGridView.isRefreshing())
+                    pullToRefreshGridView.onRefreshComplete();
+            }
         } else if (result instanceof ArrayList) {
             //GetSharedPosts result
             posts = (ArrayList<Post>) result;

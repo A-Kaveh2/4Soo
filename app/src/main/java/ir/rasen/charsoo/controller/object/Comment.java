@@ -1,5 +1,6 @@
 package ir.rasen.charsoo.controller.object;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -33,12 +34,23 @@ public class Comment {
         this.text = text;
     }
 
-    public Comment(int id,int userID, String userIdentifier, String text) {
+   /* public Comment(int commentId,int userID, String userIdentifier, String text) {
         //just for the test
         this.id = id;
         this.userID = userID;
         this.username = userIdentifier;
         this.text = text;
+    }*/
+
+    public static Comment getSentComment(Activity activity, int commentId, String commentText) {
+        Comment comment = new Comment();
+        comment.id = commentId;
+        comment.text = commentText;
+        comment.userID = LoginInfo.getUserId(activity);
+        comment.username = ((MyApplication) activity.getApplication()).userIdentifier;
+        comment.userProfilePictureID = ((MyApplication) activity.getApplication()).userProfilePictureId;
+
+        return comment;
     }
 
     public Comment() {
@@ -69,7 +81,7 @@ public class Comment {
             return false;
     }
 
-    public static void openCommentActivity(Context context,boolean isOwner, int postId, int postOwnerBusinessId) {
+    public static void openCommentActivity(Context context, boolean isOwner, int postId, int postOwnerBusinessId) {
         Intent intent = new Intent(context, ActivityComments.class);
         intent.putExtra(Params.POST_ID, postId);
         intent.putExtra(Params.POST_OWNER_BUSINESS_ID, postOwnerBusinessId);

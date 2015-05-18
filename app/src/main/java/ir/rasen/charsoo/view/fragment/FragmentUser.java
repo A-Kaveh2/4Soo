@@ -174,6 +174,8 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         if (result instanceof User) {
             //GetUserHomeInfo result
             user = (User) result;
+            ((MyApplication) getActivity().getApplication()).userIdentifier = user.userIdentifier;
+            ((MyApplication) getActivity().getApplication()).userProfilePictureId = user.profilePictureId;
             ((MyApplication) getActivity().getApplication()).userBusinesses = user.businesses;
             initializeUser();
 

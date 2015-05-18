@@ -95,8 +95,10 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         textViewIdentifier.setText(user.userIdentifier);
         textViewName.setText(user.name);
 
+        String text = buttonFriendStatus.getText().toString();
         switch (user.friendshipRelationStatus) {
             case FRIEND:
+                buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_green);
                 buttonFriendStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
                 buttonFriendStatus.setText(context.getString(R.string.friend));
                 break;
@@ -114,6 +116,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                 buttonFriendStatus.setText(context.getString(R.string.wating_for_comfirm));
                 break;
         }
+        text = buttonFriendStatus.getText().toString();
         buttonFriendStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -274,7 +277,6 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
 
         prepareGridThreeColumn(gridViewHeader);
         gridViewHeader.setAdapter(adapterPostGrid);
-
 
     }
 

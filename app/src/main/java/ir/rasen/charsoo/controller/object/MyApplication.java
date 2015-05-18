@@ -15,25 +15,25 @@ import ir.rasen.charsoo.controller.helper.WorkTime;
  */
 public class MyApplication extends Application {
 
-    private WebservicesHandler webservicesHandler ;
+    private WebservicesHandler webservicesHandler;
     private Permission permission;
     public Business business;
     public WorkTime workTime;
     public Post post;
     public ArrayList<BaseAdapterItem> searchUserResult;
     public ArrayList<User.UserBusinesses> userBusinesses;
-    public boolean isHomeCreated,isSearchCreated,isUserCreated;
+    public boolean isHomeCreated, isSearchCreated, isUserCreated;
     public ArrayList<Post> homePosts;
-
+    public int userProfilePictureId = 0;
+    public String userIdentifier = "";
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         webservicesHandler = new WebservicesHandler();
         webservicesHandler.currentWebservice = WebservicesHandler.Webservices.NONE;
 
-        permission = new Permission(false,false,false);
+        permission = new Permission(false, false, false);
         business = new Business();
         workTime = new WorkTime();
         post = new Post();
@@ -45,7 +45,7 @@ public class MyApplication extends Application {
         isHomeCreated = false;
         isSearchCreated = false;
         isUserCreated = false;
-        homePosts =new ArrayList<>();
+        homePosts = new ArrayList<>();
 
 
     }
@@ -58,12 +58,13 @@ public class MyApplication extends Application {
         this.webservicesHandler.currentWebservice = currentWebservice;
     }
 
-    public Permission getPermission(){
-        return  this.permission;
+    public Permission getPermission() {
+        return this.permission;
     }
 
-    public void setPermission(Permission permission){
+    public void setPermission(Permission permission) {
         this.permission = permission;
     }
+
 
 }

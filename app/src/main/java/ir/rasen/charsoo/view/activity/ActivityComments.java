@@ -163,7 +163,8 @@ public class ActivityComments extends ActionBarActivity implements IWebserviceRe
             status = Status.NONE;
 
         } else if (result instanceof Integer) {
-            comments.add(0, new Comment((Integer) result, LoginInfo.getUserId(ActivityComments.this), LoginInfo.getAccessUserIdentifier(ActivityComments.this), commentText));
+            //comments.add(0, new Comment((Integer) result, LoginInfo.getUserId(ActivityComments.this), LoginInfo.getAccessUserIdentifier(ActivityComments.this), commentText));
+            comments.add(0, Comment.getSentComment(ActivityComments.this,(Integer) result,commentText));
             adapterPostComments.notifyDataSetChanged();
             editTextComment.setText("");
         }
