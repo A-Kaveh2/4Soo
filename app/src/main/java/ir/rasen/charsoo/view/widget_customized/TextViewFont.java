@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
 
+import ir.rasen.charsoo.R;
+
 public class TextViewFont extends TextView {
     public TextViewFont(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -56,7 +58,6 @@ public class TextViewFont extends TextView {
 
             }
             setTextSize(baseFontSize);
-            //setTextSize(getResources().getDimension(R.dimen.font_size_base));
         }
     }
 }

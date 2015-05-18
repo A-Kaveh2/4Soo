@@ -68,6 +68,7 @@ public class Params {
     public static String WORK_TIME_CLOSE_MINUTE= "work_time_close_minute";
 
     public static String EDIT_MODE = "edit_mode";
+    public static String REGISTER_MODE = "register_mode";
 
     public static int LOCATION_REFRESH = 60000;
     public static int LOCATION_REFRESH_DISTANCE = 10;

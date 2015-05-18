@@ -26,7 +26,7 @@
     <dimen name="font_user_profile_edit_text">15dp</dimen>
     <dimen name="font_size_login_register_indicator">25dp</dimen>
     <dimen name="font_size_edit_text">12dp</dimen>
-    <dimen name="font_size_text_view">6dp</dimen>
+    <dimen name="font_size_text_view">14dp</dimen>
 
     
 

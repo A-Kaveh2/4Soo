@@ -91,9 +91,10 @@ public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebse
         textViewSubcategories = (TextViewFont) view.findViewById(R.id.textView_sub_category);
         textViewCategories.setEnabled(false);
         textViewSubcategories.setEnabled(false);
-        textViewCategories.setTextSize(editTextIdentifier.getTextSize()-10);
-        textViewSubcategories.setTextSize(editTextIdentifier.getTextSize()-10);
 
+        /*textViewCategories.setTextSize(editTextIdentifier.getTextSize()-10);
+        textViewSubcategories.setTextSize(editTextIdentifier.getTextSize()-10);
+*/
         imageViewPicture = (ImageView) view.findViewById(R.id.imageView_picture);
         imageViewPicture.setOnClickListener(new View.OnClickListener() {
             @Override

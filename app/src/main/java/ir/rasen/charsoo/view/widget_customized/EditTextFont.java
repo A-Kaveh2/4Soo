@@ -9,6 +9,8 @@ import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
+import ir.rasen.charsoo.R;
+
 public class EditTextFont extends EditText {
 
     private Drawable drawableRight;
@@ -38,6 +40,7 @@ public class EditTextFont extends EditText {
             Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/yekan.ttf");
             setTypeface(tf);
         }
+
     }
 
     public void setErrorC(String error) {

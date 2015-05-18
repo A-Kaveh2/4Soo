@@ -25,27 +25,26 @@ public class ActivityMapChoose extends ActionBarActivity {
     // Google Map
     private GoogleMap googleMap;
     MapView mapView;
-    LatLng latLng;
+    //LatLng latLng;
     LatLng choosedLatLng;
     Marker marker;
     MenuItem menuItemTik;
-    boolean isEditingLocationInitialized = false;
-    boolean isFirstTime = true;
+    boolean isLocationInitialized = false;
+    //boolean isFirstTime = true;
+
 
     private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
         @Override
         public void onMyLocationChange(Location location) {
             LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
 
-            if(!isEditingLocationInitialized) {
+            if(googleMap != null && !isLocationInitialized) {
                 marker = googleMap.addMarker(new MarkerOptions().position(loc));
                 menuItemTik.setVisible(true);
-                isEditingLocationInitialized = true;
-            }
-            if(googleMap != null && isFirstTime){
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,14.0f));
                 choosedLatLng = loc;
-                isFirstTime = false;
+                isLocationInitialized = true;
+
             }
         }
     };
@@ -55,17 +54,10 @@ public class ActivityMapChoose extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.choose_location));
         setContentView(R.layout.activity_map);
-
-
-        latLng = new LatLng(Double.valueOf(getString(R.string.sample_latitude)), Double.valueOf(getString(R.string.sample_longitude)));
-
         try {
-
-
             MapsInitializer.initialize(ActivityMapChoose.this);
             mapView = (MapView) findViewById(R.id.map);
             mapView.onCreate(savedInstanceState);
-
 
             if (mapView != null) {
                 googleMap = mapView.getMap();
@@ -75,13 +67,15 @@ public class ActivityMapChoose extends ActionBarActivity {
 
                 googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
 
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        latLng, 4));
-                // Zoom in, animating the camera.
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(4), 2000,
-                        null);
+                if(getIntent().getExtras().getBoolean(Params.IS_EDITTING)) {
 
+                    LatLng loc =  new LatLng(Double.valueOf(getIntent().getStringExtra(Params.LATITUDE)), Double.valueOf(getIntent().getStringExtra(Params.LONGITUDE)));
+                    marker = googleMap.addMarker(new MarkerOptions().position(loc));
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,14.0f));
+                    choosedLatLng = loc;
 
+                    isLocationInitialized = true;
+                }
             }
             googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                 @Override

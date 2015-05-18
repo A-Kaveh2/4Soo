@@ -34,7 +34,7 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
     Business business;
     String latitude,longitude;
     ButtonFont buttonMap;
-
+    boolean isEditting = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,13 +51,14 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
         categoryAdapter.setDropDownViewResource(R.layout.layout_spinner_back_drop_down);
         spinnerStates.setAdapter(categoryAdapter);
 
-        boolean isEditting = false;
+
         try {
             isEditting = getArguments().getBoolean(Params.IS_EDITTING);
         } catch (Exception e) {
 
         }
 
+        buttonMap = (ButtonFont)view.findViewById(R.id.btn_map);
 
         if (isEditting) {
             business = ((MyApplication) getActivity().getApplication()).business;
@@ -69,54 +70,25 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
                     break;
                 }
             }
+
+            buttonMap.setBackgroundResource(R.drawable.selector_button_register);
+            buttonMap.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
         }
 
-        //map shouldn't be here. The scenario has been changed.
-        /*//Map section
-        MapsInitializer.initialize(this.getActivity());
-        mapView = (MapView) view.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
 
-        if (mapView != null) {
-            googleMap = mapView.getMap();
-            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-            googleMap.setMyLocationEnabled(true);
-            if (isEditting) {
-                LatLng latLng = new LatLng(Double.valueOf(business.location_m.getLatitude()), Double.valueOf(business.location_m.getLongitude()));
-                choosedLatLng = latLng;
-                MarkerOptions marker = new MarkerOptions().position(
-                        latLng);
-                googleMap.addMarker(marker);
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(Double.valueOf(business.location_m.getLatitude()), Double.valueOf(business.location_m.getLongitude())), 5));
-            }
-            else
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(Double.valueOf(getString(R.string.sample_latitude)), Double.valueOf(getString(R.string.sample_longitude))), 5));
-            // Zoom in, animating the camera.
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(5), 2000,
-                    null);
 
-        }
-        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                choosedLatLng = latLng;
-                MarkerOptions marker = new MarkerOptions().position(
-                        latLng);
-                googleMap.addMarker(marker);
-            }
-        });
-
-        int screenHeight = getResources().getDisplayMetrics().heightPixels;
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screenHeight / 3);
-        mapView.setLayoutParams(params);*/
-        //Map section
-        buttonMap = (ButtonFont)view.findViewById(R.id.btn_map);
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(getActivity(), ActivityMapChoose.class), Params.ACTION_CHOOSE_LOCATION);
+                Intent intent = new Intent(getActivity(), ActivityMapChoose.class);
+                if(isEditting){
+                    intent.putExtra(Params.LATITUDE,business.location_m.getLatitude());
+                    intent.putExtra(Params.LONGITUDE,business.location_m.getLongitude());
+                    intent.putExtra(Params.IS_EDITTING,true);
+                }
+                else
+                    intent.putExtra(Params.IS_EDITTING,false);
+                startActivityForResult(intent, Params.ACTION_CHOOSE_LOCATION);
             }
         });
 
