@@ -8,43 +8,93 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
-import ir.rasen.charsoo.view.interface_m.IChangeTabs;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.activity.ActivityBusiness;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
+import ir.rasen.charsoo.view.adapter.AdapterUserBusinesses;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IChangeTabs;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
-public class FragmentUserBusinesses extends Fragment {
+public class FragmentUserBusinesses extends Fragment implements IWebserviceResponse {
 
-    ArrayList<User.UserBusinesses> userBusinesses;
-    ArrayList<String> userBusinessesStr;
-    ArrayAdapter adapter;
+    ArrayList<Business> userBusinesses;
+    AdapterUserBusinesses adapterUserBusinesses;
     ListView listView;
+    View view, addBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_user_businesses,
+        view = inflater.inflate(R.layout.activity_user_businesses,
                 container, false);
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), ActivityBusiness.class);
-                intent.putExtra(Params.BUSINESS_ID, userBusinesses.get(i).businessId);
+                intent.putExtra(Params.BUSINESS_ID, userBusinesses.get(i).id);
                 startActivityForResult(intent, Params.ACTION_DELETE_BUSIENSS);
             }
         });
-        (view.findViewById(R.id.btn_creat_new_business)).setOnClickListener(new View.OnClickListener() {
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            int mLastFirstVisibleItem = 0;
+
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (view.getId() == listView.getId()) {
+                    final int currentFirstVisibleItem = listView.getFirstVisiblePosition();
+
+                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
+                        // getSherlockActivity().getSupportActionBar().hide();
+                        Animation slide = null;
+                        slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+                                0.0f, Animation.RELATIVE_TO_SELF, +2.0f);
+
+                        slide.setDuration(200);
+                        slide.setFillAfter(true);
+                        slide.setFillEnabled(true);
+                        addBtn.startAnimation(slide);
+
+                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                        // getSherlockActivity().getSupportActionBar().show();
+                        Animation slide = null;
+                        slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
+                                +2.0f, Animation.RELATIVE_TO_SELF, 0.0f);
+
+                        slide.setDuration(200);
+                        slide.setFillAfter(true);
+                        slide.setFillEnabled(true);
+                        addBtn.startAnimation(slide);
+
+                    }
+
+                    mLastFirstVisibleItem = currentFirstVisibleItem;
+                }
+            }
+        });
+        addBtn = (view.findViewById(R.id.btn_creat_new_business));
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityBusinessRegisterEdit.class);
@@ -52,7 +102,15 @@ public class FragmentUserBusinesses extends Fragment {
             }
         });
 
+        userBusinesses = new ArrayList<>();
+        adapterUserBusinesses = new AdapterUserBusinesses(getActivity(), userBusinesses);
+        listView.setAdapter(adapterUserBusinesses);
+
+        // TODO:: TEMPORARY
         recursivelyCallHandler();
+
+        // TODO:: WEBSERVICE SHOULD BE WRITTEN ON WEB SIDE AND THEN THIS CODE CAN BE UNCOMMENTED::
+        //new GetUserBusinesses(getActivity(),FragmentUserBusinesses.this).execute();
 
         return view;
     }
@@ -72,26 +130,27 @@ public class FragmentUserBusinesses extends Fragment {
     }
 
     public void recursivelyCallHandler() {
+        //TODO:: TEMPORARY::
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getActivity().getApplication()).isUserCreated) {
-                    userBusinesses = new ArrayList<>();
-                    userBusinesses.addAll(((MyApplication)getActivity().getApplication()).userBusinesses);
+                    view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                    ArrayList<User.UserBusinesses> us = ((MyApplication) getActivity().getApplication()).userBusinesses;
 
-                    if (userBusinesses.size() == 0)
+                    if (us.size() == 0)
                         return;
 
-                    userBusinessesStr = new ArrayList<>();
-                    for (User.UserBusinesses business : userBusinesses) {
-                        userBusinessesStr.add(business.businessIdentifier);
+                    for (User.UserBusinesses businessItem : us) {
+                        Business business = new Business();
+                        business.id = businessItem.businessId;
+                        business.name = businessItem.businessIdentifier;
+                        userBusinesses.add(business);
                     }
+                    adapterUserBusinesses.notifyDataSetChanged();
 
-                    adapter = new ArrayAdapter<String>(getActivity(),
-                            R.layout.layout_user_businesses_item, android.R.id.text1, userBusinessesStr);
-                    listView.setAdapter(adapter);
                 } else
                     recursivelyCallHandler();
             }
@@ -108,24 +167,27 @@ public class FragmentUserBusinesses extends Fragment {
 
                 //if user just add a business
                 if (myApplication.userBusinesses.size() == 1) {
-                    userBusinessesStr = new ArrayList<>();
                     userBusinesses = new ArrayList<>();
                 }
 
-                userBusinesses.add(0, new User.UserBusinesses(myApplication.business.id, myApplication.business.businessIdentifier));
-                userBusinessesStr.add(0, myApplication.business.businessIdentifier);
+                User.UserBusinesses u = new User.UserBusinesses(myApplication.business.id, myApplication.business.businessIdentifier);
+                Business business = new Business();
+                business.id = u.businessId;
+                business.name = u.businessIdentifier;
+                // TODO:: should be added to class
+//                business.description = u.description;
+//                business.profilePictureId = u.businessPicId;
+                userBusinesses.add(0, business);
 
                 //if user just add a business
                 if (myApplication.userBusinesses.size() == 1) {
-                    adapter = new ArrayAdapter<String>(getActivity(),
-                            R.layout.layout_user_businesses_item, android.R.id.text1, userBusinessesStr);
-                    listView.setAdapter(adapter);
+                    adapterUserBusinesses.notifyDataSetChanged();
 
                     if (getActivity() instanceof IChangeTabs)
                         ((IChangeTabs) getActivity()).notifyMakeFourTabsWithInitialize();
                     LoginInfo.submitBusiness(getActivity());
                 } else
-                    adapter.notifyDataSetChanged();
+                    adapterUserBusinesses.notifyDataSetChanged();
 
             } else if (requestCode == Params.ACTION_DELETE_BUSIENSS) {
                 int businessId = data.getExtras().getInt(Params.BUSINESS_ID);
@@ -133,7 +195,6 @@ public class FragmentUserBusinesses extends Fragment {
                     if (myApplication.userBusinesses.get(i).businessId == businessId) {
                         myApplication.userBusinesses.remove(i);
                         userBusinesses.remove(i);
-                        userBusinessesStr.remove(i);
                         break;
                     }
 
@@ -143,9 +204,30 @@ public class FragmentUserBusinesses extends Fragment {
                         ((IChangeTabs) getActivity()).notifyMakeThreeTab();
                     LoginInfo.removeBusiness(getActivity());
                 } else
-                    adapter.notifyDataSetChanged();
+                    adapterUserBusinesses.notifyDataSetChanged();
             }
 
         }
     }
+
+    @Override
+    public void getResult(Object result) {
+        view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+        if (result instanceof ArrayList) {
+            ArrayList<Business> temp = new ArrayList<>();
+            temp.addAll(userBusinesses);
+            temp.addAll((ArrayList<Business>) result);
+            userBusinesses.clear();
+            userBusinesses.addAll(temp);
+            adapterUserBusinesses.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void getError(Integer errorCode) {
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+    }
+
+
+
 }

@@ -7,36 +7,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.view.adapter.AdapterUserBusinesses;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 
-public class ActivityUserBusinesses extends ActionBarActivity {
+public class ActivityUserBusinesses extends ActionBarActivity implements IWebserviceResponse {
 
-    ArrayList<User.UserBusinesses> userBusinesses;
-    ArrayList<String> userBusinessesStr;
-    ArrayAdapter adapter;
+    ArrayList<Business> userBusinesses;
+    AdapterUserBusinesses adapterUserBusinesses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_businesses);
         ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.businesses));
+        userBusinesses = new ArrayList<>();
         ListView listView = (ListView) findViewById(R.id.listView);
-        userBusinesses = ((MyApplication) getApplication()).userBusinesses;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(ActivityUserBusinesses.this, ActivityBusiness.class);
-                intent.putExtra(Params.BUSINESS_ID, userBusinesses.get(i).businessId);
+                intent.putExtra(Params.BUSINESS_ID, userBusinesses.get(i).id);
                 startActivity(intent);
             }
         });
@@ -48,18 +51,20 @@ public class ActivityUserBusinesses extends ActionBarActivity {
             }
         });
 
-        if (userBusinesses.size() == 0)
-            return;
+        adapterUserBusinesses = new AdapterUserBusinesses(this, userBusinesses);
+        listView.setAdapter(adapterUserBusinesses);
 
-        userBusinessesStr = new ArrayList<>();
-        for (User.UserBusinesses business : userBusinesses) {
-            userBusinessesStr.add(business.businessIdentifier);
+        //TODO:: SHOULD BE EXECUTED
+        //new GetUserBusinesses(this,this).execute();
+
+        //TODO:: TEMPORARY::
+        ArrayList<User.UserBusinesses> userBusinesses = ((MyApplication) getApplication()).userBusinesses;
+        for (User.UserBusinesses businessItem : userBusinesses) {
+            Business business = new Business();
+            business.id = businessItem.businessId;
+            business.name = businessItem.businessIdentifier;
         }
-
-        adapter = new ArrayAdapter<String>(ActivityUserBusinesses.this,
-                R.layout.layout_user_businesses_item, android.R.id.text1, userBusinessesStr);
-        listView.setAdapter(adapter);
-
+        adapterUserBusinesses.notifyDataSetChanged();
 
     }
 
@@ -83,20 +88,21 @@ public class ActivityUserBusinesses extends ActionBarActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            if (requestCode == Params.ACTION_REGISTER_BUSINESS) {
-                MyApplication myApplication = (MyApplication) getApplication();
-                myApplication.userBusinesses.add(new User.UserBusinesses(myApplication.business.id, myApplication.business.businessIdentifier));
-                userBusinesses.add(0, new User.UserBusinesses(myApplication.business.id, myApplication.business.businessIdentifier));
-                userBusinessesStr.add(0, myApplication.business.businessIdentifier);
-                adapter.notifyDataSetChanged();
-            }
+    public void getResult(Object result) {
+        findViewById(R.id.progressBar).setVisibility(View.GONE);
+        if (result instanceof ArrayList) {
+            ArrayList<Business> temp = new ArrayList<>();
+            temp.addAll(userBusinesses);
+            temp.addAll((ArrayList<Business>) result);
+            userBusinesses.clear();
+            userBusinesses.addAll(temp);
+            adapterUserBusinesses.notifyDataSetChanged();
         }
-
     }
 
+    @Override
+    public void getError(Integer errorCode) {
+        new DialogMessage(this, ServerAnswer.getError(this, errorCode)).show();
+    }
 
 }

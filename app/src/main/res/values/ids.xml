@@ -1,0 +1,7 @@
+<resources>
+
+    <item name="img_userbusinesses_pic" type="id"/>
+    <item name="txt_userbusinesses_name" type="id"/>
+    <item name="txt_userbusinesses_description" type="id"/>
+    <item name="progressBar" type="id"/>
+</resources>

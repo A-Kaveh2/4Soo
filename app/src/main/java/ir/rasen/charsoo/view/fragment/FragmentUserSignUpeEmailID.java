@@ -12,7 +12,7 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.ImageViewCircle;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 public class FragmentUserSignUpeEmailID extends Fragment implements IWebserviceResponse {
 

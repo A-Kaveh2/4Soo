@@ -15,7 +15,7 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.view.widget_customized.ImageViewCircle;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 import ir.rasen.charsoo.model.DownloadImages;
 

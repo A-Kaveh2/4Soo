@@ -15,7 +15,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp">
 
-            <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
+            <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
                 android:layout_width="@dimen/register_profile_picture_height"
                 android:layout_height="@dimen/register_profile_picture_height"
                 android:id="@+id/imageView_user_picture"

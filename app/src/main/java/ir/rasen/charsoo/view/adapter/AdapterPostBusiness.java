@@ -81,9 +81,6 @@ public class AdapterPostBusiness extends BaseAdapter {
             holder.textViewDate = (TextViewFont) view.findViewById(R.id.textView_date);
 
             holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
-            //to display post picture as square
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
-            holder.imageViewPost.setLayoutParams(params);
 
             holder.imageViewEdit = (ImageView) view.findViewById(R.id.imageView_edit);
             holder.imageViewComment = (ImageView) view.findViewById(R.id.imageView_comment);

@@ -78,7 +78,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="@dimen/drawer_edit_button_margin">
 
-                    <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
+                    <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@color/DarkOrange"

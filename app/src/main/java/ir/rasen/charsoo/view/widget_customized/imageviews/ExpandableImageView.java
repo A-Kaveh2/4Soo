@@ -1,4 +1,4 @@
-package ir.rasen.charsoo.view.widget_customized;
+package ir.rasen.charsoo.view.widget_customized.imageviews;
 
 import android.app.Activity;
 import android.content.Context;

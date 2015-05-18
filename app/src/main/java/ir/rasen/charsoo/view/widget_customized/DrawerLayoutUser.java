@@ -16,6 +16,7 @@ import ir.rasen.charsoo.view.dialog.DialogExit;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/15/2015.

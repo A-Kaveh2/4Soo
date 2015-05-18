@@ -62,7 +62,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center">
 
-            <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
+            <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
                 android:layout_width="@dimen/adapter_user_image_height"
                 android:layout_height="@dimen/adapter_user_image_height"
                 android:id="@+id/imageView_comment_adapter_item_image_user"

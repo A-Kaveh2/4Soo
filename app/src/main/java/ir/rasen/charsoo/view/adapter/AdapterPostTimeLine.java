@@ -10,27 +10,26 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.Comment;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.PopupReportPostAdapter;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.MyGestureDetector;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
-import ir.rasen.charsoo.view.interface_m.IReportPost;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
+import ir.rasen.charsoo.view.dialog.PopupReportPostAdapter;
+import ir.rasen.charsoo.view.interface_m.IReportPost;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
 
 /**
@@ -86,7 +85,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         final Holder holder = new Holder();
         view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list, viewGroup, false);
 
-
         holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
         holder.textViewBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_business_identifier);
         holder.textViewDate = (TextViewFont) view.findViewById(R.id.textView_date);
@@ -95,11 +93,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         holder.llCompleteSection = (LinearLayout) view.findViewById(R.id.ll_complete_post_section);
         holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
         holder.imageViewPostLike = (ImageView) view.findViewById(R.id.imageView_post_like);
-
-        //to display post picture as square
-        RelativeLayout.LayoutParams params = new RelativeLayout
-                .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
-        holder.imageViewPost.setLayoutParams(params);
 
         holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
         holder.imageViewComment = (ImageView) view.findViewById(R.id.imageView_comment);

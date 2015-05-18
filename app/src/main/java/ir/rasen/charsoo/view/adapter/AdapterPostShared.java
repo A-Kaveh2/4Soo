@@ -11,29 +11,28 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.Comment;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.MyGestureDetector;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
-import ir.rasen.charsoo.view.interface_m.IReportPost;
-import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
+import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
+import ir.rasen.charsoo.view.interface_m.IReportPost;
+import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
 /**
  * Created by android on 3/7/2015.
@@ -43,18 +42,13 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
     private ArrayList<Post> items;
     private Context context;
     DownloadImages downloadImages;
-    private int screedWidth;
     private IReportPost iReportPost;
     IUpdateTimeLine iUpdateTimeLine;
-
-    private GestureDetector gestureDetector;
-
 
     public AdapterPostShared(Context context, ArrayList<Post> items) {
         this.context = context;
         this.items = items;
         downloadImages = new DownloadImages(context);
-        screedWidth = context.getResources().getDisplayMetrics().widthPixels;
         iReportPost = this;
         this.iUpdateTimeLine = this;
         this.iReportPost = this;
@@ -100,9 +94,6 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
                 holder.llCompleteSection = (LinearLayout) view.findViewById(R.id.ll_complete_post_section);
 
                 holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
-                //to display post picture as square
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, screedWidth);
-                holder.imageViewPost.setLayoutParams(params);
                 holder.imageViewPostLike = (ImageView) view.findViewById(R.id.imageView_post_like);
 
                 holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);

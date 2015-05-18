@@ -4,6 +4,43 @@
         <attr name="collapsedHeight" format="dimension" />
         <attr name="animationDuration" format="integer" />
     </declare-styleable>
+    <attr name="siArrowPosition">
+        <enum name="left" value="0" />
+        <enum name="right" value="1" />
+    </attr>
+    <attr name="siBorderType">
+        <enum name="stroke" value="0" />
+        <enum name="fill" value="1" />
+    </attr>
+    <attr name="siStrokeCap">
+        <enum name="butt" value="0" />
+        <enum name="round" value="1" />
+        <enum name="square" value="2" />
+    </attr>
+    <attr name="siStrokeJoin">
+        <enum name="bevel" value="0" />
+        <enum name="miter" value="1" />
+        <enum name="round" value="2" />
+    </attr>
+    <declare-styleable name="ShaderImageView">
+        <attr name="siSquare" format="boolean" />
+        <attr name="siBorderColor" format="color" />
+        <attr name="siBorderWidth" format="dimension" />
+        <attr name="siBorderAlpha" format="float" />
+        <attr name="siForeground" format="integer|reference" />
+        <!-- Rounded Image View -->
+        <attr name="siRadius" format="dimension" />
+        <!--BubbleImageView-->
+        <attr name="siArrowPosition"/>
+        <attr name="siTriangleHeight" format="dimension"/>
+        <!--PorterImageView-->
+        <attr name="siShape" format="integer|reference" />
+        <!--ShaderImageView-->
+        <attr name="siBorderType"/>
+        <attr name="siStrokeCap"/>
+        <attr name="siStrokeJoin"/>
+        <attr name="siStrokeMiter" format="dimension" />
+    </declare-styleable>
 
     <dimen name="activity_horizontal_margin_2x">32dp</dimen>
     <dimen name="activity_horizontal_margin_half">8dp</dimen>
@@ -12,6 +49,8 @@
     <dimen name="activity_vertical_margin_half">8dp</dimen>
     <dimen name="activity_vertical_margin_1of4">4dp</dimen>
     <dimen name="activity_vertical_margin_1of8">2dp</dimen>
+    <dimen name="margin_minimum">1dp</dimen>
+    <dimen name="margin_minimum_x2">2dp</dimen>
 
     <dimen name="actionbar_height">48dp</dimen>
     <dimen name="actionbar_height_half">24dp</dimen>

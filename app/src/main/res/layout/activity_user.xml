@@ -40,7 +40,7 @@
                     android:orientation="vertical"
                     android:background="@color/DeepSkyBlue">
 
-                    <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
+                    <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
                         android:layout_width="@dimen/drawer_user_picture_height"
                         android:layout_height="@dimen/drawer_user_picture_height"
                         android:id="@+id/imageView_user_picture"
@@ -75,7 +75,7 @@
                     android:layout_marginBottom="@dimen/drawer_edit_button_margin"
                     android:layout_marginLeft="@dimen/drawer_edit_button_margin">
 
-                    <ir.rasen.charsoo.view.widget_customized.ImageViewCircle
+                    <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@color/DarkOrange"

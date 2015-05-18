@@ -25,6 +25,7 @@ public class URLs {
     public static String GET_FOLLOWING_BUSINESSES = MAIN_URL+"getUserFollowedBusinesses";
     public static String GET_USER_FRIENDS = MAIN_URL+"getUserFriendList";
     public static String GET_USER_FRIEND_REQUEST = MAIN_URL+"getUserFriendRequestList";
+    public static String GET_USER_BUSINESSES= MAIN_URL+"getUserBusinesses";
     public static String UPDATE_SETTING = MAIN_URL+"updateUserPermission";
     public static String GET_POSTS = MAIN_URL+"getBusinessPosts";
     public static String GET_USER_POST = MAIN_URL+"getUserPost";
