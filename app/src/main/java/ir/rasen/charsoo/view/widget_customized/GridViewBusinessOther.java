@@ -10,6 +10,9 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.handmark.pulltorefresh.library.*;
+import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
@@ -40,7 +43,7 @@ import ir.rasen.charsoo.model.user.UnFollowBusiness;
  * Created by android on 3/14/2015.
  */
 public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusiness {
-    GridViewHeader gridViewHeader;
+    GridViewWithHeaderAndFooter gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostBusiness;
     private boolean isThreeColumn = true;
@@ -58,7 +61,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     IUnfollowBusiness iUnfollowBusiness;
     IWebserviceResponse iWebserviceResponse;
 
-    public GridViewBusinessOther(Activity activity, Business business, GridViewHeader gridViewHeader) {
+    public GridViewBusinessOther(Activity activity, Business business, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader) {
         this.activity = activity;
         this.business = business;
         this.gridViewHeader = gridViewHeader;
@@ -255,7 +258,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         new GetBusinessPosts(activity, LoginInfo.getUserId(activity), business.id, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewBusinessOther.this).execute();
     }
 
-    private void prepareGridThreeColumn(GridViewHeader gridViewHeader) {
+    private void prepareGridThreeColumn(GridViewWithHeaderAndFooter gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

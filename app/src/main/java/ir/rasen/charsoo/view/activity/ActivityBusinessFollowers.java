@@ -98,8 +98,8 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
     // LOAD MORE DATA
     public void loadMoreData() {
         // LOAD MORE DATA HERE...
-        //this webservice doesn't support load more yet.
-       /* status = Status.LOADING_MORE;
+
+      /*  status = Status.LOADING_MORE;
         pullToRefreshListView.setFooterVisibility(View.VISIBLE);
         new GetBusinessFollowers(ActivityBusinessFollowers.this, businessId, ActivityBusinessFollowers.this).execute();*/
     }
