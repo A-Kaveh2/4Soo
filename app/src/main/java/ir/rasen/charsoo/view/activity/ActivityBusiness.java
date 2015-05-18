@@ -3,9 +3,13 @@ package ir.rasen.charsoo.view.activity;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 
@@ -44,6 +48,7 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
     Business business;
     GridViewBusiness gridViewBusiness;
     ArrayList<Post> posts;
+    BroadcastReceiver deletePost;
 
     //pull_to_refresh_lib
     PullToRefreshGrid pullToRefreshGridView;
@@ -68,6 +73,15 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
 
         progressDialog.show();
         new GetBusinessHomeInfo(ActivityBusiness.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusiness.this), ActivityBusiness.this).execute();
+
+        deletePost = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //if the user delete a post from ActivityPost
+                gridViewBusiness.notifyDeletePost(intent.getIntExtra(Params.POST_ID,0));
+            }
+        };
+        LocalBroadcastManager.getInstance(this).registerReceiver(deletePost, new IntentFilter(Params.DELETE_POST_FROM_ACTIVITY));
 
 
     }

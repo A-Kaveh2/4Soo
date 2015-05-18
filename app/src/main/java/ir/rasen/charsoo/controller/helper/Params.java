@@ -198,6 +198,7 @@ public class Params {
     public static String UPDATE_USER_PROFILE_PCITURE = "updateUserProfilePicture";
     public static final String UPATE_TIME_LINE_TYPE_SHARE = "updateTimeLineTypeShare";
     public static final String UPATE_TIME_LINE_TYPE_CANCEL_SHARE = "updateTimeLineTypeCancelShare";
+    public static final String DELETE_POST_FROM_ACTIVITY = "deletePostFromActivity";
 
     //Actions
     public static int ACTION_ADD_NEW_BUSIENSS_SUCCESS = 1001;

@@ -192,9 +192,9 @@ public class Post {
         post.userId = jsonObject.getInt(Params.USER_ID);
         post.userName = jsonObject.getString(Params.USER_NAME);
         post.type = getType(jsonObject.getInt(Params.TYPE));
-
+        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
         if (post.type == Type.Complete) {
-            post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
+            //post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
             post.title = jsonObject.getString(Params.TITLE);
             post.creationDate = jsonObject.getInt(Params.CREATION_DATAE);
             post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID);

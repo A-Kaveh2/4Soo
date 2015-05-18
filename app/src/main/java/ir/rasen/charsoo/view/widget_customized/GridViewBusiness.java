@@ -32,6 +32,7 @@ import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.view.interface_m.IDeletePost;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
@@ -39,7 +40,7 @@ import ir.rasen.charsoo.model.post.GetBusinessPosts;
 /**
  * Created by android on 3/14/2015.
  */
-public class GridViewBusiness implements IWebserviceResponse {
+public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
     com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostBusiness adapterPostBusiness;
@@ -83,7 +84,7 @@ public class GridViewBusiness implements IWebserviceResponse {
         /*adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();*/
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, business.id, Post.GetPostType.BUSINESS);
-        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true);
+        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true,GridViewBusiness.this);
 
         imageViewSwitch.setVisibility(View.VISIBLE);
         imageViewCirecle.setVisibility(View.VISIBLE);
@@ -98,13 +99,13 @@ public class GridViewBusiness implements IWebserviceResponse {
     public void InitialGridViewBusiness(ArrayList<Post> postList) {
 
         searchItemPosts = new ArrayList<>();
-        this.posts = postList;
+        posts = postList;
 
         iWebserviceResponse = this;
         for (Post post : posts)
             searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, business.id, Post.GetPostType.BUSINESS);
-        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true);
+        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true,GridViewBusiness.this);
 
 
         if (!hasHeader) {
@@ -305,4 +306,19 @@ public class GridViewBusiness implements IWebserviceResponse {
     public void getError(Integer errorCode) {
         new DialogMessage(activity, ServerAnswer.getError(activity, errorCode)).show();
     }
+
+    @Override
+    public void notifyDeletePost(int postId) {
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).id == postId) {
+                posts.remove(i);
+                searchItemPosts.remove(i);
+                break;
+            }
+        }
+        adapterPostBusiness.notifyDataSetChanged();
+        adapterPostGrid.notifyDataSetChanged();
+    }
+
+
 }

@@ -360,7 +360,11 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
 
     @Override
     public void notifyDeletePost(int postId) {
+        Intent intent = new Intent(Params.DELETE_POST_FROM_ACTIVITY);
+        intent.putExtra(Params.POST_ID,postId);
+        LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intent);
 
+        finish();
     }
 
     @Override

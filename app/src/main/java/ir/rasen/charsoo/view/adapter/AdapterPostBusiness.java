@@ -28,7 +28,7 @@ import ir.rasen.charsoo.model.DownloadImages;
 /**
  * Created by android on 3/7/2015.
  */
-public class AdapterPostBusiness extends BaseAdapter implements IDeletePost {
+public class AdapterPostBusiness extends BaseAdapter {
 
     private ArrayList<Post> items;
     private Context context;
@@ -37,12 +37,12 @@ public class AdapterPostBusiness extends BaseAdapter implements IDeletePost {
     private IDeletePost iDeletePost;
     private boolean isUserOwner;
 
-    public AdapterPostBusiness(Context context, ArrayList<Post> items,boolean isUserOwner) {
+    public AdapterPostBusiness(Context context, ArrayList<Post> items,boolean isUserOwner,IDeletePost iDeletePost) {
         this.context = context;
         this.items = items;
         downloadImages = new DownloadImages(context);
         screedWidth = context.getResources().getDisplayMetrics().widthPixels;
-        iDeletePost = this;
+        this.iDeletePost = iDeletePost;
         this.isUserOwner = isUserOwner;
     }
 
@@ -192,14 +192,7 @@ public class AdapterPostBusiness extends BaseAdapter implements IDeletePost {
     }
 
 
-    @Override
-    public void notifyDeletePost(int postId) {
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).id == postId)
-                items.remove(i);
-        }
-        notifyDataSetChanged();
-    }
+
 
     private class Holder {
 
