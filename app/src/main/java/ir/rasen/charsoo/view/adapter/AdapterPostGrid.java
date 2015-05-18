@@ -13,11 +13,9 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
-import ir.rasen.charsoo.view.widget_customized.GridViewHeader;
-import ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.DownloadImages;
 
 public class AdapterPostGrid extends BaseAdapter {
@@ -25,8 +23,8 @@ public class AdapterPostGrid extends BaseAdapter {
     ArrayList<SearchItemPost> items;
     private int screedWidth;
     DownloadImages downloadImages;
-    GridViewWithHeaderAndFooter gridViewHF;
-    com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridView;
+    //GridViewHeaderFooter gridViewHF;
+    com.handmark.pulltorefresh.library.HFGridView gridView;
     int businessIdForBusinessPosts;
     Post.GetPostType getPostType;
 
@@ -60,9 +58,9 @@ public class AdapterPostGrid extends BaseAdapter {
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         ImageView imageView = null;
-        if (gridView == null) {
+        /*if (gridView == null) {
             try {
-                gridViewHF = (GridViewWithHeaderAndFooter) parent;
+                gridViewHF = (com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter) parent;
                 gridViewHF.setVerticalSpacing(3);
                 gridViewHF.setHorizontalSpacing(9);
                 gridViewHF.setNumColumns(3);
@@ -73,7 +71,7 @@ public class AdapterPostGrid extends BaseAdapter {
                 gridView.setNumColumns(3);
             }
 
-        }
+        }*/
         if (convertView == null) {
             imageView = new ImageView(activity);
             imageView.setLayoutParams(new GridView.LayoutParams((screedWidth / 3), (screedWidth / 3)));

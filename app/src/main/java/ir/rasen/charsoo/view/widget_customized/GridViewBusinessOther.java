@@ -5,45 +5,41 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import com.handmark.pulltorefresh.library.*;
-import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import com.handmark.pulltorefresh.library.HFGridView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
-import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
-import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
-import ir.rasen.charsoo.view.activity.ActivityProfilePicture;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
-import ir.rasen.charsoo.view.adapter.AdapterPostShared;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
 import ir.rasen.charsoo.model.user.FollowBusiness;
 import ir.rasen.charsoo.model.user.UnFollowBusiness;
+import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
+import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
+import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
+import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
+import ir.rasen.charsoo.view.adapter.AdapterPostShared;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 /**
  * Created by android on 3/14/2015.
  */
 public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusiness {
-    GridViewWithHeaderAndFooter gridViewHeader;
+    HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostBusiness;
     private boolean isThreeColumn = true;
@@ -61,7 +57,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     IUnfollowBusiness iUnfollowBusiness;
     IWebserviceResponse iWebserviceResponse;
 
-    public GridViewBusinessOther(Activity activity, Business business, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader) {
+    public GridViewBusinessOther(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
         this.activity = activity;
         this.business = business;
         this.gridViewHeader = gridViewHeader;
@@ -114,23 +110,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             textViewName.setText(String.valueOf(business.name));
             textViewFollowersNumber.setText(String.valueOf(business.followersNumber));
 
-            int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
-            imageViewCover.setLayoutParams(params);
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
-
-            imageViewCover.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityProfilePicture.class);
-                    intent.putExtra(Params.USER_IDENTIFIER, business.businessIdentifier);
-                    intent.putExtra(Params.PROFILE_PICTURE_ID, business.profilePictureId);
-                    activity.startActivity(intent);
-                    activity.overridePendingTransition(R.anim.slide_enter_down,
-                            R.anim.slide_exit_down);
-                }
-            });
 
             if (business.isFollowing) {
                 buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, activity.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
@@ -258,7 +239,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         new GetBusinessPosts(activity, LoginInfo.getUserId(activity), business.id, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewBusinessOther.this).execute();
     }
 
-    private void prepareGridThreeColumn(GridViewWithHeaderAndFooter gridViewHeader) {
+    private void prepareGridThreeColumn(HFGridView gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

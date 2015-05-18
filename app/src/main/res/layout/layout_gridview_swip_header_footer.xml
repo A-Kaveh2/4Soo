@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter
+        <com.handmark.pulltorefresh.library.HFGridView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="3dp"

@@ -1,38 +1,33 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 
-import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import com.handmark.pulltorefresh.library.HFGridView;
 import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.PullToRefreshGrid;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.FriendshipRelation;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.PullToRefreshGrid;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.GridViewHeader;
-import ir.rasen.charsoo.view.widget_customized.GridViewUserOther;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.model.user.GetUserHomeInfo;
-
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.GridViewUserOther;
 
 public class ActivityUserOther extends Activity implements IWebserviceResponse, IPullToRefresh {
 
-    private GridViewWithHeaderAndFooter gridView;
+    private HFGridView gridView;
     private int visitedUserId;
     ProgressDialog progressDialog;
     private User user;

@@ -2,11 +2,9 @@ package ir.rasen.charsoo.controller.helper;
 
 import android.app.Activity;
 import android.view.View;
-import android.widget.GridView;
-import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.Footer;
-import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import com.handmark.pulltorefresh.library.HFGridView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
 
@@ -22,16 +20,16 @@ public class PullToRefreshGrid {
     private PullToRefreshGridViewWithHeaderAndFooter pullToRefreshGridViewHF;
     private Footer footer;
     private int resultSize;
-    private GridViewWithHeaderAndFooter gridViewHF;
+    private HFGridView gridViewHF;
 
     public PullToRefreshGrid(final Activity activity,final PullToRefreshGridViewWithHeaderAndFooter pullToRefreshGridViewHF, final IPullToRefresh iPullToRefresh) {
 
         this.pullToRefreshGridViewHF = pullToRefreshGridViewHF;
 
 
-        pullToRefreshGridViewHF.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<GridViewWithHeaderAndFooter>() {
+        pullToRefreshGridViewHF.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<HFGridView>() {
             @Override
-            public void onRefresh(PullToRefreshBase<GridViewWithHeaderAndFooter> refreshView) {
+            public void onRefresh(PullToRefreshBase<HFGridView> refreshView) {
                 iPullToRefresh.notifyRefresh();
             }
         });
@@ -57,7 +55,7 @@ public class PullToRefreshGrid {
         gridViewHF.addFooterView(footer.getFooterView(), null, false);
     }
 
-    public GridViewWithHeaderAndFooter getGridViewHeaderFooter() {
+    public HFGridView getGridViewHeaderFooter() {
         return this.gridViewHF;
     }
 

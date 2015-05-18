@@ -11,11 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <ir.rasen.charsoo.view.widget_customized.ExpandableImageView
             android:id="@+id/imageView_cover"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:scaleType="fitXY" />
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:id="@+id/ll_action_bar"

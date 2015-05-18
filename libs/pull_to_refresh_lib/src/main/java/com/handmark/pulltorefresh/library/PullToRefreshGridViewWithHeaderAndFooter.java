@@ -24,7 +24,7 @@ import android.view.View;
 
 import com.handmark.pulltorefresh.library.internal.EmptyViewMethodAccessor;
 
-public class PullToRefreshGridViewWithHeaderAndFooter extends PullToRefreshAdapterViewBase<GridViewWithHeaderAndFooter> {
+public class PullToRefreshGridViewWithHeaderAndFooter extends PullToRefreshAdapterViewBase<HFGridView> {
 
 	public PullToRefreshGridViewWithHeaderAndFooter(Context context) {
 		super(context);
@@ -48,12 +48,12 @@ public class PullToRefreshGridViewWithHeaderAndFooter extends PullToRefreshAdapt
 	}
 
 	@Override
-	protected final GridViewWithHeaderAndFooter createRefreshableView(Context context, AttributeSet attrs) {
-		final GridViewWithHeaderAndFooter gv;
+	protected final HFGridView createRefreshableView(Context context, AttributeSet attrs) {
+		final HFGridView gv;
 		if (VERSION.SDK_INT >= VERSION_CODES.GINGERBREAD) {
-			gv = new InternalGridViewSDK9(context, attrs);
+			gv = new InternalHFGridViewSDK9(context, attrs);
 		} else {
-			gv = new InternalGridView(context, attrs);
+			gv = new InternalHFGridView(context, attrs);
 		}
 
 		// Use Generated ID (from res/values/ids.xml)
@@ -61,9 +61,9 @@ public class PullToRefreshGridViewWithHeaderAndFooter extends PullToRefreshAdapt
 		return gv;
 	}
 
-	class InternalGridView extends GridViewWithHeaderAndFooter implements EmptyViewMethodAccessor {
+	class InternalHFGridView extends HFGridView implements EmptyViewMethodAccessor {
 
-		public InternalGridView(Context context, AttributeSet attrs) {
+		public InternalHFGridView(Context context, AttributeSet attrs) {
 			super(context, attrs);
 		}
 
@@ -79,9 +79,9 @@ public class PullToRefreshGridViewWithHeaderAndFooter extends PullToRefreshAdapt
 	}
 
 	@TargetApi(9)
-	final class InternalGridViewSDK9 extends InternalGridView {
+	final class InternalHFGridViewSDK9 extends InternalHFGridView {
 
-		public InternalGridViewSDK9(Context context, AttributeSet attrs) {
+		public InternalHFGridViewSDK9(Context context, AttributeSet attrs) {
 			super(context, attrs);
 		}
 

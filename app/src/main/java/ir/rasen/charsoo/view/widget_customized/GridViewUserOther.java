@@ -5,26 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-import com.handmark.pulltorefresh.library.*;
-import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import com.handmark.pulltorefresh.library.HFGridView;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
-import ir.rasen.charsoo.view.activity.ActivityUserFriends;
-import ir.rasen.charsoo.view.activity.ActivityProfilePicture;
-import ir.rasen.charsoo.view.activity.ActivityUserReviews;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
-import ir.rasen.charsoo.view.adapter.AdapterPostShared;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.FriendshipRelation;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
@@ -32,18 +20,26 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.ICancelFriendship;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.friend.RequestCancelFriendship;
 import ir.rasen.charsoo.model.friend.RequestFriendship;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
+import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
+import ir.rasen.charsoo.view.activity.ActivityUserFriends;
+import ir.rasen.charsoo.view.activity.ActivityUserReviews;
+import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
+import ir.rasen.charsoo.view.adapter.AdapterPostShared;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.ICancelFriendship;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 /**
  * Created by android on 3/14/2015.
  */
 public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship {
-    GridViewWithHeaderAndFooter gridViewHeader;
+    HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
@@ -63,7 +59,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     IWebserviceResponse iWebserviceResponse;
 
 
-    public GridViewUserOther(final Activity context, final User displayedUser, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gViewHeader) {
+    public GridViewUserOther(final Activity context, final User displayedUser, com.handmark.pulltorefresh.library.HFGridView gViewHeader) {
         this.context = context;
         this.user = displayedUser;
         this.gridViewHeader = gViewHeader;
@@ -140,23 +136,8 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
             }
         });
 
-        int screenWidth = context.getResources().getDisplayMetrics().widthPixels;
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
-        imageViewCover.setLayoutParams(params);
         DownloadCoverImage downloadCoverImage = new DownloadCoverImage(context);
         downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
-
-        imageViewCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityProfilePicture.class);
-                intent.putExtra(Params.USER_IDENTIFIER, displayedUser.userIdentifier);
-                intent.putExtra(Params.PROFILE_PICTURE_ID, displayedUser.profilePictureId);
-                context.startActivity(intent);
-                context.overridePendingTransition(R.anim.slide_enter_down,
-                        R.anim.slide_exit_down);
-            }
-        });
 
         imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -288,7 +269,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         new GetSharedPosts(context, user.id, posts.get(posts.size() - 1).id, context.getResources().getInteger(R.integer.lazy_load_limitation), GridViewUserOther.this).execute();
     }
 
-    private void prepareGridThreeColumn(GridViewWithHeaderAndFooter gridViewHeader) {
+    private void prepareGridThreeColumn(HFGridView gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

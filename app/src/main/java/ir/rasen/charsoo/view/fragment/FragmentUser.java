@@ -15,18 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import com.handmark.pulltorefresh.library.HFGridView;
 import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.PullToRefreshGrid;
-import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.activity.ActivityUserFriendRequests;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
@@ -37,7 +35,6 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.DrawerLayoutUser;
-import ir.rasen.charsoo.view.widget_customized.GridViewHeader;
 import ir.rasen.charsoo.view.widget_customized.GridViewUser;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.model.user.GetUserHomeInfo;
@@ -45,7 +42,7 @@ import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh {
 
     private DrawerLayout mDrawerLayout;
-    private GridViewWithHeaderAndFooter gridView;
+    private HFGridView gridView;
     private int visitedUserId;
     ProgressDialog progressDialog;
     private User user;

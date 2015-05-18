@@ -7,41 +7,37 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-
-import com.handmark.pulltorefresh.library.*;
 
 import java.util.ArrayList;
-import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
-import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
-import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
-import ir.rasen.charsoo.view.activity.ActivityProfilePicture;
-import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
+
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterPostBusiness;
-import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IDeletePost;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
+import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
+import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
+import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
+import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
+import ir.rasen.charsoo.view.adapter.AdapterPostBusiness;
+import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IDeletePost;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 /**
  * Created by android on 3/14/2015.
  */
 public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
-    com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader;
+    com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostBusiness adapterPostBusiness;
     private boolean isThreeColumn = true;
@@ -59,7 +55,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
     boolean hasHeader;
     DownloadCoverImage downloadCoverImage;
 
-    public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader, DrawerLayout drawerLayout) {
         this.activity = activity;
         this.business = business;
         this.gridViewHeader = gridViewHeader;
@@ -109,12 +105,12 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
 
 
         if (!hasHeader) {
-            viewHeader = ((Activity) activity).getLayoutInflater().inflate(R.layout.layout_business_grid_header, null);
+            viewHeader = activity.getLayoutInflater().inflate(R.layout.layout_business_grid_header, null);
 
             imageViewMore = (ImageView) viewHeader.findViewById(R.id.imageView_more);
             imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
             imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
-            imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
+            imageViewCover = (ExpandableImageView) viewHeader.findViewById(R.id.imageView_cover);
             imageViewFollowers = (ImageView) viewHeader.findViewById(R.id.imageView_followers);
             imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
             imageViewContactInfo = (ImageView) viewHeader.findViewById(R.id.imageView_conatct_info);
@@ -131,9 +127,6 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
             textViewName.setText(String.valueOf(business.name));
             textViewFollowersNumber.setText(String.valueOf(business.followersNumber));
 
-            int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
-            imageViewCover.setLayoutParams(params);
             downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
 
@@ -142,19 +135,8 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
                 public void onClick(View view) {
                     Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
                     intent.putExtra(Params.BUSINESS_ID,business.id);
-                    intent.putExtra(Params.BUSINESS_IDENTIFIER,business.businessIdentifier);
+                    intent.putExtra(Params.BUSINESS_IDENTIFIER, business.businessIdentifier);
                     activity.startActivityForResult(intent, Params.ACTION_EDIT_BUSINESS);
-                }
-            });
-            imageViewCover.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityProfilePicture.class);
-                    intent.putExtra(Params.USER_IDENTIFIER, business.businessIdentifier);
-                    intent.putExtra(Params.PROFILE_PICTURE_ID, business.profilePictureId);
-                    activity.startActivity(intent);
-                    activity.overridePendingTransition(R.anim.slide_enter_down,
-                            R.anim.slide_exit_down);
                 }
             });
 
@@ -281,7 +263,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         new GetBusinessPosts(activity, LoginInfo.getUserId(activity), business.id, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewBusiness.this).execute();
     }
 
-    private void prepareGridThreeColumn(com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader) {
+    private void prepareGridThreeColumn(com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

@@ -1,19 +1,17 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 
-import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import com.handmark.pulltorefresh.library.HFGridView;
 import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
@@ -27,7 +25,6 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.fragment.FragmentUser;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
@@ -44,7 +41,7 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
     ProgressDialog progressDialog;
     int selectedBusinessId, businessProfilePictureId;
     DrawerLayoutBusiness drawerLayoutBusiness;
-    GridViewWithHeaderAndFooter gridView;
+    HFGridView gridView;
     Business business;
     GridViewBusiness gridViewBusiness;
     ArrayList<Post> posts;

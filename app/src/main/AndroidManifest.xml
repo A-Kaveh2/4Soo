@@ -156,9 +156,6 @@
         <activity
             android:name=".ActivityMain2"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.activity.ActivityProfilePicture"
-            android:screenOrientation="portrait" />
 
 
         <activity

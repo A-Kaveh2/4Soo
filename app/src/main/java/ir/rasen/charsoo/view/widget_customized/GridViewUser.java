@@ -10,38 +10,36 @@ import android.text.style.ForegroundColorSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import java.util.ArrayList;
-import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
-import ir.rasen.charsoo.view.activity.ActivityUserFriends;
-import ir.rasen.charsoo.view.activity.ActivityProfilePicture;
-import ir.rasen.charsoo.view.activity.ActivityProfileUser;
-import ir.rasen.charsoo.view.activity.ActivitySearchUser;
-import ir.rasen.charsoo.view.activity.ActivityUserReviews;
+
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
-import ir.rasen.charsoo.view.adapter.AdapterPostShared;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
-import com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.view.activity.ActivityProfileUser;
+import ir.rasen.charsoo.view.activity.ActivitySearchUser;
+import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
+import ir.rasen.charsoo.view.activity.ActivityUserFriends;
+import ir.rasen.charsoo.view.activity.ActivityUserReviews;
+import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
+import ir.rasen.charsoo.view.adapter.AdapterPostShared;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 /**
  * Created by android on 3/14/2015.
  */
 public class GridViewUser implements IWebserviceResponse {
-    GridViewWithHeaderAndFooter gridViewHeader;
+    com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
@@ -61,7 +59,7 @@ public class GridViewUser implements IWebserviceResponse {
     String userIdentifier, userName, aboutMe;
 
 
-    public GridViewUser(Activity activity, User user, int visitedUserId, com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewUser(Activity activity, User user, int visitedUserId, com.handmark.pulltorefresh.library.HFGridView gridViewHeader, DrawerLayout drawerLayout) {
         this.activity = activity;
         this.profilePictureId = user.profilePictureId;
         this.gridViewHeader = gridViewHeader;
@@ -142,10 +140,6 @@ public class GridViewUser implements IWebserviceResponse {
             if (!hasRequest)
                 imageViewHasRequest.setVisibility(View.GONE);
 
-            int screenWidth = activity.getResources().getDisplayMetrics().widthPixels;
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (screenWidth / 3) * 2);
-            imageViewCover.setLayoutParams(params);
-
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(profilePictureId, imageViewCover, Image_M.ImageType.USER);
 
@@ -154,17 +148,6 @@ public class GridViewUser implements IWebserviceResponse {
                 public void onClick(View view) {
                     Intent intent = new Intent(activity, ActivityProfileUser.class);
                     activity.startActivity(intent);
-                }
-            });
-            imageViewCover.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityProfilePicture.class);
-                    intent.putExtra(Params.USER_IDENTIFIER, userIdentifier);
-                    intent.putExtra(Params.PROFILE_PICTURE_ID, profilePictureId);
-                    activity.startActivity(intent);
-                    activity.overridePendingTransition(R.anim.slide_enter_down,
-                            R.anim.slide_exit_down);
                 }
             });
             imageViewMore.setOnClickListener(new View.OnClickListener() {
@@ -299,7 +282,7 @@ public class GridViewUser implements IWebserviceResponse {
         new GetSharedPosts(activity, visitedUserId, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewUser.this).execute();
     }
 
-    private void prepareGridThreeColumn(GridViewWithHeaderAndFooter gridViewHeader) {
+    private void prepareGridThreeColumn(com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

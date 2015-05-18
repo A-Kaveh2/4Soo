@@ -9,28 +9,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 
+import com.handmark.pulltorefresh.library.HFGridView;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.GridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.search.SearchBusinessesLocation;
 import ir.rasen.charsoo.model.search.SearchPost;
-
+import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 
 public class ActivitySearchPostResult extends ActionBarActivity implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     AdapterPostGrid adapterPostGrid;
-    GridViewWithHeaderAndFooter gridView;
+    HFGridView gridView;
     ArrayList<SearchItemPost> results;
     ArrayList<SearchItemPost> sampleResults;
     private View listFooterView;
@@ -65,7 +65,7 @@ public class ActivitySearchPostResult extends ActionBarActivity implements IWebs
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        gridView = (GridViewWithHeaderAndFooter) findViewById(R.id.gridView);
+        gridView = (HFGridView) findViewById(R.id.gridView);
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             int currentFirstVisibleItem
                     ,
