@@ -68,6 +68,10 @@ public class ServerAnswer {
                 return context.getResources().getString(R.string.err_no_rate);
             case 18:
                 return context.getResources().getString(R.string.err_no_review);
+            case 19:
+                return "repeated review";
+            case 20:
+                return "repeated business identifier";
 
         }
 
