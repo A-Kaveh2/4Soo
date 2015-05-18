@@ -218,7 +218,6 @@ public class GridViewUser implements IWebserviceResponse {
                         prepareGridThreeColumn(gridViewHeader);
                         gridViewHeader.setAdapter(adapterPostGrid);
                         // now it has three column
-                        isThreeColumn = true;
                         imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_list);
                     }
                 }
@@ -237,10 +236,8 @@ public class GridViewUser implements IWebserviceResponse {
 
 
         gridViewHeader.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int currentFirstVisibleItem
-                    ,
-                    currentVisibleItemCount
-                    ,
+            int currentFirstVisibleItem,
+                    currentVisibleItemCount,
                     currentScrollState;
 
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -270,8 +267,8 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewSwitch.setVisibility(View.VISIBLE);
             imageViewCirecle.setVisibility(View.VISIBLE);
         }
-        prepareGridThreeColumn(gridViewHeader);
         gridViewHeader.setAdapter(adapterPostGrid);
+        prepareGridThreeColumn(gridViewHeader);
     }
 
     // LOAD MORE DATA
@@ -286,6 +283,7 @@ public class GridViewUser implements IWebserviceResponse {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
+        isThreeColumn=true;
     }
 
     @Override
