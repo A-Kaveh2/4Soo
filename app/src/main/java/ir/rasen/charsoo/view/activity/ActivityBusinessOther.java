@@ -26,7 +26,7 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewBusinessOther;
 
-public class ActivityBusinessOther extends Activity implements IWebserviceResponse,IPullToRefresh {
+public class ActivityBusinessOther extends Activity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int selectedBusinessId;
@@ -37,9 +37,13 @@ public class ActivityBusinessOther extends Activity implements IWebserviceRespon
 
     @Override
     public void notifyRefresh() {
-        status = Status.REFRESHING;
-        posts.clear();
-        new GetBusinessHomeInfo(ActivityBusinessOther.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusinessOther.this), ActivityBusinessOther.this).execute();
+        if (posts != null) {
+            status = Status.REFRESHING;
+            posts.clear();
+            new GetBusinessHomeInfo(ActivityBusinessOther.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusinessOther.this), ActivityBusinessOther.this).execute();
+        }
+        else
+            pullToRefreshGridView.onRefreshComplete();
     }
 
     @Override
@@ -48,6 +52,7 @@ public class ActivityBusinessOther extends Activity implements IWebserviceRespon
     }
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
+
     private Status status;
 
     //pull_to_refresh_lib
@@ -69,8 +74,6 @@ public class ActivityBusinessOther extends Activity implements IWebserviceRespon
         progressDialog.show();
         new GetBusinessHomeInfo(ActivityBusinessOther.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusinessOther.this), ActivityBusinessOther.this).execute();
     }
-
-
 
 
     @Override
@@ -114,7 +117,7 @@ public class ActivityBusinessOther extends Activity implements IWebserviceRespon
 
         if (resultCode == RESULT_OK) {
             if (requestCode == Params.ACTION_ADD_POST) {
-                gridViewBusiness.notifyDataSetChanged(((MyApplication)getApplication()).post);
+                gridViewBusiness.notifyDataSetChanged(((MyApplication) getApplication()).post);
             }
         }
 

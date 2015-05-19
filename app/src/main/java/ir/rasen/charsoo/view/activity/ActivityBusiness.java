@@ -34,7 +34,7 @@ import ir.rasen.charsoo.model.business.GetBusinessHomeInfo;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
 
 
-public class ActivityBusiness extends Activity implements ISelectBusiness, IWebserviceResponse,IPullToRefresh {
+public class ActivityBusiness extends Activity implements ISelectBusiness, IWebserviceResponse, IPullToRefresh {
 
 
     private DrawerLayout mDrawerLayout;
@@ -64,7 +64,7 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        pullToRefreshGridView = new PullToRefreshGrid(ActivityBusiness.this,(PullToRefreshGridViewWithHeaderAndFooter) findViewById(R.id.gridView_HF) ,ActivityBusiness.this);
+        pullToRefreshGridView = new PullToRefreshGrid(ActivityBusiness.this, (PullToRefreshGridViewWithHeaderAndFooter) findViewById(R.id.gridView_HF), ActivityBusiness.this);
         gridView = pullToRefreshGridView.getGridViewHeaderFooter();
         drawerLayoutBusiness = new DrawerLayoutBusiness();
 
@@ -75,7 +75,7 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
             @Override
             public void onReceive(Context context, Intent intent) {
                 //if the user delete a post from ActivityPost
-                gridViewBusiness.notifyDeletePost(intent.getIntExtra(Params.POST_ID,0));
+                gridViewBusiness.notifyDeletePost(intent.getIntExtra(Params.POST_ID, 0));
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(deletePost, new IntentFilter(Params.DELETE_POST_FROM_ACTIVITY));
@@ -157,8 +157,12 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
 
     @Override
     public void notifyRefresh() {
-        posts.clear();
-        new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
+        if (posts != null) {
+            posts.clear();
+            new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
+        }
+        else
+            pullToRefreshGridView.onRefreshComplete();
     }
 
     @Override

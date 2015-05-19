@@ -3,6 +3,7 @@ package ir.rasen.charsoo.controller.helper;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import ir.rasen.charsoo.view.activity.ActivityCommentsNotifications;
 import ir.rasen.charsoo.R;
@@ -29,11 +30,20 @@ public class AlarmReciever extends BroadcastReceiver implements IWebserviceRespo
         if (result instanceof CommentNotification) {
             CommentNotification commentNotification = (CommentNotification) result;
 
+
+
             if (CommentNotification.isDisplayed(context, commentNotification.id))
                 return;
+            else{
+                Toast.makeText(context,CommentNotification.shareStatus(context, commentNotification.id),Toast.LENGTH_LONG).show();
+            }
+
 
             //save comment.id in sharePreferences storage to check isDisplayed before
             CommentNotification.insertLastCommentId(context, commentNotification.id);
+
+
+            Toast.makeText(context,"After commit:"+CommentNotification.shareStatus(context, commentNotification.id),Toast.LENGTH_LONG).show();
 
             //TODO check if activity is on top
             Intent intent = new Intent(context, ActivityCommentsNotifications.class);

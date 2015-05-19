@@ -71,7 +71,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-            pullToRefreshGridView = new PullToRefreshGrid(getActivity(),(PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF) , FragmentUser.this);
+            pullToRefreshGridView = new PullToRefreshGrid(getActivity(), (PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF), FragmentUser.this);
             gridView = pullToRefreshGridView.getGridViewHeaderFooter();
 
             mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
@@ -157,6 +157,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             }
         } else {
             try {
+
                 gridViewUser.InitialGridViewUser(new ArrayList<Post>());
             } catch (Exception e) {
 
@@ -232,9 +233,12 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 
     @Override
     public void notifyRefresh() {
-        sharedPosts.clear();
-        ((MyApplication) getActivity().getApplication()).isUserCreated = false;
-        new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
+        if (sharedPosts != null) {
+            sharedPosts.clear();
+            ((MyApplication) getActivity().getApplication()).isUserCreated = false;
+            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
+        } else
+            pullToRefreshGridView.onRefreshComplete();
     }
 
     @Override

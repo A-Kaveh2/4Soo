@@ -54,21 +54,28 @@ public class CommentNotification {
     public static boolean isDisplayed(Context context, int commendId) {
         SharedPreferences preferences = context.getSharedPreferences(
                 context.getPackageName(), Context.MODE_PRIVATE);
-        /*String lastCommentId = preferences.getString(Params.COMMENT_ID, "");
-        if (lastCommentId != 0 && lastCommentId == commendId)
-            return true;*/
-         /*  String userId = lastCommentId.substring(0, lastCommentId.indexOf(":"));
-        String commendIdStr = lastCommentId.substring(lastCommentId.indexOf(":") + 1, lastCommentId.length());
-        return false;*/
-
         Set<String> set;
         set = preferences.getStringSet(Params.USERS_SEEN_NOTIFICATIONS, null);
         if (set == null)
-            return  false;
-        if(set.contains(LoginInfo.getUserId(context)+":"+commendId))
+            return false;
+        if (set.contains(LoginInfo.getUserId(context) + ":" + commendId))
             return true;
         else
-        return false;
+            return false;
+    }
+
+    public static String shareStatus(Context context, int commendId){
+        SharedPreferences preferences = context.getSharedPreferences(
+                context.getPackageName(), Context.MODE_PRIVATE);
+        Set<String> set;
+        set = preferences.getStringSet(Params.USERS_SEEN_NOTIFICATIONS, null);
+        return  commendId+": "+set.toString();
+       /* if (set == null)
+            return "null";
+        if (set.contains(LoginInfo.getUserId(context) + ":" + commendId))
+            return "displayed before";
+        else
+            return "not displayed";*/
     }
 
     public static void insertLastCommentId(Context context, int lastCommentId) {
@@ -86,5 +93,6 @@ public class CommentNotification {
         set.add(LoginInfo.getUserId(context) + ":" + lastCommentId);
         edit.putStringSet(Params.USERS_SEEN_NOTIFICATIONS, set);
         edit.commit();
+
     }
 }

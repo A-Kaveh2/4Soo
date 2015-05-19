@@ -36,9 +36,13 @@ public class ActivityUserOther extends Activity implements IWebserviceResponse, 
 
     @Override
     public void notifyRefresh() {
-        status = Status.REFRESHING;
-        posts.clear();
-        new GetUserHomeInfo(ActivityUserOther.this, visitedUserId, LoginInfo.getUserId(ActivityUserOther.this), ActivityUserOther.this).execute();
+        if (posts != null) {
+            status = Status.REFRESHING;
+            posts.clear();
+            new GetUserHomeInfo(ActivityUserOther.this, visitedUserId, LoginInfo.getUserId(ActivityUserOther.this), ActivityUserOther.this).execute();
+        }
+        else
+            pullToRefreshGridView.onRefreshComplete();
     }
 
     @Override

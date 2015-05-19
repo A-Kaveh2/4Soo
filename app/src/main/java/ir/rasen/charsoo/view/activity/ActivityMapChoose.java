@@ -38,10 +38,10 @@ public class ActivityMapChoose extends ActionBarActivity {
         public void onMyLocationChange(Location location) {
             LatLng loc = new LatLng(location.getLatitude(), location.getLongitude());
 
-            if(googleMap != null && !isLocationInitialized) {
+            if (googleMap != null && !isLocationInitialized) {
                 marker = googleMap.addMarker(new MarkerOptions().position(loc));
                 menuItemTik.setVisible(true);
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,14.0f));
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 14.0f));
                 choosedLatLng = loc;
                 isLocationInitialized = true;
 
@@ -67,11 +67,11 @@ public class ActivityMapChoose extends ActionBarActivity {
 
                 googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
 
-                if(getIntent().getExtras().getBoolean(Params.IS_EDITTING)) {
+                if (getIntent().getExtras().getBoolean(Params.IS_EDITTING)) {
 
-                    LatLng loc =  new LatLng(Double.valueOf(getIntent().getStringExtra(Params.LATITUDE)), Double.valueOf(getIntent().getStringExtra(Params.LONGITUDE)));
+                    LatLng loc = new LatLng(Double.valueOf(getIntent().getStringExtra(Params.LATITUDE)), Double.valueOf(getIntent().getStringExtra(Params.LONGITUDE)));
                     marker = googleMap.addMarker(new MarkerOptions().position(loc));
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc,14.0f));
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 14.0f));
                     choosedLatLng = loc;
 
                     isLocationInitialized = true;
@@ -123,16 +123,14 @@ public class ActivityMapChoose extends ActionBarActivity {
         if (item.getItemId() == android.R.id.home) {
             finish();
             return true;
-        }
-        else if (item.getItemId() == R.id.action_tik){
+        } else if (item.getItemId() == R.id.action_tik) {
             Intent i = getIntent();
             i.putExtra(Params.LATITUDE, String.valueOf(choosedLatLng.latitude));
             i.putExtra(Params.LONGITUDE, String.valueOf(choosedLatLng.longitude));
             setResult(RESULT_OK, i);
             finish();
             return true;
-        }
-        else
+        } else
             return super.onOptionsItemSelected(item);
     }
 
@@ -142,7 +140,8 @@ public class ActivityMapChoose extends ActionBarActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_tik_button, menu);
         menuItemTik = menu.findItem(R.id.action_tik);
-        menuItemTik.setVisible(false);
+        if (!isLocationInitialized)
+            menuItemTik.setVisible(false);
         return true;
     }
 
