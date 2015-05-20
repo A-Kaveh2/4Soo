@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
 import com.google.android.gms.maps.GoogleMap;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +26,7 @@ import ir.rasen.charsoo.view.widget_customized.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityMapChoose;
 
-public class FragmentBusinessRegisterLocationInfo extends Fragment  {
+public class FragmentBusinessRegisterLocationInfo extends Fragment {
 
     private Spinner spinnerStates;
     EditTextFont editTextCity, editTextStreet;
@@ -32,9 +34,10 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
     //MapView mapView;
     //LatLng choosedLatLng;
     Business business;
-    String latitude,longitude;
+    String latitude, longitude;
     ButtonFont buttonMap;
     boolean isEditting = false;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -58,7 +61,7 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
 
         }
 
-        buttonMap = (ButtonFont)view.findViewById(R.id.btn_map);
+        buttonMap = (ButtonFont) view.findViewById(R.id.btn_map);
 
         if (isEditting) {
             business = ((MyApplication) getActivity().getApplication()).business;
@@ -76,18 +79,16 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
         }
 
 
-
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityMapChoose.class);
-                if(isEditting){
-                    intent.putExtra(Params.LATITUDE,business.location_m.getLatitude());
-                    intent.putExtra(Params.LONGITUDE,business.location_m.getLongitude());
-                    intent.putExtra(Params.IS_EDITTING,true);
-                }
-                else
-                    intent.putExtra(Params.IS_EDITTING,false);
+                if (isEditting) {
+                    intent.putExtra(Params.LATITUDE, business.location_m.getLatitude());
+                    intent.putExtra(Params.LONGITUDE, business.location_m.getLongitude());
+                    intent.putExtra(Params.IS_EDITTING, true);
+                } else
+                    intent.putExtra(Params.IS_EDITTING, false);
                 startActivityForResult(intent, Params.ACTION_CHOOSE_LOCATION);
             }
         });
@@ -115,9 +116,13 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
             editTextStreet.setError(Validation.getErrorMessage());
             return false;
         }
-        if (latitude == null || longitude == null) {
-            new DialogMessage(getActivity(), getString(R.string.err_choose_location)).show();
-            return false;
+        if (isEditting)
+            ((MyApplication) getActivity().getApplication()).business.location_m = business.location_m;
+        else {
+            if (latitude == null || longitude == null) {
+                new DialogMessage(getActivity(), getString(R.string.err_choose_location)).show();
+                return false;
+            }
         }
         ((MyApplication) getActivity().getApplication()).business.state = String.valueOf(spinnerStates.getSelectedItem());
         ((MyApplication) getActivity().getApplication()).business.city = editTextCity.getText().toString();
@@ -132,9 +137,9 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment  {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Params.ACTION_CHOOSE_LOCATION && resultCode == Activity.RESULT_OK) {
             latitude = data.getStringExtra(Params.LATITUDE);
-            String s  = data.getStringExtra(Params.LATITUDE);
+            String s = data.getStringExtra(Params.LATITUDE);
             longitude = data.getStringExtra(Params.LONGITUDE);
-            ((MyApplication)getActivity().getApplication()).business.location_m = new Location_M(String.valueOf(latitude), String.valueOf(longitude));
+            ((MyApplication) getActivity().getApplication()).business.location_m = new Location_M(String.valueOf(latitude), String.valueOf(longitude));
             buttonMap.setBackgroundResource(R.drawable.selector_button_register);
             buttonMap.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
         }

@@ -65,12 +65,16 @@ public class ActivityBusinessContactInfo extends ActionBarActivity implements IW
         });
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else
+            return super.onOptionsItemSelected(item);
     }
+
+  
 
 
     @Override
