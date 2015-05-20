@@ -37,8 +37,6 @@ public class AlarmReciever extends BroadcastReceiver implements IWebserviceRespo
             else{
                 Toast.makeText(context,CommentNotification.shareStatus(context, commentNotification.id),Toast.LENGTH_LONG).show();
             }
-
-
             //save comment.id in sharePreferences storage to check isDisplayed before
             CommentNotification.insertLastCommentId(context, commentNotification.id);
 

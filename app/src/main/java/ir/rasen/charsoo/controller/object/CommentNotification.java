@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import ir.rasen.charsoo.R;
@@ -64,12 +66,12 @@ public class CommentNotification {
             return false;
     }
 
-    public static String shareStatus(Context context, int commendId){
+    public static String shareStatus(Context context, int commendId) {
         SharedPreferences preferences = context.getSharedPreferences(
                 context.getPackageName(), Context.MODE_PRIVATE);
         Set<String> set;
         set = preferences.getStringSet(Params.USERS_SEEN_NOTIFICATIONS, null);
-        return  commendId+": "+set.toString();
+        return commendId + ": " + set.toString();
        /* if (set == null)
             return "null";
         if (set.contains(LoginInfo.getUserId(context) + ":" + commendId))
@@ -82,17 +84,23 @@ public class CommentNotification {
         SharedPreferences preferences = context.getSharedPreferences(
                 context.getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = preferences.edit();
-       /* edit.putString(Params.COMMENT_ID, LoginInfo.getUserId(context) + ":" + lastCommentId);
-        edit.commit();*/
-
         Set<String> set;
         set = preferences.getStringSet(Params.USERS_SEEN_NOTIFICATIONS, null);
+
         if (set == null)
             set = new HashSet<>();
+        else {
+            //find the current user's last seen comment id and remove if he has one.
+            for (String str : set) {
+                if (str.substring(0, str.indexOf(":")).equals(String.valueOf(LoginInfo.getUserId(context)))) {
+                    set.remove(str);
+                    break;
+                }
+            }
+        }
 
         set.add(LoginInfo.getUserId(context) + ":" + lastCommentId);
         edit.putStringSet(Params.USERS_SEEN_NOTIFICATIONS, set);
         edit.commit();
-
     }
 }

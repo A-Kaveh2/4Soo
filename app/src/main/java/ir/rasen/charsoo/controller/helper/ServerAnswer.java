@@ -72,6 +72,10 @@ public class ServerAnswer {
                 return "repeated review";
             case 20:
                 return "repeated business identifier";
+            case 21:
+                return "share doesn't exist";
+            case 22:
+                return "user is blocked";
 
         }
 

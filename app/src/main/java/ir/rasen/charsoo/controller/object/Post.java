@@ -189,7 +189,7 @@ public class Post {
         post.id = jsonObject.getInt(Params.POST_ID);
         post.businessID = jsonObject.getInt(Params.BUSINESS_ID);
         post.businessUserName = jsonObject.getString(Params.BUSINESS_USER_NAME);
-        post.userId = jsonObject.getInt(Params.USER_ID);
+        post.userId = jsonObject.getInt(Params.USER_ID);//business owner' user.id
         post.userName = jsonObject.getString(Params.USER_NAME);
         post.type = getType(jsonObject.getInt(Params.TYPE));
         post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
