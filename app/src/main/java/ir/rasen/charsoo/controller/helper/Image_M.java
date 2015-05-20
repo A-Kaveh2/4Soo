@@ -56,16 +56,14 @@ public class Image_M {
 
     public static String getBase64String(String imageFilePath) {
         Bitmap bm = BitmapFactory.decodeFile(imageFilePath);
-       /* ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos2); //bm is the bitmap object
-        byte[] b2 = baos2.toByteArray();
-        String encodedImage2 = Base64.encodeToString(b2, Base64.DEFAULT);*/
         int si = Image_M.sizeOf(bm);
-        /*if (Image_M.sizeOf(bm) > 1000000) {
+
+        //because of the webservice's bug, we have to decrease the volume of the image
+        if (Image_M.sizeOf(bm) > 1000000) {
             BitmapFactory.Options ops = new BitmapFactory.Options();
             ops.inSampleSize = 4;
             bm = BitmapFactory.decodeFile(imageFilePath, ops);
-        }*/
+        }
         si = Image_M.sizeOf(bm);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object

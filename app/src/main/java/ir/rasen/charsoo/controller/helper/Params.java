@@ -68,6 +68,7 @@ public class Params {
     public static String WORK_TIME_CLOSE_MINUTE= "work_time_close_minute";
 
     public static String EDIT_MODE = "edit_mode";
+    public static String EDIT_POST= "edit_post";
     public static String REGISTER_MODE = "register_mode";
 
     public static int LOCATION_REFRESH = 60000;
@@ -85,7 +86,8 @@ public class Params {
     public static String PASSWORD_NEW = "PasswordNew";
     public static String USER_ID = "UserId";
     public static String USERS_BUSINESS = "userBusiness";
-    public static String USERS_SEEN_NOTIFICATIONS = "userSeenNotifications";
+    public static String USERS_SEEN_NOTIFICATIONS_PREFERENCE_NAME ="userSeenNotifications";
+    public static String NOTIFICATION_ID = "NotificationId";
     public static String USER_IDENTIFIER = "UserIdentifier";
     public static String NAME = "Name";
     public static String ABOUT_ME = "AboutMe";
@@ -212,6 +214,7 @@ public class Params {
     public static int ACTION_CHOOSE_LOCATION = 1008;
     public static int ACTION_EDIT_BUSINESS = 1009;
     public static int ACTION_ACTIVITY_POST = 1010;
+    public static int ACTION_EDIT_POST = 1011;
 
 
     public static enum UpdateTimeLineType{SHARE,CANCEL_SHARE,LIKE,CANCEL_LIKE,REPORT,ADD_COMMENT,DELETE_COMMENT,UPDATE_COMMENT};

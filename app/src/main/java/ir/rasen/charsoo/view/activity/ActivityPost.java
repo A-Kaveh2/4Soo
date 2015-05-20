@@ -22,6 +22,7 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.MyGestureDetector;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
@@ -182,7 +183,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
                     Intent intent = new Intent(ActivityPost.this, ActivityPostAddEdit.class);
                     intent.putExtra(Params.BUSINESS_ID, businessId);
                     intent.putExtra(Params.POST_ID, postId);
-                    startActivity(intent);
+                    startActivityForResult(intent, Params.ACTION_EDIT_POST);
                 } else {
                     if (post.isLiked) {
                         //unlike the post
@@ -279,6 +280,18 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_post_activity, menu);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == Params.ACTION_EDIT_POST) {
+                post = ((MyApplication) getApplication()).post;
+                initialize();
+            }
+        }
+
     }
 
     @Override

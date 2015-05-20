@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,17 +31,17 @@ import ir.rasen.charsoo.model.DownloadImages;
 public class AdapterPostBusiness extends BaseAdapter {
 
     private ArrayList<Post> items;
-    private Context context;
+    private Activity activity;
     DownloadImages downloadImages;
     private int screedWidth;
     private IDeletePost iDeletePost;
     private boolean isUserOwner;
 
-    public AdapterPostBusiness(Context context, ArrayList<Post> items,boolean isUserOwner,IDeletePost iDeletePost) {
-        this.context = context;
+    public AdapterPostBusiness(Activity activity, ArrayList<Post> items,boolean isUserOwner,IDeletePost iDeletePost) {
+        this.activity = activity;
         this.items = items;
-        downloadImages = new DownloadImages(context);
-        screedWidth = context.getResources().getDisplayMetrics().widthPixels;
+        downloadImages = new DownloadImages(activity);
+        screedWidth = this.activity.getResources().getDisplayMetrics().widthPixels;
         this.iDeletePost = iDeletePost;
         this.isUserOwner = isUserOwner;
     }
@@ -74,7 +74,7 @@ public class AdapterPostBusiness extends BaseAdapter {
 
         if (view == null) {
             holder = new Holder();
-            view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list_business_post, viewGroup, false);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_post_adapter_list_business_post, viewGroup, false);
             holder.llAnnouncementSection = (LinearLayout) view.findViewById(R.id.ll_announcement);
             holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
             holder.textViewBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_business_identifier);
@@ -106,7 +106,7 @@ public class AdapterPostBusiness extends BaseAdapter {
 
         //all post's types have these three fields
         downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage,true);
-        holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
+        holder.textViewDate.setText(PersianDate.getCreationDate(activity, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
 
         if (items.get(position).picture!= null && !items.get(position).picture.equals("") && items.get(position).pictureId == 0 )
@@ -143,43 +143,43 @@ public class AdapterPostBusiness extends BaseAdapter {
         holder.textViewComment1UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.goUserHomeInfoPage(context,items.get(position).lastThreeComments.get(0).userID);
+                User.goUserHomeInfoPage(activity,items.get(position).lastThreeComments.get(0).userID);
 
             }
         });
         holder.textViewComment2UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.goUserHomeInfoPage(context,items.get(position).lastThreeComments.get(1).userID);
+                User.goUserHomeInfoPage(activity,items.get(position).lastThreeComments.get(1).userID);
             }
         });
         holder.textViewComment3UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.goUserHomeInfoPage(context,items.get(position).lastThreeComments.get(2).userID);
+                User.goUserHomeInfoPage(activity,items.get(position).lastThreeComments.get(2).userID);
             }
         });
 
         holder.imageViewComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Comment.openCommentActivity(context,isUserOwner,items.get(position).id,items.get(position).businessID);
+                Comment.openCommentActivity(activity,isUserOwner,items.get(position).id,items.get(position).businessID);
             }
         });
         holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ActivityPostAddEdit.class);
+                Intent intent = new Intent(activity, ActivityPostAddEdit.class);
                 intent.putExtra(Params.BUSINESS_ID,items.get(position).businessID);
                 intent.putExtra(Params.POST_ID,items.get(position).id);
-                context.startActivity(intent);
+                activity.startActivityForResult(intent,Params.ACTION_EDIT_POST);
             }
         });
 
         holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogDeletePostConfirmation d= new DialogDeletePostConfirmation(context,items.get(position).businessID,items.get(position).id,iDeletePost);
+                DialogDeletePostConfirmation d= new DialogDeletePostConfirmation(activity,items.get(position).businessID,items.get(position).id,iDeletePost);
                 d.show();
             }
         });

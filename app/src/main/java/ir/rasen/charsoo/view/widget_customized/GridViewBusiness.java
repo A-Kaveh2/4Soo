@@ -63,6 +63,9 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         this.drawerLayout = drawerLayout;
     }
 
+    public void notifyDatasetChanged(){
+        adapterPostBusiness.notifyDataSetChanged();
+    }
     public void changeProfilePicture(String picture){
         imageViewCover.setImageBitmap(Image_M.getBitmapFromString(picture));
     }

@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import ir.rasen.charsoo.R;
@@ -23,8 +21,7 @@ public class CommentNotification {
     public int id;
     public int postID;
     public int userID;
-    public String userName;
-
+    public String userName;//who wrote the comment
     public String postPicture;
     public String userPicture;
     public String text;
@@ -53,54 +50,23 @@ public class CommentNotification {
         return contentView;
     }
 
-    public static boolean isDisplayed(Context context, int commendId) {
-        SharedPreferences preferences = context.getSharedPreferences(
-                context.getPackageName(), Context.MODE_PRIVATE);
-        Set<String> set;
-        set = preferences.getStringSet(Params.USERS_SEEN_NOTIFICATIONS, null);
-        if (set == null)
-            return false;
-        if (set.contains(LoginInfo.getUserId(context) + ":" + commendId))
-            return true;
-        else
-            return false;
+    private static String getVariableName(Context context){
+        String v = Params.USER_ID+":"+String.valueOf(LoginInfo.getUserId(context));;
+        return v;
     }
+    public static boolean isDisplayed(Context context, int commentId) {
+        SharedPreferences settings = context.getSharedPreferences(Params.USERS_SEEN_NOTIFICATIONS_PREFERENCE_NAME, 0);
+        int userLastSeenNotificationId = settings.getInt(getVariableName(context),0);
 
-    public static String shareStatus(Context context, int commendId) {
-        SharedPreferences preferences = context.getSharedPreferences(
-                context.getPackageName(), Context.MODE_PRIVATE);
-        Set<String> set;
-        set = preferences.getStringSet(Params.USERS_SEEN_NOTIFICATIONS, null);
-        return commendId + ": " + set.toString();
-       /* if (set == null)
-            return "null";
-        if (set.contains(LoginInfo.getUserId(context) + ":" + commendId))
-            return "displayed before";
-        else
-            return "not displayed";*/
-    }
-
-    public static void insertLastCommentId(Context context, int lastCommentId) {
-        SharedPreferences preferences = context.getSharedPreferences(
-                context.getPackageName(), Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = preferences.edit();
-        Set<String> set;
-        set = preferences.getStringSet(Params.USERS_SEEN_NOTIFICATIONS, null);
-
-        if (set == null)
-            set = new HashSet<>();
-        else {
-            //find the current user's last seen comment id and remove if he has one.
-            for (String str : set) {
-                if (str.substring(0, str.indexOf(":")).equals(String.valueOf(LoginInfo.getUserId(context)))) {
-                    set.remove(str);
-                    break;
-                }
-            }
+        if(userLastSeenNotificationId == 0 || userLastSeenNotificationId != commentId) {
+            //if the user didn't see any notification before or the user didn't see this notification before
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putInt(getVariableName(context),commentId);
+            editor.commit();
+            return false;
         }
-
-        set.add(LoginInfo.getUserId(context) + ":" + lastCommentId);
-        edit.putStringSet(Params.USERS_SEEN_NOTIFICATIONS, set);
-        edit.commit();
+        else
+            return true;
     }
+
 }

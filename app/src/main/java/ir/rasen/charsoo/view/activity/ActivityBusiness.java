@@ -151,6 +151,21 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
                     finish();
                 }
             }
+            else if (requestCode == Params.ACTION_EDIT_POST) {
+                Post updatedPost = ((MyApplication) getApplication()).post;
+                for(int i = 0;i<posts.size();i++){
+                    if(posts.get(i).id == updatedPost.id){
+                        Post p = posts.get(i);
+                        p.title = updatedPost.title;
+                        p.description = updatedPost.description;
+                        p.hashtagList = updatedPost.hashtagList;
+                        p.price = updatedPost.price;
+                        p.code = updatedPost.code;
+                        break;
+                    }
+                }
+                gridViewBusiness.notifyDatasetChanged();
+            }
         }
 
     }
@@ -160,8 +175,7 @@ public class ActivityBusiness extends Activity implements ISelectBusiness, IWebs
         if (posts != null) {
             posts.clear();
             new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
-        }
-        else
+        } else
             pullToRefreshGridView.onRefreshComplete();
     }
 

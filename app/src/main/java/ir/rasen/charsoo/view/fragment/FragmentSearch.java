@@ -245,10 +245,10 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
 
     private boolean search() {
         if (searchType == SearchType.BUSINESSES) {
-            if (subcategoryId == 0) {
+            /*if (subcategoryId == 0) {
                 new DialogMessage(getActivity(), getString(R.string.choose_category_search)).show();
                 return false;
-            }
+            }*/
             if (choosedLatLng == null) {
                 new DialogMessage(getActivity(), getString(R.string.err_choose_location_search)).show();
                 return false;
