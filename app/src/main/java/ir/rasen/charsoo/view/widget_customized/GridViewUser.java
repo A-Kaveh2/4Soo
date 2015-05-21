@@ -3,11 +3,9 @@ package ir.rasen.charsoo.view.widget_customized;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.widget.DrawerLayout;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
@@ -19,12 +17,14 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.Permission;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
+import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.activity.ActivityProfileUser;
 import ir.rasen.charsoo.view.activity.ActivitySearchUser;
 import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
@@ -44,30 +44,29 @@ public class GridViewUser implements IWebserviceResponse {
     AdapterPostShared adapterPostShared;
     private boolean isThreeColumn = true;
 
-    ImageView imageViewSearch, imageViewMore, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewHasRequest,imageViewEdit;
+    ImageView imageViewSearch, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewHasRequest,imageViewEdit;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewIdentifier, textViewName, textViewAboutMe;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
     Activity activity;
     int profilePictureId;
-    DrawerLayout drawerLayout;
     View listFooterView;
     boolean isLoadingMore = false;
     ArrayList<Post> posts;
     int visitedUserId;
     boolean hasHeader, hasRequest;
     String userIdentifier, userName, aboutMe;
+    Permission userPermissions;
 
-
-    public GridViewUser(Activity activity, User user, int visitedUserId, com.handmark.pulltorefresh.library.HFGridView gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewUser(Activity activity, User user, int visitedUserId, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
         this.activity = activity;
         this.profilePictureId = user.profilePictureId;
         this.gridViewHeader = gridViewHeader;
-        this.drawerLayout = drawerLayout;
         this.visitedUserId = visitedUserId;
         this.hasHeader = false;
         this.userIdentifier = user.userIdentifier;
         this.userName = user.name;
+        this.userPermissions = user.permissions;
         this.hasRequest = (user.friendRequestNumber > 0) ? true : false;
         this.aboutMe = user.aboutMe;
     }
@@ -85,6 +84,7 @@ public class GridViewUser implements IWebserviceResponse {
 
         this.posts = postList;
 
+        ((ActivityMain) activity).initPopupWindowUser(userPermissions);
 
         searchItemPosts = new ArrayList<>();
         for (Post post : posts)
@@ -97,7 +97,8 @@ public class GridViewUser implements IWebserviceResponse {
 
         if (!hasHeader) {
             viewHeader = (activity).getLayoutInflater().inflate(R.layout.layout_user_grid_header, null);
-            imageViewMore = (ImageView) viewHeader.findViewById(R.id.imageView_more);
+
+            viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
             imageViewSearch = (ImageView) viewHeader.findViewById(R.id.imageView_search);
             imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
             imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
@@ -148,15 +149,6 @@ public class GridViewUser implements IWebserviceResponse {
                 public void onClick(View view) {
                     Intent intent = new Intent(activity, ActivityProfileUser.class);
                     activity.startActivity(intent);
-                }
-            });
-            imageViewMore.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (drawerLayout.isDrawerOpen(Gravity.RIGHT))
-                        drawerLayout.closeDrawer(Gravity.RIGHT);
-                    else
-                        drawerLayout.openDrawer(Gravity.RIGHT);
                 }
             });
 

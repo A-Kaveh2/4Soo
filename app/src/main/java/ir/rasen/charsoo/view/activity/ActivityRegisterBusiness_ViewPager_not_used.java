@@ -6,27 +6,23 @@ package ir.rasen.charsoo.view.activity;
 
 
 import android.app.Fragment;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
-
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
-
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterBaseInfo;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterContactInfo;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterLocationInfo;
-import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityRegisterBusiness_ViewPager_not_used extends ActionBarActivity implements
+public class ActivityRegisterBusiness_ViewPager_not_used extends CharsooActivity implements
         ActionBar.TabListener {
 
 
@@ -39,9 +35,6 @@ public class ActivityRegisterBusiness_ViewPager_not_used extends ActionBarActivi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_business_view_pager);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         List<Fragment> fragments = getFragments();
 

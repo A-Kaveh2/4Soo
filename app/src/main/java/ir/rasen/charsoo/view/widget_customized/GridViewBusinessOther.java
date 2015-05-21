@@ -93,6 +93,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
 
         if (!hasHeader) {
             viewHeader = ( activity).getLayoutInflater().inflate(R.layout.layout_business_grid_header_another, null);
+
+            viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
             imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
             imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
             imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);

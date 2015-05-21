@@ -3,7 +3,6 @@ package ir.rasen.charsoo.view.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,21 +13,21 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.model.business.GetBusinessFollowers;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.model.business.GetBusinessFollowers;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityBusinessFollowers extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityBusinessFollowers extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int businessId;
@@ -61,7 +60,7 @@ public class ActivityBusinessFollowers extends ActionBarActivity implements IWeb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_followers);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.followers));
+        setTitle(getResources().getString(R.string.followers));
         //for the test
         try {
             sampleFollowers = TestUnit.getBaseAdapterItems(getResources());

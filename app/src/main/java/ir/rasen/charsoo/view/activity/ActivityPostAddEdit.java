@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -17,11 +16,6 @@ import java.io.File;
 import java.text.DecimalFormat;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
@@ -29,15 +23,20 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.helper.WebservicesHandler;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.AddPost;
 import ir.rasen.charsoo.model.post.GetPost;
 import ir.rasen.charsoo.model.post.UpdatePost;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityPostAddEdit extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
+public class ActivityPostAddEdit extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {
 
 
     EditTextFont editTextTitle, editTextDescription, editTextPrice, editTextCode, editTextHashtags;
@@ -81,12 +80,10 @@ public class ActivityPostAddEdit extends ActionBarActivity implements View.OnCli
             progressDialog.show();
             new GetPost(ActivityPostAddEdit.this, LoginInfo.getUserId(ActivityPostAddEdit.this), businessId, postId, Post.GetPostType.BUSINESS, ActivityPostAddEdit.this).execute();
             imageViewPostPicture.setEnabled(false);
-            ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.edit_product));
+            setTitle(getResources().getString(R.string.edit_product));
         }
         else
-            ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.new_product));
-
-
+            setTitle(getString(R.string.new_product));
 
         editTextPrice.addTextChangedListener(new TextWatcher() {
             String oldText;

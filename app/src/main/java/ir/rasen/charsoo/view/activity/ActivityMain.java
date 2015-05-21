@@ -1,34 +1,44 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
+import ir.rasen.charsoo.controller.helper.Permission;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.view.dialog.DialogExit;
+import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
+import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
 
 
-public class ActivityMain extends Activity implements View.OnClickListener, IWebserviceResponse, IChangeTabs, IGoToRegisterBusinessActivity {
+public class ActivityMain extends NoActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs, IGoToRegisterBusinessActivity {
 
+    PopupWindow popupWindow;
 
     ImageView imageViewHome, imageViewSearch, imageViewUser, imageViewBusinesses;
-    LinearLayout llFooterHome, llFooterSearch, llFooterUser, llFooterBusinesses;
+    boolean footerHome=true, footerUser, footerSearch, footerBusiness;
+    ImageView imgOptions;
+
     RelativeLayout rlHome, rlSearch, rlUser, rlBusinesses;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -66,11 +76,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
         imageViewUser = (ImageView) findViewById(R.id.imageView_user);
         imageViewBusinesses = (ImageView) findViewById(R.id.imageView_businesses);
 
-        llFooterHome = (LinearLayout) findViewById(R.id.ll_footer_home);
-        llFooterSearch = (LinearLayout) findViewById(R.id.ll_footer_search);
-        llFooterUser = (LinearLayout) findViewById(R.id.ll_footer_user);
-        llFooterBusinesses = (LinearLayout) findViewById(R.id.ll_footer_businesses);
-
+        imgOptions = (ImageView) findViewById(R.id.imageView_more);
 
         rlHome = (RelativeLayout) findViewById(R.id.rl_home);
         rlSearch = (RelativeLayout) findViewById(R.id.rl_search);
@@ -110,6 +116,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                 setSelection(rlUser.getId());
                 break;
         }
+
     }
 
     private void exit() {
@@ -226,19 +233,19 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
     private void setSelection(int relativeLayoutId) {
         switch (relativeLayoutId) {
             case R.id.rl_home:
-                if (llFooterHome.getVisibility() == View.VISIBLE)
+                if (footerHome)
                     return;
                 //getSupportActionBar().show();
+                nothingChoseInHeader();
+
                 addFragment(FragmentTag.HOME);
                 rlHome.setBackgroundColor(Color.BLACK);
-                rlUser.setBackgroundColor(Color.DKGRAY);
-                rlSearch.setBackgroundColor(Color.DKGRAY);
-                rlBusinesses.setBackgroundColor(Color.DKGRAY);
+                imageViewHome.setImageResource(R.drawable.ic_home_blue_36dp);
 
-                llFooterHome.setVisibility(View.VISIBLE);
-                llFooterUser.setVisibility(View.GONE);
-                llFooterSearch.setVisibility(View.GONE);
-                llFooterBusinesses.setVisibility(View.GONE);
+                footerHome=true;
+                footerBusiness=false;
+                footerSearch=false;
+                footerUser=false;
 
 
                 ft = fm.beginTransaction();
@@ -251,21 +258,20 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
 
                 break;
             case R.id.rl_search:
-                if (llFooterSearch.getVisibility() == View.VISIBLE)
+                if (footerSearch)
                     return;
 
                 //getSupportActionBar().hide();
                 addFragment(FragmentTag.SEARCH);
-                rlHome.setBackgroundColor(Color.DKGRAY);
-                rlUser.setBackgroundColor(Color.DKGRAY);
+
+                nothingChoseInHeader();
                 rlSearch.setBackgroundColor(Color.BLACK);
-                rlBusinesses.setBackgroundColor(Color.DKGRAY);
+                imageViewSearch.setImageResource(R.drawable.ic_search_blue_36dp);
 
-                llFooterHome.setVisibility(View.GONE);
-                llFooterUser.setVisibility(View.GONE);
-                llFooterSearch.setVisibility(View.VISIBLE);
-                llFooterBusinesses.setVisibility(View.GONE);
-
+                footerHome=false;
+                footerBusiness=false;
+                footerSearch=true;
+                footerUser=false;
 
                 ft = fm.beginTransaction();
                 //ft.replace(R.id.fragmentContainer, fragmentSearch);
@@ -279,21 +285,21 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                     recursivelyCallHandlerSearchFragment();
                 break;
             case R.id.rl_user:
-                if (llFooterUser.getVisibility() == View.VISIBLE)
+                if (footerUser)
                     return;
 
                 //getSupportActionBar().hide();
                 addFragment(FragmentTag.USER);
-                rlHome.setBackgroundColor(Color.DKGRAY);
+
+                nothingChoseInHeader();
+                imgOptions.setVisibility(View.VISIBLE);
                 rlUser.setBackgroundColor(Color.BLACK);
-                rlSearch.setBackgroundColor(Color.DKGRAY);
-                rlBusinesses.setBackgroundColor(Color.DKGRAY);
+                imageViewUser.setImageResource(R.drawable.ic_person_blue_36dp);
 
-                llFooterHome.setVisibility(View.GONE);
-                llFooterUser.setVisibility(View.VISIBLE);
-                llFooterSearch.setVisibility(View.GONE);
-                llFooterBusinesses.setVisibility(View.GONE);
-
+                footerHome=false;
+                footerBusiness=false;
+                footerSearch=false;
+                footerUser=true;
 
                 ft = fm.beginTransaction();
                 //ft.replace(R.id.fragmentContainer, fragmentUser);
@@ -330,15 +336,15 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
 
 
     public void initialUserBusinessesTab() {
-        rlHome.setBackgroundColor(Color.DKGRAY);
-        rlUser.setBackgroundColor(Color.DKGRAY);
-        rlSearch.setBackgroundColor(Color.DKGRAY);
-        rlBusinesses.setBackgroundColor(Color.BLACK);
+        nothingChoseInHeader();
 
-        llFooterHome.setVisibility(View.GONE);
-        llFooterUser.setVisibility(View.GONE);
-        llFooterSearch.setVisibility(View.GONE);
-        llFooterBusinesses.setVisibility(View.VISIBLE);
+        rlBusinesses.setBackgroundColor(Color.BLACK);
+        imageViewBusinesses.setImageResource(R.drawable.ic_store_mall_directory_blue_36dp);
+
+        footerHome=false;
+        footerBusiness=true;
+        footerSearch=false;
+        footerUser=false;
 
         ft = fm.beginTransaction();
         //ft.replace(R.id.fragmentContainer, fragmentUser);
@@ -387,6 +393,10 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
 
     @Override
     public void onBackPressed() {
+        if(popupWindow.isShowing()) {
+            popupWindow.dismiss();
+            return;
+        }
         checkBack();
     }
 
@@ -423,5 +433,106 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
         }
     }
 
+    private void nothingChoseInHeader() {
+        imgOptions.setVisibility(View.GONE);
+        rlHome.setBackgroundColor(Color.DKGRAY);
+        rlUser.setBackgroundColor(Color.DKGRAY);
+        rlSearch.setBackgroundColor(Color.DKGRAY);
+        rlBusinesses.setBackgroundColor(Color.DKGRAY);
+        imageViewHome.setImageResource(R.drawable.ic_home_white_36dp);
+        imageViewUser.setImageResource(R.drawable.ic_person_white_36dp);
+        imageViewSearch.setImageResource(R.drawable.ic_search_white_36dp);
+        imageViewBusinesses.setImageResource(R.drawable.ic_store_mall_directory_white_36dp);
+    }
+
+
+    private void initialPopupOptionsUser(View view, final PopupWindow popupWindow, final Permission userPermissions) {
+/*        (view.findViewById(R.id.imageView_drawer_edit)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, ActivityProfileUser.class);
+                activity.startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+*/
+        (view.findViewById(R.id.ll_drawer_businesses)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*Intent intent = new Intent(activity, ActivityUserBusinesses.class);
+                ((MyApplication)activity.getApplication()).userBusinesses = user.businesses;
+                activity.startActivity(intent);*/
+                //iGoToRegisterBusinessActivity.notifyGo();
+                popupWindow.dismiss();
+            }
+        });
+        (view.findViewById(R.id.ll_drawer_setting)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyApplication myApplication = (MyApplication) getApplication();
+                myApplication.setPermission(userPermissions);
+                Intent intent = new Intent(ActivityMain.this, ActivityUserSetting.class);
+                startActivity(intent);
+                popupWindow.dismiss();
+            }
+        });
+        (view.findViewById(R.id.ll_drawer_exit)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DialogExit(ActivityMain.this).show();
+                popupWindow.dismiss();
+            }
+        });
+        (view.findViewById(R.id.ll_drawer_contact_us)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_contact_us)));
+                startActivity(browserIntent);
+                popupWindow.dismiss();
+            }
+        });
+        (view.findViewById(R.id.ll_drawer_guide)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_guide)));
+                startActivity(browserIntent);
+                popupWindow.dismiss();
+            }
+        });
+
+        (view.findViewById(R.id.ll_drawer)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+    }
+
+    public void initPopupWindowUser(Permission userPermissions) {
+        popupWindow = new PopupWindow(ActivityMain.this);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.popup_options_user, null, false);
+        popupWindow.setContentView(view);
+
+        initialPopupOptionsUser(view, popupWindow, userPermissions);
+
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setWindowLayoutMode(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+
+        imgOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchPopupWindow(view);
+            }
+        });
+    }
+
+    public void switchPopupWindow(View view) {
+        // SHOW POPUP
+        if(!popupWindow.isShowing())
+            popupWindow.showAsDropDown(view);
+    }
 
 }

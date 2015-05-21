@@ -3,26 +3,25 @@ package ir.rasen.charsoo.view.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.business.GetBusinessContactInfo;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityBusinessContactInfo extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityBusinessContactInfo extends CharsooActivity implements IWebserviceResponse {
 
 
     ProgressDialog progressDialog;
@@ -32,7 +31,7 @@ public class ActivityBusinessContactInfo extends ActionBarActivity implements IW
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_contact_info);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.call_info));
+        setTitle(getResources().getString(R.string.call_info));
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

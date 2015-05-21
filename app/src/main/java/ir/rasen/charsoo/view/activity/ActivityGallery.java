@@ -1,6 +1,5 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,8 +16,9 @@ import java.util.Date;
 
 import eu.janmuller.android.simplecropimage.CropImage;
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityGallery extends Activity  {
+public class ActivityGallery extends CharsooActivity {
 
     private static String TAG = "GalleryActivity";
     final int GALLERY_CAPTURE = 3;

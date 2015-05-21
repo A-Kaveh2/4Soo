@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,17 +12,17 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterUserSearchResult;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.model.search.SearchUser;
+import ir.rasen.charsoo.view.adapter.AdapterUserSearchResult;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivitySearchUser extends ActionBarActivity implements IWebserviceResponse {
+public class ActivitySearchUser extends CharsooActivity implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     int visitedUserId;
@@ -46,7 +45,7 @@ public class ActivitySearchUser extends ActionBarActivity implements IWebservice
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_user);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.search_users));
+        setTitle(getString(R.string.search_users));
         //editTextSearch = (EditTextFont)findViewById(R.id.edt_search);
 
         results = new ArrayList<>();

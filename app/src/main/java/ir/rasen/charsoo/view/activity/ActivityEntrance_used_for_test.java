@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,9 +8,10 @@ import android.view.View;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityEntrance_used_for_test extends ActionBarActivity {
+public class ActivityEntrance_used_for_test extends CharsooActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

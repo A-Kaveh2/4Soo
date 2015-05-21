@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.Business;
@@ -21,9 +19,10 @@ import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.adapter.AdapterUserBusinesses;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityUserBusinesses extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityUserBusinesses extends CharsooActivity implements IWebserviceResponse {
 
     ArrayList<Business> userBusinesses;
     AdapterUserBusinesses adapterUserBusinesses;
@@ -32,7 +31,7 @@ public class ActivityUserBusinesses extends ActionBarActivity implements IWebser
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_businesses);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.businesses));
+        setTitle(getString(R.string.businesses));
         userBusinesses = new ArrayList<>();
         ListView listView = (ListView) findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

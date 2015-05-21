@@ -9,6 +9,7 @@
     <color name="gray_light">#EEEEEE</color>
     <color name="gray">#484F54</color>
     <color name="gray_dark">#2D3138</color>
+    <color name="gray_transparent">#80808080</color>
     <color name="red">#F5524F</color>
     <color name="red_dark">#F04540</color>
     <color name="green">#44AA44</color>

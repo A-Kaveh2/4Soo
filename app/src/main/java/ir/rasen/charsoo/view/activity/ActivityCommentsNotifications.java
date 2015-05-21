@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,20 +12,20 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterCommentNotification;
-import ir.rasen.charsoo.controller.object.CommentNotification;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.object.CommentNotification;
+import ir.rasen.charsoo.model.comment.GetAllCommentNotifications;
+import ir.rasen.charsoo.view.adapter.AdapterCommentNotification;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.model.comment.GetAllCommentNotifications;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityCommentsNotifications extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityCommentsNotifications extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int businessId;
@@ -57,7 +56,7 @@ public class ActivityCommentsNotifications extends ActionBarActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_listview_pull_to_refresh);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.comments));
+        setTitle(getString(R.string.comments));
 
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
         commentNotifications = new ArrayList<>();

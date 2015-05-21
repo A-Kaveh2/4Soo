@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,20 +13,20 @@ import android.widget.EditText;
 import java.io.File;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.user.RegisterUser;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
-import ir.rasen.charsoo.model.user.RegisterUser;
 
 
-public class ActivityUserRegister extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
+public class ActivityUserRegister extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {
 
 
     EditTextFont editTextName, editTextEmail, editTextPassword, editTextRepeatPassword;
@@ -41,7 +40,7 @@ public class ActivityUserRegister extends ActionBarActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registerr);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.register));
+        setTitle(getString(R.string.register));
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

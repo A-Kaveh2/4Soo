@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\Android\4Soo\libs\crop-lib\src\main\assets"/><source path="E:\Android\4Soo\libs\crop-lib\assets"/></dataSet><dataSet config="release"><source path="E:\Android\4Soo\libs\crop-lib\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/Sina/Desktop/Projects/Android/4Soo/libs/crop-lib/src/main/assets"/><source path="/Users/Sina/Desktop/Projects/Android/4Soo/libs/crop-lib/assets"/></dataSet><dataSet config="release"><source path="/Users/Sina/Desktop/Projects/Android/4Soo/libs/crop-lib/src/release/assets"/></dataSet></merger>

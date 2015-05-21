@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,37 +18,37 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.MyGestureDetector;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.PersianDate;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.TextProcessor;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.view.dialog.PopupCancelSharePost;
-import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
-import ir.rasen.charsoo.view.dialog.PopupReportPostActivity;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
-import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.controller.helper.Params;
-import ir.rasen.charsoo.controller.helper.PersianDate;
-import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.controller.helper.TextProcessor;
-import ir.rasen.charsoo.view.interface_m.IDeletePost;
-import ir.rasen.charsoo.view.interface_m.IReportPost;
-import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.GetPost;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
+import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupCancelSharePost;
+import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
+import ir.rasen.charsoo.view.dialog.PopupReportPostActivity;
+import ir.rasen.charsoo.view.interface_m.IDeletePost;
+import ir.rasen.charsoo.view.interface_m.IReportPost;
+import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityPost extends ActionBarActivity implements IWebserviceResponse, IReportPost, IDeletePost, IUpdateTimeLine {
+public class ActivityPost extends CharsooActivity implements IWebserviceResponse, IReportPost, IDeletePost, IUpdateTimeLine {
 
 
     ProgressDialog progressDialog;
@@ -89,7 +88,7 @@ public class ActivityPost extends ActionBarActivity implements IWebserviceRespon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.product));
+        setTitle(getString(R.string.product));
         postId = getIntent().getExtras().getInt(Params.POST_ID);
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
         final String postType = getIntent().getExtras().getString(Params.POST_TYPE);

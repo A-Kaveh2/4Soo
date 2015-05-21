@@ -2,25 +2,24 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Permission;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.model.user.UpdateSetting;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityUserSetting extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityUserSetting extends CharsooActivity implements IWebserviceResponse {
 
 
     ProgressDialog progressDialog;
@@ -31,7 +30,7 @@ public class ActivityUserSetting extends ActionBarActivity implements IWebservic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.settings));
+        setTitle(getString(R.string.settings));
 
 
         progressDialog = new ProgressDialog(this);

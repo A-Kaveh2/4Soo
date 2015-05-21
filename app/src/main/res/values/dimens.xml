@@ -78,7 +78,7 @@
     <dimen name="header_switch_footer_hight_halft">15dp</dimen>
     <dimen name="drawer_header_height_blue_section">180dp</dimen>
     <dimen name="drawer_header_business_height_blue_section">80dp</dimen>
-    <dimen name="drawer_header_height">220dp</dimen>
+    <dimen name="drawer_header_height">48dp</dimen>
     <dimen name="drawer_header_business_height">120dp</dimen>
     <dimen name="drawer_user_picture_height">100dp</dimen>
     <dimen name="drawer_header_inner_items_height">40dp</dimen>

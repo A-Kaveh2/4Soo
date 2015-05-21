@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
@@ -10,30 +9,31 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterBusinessSearchResult;
-import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
-import ir.rasen.charsoo.view.adapter.AdapterUserFollowingBusinesses;
-import ir.rasen.charsoo.view.adapter.AdapterUserFriendshipRequest;
-import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
-import ir.rasen.charsoo.view.adapter.AdapterUserSearchResult;
-import ir.rasen.charsoo.view.adapter.BaseAdapter_M;
-import ir.rasen.charsoo.view.adapter.AdapterBusinessPostComments;
-import ir.rasen.charsoo.view.adapter.AdapterBusinessReview;
-import ir.rasen.charsoo.view.adapter.AdapterCommentNotification;
-import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
-import ir.rasen.charsoo.view.adapter.AdapterPostComments;
-import ir.rasen.charsoo.view.adapter.AdapterUserReview;
-import ir.rasen.charsoo.controller.object.Comment;
-import ir.rasen.charsoo.view.dialog.DialogEditComment;
-import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessPostComments;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessReview;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessSearchResult;
+import ir.rasen.charsoo.view.adapter.AdapterCommentNotification;
+import ir.rasen.charsoo.view.adapter.AdapterPostComments;
+import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
+import ir.rasen.charsoo.view.adapter.AdapterUserFollowingBusinesses;
+import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
+import ir.rasen.charsoo.view.adapter.AdapterUserFriendshipRequest;
+import ir.rasen.charsoo.view.adapter.AdapterUserReview;
+import ir.rasen.charsoo.view.adapter.AdapterUserSearchResult;
+import ir.rasen.charsoo.view.adapter.BaseAdapter_M;
+import ir.rasen.charsoo.view.dialog.DialogEditComment;
+import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
 import ir.rasen.charsoo.view.interface_m.IBaseAdapterOnClickTask;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityTest extends ActionBarActivity implements IBaseAdapterOnClickTask, IWebserviceResponse,ICommentChange {
+public class ActivityTest extends CharsooActivity implements IBaseAdapterOnClickTask, IWebserviceResponse,ICommentChange {
 
     ProgressDialog progressDialog;
 

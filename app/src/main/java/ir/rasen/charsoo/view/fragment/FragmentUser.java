@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,27 +20,25 @@ import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFoot
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshGrid;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.post.GetSharedPosts;
+import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.controller.helper.Params;
-import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
+import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.DrawerLayoutUser;
 import ir.rasen.charsoo.view.widget_customized.GridViewUser;
-import ir.rasen.charsoo.model.post.GetSharedPosts;
-import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 
 public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh {
 
-    private DrawerLayout mDrawerLayout;
     private HFGridView gridView;
     private int visitedUserId;
     ProgressDialog progressDialog;
@@ -74,7 +71,6 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             pullToRefreshGridView = new PullToRefreshGrid(getActivity(), (PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF), FragmentUser.this);
             gridView = pullToRefreshGridView.getGridViewHeaderFooter();
 
-            mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
             recursivelyCallHandler();
 
         } catch (Exception e) {
@@ -144,10 +140,9 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     private void initializeUser() {
         if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
             return;
-        DrawerLayoutUser.Initial(getActivity(), mDrawerLayout, user, (IGoToRegisterBusinessActivity) getActivity());
         boolean hasRequest = false;
 
-        gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView, mDrawerLayout);
+        gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView);
         if (((MyApplication) getActivity().getApplication()).isUserCreated) {
             try {
                 gridViewUser.InitialGridViewUser(sharedPosts);

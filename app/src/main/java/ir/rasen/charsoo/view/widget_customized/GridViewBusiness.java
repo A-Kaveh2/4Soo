@@ -3,12 +3,11 @@ package ir.rasen.charsoo.view.widget_customized;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,8 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
     AdapterPostBusiness adapterPostBusiness;
     private boolean isThreeColumn = true;
     boolean isLoadingMore = false;
-    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewBack,imageViewEdit;
+    ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewEdit;
+    LinearLayout llBack;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
     View listFooterView;
     View viewHeader;
@@ -52,15 +52,13 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
     Business business;
     IWebserviceResponse iWebserviceResponse;
     ArrayList<Post> posts;
-    DrawerLayout drawerLayout;
     boolean hasHeader;
     DownloadCoverImage downloadCoverImage;
 
-    public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader, DrawerLayout drawerLayout) {
+    public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
         this.activity = activity;
         this.business = business;
         this.gridViewHeader = gridViewHeader;
-        this.drawerLayout = drawerLayout;
     }
 
     public void notifyDatasetChanged(){
@@ -111,14 +109,14 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         if (!hasHeader) {
             viewHeader = activity.getLayoutInflater().inflate(R.layout.layout_business_grid_header, null);
 
-            imageViewMore = (ImageView) viewHeader.findViewById(R.id.imageView_more);
+            viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
             imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
             imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
             imageViewCover = (ExpandableImageView) viewHeader.findViewById(R.id.imageView_cover);
             imageViewFollowers = (ImageView) viewHeader.findViewById(R.id.imageView_followers);
             imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
             imageViewContactInfo = (ImageView) viewHeader.findViewById(R.id.imageView_conatct_info);
-            imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
+            llBack = (LinearLayout) viewHeader.findViewById(R.id.ll_back);
             imageViewEdit = (ImageView) viewHeader.findViewById(R.id.imageView_edit);
 
             textViewFollowersNumber = (TextViewFont) viewHeader.findViewById(R.id.textView_followers_number22);
@@ -144,15 +142,6 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
                 }
             });
 
-            imageViewMore.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (drawerLayout.isDrawerOpen(Gravity.RIGHT))
-                        drawerLayout.closeDrawer(Gravity.RIGHT);
-                    else
-                        drawerLayout.openDrawer(Gravity.RIGHT);
-                }
-            });
             imageViewFollowers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -199,7 +188,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
                     }
                 }
             });
-            imageViewBack.setOnClickListener(new View.OnClickListener() {
+            llBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     activity.finish();

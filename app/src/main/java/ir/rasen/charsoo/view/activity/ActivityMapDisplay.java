@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,10 +11,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityMapDisplay extends ActionBarActivity {
+public class ActivityMapDisplay extends CharsooActivity {
 
     // Google Map
     private GoogleMap googleMap;
@@ -24,7 +23,7 @@ public class ActivityMapDisplay extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.display_location));
+        setTitle(getString(R.string.display_location));
 
         double lat = getIntent().getExtras().getDouble(Params.LATITUDE);
         double lng = getIntent().getExtras().getDouble(Params.LONGITUDE);

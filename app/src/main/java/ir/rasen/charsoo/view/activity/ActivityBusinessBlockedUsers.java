@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,18 +13,18 @@ import com.handmark.pulltorefresh.library.Footer;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterBlockedUsers;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.model.business.GetBlockedUsers;
+import ir.rasen.charsoo.view.adapter.AdapterBlockedUsers;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityBusinessBlockedUsers extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityBusinessBlockedUsers extends CharsooActivity implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     int businessId;
@@ -47,7 +46,7 @@ public class ActivityBusinessBlockedUsers extends ActionBarActivity implements I
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_listview);
 
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.blocked));
+        setTitle(getResources().getString(R.string.blocked));
         try {
             sampleBlockedUsers = TestUnit.getBaseAdapterItems(getResources());
         } catch (Exception e) {

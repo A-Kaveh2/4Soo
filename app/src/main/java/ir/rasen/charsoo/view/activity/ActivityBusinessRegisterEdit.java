@@ -12,9 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,28 +22,29 @@ import android.widget.LinearLayout;
 
 import java.io.File;
 
-import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterBaseInfo;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterContactInfo;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterLocationInfo;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.view.dialog.DialogDeleteBusinessConfirmation;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.model.business.GetBusinessProfileInfo;
+import ir.rasen.charsoo.model.business.RegisterBusiness;
+import ir.rasen.charsoo.model.business.UpdateBusinessProfileInfo;
+import ir.rasen.charsoo.view.dialog.DialogDeleteBusinessConfirmation;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterBaseInfo;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterContactInfo;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterLocationInfo;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
-import ir.rasen.charsoo.model.business.GetBusinessProfileInfo;
-import ir.rasen.charsoo.model.business.RegisterBusiness;
-import ir.rasen.charsoo.model.business.UpdateBusinessProfileInfo;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityBusinessRegisterEdit extends ActionBarActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
+public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
 
     FragmentBusinessRegisterBaseInfo fragmentBaseInfo;
     FragmentBusinessRegisterContactInfo fragmentContactInfo;
@@ -69,9 +68,6 @@ public class ActivityBusinessRegisterEdit extends ActionBarActivity implements I
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_register);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.layout_action_bar_home, null);

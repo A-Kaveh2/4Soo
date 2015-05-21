@@ -3,7 +3,6 @@ package ir.rasen.charsoo.view.activity;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,10 +16,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityMapChoose extends ActionBarActivity {
+public class ActivityMapChoose extends CharsooActivity {
 
     // Google Map
     private GoogleMap googleMap;
@@ -31,7 +30,6 @@ public class ActivityMapChoose extends ActionBarActivity {
     MenuItem menuItemTik;
     boolean isLocationInitialized = false;
     //boolean isFirstTime = true;
-
 
     private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
         @Override
@@ -52,7 +50,7 @@ public class ActivityMapChoose extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.choose_location));
+        setTitle(getString(R.string.choose_location));
         setContentView(R.layout.activity_map);
         try {
             MapsInitializer.initialize(ActivityMapChoose.this);
