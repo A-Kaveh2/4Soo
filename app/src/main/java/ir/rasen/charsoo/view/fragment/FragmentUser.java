@@ -62,7 +62,6 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             visitedUserId = LoginInfo.getUserId(getActivity());
             iUpdateUserProfile = this;
 
-
             //set progress dialog
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getResources().getString(R.string.please_wait));
