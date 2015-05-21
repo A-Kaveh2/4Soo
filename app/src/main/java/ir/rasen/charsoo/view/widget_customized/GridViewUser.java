@@ -261,8 +261,8 @@ public class GridViewUser implements IWebserviceResponse {
         }
 
         if(isThreeColumn) {
-            gridViewHeader.setAdapter(adapterPostGrid);
             prepareGridThreeColumn(gridViewHeader);
+            gridViewHeader.setAdapter(adapterPostGrid);
         } else {
             gridViewHeader.setAdapter(adapterPostShared);
             imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
