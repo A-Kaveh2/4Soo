@@ -189,7 +189,6 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             pullToRefreshGridView.setResultSize(sharedPosts.size());
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
-                gridView.removeHeaderView(gridView.getHeaderView());
             }
             gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn);
         }
