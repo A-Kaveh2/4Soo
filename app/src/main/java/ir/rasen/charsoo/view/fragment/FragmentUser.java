@@ -31,7 +31,6 @@ import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
-import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
@@ -138,14 +137,15 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     }
 
     private void initializeUser() {
-        if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
+/*        if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
             return;
-        boolean hasRequest = false;
+        boolean hasRequest = false;*/
 
+        boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
         gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView);
         if (((MyApplication) getActivity().getApplication()).isUserCreated) {
             try {
-                gridViewUser.InitialGridViewUser(sharedPosts);
+                gridViewUser.InitialGridViewUser(sharedPosts, beThreeColumn);
                 gridViewUser.hideLoader();
             } catch (Exception e) {
 
@@ -153,7 +153,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         } else {
             try {
 
-                gridViewUser.InitialGridViewUser(new ArrayList<Post>());
+                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn);
             } catch (Exception e) {
 
             }
@@ -170,6 +170,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             ((MyApplication) getActivity().getApplication()).userIdentifier = user.userIdentifier;
             ((MyApplication) getActivity().getApplication()).userProfilePictureId = user.profilePictureId;
             ((MyApplication) getActivity().getApplication()).userBusinesses = user.businesses;
+            ((MyApplication) getActivity().getApplication()).setPermission(user.permissions);
             initializeUser();
 
             if (!LoginInfo.hasBusiness(getActivity()) && user.businesses.size() != 0) {
@@ -190,7 +191,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 pullToRefreshGridView.onRefreshComplete();
                 gridView.removeHeaderView(gridView.getHeaderView());
             }
-            gridViewUser.InitialGridViewUser(sharedPosts);
+            gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn);
         }
     }
 
@@ -223,7 +224,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 break;
             }
         }
-        gridViewUser.InitialGridViewUser(sharedPosts);
+        gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn);
     }
 
     @Override

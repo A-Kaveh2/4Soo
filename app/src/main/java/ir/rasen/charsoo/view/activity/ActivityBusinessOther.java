@@ -89,8 +89,9 @@ public class ActivityBusinessOther extends NoActionBarActivity implements IWebse
             if (pullToRefreshGridView.isRefreshing())
                 gridView.removeHeaderView(gridView.getHeaderView());
 
+            boolean beThreeColumn = gridViewBusiness == null ? true : gridViewBusiness.isThreeColumn;
             gridViewBusiness = new GridViewBusinessOther(ActivityBusinessOther.this, business, gridView);
-            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>());
+            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
             new GetBusinessPosts(ActivityBusinessOther.this, LoginInfo.getUserId(ActivityBusinessOther.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessOther.this).execute();
         }
         if (result instanceof ArrayList) {
@@ -100,7 +101,7 @@ public class ActivityBusinessOther extends NoActionBarActivity implements IWebse
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
             }
-            gridViewBusiness.InitialGridViewBusiness(posts);
+            gridViewBusiness.InitialGridViewBusiness(posts, gridViewBusiness.isThreeColumn);
         }
 
     }

@@ -42,7 +42,7 @@ public class GridViewUser implements IWebserviceResponse {
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
-    private boolean isThreeColumn = true;
+    public boolean isThreeColumn = true;
 
     ImageView imageViewSearch, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewHasRequest,imageViewEdit;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewIdentifier, textViewName, textViewAboutMe;
@@ -71,7 +71,6 @@ public class GridViewUser implements IWebserviceResponse {
         this.aboutMe = user.aboutMe;
     }
 
-
     public void hideRequestAnnouncement() {
         imageViewHasRequest.setVisibility(View.GONE);
     }
@@ -80,11 +79,12 @@ public class GridViewUser implements IWebserviceResponse {
         imageViewCover.setImageBitmap(Image_M.getBitmapFromString(userPictureString));
     }
 
-    public void InitialGridViewUser(ArrayList<Post> postList) {
+    public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn) {
+        this.isThreeColumn = beThreeColumn;
 
         this.posts = postList;
 
-        ((ActivityMain) activity).initPopupWindowUser(userPermissions);
+        ((ActivityMain) activity).initPopupWindowUser();
 
         searchItemPosts = new ArrayList<>();
         for (Post post : posts)
@@ -259,8 +259,15 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewSwitch.setVisibility(View.VISIBLE);
             imageViewCirecle.setVisibility(View.VISIBLE);
         }
-        gridViewHeader.setAdapter(adapterPostGrid);
-        prepareGridThreeColumn(gridViewHeader);
+
+        if(isThreeColumn) {
+            gridViewHeader.setAdapter(adapterPostGrid);
+            prepareGridThreeColumn(gridViewHeader);
+        } else {
+            gridViewHeader.setAdapter(adapterPostShared);
+            imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
+        }
+
     }
 
     // LOAD MORE DATA
@@ -288,6 +295,7 @@ public class GridViewUser implements IWebserviceResponse {
                 adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
             else
                 adapterPostShared.loadMore(posts);
+            isLoadingMore=false;
 
 
         }

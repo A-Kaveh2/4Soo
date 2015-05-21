@@ -42,7 +42,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
-    private boolean isThreeColumn = true;
+    public boolean isThreeColumn = true;
 
     ImageView imageViewSwitch, imageViewCover,imageViewCirecle, imageViewFriends, imageViewReviews, imageViewBack, imageViewFollowingBusinesses;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews,textViewIdentifier,textViewName;
@@ -57,7 +57,6 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     boolean headerInitialized = false;
     ICancelFriendship iCancelFriendshipl;
     IWebserviceResponse iWebserviceResponse;
-
 
     public GridViewUserOther(final Activity context, final User displayedUser, com.handmark.pulltorefresh.library.HFGridView gViewHeader) {
         this.context = context;
@@ -243,7 +242,9 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         headerInitialized = true;
     }
 
-    public void InitialGridViewUser(ArrayList<Post> postList) {
+    public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn) {
+
+        this.isThreeColumn = beThreeColumn;
 
         if (postList.size() == 0) {
             imageViewSwitch.setVisibility(View.GONE);
@@ -265,8 +266,13 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         adapterPostGrid = new AdapterPostGrid(context, searchItemPosts,0, Post.GetPostType.SHARE);
         adapterPostShared = new AdapterPostShared(context, posts);
 
-        prepareGridThreeColumn(gridViewHeader);
-        gridViewHeader.setAdapter(adapterPostGrid);
+        if(isThreeColumn) {
+            gridViewHeader.setAdapter(adapterPostGrid);
+            prepareGridThreeColumn(gridViewHeader);
+        } else {
+            gridViewHeader.setAdapter(adapterPostShared);
+            imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
+        }
 
     }
 
@@ -302,6 +308,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                 adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
             else
                 adapterPostShared.loadMore(posts);
+            isLoadingMore=false;
         }
     }
 

@@ -4,22 +4,20 @@
     android:id="@+id/ll_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="right"
+    android:layout_gravity="end"
     android:background="@color/gray_transparent"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right">
+        android:layout_gravity="end">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
-
 
             <LinearLayout
                 android:id="@+id/ll_drawer_businesses"
@@ -27,14 +25,15 @@
                 android:layout_height="@dimen/drawer_header_inner_items_with_icons_height"
                 android:background="@drawable/selector_popup_middle_item"
                 android:gravity="right|center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/activity_horizontal_margin">
 
                 <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
-                    android:text="@string/businesses"
+                    android:text="@string/new_business"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="@color/Black"
                     android:textSize="@dimen/font_size_adapter_item_title" />

@@ -21,23 +21,21 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.controller.helper.Permission;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.view.dialog.DialogExit;
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
-import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
 
 
-public class ActivityMain extends NoActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs, IGoToRegisterBusinessActivity {
+public class ActivityMain extends NoActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs {
 
     PopupWindow popupWindow;
 
     ImageView imageViewHome, imageViewSearch, imageViewUser, imageViewBusinesses;
     boolean footerHome=true, footerUser, footerSearch, footerBusiness;
-    ImageView imgOptions;
 
     RelativeLayout rlHome, rlSearch, rlUser, rlBusinesses;
     FragmentManager fm;
@@ -75,8 +73,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
         imageViewSearch = (ImageView) findViewById(R.id.imageView_search);
         imageViewUser = (ImageView) findViewById(R.id.imageView_user);
         imageViewBusinesses = (ImageView) findViewById(R.id.imageView_businesses);
-
-        imgOptions = (ImageView) findViewById(R.id.imageView_more);
 
         rlHome = (RelativeLayout) findViewById(R.id.rl_home);
         rlSearch = (RelativeLayout) findViewById(R.id.rl_search);
@@ -292,7 +288,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 addFragment(FragmentTag.USER);
 
                 nothingChoseInHeader();
-                imgOptions.setVisibility(View.VISIBLE);
                 rlUser.setBackgroundColor(Color.BLACK);
                 imageViewUser.setImageResource(R.drawable.ic_person_blue_36dp);
 
@@ -419,7 +414,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
 
     }
 
-    @Override
     public void notifyGo() {
         if (((MyApplication) getApplication()).userBusinesses.size() == 0) {
             //we have to go to the FragmentUserBusinesses first and then go to registerBusinessActvitiy because we need get register result back to the fragment.
@@ -434,7 +428,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     }
 
     private void nothingChoseInHeader() {
-        imgOptions.setVisibility(View.GONE);
         rlHome.setBackgroundColor(Color.DKGRAY);
         rlUser.setBackgroundColor(Color.DKGRAY);
         rlSearch.setBackgroundColor(Color.DKGRAY);
@@ -446,7 +439,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     }
 
 
-    private void initialPopupOptionsUser(View view, final PopupWindow popupWindow, final Permission userPermissions) {
+    private void initialPopupOptionsUser(View view, final PopupWindow popupWindow) {
 /*        (view.findViewById(R.id.imageView_drawer_edit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -459,18 +452,15 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
         (view.findViewById(R.id.ll_drawer_businesses)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(activity, ActivityUserBusinesses.class);
-                ((MyApplication)activity.getApplication()).userBusinesses = user.businesses;
-                activity.startActivity(intent);*/
-                //iGoToRegisterBusinessActivity.notifyGo();
+                Intent intent = new Intent(ActivityMain.this, ActivityBusinessRegisterEdit.class);
+                startActivityForResult(intent, Params.ACTION_REGISTER_BUSINESS);
+                notifyGo();
                 popupWindow.dismiss();
             }
         });
         (view.findViewById(R.id.ll_drawer_setting)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyApplication myApplication = (MyApplication) getApplication();
-                myApplication.setPermission(userPermissions);
                 Intent intent = new Intent(ActivityMain.this, ActivityUserSetting.class);
                 startActivity(intent);
                 popupWindow.dismiss();
@@ -508,29 +498,25 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
         });
     }
 
-    public void initPopupWindowUser(Permission userPermissions) {
+    public void initPopupWindowUser() {
         popupWindow = new PopupWindow(ActivityMain.this);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popup_options_user, null, false);
         popupWindow.setContentView(view);
 
-        initialPopupOptionsUser(view, popupWindow, userPermissions);
+        initialPopupOptionsUser(view, popupWindow);
 
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.setOutsideTouchable(true);
         popupWindow.setWindowLayoutMode(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
 
-        imgOptions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switchPopupWindow(view);
-            }
-        });
     }
 
     public void switchPopupWindow(View view) {
         // SHOW POPUP
+        if(popupWindow==null)
+            initPopupWindowUser();
         if(!popupWindow.isShowing())
             popupWindow.showAsDropDown(view);
     }

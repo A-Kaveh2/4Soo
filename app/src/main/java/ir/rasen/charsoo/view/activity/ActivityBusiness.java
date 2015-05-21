@@ -94,8 +94,9 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
             ((MyApplication) getApplication()).business = new Business();
             ((MyApplication) getApplication()).business = business;
 
+            boolean beThreeColumn = gridViewBusiness == null ? true : gridViewBusiness.isThreeColumn;
             gridViewBusiness = new GridViewBusiness(this, business, gridView);
-            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>());
+            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
 
             new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
         }
@@ -107,7 +108,7 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
                 pullToRefreshGridView.onRefreshComplete();
 /*                gridView.removeHeaderView(gridView.getHeaderView());*/
             }
-            gridViewBusiness.InitialGridViewBusiness(posts);
+            gridViewBusiness.InitialGridViewBusiness(posts, gridViewBusiness.isThreeColumn);
         }
 
     }
@@ -171,4 +172,7 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
 
     }
 
+    public void onClick(View view) {
+        // to set null onClick, please don't clean this function
+    }
 }

@@ -15,24 +15,28 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_centerVertical="true"
-            android:src="@drawable/logo_4soo" />
-
-        <ImageView
             android:id="@+id/imageView_more"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_more_vert_white_24dp"
-            android:visibility="gone"/>
+            android:onClick="switchPopupWindow"/>
 
+        <ImageView
+            android:id="@+id/imageView_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_toLeftOf="@+id/imageView_more"
+            android:layout_toStartOf="@+id/imageView_more"
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo_4soo" />
     </RelativeLayout>
 
     <RelativeLayout

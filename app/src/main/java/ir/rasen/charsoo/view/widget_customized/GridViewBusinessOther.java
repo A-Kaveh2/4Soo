@@ -42,7 +42,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostBusiness;
-    private boolean isThreeColumn = true;
+    public boolean isThreeColumn = true;
     boolean isLoadingMore = false;
     ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewBack,imageViewContactInfo,imageViewCirecle;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
@@ -80,7 +80,9 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         }
     }
 
-    public void InitialGridViewBusiness(ArrayList<Post> postList) {
+    public void InitialGridViewBusiness(ArrayList<Post> postList, boolean beThreeColumn) {
+
+        this.isThreeColumn = beThreeColumn;
 
         searchItemPosts = new ArrayList<>();
         this.posts = postList;
@@ -200,9 +202,13 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         }
         gridViewHeader.setBackgroundColor(Color.parseColor("#ffffff"));
 
-
-        prepareGridThreeColumn(gridViewHeader);
-        gridViewHeader.setAdapter(adapterPostGrid);
+        if(isThreeColumn) {
+            gridViewHeader.setAdapter(adapterPostGrid);
+            prepareGridThreeColumn(gridViewHeader);
+        } else {
+            gridViewHeader.setAdapter(adapterPostBusiness);
+            imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
+        }
 
         gridViewHeader.setOnScrollListener(new AbsListView.OnScrollListener() {
             int currentFirstVisibleItem
@@ -266,6 +272,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                 imageViewSwitch.setVisibility(View.VISIBLE);
                 imageViewCirecle.setVisibility(View.VISIBLE);
             }
+            isLoadingMore=false;
 
         } else if (result instanceof ResultStatus) {
             //FollowBusiness' result

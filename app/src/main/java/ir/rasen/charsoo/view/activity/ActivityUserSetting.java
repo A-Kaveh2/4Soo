@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
@@ -24,6 +25,7 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
 
     ProgressDialog progressDialog;
     MyApplication myApplication;
+    private Permission permission;
 
 
     @Override
@@ -41,8 +43,8 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
         checkBoxFriends = (CheckBox) findViewById(R.id.checkBox_friends);
         checkBoxReviews = (CheckBox) findViewById(R.id.checkBox_reviews);
 
-        MyApplication myApplication = (MyApplication)getApplication();
-        Permission permission = myApplication.getPermission();
+        myApplication = (MyApplication)getApplication();
+        permission = myApplication.getPermission();
         checkBoxBusinesses.setChecked(permission.followedBusiness);
         checkBoxFriends.setChecked(permission.friends);
         checkBoxReviews.setChecked(permission.reviews);
@@ -52,7 +54,8 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-                new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), new Permission(checkBoxBusinesses.isChecked(), checkBoxFriends.isChecked(), checkBoxReviews.isChecked()), ActivityUserSetting.this).execute();
+                permission = new Permission(checkBoxBusinesses.isChecked(), checkBoxFriends.isChecked(), checkBoxReviews.isChecked());
+                new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), permission, ActivityUserSetting.this).execute();
             }
         });
     }
@@ -65,7 +68,6 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
         inflater.inflate(R.menu.menu_user_setting, menu);*/
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -81,8 +83,11 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
-        if (result instanceof ResultStatus)
-            new DialogMessage(ActivityUserSetting.this, getResources().getString(R.string.dialog_update_success)).show();
+        if (result instanceof ResultStatus) {
+            myApplication.setPermission(permission);
+            Toast.makeText(ActivityUserSetting.this, getResources().getString(R.string.dialog_update_success), Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override

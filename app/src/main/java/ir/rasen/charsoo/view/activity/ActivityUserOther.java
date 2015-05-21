@@ -87,10 +87,12 @@ public class ActivityUserOther extends NoActionBarActivity implements IWebservic
             //GetUserHomeInfo result
             user = (User) result;
             gridView.setVisibility(View.VISIBLE);
+
+            boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
             gridViewUser = new GridViewUserOther(ActivityUserOther.this, user, gridView);
             if (pullToRefreshGridView.isRefreshing())
                 gridView.removeHeaderView(gridView.getHeaderView());
-            gridViewUser.InitialGridViewUser(new ArrayList<Post>());
+            gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn);
             if (user.friendshipRelationStatus == FriendshipRelation.Status.FRIEND)
                 new GetSharedPosts(ActivityUserOther.this, visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityUserOther.this).execute();
             else {
@@ -104,7 +106,7 @@ public class ActivityUserOther extends NoActionBarActivity implements IWebservic
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
             }
-            gridViewUser.InitialGridViewUser(posts);
+            gridViewUser.InitialGridViewUser(posts, gridViewUser.isThreeColumn);
         }
     }
 

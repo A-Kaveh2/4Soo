@@ -51,8 +51,8 @@
                 <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:id="@+id/textView_business_identifier_header"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/imageView_back"
                     android:textColor="@color/White" />
@@ -73,6 +73,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/shape_gradiant_black"
+                android:onClick="onClick"
                 android:gravity="right|center_vertical">
 
                 <ImageView

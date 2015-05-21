@@ -58,7 +58,8 @@
                 android:layout_alignParentRight="true"
                 android:background="@color/BlackTransparent"
                 android:gravity="right|center_vertical"
-                android:layout_alignParentEnd="true">
+                android:layout_alignParentEnd="true"
+                android:onClick="onClick">
 
                 <ImageView
                     android:id="@+id/imageView_edit"

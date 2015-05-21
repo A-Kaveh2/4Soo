@@ -40,7 +40,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostBusiness adapterPostBusiness;
-    private boolean isThreeColumn = true;
+    public boolean isThreeColumn = true;
     boolean isLoadingMore = false;
     ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewEdit;
     LinearLayout llBack;
@@ -92,10 +92,12 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         } else {
             gridViewHeader.setAdapter(adapterPostBusiness);
         }
+
     }
 
-    public void InitialGridViewBusiness(ArrayList<Post> postList) {
+    public void InitialGridViewBusiness(ArrayList<Post> postList, boolean beThreeColumn) {
 
+        this.isThreeColumn = beThreeColumn;
         searchItemPosts = new ArrayList<>();
         posts = postList;
 
@@ -216,8 +218,12 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
             imageViewCirecle.setVisibility(View.VISIBLE);
         }
 
-        prepareGridThreeColumn(gridViewHeader);
-        gridViewHeader.setAdapter(adapterPostGrid);
+        if(isThreeColumn) {
+            gridViewHeader.setAdapter(adapterPostGrid);
+            prepareGridThreeColumn(gridViewHeader);
+        } else {
+            gridViewHeader.setAdapter(adapterPostBusiness);
+        }
 
         gridViewHeader.setOnScrollListener(new AbsListView.OnScrollListener() {
             int currentFirstVisibleItem
@@ -272,6 +278,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
                 adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
             else
                 adapterPostBusiness.loadMore(posts);
+            isLoadingMore=false;
         }
 
 
