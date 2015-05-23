@@ -83,10 +83,6 @@
             android:name=".view.activity.ActivityMapDisplay"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".view.activity.ActivityRegisterBusiness_ViewPager_not_used"
-            android:theme="@style/CustomActionBarTheme"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".view.activity.ActivityBusinessRegisterEdit"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />

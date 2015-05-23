@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -79,8 +80,38 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment {
             buttonMap.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
         }
 
-        if(!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity()))
+        LocationManagerTracker lt2 = new LocationManagerTracker(getActivity());
+        // check if GPS enabled
+        if(lt2.canGetLocation()){
+
+            latitude = String.valueOf(lt2.getLatitude());
+            longitude = String.valueOf(lt2.getLongitude());
+            ((MyApplication) getActivity().getApplication()).business.location_m = new Location_M(latitude, longitude);
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            lt2.showSettingsAlert();
+        }
+
+        if (!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity())) {
             buttonMap.setEnabled(false);
+            view.findViewById(R.id.textView_play_service).setVisibility(View.VISIBLE);
+
+            LocationManagerTracker lt = new LocationManagerTracker(getActivity());
+            // check if GPS enabled
+            if(lt.canGetLocation()){
+
+                 latitude = String.valueOf(lt.getLatitude());
+                 longitude = String.valueOf(lt.getLongitude());
+                ((MyApplication) getActivity().getApplication()).business.location_m = new Location_M(latitude, longitude);
+            }else{
+                // can't get location
+                // GPS or Network is not enabled
+                // Ask user to enable GPS/network in settings
+                lt.showSettingsAlert();
+            }
+        }
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

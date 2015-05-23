@@ -89,42 +89,6 @@ public class ActivitySearchUser extends CharsooActivity implements IWebserviceRe
         searchKeyWord = getIntent().getExtras().getString(Params.SEARCH_KEY_WORD);
         search();
 
-        //editTextSearch is now gone. The search scenario changed.
-       /* editTextSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if(!Validation.validateIdentifier(ActivitySearchUser.this,editTextSearch.getText().toString()).isValid()){
-                        editTextSearch.setError(Validation.getErrorMessage());
-                        return false;
-                    }
-                    search();
-                    return true;
-                }
-                return false;
-            }
-        });
-        editTextSearch.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
-
-                if(event.getAction() == MotionEvent.ACTION_UP) {
-                    if(event.getRawX() >= (editTextSearch.getRight() - editTextSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        if(!Validation.validateIdentifier(ActivitySearchUser.this,editTextSearch.getText().toString()).isValid()){
-                            editTextSearch.setError(Validation.getErrorMessage());
-                            return false;
-                        }
-                        search();
-                    }
-                }
-                return false;
-            }
-        });*/
-
     }
 
     private void search(){

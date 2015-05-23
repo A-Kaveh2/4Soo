@@ -76,6 +76,16 @@
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_larger" />
 
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                android:id="@+id/textView_play_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:text="@string/play_services_guide"
+                android:layout_marginBottom="30dp"
+                android:gravity="right" />
+
 
         </LinearLayout>
     </ScrollView>
