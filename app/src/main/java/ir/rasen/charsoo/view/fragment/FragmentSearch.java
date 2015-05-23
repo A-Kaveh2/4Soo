@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.LocationManagerTracker;
 import ir.rasen.charsoo.controller.object.Category;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.SubCategory;
@@ -172,28 +173,27 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
 
-        if (mapView != null) {
+        if (!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity()))
+            new DialogMessage(getActivity(), getString(R.string.err_map_loading) + getString(R.string.err_map_loading_description)).show();
+        else if (mapView != null) {
             googleMap = mapView.getMap();
-            try {
-                googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-                googleMap.setMyLocationEnabled(true);
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(Double.valueOf(getString(R.string.sample_latitude)), Double.valueOf(getString(R.string.sample_longitude))), 5));
-                // Zoom in, animating the camera.
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(5), 2000,
-                        null);
-                googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-                    @Override
-                    public void onMapClick(LatLng latLng) {
-                        choosedLatLng = latLng;
-                        MarkerOptions marker = new MarkerOptions().position(
-                                latLng);
-                        googleMap.addMarker(marker);
-                    }
-                });
-            } catch (Exception e) {
-                new DialogMessage(getActivity(), getString(R.string.err_map_loading) + getString(R.string.err_map_loading_description)).show();
-            }
+            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+            googleMap.setMyLocationEnabled(true);
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                    new LatLng(Double.valueOf(getString(R.string.sample_latitude)), Double.valueOf(getString(R.string.sample_longitude))), 5));
+            // Zoom in, animating the camera.
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(5), 2000,
+                    null);
+            googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    choosedLatLng = latLng;
+                    MarkerOptions marker = new MarkerOptions().position(
+                            latLng);
+                    googleMap.addMarker(marker);
+                }
+            });
+
         }
         //Map section
 

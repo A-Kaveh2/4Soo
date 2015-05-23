@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.LocationManagerTracker;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
@@ -78,7 +79,8 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment {
             buttonMap.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
         }
 
-
+        if(!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity()))
+            buttonMap.setEnabled(false);
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

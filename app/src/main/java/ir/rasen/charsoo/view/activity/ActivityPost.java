@@ -206,7 +206,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
 
         imageViewPost.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
-                if(post == null)
+                if(post == null || getPostType == Post.GetPostType.BUSINESS)
                     return false;
                 return gestureDetector.onTouchEvent(event);
             }
