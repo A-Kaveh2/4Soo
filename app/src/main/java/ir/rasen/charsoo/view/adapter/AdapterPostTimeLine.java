@@ -45,8 +45,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
     GridView gridView;
 
 
-
-
     public AdapterPostTimeLine(Context context, ArrayList<Post> items) {
         this.context = context;
         this.items = items;
@@ -110,6 +108,9 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         holder.textViewTitle = (TextViewFont) view.findViewById(R.id.textView_title);
         holder.textViewPrice = (TextViewFont) view.findViewById(R.id.textView_price);
         holder.textViewComment3UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment3_user_identifier);
+        holder.textViewCode = (TextViewFont) view.findViewById(R.id.textView_code);
+        holder.llPriceSection = (LinearLayout) view.findViewById(R.id.ll_price_section);
+        holder.llCodeSection = (LinearLayout) view.findViewById(R.id.ll_code_section);
 
         //announcement parts
         holder.llAnnouncementSection = (LinearLayout) view.findViewById(R.id.ll_announcement);
@@ -150,7 +151,17 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
             holder.textViewDescription.setText(TextProcessor.removeHashtags(items.get(position).description));
             holder.textViewTitle.setText(TextProcessor.removeHashtags(items.get(position).title));
-            holder.textViewPrice.setText(items.get(position).price);
+            if (items.get(position).price != null && !items.get(position).price.equals("")&& !items.get(position).price.equals("null")) {
+                holder.textViewPrice.setText(items.get(position).price);
+                holder.llPriceSection.setVisibility(View.VISIBLE);
+            } else
+                holder.llPriceSection.setVisibility(View.GONE);
+            if (items.get(position).code != null && !items.get(position).code.equals("")&& !items.get(position).code.equals("null")) {
+                holder.textViewCode.setText(items.get(position).code);
+                holder.llCodeSection.setVisibility(View.VISIBLE);
+            } else
+                holder.llCodeSection.setVisibility(View.GONE);
+
 
             ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
             if (lastThreeComments.size() == 0) {
@@ -267,7 +278,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             });
 
 
-            holder.gestureDetector = new GestureDetector(context, new MyGestureDetector(context,items.get(position).id,items.get(position).isLiked, holder.imageViewLike, holder.imageViewPostLike));
+            holder.gestureDetector = new GestureDetector(context, new MyGestureDetector(context, items.get(position).id, items.get(position).isLiked, holder.imageViewLike, holder.imageViewPostLike));
 
             holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
@@ -369,6 +380,8 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         ImageView imageViewComment;
         ImageView imageViewShare;
         ImageView imageViewMore;
+        TextViewFont textViewCode;
+        LinearLayout llPriceSection, llCodeSection;
 
         //announcement parts
         LinearLayout llAnnouncementSection;

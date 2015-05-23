@@ -151,6 +151,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ll_price_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -178,6 +179,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price"
+                android:textSize="@dimen/font_size_adapter_item_title" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_code_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
+            android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
+            android:layout_marginBottom="@dimen/post_adapter_description_margin"
+            android:layout_marginTop="5dp"
+            android:gravity="right">
+
+
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                android:id="@+id/textView_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:textSize="@dimen/font_size_adapter_item_title" />
+
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product_code"
                 android:textSize="@dimen/font_size_adapter_item_title" />
 
         </LinearLayout>

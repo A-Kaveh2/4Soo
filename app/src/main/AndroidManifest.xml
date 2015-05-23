@@ -48,15 +48,11 @@
         <activity
             android:name=".view.activity.ActivityTest"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ActivityTestUser"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".view.activity.ActivityBusiness"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.activity.ActivityEntrance_used_for_test"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".view.activity.ActivityUserRegister"
             android:windowSoftInputMode="stateHidden|adjustResize"
@@ -153,10 +149,6 @@
         <activity
             android:name=".view.activity.ActivityPost"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ActivityMain2"
-            android:screenOrientation="portrait" />
-
 
         <activity
             android:name="eu.janmuller.android.simplecropimage.CropImage"

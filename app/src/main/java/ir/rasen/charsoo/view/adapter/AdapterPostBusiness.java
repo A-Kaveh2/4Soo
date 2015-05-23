@@ -37,7 +37,7 @@ public class AdapterPostBusiness extends BaseAdapter {
     private IDeletePost iDeletePost;
     private boolean isUserOwner;
 
-    public AdapterPostBusiness(Activity activity, ArrayList<Post> items,boolean isUserOwner,IDeletePost iDeletePost) {
+    public AdapterPostBusiness(Activity activity, ArrayList<Post> items, boolean isUserOwner, IDeletePost iDeletePost) {
         this.activity = activity;
         this.items = items;
         downloadImages = new DownloadImages(activity);
@@ -46,7 +46,7 @@ public class AdapterPostBusiness extends BaseAdapter {
         this.isUserOwner = isUserOwner;
     }
 
-    public void loadMore(ArrayList<Post> newItem){
+    public void loadMore(ArrayList<Post> newItem) {
         this.items.addAll(newItem);
         notifyDataSetChanged();
     }
@@ -97,6 +97,11 @@ public class AdapterPostBusiness extends BaseAdapter {
             holder.textViewComment3UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment3_user_identifier);
             holder.textViewTitle = (TextViewFont) view.findViewById(R.id.textView_title);
             holder.textViewPrice = (TextViewFont) view.findViewById(R.id.textView_price);
+            holder.textViewCode = (TextViewFont) view.findViewById(R.id.textView_code);
+            holder.llPriceSection = (LinearLayout) view.findViewById(R.id.ll_price_section);
+            holder.llCodeSection = (LinearLayout) view.findViewById(R.id.ll_code_section);
+
+
             view.setTag(holder);
 
         } else
@@ -105,20 +110,29 @@ public class AdapterPostBusiness extends BaseAdapter {
         holder.llAnnouncementSection.setVisibility(View.GONE);
 
         //all post's types have these three fields
-        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage,true);
+        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
         holder.textViewDate.setText(PersianDate.getCreationDate(activity, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
 
-        if (items.get(position).picture!= null && !items.get(position).picture.equals("") && items.get(position).pictureId == 0 )
+        if (items.get(position).picture != null && !items.get(position).picture.equals("") && items.get(position).pictureId == 0)
             holder.imageViewPost.setImageBitmap(Image_M.getBitmapFromString(items.get(position).picture));
         else
-        downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost,false);
+            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, false);
         holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
         holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
         holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
         holder.textViewDescription.setText(items.get(position).description);
         holder.textViewTitle.setText(TextProcessor.removeHashtags(items.get(position).title));
-        holder.textViewPrice.setText(items.get(position).price);
+        if (items.get(position).price != null && !items.get(position).price.equals("") && !items.get(position).price.equals("null")) {
+            holder.textViewPrice.setText(items.get(position).price);
+            holder.llPriceSection.setVisibility(View.VISIBLE);
+        } else
+            holder.llPriceSection.setVisibility(View.GONE);
+        if (items.get(position).code != null && !items.get(position).code.equals("") && !items.get(position).code.equals("null")) {
+            holder.textViewCode.setText(items.get(position).code);
+            holder.llCodeSection.setVisibility(View.VISIBLE);
+        } else
+            holder.llCodeSection.setVisibility(View.GONE);
 
         ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
         if (lastThreeComments.size() > 0) {
@@ -143,43 +157,43 @@ public class AdapterPostBusiness extends BaseAdapter {
         holder.textViewComment1UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.goUserHomeInfoPage(activity,items.get(position).lastThreeComments.get(0).userID);
+                User.goUserHomeInfoPage(activity, items.get(position).lastThreeComments.get(0).userID);
 
             }
         });
         holder.textViewComment2UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.goUserHomeInfoPage(activity,items.get(position).lastThreeComments.get(1).userID);
+                User.goUserHomeInfoPage(activity, items.get(position).lastThreeComments.get(1).userID);
             }
         });
         holder.textViewComment3UserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.goUserHomeInfoPage(activity,items.get(position).lastThreeComments.get(2).userID);
+                User.goUserHomeInfoPage(activity, items.get(position).lastThreeComments.get(2).userID);
             }
         });
 
         holder.imageViewComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Comment.openCommentActivity(activity,isUserOwner,items.get(position).id,items.get(position).businessID);
+                Comment.openCommentActivity(activity, isUserOwner, items.get(position).id, items.get(position).businessID);
             }
         });
         holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-                intent.putExtra(Params.BUSINESS_ID,items.get(position).businessID);
-                intent.putExtra(Params.POST_ID,items.get(position).id);
-                activity.startActivityForResult(intent,Params.ACTION_EDIT_POST);
+                intent.putExtra(Params.BUSINESS_ID, items.get(position).businessID);
+                intent.putExtra(Params.POST_ID, items.get(position).id);
+                activity.startActivityForResult(intent, Params.ACTION_EDIT_POST);
             }
         });
 
         holder.imageViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogDeletePostConfirmation d= new DialogDeletePostConfirmation(activity,items.get(position).businessID,items.get(position).id,iDeletePost);
+                DialogDeletePostConfirmation d = new DialogDeletePostConfirmation(activity, items.get(position).businessID, items.get(position).id, iDeletePost);
                 d.show();
             }
         });
@@ -187,8 +201,6 @@ public class AdapterPostBusiness extends BaseAdapter {
 
         return view;
     }
-
-
 
 
     private class Holder {
@@ -216,5 +228,8 @@ public class AdapterPostBusiness extends BaseAdapter {
         ImageView imageViewComment;
         ImageView imageViewDelete;
         LinearLayout llAnnouncementSection;
+
+        TextViewFont textViewCode;
+        LinearLayout llPriceSection, llCodeSection;
     }
 }

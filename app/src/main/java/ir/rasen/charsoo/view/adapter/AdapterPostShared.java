@@ -112,6 +112,11 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
                 holder.textViewComment3UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment3_user_identifier);
                 holder.textViewTitle = (TextViewFont) view.findViewById(R.id.textView_title);
                 holder.textViewPrice = (TextViewFont) view.findViewById(R.id.textView_price);
+                holder.textViewCode = (TextViewFont) view.findViewById(R.id.textView_code);
+                holder.llPriceSection = (LinearLayout) view.findViewById(R.id.ll_price_section);
+                holder.llCodeSection = (LinearLayout) view.findViewById(R.id.ll_code_section);
+
+
                 view.setTag(holder);
 
             } else
@@ -143,7 +148,17 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
             holder.textViewDescription.setText(TextProcessor.removeHashtags(items.get(position).description));
             holder.textViewTitle.setText(TextProcessor.removeHashtags(items.get(position).title));
-            holder.textViewPrice.setText(items.get(position).price);
+            if (items.get(position).price != null && !items.get(position).price.equals("")&& !items.get(position).price.equals("null")) {
+                holder.textViewPrice.setText(items.get(position).price);
+                holder.llPriceSection.setVisibility(View.VISIBLE);
+            } else
+                holder.llPriceSection.setVisibility(View.GONE);
+            if (items.get(position).code != null && !items.get(position).code.equals("")&& !items.get(position).code.equals("null")) {
+                holder.textViewCode.setText(items.get(position).code);
+                holder.llCodeSection.setVisibility(View.VISIBLE);
+            } else
+                holder.llCodeSection.setVisibility(View.GONE);
+
 
 
             ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
@@ -310,6 +325,8 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
         ImageView imageViewComment;
         ImageView imageViewShare;
         ImageView imageViewMore;
+        TextViewFont textViewCode;
+        LinearLayout llPriceSection, llCodeSection;
 
         GestureDetector gestureDetector;
 
