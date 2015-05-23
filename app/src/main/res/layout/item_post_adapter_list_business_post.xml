@@ -6,7 +6,6 @@
     android:background="@color/White"
     android:weightSum="100">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -59,12 +58,11 @@
         android:id="@+id/ll_complete_post_section"
         android:orientation="vertical">
 
-        <ImageView
+        <ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView
             android:id="@+id/imageView_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:weightSum="100" />
+            android:scaleType="fitXY" />
 
 
         <LinearLayout

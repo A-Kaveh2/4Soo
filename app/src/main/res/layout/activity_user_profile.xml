@@ -44,17 +44,6 @@
                         android:layout_alignParentBottom="true">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/action_bar_custome_height"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentRight="true"
-                            android:background="@drawable/shape_gradiant_down"
-                            android:gravity="right|center_vertical"
-                            android:layout_alignParentEnd="true">
-
-                        </LinearLayout>
-
-                        <LinearLayout
                             android:id="@+id/ll_footer_blank"
                             android:layout_width="match_parent"
                             android:orientation="horizontal"

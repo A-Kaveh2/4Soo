@@ -42,9 +42,9 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
-    private boolean isThreeColumn = true;
+    public boolean isThreeColumn = true;
 
-    ImageView imageViewSwitch, imageViewCover,imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses;
+    ImageView imageViewSwitch, imageViewCover,imageViewCirecle, imageViewFriends, imageViewReviews, imageViewBack, imageViewFollowingBusinesses;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews,textViewIdentifier,textViewName;
     ButtonFont buttonFriendStatus;
     ArrayList<SearchItemPost> searchItemPosts;
@@ -58,7 +58,6 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     ICancelFriendship iCancelFriendshipl;
     IWebserviceResponse iWebserviceResponse;
 
-
     public GridViewUserOther(final Activity context, final User displayedUser, com.handmark.pulltorefresh.library.HFGridView gViewHeader) {
         this.context = context;
         this.user = displayedUser;
@@ -66,9 +65,12 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         this.iCancelFriendshipl = this;
         this.iWebserviceResponse = this;
         viewHeader = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_user_grid_header_another, null);
+
+        viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
         imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
         imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
         imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
+        imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
 
         imageViewFriends = (ImageView) viewHeader.findViewById(R.id.imageView_friends);
         imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
@@ -139,6 +141,12 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         DownloadCoverImage downloadCoverImage = new DownloadCoverImage(context);
         downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
 
+        imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.finish();
+            }
+        });
         imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,7 +242,9 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         headerInitialized = true;
     }
 
-    public void InitialGridViewUser(ArrayList<Post> postList) {
+    public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn) {
+
+        this.isThreeColumn = beThreeColumn;
 
         if (postList.size() == 0) {
             imageViewSwitch.setVisibility(View.GONE);
@@ -256,8 +266,13 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         adapterPostGrid = new AdapterPostGrid(context, searchItemPosts,0, Post.GetPostType.SHARE);
         adapterPostShared = new AdapterPostShared(context, posts);
 
-        prepareGridThreeColumn(gridViewHeader);
-        gridViewHeader.setAdapter(adapterPostGrid);
+        if(isThreeColumn) {
+            gridViewHeader.setAdapter(adapterPostGrid);
+            prepareGridThreeColumn(gridViewHeader);
+        } else {
+            gridViewHeader.setAdapter(adapterPostShared);
+            imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
+        }
 
     }
 
@@ -293,6 +308,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                 adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
             else
                 adapterPostShared.loadMore(posts);
+            isLoadingMore=false;
         }
     }
 

@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,23 +12,23 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterBusinessReview;
-import ir.rasen.charsoo.controller.object.Review;
-import ir.rasen.charsoo.view.dialog.DialogAddReview;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.controller.object.Review;
+import ir.rasen.charsoo.model.review.GetBusinessReviews;
+import ir.rasen.charsoo.view.adapter.AdapterBusinessReview;
+import ir.rasen.charsoo.view.dialog.DialogAddReview;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IAddReview;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.model.review.GetBusinessReviews;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityBusinessReviews extends ActionBarActivity implements IWebserviceResponse, IAddReview, IPullToRefresh {
+public class ActivityBusinessReviews extends CharsooActivity implements IWebserviceResponse, IAddReview, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int businessId;
@@ -62,7 +61,7 @@ public class ActivityBusinessReviews extends ActionBarActivity implements IWebse
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_reviews);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.reviews));
+        setTitle(getResources().getString(R.string.reviews));
         try {
             sampleResults = TestUnit.getUserReviewAdapterItems();
         } catch (Exception e) {

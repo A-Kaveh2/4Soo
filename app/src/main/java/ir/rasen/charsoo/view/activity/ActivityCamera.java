@@ -1,9 +1,7 @@
 package ir.rasen.charsoo.view.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -16,9 +14,10 @@ import android.widget.RelativeLayout;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.CustomeCamera;
 import ir.rasen.charsoo.view.interface_m.ICropResult;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityCamera extends ActionBarActivity implements ICropResult {
+public class ActivityCamera extends CharsooActivity implements ICropResult {
 
     private static String TAG = "CameraActivity";
     FrameLayout cameraPreview;
@@ -33,9 +32,6 @@ public class ActivityCamera extends ActionBarActivity implements ICropResult {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_camera);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         cameraPreview = (FrameLayout) findViewById(R.id.camera_preview);

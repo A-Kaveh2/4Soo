@@ -1,32 +1,17 @@
 package ir.rasen.charsoo.view.widget_customized;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-
-import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
-import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
-import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
-import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
-import ir.rasen.charsoo.model.DownloadImages;
 
 /**
  * Created by android on 3/15/2015.
  */
-public class DrawerLayoutBusiness implements IChangeBusiness {
+public class UNUSED_DrawerLayoutBusiness implements IChangeBusiness {
+    //TODO:: TEMP:
+    @Override
+    public void notifyDeleteBusiness(int businessId) {
 
+    }
+/*
     private int selectedBusinessId;
     ArrayAdapter<String> adapter;
     ListView listView;
@@ -39,9 +24,6 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
     IChangeBusiness iChangeBusiness;
     DrawerLayout mDrawerLayout;
 
-    public void changeProfilePicture(String picture){
-        ((ImageView)mDrawerLayout.findViewById(R.id.imageView_business_picture)).setImageBitmap(Image_M.getBitmapFromString(picture));
-    }
     public void Initial(final Activity activity, DrawerLayout drawerLayout, ArrayList<User.UserBusinesses> businessListItems, final int displayedBusinessId,final int displayBusinessProfilePictureId, ISelectBusiness iSelectBusiness) {
         //businessHashTable: <businessIdentifier,businessId>
         items = businessListItems;
@@ -61,7 +43,7 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
             public void onClick(View view) {
                 /*PopupEditDeleteBusiness p = new PopupEditDeleteBusiness(activity,selectedBusinessId,businessIdentifier, iChangeBusiness);
                 p.show();*/
-                Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
+                /*Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
                 intent.putExtra(Params.BUSINESS_ID,displayedBusinessId);
                 intent.putExtra(Params.BUSINESS_IDENTIFIER,businessIdentifier);
                 activity.startActivityForResult(intent,Params.ACTION_EDIT_BUSINESS);
@@ -119,5 +101,5 @@ public class DrawerLayoutBusiness implements IChangeBusiness {
         selectBusiness.notifySelectBusiness(items.get(0).businessId);
     }
 
-
+*/
 }

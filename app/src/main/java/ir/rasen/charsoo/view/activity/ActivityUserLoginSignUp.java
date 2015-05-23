@@ -8,25 +8,24 @@ package ir.rasen.charsoo.view.activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.fragment.FragmentUserLogin;
 import ir.rasen.charsoo.view.fragment.FragmentUserSignUpeEmailID;
 import ir.rasen.charsoo.view.fragment.FragmentUserSignUpeNamePassword;
 import ir.rasen.charsoo.view.fragment.FragmentUserSignUpePicture;
-import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityUserLoginSignUp extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserviceResponse {
 
     FragmentUserLogin fragmentUserLogin;
     FragmentUserSignUpeEmailID fragmentEmailID;
@@ -47,10 +46,6 @@ public class ActivityUserLoginSignUp extends ActionBarActivity implements IWebse
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login_register);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.BlackTransparent)));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

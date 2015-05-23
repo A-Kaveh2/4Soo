@@ -1,6 +1,5 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -24,8 +23,9 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewUserOther;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
 
-public class ActivityUserOther extends Activity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityUserOther extends NoActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     private HFGridView gridView;
     private int visitedUserId;
@@ -87,10 +87,12 @@ public class ActivityUserOther extends Activity implements IWebserviceResponse, 
             //GetUserHomeInfo result
             user = (User) result;
             gridView.setVisibility(View.VISIBLE);
+
+            boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
             gridViewUser = new GridViewUserOther(ActivityUserOther.this, user, gridView);
             if (pullToRefreshGridView.isRefreshing())
                 gridView.removeHeaderView(gridView.getHeaderView());
-            gridViewUser.InitialGridViewUser(new ArrayList<Post>());
+            gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn);
             if (user.friendshipRelationStatus == FriendshipRelation.Status.FRIEND)
                 new GetSharedPosts(ActivityUserOther.this, visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityUserOther.this).execute();
             else {
@@ -104,7 +106,7 @@ public class ActivityUserOther extends Activity implements IWebserviceResponse, 
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
             }
-            gridViewUser.InitialGridViewUser(posts);
+            gridViewUser.InitialGridViewUser(posts, gridViewUser.isThreeColumn);
         }
     }
 

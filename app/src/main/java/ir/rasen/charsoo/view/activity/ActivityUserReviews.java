@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,18 +12,18 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterUserReview;
-import ir.rasen.charsoo.controller.object.Review;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.model.review.GetUserReviews;
+import ir.rasen.charsoo.view.adapter.AdapterUserReview;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityUserReviews extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityUserReviews extends CharsooActivity implements IWebserviceResponse {
 
     ProgressDialog progressDialog;
     int visitedUserId;
@@ -42,7 +41,7 @@ public class ActivityUserReviews extends ActionBarActivity implements IWebservic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_listview);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.reviews));
+        setTitle(getString(R.string.reviews));
         try {
             sampleResults = TestUnit.getUserReviewAdapterItems();
         } catch (Exception e) {

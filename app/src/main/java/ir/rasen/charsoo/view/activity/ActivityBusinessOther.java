@@ -1,6 +1,5 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,8 +24,9 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewBusinessOther;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
 
-public class ActivityBusinessOther extends Activity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityBusinessOther extends NoActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int selectedBusinessId;
@@ -89,8 +89,9 @@ public class ActivityBusinessOther extends Activity implements IWebserviceRespon
             if (pullToRefreshGridView.isRefreshing())
                 gridView.removeHeaderView(gridView.getHeaderView());
 
+            boolean beThreeColumn = gridViewBusiness == null ? true : gridViewBusiness.isThreeColumn;
             gridViewBusiness = new GridViewBusinessOther(ActivityBusinessOther.this, business, gridView);
-            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>());
+            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
             new GetBusinessPosts(ActivityBusinessOther.this, LoginInfo.getUserId(ActivityBusinessOther.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessOther.this).execute();
         }
         if (result instanceof ArrayList) {
@@ -100,7 +101,7 @@ public class ActivityBusinessOther extends Activity implements IWebserviceRespon
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
             }
-            gridViewBusiness.InitialGridViewBusiness(posts);
+            gridViewBusiness.InitialGridViewBusiness(posts, gridViewBusiness.isThreeColumn);
         }
 
     }

@@ -1,13 +1,115 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityMain"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ActivityMain">
+
+    <RelativeLayout
+        android:id="@+id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/DeepSkyBlue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView_more"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_more_vert_white_24dp"
+            android:onClick="switchPopupWindow"/>
+
+        <ImageView
+            android:id="@+id/imageView_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_toLeftOf="@+id/imageView_more"
+            android:layout_toStartOf="@+id/imageView_more"
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo_4soo" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_footer"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/gray_dark"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <RelativeLayout
+                android:id="@+id/rl_home"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@color/Black">
+
+                <ImageView
+                    android:id="@+id/imageView_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_home_blue_36dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_search"
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_search_white_36dp" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_businesses2"
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView_businesses"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_store_mall_directory_white_36dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_user"
+                android:layout_width="80dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_person_white_36dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/fragmentContainer"
@@ -19,136 +121,37 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/ll_footer">
-
+            android:layout_below="@id/ll_footer">
 
             <fragment
-                class="ir.rasen.charsoo.view.fragment.FragmentHome"
                 android:id="@+id/frag_home"
+                class="ir.rasen.charsoo.view.fragment.FragmentHome"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/layout_gridview_swip_header_footer" />
 
             <fragment
-                class="ir.rasen.charsoo.view.fragment.FragmentSearch"
                 android:id="@+id/frag_search"
+                class="ir.rasen.charsoo.view.fragment.FragmentSearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_search" />
 
             <fragment
-                class="ir.rasen.charsoo.view.fragment.FragmentUser"
                 android:id="@+id/frag_user"
+                class="ir.rasen.charsoo.view.fragment.FragmentUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_user" />
 
             <fragment
-                class="ir.rasen.charsoo.view.fragment.FragmentUserBusinesses"
                 android:id="@+id/frag_user_businesses"
+                class="ir.rasen.charsoo.view.fragment.FragmentUserBusinesses"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:layout="@layout/fragment_user" />
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_footer"
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            android:orientation="horizontal"
-            android:weightSum="100"
-            android:background="@color/gray_dark"
-            android:layout_alignParentBottom="true">
-
-            <RelativeLayout
-                android:id="@+id/rl_home"
-                android:layout_width="80dp"
-                android:background="@color/Black"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView_home"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_home_white_36dp" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/ll_footer_home"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="@color/DeepSkyBlue"
-                    android:layout_alignParentBottom="true" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_search"
-                android:layout_width="80dp"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView_search"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_search_white_36dp" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/ll_footer_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:visibility="gone"
-                    android:background="@color/DeepSkyBlue"
-                    android:layout_alignParentBottom="true" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/rl_businesses2"
-                android:layout_width="80dp"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView_businesses"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_store_mall_directory_white_36dp" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/ll_footer_businesses"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="@color/DeepSkyBlue"
-                    android:visibility="gone"
-                    android:layout_alignParentBottom="true" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_user"
-                android:layout_width="80dp"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView_user"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_person_white_36dp" />
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/ll_footer_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="@color/DeepSkyBlue"
-                    android:visibility="gone"
-                    android:layout_alignParentBottom="true" />
-            </RelativeLayout>
-        </LinearLayout>
     </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

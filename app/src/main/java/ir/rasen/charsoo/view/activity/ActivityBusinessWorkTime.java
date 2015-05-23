@@ -3,24 +3,23 @@ package ir.rasen.charsoo.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.helper.WorkTime;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityBusinessWorkTime extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
+public class ActivityBusinessWorkTime extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {
 
 
     EditTextFont editTextTimeOpenHour, editTextTimeOpenMinute, editTextTimeCloseHour, editTextTimeCloseMinute;
@@ -32,7 +31,7 @@ public class ActivityBusinessWorkTime extends ActionBarActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_work_time);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.work_time));
+        setTitle(getResources().getString(R.string.work_time));
         boolean isEditting = false;
         try {
             isEditting = getIntent().getExtras().getBoolean(Params.IS_EDITTING);

@@ -3,28 +3,25 @@ package ir.rasen.charsoo.view.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.controller.helper.WebservicesHandler;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.model.user.Login;
+import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.controller.helper.WebservicesHandler;
-import ir.rasen.charsoo.model.user.Login;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoBackActivity;
 
 
-public class ActivityLogin extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse {
-
+public class ActivityLogin extends NoBackActivity implements View.OnClickListener, IWebserviceResponse {
 
     EditTextFont editTextEmail, editTextPassword;
     Validation validation;
@@ -36,8 +33,8 @@ public class ActivityLogin extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ActionBar_M.setActionBarNoBack(getSupportActionBar(), this, getResources().getString(R.string.login));
 
+        init(getString(R.string.login));
 
         //for the test I need to disable automatically going to ActivityMain
        /* if (LoginInfo.isLoggedIn(this)) {

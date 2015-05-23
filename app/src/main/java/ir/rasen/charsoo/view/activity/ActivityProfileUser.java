@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -17,30 +16,30 @@ import android.widget.Spinner;
 import java.io.File;
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.DialogChangePassword;
-import ir.rasen.charsoo.view.dialog.DialogClearSearchHistoryConfirmation;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Sex;
 import ir.rasen.charsoo.controller.helper.Validation;
-import ir.rasen.charsoo.view.interface_m.IChangePassword;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.user.GetUserProfileInfo;
 import ir.rasen.charsoo.model.user.UpdateUserProfile;
+import ir.rasen.charsoo.view.dialog.DialogChangePassword;
+import ir.rasen.charsoo.view.dialog.DialogClearSearchHistoryConfirmation;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
+import ir.rasen.charsoo.view.interface_m.IChangePassword;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityProfileUser extends ActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangePassword {
+public class ActivityProfileUser extends CharsooActivity implements View.OnClickListener, IWebserviceResponse, IChangePassword {
 
 
     ProgressDialog progressDialog;
@@ -56,7 +55,7 @@ public class ActivityProfileUser extends ActionBarActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.user_profile));
+        setTitle(getString(R.string.user_profile));
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

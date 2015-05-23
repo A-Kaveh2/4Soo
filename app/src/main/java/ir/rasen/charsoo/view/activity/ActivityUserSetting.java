@@ -2,36 +2,37 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Permission;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.model.user.UpdateSetting;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityUserSetting extends ActionBarActivity implements IWebserviceResponse {
+public class ActivityUserSetting extends CharsooActivity implements IWebserviceResponse {
 
 
     ProgressDialog progressDialog;
     MyApplication myApplication;
+    private Permission permission;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_setting);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.settings));
+        setTitle(getString(R.string.settings));
 
 
         progressDialog = new ProgressDialog(this);
@@ -42,8 +43,8 @@ public class ActivityUserSetting extends ActionBarActivity implements IWebservic
         checkBoxFriends = (CheckBox) findViewById(R.id.checkBox_friends);
         checkBoxReviews = (CheckBox) findViewById(R.id.checkBox_reviews);
 
-        MyApplication myApplication = (MyApplication)getApplication();
-        Permission permission = myApplication.getPermission();
+        myApplication = (MyApplication)getApplication();
+        permission = myApplication.getPermission();
         checkBoxBusinesses.setChecked(permission.followedBusiness);
         checkBoxFriends.setChecked(permission.friends);
         checkBoxReviews.setChecked(permission.reviews);
@@ -53,7 +54,8 @@ public class ActivityUserSetting extends ActionBarActivity implements IWebservic
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-                new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), new Permission(checkBoxBusinesses.isChecked(), checkBoxFriends.isChecked(), checkBoxReviews.isChecked()), ActivityUserSetting.this).execute();
+                permission = new Permission(checkBoxBusinesses.isChecked(), checkBoxFriends.isChecked(), checkBoxReviews.isChecked());
+                new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), permission, ActivityUserSetting.this).execute();
             }
         });
     }
@@ -66,7 +68,6 @@ public class ActivityUserSetting extends ActionBarActivity implements IWebservic
         inflater.inflate(R.menu.menu_user_setting, menu);*/
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -82,8 +83,11 @@ public class ActivityUserSetting extends ActionBarActivity implements IWebservic
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
-        if (result instanceof ResultStatus)
-            new DialogMessage(ActivityUserSetting.this, getResources().getString(R.string.dialog_update_success)).show();
+        if (result instanceof ResultStatus) {
+            myApplication.setPermission(permission);
+            Toast.makeText(ActivityUserSetting.this, getResources().getString(R.string.dialog_update_success), Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override

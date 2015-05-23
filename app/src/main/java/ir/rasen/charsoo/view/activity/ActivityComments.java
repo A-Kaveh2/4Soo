@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,24 +12,24 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.adapter.AdapterPostComments;
-import ir.rasen.charsoo.controller.object.Comment;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.ActionBar_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.model.comment.GetPostAllComments;
+import ir.rasen.charsoo.model.comment.SendComment;
+import ir.rasen.charsoo.view.adapter.AdapterPostComments;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.model.comment.GetPostAllComments;
-import ir.rasen.charsoo.model.comment.SendComment;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityComments extends ActionBarActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityComments extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
     int postId, postOwnerBusinessId;
     AdapterPostComments adapterPostComments;
@@ -66,7 +65,7 @@ public class ActivityComments extends ActionBarActivity implements IWebserviceRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments);
-        ActionBar_M.setActionBar(getSupportActionBar(), this, getResources().getString(R.string.comments));
+        setTitle(getString(R.string.comments));
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

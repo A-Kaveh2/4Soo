@@ -61,12 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView
                 android:id="@+id/imageView_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:weightSum="100" />
+                android:scaleType="fitXY" />
 
             <ImageView
                 android:id="@+id/imageView_post_like"

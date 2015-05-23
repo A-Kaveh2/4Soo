@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,27 +20,24 @@ import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFoot
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshGrid;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.post.GetSharedPosts;
+import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.controller.helper.Params;
-import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.view.interface_m.IGoToRegisterBusinessActivity;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.DrawerLayoutUser;
 import ir.rasen.charsoo.view.widget_customized.GridViewUser;
-import ir.rasen.charsoo.model.post.GetSharedPosts;
-import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 
 public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh {
 
-    private DrawerLayout mDrawerLayout;
     private HFGridView gridView;
     private int visitedUserId;
     ProgressDialog progressDialog;
@@ -66,7 +62,6 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             visitedUserId = LoginInfo.getUserId(getActivity());
             iUpdateUserProfile = this;
 
-
             //set progress dialog
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -74,7 +69,6 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             pullToRefreshGridView = new PullToRefreshGrid(getActivity(), (PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF), FragmentUser.this);
             gridView = pullToRefreshGridView.getGridViewHeaderFooter();
 
-            mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
             recursivelyCallHandler();
 
         } catch (Exception e) {
@@ -142,15 +136,15 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     }
 
     private void initializeUser() {
-        if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
+/*        if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
             return;
-        DrawerLayoutUser.Initial(getActivity(), mDrawerLayout, user, (IGoToRegisterBusinessActivity) getActivity());
-        boolean hasRequest = false;
+        boolean hasRequest = false;*/
 
-        gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView, mDrawerLayout);
+        boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
+        gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView);
         if (((MyApplication) getActivity().getApplication()).isUserCreated) {
             try {
-                gridViewUser.InitialGridViewUser(sharedPosts);
+                gridViewUser.InitialGridViewUser(sharedPosts, beThreeColumn);
                 gridViewUser.hideLoader();
             } catch (Exception e) {
 
@@ -158,7 +152,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         } else {
             try {
 
-                gridViewUser.InitialGridViewUser(new ArrayList<Post>());
+                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn);
             } catch (Exception e) {
 
             }
@@ -175,6 +169,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             ((MyApplication) getActivity().getApplication()).userIdentifier = user.userIdentifier;
             ((MyApplication) getActivity().getApplication()).userProfilePictureId = user.profilePictureId;
             ((MyApplication) getActivity().getApplication()).userBusinesses = user.businesses;
+            ((MyApplication) getActivity().getApplication()).setPermission(user.permissions);
             initializeUser();
 
             if (!LoginInfo.hasBusiness(getActivity()) && user.businesses.size() != 0) {
@@ -193,9 +188,8 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             pullToRefreshGridView.setResultSize(sharedPosts.size());
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
-                gridView.removeHeaderView(gridView.getHeaderView());
             }
-            gridViewUser.InitialGridViewUser(sharedPosts);
+            gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn);
         }
     }
 
@@ -228,7 +222,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 break;
             }
         }
-        gridViewUser.InitialGridViewUser(sharedPosts);
+        gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn);
     }
 
     @Override
