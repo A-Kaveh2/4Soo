@@ -36,56 +36,6 @@ public class PopupSelectCameraGallery extends MyPopup {
         LinearLayout linearLayoutCamera = (LinearLayout) view.findViewById(R.id.ll_camera);
         LinearLayout linearLayoutGallery = (LinearLayout) view.findViewById(R.id.ll_gallery);
 
-/*
-
-
-
-        LinearLayout.LayoutParams paramsLayout = new LinearLayout.LayoutParams(width, height);
-
-        LinearLayout linearLayoutCamera = new LinearLayout(activity);
-        linearLayoutCamera.setOrientation(LinearLayout.HORIZONTAL);
-        linearLayoutCamera.setGravity(Gravity.RIGHT);
-        linearLayoutCamera.setLayoutParams(paramsLayout);
-        linearLayoutCamera.setBackgroundResource(R.drawable.selector_popup_top_item);
-
-        LinearLayout.LayoutParams paramsIcons = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        paramsIcons.setMargins(width/10,0,width/10,0);
-
-        ImageView imageViewCamera = new ImageView(activity);
-        imageViewCamera.setLayoutParams(paramsLayout);
-        imageViewCamera.setImageResource(R.drawable.ic_camera_alt_grey600_24dp);
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        TextViewFont textViewCamera = new TextViewFont(activity);
-        textViewCamera.setGravity(Gravity.CENTER);
-        textViewCamera.setLayoutParams(params);
-        textViewCamera.setText(activity.getResources().getString(R.string.camera));
-        textViewCamera.setTextSize(activity.getResources().getDimension(R.dimen.popup_font));
-
-        //linearLayoutCamera.addView(textViewCamera);
-        linearLayoutCamera.addView(imageViewCamera);
-
-
-        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width,1);
-        TextViewFont textViewDevider = new TextViewFont(activity);
-        textViewDevider.setLayoutParams(params2);
-        textViewDevider.setBackgroundColor(Color.GRAY);
-
-
-        TextViewFont textViewGallery = new TextViewFont(activity);
-        textViewGallery.setGravity(Gravity.CENTER);
-        textViewGallery.setLayoutParams(params);
-        textViewGallery.setText(activity.getResources().getString(R.string.gallery));
-        textViewGallery.setBackgroundResource(R.drawable.selector_popup_bottom_item);
-        textViewGallery.setTextSize(activity.getResources().getDimension(R.dimen.popup_font));
-
-        LinearLayout ll_body = getBody();
-        ll_body.addView(linearLayoutCamera);
-        ll_body.addView(textViewDevider);
-        ll_body.addView(textViewGallery);
-*/
-
         LinearLayout ll_body_super = getBody();
         ll_body_super.addView(view);
 

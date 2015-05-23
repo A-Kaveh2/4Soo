@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -172,6 +173,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getApplication()).isUserCreated) {
+                    ft = fm.beginTransaction();
                     ft.show(fm.findFragmentById(R.id.frag_user_businesses));
                     ft.hide(fm.findFragmentById(R.id.frag_search));
                     ft.hide(fm.findFragmentById(R.id.frag_home));
@@ -192,6 +194,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getApplication()).isSearchCreated) {
+                    ft = fm.beginTransaction();
                     ft.show(fm.findFragmentById(R.id.frag_user));
                     ft.hide(fm.findFragmentById(R.id.frag_search));
                     ft.hide(fm.findFragmentById(R.id.frag_home));
@@ -212,6 +215,7 @@ public class ActivityMain extends Activity implements View.OnClickListener, IWeb
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getApplication()).isSearchCreated) {
+                    ft = fm.beginTransaction();
                     ft.show(fm.findFragmentById(R.id.frag_search));
                     ft.hide(fm.findFragmentById(R.id.frag_home));
                     ft.hide(fm.findFragmentById(R.id.frag_user));

@@ -37,18 +37,18 @@ import ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView;
 /**
  * Created by android on 3/14/2015.
  */
-public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
+public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostBusiness adapterPostBusiness;
     private boolean isThreeColumn = true;
     boolean isLoadingMore = false;
-    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewBack,imageViewEdit;
-    TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
+    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo, imageViewCirecle, imageViewBack, imageViewEdit;
+    TextViewFont textViewFollowersNumber, textViewIdentifier, textViewName;
     View listFooterView;
     View viewHeader;
     ArrayList<SearchItemPost> searchItemPosts;
-    Activity  activity;
+    Activity activity;
     Business business;
     IWebserviceResponse iWebserviceResponse;
     ArrayList<Post> posts;
@@ -63,28 +63,24 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         this.drawerLayout = drawerLayout;
     }
 
-    public void notifyDatasetChanged(){
+    public void notifyDatasetChanged() {
         adapterPostBusiness.notifyDataSetChanged();
     }
-    public void changeProfilePicture(String picture){
+
+    public void changeProfilePicture(String picture) {
         imageViewCover.setImageBitmap(Image_M.getBitmapFromString(picture));
     }
-    public void notifyDataSetChanged(Post post) {
-        posts.add(0, post);
-        if (posts.size() == 0) {
-            imageViewSwitch.setVisibility(View.GONE);
-            imageViewCirecle.setVisibility(View.GONE);
-        }
-        else {
-            imageViewSwitch.setVisibility(View.VISIBLE);
-            imageViewCirecle.setVisibility(View.VISIBLE);
-        }
 
+    public void notifyDataSetChanged(Post post) {
+
+        posts.add(0, post);
+        imageViewSwitch.setVisibility(View.VISIBLE);
+        imageViewCirecle.setVisibility(View.VISIBLE);
         searchItemPosts.add(0, new SearchItemPost(post.id, post.pictureId, post.picture));
         /*adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();*/
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, business.id, Post.GetPostType.BUSINESS);
-        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true,GridViewBusiness.this);
+        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true, GridViewBusiness.this);
 
         imageViewSwitch.setVisibility(View.VISIBLE);
         imageViewCirecle.setVisibility(View.VISIBLE);
@@ -105,7 +101,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         for (Post post : posts)
             searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, business.id, Post.GetPostType.BUSINESS);
-        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true,GridViewBusiness.this);
+        adapterPostBusiness = new AdapterPostBusiness(activity, posts, true, GridViewBusiness.this);
 
 
         if (!hasHeader) {
@@ -126,7 +122,6 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_business_name);
 
 
-
             textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
             textViewName.setText(String.valueOf(business.name));
             textViewFollowersNumber.setText(String.valueOf(business.followersNumber));
@@ -138,7 +133,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
-                    intent.putExtra(Params.BUSINESS_ID,business.id);
+                    intent.putExtra(Params.BUSINESS_ID, business.id);
                     intent.putExtra(Params.BUSINESS_IDENTIFIER, business.businessIdentifier);
                     activity.startActivityForResult(intent, Params.ACTION_EDIT_BUSINESS);
                 }
@@ -221,8 +216,7 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         if (postList.size() == 0) {
             imageViewSwitch.setVisibility(View.GONE);
             imageViewCirecle.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             imageViewSwitch.setVisibility(View.VISIBLE);
             imageViewCirecle.setVisibility(View.VISIBLE);
         }
@@ -304,6 +298,11 @@ public class GridViewBusiness implements IWebserviceResponse ,IDeletePost{
         }
         adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();
+
+        if (posts.size() == 0) {
+            imageViewSwitch.setVisibility(View.GONE);
+            imageViewCirecle.setVisibility(View.GONE);
+        }
     }
 
 
