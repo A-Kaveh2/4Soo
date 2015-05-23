@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.CurrentLocationProvider;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
@@ -62,7 +63,7 @@ public class ActivityMapChoose extends CharsooActivity {
                 googleMap.getUiSettings().setMyLocationButtonEnabled(true);
                 googleMap.setMyLocationEnabled(true);
                 googleMap.getUiSettings().setZoomControlsEnabled(true);
-
+                googleMap.setLocationSource(new CurrentLocationProvider(this));
                 googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
 
                 if (getIntent().getExtras().getBoolean(Params.IS_EDITTING)) {

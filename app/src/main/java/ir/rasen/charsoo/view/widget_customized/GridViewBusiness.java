@@ -42,14 +42,14 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     AdapterPostBusiness adapterPostBusiness;
     public boolean isThreeColumn = true;
     boolean isLoadingMore = false;
-<<<<<<< HEAD
-    ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo, imageViewCirecle, imageViewBack, imageViewEdit;
+
+  /*  ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo, imageViewCirecle, imageViewBack, imageViewEdit;
     TextViewFont textViewFollowersNumber, textViewIdentifier, textViewName;
-=======
+*/
     ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewEdit;
     LinearLayout llBack;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
->>>>>>> 81f9939f21a13158e550765f92368c6e50bc347f
+
     View listFooterView;
     View viewHeader;
     ArrayList<SearchItemPost> searchItemPosts;
