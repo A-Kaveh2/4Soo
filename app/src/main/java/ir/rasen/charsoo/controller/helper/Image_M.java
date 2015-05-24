@@ -58,18 +58,21 @@ public class Image_M {
         Bitmap bm = BitmapFactory.decodeFile(imageFilePath);
         int si = Image_M.sizeOf(bm);
 
+        BitmapFactory.Options ops = new BitmapFactory.Options();
+        ops.inSampleSize = 1;
+
         //because of the webservice's bug, we have to decrease the volume of the image
-        if (Image_M.sizeOf(bm) > 1000000) {
-            BitmapFactory.Options ops = new BitmapFactory.Options();
-            ops.inSampleSize = 4;
+        while (Image_M.sizeOf(bm) > 100000) {
+            ops.inSampleSize++;
             bm = BitmapFactory.decodeFile(imageFilePath, ops);
+            si = Image_M.sizeOf(bm);
         }
-        si = Image_M.sizeOf(bm);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
         byte[] b = baos.toByteArray();
         String encodedImage = Base64.encodeToString(b, Base64.DEFAULT);
-        return encodedImage.replace("\n", "");
+        String result = encodedImage.replace("\n", "");
+        return result;
     }
 
     public static Bitmap getBitmapFromString(String codedImage) {
@@ -102,6 +105,26 @@ public class Image_M {
         } else {
             return data.getByteCount();
         }
+    }
+
+    static long getImageLength(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] imageInByte = stream.toByteArray();
+        return imageInByte.length;
+    }
+
+    static int getBytesPerPixel(Config config) {
+        if (config == Config.ARGB_8888) {
+            return 4;
+        } else if (config == Config.RGB_565) {
+            return 2;
+        } else if (config == Config.ARGB_4444) {
+            return 2;
+        } else if (config == Config.ALPHA_8) {
+            return 1;
+        }
+        return 1;
     }
 
     public static Bitmap readBitmapFromStorate(String filePath) {
