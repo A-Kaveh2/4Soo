@@ -18,6 +18,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.model.post.GetTimeLinePost;
 import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
@@ -27,11 +28,12 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.view.interface_m.IGetNewTimeLinePost;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.model.post.GetTimeLinePosts;
 
-public class FragmentHome extends Fragment implements IWebserviceResponse,IPullToRefresh {
+public class FragmentHome extends Fragment implements IWebserviceResponse,IPullToRefresh,IGetNewTimeLinePost {
 
     ProgressDialog progressDialog;
     AdapterPostTimeLine adapterPostTimeLine;
@@ -44,22 +46,13 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
     //private PullToRefreshListView pullToRefreshListView;
 
 
-    @Override
-    public void notifyRefresh() {
-        status = Status.REFRESHING;
-        results.clear();
-        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
-    }
 
-    @Override
-    public void notifyLoadMore() {
-        loadMoreData();
-    }
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
     private Status status;
     BroadcastReceiver timeLineUpdateReceiver;
+    BroadcastReceiver updatePostLastThreeComments;
     PullToRefreshList pullToRefreshListView;
 
     @Override
@@ -92,7 +85,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getExtras();
-                switch (bundle.getString(Params.UPATE_TIME_LINE_TYPE)) {
+                switch (bundle.getString(Params.UPDATE_TIME_LINE_TYPE)) {
                     case Params.UPATE_TIME_LINE_TYPE_SHARE:
                         updateShare(true, bundle.getInt(Params.POST_ID));
                         break;
@@ -104,6 +97,16 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(timeLineUpdateReceiver, new IntentFilter(Params.UPATE_TIME_LINE));
+
+        updatePostLastThreeComments = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle bundle = intent.getExtras();
+                new GetTimeLinePost(getActivity(),bundle.getInt(Params.POST_ID),results,FragmentHome.this).execute();
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(updatePostLastThreeComments, new IntentFilter(Params.UPDATE_TIME_LINE_POST_LAST_THREE_COMMENTS));
+
         return view;
     }
 
@@ -172,6 +175,23 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+    }
+
+    @Override
+    public void notifyRefresh() {
+        status = Status.REFRESHING;
+        results.clear();
+        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+    }
+
+    @Override
+    public void notifyLoadMore() {
+        loadMoreData();
+    }
+
+    @Override
+    public void notifyGetNewPost(Post post) {
+        Post.updatePostLastThreeComments(results,post);
     }
 
 

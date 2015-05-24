@@ -383,7 +383,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
     @Override
     public void notifyUpdateTimeLineShare(int postId) {
         Intent intent = new Intent(Params.UPATE_TIME_LINE);
-        intent.putExtra(Params.UPATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_SHARE);
+        intent.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_SHARE);
         intent.putExtra(Params.POST_ID, postId);
         LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intent);
     }
@@ -399,7 +399,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         } else {
             //update time line
             Intent intentUpdateTimeLine = new Intent(Params.UPATE_TIME_LINE);
-            intentUpdateTimeLine.putExtra(Params.UPATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
+            intentUpdateTimeLine.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
             intentUpdateTimeLine.putExtra(Params.POST_ID, postId);
             LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intentUpdateTimeLine);
         }

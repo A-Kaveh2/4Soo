@@ -144,8 +144,7 @@ public class Post {
         post.isLiked = jsonObject.getBoolean(Params.IS_LIKED);
         try {
             post.isShared = jsonObject.getBoolean(Params.IS_SHARED);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
         }
         //post.likeNumber = jsonObject.getInt(Params.LIKE_NUMBER);
@@ -155,7 +154,7 @@ public class Post {
         return post;
     }
 
-    public static Post getFromJSONObjectSearch( JSONObject jsonObject) throws Exception {
+    public static Post getFromJSONObjectSearch(JSONObject jsonObject) throws Exception {
         Post post = new Post();
         post.id = jsonObject.getInt(Params.POST_ID);
         post.businessID = jsonObject.getInt(Params.BUSINESS_ID);
@@ -256,6 +255,22 @@ public class Post {
         activity.startActivityForResult(intent, Params.ACTION_ACTIVITY_POST);
     }
 
+    public static int getIndexOfPost(ArrayList<Post> posts, int postId) {
+        for (int i = 0; i < posts.size(); i++) {
+            if (posts.get(i).id == postId)
+                return i;
+        }
+
+        //there is not such a post in the posts
+        return -1;
+    }
+
+    public static void updatePostLastThreeComments(ArrayList<Post> newPosts,Post post){
+        for (int i = 0; i < newPosts.size(); i++) {
+            if (newPosts.get(i).id == post.id)
+                post.lastThreeComments = newPosts.get(i).lastThreeComments;
+        }
+    }
 
 
 }

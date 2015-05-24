@@ -86,7 +86,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 
                 //update time line
                 Intent intentUpdateTimeLine = new Intent(Params.UPATE_TIME_LINE);
-                intentUpdateTimeLine.putExtra(Params.UPATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
+                intentUpdateTimeLine.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
                 intentUpdateTimeLine.putExtra(Params.POST_ID, postId);
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intentUpdateTimeLine);
             }

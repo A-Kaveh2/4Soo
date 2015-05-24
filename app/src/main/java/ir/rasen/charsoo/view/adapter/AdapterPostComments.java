@@ -15,6 +15,7 @@ import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupBlockUser;
+import ir.rasen.charsoo.view.dialog.PopupDeleteCommentBlockUser;
 import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
@@ -103,10 +104,10 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
         holder.imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUserOwner && comments.get(position).userID != LoginInfo.getUserId(context)) {
+                if (isUserOwner) {
                     //the business owner is watching the posts
                     new PopupBlockUser(context,postOwnerBusinessId, comments.get(position).userID, AdapterPostComments.this).show();
-
+                    //new PopupDeleteCommentBlockUser(context,postOwnerBusinessId,comments.get(position),)
                 } else {
                     PopupEditDeleteComment p = new PopupEditDeleteComment(context, comments.get(position), IWebserviceResponse, progressDialog, iCommentChange);
                     p.show();

@@ -195,8 +195,9 @@ public class Params {
     public static String HAS_REQUEST = "hasRequest";
     public static String IS_OWNER = "isOwner";
     public static String UPATE_TIME_LINE = "updateTimeLine";
+    public static String UPDATE_TIME_LINE_POST_LAST_THREE_COMMENTS = "updateTimeLinePostLastThreeComments";
     public static String CANCEL_USER_SHARE_POST = "cancelUserSharePost";
-    public static String UPATE_TIME_LINE_TYPE = "updateTimeLineType";
+    public static String UPDATE_TIME_LINE_TYPE = "updateTimeLineType";
     public static String REMOVE_REQUEST_ANNOUNCEMENT = "removeRequestAnnouncement";
     public static String UPDATE_USER_PROFILE_PCITURE = "updateUserProfilePicture";
     public static final String UPATE_TIME_LINE_TYPE_SHARE = "updateTimeLineTypeShare";

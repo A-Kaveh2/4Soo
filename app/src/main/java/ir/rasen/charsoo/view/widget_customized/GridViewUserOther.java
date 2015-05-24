@@ -64,153 +64,175 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         this.gridViewHeader = gViewHeader;
         this.iCancelFriendshipl = this;
         this.iWebserviceResponse = this;
-        viewHeader = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_user_grid_header_another, null);
 
-        viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
-        imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
-        imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
-        imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
-        imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
+    }
 
-        imageViewFriends = (ImageView) viewHeader.findViewById(R.id.imageView_friends);
-        imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
-        imageViewFollowingBusinesses = (ImageView) viewHeader.findViewById(R.id.imageView_businesses);
+    public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn) {
 
-        textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
-        textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
-        textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
-        textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_user_identifier);
-        textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_user_name);
-        buttonFriendStatus = (ButtonFont) viewHeader.findViewById(R.id.btn_friend_satus);
+        this.posts = postList;
+        searchItemPosts = new ArrayList<>();
+        for (Post post : posts)
+            searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
 
-        imageViewSwitch.setVisibility(View.GONE);
-        imageViewCirecle.setVisibility(View.GONE);
-
-        //TODO change user.name to user.userIdentifier
+        adapterPostGrid = new AdapterPostGrid(context, searchItemPosts,0, Post.GetPostType.SHARE);
+        adapterPostShared = new AdapterPostShared(context, posts);
 
 
 
-        textViewIdentifier.setText(user.userIdentifier);
-        textViewName.setText(user.name);
+        if (!headerInitialized) {
+            viewHeader = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_user_grid_header_another, null);
 
-        String text = buttonFriendStatus.getText().toString();
-        switch (user.friendshipRelationStatus) {
-            case FRIEND:
-                buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_green);
-                buttonFriendStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
-                buttonFriendStatus.setText(context.getString(R.string.friend));
-                break;
-            case NOT_FRIEND:
-                buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_blue);
-                buttonFriendStatus.setText(context.getString(R.string.friendy));
-                break;
-            case REQUEST_REJECTED:
-                buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_red);
-                buttonFriendStatus.setText(context.getString(R.string.friendy));
-                break;
-            case REQUEST_SENT:
-                buttonFriendStatus.setEnabled(false);
-                buttonFriendStatus.setBackgroundResource(R.drawable.shape_button_gray);
-                buttonFriendStatus.setText(context.getString(R.string.wating_for_comfirm));
-                break;
+            viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
+            imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
+            imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
+            imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
+            imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
+
+            imageViewFriends = (ImageView) viewHeader.findViewById(R.id.imageView_friends);
+            imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
+            imageViewFollowingBusinesses = (ImageView) viewHeader.findViewById(R.id.imageView_businesses);
+
+            textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
+            textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
+            textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
+            textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_user_identifier);
+            textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_user_name);
+            buttonFriendStatus = (ButtonFont) viewHeader.findViewById(R.id.btn_friend_satus);
+
+            imageViewSwitch.setVisibility(View.GONE);
+            imageViewCirecle.setVisibility(View.GONE);
+
+            //TODO change user.name to user.userIdentifier
+
+
+            textViewIdentifier.setText(user.userIdentifier);
+            textViewName.setText(user.name);
+
+            String text = buttonFriendStatus.getText().toString();
+            switch (user.friendshipRelationStatus) {
+                case FRIEND:
+                    buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_green);
+                    buttonFriendStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
+                    buttonFriendStatus.setText(context.getString(R.string.friend));
+                    break;
+                case NOT_FRIEND:
+                    buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_blue);
+                    buttonFriendStatus.setText(context.getString(R.string.friendy));
+                    break;
+                case REQUEST_REJECTED:
+                    buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_red);
+                    buttonFriendStatus.setText(context.getString(R.string.friendy));
+                    break;
+                case REQUEST_SENT:
+                    buttonFriendStatus.setEnabled(false);
+                    buttonFriendStatus.setBackgroundResource(R.drawable.shape_button_gray);
+                    buttonFriendStatus.setText(context.getString(R.string.wating_for_comfirm));
+                    break;
+            }
+
+
+            text = buttonFriendStatus.getText().toString();
+            buttonFriendStatus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    switch (user.friendshipRelationStatus) {
+                        case FRIEND:
+                            //cancel friendship
+                            new RequestCancelFriendship(context, LoginInfo.getUserId(context), user.id, iCancelFriendshipl).execute();
+                            break;
+                        case NOT_FRIEND:
+                            //send friendship request
+                            new RequestFriendship(context, LoginInfo.getUserId(context), user.id, iWebserviceResponse).execute();
+                            break;
+                        case REQUEST_REJECTED:
+                            //send request again
+                            new RequestFriendship(context, LoginInfo.getUserId(context), user.id, iWebserviceResponse).execute();
+                            break;
+                        case REQUEST_SENT:
+                            //do nothing
+                            break;
+                    }
+                }
+            });
+
+            DownloadCoverImage downloadCoverImage = new DownloadCoverImage(context);
+            downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
+
+            imageViewBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.finish();
+                }
+            });
+            imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
+                        return;
+                    if (user.permissions.followedBusiness) {
+                        Intent intent1 = new Intent(context, ActivityUserFollowingBusinesses.class);
+                        intent1.putExtra(Params.VISITED_USER_ID, user.id);
+                        context.startActivity(intent1);
+                    } else
+                        new DialogMessage(context, context.getString(R.string.err_permission_businesses)).show();
+                }
+            });
+            imageViewFriends.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
+                        return;
+                    if (user.permissions.friends) {
+                        Intent intent1 = new Intent(context, ActivityUserFriends.class);
+                        intent1.putExtra(Params.VISITED_USER_ID, user.id);
+                        context.startActivity(intent1);
+                    } else
+                        new DialogMessage(context, context.getString(R.string.err_permission_friends)).show();
+                }
+            });
+
+            imageViewReviews.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
+                        return;
+                    if (user.permissions.reviews) {
+                        Intent intent1 = new Intent(context, ActivityUserReviews.class);
+                        intent1.putExtra(Params.VISITED_USER_ID, user.id);
+                        context.startActivity(intent1);
+                    } else
+                        new DialogMessage(context, context.getString(R.string.err_permission_reviews)).show();
+                }
+            });
+
+            imageViewSwitch.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isThreeColumn) {
+                        gridViewHeader.setNumColumns(1);
+                        gridViewHeader.setAdapter(adapterPostShared);
+                        //now it has one column
+                        isThreeColumn = false;
+                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
+                    } else {
+                        prepareGridThreeColumn(gridViewHeader);
+                        gridViewHeader.setAdapter(adapterPostGrid);
+                        // now it has three column
+                        isThreeColumn = true;
+                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_list);
+                    }
+                }
+            });
+
+            gridViewHeader.addHeaderView(viewHeader);
+            listFooterView = ((LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
+            gridViewHeader.addFooterView(listFooterView);
+
+            headerInitialized = true;
         }
-        text = buttonFriendStatus.getText().toString();
-        buttonFriendStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (user.friendshipRelationStatus) {
-                    case FRIEND:
-                        //cancel friendship
-                        new RequestCancelFriendship(context, LoginInfo.getUserId(context),user.id,iCancelFriendshipl).execute();
-                        break;
-                    case NOT_FRIEND:
-                        //send friendship request
-                        new RequestFriendship(context,LoginInfo.getUserId(context),user.id,iWebserviceResponse).execute();
-                        break;
-                    case REQUEST_REJECTED:
-                        //send request again
-                        new RequestFriendship(context,LoginInfo.getUserId(context),user.id,iWebserviceResponse).execute();
-                        break;
-                    case REQUEST_SENT:
-                        //do nothing
-                        break;
-                }
-            }
-        });
-
-        DownloadCoverImage downloadCoverImage = new DownloadCoverImage(context);
-        downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
-
-        imageViewBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.finish();
-            }
-        });
-        imageViewFollowingBusinesses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
-                    return;
-                if (user.permissions.followedBusiness) {
-                    Intent intent1 = new Intent(context, ActivityUserFollowingBusinesses.class);
-                    intent1.putExtra(Params.VISITED_USER_ID, user.id);
-                    context.startActivity(intent1);
-                } else
-                    new DialogMessage(context, context.getString(R.string.err_permission_businesses)).show();
-            }
-        });
-        imageViewFriends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
-                    return;
-                if (user.permissions.friends) {
-                    Intent intent1 = new Intent(context, ActivityUserFriends.class);
-                    intent1.putExtra(Params.VISITED_USER_ID, user.id);
-                    context.startActivity(intent1);
-                } else
-                    new DialogMessage(context, context.getString(R.string.err_permission_friends)).show();
-            }
-        });
-
-        imageViewReviews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(user.friendshipRelationStatus != FriendshipRelation.Status.FRIEND)
-                   return;
-                if (user.permissions.reviews) {
-                    Intent intent1 = new Intent(context, ActivityUserReviews.class);
-                    intent1.putExtra(Params.VISITED_USER_ID, user.id);
-                    context.startActivity(intent1);
-                } else
-                    new DialogMessage(context, context.getString(R.string.err_permission_reviews)).show();
-            }
-        });
-
-        imageViewSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isThreeColumn) {
-                    gridViewHeader.setNumColumns(1);
-                    gridViewHeader.setAdapter(adapterPostShared);
-                    //now it has one column
-                    isThreeColumn = false;
-                    imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
-                } else {
-                    prepareGridThreeColumn(gridViewHeader);
-                    gridViewHeader.setAdapter(adapterPostGrid);
-                    // now it has three column
-                    isThreeColumn = true;
-                    imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_list);
-                }
-            }
-        });
-
-        gridViewHeader.addHeaderView(viewHeader);
-        listFooterView = ((LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
-        gridViewHeader.addFooterView(listFooterView);
-
+        else {
+            listFooterView.setVisibility(View.GONE);
+        }
 
         gridViewHeader.setBackgroundColor(Color.parseColor("#ffffff"));
         gridViewHeader.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -239,10 +261,8 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                 }
             }
         });
-        headerInitialized = true;
-    }
 
-    public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn) {
+
 
         this.isThreeColumn = beThreeColumn;
 
@@ -258,14 +278,6 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         //if gridview is displaying the post or user has not any posts
         if (postList.size() != 0 || (headerInitialized && postList.size()==0))
             listFooterView.setVisibility(View.GONE);
-        this.posts = postList;
-        searchItemPosts = new ArrayList<>();
-        for (Post post : posts)
-            searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
-
-        adapterPostGrid = new AdapterPostGrid(context, searchItemPosts,0, Post.GetPostType.SHARE);
-        adapterPostShared = new AdapterPostShared(context, posts);
-
         if(isThreeColumn) {
             gridViewHeader.setAdapter(adapterPostGrid);
             prepareGridThreeColumn(gridViewHeader);

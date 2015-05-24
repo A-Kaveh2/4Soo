@@ -1,7 +1,8 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/White">
 
     <ir.rasen.charsoo.view.widget_customized.ButtonFont
         android:id="@+id/btn_blocked_users"
@@ -24,6 +25,7 @@
         android:fadingEdge="none"
         android:fastScrollEnabled="false"
         android:footerDividersEnabled="false"
+        android:layout_below="@+id/btn_blocked_users"
         android:headerDividersEnabled="false"
         android:smoothScrollbar="true" />
 </RelativeLayout>

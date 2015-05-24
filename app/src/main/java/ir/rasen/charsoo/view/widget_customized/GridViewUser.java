@@ -224,6 +224,7 @@ public class GridViewUser implements IWebserviceResponse {
             listFooterView.setVisibility(View.GONE);
         }
 
+
         gridViewHeader.setBackgroundColor(Color.parseColor("#ffffff"));
 
 
