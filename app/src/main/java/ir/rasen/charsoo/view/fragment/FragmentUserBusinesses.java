@@ -2,9 +2,13 @@ package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +29,7 @@ import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.activity.ActivityBusiness;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
+import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.adapter.AdapterUserBusinesses;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
@@ -36,6 +41,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
     AdapterUserBusinesses adapterUserBusinesses;
     ListView listView;
     View view, addBtn;
+    BroadcastReceiver deleteBusinessReciever;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,11 +118,24 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
         // TODO:: WEBSERVICE SHOULD BE WRITTEN ON WEB SIDE AND THEN THIS CODE CAN BE UNCOMMENTED::
         //new GetUserBusinesses(getActivity(),FragmentUserBusinesses.this).execute();
 
+        deleteBusinessReciever = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                int deletedBusinessId = intent.getIntExtra(Params.BUSINESS_ID,0);
+                //TODO:: UPDATE THE BUSINESSES LIST
+                ((ActivityMain)getActivity()).setFragment(ActivityMain.FragmentTag.BUSINESSES);
+            }
+        };
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(deleteBusinessReciever, new IntentFilter(Params.DELETE_BUSINESS));
+
+
         return view;
     }
 
-    Handler handler = new Handler();
+    public void deleteBusiness(int businessId){
 
+    }
+    Handler handler = new Handler();
     public void goToRegisterBusinessActivity() {
         Activity activity = getActivity();
         if (activity == null)
@@ -164,7 +183,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == Params.ACTION_REGISTER_BUSINESS) {
 
-                myApplication.userBusinesses.add(0,new User.UserBusinesses(myApplication.business.id, myApplication.business.businessIdentifier));
+                myApplication.userBusinesses.add(0, new User.UserBusinesses(myApplication.business.id, myApplication.business.businessIdentifier));
 
                 //changed by Sina
                 //if user just add a business
@@ -229,7 +248,6 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
     public void getError(Integer errorCode) {
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
     }
-
 
 
 }

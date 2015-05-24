@@ -154,6 +154,8 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
                 }
                 gridViewBusiness.notifyDatasetChanged();
             }
+
+
         }
 
     }

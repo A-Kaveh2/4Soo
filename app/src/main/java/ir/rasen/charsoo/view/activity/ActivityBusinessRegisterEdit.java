@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -287,9 +288,13 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
 
     @Override
     public void notifyDeleteBusiness(int businessId) {
+       /* Intent intent = new Intent(Params.DELETE_BUSINESS);
+        intent.putExtra(Params.BUSINESS_ID, businessId);
+        LocalBroadcastManager.getInstance(ActivityBusinessRegisterEdit.this).sendBroadcast(intent);*/
+
         Intent i = getIntent();
         i.putExtra(Params.BUSINESS_ID, businessId);
-        i.putExtra(Params.TYPE, Business.ChangeType.DELETE.name());
+        i.putExtra(Params.TYPE,Business.ChangeType.DELETE.name());
         setResult(RESULT_OK, i);
         finish();
     }

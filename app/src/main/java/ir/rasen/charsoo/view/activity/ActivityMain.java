@@ -44,7 +44,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     ProgressDialog progressDialog;
     int screenWidth;
 
-    private enum FragmentTag {HOME, SEARCH, BUSINESSES, USER}
+    public enum FragmentTag {HOME, SEARCH, BUSINESSES, USER}
 
     ArrayList<FragmentTag> fragmentTagList = new ArrayList<>();
 
@@ -98,7 +98,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
 
     }
 
-    private void setFragment(FragmentTag fragmentTag) {
+    public void setFragment(FragmentTag fragmentTag) {
         switch (fragmentTag) {
             case HOME:
                 setSelection(rlHome.getId());

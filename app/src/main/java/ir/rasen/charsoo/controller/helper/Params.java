@@ -203,6 +203,7 @@ public class Params {
     public static final String UPATE_TIME_LINE_TYPE_SHARE = "updateTimeLineTypeShare";
     public static final String UPATE_TIME_LINE_TYPE_CANCEL_SHARE = "updateTimeLineTypeCancelShare";
     public static final String DELETE_POST_FROM_ACTIVITY = "deletePostFromActivity";
+    public static final String DELETE_BUSINESS= "deleteBusiness";
 
     //Actions
     public static int ACTION_ADD_NEW_BUSIENSS_SUCCESS = 1001;
@@ -216,6 +217,7 @@ public class Params {
     public static int ACTION_EDIT_BUSINESS = 1009;
     public static int ACTION_ACTIVITY_POST = 1010;
     public static int ACTION_EDIT_POST = 1011;
+
 
 
     public static enum UpdateTimeLineType{SHARE,CANCEL_SHARE,LIKE,CANCEL_LIKE,REPORT,ADD_COMMENT,DELETE_COMMENT,UPDATE_COMMENT};
