@@ -26,6 +26,7 @@ import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
 import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
+import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
 import ir.rasen.charsoo.view.adapter.AdapterPostBusiness;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
@@ -165,10 +166,15 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
             imageViewContactInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityBusinessContactInfo.class);
+                    //commented for the test
+                   /* Intent intent = new Intent(activity, ActivityBusinessContactInfo.class);
                     MyApplication myApplication = (MyApplication) ((Activity) activity).getApplication();
                     myApplication.business = business;
-                    activity.startActivity(intent);
+                    activity.startActivity(intent);*/
+
+                    Intent intent = new Intent(activity, ActivityPostAddEdit.class);
+                    intent.putExtra(Params.BUSINESS_ID,business.id);
+                    activity.startActivityForResult(intent,Params.ACTION_ADD_POST);
                 }
             });
 

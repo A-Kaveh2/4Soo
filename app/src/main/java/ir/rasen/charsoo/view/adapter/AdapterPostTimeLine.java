@@ -24,6 +24,7 @@ import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.model.post.CancelShare;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
@@ -292,10 +293,10 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                     if (items.get(position).isShared) {
                         //cancel share the post
 
-                        /*new CancelShare(context,LoginInfo.getUserId(context), items.get(position).id,null).execute();
+                        new CancelShare(context,LoginInfo.getUserId(context), items.get(position).id,null).execute();
 
                         items.get(position).isShared = false;
-                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);*/
+                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);
                     } else {
                         //share the post
 

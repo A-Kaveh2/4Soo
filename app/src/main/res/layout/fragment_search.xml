@@ -149,13 +149,25 @@
             android:background="@drawable/shape_edit_text_back"
             android:gravity="right" />
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/map"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
             android:layout_height="match_parent"
-            android:layout_below="@id/textView_sub_category" />
+            android:layout_below="@id/textView_sub_category">
 
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                android:id="@+id/textView_map_error"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:text="@string/err_map_loading_description"
+                android:gravity="right|center_vertical" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
 

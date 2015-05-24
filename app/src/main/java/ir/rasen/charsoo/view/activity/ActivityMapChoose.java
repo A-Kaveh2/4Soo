@@ -69,7 +69,7 @@ public class ActivityMapChoose extends CharsooActivity {
                 if (getIntent().getExtras().getBoolean(Params.IS_EDITTING)) {
 
                     LatLng loc = new LatLng(Double.valueOf(getIntent().getStringExtra(Params.LATITUDE)), Double.valueOf(getIntent().getStringExtra(Params.LONGITUDE)));
-                    marker = googleMap.addMarker(new MarkerOptions().position(loc));
+                   marker = googleMap.addMarker(new MarkerOptions().position(loc));
                     googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 14.0f));
                     choosedLatLng = loc;
 

@@ -150,8 +150,10 @@
     <string name="err_permission_friends">کاربر مورد نظر اجازه مشاهده لیست دوستان خود را به دوستان اعطا نکرده است</string>
     <string name="err_permission_reviews">کاربر مورد نظر اجازه مشاهده لیست نقدهای انجام شده خود را به دوستان اعطا نکرده است</string>
     <string name="err_map_loading">خطای بارگزاری نقشه</string>
-    <string name="err_map_loading_description">Google Play Service  را نصب و یا در صورت نصب به روز رسانی کنید</string>
+    <string name="err_map_loading_description">جستجوی کسب و کارها نیازمند مشخص کردن مکان کسب و کار بر روی نقشه است. جهت نمایش نقشه نرم افزار Google Play Store را نصب و یا به روز رسانی کنید و مجددا سعی کنید.</string>
     <string name="err">خطا</string>
+    <string name="err_location_service_title">سرویس های مکان یابی</string>
+    <string name="err_location_service_body">تنظیمات مربوط به سرویس های مکان یابی فعال نشده است. آیا مایل به مشاهده تنظیمات هستید؟</string>
 
     <!-- ERRORS -->
 

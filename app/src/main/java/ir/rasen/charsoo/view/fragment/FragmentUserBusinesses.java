@@ -163,8 +163,10 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
         MyApplication myApplication = (MyApplication) getActivity().getApplication();
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == Params.ACTION_REGISTER_BUSINESS) {
+
                 myApplication.userBusinesses.add(0,new User.UserBusinesses(myApplication.business.id, myApplication.business.businessIdentifier));
 
+                //changed by Sina
                 //if user just add a business
                 if (myApplication.userBusinesses.size() == 1) {
                     userBusinesses = new ArrayList<>();

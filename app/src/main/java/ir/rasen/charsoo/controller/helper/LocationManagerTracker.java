@@ -16,6 +16,8 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 
+import ir.rasen.charsoo.R;
+
 /**
  * Created by android on 5/23/2015.
  */
@@ -169,13 +171,13 @@ public class LocationManagerTracker extends Service implements LocationListener 
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         // Setting Dialog Title
-        alertDialog.setTitle("Location Settings");
+        alertDialog.setTitle(mContext.getResources().getString(R.string.err_location_service_title));
 
         // Setting Dialog Message
-        alertDialog.setMessage("GPS and Network are not enabled. Do you want to go to settings menu?");
+        alertDialog.setMessage(mContext.getResources().getString(R.string.err_location_service_body));
 
         // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
+        alertDialog.setPositiveButton(mContext.getResources().getString(R.string.settings), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
@@ -183,7 +185,7 @@ public class LocationManagerTracker extends Service implements LocationListener 
         });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(mContext.getString(R.string.cancel), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }

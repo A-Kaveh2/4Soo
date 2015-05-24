@@ -173,8 +173,10 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
 
-        if (!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity()))
-            new DialogMessage(getActivity(), getString(R.string.err_map_loading) + getString(R.string.err_map_loading_description)).show();
+        if (!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity())) {
+            view.findViewById(R.id.textView_map_error).setVisibility(View.VISIBLE);
+            mapView.setVisibility(View.GONE);
+        }
         else if (mapView != null) {
             googleMap = mapView.getMap();
             googleMap.getUiSettings().setMyLocationButtonEnabled(false);
