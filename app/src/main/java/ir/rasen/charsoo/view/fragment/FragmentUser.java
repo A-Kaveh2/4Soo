@@ -186,11 +186,14 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 
             //GetSharedPosts result
             sharedPosts = (ArrayList<Post>) result;
+            if (sharedPosts.size() == 0)
+                new DialogMessage(getActivity(), "Empty posts").show();
             pullToRefreshGridView.setResultSize(sharedPosts.size());
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
             }
             gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn, gridViewUser.hasHeader);
+            int i = sharedPosts.size();
         }
     }
 

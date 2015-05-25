@@ -7,7 +7,14 @@ import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import ir.rasen.charsoo.R;
 
@@ -40,7 +47,31 @@ public class EditTextFont extends EditText {
             Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/yekan.ttf");
             setTypeface(tf);
         }
+       /* setCustomSelectionActionModeCallback(new ActionMode.Callback() {
 
+            public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public void onDestroyActionMode(ActionMode mode) {
+            }
+
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                return false;
+            }
+
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                return false;
+            }
+        });*/
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (getError() != null)
+            setError(null);
+        return super.onTouchEvent(event);
     }
 
     public void setErrorC(String error) {
