@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/TextViewStyled</item>
     </style>
 
     <!-- the theme applied to the application or activity -->
@@ -25,4 +26,7 @@
         <item name="background">@drawable/selector_actionbar_tab_indicator</item>
     </style>
 
+    <style name="TextViewStyled" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/material_black</item>
+    </style>
 </resources>
