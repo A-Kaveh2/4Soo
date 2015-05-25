@@ -95,5 +95,6 @@
 
     <dimen name="btn_height">48dp</dimen>
     <dimen name="btn_height_large">64dp</dimen>
+    <dimen name="txt_under_cover_width">100dp</dimen>
 
 </resources>

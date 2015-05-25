@@ -124,9 +124,11 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             if (business.isFollowing) {
                 buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, activity.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
                 buttonFollowStatus.setText(activity.getString(R.string.followed_business_page));
+                buttonFollowStatus.setTextColor(activity.getResources().getColor(R.color.white));
             } else {
-                buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.dark_blue));
+                buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.white));
                 buttonFollowStatus.setText(activity.getString(R.string.follow));
+                buttonFollowStatus.setTextColor(activity.getResources().getColor(R.color.material_blue));
             }
 
             buttonFollowStatus.setOnClickListener(new View.OnClickListener() {
@@ -182,6 +184,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                     gridViewHeader.setAdapter(adapterPostBusiness);
                     //now it has one column
                     isThreeColumn = false;
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
                 }
             });
             switchGrid.setOnClickListener(new View.OnClickListener() {
@@ -191,9 +195,10 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                     gridViewHeader.setAdapter(adapterPostGrid);
                     // now it has three column
                     isThreeColumn = true;
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
                 }
             });
-
 
             gridViewHeader.addHeaderView(viewHeader);
             hasHeader = true;
@@ -271,9 +276,10 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
 
         } else if (result instanceof ResultStatus) {
             //FollowBusiness' result
-            buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.OrangeRed));
-            buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, activity.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
+            buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.material_green));
+            buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, activity.getResources().getDrawable(R.drawable.ic_check_white_24dp), null, null);
             buttonFollowStatus.setText(activity.getString(R.string.followed_business_page));
+            buttonFollowStatus.setTextColor(activity.getResources().getColor(R.color.white));
             business.isFollowing = true;
         }
 
@@ -287,9 +293,10 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
 
     @Override
     public void notifyUnfollowBusiness(int businessId) {
-        buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.DarkBlue));
+        buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.white));
         buttonFollowStatus.setText(activity.getString(R.string.follow));
         buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        buttonFollowStatus.setTextColor(activity.getResources().getColor(R.color.material_blue));
         business.isFollowing = false;
     }
 }

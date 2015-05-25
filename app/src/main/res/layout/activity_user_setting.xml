@@ -29,7 +29,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/textView_title_friends" />
 
-            <CheckBox
+            <ir.rasen.charsoo.view.widget_customized.checkbox.CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox_friends"
@@ -72,7 +72,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/textView_title_businesses" />
 
-            <CheckBox
+            <ir.rasen.charsoo.view.widget_customized.checkbox.CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox_businesses"
@@ -116,7 +116,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/textView_title_reviews" />
 
-            <CheckBox
+            <ir.rasen.charsoo.view.widget_customized.checkbox.CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox_reviews"
