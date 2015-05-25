@@ -141,10 +141,11 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         boolean hasRequest = false;*/
 
         boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
+        boolean hasHeader = gridViewUser == null ? false : gridViewUser.hasHeader;
         gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView);
         if (((MyApplication) getActivity().getApplication()).isUserCreated) {
             try {
-                gridViewUser.InitialGridViewUser(sharedPosts, beThreeColumn);
+                gridViewUser.InitialGridViewUser(sharedPosts, beThreeColumn, hasHeader);
                 gridViewUser.hideLoader();
             } catch (Exception e) {
 
@@ -152,7 +153,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         } else {
             try {
 
-                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn);
+                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), gridViewUser.isThreeColumn, hasHeader);
             } catch (Exception e) {
 
             }
@@ -189,7 +190,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
             }
-            gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn);
+            gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn, gridViewUser.hasHeader);
         }
     }
 
@@ -222,7 +223,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 break;
             }
         }
-        gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn);
+        gridViewUser.InitialGridViewUser(sharedPosts, gridViewUser.isThreeColumn, gridViewUser.hasHeader);
     }
 
     @Override
