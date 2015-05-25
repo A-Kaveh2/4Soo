@@ -21,7 +21,7 @@ public class PopupEditDeleteComment extends MyPopup {
 
 
     @SuppressLint("NewApi")
-    public PopupEditDeleteComment(final Context context, final Comment comment,final IWebserviceResponse IWebserviceResponse,final ProgressDialog progressDialog,final ICommentChange iCommentChange) {
+    public PopupEditDeleteComment(final Context context, final Comment comment,final ICommentChange iCommentChange) {
         super(context);
 
         this.context = context;
@@ -61,7 +61,7 @@ public class PopupEditDeleteComment extends MyPopup {
         textViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogEditComment d = new DialogEditComment(context,comment, IWebserviceResponse,progressDialog,iCommentChange);
+                DialogEditComment d = new DialogEditComment(context,comment,iCommentChange);
                 d.show();
                 dismiss();
             }
@@ -69,7 +69,7 @@ public class PopupEditDeleteComment extends MyPopup {
         textViewDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogDeleteCommentConfirmation d = new DialogDeleteCommentConfirmation(context,comment, IWebserviceResponse,progressDialog,iCommentChange);
+                DialogDeleteCommentConfirmation d = new DialogDeleteCommentConfirmation(context,comment,iCommentChange);
                 d.show();
                 dismiss();
             }

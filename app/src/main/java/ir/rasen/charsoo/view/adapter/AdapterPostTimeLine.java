@@ -60,6 +60,16 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         notifyDataSetChanged();
     }
 
+    public void updatePostLastThreeComments(Post post) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).id == post.id) {
+                items.get(i).lastThreeComments = post.lastThreeComments;
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
     @Override
     public int getCount() {
         return items.size();
@@ -152,12 +162,12 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
             holder.textViewDescription.setText(TextProcessor.removeHashtags(items.get(position).description));
             holder.textViewTitle.setText(TextProcessor.removeHashtags(items.get(position).title));
-            if (items.get(position).price != null && !items.get(position).price.equals("")&& !items.get(position).price.equals("null")) {
+            if (items.get(position).price != null && !items.get(position).price.equals("") && !items.get(position).price.equals("null")) {
                 holder.textViewPrice.setText(items.get(position).price);
                 holder.llPriceSection.setVisibility(View.VISIBLE);
             } else
                 holder.llPriceSection.setVisibility(View.GONE);
-            if (items.get(position).code != null && !items.get(position).code.equals("")&& !items.get(position).code.equals("null")) {
+            if (items.get(position).code != null && !items.get(position).code.equals("") && !items.get(position).code.equals("null")) {
                 holder.textViewCode.setText(items.get(position).code);
                 holder.llCodeSection.setVisibility(View.VISIBLE);
             } else
@@ -293,7 +303,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                     if (items.get(position).isShared) {
                         //cancel share the post
 
-                        new CancelShare(context,LoginInfo.getUserId(context), items.get(position).id,null).execute();
+                        new CancelShare(context, LoginInfo.getUserId(context), items.get(position).id, null).execute();
 
                         items.get(position).isShared = false;
                         holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);

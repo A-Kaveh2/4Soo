@@ -58,7 +58,7 @@ public class CommentNotification {
         SharedPreferences settings = context.getSharedPreferences(Params.USERS_SEEN_NOTIFICATIONS_PREFERENCE_NAME, 0);
         int userLastSeenNotificationId = settings.getInt(getVariableName(context),0);
 
-        if(userLastSeenNotificationId == 0 || userLastSeenNotificationId != commentId) {
+        if(userLastSeenNotificationId == 0 || userLastSeenNotificationId < commentId) {
             //if the user didn't see any notification before or the user didn't see this notification before
             SharedPreferences.Editor editor = settings.edit();
             editor.putInt(getVariableName(context),commentId);

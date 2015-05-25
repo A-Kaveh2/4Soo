@@ -77,7 +77,8 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
     ImageView imageViewShare;
     ImageView imageViewMore;
     ImageView imageViewPostLike;
-
+    TextViewFont textViewCode;
+    LinearLayout llPriceSection, llCodeSection;
     Post post;
     DownloadImages downloadImages;
     Post.GetPostType getPostType;
@@ -132,6 +133,9 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         textViewComment3UserIdentifier = (TextViewFont) findViewById(R.id.textView_comment3_user_identifier);
         textViewTitle = (TextViewFont) findViewById(R.id.textView_title);
         textViewPrice = (TextViewFont) findViewById(R.id.textView_price);
+        textViewCode = (TextViewFont) findViewById(R.id.textView_code);
+        llPriceSection = (LinearLayout) findViewById(R.id.ll_price_section);
+        llCodeSection = (LinearLayout) findViewById(R.id.ll_code_section);
 
         textViewBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,7 +340,16 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         textViewShareNumber.setText(String.valueOf(post.shareNumber));
         textViewDescription.setText(TextProcessor.removeHashtags(post.description));
         textViewTitle.setText(TextProcessor.removeHashtags(post.title));
-        textViewPrice.setText(post.price);
+        if (post.price != null && !post.price.equals("") && !post.price.equals("null")) {
+            textViewPrice.setText(post.price);
+            llPriceSection.setVisibility(View.VISIBLE);
+        } else
+            llPriceSection.setVisibility(View.GONE);
+        if (post.code != null && !post.code.equals("") && !post.code.equals("null")) {
+            textViewCode.setText(post.code);
+            llCodeSection.setVisibility(View.VISIBLE);
+        } else
+            llCodeSection.setVisibility(View.GONE);
 
         ArrayList<Comment> lastThreeComments = post.lastThreeComments;
         if (lastThreeComments.size() > 0) {

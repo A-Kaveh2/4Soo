@@ -23,7 +23,7 @@ public class DialogEditComment extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogEditComment(final Context context, final Comment comment, final IWebserviceResponse IWebserviceResponse, final ProgressDialog progressDialog,final ICommentChange iCommentChange) {
+    public DialogEditComment(final Context context, final Comment comment,final ICommentChange iCommentChange) {
         super(context, context.getResources().getString(R.string.edit_comment),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.edit));
@@ -71,10 +71,7 @@ public class DialogEditComment extends MyDialogOkCancel {
                 comment.text = et_comment.getText().toString();
 
                 //update the comment
-                progressDialog.show();
-                new UpdateComment(context,comment, IWebserviceResponse,iCommentChange).execute();
-
-
+                new UpdateComment(context,comment,iCommentChange).execute();
                 dismiss();
             }
         });

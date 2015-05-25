@@ -21,7 +21,7 @@ public class DialogDeleteCommentConfirmation extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogDeleteCommentConfirmation(final Context context, final Comment comment, final IWebserviceResponse IWebserviceResponse, final ProgressDialog progressDialog, final ICommentChange iCommentChange) {
+    public DialogDeleteCommentConfirmation(final Context context, final Comment comment, final ICommentChange iCommentChange) {
         super(context, context.getResources().getString(R.string.popup_warning),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.delete));
@@ -54,10 +54,7 @@ public class DialogDeleteCommentConfirmation extends MyDialogOkCancel {
         textViewOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.show();
-                //progressDialog will be closed in getResult or getError in calling class
-                new DeleteComment(context,comment.businessID, comment.id, IWebserviceResponse, iCommentChange).execute();
-
+                new DeleteComment(context,comment.businessID, comment.id, iCommentChange).execute();
                 dismiss();
             }
         });

@@ -33,7 +33,7 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.model.post.GetTimeLinePosts;
 
-public class FragmentHome extends Fragment implements IWebserviceResponse,IPullToRefresh,IGetNewTimeLinePost {
+public class FragmentHome extends Fragment implements IWebserviceResponse, IPullToRefresh, IGetNewTimeLinePost {
 
     ProgressDialog progressDialog;
     AdapterPostTimeLine adapterPostTimeLine;
@@ -44,8 +44,6 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
 
     //pull_to_refresh_lib
     //private PullToRefreshListView pullToRefreshListView;
-
-
 
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
@@ -102,7 +100,14 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getExtras();
-                new GetTimeLinePost(getActivity(),bundle.getInt(Params.POST_ID),results,FragmentHome.this).execute();
+
+                //if the comment is one of the post's last three comments
+                int postId = bundle.getInt(Params.POST_ID);
+                for (int i = 0; i < results.size(); i++) {
+                    if (results.get(i).id == postId)
+                        new GetTimeLinePost(getActivity(), postId, results, FragmentHome.this).execute();
+                }
+
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(updatePostLastThreeComments, new IntentFilter(Params.UPDATE_TIME_LINE_POST_LAST_THREE_COMMENTS));
@@ -191,7 +196,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse,IPullT
 
     @Override
     public void notifyGetNewPost(Post post) {
-        Post.updatePostLastThreeComments(results,post);
+        adapterPostTimeLine.updatePostLastThreeComments(post);
     }
 
 

@@ -1,18 +1,24 @@
 package ir.rasen.charsoo.view.adapter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.view.activity.ActivityPost;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupBlockUser;
 import ir.rasen.charsoo.view.dialog.PopupDeleteCommentBlockUser;
@@ -35,24 +41,24 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
     //In this adapter, if the user is comment's owner, he can edit or delete the comment
 
     private ArrayList<Comment> comments;
-    private Context context;
+    private Activity context;
     DownloadImages downloadImages;
-    IWebserviceResponse IWebserviceResponse;
+    IWebserviceResponse iWebserviceResponse;
     ProgressDialog progressDialog;
-    int postOwnerBusinessId;
+    int postOwnerBusinessId, postId;
     private ICommentChange iCommentChange;
     boolean isUserOwner;
 
-
-    public AdapterPostComments(Context context, boolean isUserOwner, int postOwnerBusinessId, ArrayList<Comment> comments, IWebserviceResponse IWebserviceResponse, ProgressDialog progressDialog) {
+    public AdapterPostComments(Activity context, boolean isUserOwner, int postId, int postOwnerBusinessId, ArrayList<Comment> comments, ProgressDialog progressDialog) {
         this.context = context;
         this.comments = comments;
         downloadImages = new DownloadImages(context);
-        this.IWebserviceResponse = IWebserviceResponse;
+        this.iWebserviceResponse = this;
         this.progressDialog = progressDialog;
         this.postOwnerBusinessId = postOwnerBusinessId;
         this.iCommentChange = this;
         this.isUserOwner = isUserOwner;
+        this.postId = postId;
     }
 
     public void loadMore(ArrayList<Comment> newComments) {
@@ -92,7 +98,7 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
 
 
         //download image with customized class via imageId
-        downloadImages.download(comments.get(position).userProfilePictureID, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
+        downloadImages.download(comments.get(position).userProfilePictureID, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage, false);
         holder.textViewUserIdentifier.setText(comments.get(position).username);
         holder.textViewText.setText(comments.get(position).text);
 
@@ -104,12 +110,12 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
         holder.imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isUserOwner) {
-                    //the business owner is watching the posts
-                    new PopupBlockUser(context,postOwnerBusinessId, comments.get(position).userID, AdapterPostComments.this).show();
-                    //new PopupDeleteCommentBlockUser(context,postOwnerBusinessId,comments.get(position),)
+                if (isUserOwner && comments.get(position).userID != LoginInfo.getUserId(context)) {
+                    //the business owner is watching the posts and the comment doesn't belong to the user
+                    //new PopupBlockUser(context,postOwnerBusinessId, comments.get(position).userID, AdapterPostComments.this).show();
+                    new PopupDeleteCommentBlockUser(context, postOwnerBusinessId, comments.get(position), iWebserviceResponse, progressDialog, iCommentChange).show();
                 } else {
-                    PopupEditDeleteComment p = new PopupEditDeleteComment(context, comments.get(position), IWebserviceResponse, progressDialog, iCommentChange);
+                    PopupEditDeleteComment p = new PopupEditDeleteComment(context, comments.get(position), iCommentChange);
                     p.show();
                 }
 
@@ -130,17 +136,29 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
     @Override
     public void notifyDeleteComment(int commentId) {
         for (int i = 0; i < comments.size(); i++) {
-            if (comments.get(i).id == commentId)
+            if (comments.get(i).id == commentId) {
+                //notify the FragmentHome to get updated last three comments for the post
+                Intent intent = new Intent(Params.UPDATE_TIME_LINE_POST_LAST_THREE_COMMENTS);
+                intent.putExtra(Params.POST_ID, postId);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
                 comments.remove(i);
+                notifyDataSetChanged();
+            }
         }
-        notifyDataSetChanged();
+
+
     }
 
     @Override
     public void notifyUpdateComment(Comment comment) {
         for (int i = 0; i < comments.size(); i++) {
-            if (comments.get(i).id == comment.id)
+            if (comments.get(i).id == comment.id) {
                 comments.get(i).text = comment.text;
+                Intent intent = new Intent(Params.UPDATE_TIME_LINE_POST_LAST_THREE_COMMENTS);
+                intent.putExtra(Params.POST_ID, postId);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
         }
         notifyDataSetChanged();
     }
@@ -148,13 +166,14 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
     @Override
     public void getResult(Object result) {
         //get BlockUser's result
-        new DialogMessage(context,context.getString(R.string.block_done)).show();
+        progressDialog.dismiss();
+        Toast.makeText(context, context.getString(R.string.block_done), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void getError(Integer errorCode) {
         //get BlockUser's error
-        new DialogMessage(context,context.getString(R.string.block_error)).show();
+        new DialogMessage(context, context.getString(R.string.block_error)).show();
     }
     //Each item in this adapter has a picture and a title
 

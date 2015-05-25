@@ -265,12 +265,7 @@ public class Post {
         return -1;
     }
 
-    public static void updatePostLastThreeComments(ArrayList<Post> newPosts,Post post){
-        for (int i = 0; i < newPosts.size(); i++) {
-            if (newPosts.get(i).id == post.id)
-                post.lastThreeComments = newPosts.get(i).lastThreeComments;
-        }
-    }
+
 
 
 }

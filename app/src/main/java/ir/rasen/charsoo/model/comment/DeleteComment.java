@@ -20,8 +20,6 @@ import ir.rasen.charsoo.model.WebserviceGET;
  */
 public class DeleteComment extends AsyncTask<Void, Void, ResultStatus> {
     private static final String TAG = "DeleteComment ";
-
-    private IWebserviceResponse delegate = null;
     private ICommentChange iCommentChange = null;
     private int businessID;
     private int commentID;
@@ -31,8 +29,7 @@ public class DeleteComment extends AsyncTask<Void, Void, ResultStatus> {
     //if userID = comment.userID delete the comment which write the user with id = userID
     //if userID != comment.userID (user is not the writer) and userID == comment.businessID delete the comment which user with id=userID is owner of the business which is owner of the post
 
-    public DeleteComment(Context context,int businessID, int commentID, IWebserviceResponse delegate,ICommentChange iCommentChange) {
-        this.delegate = delegate;
+    public DeleteComment(Context context, int businessID, int commentID, ICommentChange iCommentChange) {
         this.businessID = businessID;
         this.commentID = commentID;
         this.iCommentChange = iCommentChange;
@@ -41,11 +38,11 @@ public class DeleteComment extends AsyncTask<Void, Void, ResultStatus> {
 
     @Override
     protected ResultStatus doInBackground(Void... voids) {
-        WebserviceGET webserviceGET = new WebserviceGET(URLs.DELETE_COMMENT,new ArrayList<>(
+        WebserviceGET webserviceGET = new WebserviceGET(URLs.DELETE_COMMENT, new ArrayList<>(
                 Arrays.asList(String.valueOf(businessID), String.valueOf(commentID))));
 
         try {
-              serverAnswer = webserviceGET.execute(context);
+            serverAnswer = webserviceGET.execute(context);
             if (serverAnswer.getSuccessStatus())
                 return ResultStatus.getResultStatus(serverAnswer);
         } catch (Exception e) {
@@ -57,18 +54,8 @@ public class DeleteComment extends AsyncTask<Void, Void, ResultStatus> {
 
     @Override
     protected void onPostExecute(ResultStatus result) {
-
         //if webservice.execute() throws exception
-        if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
-            return;
-        }
-        if (serverAnswer.getSuccessStatus()) {
-            delegate.getResult(result);
+        if (serverAnswer != null && serverAnswer.getSuccessStatus())
             iCommentChange.notifyDeleteComment(commentID);
-        }
-        else
-            delegate.getError(serverAnswer.getErrorCode());
-
     }
 }

@@ -59,7 +59,7 @@ public class PopupDeleteCommentBlockUser extends MyPopup {
         textViewEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogDeleteCommentConfirmation d = new DialogDeleteCommentConfirmation(context,comment, IWebserviceResponse,progressDialog,iCommentChange);
+                DialogDeleteCommentConfirmation d = new DialogDeleteCommentConfirmation(context,comment,iCommentChange);
                 d.show();
                 dismiss();
             }

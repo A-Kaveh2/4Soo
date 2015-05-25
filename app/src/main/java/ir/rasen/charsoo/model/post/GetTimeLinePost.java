@@ -42,7 +42,7 @@ public class GetTimeLinePost extends AsyncTask<Void, Void, Post> {
         //currentPosts.get(Post.getIndexOfPost(currentPosts,postId)-1) returns the id of the post before the target post in time line
         WebserviceGET webserviceGET = new WebserviceGET(URLs.GET_TIME_LINE_POSTS,new ArrayList<>(
                 Arrays.asList(String.valueOf(LoginInfo.getUserId(context)),
-                        String.valueOf(currentPosts.get(Post.getIndexOfPost(currentPosts,postId)-1)),
+                        String.valueOf(currentPosts.get(Post.getIndexOfPost(currentPosts,postId)-1).id),
                         String.valueOf(1))));
 
 
@@ -53,8 +53,10 @@ public class GetTimeLinePost extends AsyncTask<Void, Void, Post> {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     targetPost = Post.getFromJSONObjectTimeLine(jsonObject);
+                    if(targetPost.id == postId)
+                        return targetPost;
                 }
-                return targetPost;
+                return null;
             }
 
         } catch (Exception e) {

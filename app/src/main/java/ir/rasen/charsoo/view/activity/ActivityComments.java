@@ -149,7 +149,7 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
 
 
             if (status == Status.FIRST_TIME) {
-                adapterPostComments = new AdapterPostComments(ActivityComments.this, isUserOwner, postOwnerBusinessId, comments, ActivityComments.this, progressDialog);
+                adapterPostComments = new AdapterPostComments(ActivityComments.this, isUserOwner, postId, postOwnerBusinessId, comments, progressDialog);
                 listView.setAdapter(adapterPostComments);
             } else if (status == Status.REFRESHING) {
                 adapterPostComments.notifyDataSetChanged();
@@ -163,7 +163,7 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
 
         } else if (result instanceof Integer) {
             //comments.add(0, new Comment((Integer) result, LoginInfo.getUserId(ActivityComments.this), LoginInfo.getAccessUserIdentifier(ActivityComments.this), commentText));
-            comments.add(0, Comment.getSentComment(ActivityComments.this,(Integer) result,commentText));
+            comments.add(0, Comment.getSentComment(ActivityComments.this, (Integer) result, commentText));
             adapterPostComments.notifyDataSetChanged();
             editTextComment.setText("");
         }
