@@ -135,7 +135,7 @@
             android:layout_height="@dimen/button_height_small"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/selector_button_shape_orange"
+            android:background="@color/OrangeRed"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:text="@string/login" />

@@ -11,7 +11,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.TextView;
 
 import com.gc.materialdesign.R;
 import com.gc.materialdesign.utils.Utils;
@@ -24,7 +23,7 @@ public abstract class Button extends CustomView {
 	int minWidth;
 	int minHeight;
 	int background;
-	float rippleSpeed = 12f;
+	float rippleSpeed = 1000f;
 	int rippleSize = 3;
 	Integer rippleColor;
 	OnClickListener onClickListener;

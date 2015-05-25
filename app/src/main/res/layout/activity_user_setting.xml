@@ -45,7 +45,7 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/friends_set"
                 android:textColor="@color/Black"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_below="@+id/textView_title_friends" />
 
             <LinearLayout
@@ -88,7 +88,7 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/businesses_set"
                 android:textColor="@color/Black"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_below="@+id/textView_title_businesses" />
 
             <LinearLayout
@@ -132,7 +132,7 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/reviews_set"
                 android:textColor="@color/Black"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_below="@+id/textView_title_reviews" />
 
 

@@ -5,8 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.Toast;
+
+import com.gc.materialdesign.views.CheckBox;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
@@ -45,16 +46,31 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
 
         myApplication = (MyApplication)getApplication();
         permission = myApplication.getPermission();
-        checkBoxBusinesses.setChecked(permission.followedBusiness);
-        checkBoxFriends.setChecked(permission.friends);
-        checkBoxReviews.setChecked(permission.reviews);
+        checkBoxBusinesses.post(new Runnable() {
+            @Override
+            public void run() {
+                checkBoxBusinesses.setChecked(permission.followedBusiness);
+            }
+        });
+        checkBoxFriends.post(new Runnable() {
+            @Override
+            public void run() {
+                checkBoxFriends.setChecked(permission.friends);
+            }
+        });
+        checkBoxReviews.post(new Runnable() {
+            @Override
+            public void run() {
+                checkBoxReviews.setChecked(permission.reviews);
+            }
+        });
 
 
         (findViewById(R.id.btn_submit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 progressDialog.show();
-                permission = new Permission(checkBoxBusinesses.isChecked(), checkBoxFriends.isChecked(), checkBoxReviews.isChecked());
+                permission = new Permission(checkBoxBusinesses.isCheck(), checkBoxFriends.isCheck(), checkBoxReviews.isCheck());
                 new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), permission, ActivityUserSetting.this).execute();
             }
         });

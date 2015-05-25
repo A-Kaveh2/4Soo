@@ -386,7 +386,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        if(popupWindow.isShowing()) {
+        if(popupWindow!=null && popupWindow.isShowing()) {
             popupWindow.dismiss();
             return;
         }
