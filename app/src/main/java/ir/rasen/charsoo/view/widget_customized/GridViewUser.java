@@ -54,7 +54,8 @@ public class GridViewUser implements IWebserviceResponse {
     boolean isLoadingMore = false;
     ArrayList<Post> posts;
     int visitedUserId;
-    boolean hasHeader, hasRequest;
+    public boolean hasHeader;
+    boolean hasRequest;
     String userIdentifier, userName, aboutMe;
     Permission userPermissions;
 
@@ -63,7 +64,7 @@ public class GridViewUser implements IWebserviceResponse {
         this.profilePictureId = user.profilePictureId;
         this.gridViewHeader = gridViewHeader;
         this.visitedUserId = visitedUserId;
-        this.hasHeader = false;
+//        this.hasHeader = false;
         this.userIdentifier = user.userIdentifier;
         this.userName = user.name;
         this.userPermissions = user.permissions;
@@ -79,9 +80,9 @@ public class GridViewUser implements IWebserviceResponse {
         imageViewCover.setImageBitmap(Image_M.getBitmapFromString(userPictureString));
     }
 
-    public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn) {
+    public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn, boolean hasHeader) {
         this.isThreeColumn = beThreeColumn;
-
+        this.hasHeader = hasHeader;
         this.posts = postList;
 
         ((ActivityMain) activity).initPopupWindowUser();
@@ -216,12 +217,14 @@ public class GridViewUser implements IWebserviceResponse {
             });
 
             gridViewHeader.addHeaderView(viewHeader);
-            hasHeader = true;
+            this.hasHeader = true;
 
             listFooterView = ((LayoutInflater) activity.getSystemService(activity.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
             gridViewHeader.addFooterView(listFooterView);
         } else {
-            listFooterView.setVisibility(View.GONE);
+            if (listFooterView!= null) {
+                listFooterView.setVisibility(View.GONE);
+            }
         }
 
 
@@ -257,14 +260,19 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewSwitch.setVisibility(View.GONE);
             imageViewCirecle.setVisibility(View.GONE);
         } else {
-            imageViewSwitch.setVisibility(View.VISIBLE);
-            imageViewCirecle.setVisibility(View.VISIBLE);
+            if (imageViewSwitch!= null) {
+                imageViewSwitch.setVisibility(View.VISIBLE);
+            }
+            if (imageViewCirecle != null) {
+                imageViewCirecle.setVisibility(View.VISIBLE);
+            }
         }
 
         if(isThreeColumn) {
             prepareGridThreeColumn(gridViewHeader);
             gridViewHeader.setAdapter(adapterPostGrid);
         } else {
+            prepareGridThreeColumn(gridViewHeader);
             gridViewHeader.setAdapter(adapterPostShared);
             imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
         }
