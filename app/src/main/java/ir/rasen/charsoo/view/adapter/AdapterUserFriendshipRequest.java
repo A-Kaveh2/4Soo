@@ -16,6 +16,7 @@ import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.view.interface_m.IFriendRequest;
 import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 import ir.rasen.charsoo.model.DownloadImages;
@@ -31,6 +32,7 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
     DownloadImages downloadImages;
     ListView listView;
     ArrayList<BaseAdapterItem> acceptedUsers;
+    IFriendRequest iFriendRequest;
 
 
     public AdapterUserFriendshipRequest(Context context, ArrayList<BaseAdapterItem> items) {
@@ -38,6 +40,7 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
         this.items = items;
         downloadImages = new DownloadImages(context);
         acceptedUsers = new ArrayList<>();
+        this.iFriendRequest = iFriendRequest;
     }
 
     public void loadMore(ArrayList<BaseAdapterItem> newItem){
