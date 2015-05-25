@@ -70,14 +70,12 @@
                 android:inputType="textEmailAddress"
                  />
 
-            <ir.rasen.charsoo.view.widget_customized.ButtonFont
+            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                 android:id="@+id/btn_work_time"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:text="@string/work_time"
                 android:layout_marginTop="30dp"
-                android:background="@drawable/selector_button_login"
-                android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_larger" />
         </LinearLayout>
 

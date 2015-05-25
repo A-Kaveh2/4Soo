@@ -139,15 +139,14 @@
 
         </RelativeLayout>
 
-        <ir.rasen.charsoo.view.widget_customized.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:text="@string/submit"
             android:layout_marginTop="20dp"
-            android:background="@drawable/selector_button_login"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_larger" />
+            android:layout_gravity="center"
+            android:background="@color/OrangeRed" />
     </LinearLayout>
 
 </RelativeLayout>

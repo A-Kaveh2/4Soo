@@ -93,6 +93,7 @@
     <dimen name="time_edit_text_width">70dp</dimen>
     <dimen name="map_height">300dp</dimen>
 
-
+    <dimen name="btn_height">48dp</dimen>
+    <dimen name="btn_height_large">64dp</dimen>
 
 </resources>

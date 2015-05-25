@@ -20,7 +20,7 @@
             android:layout_height="@dimen/menu_pic_largest"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_app" />
 
         <ir.rasen.charsoo.view.widget_customized.TextViewFont
             android:id="@id/txt_userbusinesses_name"

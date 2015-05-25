@@ -113,15 +113,15 @@ public class DownloadCoverImage {
 
             if (result != null && !result.equals("")) {
                 Bitmap bitmap = Image_M.getBitmapFromString(result);
-                int width = context.getResources().getDisplayMetrics().widthPixels;
+                //int width = context.getResources().getDisplayMetrics().widthPixels;
                 //crop middle part of picture
-                int bitmapWidth = bitmap.getWidth();
-                if(width>bitmapWidth)
-                    width = bitmapWidth;
-                Bitmap croppedBitmap = Bitmap.createBitmap(bitmap, 0, width / 6, width, (width / 3) * 2);
+                //int bitmapWidth = bitmap.getWidth();
+                //if(width>bitmapWidth)
+                //    width = bitmapWidth;
+                //Bitmap croppedBitmap = Bitmap.createBitmap(bitmap, 0, width / 6, width, (width / 3) * 2);
                 if (bitmap != null) {
-                    Image_M.saveBitmap(storagePath, String.valueOf(threadKey) + ".jpg", croppedBitmap);
-                    imageView.setImageBitmap(croppedBitmap);
+                    Image_M.saveBitmap(storagePath, String.valueOf(threadKey) + ".jpg", bitmap);
+                    imageView.setImageBitmap(bitmap);
                 }
             }
         }

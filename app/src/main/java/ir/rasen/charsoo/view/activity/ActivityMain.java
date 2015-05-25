@@ -5,7 +5,6 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -239,7 +237,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 nothingChoseInHeader();
 
                 addFragment(FragmentTag.HOME);
-                rlHome.setBackgroundColor(Color.BLACK);
                 imageViewHome.setImageResource(R.drawable.ic_home_blue_36dp);
 
                 footerHome=true;
@@ -265,7 +262,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 addFragment(FragmentTag.SEARCH);
 
                 nothingChoseInHeader();
-                rlSearch.setBackgroundColor(Color.BLACK);
                 imageViewSearch.setImageResource(R.drawable.ic_search_blue_36dp);
 
                 footerHome=false;
@@ -292,7 +288,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 addFragment(FragmentTag.USER);
 
                 nothingChoseInHeader();
-                rlUser.setBackgroundColor(Color.BLACK);
                 imageViewUser.setImageResource(R.drawable.ic_person_blue_36dp);
 
                 footerHome=false;
@@ -337,7 +332,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     public void initialUserBusinessesTab() {
         nothingChoseInHeader();
 
-        rlBusinesses.setBackgroundColor(Color.BLACK);
         imageViewBusinesses.setImageResource(R.drawable.ic_store_mall_directory_blue_36dp);
 
         footerHome=false;
@@ -432,10 +426,6 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     }
 
     private void nothingChoseInHeader() {
-        rlHome.setBackgroundColor(Color.DKGRAY);
-        rlUser.setBackgroundColor(Color.DKGRAY);
-        rlSearch.setBackgroundColor(Color.DKGRAY);
-        rlBusinesses.setBackgroundColor(Color.DKGRAY);
         imageViewHome.setImageResource(R.drawable.ic_home_white_36dp);
         imageViewUser.setImageResource(R.drawable.ic_person_white_36dp);
         imageViewSearch.setImageResource(R.drawable.ic_search_white_36dp);

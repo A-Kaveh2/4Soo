@@ -6,4 +6,4 @@
     <item android:drawable="@color/DodgerBlue" android:state_pressed="true"/>
     <item android:drawable="@color/DodgerBlue" android:state_activated="true"/>
 
-</selector><!-- From: file:/D:/projects/4Soo/libs/crop-lib/res/drawable/selector_button.xml -->
+</selector><!-- From: file:/Users/Sina/Desktop/Projects/Android/4Soo/libs/crop-lib/res/drawable/selector_button.xml -->

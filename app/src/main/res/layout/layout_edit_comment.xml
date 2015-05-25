@@ -19,24 +19,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2">
-        <ir.rasen.charsoo.view.widget_customized.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
             android:id="@+id/btn_edit_comment_submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#A9A9A9"
+            android:background="@color/DodgerBlue"
             android:text="@string/edit_comment"
-            android:textColor="@android:color/white"
-            android:textAppearance="@android:style/TextAppearance.Large"
             android:layout_margin="@dimen/activity_horizontal_margin_1of4" />
-        <ir.rasen.charsoo.view.widget_customized.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
             android:id="@+id/btn_edit_comment_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#A9A9A9"
+            android:background="@color/DodgerBlue"
             android:text="@string/back"
-            android:textColor="@android:color/white"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:layout_margin="@dimen/activity_horizontal_margin_1of4" />
     </LinearLayout>

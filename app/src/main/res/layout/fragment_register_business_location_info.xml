@@ -66,15 +66,13 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/map_height" />
-            <ir.rasen.charsoo.view.widget_customized.ButtonFont
+            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                 android:id="@+id/btn_map"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:text="@string/choose_location_on_map"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/selector_button_login"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_larger" />
+                android:background="@color/OrangeRed" />
 
             <ir.rasen.charsoo.view.widget_customized.TextViewFont
                 android:id="@+id/textView_play_service"

@@ -60,7 +60,7 @@
                 android:layout_width="@dimen/adapter_user_image_height"
                 android:layout_height="@dimen/adapter_user_image_height"
                 android:id="@+id/imageView_review_adapter_item_image_user"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/ic_app"/>
         </LinearLayout>
 
         <ImageView

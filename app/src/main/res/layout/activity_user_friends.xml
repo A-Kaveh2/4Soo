@@ -6,16 +6,14 @@
     android:background="@color/White"
     android:orientation="vertical">
 
-    <ir.rasen.charsoo.view.widget_customized.ButtonFont
+    <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
         android:id="@+id/btn_friend_requests"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
         android:text="@string/friend_request"
-        android:background="@drawable/selector_button_login"
+        android:background="@color/OrangeRed"
         android:layout_margin="20dp"
-        android:layout_alignParentTop="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size_larger" />
+        android:layout_alignParentTop="true" />
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/pull_refresh_list"

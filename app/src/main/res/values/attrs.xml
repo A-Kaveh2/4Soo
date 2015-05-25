@@ -71,6 +71,7 @@
     <dimen name="profile_pic_small">24dp</dimen>
     <dimen name="profile_pic">36dp</dimen>
 
+    <dimen name="img_under_cover">64dp</dimen>
 
 
     <dimen name="corner_size_dialog">20dp</dimen>

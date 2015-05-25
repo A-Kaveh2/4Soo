@@ -17,7 +17,7 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.helper.WorkTime;
-import ir.rasen.charsoo.view.widget_customized.ButtonFont;
+import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityBusinessWorkTime;
 

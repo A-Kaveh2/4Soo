@@ -34,6 +34,7 @@ import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.adapter.AdapterPostShared;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 
 /**
  * Created by android on 3/14/2015.
@@ -44,7 +45,9 @@ public class GridViewUser implements IWebserviceResponse {
     AdapterPostShared adapterPostShared;
     public boolean isThreeColumn = true;
 
-    ImageView imageViewSearch, imageViewSwitch, imageViewCover, imageViewCirecle, imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewHasRequest,imageViewEdit;
+    FloatButton imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewEdit;
+    View switchGrid, switchList;
+    ImageView imageViewSearch, imageViewCover, imageViewCirecle, imageViewHasRequest;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewIdentifier, textViewName, textViewAboutMe;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
@@ -101,15 +104,16 @@ public class GridViewUser implements IWebserviceResponse {
 
             viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
             imageViewSearch = (ImageView) viewHeader.findViewById(R.id.imageView_search);
-            imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
+            switchGrid = viewHeader.findViewById(R.id.btn_switch_grid);
+            switchList = viewHeader.findViewById(R.id.btn_switch_list);
             imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
             imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
 
-            imageViewFriends = (ImageView) viewHeader.findViewById(R.id.imageView_friends);
+            imageViewFriends = (FloatButton) viewHeader.findViewById(R.id.imageView_friends);
             imageViewHasRequest = (ImageView) viewHeader.findViewById(R.id.imageView_has_request);
-            imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
-            imageViewFollowingBusinesses = (ImageView) viewHeader.findViewById(R.id.imageView_businesses);
-            imageViewEdit = (ImageView) viewHeader.findViewById(R.id.imageView_edit);
+            imageViewReviews = (FloatButton) viewHeader.findViewById(R.id.imageView_reviews);
+            imageViewFollowingBusinesses = (FloatButton) viewHeader.findViewById(R.id.imageView_businesses);
+            imageViewEdit = (FloatButton) viewHeader.findViewById(R.id.imageView_edit);
 
             textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
             textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
@@ -197,22 +201,25 @@ public class GridViewUser implements IWebserviceResponse {
                 }
             });
 
-
-            imageViewSwitch.setOnClickListener(new View.OnClickListener() {
+            switchList.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if (isThreeColumn) {
-                        gridViewHeader.setNumColumns(1);
-                        gridViewHeader.setAdapter(adapterPostShared);
-                        //now it has one column
-                        isThreeColumn = false;
-                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
-                    } else {
-                        prepareGridThreeColumn(gridViewHeader);
-                        gridViewHeader.setAdapter(adapterPostGrid);
-                        // now it has three column
-                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_list);
-                    }
+                public void onClick(View v) {
+                    gridViewHeader.setNumColumns(1);
+                    gridViewHeader.setAdapter(adapterPostShared);
+                    //now it has one column
+                    isThreeColumn = false;
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                }
+            });
+            switchGrid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    prepareGridThreeColumn(gridViewHeader);
+                    gridViewHeader.setAdapter(adapterPostGrid);
+                    // now it has three column
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
                 }
             });
 
@@ -257,12 +264,8 @@ public class GridViewUser implements IWebserviceResponse {
         });
 
         if (posts.size() == 0) {
-            imageViewSwitch.setVisibility(View.GONE);
             imageViewCirecle.setVisibility(View.GONE);
         } else {
-            if (imageViewSwitch!= null) {
-                imageViewSwitch.setVisibility(View.VISIBLE);
-            }
             if (imageViewCirecle != null) {
                 imageViewCirecle.setVisibility(View.VISIBLE);
             }
@@ -274,7 +277,6 @@ public class GridViewUser implements IWebserviceResponse {
         } else {
             prepareGridThreeColumn(gridViewHeader);
             gridViewHeader.setAdapter(adapterPostShared);
-            imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
         }
 
     }

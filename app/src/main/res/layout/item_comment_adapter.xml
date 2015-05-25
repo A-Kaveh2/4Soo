@@ -54,7 +54,7 @@
                 android:layout_marginBottom="@dimen/base_adapter_item_image_margin"
                 android:layout_marginTop="@dimen/base_adapter_item_image_margin"
                 android:id="@+id/imageView_comment_adapter_item_image"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/ic_app" />
         </LinearLayout>
 
         <ImageView

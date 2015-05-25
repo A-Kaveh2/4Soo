@@ -14,7 +14,7 @@
         android:id="@+id/btn_creat_new_business"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_button_login"
+        android:background="@color/OrangeRed"
         android:src="@drawable/selector_button_add"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_alignParentBottom="true"

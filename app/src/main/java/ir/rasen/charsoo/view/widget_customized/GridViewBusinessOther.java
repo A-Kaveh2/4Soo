@@ -34,6 +34,8 @@ import ir.rasen.charsoo.view.adapter.AdapterPostShared;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
+import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 
 /**
  * Created by android on 3/14/2015.
@@ -44,7 +46,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     AdapterPostShared adapterPostBusiness;
     public boolean isThreeColumn = true;
     boolean isLoadingMore = false;
-    ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewBack,imageViewContactInfo,imageViewCirecle;
+    FloatButton imageViewFollowers, imageViewReviews, imageViewContactInfo;
+    ImageView imageViewCover, imageViewBack;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
     View listFooterView;
     View viewHeader;
@@ -56,6 +59,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     ButtonFont buttonFollowStatus;
     IUnfollowBusiness iUnfollowBusiness;
     IWebserviceResponse iWebserviceResponse;
+    View switchGrid, switchList;
 
     public GridViewBusinessOther(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
         this.activity = activity;
@@ -97,12 +101,12 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             viewHeader = ( activity).getLayoutInflater().inflate(R.layout.layout_business_grid_header_another, null);
 
             viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
-            imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
-            imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
+            switchGrid = viewHeader.findViewById(R.id.btn_switch_grid);
+            switchList = viewHeader.findViewById(R.id.btn_switch_list);
             imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
-            imageViewFollowers = (ImageView) viewHeader.findViewById(R.id.imageView_followers);
-            imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
-            imageViewContactInfo = (ImageView) viewHeader.findViewById(R.id.imageView_conatct_info);
+            imageViewFollowers = (FloatButton) viewHeader.findViewById(R.id.imageView_followers);
+            imageViewReviews = (FloatButton) viewHeader.findViewById(R.id.imageView_reviews);
+            imageViewContactInfo = (FloatButton) viewHeader.findViewById(R.id.imageView_contact_info);
             imageViewBack = (ImageView) viewHeader.findViewById(R.id.imageView_back);
 
             textViewFollowersNumber = (TextViewFont) viewHeader.findViewById(R.id.textView_followers_number22);
@@ -112,7 +116,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
 
             textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
             textViewName.setText(String.valueOf(business.name));
-            textViewFollowersNumber.setText(String.valueOf(business.followersNumber));
+            textViewFollowersNumber.setText(String.valueOf(business.followersNumber)+" "+activity.getString(R.string.followers_num));
 
             DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
@@ -121,7 +125,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                 buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, activity.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
                 buttonFollowStatus.setText(activity.getString(R.string.followed_business_page));
             } else {
-                buttonFollowStatus.setBackgroundResource(R.drawable.selector_button_shape_blue);
+                buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.dark_blue));
                 buttonFollowStatus.setText(activity.getString(R.string.follow));
             }
 
@@ -171,22 +175,22 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                 }
             });
 
-            imageViewSwitch.setOnClickListener(new View.OnClickListener() {
+            switchList.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if (isThreeColumn) {
-                        gridViewHeader.setNumColumns(1);
-                        gridViewHeader.setAdapter(adapterPostBusiness);
-                        //now it has one column
-                        isThreeColumn = false;
-                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
-                    } else {
-                        prepareGridThreeColumn(gridViewHeader);
-                        gridViewHeader.setAdapter(adapterPostGrid);
-                        // now it has three column
-                        isThreeColumn = true;
-                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_list);
-                    }
+                public void onClick(View v) {
+                    gridViewHeader.setNumColumns(1);
+                    gridViewHeader.setAdapter(adapterPostBusiness);
+                    //now it has one column
+                    isThreeColumn = false;
+                }
+            });
+            switchGrid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    prepareGridThreeColumn(gridViewHeader);
+                    gridViewHeader.setAdapter(adapterPostGrid);
+                    // now it has three column
+                    isThreeColumn = true;
                 }
             });
 
@@ -207,7 +211,6 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             prepareGridThreeColumn(gridViewHeader);
         } else {
             gridViewHeader.setAdapter(adapterPostBusiness);
-            imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
         }
 
         gridViewHeader.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -264,19 +267,11 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             else
                 adapterPostBusiness.loadMore(posts);
 
-            if (posts.size() == 0) {
-                imageViewSwitch.setVisibility(View.GONE);
-                imageViewCirecle.setVisibility(View.GONE);
-            }
-            else {
-                imageViewSwitch.setVisibility(View.VISIBLE);
-                imageViewCirecle.setVisibility(View.VISIBLE);
-            }
             isLoadingMore=false;
 
         } else if (result instanceof ResultStatus) {
             //FollowBusiness' result
-            buttonFollowStatus.setBackgroundResource(R.drawable.selector_button_shape_orange);
+            buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.OrangeRed));
             buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, activity.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
             buttonFollowStatus.setText(activity.getString(R.string.followed_business_page));
             business.isFollowing = true;
@@ -292,7 +287,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
 
     @Override
     public void notifyUnfollowBusiness(int businessId) {
-        buttonFollowStatus.setBackgroundResource(R.drawable.selector_button_shape_blue);
+        buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.DarkBlue));
         buttonFollowStatus.setText(activity.getString(R.string.follow));
         buttonFollowStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         business.isFollowing = false;

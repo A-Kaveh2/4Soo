@@ -93,15 +93,13 @@
                 android:drawableRight="@drawable/ic_lock_blue_24dp"
                 android:layout_marginTop="20dp" />
 
-            <ir.rasen.charsoo.view.widget_customized.ButtonFont
+            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:text="@string/register"
-                android:background="@drawable/selector_button_login"
+                android:background="@color/OrangeRed"
                 android:layout_marginTop="30dp"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/text_size_larger"
                 android:layout_below="@+id/editText_password_repeat" />
         </RelativeLayout>
     </ScrollView>
