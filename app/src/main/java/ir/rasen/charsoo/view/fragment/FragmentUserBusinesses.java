@@ -76,7 +76,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                         Animation slide = null;
                         slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                                0.0f, Animation.RELATIVE_TO_SELF, +5.0f);
+                                0.0f, Animation.RELATIVE_TO_SELF, +3.0f);
 
                         slide.setDuration(200);
                         slide.setFillAfter(true);
@@ -88,7 +88,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                         Animation slide = null;
                         slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                                +5.0f, Animation.RELATIVE_TO_SELF, 0.0f);
+                                +3.0f, Animation.RELATIVE_TO_SELF, 0.0f);
 
                         slide.setDuration(200);
                         slide.setFillAfter(true);

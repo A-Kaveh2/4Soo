@@ -11,13 +11,13 @@
         android:layout_height="match_parent"
         android:divider="@android:color/transparent"/>
 
-    <ir.rasen.charsoo.view.widget_customized.buttons.FlatButton
+    <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
         android:id="@+id/btn_creat_new_business"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/OrangeRed"
         materialdesign:iconDrawable="@drawable/ic_add"
-        materialdesign:animate="true"
+        materialdesign:animate="false"
         android:layout_marginRight="@dimen/activity_horizontal_margin_2x"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_alignParentBottom="true"
