@@ -124,9 +124,9 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_business_name);
 
 
-            textViewIdentifier.setText(String.valueOf(business.businessIdentifier)+" "+activity.getString(R.string.followers_num));
+            textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
             textViewName.setText(String.valueOf(business.name));
-            textViewFollowersNumber.setText(String.valueOf(business.followersNumber));
+            textViewFollowersNumber.setText(String.valueOf(business.followersNumber)+" "+activity.getString(R.string.followers_num));
 
             downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
