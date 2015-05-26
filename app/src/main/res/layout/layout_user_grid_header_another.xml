@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/rl_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:paddingBottom="20dp">
 
@@ -154,7 +154,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_under_cover_width"
                     android:layout_height="wrap_content">
 
                     <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
@@ -197,7 +197,7 @@
                 android:orientation="vertical">
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/layout_under_cover_width"
                     android:layout_height="wrap_content">
 
                     <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
@@ -240,21 +240,20 @@
                 android:layout_marginLeft="30dp"
                 android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="@dimen/layout_under_cover_width"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
                         android:id="@+id/imageView_businesses"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:background="@color/material_blue"
                         materialdesign:animate="false"
-                        materialdesign:iconDrawable="@drawable/ic_shop"
-                        android:layout_alignParentTop="true"
-                        android:layout_toRightOf="@+id/textView_businesses_number"
-                        android:layout_toEndOf="@+id/textView_businesses_number" />
-
+                        materialdesign:iconDrawable="@drawable/ic_shop"/>
+<!--
                     <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_businesses_number"
                         android:layout_width="wrap_content"
@@ -266,17 +265,17 @@
                         android:text="12345"
                         android:textColor="@color/Black"
                         android:textSize="@dimen/font_size_header"
-                        android:visibility="gone" />
-                </RelativeLayout>
+                        android:visibility="gone" />-->
+                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/businesses"
+                        android:textColor="@color/Gray"
+                        android:textSize="@dimen/font_size_header" />
+                </LinearLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/businesses"
-                    android:textColor="@color/Gray"
-                    android:textSize="@dimen/font_size_header" />
 
             </LinearLayout>
 

@@ -10,13 +10,16 @@
         android:id="@+id/rl_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:orientation="vertical">
 
         <ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView
             android:id="@+id/imageView_cover"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_vertical_margin"
+            android:layout_below="@id/imageView_cover"/>
 
         <RelativeLayout
             android:id="@+id/ll_action_bar"
@@ -52,14 +55,6 @@
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/ll_footer_blank"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/header_switch_footer_hight_halft"
-                android:layout_alignParentBottom="true"
-                android:background="@color/White"
-                android:orientation="horizontal" />
-
         </LinearLayout>
 
         <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
@@ -67,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
             android:background="@color/material_pink"
             materialdesign:animate="false"
             materialdesign:iconDrawable="@drawable/ic_edit" />
