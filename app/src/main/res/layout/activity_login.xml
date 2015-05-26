@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityMain"
-    android:gravity="center">
+    android:gravity="center"
+    tools:context=".ActivityMain">
 
 
     <ScrollView
@@ -11,80 +11,85 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
-            android:id="@+id/relativeLayout">
+            android:layout_marginRight="20dp">
 
             <ir.rasen.charsoo.view.widget_customized.EditTextFont
                 android:id="@+id/edt_login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email"
-                android:textColorHint="@color/Black"
+                android:drawableRight="@drawable/ic_email_blue_24dp"
                 android:gravity="right|center_vertical"
-                android:textColor="@color/Black"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress|textNoSuggestions"
                 android:singleLine="true"
+                android:textColor="@color/Black"
 
-                android:drawableRight="@drawable/ic_email_blue_24dp" />
+                android:textColorHint="@color/Black" />
 
             <ir.rasen.charsoo.view.widget_customized.EditTextFont
                 android:id="@+id/edt_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/edt_login_email"
+                android:layout_marginTop="20dp"
+                android:drawableRight="@drawable/ic_lock_blue_24dp"
+                android:gravity="right|center_vertical"
                 android:hint="@string/password"
                 android:inputType="textPassword"
                 android:selectAllOnFocus="true"
-                android:textColorHint="@color/Black"
-                android:layout_marginTop="20dp"
-                android:textColor="@color/Black"
                 android:singleLine="true"
-                android:gravity="right|center_vertical"
-                android:drawableRight="@drawable/ic_lock_blue_24dp" />
+                android:textColor="@color/Black"
+                android:textColorHint="@color/Black" />
 
             <LinearLayout
                 android:id="@+id/ll_login_btns"
-                android:layout_below="@+id/edt_login_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/edt_login_password"
                 android:layout_alignRight="@id/edt_login_password"
+                android:layout_below="@+id/edt_login_password"
                 android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
-                    android:id="@+id/btn_login_login"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/button_height"
-                    android:background="@color/OrangeRed"
-                    android:gravity="center"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:text="@string/login" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
-                    android:id="@+id/btn_login_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/button_height"
-                    android:text="@string/register"
-                    android:background="@color/DodgerBlue"
-                    android:gravity="center"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginTop="10dp" />
+                    <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        android:id="@+id/btn_login_login"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_weight="1"
+                        android:background="@color/OrangeRed"
+                        android:gravity="center"
+                        android:text="@string/login" />
+
+                    <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        android:id="@+id/btn_login_register"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_weight="1"
+                        android:background="@color/DodgerBlue"
+                        android:gravity="center"
+                        android:text="@string/register" />
+                </LinearLayout>
 
                 <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:id="@+id/btn_login_forget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@color/Black"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
                     android:text="@string/forgot_password"
-                    android:textSize="@dimen/text_size_large"
-                    android:layout_marginTop="20dp" />
+                    android:textColor="@color/Black"
+                    android:textSize="@dimen/text_size_large" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

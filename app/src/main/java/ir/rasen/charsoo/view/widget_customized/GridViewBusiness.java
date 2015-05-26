@@ -18,11 +18,9 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
-import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
 import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
@@ -32,6 +30,7 @@ import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IDeletePost;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 import ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView;
 
 /**
@@ -47,7 +46,8 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
   /*  ImageView imageViewMore, imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo, imageViewCirecle, imageViewBack, imageViewEdit;
     TextViewFont textViewFollowersNumber, textViewIdentifier, textViewName;
 */
-    ImageView imageViewSwitch, imageViewCover, imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewCirecle,imageViewEdit;
+    FloatButton imageViewFollowers, imageViewReviews, imageViewContactInfo,imageViewEdit;
+    ImageView imageViewCover;
     LinearLayout llBack;
     TextViewFont textViewFollowersNumber,textViewIdentifier,textViewName;
 
@@ -60,6 +60,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     ArrayList<Post> posts;
     boolean hasHeader;
     DownloadCoverImage downloadCoverImage;
+    View switchGrid, switchList;
 
     public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
         this.activity = activity;
@@ -78,16 +79,11 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     public void notifyDataSetChanged(Post post) {
 
         posts.add(0, post);
-        imageViewSwitch.setVisibility(View.VISIBLE);
-        imageViewCirecle.setVisibility(View.VISIBLE);
         searchItemPosts.add(0, new SearchItemPost(post.id, post.pictureId, post.picture));
         /*adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();*/
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, business.id, Post.GetPostType.BUSINESS);
         adapterPostBusiness = new AdapterPostBusiness(activity, posts, true, GridViewBusiness.this);
-
-        imageViewSwitch.setVisibility(View.VISIBLE);
-        imageViewCirecle.setVisibility(View.VISIBLE);
 
         if (isThreeColumn) {
             gridViewHeader.setAdapter(adapterPostGrid);
@@ -114,14 +110,14 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
             viewHeader = activity.getLayoutInflater().inflate(R.layout.layout_business_grid_header, null);
 
             viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
-            imageViewSwitch = (ImageView) viewHeader.findViewById(R.id.imageView_switch);
-            imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
+            switchGrid = viewHeader.findViewById(R.id.btn_switch_grid);
+            switchList = viewHeader.findViewById(R.id.btn_switch_list);
             imageViewCover = (ExpandableImageView) viewHeader.findViewById(R.id.imageView_cover);
-            imageViewFollowers = (ImageView) viewHeader.findViewById(R.id.imageView_followers);
-            imageViewReviews = (ImageView) viewHeader.findViewById(R.id.imageView_reviews);
-            imageViewContactInfo = (ImageView) viewHeader.findViewById(R.id.imageView_conatct_info);
+            imageViewFollowers = (FloatButton) viewHeader.findViewById(R.id.imageView_followers);
+            imageViewReviews = (FloatButton) viewHeader.findViewById(R.id.imageView_reviews);
+            imageViewContactInfo = (FloatButton) viewHeader.findViewById(R.id.imageView_conatct_info);
             llBack = (LinearLayout) viewHeader.findViewById(R.id.ll_back);
-            imageViewEdit = (ImageView) viewHeader.findViewById(R.id.imageView_edit);
+            imageViewEdit = (FloatButton) viewHeader.findViewById(R.id.imageView_edit);
 
             textViewFollowersNumber = (TextViewFont) viewHeader.findViewById(R.id.textView_followers_number22);
             textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_business_identifier_header);
@@ -130,7 +126,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
 
             textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
             textViewName.setText(String.valueOf(business.name));
-            textViewFollowersNumber.setText(String.valueOf(business.followersNumber));
+            textViewFollowersNumber.setText(String.valueOf(business.followersNumber)+" "+activity.getString(R.string.followers_num));
 
             downloadCoverImage = new DownloadCoverImage(activity);
             downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
@@ -171,29 +167,30 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                     MyApplication myApplication = (MyApplication) ((Activity) activity).getApplication();
                     myApplication.business = business;
                     activity.startActivity(intent);*/
-
-                    Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-                    intent.putExtra(Params.BUSINESS_ID,business.id);
-                    activity.startActivityForResult(intent,Params.ACTION_ADD_POST);
+                    addNewPost();
                 }
             });
 
-            imageViewSwitch.setOnClickListener(new View.OnClickListener() {
+            switchList.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    if (isThreeColumn) {
-                        gridViewHeader.setNumColumns(1);
-                        gridViewHeader.setAdapter(adapterPostBusiness);
-                        //now it has one column
-                        isThreeColumn = false;
-                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_grid);
-                    } else {
-                        prepareGridThreeColumn(gridViewHeader);
-                        gridViewHeader.setAdapter(adapterPostGrid);
-                        // now it has three column
-                        isThreeColumn = true;
-                        imageViewSwitch.setImageResource(R.drawable.selector_header_swtich_list);
-                    }
+                public void onClick(View v) {
+                    gridViewHeader.setNumColumns(1);
+                    gridViewHeader.setAdapter(adapterPostBusiness);
+                    //now it has one column
+                    isThreeColumn = false;
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                }
+            });
+            switchGrid.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    prepareGridThreeColumn(gridViewHeader);
+                    gridViewHeader.setAdapter(adapterPostGrid);
+                    // now it has three column
+                    isThreeColumn = true;
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
                 }
             });
             llBack.setOnClickListener(new View.OnClickListener() {
@@ -213,15 +210,6 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
             listFooterView.setVisibility(View.GONE);
         }
         gridViewHeader.setBackgroundColor(Color.parseColor("#ffffff"));
-
-
-        if (postList.size() == 0) {
-            imageViewSwitch.setVisibility(View.GONE);
-            imageViewCirecle.setVisibility(View.GONE);
-        } else {
-            imageViewSwitch.setVisibility(View.VISIBLE);
-            imageViewCirecle.setVisibility(View.VISIBLE);
-        }
 
         if(isThreeColumn) {
             gridViewHeader.setAdapter(adapterPostGrid);
@@ -306,11 +294,12 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();
 
-        if (posts.size() == 0) {
-            imageViewSwitch.setVisibility(View.GONE);
-            imageViewCirecle.setVisibility(View.GONE);
-        }
     }
 
+    private void addNewPost() {
+        Intent intent = new Intent(activity, ActivityPostAddEdit.class);
+        intent.putExtra(Params.BUSINESS_ID,business.id);
+        activity.startActivityForResult(intent, Params.ACTION_ADD_POST);
+    }
 
 }

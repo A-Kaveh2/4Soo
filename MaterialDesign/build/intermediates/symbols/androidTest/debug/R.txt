@@ -35,11 +35,10 @@ int drawable background_transparent 0x7f020008
 int drawable dialog_background 0x7f020009
 int drawable float_button1_shadowp 0x7f02000a
 int drawable float_button_shadow1 0x7f02000b
-int drawable ic_launcher 0x7f02000c
-int drawable ic_reloj_max 0x7f02000d
-int drawable shadow_down 0x7f02000e
-int drawable shadow_right 0x7f02000f
-int drawable sprite_check 0x7f020010
+int drawable ic_reloj_max 0x7f02000c
+int drawable shadow_down 0x7f02000d
+int drawable shadow_right 0x7f02000e
+int drawable sprite_check 0x7f02000f
 int id blue 0x7f060005
 int id button_accept 0x7f06000c
 int id button_cancel 0x7f06000b

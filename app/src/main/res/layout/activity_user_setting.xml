@@ -141,9 +141,11 @@
 
         <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
             android:id="@+id/btn_submit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
             android:text="@string/submit"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:background="@color/OrangeRed" />
