@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
@@ -98,28 +99,6 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="@dimen/header_switch_hight"
-            android:layout_height="@dimen/header_switch_hight"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="15dp">
-
-            <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
-                android:id="@+id/imageView_cirecle"
-                android:layout_width="@dimen/header_switch_hight"
-                android:layout_height="@dimen/header_switch_hight"
-                android:src="@color/DarkOrange" />
-
-            <ImageView
-                android:id="@+id/imageView_switch"
-                android:layout_width="@dimen/header_switch_inner_item_hight"
-                android:layout_height="@dimen/header_switch_inner_item_hight"
-                android:layout_centerInParent="true"
-                android:src="@drawable/selector_header_swtich_list" />
-        </RelativeLayout>
-
 
     </RelativeLayout>
 
@@ -132,7 +111,7 @@
         <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
             android:id="@+id/btn_friend_satus"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/button_height_small"
+            android:layout_height="@dimen/btn_height"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="10dp"
             android:background="@color/OrangeRed"
@@ -178,15 +157,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+                    <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
                         android:id="@+id/imageView_friends"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/selector_button_business_follower" />
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/material_blue"
+                        materialdesign:animate="false"
+                        materialdesign:iconDrawable="@drawable/ic_friends" />
 
                     <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_friends_number"
-                        android:layout_width="50dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -218,15 +200,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+                    <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
                         android:id="@+id/imageView_reviews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/selector_button_business_review" />
+                        android:layout_centerHorizontal="true"
+                        android:background="@color/material_blue"
+                        materialdesign:animate="false"
+                        materialdesign:iconDrawable="@drawable/ic_review" />
 
                     <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_reviews_number"
-                        android:layout_width="50dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -259,15 +244,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ImageView
+                    <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
                         android:id="@+id/imageView_businesses"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/selector_button_business_contact_info" />
+                        android:background="@color/material_blue"
+                        materialdesign:animate="false"
+                        materialdesign:iconDrawable="@drawable/ic_shop"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/textView_businesses_number"
+                        android:layout_toEndOf="@+id/textView_businesses_number" />
 
                     <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_businesses_number"
-                        android:layout_width="50dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
@@ -294,5 +284,40 @@
         </LinearLayout>
 
 
+    </LinearLayout>
+    <!-- SWITCHES -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:id="@+id/btn_switch_grid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/material_blue_light">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/selector_header_swtich_grid" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btn_switch_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/material_gray">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/selector_header_swtich_list" />
+        </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

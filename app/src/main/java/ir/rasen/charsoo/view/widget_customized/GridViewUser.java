@@ -47,7 +47,7 @@ public class GridViewUser implements IWebserviceResponse {
 
     FloatButton imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewEdit;
     View switchGrid, switchList;
-    ImageView imageViewSearch, imageViewCover, imageViewCirecle, imageViewHasRequest;
+    ImageView imageViewSearch, imageViewCover, imageViewHasRequest;
     TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewIdentifier, textViewName, textViewAboutMe;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
@@ -106,7 +106,6 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewSearch = (ImageView) viewHeader.findViewById(R.id.imageView_search);
             switchGrid = viewHeader.findViewById(R.id.btn_switch_grid);
             switchList = viewHeader.findViewById(R.id.btn_switch_list);
-            imageViewCirecle = (ImageView) viewHeader.findViewById(R.id.imageView_cirecle);
             imageViewCover = (ImageView) viewHeader.findViewById(R.id.imageView_cover);
 
             imageViewFriends = (FloatButton) viewHeader.findViewById(R.id.imageView_friends);
@@ -264,11 +263,11 @@ public class GridViewUser implements IWebserviceResponse {
         });
 
         if (posts.size() == 0) {
-            imageViewCirecle.setVisibility(View.GONE);
+            //imageViewCirecle.setVisibility(View.GONE);
         } else {
-            if (imageViewCirecle != null) {
-                imageViewCirecle.setVisibility(View.VISIBLE);
-            }
+            //if (imageViewCirecle != null) {
+            //    imageViewCirecle.setVisibility(View.VISIBLE);
+            //}
         }
 
         if(isThreeColumn) {
