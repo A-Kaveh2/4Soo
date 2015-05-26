@@ -31,7 +31,7 @@
     <application
         android:name=".controller.object.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/ic_app"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity

@@ -55,16 +55,14 @@
                 android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
-                <ir.rasen.charsoo.view.widget_customized.ButtonFont
+                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                     android:id="@+id/btn_login_login"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:text="@string/login"
-                    android:background="@drawable/selector_button_login"
+                    android:background="@color/OrangeRed"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_larger" />
+                    android:layout_marginRight="3dp" />
 
                 <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:id="@+id/btn_login_forget"

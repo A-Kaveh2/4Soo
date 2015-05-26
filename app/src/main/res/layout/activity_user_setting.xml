@@ -29,7 +29,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/textView_title_friends" />
 
-            <CheckBox
+            <ir.rasen.charsoo.view.widget_customized.checkbox.CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox_friends"
@@ -45,7 +45,7 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/friends_set"
                 android:textColor="@color/Black"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_below="@+id/textView_title_friends" />
 
             <LinearLayout
@@ -72,7 +72,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/textView_title_businesses" />
 
-            <CheckBox
+            <ir.rasen.charsoo.view.widget_customized.checkbox.CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox_businesses"
@@ -88,7 +88,7 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/businesses_set"
                 android:textColor="@color/Black"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_below="@+id/textView_title_businesses" />
 
             <LinearLayout
@@ -116,7 +116,7 @@
                 android:layout_alignParentTop="true"
                 android:id="@+id/textView_title_reviews" />
 
-            <CheckBox
+            <ir.rasen.charsoo.view.widget_customized.checkbox.CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/checkBox_reviews"
@@ -132,22 +132,21 @@
                 android:layout_alignParentRight="true"
                 android:text="@string/reviews_set"
                 android:textColor="@color/Black"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
                 android:layout_below="@+id/textView_title_reviews" />
 
 
 
         </RelativeLayout>
 
-        <ir.rasen.charsoo.view.widget_customized.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:text="@string/submit"
             android:layout_marginTop="20dp"
-            android:background="@drawable/selector_button_login"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_larger" />
+            android:layout_gravity="center"
+            android:background="@color/OrangeRed" />
     </LinearLayout>
 
 </RelativeLayout>

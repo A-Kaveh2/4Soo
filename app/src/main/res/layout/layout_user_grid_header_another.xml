@@ -129,18 +129,16 @@
         android:gravity="right"
         android:orientation="vertical">
 
-        <ir.rasen.charsoo.view.widget_customized.ButtonFont
+        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
             android:id="@+id/btn_friend_satus"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height_small"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/selector_button_shape_orange"
+            android:background="@color/OrangeRed"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:text="@string/login"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/text_size_larger" />
+            android:text="@string/login" />
 
 
         <ir.rasen.charsoo.view.widget_customized.TextViewFont

@@ -17,7 +17,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/img_notification_post"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_app" />
     </LinearLayout>
 
     <LinearLayout
@@ -47,7 +47,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/img_notification_user"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_app" />
     </LinearLayout>
 
 

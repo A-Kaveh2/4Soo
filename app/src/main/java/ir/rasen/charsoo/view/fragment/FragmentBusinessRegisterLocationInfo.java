@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 
@@ -24,7 +23,7 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.Location_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.Validation;
-import ir.rasen.charsoo.view.widget_customized.ButtonFont;
+import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityMapChoose;
 

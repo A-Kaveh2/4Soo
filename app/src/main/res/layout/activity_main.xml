@@ -50,13 +50,13 @@
             android:layout_alignParentTop="true"
             android:background="@color/gray_dark"
             android:orientation="horizontal"
-            android:weightSum="100">
+            android:weightSum="4">
 
             <RelativeLayout
                 android:id="@+id/rl_home"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:background="@color/Black">
+                android:background="@color/gray_dark">
 
                 <ImageView
                     android:id="@+id/imageView_home"

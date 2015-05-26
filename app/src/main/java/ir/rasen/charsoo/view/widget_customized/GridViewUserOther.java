@@ -34,6 +34,7 @@ import ir.rasen.charsoo.view.adapter.AdapterPostShared;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.ICancelFriendship;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 
 /**
  * Created by android on 3/14/2015.

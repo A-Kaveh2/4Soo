@@ -320,36 +320,30 @@
                     android:text="@string/account" />
 
 
-                <ir.rasen.charsoo.view.widget_customized.ButtonFont
+                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                     android:id="@+id/btn_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_user_profile_height"
                     android:text="@string/change_password"
-                    android:background="@drawable/selector_button_register"
-                    android:layout_marginTop="@dimen/user_profile_margin"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_large" />
+                    android:background="@color/DodgerBlue"
+                    android:layout_marginTop="@dimen/user_profile_margin" />
 
-                <ir.rasen.charsoo.view.widget_customized.ButtonFont
+                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                     android:id="@+id/btn_clear_search_history"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_user_profile_height"
                     android:text="@string/clear_history"
-                    android:background="@drawable/selector_button_register"
+                    android:background="@color/DodgerBlue"
                     android:layout_marginTop="@dimen/user_profile_margin"
-                    android:visibility="gone"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_large" />
+                    android:visibility="gone" />
 
-                <ir.rasen.charsoo.view.widget_customized.ButtonFont
+                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                     android:id="@+id/btn_user_profile_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:text="@string/submit"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/selector_button_login"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/text_size_larger" />
+                    android:background="@color/OrangeRed" />
 
             </LinearLayout>
 

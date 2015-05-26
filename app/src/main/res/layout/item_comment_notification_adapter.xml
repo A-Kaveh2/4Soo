@@ -24,7 +24,7 @@
                 android:layout_height="@dimen/comment_notification_adapter_post_image_height"
                 android:id="@+id/imageView_comment_adapter_item_image_post"
                 android:layout_margin="2dp"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/ic_app"/>
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +66,7 @@
                 android:layout_width="@dimen/adapter_user_image_height"
                 android:layout_height="@dimen/adapter_user_image_height"
                 android:id="@+id/imageView_comment_adapter_item_image_user"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/ic_app"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>
