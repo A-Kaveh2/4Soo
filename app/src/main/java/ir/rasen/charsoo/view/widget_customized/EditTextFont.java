@@ -74,6 +74,13 @@ public class EditTextFont extends EditText {
         return super.onTouchEvent(event);
     }
 
+    @Override
+    protected void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
+        if (getError() != null)
+            setError(null);
+        super.onTextChanged(text, start, lengthBefore, lengthAfter);
+    }
+
     public void setErrorC(String error) {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD) {
             ForegroundColorSpan fgcspan = new ForegroundColorSpan(getResources().getColor(android.R.color.black));

@@ -153,6 +153,7 @@
     <string name="err_map_loading_description">جستجوی کسب و کارها نیازمند مشخص کردن مکان کسب و کار بر روی نقشه است. جهت نمایش نقشه نرم افزار Google Play Store را نصب و یا به روز رسانی کنید و مجددا سعی کنید.</string>
     <string name="err">خطا</string>
     <string name="err_location_service_title">سرویس های مکان یابی</string>
+    <string name="err_fill_search_box">لطفا متن جستجو را وارد کنید.</string>
     <string name="err_location_service_body">تنظیمات مربوط به سرویس های مکان یابی فعال نشده است. آیا مایل به مشاهده تنظیمات هستید؟</string>
 
     <!-- ERRORS -->

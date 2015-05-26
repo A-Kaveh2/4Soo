@@ -176,8 +176,7 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
         if (!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity())) {
             view.findViewById(R.id.textView_map_error).setVisibility(View.VISIBLE);
             mapView.setVisibility(View.GONE);
-        }
-        else if (mapView != null) {
+        } else if (mapView != null) {
             googleMap = mapView.getMap();
             googleMap.getUiSettings().setMyLocationButtonEnabled(false);
             googleMap.setMyLocationEnabled(true);
@@ -246,6 +245,10 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
     }
 
     private boolean search() {
+        if (editTextSearch.getText().toString().equals("")) {
+            editTextSearch.setError(getString(R.string.err_fill_search_box));
+            return false;
+        }
         if (searchType == SearchType.BUSINESSES) {
             /*if (subcategoryId == 0) {
                 new DialogMessage(getActivity(), getString(R.string.choose_category_search)).show();
