@@ -102,7 +102,10 @@
             android:id="@+id/textView_user_about_me"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:layout_marginTop="10dp"
             android:textColor="@color/Black"
             android:textSize="@dimen/font_size_header" />
@@ -112,10 +115,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
-
             android:textColor="@color/DarkOrange"
-            android:textSize="@dimen/font_size_header"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="gone" />
 
 
@@ -282,7 +283,7 @@
             android:background="@color/material_blue_light">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/menu_pic"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/selector_header_swtich_grid" />
@@ -293,10 +294,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/material_gray">
+            android:background="@color/material_gray_light">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/menu_pic"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/selector_header_swtich_list" />

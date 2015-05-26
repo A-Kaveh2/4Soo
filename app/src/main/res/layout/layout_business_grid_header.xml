@@ -16,6 +16,10 @@
             android:id="@+id/imageView_cover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"/>
 
         <RelativeLayout
             android:id="@+id/ll_action_bar"
@@ -82,7 +86,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
+                android:layout_marginStart="@dimen/activity_vertical_margin"
                 android:background="@color/material_pink"
                 materialdesign:animate="false"
                 materialdesign:iconDrawable="@drawable/ic_edit" />
@@ -108,9 +113,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
             android:textColor="@color/DarkOrange"
-            android:textSize="@dimen/font_size_header"
+            android:textSize="@dimen/text_size_normal"
             android:visibility="gone" />
 
 
@@ -260,7 +264,7 @@
             android:background="@color/material_blue_light">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/menu_pic"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/selector_header_swtich_grid" />
@@ -271,10 +275,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/material_gray">
+            android:background="@color/material_gray_light">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/menu_pic"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/selector_header_swtich_list" />

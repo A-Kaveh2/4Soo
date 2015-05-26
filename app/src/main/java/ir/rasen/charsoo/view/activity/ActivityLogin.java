@@ -77,7 +77,7 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
                     return;
                 }
                 if (!Validation.validatePassword(ActivityLogin.this, editTextPassword.getText().toString()).isValid()) {
-                    editTextPassword.setErrorC(Validation.getErrorMessage());
+                    editTextPassword.setError(Validation.getErrorMessage());
                     return;
                 }
                 progressDialog.show();

@@ -48,7 +48,8 @@ public class GridViewUser implements IWebserviceResponse {
     FloatButton imageViewFriends, imageViewReviews, imageViewFollowingBusinesses, imageViewEdit;
     View switchGrid, switchList;
     ImageView imageViewSearch, imageViewCover, imageViewHasRequest;
-    TextViewFont textViewFriends, textViewBusinesses, textViewReviews, textViewIdentifier, textViewName, textViewAboutMe;
+    //TextViewFont textViewFriends, textViewBusinesses, textViewReviews,
+    TextViewFont textViewIdentifier, textViewName, textViewAboutMe;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
     Activity activity;
@@ -114,9 +115,9 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewFollowingBusinesses = (FloatButton) viewHeader.findViewById(R.id.imageView_businesses);
             imageViewEdit = (FloatButton) viewHeader.findViewById(R.id.imageView_edit);
 
-            textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
-            textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
-            textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
+            //textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
+            //textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
+            //textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
 
             textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_user_identifier);
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_user_name);
@@ -208,7 +209,7 @@ public class GridViewUser implements IWebserviceResponse {
                     //now it has one column
                     isThreeColumn = false;
                     switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
                 }
             });
             switchGrid.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +219,7 @@ public class GridViewUser implements IWebserviceResponse {
                     gridViewHeader.setAdapter(adapterPostGrid);
                     // now it has three column
                     switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
                 }
             });
 

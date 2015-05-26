@@ -49,7 +49,8 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     FloatButton imageViewFriends, imageViewReviews, imageViewFollowingBusinesses;
     ImageView imageViewCover, imageViewBack;
     View switchGrid, switchList;
-    TextViewFont textViewFriends, textViewBusinesses, textViewReviews,textViewIdentifier,textViewName;
+    //TextViewFont textViewFriends, textViewBusinesses, textViewReviews,
+    TextViewFont textViewIdentifier,textViewName;
     ButtonFont buttonFriendStatus;
     ArrayList<SearchItemPost> searchItemPosts;
     View viewHeader;
@@ -96,9 +97,9 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
 
             switchGrid = viewHeader.findViewById(R.id.btn_switch_grid);
             switchList = viewHeader.findViewById(R.id.btn_switch_list);
-            textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
-            textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
-            textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
+            //textViewBusinesses = (TextViewFont) viewHeader.findViewById(R.id.textView_businesses);
+            //textViewFriends = (TextViewFont) viewHeader.findViewById(R.id.textView_friends);
+            //textViewReviews = (TextViewFont) viewHeader.findViewById(R.id.textView_reviews);
             textViewIdentifier = (TextViewFont) viewHeader.findViewById(R.id.textView_user_identifier);
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_user_name);
             buttonFriendStatus = (ButtonFont) viewHeader.findViewById(R.id.btn_friend_satus);
@@ -214,7 +215,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                     //now it has one column
                     isThreeColumn = false;
                     switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
                 }
             });
             switchGrid.setOnClickListener(new View.OnClickListener() {
@@ -226,7 +227,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                     isThreeColumn = false;
                     // now it has three column
                     switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
                 }
             });
 
