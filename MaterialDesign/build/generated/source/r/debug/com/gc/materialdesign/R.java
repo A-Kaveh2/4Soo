@@ -170,11 +170,10 @@ containing a value of this type.
         public static int dialog_background=0x7f020009;
         public static int float_button1_shadowp=0x7f02000a;
         public static int float_button_shadow1=0x7f02000b;
-        public static int ic_launcher=0x7f02000c;
-        public static int ic_reloj_max=0x7f02000d;
-        public static int shadow_down=0x7f02000e;
-        public static int shadow_right=0x7f02000f;
-        public static int sprite_check=0x7f020010;
+        public static int ic_reloj_max=0x7f02000c;
+        public static int shadow_down=0x7f02000d;
+        public static int shadow_right=0x7f02000e;
+        public static int sprite_check=0x7f02000f;
     }
     public static final class id {
         public static int blue=0x7f060005;

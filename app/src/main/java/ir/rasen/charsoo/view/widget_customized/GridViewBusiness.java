@@ -124,7 +124,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
             textViewName = (TextViewFont) viewHeader.findViewById(R.id.textView_business_name);
 
 
-            textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
+            textViewIdentifier.setText(String.valueOf(business.businessIdentifier)+" "+activity.getString(R.string.followers_num));
             textViewName.setText(String.valueOf(business.name));
             textViewFollowersNumber.setText(String.valueOf(business.followersNumber));
 
@@ -167,10 +167,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                     MyApplication myApplication = (MyApplication) ((Activity) activity).getApplication();
                     myApplication.business = business;
                     activity.startActivity(intent);*/
-
-                    Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-                    intent.putExtra(Params.BUSINESS_ID,business.id);
-                    activity.startActivityForResult(intent, Params.ACTION_ADD_POST);
+                    addNewPost();
                 }
             });
 
@@ -299,5 +296,10 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
 
     }
 
+    private void addNewPost() {
+        Intent intent = new Intent(activity, ActivityPostAddEdit.class);
+        intent.putExtra(Params.BUSINESS_ID,business.id);
+        activity.startActivityForResult(intent, Params.ACTION_ADD_POST);
+    }
 
 }

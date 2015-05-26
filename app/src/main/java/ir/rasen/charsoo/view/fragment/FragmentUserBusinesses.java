@@ -34,13 +34,15 @@ import ir.rasen.charsoo.view.adapter.AdapterUserBusinesses;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 
 public class FragmentUserBusinesses extends Fragment implements IWebserviceResponse {
 
     ArrayList<Business> userBusinesses;
     AdapterUserBusinesses adapterUserBusinesses;
     ListView listView;
-    View view, addBtn;
+    View view;
+    FloatButton addBtn;
     BroadcastReceiver deleteBusinessReciever;
 
     @Override
@@ -74,7 +76,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                         Animation slide = null;
                         slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                                0.0f, Animation.RELATIVE_TO_SELF, +2.0f);
+                                0.0f, Animation.RELATIVE_TO_SELF, +5.0f);
 
                         slide.setDuration(200);
                         slide.setFillAfter(true);
@@ -86,7 +88,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                         Animation slide = null;
                         slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
                                 Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                                +2.0f, Animation.RELATIVE_TO_SELF, 0.0f);
+                                +5.0f, Animation.RELATIVE_TO_SELF, 0.0f);
 
                         slide.setDuration(200);
                         slide.setFillAfter(true);
@@ -99,7 +101,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                 }
             }
         });
-        addBtn = (view.findViewById(R.id.btn_creat_new_business));
+        addBtn = (FloatButton) (view.findViewById(R.id.btn_creat_new_business));
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
