@@ -125,18 +125,19 @@ public class ExpandableImageView extends ImageView {
     }
 
     private void measureWindowSize(Context context) {
-        WindowManager w = ((Activity)context).getWindowManager();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            Point size = new Point();
-            w.getDefaultDisplay().getSize(size);
-            screenWidth = size.x;
-            screenHeight = size.y;
-        } else {
-            Display d = w.getDefaultDisplay();
-            screenWidth = d.getWidth();
-            screenHeight = d.getHeight();
-        }
+            WindowManager w = ((Activity) context).getWindowManager();
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                Point size = new Point();
+                w.getDefaultDisplay().getSize(size);
+                screenWidth = size.x;
+                screenHeight = size.y;
+            } else {
+                Display d = w.getDefaultDisplay();
+                screenWidth = d.getWidth();
+                screenHeight = d.getHeight();
+            }
     }
 
     public interface OnExpandListener {

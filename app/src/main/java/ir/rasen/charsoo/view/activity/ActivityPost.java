@@ -338,7 +338,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         textViewLikeNumber.setText(String.valueOf(post.likeNumber));
         textViewCommentNumber.setText(String.valueOf(post.commentNumber));
         textViewShareNumber.setText(String.valueOf(post.shareNumber));
-        textViewDescription.setText(TextProcessor.removeHashtags(post.description));
+        textViewDescription.setText(post.description);
         textViewTitle.setText(TextProcessor.removeHashtags(post.title));
         if (post.price != null && !post.price.equals("") && !post.price.equals("null")) {
             textViewPrice.setText(post.price);
