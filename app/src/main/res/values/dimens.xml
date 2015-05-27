@@ -33,11 +33,11 @@
 
     <dimen name="font_size_base">9dp</dimen>
 
-    <dimen name="text_size_small">14dp</dimen>
-    <dimen name="text_size_normal">15dp</dimen>
-    <dimen name="text_size_large">16dp</dimen>
-    <dimen name="text_size_larger">20dp</dimen>
-    <dimen name="text_size_largest">24dp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_larger">20sp</dimen>
+    <dimen name="text_size_largest">24sp</dimen>
 
     <dimen name="font_rial">12sp</dimen>
     <dimen name="font_size_adapter_item_title">14sp</dimen>
@@ -94,8 +94,7 @@
     <dimen name="map_height">300dp</dimen>
 
     <dimen name="btn_height">48dp</dimen>
-    <dimen name="btn_height_large">64dp</dimen>
+    <dimen name="btn_height_large">54dp</dimen>
     <dimen name="txt_under_cover_width">100dp</dimen>
-    <dimen name="layout_under_cover_width">78dp</dimen>
 
 </resources>

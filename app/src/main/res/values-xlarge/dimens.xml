@@ -3,28 +3,28 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="font_size_base">18dp</dimen>
-    <dimen name="popup_font">15dp</dimen>
+    <dimen name="font_size_base">18sp</dimen>
+    <dimen name="popup_font">15sp</dimen>
 
-    <dimen name="text_size_small">18dp</dimen>
-    <dimen name="text_size_normal">19dp</dimen>
-    <dimen name="text_size_large">21dp</dimen>
-    <dimen name="text_size_larger">23dp</dimen>
-    <dimen name="text_size_largest">28dp</dimen>
+    <dimen name="text_size_small">18sp</dimen>
+    <dimen name="text_size_normal">19sp</dimen>
+    <dimen name="text_size_large">21sp</dimen>
+    <dimen name="text_size_larger">23sp</dimen>
+    <dimen name="text_size_largest">28sp</dimen>
 
-    <dimen name="font_rial">15dp</dimen>
-    <dimen name="font_size_adapter_item_title">17dp</dimen>
-    <dimen name="font_size_drawer_businesses">21dp</dimen>
-    <dimen name="font_size_drawer_businesses_title">22dp</dimen>
-    <dimen name="font_size_adapter_item_text">23dp</dimen>
-    <dimen name="font_size_header">24dp</dimen>
-    <dimen name="font_size_about_me">21dp</dimen>
-    <dimen name="font_size_register">25dp</dimen>
-    <dimen name="font_size_user_setting_title">26dp</dimen>
-    <dimen name="font_size_action_bar_title">27dp</dimen>
-    <dimen name="font_user_profile_edit_text">28dp</dimen>
-    <dimen name="font_size_login_register_indicator">30dp</dimen>
-    <dimen name="font_size_edit_text">14dp</dimen>
-    <dimen name="font_size_text_view">13dp</dimen>
+    <dimen name="font_rial">15sp</dimen>
+    <dimen name="font_size_adapter_item_title">17sp</dimen>
+    <dimen name="font_size_drawer_businesses">21sp</dimen>
+    <dimen name="font_size_drawer_businesses_title">22sp</dimen>
+    <dimen name="font_size_adapter_item_text">23sp</dimen>
+    <dimen name="font_size_header">24sp</dimen>
+    <dimen name="font_size_about_me">21sp</dimen>
+    <dimen name="font_size_register">25sp</dimen>
+    <dimen name="font_size_user_setting_title">26sp</dimen>
+    <dimen name="font_size_action_bar_title">27sp</dimen>
+    <dimen name="font_user_profile_edit_text">28sp</dimen>
+    <dimen name="font_size_login_register_indicator">30sp</dimen>
+    <dimen name="font_size_edit_text">14sp</dimen>
+    <dimen name="font_size_text_view">13sp</dimen>
 
 </resources>
