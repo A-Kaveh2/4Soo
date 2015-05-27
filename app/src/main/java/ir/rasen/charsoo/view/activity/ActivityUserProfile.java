@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,7 +40,7 @@ import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityProfileUser extends CharsooActivity implements View.OnClickListener, IWebserviceResponse, IChangePassword {
+public class ActivityUserProfile extends CharsooActivity implements View.OnClickListener, IWebserviceResponse, IChangePassword {
 
 
     ProgressDialog progressDialog;
@@ -127,11 +128,11 @@ public class ActivityProfileUser extends CharsooActivity implements View.OnClick
             }
         } else if (result instanceof ResultStatus) {
             //UpdateUserProfileInfo result
-            new DialogMessage(ActivityProfileUser.this, getString(R.string.dialog_success)).show();
+            new DialogMessage(ActivityUserProfile.this, getString(R.string.dialog_success)).show();
             if (userPictureString != null) {
                 Intent intent = new Intent(Params.UPDATE_USER_PROFILE_PCITURE);
                 intent.putExtra(Params.USER_PICUTE,userPictureString);
-                LocalBroadcastManager.getInstance(ActivityProfileUser.this).sendBroadcast(intent);
+                LocalBroadcastManager.getInstance(ActivityUserProfile.this).sendBroadcast(intent);
             }
             onBackPressed();
 
@@ -142,7 +143,7 @@ public class ActivityProfileUser extends CharsooActivity implements View.OnClick
     @Override
     public void getError(Integer errorCode) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityProfileUser.this, ServerAnswer.getError(ActivityProfileUser.this, errorCode)).show();
+        new DialogMessage(ActivityUserProfile.this, ServerAnswer.getError(ActivityUserProfile.this, errorCode)).show();
     }
 
     @Override
@@ -152,50 +153,50 @@ public class ActivityProfileUser extends CharsooActivity implements View.OnClick
                 finish();
                 break;
             case R.id.imageView_camera:
-                new PopupSelectCameraGallery(ActivityProfileUser.this).show();
+                new PopupSelectCameraGallery(ActivityUserProfile.this).show();
                 break;
             case R.id.btn_change_password:
-                new DialogChangePassword(ActivityProfileUser.this, ActivityProfileUser.this).show();
+                new DialogChangePassword(ActivityUserProfile.this, ActivityUserProfile.this).show();
                 break;
             case R.id.btn_clear_search_history:
-                new DialogClearSearchHistoryConfirmation(ActivityProfileUser.this).show();
+                new DialogClearSearchHistoryConfirmation(ActivityUserProfile.this).show();
                 break;
             case R.id.btn_user_profile_submit:
                 if (getUserInfo()) {
                     progressDialog.show();
-                    new UpdateUserProfile(ActivityProfileUser.this, user, ActivityProfileUser.this).execute();
+                    new UpdateUserProfile(ActivityUserProfile.this, user, ActivityUserProfile.this).execute();
                 }
                 break;
         }
     }
 
     private boolean getUserInfo() {
-        if (!Validation.validateName(ActivityProfileUser.this, editTextName.getText().toString()).isValid()) {
+        if (!Validation.validateName(ActivityUserProfile.this, editTextName.getText().toString()).isValid()) {
             editTextName.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateAboutMe(ActivityProfileUser.this, editTextAboutMe.getText().toString()).isValid()) {
+        if (!Validation.validateAboutMe(ActivityUserProfile.this, editTextAboutMe.getText().toString()).isValid()) {
             editTextAboutMe.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateEmail(ActivityProfileUser.this, editTextEmail.getText().toString()).isValid()) {
+        if (!Validation.validateEmail(ActivityUserProfile.this, editTextEmail.getText().toString()).isValid()) {
             editTextEmail.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateDay(ActivityProfileUser.this, editTextDay.getText().toString()).isValid()) {
+        if (!Validation.validateDay(ActivityUserProfile.this, editTextDay.getText().toString()).isValid()) {
             editTextDay.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateMonth(ActivityProfileUser.this, editTextMonth.getText().toString()).isValid()) {
+        if (!Validation.validateMonth(ActivityUserProfile.this, editTextMonth.getText().toString()).isValid()) {
             editTextMonth.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateYear(ActivityProfileUser.this, editTextYear.getText().toString()).isValid()) {
+        if (!Validation.validateYear(ActivityUserProfile.this, editTextYear.getText().toString()).isValid()) {
             editTextYear.setError(Validation.getErrorMessage());
             return false;
         }
         if (spinnerSex.getSelectedItemPosition() == 0) {
-            new DialogMessage(ActivityProfileUser.this, getString(R.string.choose_user_sex)).show();
+            new DialogMessage(ActivityUserProfile.this, getString(R.string.choose_user_sex)).show();
             return false;
         }
         user.name = editTextName.getText().toString();
@@ -260,5 +261,14 @@ public class ActivityProfileUser extends CharsooActivity implements View.OnClick
     @Override
     public void notifyNewPassword(String newPassword) {
         user.password = newPassword;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else
+            return super.onOptionsItemSelected(item);
     }
 }
