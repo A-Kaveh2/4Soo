@@ -25,7 +25,7 @@ import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.view.activity.ActivityMain;
-import ir.rasen.charsoo.view.activity.ActivityProfileUser;
+import ir.rasen.charsoo.view.activity.ActivityUserProfile;
 import ir.rasen.charsoo.view.activity.ActivitySearchUser;
 import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
 import ir.rasen.charsoo.view.activity.ActivityUserFriends;
@@ -151,7 +151,7 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityProfileUser.class);
+                    Intent intent = new Intent(activity, ActivityUserProfile.class);
                     activity.startActivity(intent);
                 }
             });
