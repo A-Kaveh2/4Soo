@@ -62,7 +62,6 @@ public class WebserviceGET {
         HttpResponse httpResponse = null;
         try {
             httpResponse = httpclient.execute(httpGet);
-
         } catch (Exception e) {
 
         }
