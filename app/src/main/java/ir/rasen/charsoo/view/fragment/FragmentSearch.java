@@ -46,6 +46,7 @@ import ir.rasen.charsoo.model.business.GetBusinessGategories;
 import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
 
 public class FragmentSearch extends Fragment implements IWebserviceResponse, ISelectCategory {
+    public static final String TAG="FragmentSearch";
 
     EditTextFont editTextSearch;
     LinearLayout llIndicatorBusinesses, llIndicatorPosts, llIndicatorUsers;
@@ -239,9 +240,9 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }
 
     private boolean search() {

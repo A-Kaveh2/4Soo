@@ -20,7 +20,7 @@ import ir.rasen.charsoo.model.WebserviceGET;
  * Created by android on 12/16/2014.
  */
 public class DeleteReview extends AsyncTask<Void, Void, ResultStatus> {
-    private static final String TAG = "UpdateReview";
+    private static final String TAG = "DeleteReview";
 
     private IWebserviceResponse delegate = null;
     private Review review;
@@ -58,13 +58,13 @@ public class DeleteReview extends AsyncTask<Void, Void, ResultStatus> {
 
         //if webservice.execute() throws exception
         if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
+            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
             return;
         }
         if (serverAnswer.getSuccessStatus()) {
             delegate.getResult(result);
             iReviewChange.notifyDeleteReview(review.id);
         } else
-            delegate.getError(serverAnswer.getErrorCode());
+            delegate.getError(serverAnswer.getErrorCode(),TAG);
     }
 }

@@ -151,8 +151,8 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserFriends.this, ServerAnswer.getError(ActivityUserFriends.this, errorCode)).show();
+        new DialogMessage(ActivityUserFriends.this, ServerAnswer.getError(ActivityUserFriends.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

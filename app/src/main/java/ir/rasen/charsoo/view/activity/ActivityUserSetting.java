@@ -107,8 +107,8 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserSetting.this, ServerAnswer.getError(ActivityUserSetting.this, errorCode)).show();
+        new DialogMessage(ActivityUserSetting.this, ServerAnswer.getError(ActivityUserSetting.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

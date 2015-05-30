@@ -24,7 +24,7 @@ import ir.rasen.charsoo.model.WebserviceGET;
  * Created by android on 12/16/2014.
  */
 public class GetPostAllComments extends AsyncTask<Void, Void, ArrayList<Comment>> {
-    private static final String TAG = "GetAllComments";
+    private static final String TAG = "GetPostAllComments";
     private IWebserviceResponse delegate = null;
     private int postID;
     private int beforThisId;
@@ -77,12 +77,12 @@ public class GetPostAllComments extends AsyncTask<Void, Void, ArrayList<Comment>
 
         //if webservice.execute() throws exception
         if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
+            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
             return;
         }
         if (serverAnswer.getSuccessStatus())
             delegate.getResult(result);
         else
-            delegate.getError(serverAnswer.getErrorCode());
+            delegate.getError(serverAnswer.getErrorCode(),TAG);
     }
 }

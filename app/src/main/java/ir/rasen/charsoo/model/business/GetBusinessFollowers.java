@@ -1,6 +1,7 @@
 package ir.rasen.charsoo.model.business;
 
 import android.content.Context;
+import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -68,12 +69,12 @@ public class GetBusinessFollowers extends AsyncTask<Void, Void, ArrayList<BaseAd
 
         //if webservice.execute() throws exception
         if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
+            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
             return;
         }
         if (serverAnswer.getSuccessStatus())
             delegate.getResult(result);
         else
-            delegate.getError(serverAnswer.getErrorCode());
+            delegate.getError(serverAnswer.getErrorCode(), TAG);
     }
 }

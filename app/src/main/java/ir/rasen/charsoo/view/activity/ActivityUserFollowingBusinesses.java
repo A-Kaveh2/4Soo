@@ -152,8 +152,8 @@ public class ActivityUserFollowingBusinesses extends CharsooActivity implements 
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserFollowingBusinesses.this, ServerAnswer.getError(ActivityUserFollowingBusinesses.this, errorCode)).show();
+        new DialogMessage(ActivityUserFollowingBusinesses.this, ServerAnswer.getError(ActivityUserFollowingBusinesses.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

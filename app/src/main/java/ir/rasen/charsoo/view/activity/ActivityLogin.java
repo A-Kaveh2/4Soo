@@ -125,8 +125,8 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityLogin.this, ServerAnswer.getError(ActivityLogin.this, errorCode)).show();
+        new DialogMessage(ActivityLogin.this, ServerAnswer.getError(ActivityLogin.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

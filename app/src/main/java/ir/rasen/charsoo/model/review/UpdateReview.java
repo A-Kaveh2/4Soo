@@ -56,13 +56,13 @@ public class UpdateReview extends AsyncTask<Void, Void, ResultStatus> {
     protected void onPostExecute(ResultStatus result) {
 
         if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
+            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
             return;
         }
         if (serverAnswer.getSuccessStatus()) {
             delegate.getResult(result);
             iReviewChange.notifyUpdateReview(review);
         } else
-            delegate.getError(serverAnswer.getErrorCode());
+            delegate.getError(serverAnswer.getErrorCode(),TAG);
     }
 }

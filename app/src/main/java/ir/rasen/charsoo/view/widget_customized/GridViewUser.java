@@ -25,7 +25,7 @@ import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.view.activity.ActivityMain;
-import ir.rasen.charsoo.view.activity.ActivityProfileUser;
+import ir.rasen.charsoo.view.activity.ActivityUserProfile;
 import ir.rasen.charsoo.view.activity.ActivitySearchUser;
 import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
 import ir.rasen.charsoo.view.activity.ActivityUserFriends;
@@ -40,6 +40,8 @@ import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
  * Created by android on 3/14/2015.
  */
 public class GridViewUser implements IWebserviceResponse {
+    public static final String TAG="GridViewUser";
+
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
@@ -152,7 +154,7 @@ public class GridViewUser implements IWebserviceResponse {
             imageViewEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(activity, ActivityProfileUser.class);
+                    Intent intent = new Intent(activity, ActivityUserProfile.class);
                     activity.startActivity(intent);
                 }
             });
@@ -313,8 +315,8 @@ public class GridViewUser implements IWebserviceResponse {
     }
 
     @Override
-    public void getError(Integer errorCode) {
-        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode)).show();
+    public void getError(Integer errorCode,String callerStringID) {
+        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode,callerStringID+">"+TAG)).show();
     }
 
     public void hideLoader() {

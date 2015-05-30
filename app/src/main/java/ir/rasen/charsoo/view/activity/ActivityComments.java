@@ -170,8 +170,8 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityComments.this, ServerAnswer.getError(ActivityComments.this, errorCode)).show();
+        new DialogMessage(ActivityComments.this, ServerAnswer.getError(ActivityComments.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

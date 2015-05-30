@@ -33,7 +33,6 @@ import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActiv
 
 
 public class ActivityBusiness extends NoActionBarActivity implements ISelectBusiness, IWebserviceResponse, IPullToRefresh {
-
     ProgressDialog progressDialog;
     int selectedBusinessId, businessProfilePictureId;
     HFGridView gridView;
@@ -114,9 +113,9 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBusiness.this, ServerAnswer.getError(ActivityBusiness.this, errorCode)).show();
+        new DialogMessage(ActivityBusiness.this, ServerAnswer.getError(ActivityBusiness.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     @Override

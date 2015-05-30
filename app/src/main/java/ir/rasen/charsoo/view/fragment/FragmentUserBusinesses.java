@@ -37,6 +37,7 @@ import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 
 public class FragmentUserBusinesses extends Fragment implements IWebserviceResponse {
+    public static final String TAG="FragmentUserBusinesses";
 
     ArrayList<Business> userBusinesses;
     AdapterUserBusinesses adapterUserBusinesses;
@@ -247,8 +248,8 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
     }
 
     @Override
-    public void getError(Integer errorCode) {
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+    public void getError(Integer errorCode,String callerStringID) {
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }
 
 

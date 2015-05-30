@@ -145,8 +145,8 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserFriendRequests.this, ServerAnswer.getError(ActivityUserFriendRequests.this, errorCode)).show();
+        new DialogMessage(ActivityUserFriendRequests.this, ServerAnswer.getError(ActivityUserFriendRequests.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

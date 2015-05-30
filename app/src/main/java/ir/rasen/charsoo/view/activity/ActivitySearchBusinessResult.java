@@ -159,9 +159,9 @@ public class ActivitySearchBusinessResult extends CharsooActivity implements IWe
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivitySearchBusinessResult.this, ServerAnswer.getError(ActivitySearchBusinessResult.this, errorCode)).show();
+        new DialogMessage(ActivitySearchBusinessResult.this, ServerAnswer.getError(ActivitySearchBusinessResult.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
 }

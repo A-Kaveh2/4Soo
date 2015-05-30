@@ -225,4 +225,9 @@ public class Params {
     public static enum UpdateTimeLineType{SHARE,CANCEL_SHARE,LIKE,CANCEL_LIKE,REPORT,ADD_COMMENT,DELETE_COMMENT,UPDATE_COMMENT};
 
 
+    /**
+     * Created by MHFathi
+     */
+    public static final boolean isTestVersion=true;
+
 }

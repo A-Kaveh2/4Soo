@@ -35,11 +35,15 @@ import ir.rasen.charsoo.model.post.GetTimeLinePosts;
 
 public class FragmentHome extends Fragment implements IWebserviceResponse, IPullToRefresh, IGetNewTimeLinePost {
 
+    public static final String TAG="FragmentHome";
+
     ProgressDialog progressDialog;
     AdapterPostTimeLine adapterPostTimeLine;
     ListView listView;
     ArrayList<Post> results;
     ArrayList<Post> sampleResults;
+
+
 
 
     //pull_to_refresh_lib
@@ -58,6 +62,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,
                 container, false);
+
 
         try {
             sampleResults = TestUnit.getPostAdapterListItems();
@@ -177,9 +182,9 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }
 
     @Override

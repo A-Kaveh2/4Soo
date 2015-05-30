@@ -324,9 +324,9 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityPost.this, ServerAnswer.getError(ActivityPost.this, errorCode)).show();
+        new DialogMessage(ActivityPost.this, ServerAnswer.getError(ActivityPost.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     public void initialize() {
@@ -343,7 +343,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         if (post.price != null && !post.price.equals("") && !post.price.equals("null")) {
             textViewPrice.setText(post.price);
             llPriceSection.setVisibility(View.VISIBLE);
-        } else
+        } else//dfadf
             llPriceSection.setVisibility(View.GONE);
         if (post.code != null && !post.code.equals("") && !post.code.equals("null")) {
             textViewCode.setText(post.code);

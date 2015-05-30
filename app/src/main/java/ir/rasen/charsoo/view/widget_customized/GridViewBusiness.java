@@ -37,6 +37,8 @@ import ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView;
  * Created by android on 3/14/2015.
  */
 public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
+    public static final String TAG="GridViewBusiness";
+
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostBusiness adapterPostBusiness;
@@ -278,8 +280,8 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     }
 
     @Override
-    public void getError(Integer errorCode) {
-        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode)).show();
+    public void getError(Integer errorCode,String callerStringID) {
+        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode,callerStringID+">"+TAG)).show();
     }
 
     @Override

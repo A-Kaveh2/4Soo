@@ -127,8 +127,8 @@ public class ActivityCommentsNotifications extends CharsooActivity implements IW
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityCommentsNotifications.this, ServerAnswer.getError(ActivityCommentsNotifications.this, errorCode)).show();
+        new DialogMessage(ActivityCommentsNotifications.this, ServerAnswer.getError(ActivityCommentsNotifications.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

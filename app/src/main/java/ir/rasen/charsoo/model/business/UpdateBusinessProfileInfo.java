@@ -17,7 +17,7 @@ import ir.rasen.charsoo.model.WebservicePOST;
  * Created by android on 12/16/2014.
  */
 public class UpdateBusinessProfileInfo extends AsyncTask<Void, Void, ResultStatus> {
-    private static final String TAG = "UpdateProfileInfo";
+    private static final String TAG = "UpdateBusinessProfileInfo";
 
     private IWebserviceResponse delegate = null;
     private Business business;
@@ -78,12 +78,12 @@ public class UpdateBusinessProfileInfo extends AsyncTask<Void, Void, ResultStatu
 
         //if webservice.execute() throws exception
         if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
+            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
             return;
         }
         if (serverAnswer.getSuccessStatus())
             delegate.getResult(result);
         else
-            delegate.getError(serverAnswer.getErrorCode());
+            delegate.getError(serverAnswer.getErrorCode(),TAG);
     }
 }

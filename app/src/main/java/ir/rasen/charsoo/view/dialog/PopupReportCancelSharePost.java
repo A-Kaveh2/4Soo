@@ -92,7 +92,7 @@ public class PopupReportCancelSharePost extends MyPopup implements IWebserviceRe
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
 
     }
 }

@@ -155,8 +155,8 @@ public class ActivityUserRegister extends CharsooActivity implements View.OnClic
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserRegister.this, ServerAnswer.getError(ActivityUserRegister.this, errorCode)).show();
+        new DialogMessage(ActivityUserRegister.this, ServerAnswer.getError(ActivityUserRegister.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

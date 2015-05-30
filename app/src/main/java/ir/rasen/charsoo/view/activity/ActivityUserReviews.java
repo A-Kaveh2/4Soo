@@ -145,9 +145,9 @@ public class ActivityUserReviews extends CharsooActivity implements IWebserviceR
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserReviews.this, ServerAnswer.getError(ActivityUserReviews.this, errorCode)).show();
+        new DialogMessage(ActivityUserReviews.this, ServerAnswer.getError(ActivityUserReviews.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
 }
