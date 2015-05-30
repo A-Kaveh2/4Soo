@@ -63,7 +63,7 @@ public class WebserviceGET {
         try {
             httpResponse = httpclient.execute(httpGet);
         } catch (Exception e) {
-            Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+
         }
         return ServerAnswer.getList(httpResponse);
     }
