@@ -152,6 +152,7 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
+        pullToRefreshListView.onRefreshComplete();
         if (errorCode != 18)
             new DialogMessage(ActivityBusinessReviews.this, ServerAnswer.getError(ActivityBusinessReviews.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }

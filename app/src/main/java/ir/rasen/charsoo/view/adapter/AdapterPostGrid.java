@@ -58,7 +58,7 @@ public class AdapterPostGrid extends BaseAdapter {
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         ImageView imageView = null;
-        if (gridView == null) {
+       /* if (gridView == null) {
             try {
                 gridView = (com.handmark.pulltorefresh.library.HFGridView) parent;
                 gridView.setVerticalSpacing(3);
@@ -68,7 +68,7 @@ public class AdapterPostGrid extends BaseAdapter {
 
             }
 
-        }
+        }*/
         if (convertView == null) {
             imageView = new ImageView(activity);
             imageView.setLayoutParams(new GridView.LayoutParams((screedWidth / 3), (screedWidth / 3)));

@@ -60,7 +60,7 @@
                 android:layout_marginTop="30dp"
                 android:nextFocusDown="@+id/edt_price" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widget_customized.EditTextFontPasteDisabled
                 android:id="@+id/edt_price"
                 android:layout_width="match_parent"
                 android:hint="@string/price_tooman"

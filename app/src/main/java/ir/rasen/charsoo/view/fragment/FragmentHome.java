@@ -183,6 +183,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
 
     @Override
     public void getError(Integer errorCode,String callerStringID) {
+        pullToRefreshListView.onRefreshComplete();
         progressDialog.dismiss();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }

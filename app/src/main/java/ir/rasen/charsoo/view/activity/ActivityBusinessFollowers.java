@@ -151,6 +151,7 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
+        pullToRefreshListView.onRefreshComplete();
         new DialogMessage(ActivityBusinessFollowers.this, ServerAnswer.getError(ActivityBusinessFollowers.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }
