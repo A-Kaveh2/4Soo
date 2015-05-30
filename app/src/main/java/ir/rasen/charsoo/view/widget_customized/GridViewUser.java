@@ -273,14 +273,25 @@ public class GridViewUser implements IWebserviceResponse {
             //}
         }
 
-        if(isThreeColumn) {
+        /*if(isThreeColumn) {
             prepareGridThreeColumn(gridViewHeader);
             gridViewHeader.setAdapter(adapterPostGrid);
         } else {
-            prepareGridThreeColumn(gridViewHeader);
+            gridViewHeader.setNumColumns(1);
             gridViewHeader.setAdapter(adapterPostShared);
-        }
+        }*/
+        gridViewHeader.setNumColumns(1);
+        gridViewHeader.setAdapter(adapterPostShared);
+        //now it has one column
+        isThreeColumn = false;
+        switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+        switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
 
+        prepareGridThreeColumn(gridViewHeader);
+        gridViewHeader.setAdapter(adapterPostGrid);
+        // now it has three column
+        switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+        switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
     }
 
     // LOAD MORE DATA

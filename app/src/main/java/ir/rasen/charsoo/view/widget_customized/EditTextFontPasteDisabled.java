@@ -7,16 +7,13 @@ import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-public class EditTextFont extends EditText {
+public class EditTextFontPasteDisabled extends EditText {
 
     private Drawable drawableRight;
     private Drawable drawableLeft;
@@ -27,22 +24,30 @@ public class EditTextFont extends EditText {
 
     boolean errorSet=false;
 
-    public EditTextFont(Context context, AttributeSet attrs, int defStyle) {
+    public EditTextFontPasteDisabled(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
-    public EditTextFont(Context context, AttributeSet attrs) {
+    public EditTextFontPasteDisabled(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public EditTextFont(Context context) {
+    public EditTextFontPasteDisabled(Context context) {
         super(context);
         init();
     }
 
-
+    boolean canPaste()
+    {
+        return false;
+    }
+    @Override
+    public boolean isSuggestionsEnabled()
+    {
+        return false;
+    }
 
     private void init() {
         if (!isInEditMode()) {

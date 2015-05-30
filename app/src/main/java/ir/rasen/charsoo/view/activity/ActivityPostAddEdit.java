@@ -33,13 +33,15 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widget_customized.EditTextFontPasteDisabled;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
 public class ActivityPostAddEdit extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {
 
 
-    EditTextFont editTextTitle, editTextDescription, editTextPrice, editTextCode, editTextHashtags;
+    EditTextFont editTextTitle, editTextDescription, editTextCode, editTextHashtags;
+    EditTextFontPasteDisabled editTextPrice;
     ProgressDialog progressDialog;
     ImageView imageViewPostPicture;
     String filePath, postPictureString;
@@ -72,7 +74,7 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
         editTextTitle = (EditTextFont) findViewById(R.id.edt_title);
         editTextDescription = (EditTextFont) findViewById(R.id.edt_description);
         editTextHashtags = (EditTextFont) findViewById(R.id.edt_hashtags);
-        editTextPrice = (EditTextFont) findViewById(R.id.edt_price);
+        editTextPrice = (EditTextFontPasteDisabled) findViewById(R.id.edt_price);
         editTextCode = (EditTextFont) findViewById(R.id.edt_code);
 
         if (postId != 0) {
