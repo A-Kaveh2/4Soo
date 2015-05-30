@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import ir.rasen.charsoo.R;
 
@@ -152,10 +153,10 @@ public class PersianDate {
         return monthStringList;
     }
 
-    public static String getCreationDate(Context context, int hours) {
+    public static String getCreationDate(Context context, Date date) {
         Resources resources = context.getResources();
         String creationDate = "";
-
+        int hours = 0;
         if (hours < 0) {
             //this is the future!
             creationDate = resources.getString(R.string.err_creation_date_invalid);

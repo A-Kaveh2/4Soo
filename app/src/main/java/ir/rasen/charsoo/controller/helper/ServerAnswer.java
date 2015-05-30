@@ -146,7 +146,8 @@ public class ServerAnswer {
         int errorCode = NONE_DEFINED_ERROR;
         if (errorJsonObject != null) {
             try {
-                errorCode = Integer.valueOf(errorJsonObject.getString(Params.ERROR_CODE));
+                if (!errorJsonObject.getString(Params.ERROR_CODE).equals("null"))
+                    errorCode = Integer.valueOf(errorJsonObject.getString(Params.ERROR_CODE));
             } catch (Exception e) {
 
             }

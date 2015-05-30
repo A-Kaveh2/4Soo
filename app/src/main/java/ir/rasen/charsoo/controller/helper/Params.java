@@ -85,6 +85,7 @@ public class Params {
     public static String PASSWORD = "Password";
     public static String PASSWORD_NEW = "PasswordNew";
     public static String USER_ID = "UserId";
+    public static String USER_UNDER_LINE_ID = "User_Id";
     public static String USERS_BUSINESS = "userBusiness";
     public static String USERS_SEEN_NOTIFICATIONS_PREFERENCE_NAME ="userSeenNotifications";
     public static String NOTIFICATION_ID = "NotificationId";
@@ -132,6 +133,7 @@ public class Params {
     public static String REQUESTED_USER_ID= "RequestedId";
     public static String ANSWER= "Answer";
     public static String BUSINESS_ID= "BusinessId";
+    public static String BUSINESS_UNDER_LINE_ID= "Business_Id";
     public static String BUSINESS_IDENTIFIER= "BusinessIdentifier";
     public static String BUSINESS_USER_NAME= "BusinessUserName";
     public static String REVIEW_ID= "ReviewId";
