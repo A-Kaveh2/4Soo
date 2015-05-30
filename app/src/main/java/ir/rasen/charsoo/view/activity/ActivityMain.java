@@ -34,7 +34,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     PopupWindow popupWindow;
 
     ImageView imageViewHome, imageViewSearch, imageViewUser, imageViewBusinesses;
-    boolean footerHome=true, footerUser, footerSearch, footerBusiness;
+    boolean footerHome=true, footerUser, footerSearch, footerBusiness, popupWindowDS=false;
 
     RelativeLayout rlHome, rlSearch, rlUser, rlBusinesses;
     FragmentManager fm;
@@ -502,6 +502,19 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
 
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.setOutsideTouchable(true);
+        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                popupWindowDS=true;
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        popupWindowDS = false;
+                    }
+                }, 100);
+            }
+        });
         popupWindow.setWindowLayoutMode(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
 
@@ -511,7 +524,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
         // SHOW POPUP
         if(popupWindow==null)
             initPopupWindowUser();
-        if(!popupWindow.isShowing())
+        if(!popupWindow.isShowing() && !popupWindowDS)
             popupWindow.showAsDropDown(view);
     }
 

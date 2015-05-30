@@ -76,11 +76,11 @@ public class DialogAddReview extends MyDialogOkCancel {
             @Override
             public void onClick(View view) {
                 if (et_review.length() < Params.COMMENT_TEXT_MIN_LENGTH) {
-                    et_review.setErrorC(context.getString(R.string.comment_is_too_short));
+                    et_review.setError(context.getString(R.string.comment_is_too_short));
                     return;
                 }
                 if (et_review.length() > Params.COMMENT_TEXT_MAX_LENGTH) {
-                    et_review.setErrorC(context.getString(R.string.enter_is_too_long));
+                    et_review.setError(context.getString(R.string.enter_is_too_long));
                     return;
                 }
 

@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -9,13 +8,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.model.comment.UpdateComment;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.comment.UpdateComment;
 
 
 public class DialogEditComment extends MyDialogOkCancel {
@@ -61,11 +59,11 @@ public class DialogEditComment extends MyDialogOkCancel {
             @Override
             public void onClick(View view) {
                 if (et_comment.length() < Params.COMMENT_TEXT_MIN_LENGTH) {
-                    et_comment.setErrorC(context.getString(R.string.comment_is_too_short));
+                    et_comment.setError(context.getString(R.string.comment_is_too_short));
                     return;
                 }
                 if (et_comment.length() > Params.COMMENT_TEXT_MAX_LENGTH) {
-                    et_comment.setErrorC(context.getString(R.string.enter_is_too_long));
+                    et_comment.setError(context.getString(R.string.enter_is_too_long));
                     return;
                 }
                 comment.text = et_comment.getText().toString();

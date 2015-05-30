@@ -7,16 +7,11 @@ import android.os.Build;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import ir.rasen.charsoo.R;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 public class EditTextFont extends EditText {
 
@@ -26,6 +21,8 @@ public class EditTextFont extends EditText {
     private Drawable drawableBottom;
 
     int actionX, actionY;
+
+    boolean errorSet=false;
 
     public EditTextFont(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -81,7 +78,18 @@ public class EditTextFont extends EditText {
         super.onTextChanged(text, start, lengthBefore, lengthAfter);
     }
 
-    public void setErrorC(String error) {
+    @Override
+    public void setError(CharSequence error) {
+        super.setError(error);
+        if(errorSet) {
+            errorSet=false;
+            return;
+        }
+        errorSet=true;
+        if(error!=null)
+            YoYo.with(Techniques.Shake)
+                .duration(700)
+                .playOn(this);
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD) {
             ForegroundColorSpan fgcspan = new ForegroundColorSpan(getResources().getColor(android.R.color.black));
             SpannableStringBuilder ssbuilder = new SpannableStringBuilder(error);
@@ -90,7 +98,7 @@ public class EditTextFont extends EditText {
         } else {
             setError(error);
         }
+        requestFocus();
     }
-
 
 }

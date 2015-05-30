@@ -179,7 +179,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                     //now it has one column
                     isThreeColumn = false;
                     switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
                 }
             });
             switchGrid.setOnClickListener(new View.OnClickListener() {
@@ -190,7 +190,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                     // now it has three column
                     isThreeColumn = true;
                     switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray));
+                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
                 }
             });
             llBack.setOnClickListener(new View.OnClickListener() {

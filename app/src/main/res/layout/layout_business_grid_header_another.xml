@@ -16,6 +16,10 @@
             android:id="@+id/imageView_cover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageView_cover"/>
 
         <LinearLayout
             android:id="@+id/ll_action_bar"
@@ -56,14 +60,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_footer_blank"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/header_switch_footer_hight_halft"
-                android:layout_alignParentBottom="true"
-                android:background="@color/White"
-                android:orientation="horizontal" />
-
         </LinearLayout>
 
 
@@ -78,7 +74,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/activity_vertical_margin">
 
             <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
                 android:id="@+id/btn_follow_satus"
@@ -88,7 +85,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:background="@color/material_green"
+                android:background="@color/material_blue"
                 android:textColor="@color/white"
                 android:paddingLeft="@dimen/activity_vertical_margin_1of4"
                 android:paddingRight="@dimen/activity_vertical_margin_1of4"
@@ -98,8 +95,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/btn_follow_satus"
+                android:layout_toStartOf="@+id/btn_follow_satus"
                 android:orientation="vertical"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_centerVertical="true">
 
                 <ir.rasen.charsoo.view.widget_customized.TextViewFont
@@ -115,10 +114,9 @@
                     android:id="@+id/textView_business_identifier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:text="@string/businesses"
                     android:textColor="@color/material_gray"
-                    android:textSize="@dimen/font_size_header"
+                    android:textSize="@dimen/text_size_normal"
                     android:layout_gravity="end"/>
             </LinearLayout>
         </RelativeLayout>
@@ -233,7 +231,7 @@
             android:background="@color/material_blue_light">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/menu_pic"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/selector_header_swtich_grid" />
@@ -244,10 +242,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/material_gray">
+            android:background="@color/material_gray_light">
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/menu_pic"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/selector_header_swtich_list" />

@@ -67,7 +67,7 @@ public class FragmentUserLogin extends Fragment implements IWebserviceResponse {
             return;
         }
         if (!Validation.validatePassword(getActivity(), editTextPassword.getText().toString()).isValid()) {
-            editTextPassword.setErrorC(Validation.getErrorMessage());
+            editTextPassword.setError(Validation.getErrorMessage());
             return;
         }
         progressDialog.show();
