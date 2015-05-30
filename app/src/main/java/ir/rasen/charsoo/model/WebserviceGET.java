@@ -61,9 +61,7 @@ public class WebserviceGET {
 
         HttpResponse httpResponse = null;
         try {
-            Toast.makeText(context,"executelist",Toast.LENGTH_LONG);
             httpResponse = httpclient.execute(httpGet);
-
         } catch (Exception e) {
             Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
         }
