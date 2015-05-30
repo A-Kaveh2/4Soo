@@ -83,8 +83,7 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
             new GetPost(ActivityPostAddEdit.this, LoginInfo.getUserId(ActivityPostAddEdit.this), businessId, postId, Post.GetPostType.BUSINESS, ActivityPostAddEdit.this).execute();
             imageViewPostPicture.setEnabled(false);
             setTitle(getResources().getString(R.string.edit_product));
-        }
-        else
+        } else
             setTitle(getString(R.string.new_product));
 
         editTextPrice.addTextChangedListener(new TextWatcher() {
@@ -106,8 +105,8 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
                     counter++;
                 }*/
 
-                String price = editTextPrice.getText().toString().replace(",","");
-                if(price.equals(""))
+                String price = editTextPrice.getText().toString().replace(",", "");
+                if (price.equals(""))
                     return;
                 double amount = Double.parseDouble(price);
                 DecimalFormat formatter = new DecimalFormat("#,###");
@@ -248,11 +247,14 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
                 downloadImages.download(post.pictureId, Image_M.MEDIUM, Image_M.ImageType.POST, imageViewPostPicture, false);
 
                 editTextDescription.setText(post.description);
-                String hashtags = "";
-                for (String hashtag : post.hashtagList) {
-                    hashtags += "#" + hashtag;
+                if (post.hashtagList.size() != 0) {
+                    String hashtags = "";
+                    for (String hashtag : post.hashtagList) {
+                        if (!hashtag.equals(""))
+                            hashtags += "#" + hashtag;
+                    }
+                    editTextHashtags.setText(hashtags + " ");
                 }
-                editTextHashtags.setText(hashtags + " ");
 
                 editTextPrice.setText(post.price);
                 editTextCode.setText(post.code);
@@ -269,8 +271,8 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
     }
 
     @Override
-    public void getError(Integer errorCode,String callerStringID) {
+    public void getError(Integer errorCode, String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityPostAddEdit.this, ServerAnswer.getError(ActivityPostAddEdit.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+        new DialogMessage(ActivityPostAddEdit.this, ServerAnswer.getError(ActivityPostAddEdit.this, errorCode, callerStringID + ">" + this.getLocalClassName())).show();
     }
 }

@@ -21,6 +21,7 @@ public class MyApplication extends Application {
     public WorkTime workTime;
     public Post post;
     public ArrayList<BaseAdapterItem> searchUserResult;
+    public ArrayList<BaseAdapterItem> newFriends;
     public ArrayList<User.UserBusinesses> userBusinesses;
     public boolean isHomeCreated, isSearchCreated, isUserCreated;
     public ArrayList<Post> homePosts;
@@ -38,6 +39,7 @@ public class MyApplication extends Application {
         workTime = new WorkTime();
         post = new Post();
         searchUserResult = new ArrayList<>();
+        newFriends = new ArrayList<>();
         userBusinesses = new ArrayList<>();
         Alarm_M alarm_m = new Alarm_M();
         alarm_m.set(getApplicationContext());

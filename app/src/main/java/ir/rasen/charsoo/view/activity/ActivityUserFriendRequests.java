@@ -21,6 +21,7 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.model.friend.GetUserFriendRequests;
 import ir.rasen.charsoo.view.adapter.AdapterUserFriendshipRequest;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
@@ -144,10 +145,27 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
         }
     }
 
+
+
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
         pullToRefreshListView.onRefreshComplete();
         new DialogMessage(ActivityUserFriendRequests.this, ServerAnswer.getError(ActivityUserFriendRequests.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = getIntent();
+        if(adapterFriendshipRequest.getAcceptedUsers().size() != 0) {
+            ((MyApplication) getApplication()).newFriends = adapterFriendshipRequest.getAcceptedUsers();
+            i.putExtra(Params.NEW_FIREND, true);
+        }
+        else {
+            ((MyApplication) getApplication()).newFriends = new ArrayList<>();
+            i.putExtra(Params.NEW_FIREND, false);
+        }
+        setResult(RESULT_OK, i);
+        finish();
     }
 }

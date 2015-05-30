@@ -1,5 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.model.friend.GetUserFriends;
 import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
@@ -90,7 +92,7 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
             public void onClick(View view) {
                 Intent intent1 = new Intent(ActivityUserFriends.this, ActivityUserFriendRequests.class);
                 intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
-                startActivity(intent1);
+                startActivityForResult(intent1, Params.ACTION_NEW_FRIENDS);
             }
         });
 
@@ -155,5 +157,18 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
         progressDialog.dismiss();
         pullToRefreshListView.onRefreshComplete();
         new DialogMessage(ActivityUserFriends.this, ServerAnswer.getError(ActivityUserFriends.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == Params.ACTION_NEW_FRIENDS) {
+                if(data.getExtras().getBoolean(Params.NEW_FIREND)){
+                    friends.addAll(0,((MyApplication)getApplication()).newFriends);
+                    adapterFriends.notifyDataSetChanged();
+                }
+            }
+        }
     }
 }

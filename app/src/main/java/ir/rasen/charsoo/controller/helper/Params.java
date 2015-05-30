@@ -77,7 +77,7 @@ public class Params {
     public static String CLOSED_BEFORE_RESPONSE = "closed before webservice response...";
 
     public static String NOTIFICATION = "notification";
-
+    public static String NEW_FIREND= "newFriend";
     /**
      * Created by android on 12/15/2014.
      */
@@ -219,6 +219,7 @@ public class Params {
     public static int ACTION_EDIT_BUSINESS = 1009;
     public static int ACTION_ACTIVITY_POST = 1010;
     public static int ACTION_EDIT_POST = 1011;
+    public static int ACTION_NEW_FRIENDS = 1012;
 
 
 
