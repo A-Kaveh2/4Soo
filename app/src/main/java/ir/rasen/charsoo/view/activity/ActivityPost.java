@@ -263,6 +263,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
 
 
         progressDialog.show();
+        int iiid=LoginInfo.getUserId(this);
         new GetPost(this, LoginInfo.getUserId(this), businessId, postId, getPostType, this).execute();
 
         if (getPostType == Post.GetPostType.BUSINESS) {

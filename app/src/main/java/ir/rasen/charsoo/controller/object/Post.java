@@ -105,8 +105,17 @@ public class Post {
         Post post = new Post();
         post.id = jsonObject.getInt(Params.POST_ID);
         post.businessIdentifier = jsonObject.getString(Params.BUSINESS_ID);
-        post.businessID = jsonObject.getInt(Params.BUSINESS_UNDER_LINE_ID);
-        post.businessUserName = jsonObject.getString(Params.BUSINESS_USER_NAME);
+        try{ //mhfathi
+            post.businessID = jsonObject.getInt(Params.BUSINESS_UNDER_LINE_ID);
+        }catch (Exception e){
+            post.businessID = jsonObject.getInt(Params.BUSINESS_ID);
+        }
+        try{ //mhfathi
+            post.businessUserName = jsonObject.getString(Params.BUSINESS_USER_NAME);
+        }catch (Exception e){
+
+        }
+
         post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
         post.title = jsonObject.getString(Params.TITLE);
 
