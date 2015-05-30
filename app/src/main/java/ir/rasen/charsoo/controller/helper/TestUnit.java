@@ -163,7 +163,7 @@ public class TestUnit {
         //announcements
         Post post7 = new Post();
         post7.businessProfilePictureId = 2022;
-        post7.creationDate = 1;
+        //post7.creationDate = 1;
         post7.businessUserName = "کسب و کار 7";
         post7.businessID = 1;
         post7.userId = 3;
@@ -172,7 +172,7 @@ public class TestUnit {
 
         Post post8 = new Post();
         post8.businessProfilePictureId = 2022;
-        post8.creationDate = 1;
+        //post8.creationDate = 1;
         post8.businessUserName = "کسب و کار 7";
         post8.businessID = 1;
         post8.userId = 4;
@@ -189,7 +189,7 @@ public class TestUnit {
             post.businessID = 1;
             post.type = Post.Type.Complete;
             post.pictureId = 2022;
-            post.creationDate = -10;
+            //post.creationDate = -10;
             post.likeNumber = 325485;
             post.commentNumber = 6529851;
             post.shareNumber = 6325985;
@@ -271,7 +271,7 @@ public class TestUnit {
             post.businessID = 1;
             post.type = Post.Type.Complete;
             post.pictureId = 2022;
-            post.creationDate = -10;
+            //post.creationDate = -10;
             post.likeNumber = 325485;
             post.commentNumber = 6529851;
             post.shareNumber = 6325985;

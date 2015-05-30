@@ -50,8 +50,14 @@ public class GetTimeLinePosts extends AsyncTask<Void, Void, ArrayList<Post>> {
                 JSONArray jsonArray = serverAnswer.getResultList();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    list.add(Post.getFromJSONObjectTimeLine(jsonObject));
+                    try {
+                        list.add(Post.getFromJSONObjectTimeLine(jsonObject));
+                    }
+                    catch (Exception e){
+                        Log.e(TAG, e.getMessage());
+                    }
                 }
+
                 return list;
             }
 
