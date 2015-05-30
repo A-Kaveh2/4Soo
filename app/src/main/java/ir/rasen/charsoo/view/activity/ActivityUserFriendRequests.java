@@ -145,10 +145,7 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
         }
     }
 
-    @Override
-    public void getError(Integer errorCode) {
 
-    }
 
     @Override
     public void getError(Integer errorCode,String callerStringID) {
