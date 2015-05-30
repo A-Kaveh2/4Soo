@@ -21,8 +21,8 @@ public class AlarmReciever extends BroadcastReceiver implements IWebserviceRespo
     @Override
     public void onReceive(Context context, Intent intent) {
         this.context = context;
-        if (LoginInfo.getUserId(context) != 0)
-            new GetLastCommentNotification(context, LoginInfo.getUserId(context), AlarmReciever.this).execute();
+//        if (LoginInfo.getUserId(context) != 0)
+//            new GetLastCommentNotification(context, LoginInfo.getUserId(context), AlarmReciever.this).execute();
     }
 
     @Override

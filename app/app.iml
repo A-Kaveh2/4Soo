@@ -71,6 +71,8 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/dex-cache" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.daimajia.androidanimations/library/1.1.3/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.daimajia.easing/library/1.0.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.google.android.gms/play-services/6.5.87/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/se.emilsjolander/stickylistheaders/2.5.2/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
@@ -90,18 +92,13 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 22 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-<<<<<<< HEAD
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
-=======
-    <orderEntry type="library" exported="" name="appcompat-v7-22.1.1" level="project" />
-    <orderEntry type="library" exported="" name="play-services-6.5.87" level="project" />
-    <orderEntry type="library" exported="" name="stickylistheaders-2.5.2" level="project" />
->>>>>>> ef3436d99dd5085f828be8ac3395301e7c90a26c
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
-    <orderEntry type="library" exported="" name="joda-time-2.7" level="project" />
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="stickylistheaders-2.5.2" level="project" />
+    <orderEntry type="library" exported="" name="library-1.0.2" level="project" />
+    <orderEntry type="library" exported="" name="library-1.1.3" level="project" />
     <orderEntry type="library" exported="" name="play-services-6.5.87" level="project" />
     <orderEntry type="module" module-name="crop-lib" exported="" />
     <orderEntry type="module" module-name="MaterialDesign" exported="" />

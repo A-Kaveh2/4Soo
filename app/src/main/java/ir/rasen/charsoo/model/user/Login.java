@@ -48,7 +48,6 @@ public class Login extends AsyncTask<Void, Void, ResultStatus> {
         WebserviceGET webserviceGET = new WebserviceGET(URLs.LOGIN, new ArrayList<>(
                 Arrays.asList(email, password)));
 
-
         try {
             serverAnswer = webserviceGET.execute(context);
             if (serverAnswer.getSuccessStatus()) {
