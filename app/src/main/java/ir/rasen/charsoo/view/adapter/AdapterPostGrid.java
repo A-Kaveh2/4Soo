@@ -58,20 +58,17 @@ public class AdapterPostGrid extends BaseAdapter {
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View convertView, ViewGroup parent) {
         ImageView imageView = null;
-        /*if (gridView == null) {
+        if (gridView == null) {
             try {
-                gridViewHF = (com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter) parent;
-                gridViewHF.setVerticalSpacing(3);
-                gridViewHF.setHorizontalSpacing(9);
-                gridViewHF.setNumColumns(3);
-            } catch (Exception e) {
-                gridView = (com.handmark.pulltorefresh.library.GridViewWithHeaderAndFooter) parent;
+                gridView = (com.handmark.pulltorefresh.library.HFGridView) parent;
                 gridView.setVerticalSpacing(3);
                 gridView.setHorizontalSpacing(9);
                 gridView.setNumColumns(3);
+            } catch (Exception e) {
+
             }
 
-        }*/
+        }
         if (convertView == null) {
             imageView = new ImageView(activity);
             imageView.setLayoutParams(new GridView.LayoutParams((screedWidth / 3), (screedWidth / 3)));
