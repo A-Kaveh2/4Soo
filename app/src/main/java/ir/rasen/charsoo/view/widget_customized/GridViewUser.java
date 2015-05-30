@@ -40,6 +40,8 @@ import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
  * Created by android on 3/14/2015.
  */
 public class GridViewUser implements IWebserviceResponse {
+    public static final String TAG="GridViewUser";
+
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
@@ -313,8 +315,8 @@ public class GridViewUser implements IWebserviceResponse {
     }
 
     @Override
-    public void getError(Integer errorCode) {
-        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode)).show();
+    public void getError(Integer errorCode,String callerStringID) {
+        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode,callerStringID+">"+TAG)).show();
     }
 
     public void hideLoader() {

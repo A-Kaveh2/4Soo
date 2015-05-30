@@ -41,7 +41,7 @@ public class AlarmReciever extends BroadcastReceiver implements IWebserviceRespo
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
 
     }
 

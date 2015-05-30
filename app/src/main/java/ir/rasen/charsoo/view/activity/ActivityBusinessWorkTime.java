@@ -255,8 +255,8 @@ public class ActivityBusinessWorkTime extends CharsooActivity implements View.On
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
 
-        new DialogMessage(ActivityBusinessWorkTime.this, ServerAnswer.getError(ActivityBusinessWorkTime.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessWorkTime.this, ServerAnswer.getError(ActivityBusinessWorkTime.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

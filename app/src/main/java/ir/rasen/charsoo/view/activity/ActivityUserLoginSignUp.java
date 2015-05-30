@@ -164,9 +164,9 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserLoginSignUp.this, ServerAnswer.getError(ActivityUserLoginSignUp.this, errorCode)).show();
+        new DialogMessage(ActivityUserLoginSignUp.this, ServerAnswer.getError(ActivityUserLoginSignUp.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     private void nextFragment() {

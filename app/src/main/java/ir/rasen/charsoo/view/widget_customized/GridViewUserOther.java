@@ -41,6 +41,8 @@ import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
  * Created by android on 3/14/2015.
  */
 public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship {
+    public static final String TAG="GridViewUserOther";
+
     HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
@@ -322,8 +324,8 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     }
 
     @Override
-    public void getError(Integer errorCode) {
-        new DialogMessage(context, ServerAnswer.getError(context, errorCode)).show();
+    public void getError(Integer errorCode,String callerStringID) {
+        new DialogMessage(context, ServerAnswer.getError(context, errorCode,callerStringID+">"+TAG)).show();
     }
 
     @Override

@@ -148,8 +148,8 @@ public class ActivityBusinessBlockedUsers extends CharsooActivity implements IWe
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBusinessBlockedUsers.this, ServerAnswer.getError(ActivityBusinessBlockedUsers.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessBlockedUsers.this, ServerAnswer.getError(ActivityBusinessBlockedUsers.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

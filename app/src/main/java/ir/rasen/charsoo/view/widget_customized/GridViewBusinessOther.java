@@ -41,6 +41,8 @@ import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
  * Created by android on 3/14/2015.
  */
 public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusiness {
+    public static final String TAG="GridViewBusinessOther";
+
     HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostBusiness;
@@ -285,8 +287,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     }
 
     @Override
-    public void getError(Integer errorCode) {
-        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode)).show();
+    public void getError(Integer errorCode,String callerStringID) {
+        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode,callerStringID+">"+TAG)).show();
     }
 
     @Override

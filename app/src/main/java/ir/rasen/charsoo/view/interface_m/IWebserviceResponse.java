@@ -18,6 +18,6 @@ public interface IWebserviceResponse {
 
 
 
-    void getError(Integer errorCode);
+    void getError(Integer errorCode,String callerStringID);
 
 }

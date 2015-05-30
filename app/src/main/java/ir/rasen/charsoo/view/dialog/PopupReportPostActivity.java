@@ -66,7 +66,7 @@ public class PopupReportPostActivity extends MyPopup implements  IWebserviceResp
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
 
     }
 }

@@ -380,7 +380,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
 
     }
 

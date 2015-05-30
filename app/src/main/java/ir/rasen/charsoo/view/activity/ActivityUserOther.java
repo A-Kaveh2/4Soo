@@ -111,8 +111,8 @@ public class ActivityUserOther extends NoActionBarActivity implements IWebservic
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserOther.this, ServerAnswer.getError(ActivityUserOther.this, errorCode)).show();
+        new DialogMessage(ActivityUserOther.this, ServerAnswer.getError(ActivityUserOther.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

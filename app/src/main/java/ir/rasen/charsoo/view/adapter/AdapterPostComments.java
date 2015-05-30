@@ -35,7 +35,7 @@ import ir.rasen.charsoo.model.DownloadImages;
  * Created by android on 3/7/2015.
  */
 public class AdapterPostComments extends BaseAdapter implements ICommentChange, IWebserviceResponse {
-
+    public static final String TAG="AdapterPostComments";
     //This adapter will displays comments of a post
     //In this adapter user can not delete the comment or block the comment's writer (business who owns the post can)
     //In this adapter, if the user is comment's owner, he can edit or delete the comment
@@ -171,9 +171,9 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         //get BlockUser's error
-        new DialogMessage(context, context.getString(R.string.block_error)).show();
+        new DialogMessage(context,callerStringID+">"+TAG + context.getString(R.string.block_error)).show();
     }
     //Each item in this adapter has a picture and a title
 

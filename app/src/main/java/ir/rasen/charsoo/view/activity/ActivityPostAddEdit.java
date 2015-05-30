@@ -267,8 +267,8 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityPostAddEdit.this, ServerAnswer.getError(ActivityPostAddEdit.this, errorCode)).show();
+        new DialogMessage(ActivityPostAddEdit.this, ServerAnswer.getError(ActivityPostAddEdit.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

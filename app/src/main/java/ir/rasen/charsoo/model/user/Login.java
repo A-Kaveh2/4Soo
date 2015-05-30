@@ -82,12 +82,12 @@ public class Login extends AsyncTask<Void, Void, ResultStatus> {
     @Override
     protected void onPostExecute(ResultStatus result) {
         if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
+            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
             return;
         }
         if (result.success)
             delegate.getResult(result);
         else
-            delegate.getError(result.errorCode);
+            delegate.getError(result.errorCode,TAG);
     }
 }

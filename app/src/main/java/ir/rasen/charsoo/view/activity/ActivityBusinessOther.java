@@ -107,9 +107,9 @@ public class ActivityBusinessOther extends NoActionBarActivity implements IWebse
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBusinessOther.this, ServerAnswer.getError(ActivityBusinessOther.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessOther.this, ServerAnswer.getError(ActivityBusinessOther.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     @Override

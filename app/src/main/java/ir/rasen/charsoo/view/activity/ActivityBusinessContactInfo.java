@@ -96,8 +96,8 @@ public class ActivityBusinessContactInfo extends CharsooActivity implements IWeb
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBusinessContactInfo.this, ServerAnswer.getError(ActivityBusinessContactInfo.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessContactInfo.this, ServerAnswer.getError(ActivityBusinessContactInfo.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 }

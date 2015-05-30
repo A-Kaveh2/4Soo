@@ -246,9 +246,9 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBusinessRegisterEdit.this, ServerAnswer.getError(ActivityBusinessRegisterEdit.this, errorCode)).show();
+        new DialogMessage(ActivityBusinessRegisterEdit.this, ServerAnswer.getError(ActivityBusinessRegisterEdit.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     @Override

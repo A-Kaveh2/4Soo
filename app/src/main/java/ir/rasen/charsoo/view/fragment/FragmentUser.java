@@ -38,6 +38,7 @@ import ir.rasen.charsoo.view.widget_customized.GridViewUser;
 
 public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh {
 
+    public static final String TAG="FargmentUser";
     private HFGridView gridView;
     private int visitedUserId;
     ProgressDialog progressDialog;
@@ -198,9 +199,9 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }
 
 

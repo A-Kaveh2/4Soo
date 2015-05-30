@@ -22,7 +22,7 @@ import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.model.user.Login;
 
 public class FragmentUserLogin extends Fragment implements IWebserviceResponse {
-
+    public static final String TAG ="FragmentUserLogin";
     EditTextFont editTextEmail, editTextPassword;
     Validation validation;
     MyApplication myApplication;
@@ -93,9 +93,9 @@ public class FragmentUserLogin extends Fragment implements IWebserviceResponse {
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }
 
 

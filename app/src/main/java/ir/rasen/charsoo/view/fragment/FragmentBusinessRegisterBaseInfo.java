@@ -41,6 +41,7 @@ import ir.rasen.charsoo.model.business.GetBusinessGategories;
 import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
 
 public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
+    public static final String TAG="FragmentBusinessRegisterBaseInfo";
 
     private ProgressDialog progressDialog;
     private EditTextFont editTextName, editTextIdentifier, editTextDescription, editTextHashtags;
@@ -216,9 +217,9 @@ public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebse
 
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode)).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }
 
     public boolean isVerified() {

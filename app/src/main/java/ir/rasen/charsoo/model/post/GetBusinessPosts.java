@@ -21,7 +21,7 @@ import ir.rasen.charsoo.model.WebserviceGET;
  * Created by android on 12/16/2014.
  */
 public class GetBusinessPosts extends AsyncTask<Void, Void, ArrayList<Post>> {
-    private static final String TAG = "GetPosts";
+    private static final String TAG = "GetBusinessPosts";
     private IWebserviceResponse delegate = null;
     private int businessID,userId;
     private int afterThisID,limitation;
@@ -70,12 +70,12 @@ public class GetBusinessPosts extends AsyncTask<Void, Void, ArrayList<Post>> {
 
         //if webservice.execute() throws exception
         if (serverAnswer == null) {
-            delegate.getError(ServerAnswer.EXECUTION_ERROR);
+            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
             return;
         }
         if (serverAnswer.getSuccessStatus())
             delegate.getResult(result);
         else
-            delegate.getError(serverAnswer.getErrorCode());
+            delegate.getError(serverAnswer.getErrorCode(),TAG);
     }
 }

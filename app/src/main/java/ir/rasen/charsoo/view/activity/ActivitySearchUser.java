@@ -158,9 +158,9 @@ public class ActivitySearchUser extends CharsooActivity implements IWebserviceRe
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivitySearchUser.this, ServerAnswer.getError(ActivitySearchUser.this, errorCode)).show();
+        new DialogMessage(ActivitySearchUser.this, ServerAnswer.getError(ActivitySearchUser.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
 }

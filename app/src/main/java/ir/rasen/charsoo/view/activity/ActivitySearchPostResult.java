@@ -157,9 +157,9 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivitySearchPostResult.this, ServerAnswer.getError(ActivitySearchPostResult.this, errorCode)).show();
+        new DialogMessage(ActivitySearchPostResult.this, ServerAnswer.getError(ActivitySearchPostResult.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
 }

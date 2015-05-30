@@ -141,9 +141,9 @@ public class ActivityUserProfile extends CharsooActivity implements View.OnClick
     }
 
     @Override
-    public void getError(Integer errorCode) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserProfile.this, ServerAnswer.getError(ActivityUserProfile.this, errorCode)).show();
+        new DialogMessage(ActivityUserProfile.this, ServerAnswer.getError(ActivityUserProfile.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     @Override
