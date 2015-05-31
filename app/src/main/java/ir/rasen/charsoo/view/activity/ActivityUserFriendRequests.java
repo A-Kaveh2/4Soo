@@ -113,7 +113,7 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish();
+            onBackPressed();
             return true;
         } else
             return super.onOptionsItemSelected(item);
