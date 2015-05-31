@@ -28,6 +28,7 @@ import ir.rasen.charsoo.model.post.CancelShare;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
+import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmation;
 import ir.rasen.charsoo.view.dialog.PopupReportPostAdapter;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
@@ -308,11 +309,11 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                 public void onClick(View view) {
                     if (items.get(position).isShared) {
                         //cancel share the post
-
-                        new CancelShare(context, LoginInfo.getUserId(context), items.get(position).id, null).execute();
+                        new DialogCancelShareConfirmation(context,items.get(position),holder.imageViewShare).show();
+                        /*new CancelShare(context, LoginInfo.getUserId(context), items.get(position).id, null).execute();
 
                         items.get(position).isShared = false;
-                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);
+                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);*/
                     } else {
                         //share the post
 

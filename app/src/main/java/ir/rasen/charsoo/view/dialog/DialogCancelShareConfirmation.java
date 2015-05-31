@@ -5,10 +5,14 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.post.CancelShare;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
 
@@ -17,7 +21,7 @@ public class DialogCancelShareConfirmation extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogCancelShareConfirmation(final Context context) {
+    public DialogCancelShareConfirmation(final Context context,final Post post,final ImageView imageViewShareIcon) {
         super(context, context.getResources().getString(R.string.popup_warning),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.cancel_share));
@@ -49,7 +53,9 @@ public class DialogCancelShareConfirmation extends MyDialogOkCancel {
         textViewOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User.clearSearchHistory(context);
+                new CancelShare(context, LoginInfo.getUserId(context), post.id, null).execute();
+                post.isShared = false;
+                imageViewShareIcon.setImageResource(R.drawable.ic_reply_grey);
                 dismiss();
             }
         });
