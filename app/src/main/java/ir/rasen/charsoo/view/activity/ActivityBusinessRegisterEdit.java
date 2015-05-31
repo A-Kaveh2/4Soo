@@ -54,9 +54,8 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
     String filePath, businessPictureString;
 
 
-    private enum Fragments {BASE_INFO, CONTACT_INFO, LOCATION_INFO}
+    private enum Fragments {BASE_INFO, CONTACT_INFO, LOCATION_INFO};
 
-    ;
     private Fragments fragmentCurrent;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -70,8 +69,8 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_register);
 
-        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.layout_action_bar_home, null);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.layout_action_bar_home, null);
 
 
         progressDialog = new ProgressDialog(this);
