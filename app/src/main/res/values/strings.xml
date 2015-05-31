@@ -259,6 +259,7 @@
     <string name="confirmation_unfriend">آیا می خواهید رابطه دوستی را حذف کنید؟</string>
     <string name="confirmation_search_history">آیا می خواهید تاریخچه جستجو را پاک کنید؟</string>
     <string name="confirmation_unfollow">آیا می خواهید کسب و کار را دنبال نکنید؟</string>
+    <string name="confirmation_cancel_share">لغو اشتراک گذاری؟</string>
 
     <!-- MENU ITEMS -->
     <string name="exit">خروج</string>

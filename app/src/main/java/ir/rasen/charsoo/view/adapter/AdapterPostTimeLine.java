@@ -91,45 +91,49 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             gridView = (GridView) viewGroup;
             gridView.setSelector(new ColorDrawable(0x00ffffff));
         }*/
-        final Holder holder = new Holder();
-        view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list, viewGroup, false);
+        final Holder holder;
+        if (view == null) {
+            holder = new Holder();
+            view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list, viewGroup, false);
 
-        holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
-        holder.textViewBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_business_identifier);
-        holder.textViewDate = (TextViewFont) view.findViewById(R.id.textView_date);
+            holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
+            holder.textViewBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_business_identifier);
+            holder.textViewDate = (TextViewFont) view.findViewById(R.id.textView_date);
 
-        //complete section
-        holder.llCompleteSection = (LinearLayout) view.findViewById(R.id.ll_complete_post_section);
-        holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
-        holder.imageViewPostLike = (ImageView) view.findViewById(R.id.imageView_post_like);
+            //complete section
+            holder.llCompleteSection = (LinearLayout) view.findViewById(R.id.ll_complete_post_section);
+            holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
+            holder.imageViewPostLike = (ImageView) view.findViewById(R.id.imageView_post_like);
 
-        holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
-        holder.imageViewComment = (ImageView) view.findViewById(R.id.imageView_comment);
-        holder.imageViewShare = (ImageView) view.findViewById(R.id.imageView_share);
-        holder.imageViewMore = (ImageView) view.findViewById(R.id.imageView_more);
-        holder.textViewLikeNumber = (TextViewFont) view.findViewById(R.id.textView_like_number);
-        holder.textViewCommentNumber = (TextViewFont) view.findViewById(R.id.textView_comment_number);
-        holder.textViewShareNumber = (TextViewFont) view.findViewById(R.id.textView_share_number);
-        holder.textViewDescription = (TextViewFont) view.findViewById(R.id.textView_description);
-        holder.textViewComment1 = (TextViewFont) view.findViewById(R.id.textView_comment1);
-        holder.textViewComment1UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment1_user_identifier);
-        holder.textViewComment2 = (TextViewFont) view.findViewById(R.id.textView_comment2);
-        holder.textViewComment2UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment2_user_identifier);
-        holder.textViewComment3 = (TextViewFont) view.findViewById(R.id.textView_comment3);
-        holder.textViewTitle = (TextViewFont) view.findViewById(R.id.textView_title);
-        holder.textViewPrice = (TextViewFont) view.findViewById(R.id.textView_price);
-        holder.textViewComment3UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment3_user_identifier);
-        holder.textViewCode = (TextViewFont) view.findViewById(R.id.textView_code);
-        holder.llPriceSection = (LinearLayout) view.findViewById(R.id.ll_price_section);
-        holder.llCodeSection = (LinearLayout) view.findViewById(R.id.ll_code_section);
+            holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
+            holder.imageViewComment = (ImageView) view.findViewById(R.id.imageView_comment);
+            holder.imageViewShare = (ImageView) view.findViewById(R.id.imageView_share);
+            holder.imageViewMore = (ImageView) view.findViewById(R.id.imageView_more);
+            holder.textViewLikeNumber = (TextViewFont) view.findViewById(R.id.textView_like_number);
+            holder.textViewCommentNumber = (TextViewFont) view.findViewById(R.id.textView_comment_number);
+            holder.textViewShareNumber = (TextViewFont) view.findViewById(R.id.textView_share_number);
+            holder.textViewDescription = (TextViewFont) view.findViewById(R.id.textView_description);
+            holder.textViewComment1 = (TextViewFont) view.findViewById(R.id.textView_comment1);
+            holder.textViewComment1UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment1_user_identifier);
+            holder.textViewComment2 = (TextViewFont) view.findViewById(R.id.textView_comment2);
+            holder.textViewComment2UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment2_user_identifier);
+            holder.textViewComment3 = (TextViewFont) view.findViewById(R.id.textView_comment3);
+            holder.textViewTitle = (TextViewFont) view.findViewById(R.id.textView_title);
+            holder.textViewPrice = (TextViewFont) view.findViewById(R.id.textView_price);
+            holder.textViewComment3UserIdentifier = (TextViewFont) view.findViewById(R.id.textView_comment3_user_identifier);
+            holder.textViewCode = (TextViewFont) view.findViewById(R.id.textView_code);
+            holder.llPriceSection = (LinearLayout) view.findViewById(R.id.ll_price_section);
+            holder.llCodeSection = (LinearLayout) view.findViewById(R.id.ll_code_section);
 
-        //announcement parts
-        holder.llAnnouncementSection = (LinearLayout) view.findViewById(R.id.ll_announcement);
-        holder.textViewAnnouncementUserIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_userIdentifier);
-        holder.textViewAnnouncementBusinessStaticPart = (TextViewFont) view.findViewById(R.id.textView_announcement_business_static_part);
-        holder.textViewAnnouncementBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_business_identifier);
+            //announcement parts
+            holder.llAnnouncementSection = (LinearLayout) view.findViewById(R.id.ll_announcement);
+            holder.textViewAnnouncementUserIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_userIdentifier);
+            holder.textViewAnnouncementBusinessStaticPart = (TextViewFont) view.findViewById(R.id.textView_announcement_business_static_part);
+            holder.textViewAnnouncementBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_business_identifier);
 
-        //view.setTag(holder);
+            view.setTag(holder);
+        } else
+            holder = (Holder) view.getTag();
 
 
         //all post's types have these three fields
@@ -231,6 +235,8 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
             if (items.get(position).isLiked)
                 holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+            else
+                holder.imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
             if (items.get(position).isShared)
                 holder.imageViewShare.setImageResource(R.drawable.ic_reply_blue);
             else
