@@ -26,10 +26,11 @@ import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.DownloadImages;
-import ir.rasen.charsoo.model.post.CancelShare;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
+import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationTimeLine;
+import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationUserShared;
 import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
@@ -38,7 +39,7 @@ import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 /**
  * Created by android on 3/7/2015.
  */
-public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdateTimeLine {
+public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpdateTimeLine {
 
     private ArrayList<Post> items;
     private Context context;
@@ -149,17 +150,16 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
             holder.textViewDescription.setText(TextProcessor.removeHashtags(items.get(position).description));
             holder.textViewTitle.setText(TextProcessor.removeHashtags(items.get(position).title));
-            if (items.get(position).price != null && !items.get(position).price.equals("")&& !items.get(position).price.equals("null")) {
+            if (items.get(position).price != null && !items.get(position).price.equals("") && !items.get(position).price.equals("null")) {
                 holder.textViewPrice.setText(items.get(position).price);
                 holder.llPriceSection.setVisibility(View.VISIBLE);
             } else
                 holder.llPriceSection.setVisibility(View.GONE);
-            if (items.get(position).code != null && !items.get(position).code.equals("")&& !items.get(position).code.equals("null")) {
+            if (items.get(position).code != null && !items.get(position).code.equals("") && !items.get(position).code.equals("null")) {
                 holder.textViewCode.setText(items.get(position).code);
                 holder.llCodeSection.setVisibility(View.VISIBLE);
             } else
                 holder.llCodeSection.setVisibility(View.GONE);
-
 
 
             ArrayList<Comment> lastThreeComments = items.get(position).lastThreeComments;
@@ -238,7 +238,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
                 }
             });
 
-            holder.gestureDetector = new GestureDetector(context, new MyGestureDetector(context,items.get(position).id,items.get(position).isLiked, holder.imageViewLike, holder.imageViewPostLike));
+            holder.gestureDetector = new GestureDetector(context, new MyGestureDetector(context, items.get(position).id, items.get(position).isLiked, holder.imageViewLike, holder.imageViewPostLike));
 
             holder.imageViewPost.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent event) {
@@ -251,9 +251,10 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
                 public void onClick(View view) {
                     if (items.get(position).isShared) {
                         //cancel share the post
-                        new CancelShare(context, LoginInfo.getUserId(context), items.get(position).id, iUpdateTimeLine).execute();
+             /*           new CancelShare(context, LoginInfo.getUserId(context), items.get(position).id, iUpdateTimeLine).execute();
                         items.get(position).isShared = false;
-                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);
+                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);*/
+                        new DialogCancelShareConfirmationUserShared(context, items.get(position).id, AdapterPostShared.this).show();
                     } else {
                         //share the post
                         new Share(context, LoginInfo.getUserId(context), items.get(position).id, iUpdateTimeLine).execute();
@@ -266,12 +267,11 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
             holder.imageViewMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new PopupReportCancelSharePost(context, items.get(position).userId, items.get(position).id,position,holder.imageViewMore,iUpdateTimeLine,iReportPost).show();
+                    new PopupReportCancelSharePost(context, items.get(position).userId, items.get(position).id, position, holder.imageViewMore, iUpdateTimeLine, iReportPost).show();
                 }
             });
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             String s = e.getMessage();
         }
         return view;
@@ -286,17 +286,25 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
     @Override
     public void notifyUpdateTimeLineShare(int postId) {
         Intent intent = new Intent(Params.UPATE_TIME_LINE);
-        intent.putExtra(Params.UPDATE_TIME_LINE_TYPE,Params.UPATE_TIME_LINE_TYPE_SHARE);
-        intent.putExtra(Params.POST_ID_INT,postId);
+        intent.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_SHARE);
+        intent.putExtra(Params.POST_ID_INT, postId);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     @Override
     public void notifyUpdateTimeLineCancelShare(int postId) {
         Intent intent = new Intent(Params.UPATE_TIME_LINE);
-        intent.putExtra(Params.UPDATE_TIME_LINE_TYPE,Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
-        intent.putExtra(Params.POST_ID_INT,postId);
+        intent.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
+        intent.putExtra(Params.POST_ID_INT, postId);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).id == postId) {
+                items.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
     }
 
 
