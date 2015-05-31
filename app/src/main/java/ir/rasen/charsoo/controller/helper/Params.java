@@ -136,6 +136,7 @@ public class Params {
     public static String BUSINESS_UNDER_LINE_ID= "Business_Id";
     public static String BUSINESS_IDENTIFIER= "BusinessIdentifier";
     public static String BUSINESS_USER_NAME= "BusinessUserName";
+    public static String BUSINESS_NAME="BusinessName";//mhfathi
     public static String REVIEW_ID= "ReviewId";
     public static String SEARCH_TEXT= "SearchText";
     public static String LOCATION_LATITUDE= "LocationLatitude";
