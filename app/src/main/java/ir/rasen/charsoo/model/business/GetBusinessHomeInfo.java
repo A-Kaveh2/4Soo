@@ -49,7 +49,7 @@ public class GetBusinessHomeInfo extends AsyncTask<Void, Void, Business> {
                 business.id = businessID;
                 business.businessIdentifier = jsonObject.getString(Params.BUSINESS_USER_NAME);
                 business.userID = jsonObject.getInt(Params.USER_ID);
-                business.name = jsonObject.getString(Params.BUSINESS_USER_NAME);
+                business.name = jsonObject.getString(Params.BUSINESS_NAME);//mhfathi
                 business.profilePictureId = jsonObject.getInt(Params.PROFILE_PICTURE_ID);
                 business.coverPictureId = jsonObject.getInt(Params.COVER_PICTURE_ID);
                 business.category = jsonObject.getString(Params.CATEGORY);
