@@ -29,7 +29,7 @@ public class DialogCancelShareConfirmation extends MyDialogOkCancel {
         paramsWarning.setMargins(5, getRowHeight(), 5, getRowHeight());
         textViewWarning.setLayoutParams(paramsWarning);
         textViewWarning.setText(context.getResources().getString(R.string.confirmation_cancel_share));
-        
+
         //add editText to the body
         LinearLayout ll_body = getBody();
         ll_body.addView(textViewWarning);
