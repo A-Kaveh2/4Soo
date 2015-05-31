@@ -288,7 +288,7 @@
     <string name="popup_warning">توجه!</string>
     <string name="delete_friend">لغو دوستی</string>
 
-    <!-- COMMENTS -->
+    <!-- Post_COMMENTS_STRING -->
     <string name="enter_your_comment">نظر خود را بنویسید…</string>
     <string name="send">ارسال</string>
 
@@ -390,7 +390,7 @@
     <string name="dialog_success">اطلاعات ثبت شد</string>
     <string name="success">درخواست شما با موفقیت انجام شد.</string>
 
-    <!-- ChOOSE PICTURE -->
+    <!-- ChOOSE POST_PICTURE_STRING -->
     <string-array name="camera_or_gallery">
         <item>@string/camera</item>
         <item>@string/gallery</item>
