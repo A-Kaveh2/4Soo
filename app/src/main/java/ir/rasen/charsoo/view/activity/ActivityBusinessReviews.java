@@ -68,7 +68,7 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
 
         }
 
-        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
         if (getIntent().getExtras().getBoolean(Params.BUSINESS_OWNER))
             (findViewById(R.id.rl_add)).setVisibility(View.GONE);
 

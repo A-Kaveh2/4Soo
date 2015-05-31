@@ -36,7 +36,7 @@ public class UpdatePassword extends AsyncTask<Void, Void, ResultStatus> {
         WebservicePOST webservicePOST = new WebservicePOST(URLs.UPDATE_PASSWORD);
 
         try {
-            webservicePOST.addParam(Params.USER_ID, String.valueOf(userID));
+            webservicePOST.addParam(Params.USER_ID_INT, String.valueOf(userID));
             webservicePOST.addParam(Params.PASSWORD_NEW, newPassword);
 
             serverAnswer = webservicePOST.execute(context);

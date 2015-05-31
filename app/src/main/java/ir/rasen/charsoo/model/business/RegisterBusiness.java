@@ -42,10 +42,10 @@ public class RegisterBusiness extends AsyncTask<Void, Void, Integer> {
         try {
             //TODO remove test part
             //for the test
-            webservicePOST.addParam(Params.USER_ID, String.valueOf(LoginInfo.getUserId(context)));
+            webservicePOST.addParam(Params.USER_ID_INT, String.valueOf(LoginInfo.getUserId(context)));
 
-            //webservicePOST.addParam(Params.USER_ID, String.valueOf(business.userID));
-            webservicePOST.addParam(Params.BUSINESS_ID, business.businessIdentifier);
+            //webservicePOST.addParam(Params.USER_ID_INT, String.valueOf(business.userID));
+            webservicePOST.addParam(Params.BUSINESS_ID_STRING, business.businessIdentifier);
             webservicePOST.addParam(Params.NAME, business.name);
             webservicePOST.addParam(Params.EMAIL, business.email);
             if (business.coverPicture != null)
@@ -58,7 +58,7 @@ public class RegisterBusiness extends AsyncTask<Void, Void, Integer> {
                 webservicePOST.addParam(Params.PROFILE_PICTURE, "");
             webservicePOST.addParam(Params.CATEGORY_ID, String.valueOf(business.categoryID));
             webservicePOST.addParam(Params.SUB_CATEGORY_ID, String.valueOf(business.subCategoryID));
-            webservicePOST.addParam(Params.DESCRIPTION, business.description);
+            webservicePOST.addParam(Params.DESCRIPTION_STRING, business.description);
             webservicePOST.addParam(Params.WORK_DAYS, business.workTime.getWorkDaysString());
             webservicePOST.addParam(Params.WORK_TIME_OPEN, business.workTime.getTimeWorkOpenWebservice());
             webservicePOST.addParam(Params.WORK_TIME_CLOSE, business.workTime.getTimeWorkCloseWebservice());
@@ -79,7 +79,7 @@ public class RegisterBusiness extends AsyncTask<Void, Void, Integer> {
                 int busienssId = 0;
                 JSONObject jsonObject = serverAnswer.getResult();
                 if (jsonObject != null) {
-                    busienssId = jsonObject.getInt(Params.BUSINESS_ID);
+                    busienssId = jsonObject.getInt(Params.BUSINESS_ID_STRING);
                 }
                 return busienssId;
 

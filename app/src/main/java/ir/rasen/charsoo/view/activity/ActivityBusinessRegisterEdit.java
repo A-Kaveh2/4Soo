@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -87,7 +86,7 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
 
 
         try {
-            businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+            businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
             businessIdentifier = getIntent().getExtras().getString(Params.BUSINESS_IDENTIFIER);
         } catch (Exception e) {
 
@@ -288,11 +287,11 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
     @Override
     public void notifyDeleteBusiness(int businessId) {
        /* Intent intent = new Intent(Params.DELETE_BUSINESS);
-        intent.putExtra(Params.BUSINESS_ID, businessId);
+        intent.putExtra(Params.BUSINESS_ID_STRING, businessId);
         LocalBroadcastManager.getInstance(ActivityBusinessRegisterEdit.this).sendBroadcast(intent);*/
 
         Intent i = getIntent();
-        i.putExtra(Params.BUSINESS_ID, businessId);
+        i.putExtra(Params.BUSINESS_ID_STRING, businessId);
         i.putExtra(Params.TYPE,Business.ChangeType.DELETE.name());
         setResult(RESULT_OK, i);
         finish();

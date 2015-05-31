@@ -1,6 +1,5 @@
 package ir.rasen.charsoo.controller.object;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
@@ -68,8 +67,8 @@ public class User {
         for (int j = 0; j < jsonArray.length(); j++) {
             JSONObject jsonObject = jsonArray.getJSONObject(j);
             UserBusinesses userBusinesses = new UserBusinesses();
-            userBusinesses.businessId = Integer.valueOf(jsonObject.getString(Params.BUSINESS_ID));
-            userBusinesses.businessIdentifier = jsonObject.getString(Params.BUSINESS_USER_NAME);
+            userBusinesses.businessId = Integer.valueOf(jsonObject.getString(Params.BUSINESS_ID_STRING));
+            userBusinesses.businessIdentifier = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
             businesses.add(userBusinesses);
         }
 

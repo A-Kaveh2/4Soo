@@ -47,7 +47,7 @@ public class Business {
 
     public static void goBusinessHomeInfoPage(Context context,int businessId) {
         Intent intent = new Intent(context, ActivityBusinessOther.class);
-        intent.putExtra(Params.BUSINESS_ID,businessId);
+        intent.putExtra(Params.BUSINESS_ID_STRING,businessId);
         context.startActivity(intent);
     }
 

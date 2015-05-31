@@ -53,7 +53,7 @@ public class ActivityBusinessBlockedUsers extends CharsooActivity implements IWe
 
         }
 
-        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
         blockedUsers = new ArrayList<>();
         status = Status.FIRST_TIME;
 

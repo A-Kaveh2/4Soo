@@ -46,7 +46,7 @@ public class SearchBusinessesNearBy extends AsyncTask<Void, Void, ArrayList<Base
         WebservicePOST webservicePOST = new WebservicePOST(URLs.SEARCH_BUSINESS_NEAR_BY);
 
         try {
-            webservicePOST.addParam(Params.USER_ID,String.valueOf( userID));
+            webservicePOST.addParam(Params.USER_ID_INT,String.valueOf( userID));
             webservicePOST.addParam(Params.SEARCH_TEXT, searchText);
             webservicePOST.addParam(Params.NEAR_BY, nearBy);
 
@@ -55,7 +55,7 @@ public class SearchBusinessesNearBy extends AsyncTask<Void, Void, ArrayList<Base
                 JSONArray jsonArray = serverAnswer.getResultList();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.BUSINESS_ID),
+                    list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.BUSINESS_ID_STRING),
                             jsonObject.getInt(Params.SEARCH_PICTURE_ID),
                             jsonObject.getString(Params.NAME)));
                 }

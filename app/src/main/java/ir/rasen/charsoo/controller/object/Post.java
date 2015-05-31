@@ -7,7 +7,6 @@ import android.content.Intent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +66,7 @@ public class Post {
 
 
     public static Date setCreationDate(JSONObject object)throws Exception{
-        String dateStr = object.getString(Params.CREATION_DATAE);
+        String dateStr = object.getString(Params.CREATION_DATAE_DATE);
         dateStr = dateStr.replace("/Date(", "").replace(")/", "");
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         //Date date =  dateFormat.parse(dateStr);
@@ -103,34 +102,34 @@ public class Post {
 
     public static Post getFromJSONObjectShare(JSONObject jsonObject) throws Exception {
         Post post = new Post();
-        post.id = jsonObject.getInt(Params.POST_ID);
-        post.businessIdentifier = jsonObject.getString(Params.BUSINESS_ID);
+        post.id = jsonObject.getInt(Params.POST_ID_INT);
+        post.businessIdentifier = jsonObject.getString(Params.BUSINESS_ID_STRING);
         try{ //mhfathi
-            post.businessID = jsonObject.getInt(Params.BUSINESS_UNDER_LINE_ID);
+            post.businessID = jsonObject.getInt(Params.BUSINESS_ID_INT);
         }catch (Exception e){
-            post.businessID = jsonObject.getInt(Params.BUSINESS_ID);
+            post.businessID = jsonObject.getInt(Params.BUSINESS_ID_STRING);
         }
         try{ //mhfathi
-            post.businessUserName = jsonObject.getString(Params.BUSINESS_USER_NAME);
+            post.businessUserName = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
         }catch (Exception e){
 
         }
 
-        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
-        post.title = jsonObject.getString(Params.TITLE);
+        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
+        post.title = jsonObject.getString(Params.POST_TITLE_STRING);
 
-        post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID);
-        post.description = jsonObject.getString(Params.DESCRIPTION);
-        post.code = jsonObject.getString(Params.CODE);
-        post.price = jsonObject.getString(Params.PRICE);
+        post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID_INT);
+        post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+        post.code = jsonObject.getString(Params.POST_CODE_STRING);
+        post.price = jsonObject.getString(Params.POST_PRICE_STRING);
 
-        String comments = jsonObject.getString(Params.COMMENTS);
+        String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
         JSONArray jsonArrayComments = new JSONArray(comments);
         post.lastThreeComments = Comment.getFromJSONArray(jsonArrayComments);
 
         post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
 
-        post.isLiked = jsonObject.getBoolean(Params.IS_LIKED);
+        post.isLiked = jsonObject.getBoolean(Params.POST_IS_LIKED);
 
         post.isShared = true;
 
@@ -139,23 +138,23 @@ public class Post {
         //post.shareNumber = jsonObject.getInt(Params.SHARE_NUMBER);
 
         post.creationDate = setCreationDate(jsonObject);
-        post.isReported = jsonObject.getBoolean(Params.IS_REPORTED);
+        post.isReported = jsonObject.getBoolean(Params.POST_IS_REPORTED);
         return post;
     }
 
 
     public static Post getFromJSONObjectBusiness(int businessID, JSONObject jsonObject) throws Exception {
         Post post = new Post();
-        post.id = jsonObject.getInt(Params.POST_ID);
+        post.id = jsonObject.getInt(Params.POST_ID_INT);
         post.businessID = businessID;
-        post.title = jsonObject.getString(Params.TITLE);
+        post.title = jsonObject.getString(Params.POST_TITLE_STRING);
         post.creationDate = setCreationDate(jsonObject);
-        post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID);
-        post.description = jsonObject.getString(Params.DESCRIPTION);
-        post.code = jsonObject.getString(Params.CODE);
-        post.price = jsonObject.getString(Params.PRICE);
+        post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID_INT);
+        post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+        post.code = jsonObject.getString(Params.POST_CODE_STRING);
+        post.price = jsonObject.getString(Params.POST_PRICE_STRING);
 
-        String comments = jsonObject.getString(Params.COMMENTS);
+        String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
         JSONArray jsonArrayComments = new JSONArray(comments);
 
 
@@ -163,9 +162,9 @@ public class Post {
 
         post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
 
-        post.isLiked = jsonObject.getBoolean(Params.IS_LIKED);
+        post.isLiked = jsonObject.getBoolean(Params.POST_IS_LIKED);
         try {
-            post.isShared = jsonObject.getBoolean(Params.IS_SHARED);
+            post.isShared = jsonObject.getBoolean(Params.POST_IS_SHARED);
         } catch (Exception e) {
 
         }
@@ -178,16 +177,16 @@ public class Post {
 
     public static Post getFromJSONObjectSearch(JSONObject jsonObject) throws Exception {
         Post post = new Post();
-        post.id = jsonObject.getInt(Params.POST_ID);
-        post.businessID = jsonObject.getInt(Params.BUSINESS_ID);
-        post.title = jsonObject.getString(Params.TITLE);
+        post.id = jsonObject.getInt(Params.POST_ID_INT);
+        post.businessID = jsonObject.getInt(Params.BUSINESS_ID_STRING);
+        post.title = jsonObject.getString(Params.POST_TITLE_STRING);
         post.creationDate = setCreationDate(jsonObject);
-        post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID);
-        post.description = jsonObject.getString(Params.DESCRIPTION);
-        post.code = jsonObject.getString(Params.CODE);
-        post.price = jsonObject.getString(Params.PRICE);
+        post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID_INT);
+        post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+        post.code = jsonObject.getString(Params.POST_CODE_STRING);
+        post.price = jsonObject.getString(Params.POST_PRICE_STRING);
 
-        String comments = jsonObject.getString(Params.COMMENTS);
+        String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
         JSONArray jsonArrayComments = new JSONArray(comments);
 
 
@@ -195,9 +194,9 @@ public class Post {
 
         post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
 
-        post.isLiked = jsonObject.getBoolean(Params.IS_LIKED);
-        post.isShared = jsonObject.getBoolean(Params.IS_SHARED);
-        post.isReported = jsonObject.getBoolean(Params.IS_REPORTED);
+        post.isLiked = jsonObject.getBoolean(Params.POST_IS_LIKED);
+        post.isShared = jsonObject.getBoolean(Params.POST_IS_SHARED);
+        post.isReported = jsonObject.getBoolean(Params.POST_IS_REPORTED);
         //post.likeNumber = jsonObject.getInt(Params.LIKE_NUMBER);
         //post.commentNumber = jsonObject.getInt(Params.COMMENT_NUMBER);
         //post.shareNumber = jsonObject.getInt(Params.SHARE_NUMBER);
@@ -207,25 +206,25 @@ public class Post {
 
     public static Post getFromJSONObjectTimeLine(JSONObject jsonObject) throws Exception {
         Post post = new Post();
-        post.id = jsonObject.getInt(Params.POST_ID);
-        post.businessID = jsonObject.getInt(Params.BUSINESS_ID);
-        post.businessUserName = jsonObject.getString(Params.BUSINESS_USER_NAME);
-        post.userId = jsonObject.getInt(Params.USER_ID);//business owner' user.id
-        post.userName = jsonObject.getString(Params.USER_NAME);
+        post.id = jsonObject.getInt(Params.POST_ID_INT);
+        post.businessID = jsonObject.getInt(Params.BUSINESS_ID_STRING);
+        post.businessUserName = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
+        post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
+        post.userName = jsonObject.getString(Params.USER_NAME_STRING);
         post.type = getType(jsonObject.getInt(Params.TYPE));
-        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
+        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
         if (post.type == Type.Complete) {
-            //post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID);
-            post.title = jsonObject.getString(Params.TITLE);
+            //post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
+            post.title = jsonObject.getString(Params.POST_TITLE_STRING);
             post.creationDate = setCreationDate(jsonObject);
-            post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID);
-            post.description = jsonObject.getString(Params.DESCRIPTION);
-            post.code = jsonObject.getString(Params.CODE);
-            post.price = jsonObject.getString(Params.PRICE);
-            post.isLiked = jsonObject.getBoolean(Params.IS_LIKED);
-            post.isReported = jsonObject.getBoolean(Params.IS_REPORTED);
-            post.isShared = jsonObject.getBoolean(Params.IS_SHARED);
-            String comments = jsonObject.getString(Params.COMMENTS);
+            post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID_INT);
+            post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+            post.code = jsonObject.getString(Params.POST_CODE_STRING);
+            post.price = jsonObject.getString(Params.POST_PRICE_STRING);
+            post.isLiked = jsonObject.getBoolean(Params.POST_IS_LIKED);
+            post.isReported = jsonObject.getBoolean(Params.POST_IS_REPORTED);
+            post.isShared = jsonObject.getBoolean(Params.POST_IS_SHARED);
+            String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
             JSONArray jsonArrayComments = new JSONArray(comments);
 
             //
@@ -239,7 +238,7 @@ public class Post {
         } else if (post.type == Type.Follow) {
 
         } else if (post.type == Type.Review) {
-            String description = jsonObject.getString(Params.DESCRIPTION);
+            String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         }
         return post;
     }
@@ -263,16 +262,16 @@ public class Post {
 
     public static void goPostPage(Context context, int postId, int businessIdForBusinessType, GetPostType getPostType) {
         Intent intent = new Intent(context, ActivityPost.class);
-        intent.putExtra(Params.POST_ID, postId);
-        intent.putExtra(Params.BUSINESS_ID, businessIdForBusinessType);
+        intent.putExtra(Params.POST_ID_INT, postId);
+        intent.putExtra(Params.BUSINESS_ID_STRING, businessIdForBusinessType);
         intent.putExtra(Params.POST_TYPE, getPostType.name());
         context.startActivity(intent);
     }
 
     public static void goPostPageFromUserHome(Activity activity, int postId, int businessIdForBusinessType, GetPostType getPostType) {
         Intent intent = new Intent(activity, ActivityPost.class);
-        intent.putExtra(Params.POST_ID, postId);
-        intent.putExtra(Params.BUSINESS_ID, businessIdForBusinessType);
+        intent.putExtra(Params.POST_ID_INT, postId);
+        intent.putExtra(Params.BUSINESS_ID_STRING, businessIdForBusinessType);
         intent.putExtra(Params.POST_TYPE, getPostType.name());
         activity.startActivityForResult(intent, Params.ACTION_ACTIVITY_POST);
     }

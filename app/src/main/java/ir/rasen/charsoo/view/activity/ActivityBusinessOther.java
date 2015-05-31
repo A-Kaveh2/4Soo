@@ -63,7 +63,7 @@ public class ActivityBusinessOther extends NoActionBarActivity implements IWebse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_other);
 
-        selectedBusinessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+        selectedBusinessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));

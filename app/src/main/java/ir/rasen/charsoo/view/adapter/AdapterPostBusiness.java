@@ -184,8 +184,8 @@ public class AdapterPostBusiness extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-                intent.putExtra(Params.BUSINESS_ID, items.get(position).businessID);
-                intent.putExtra(Params.POST_ID, items.get(position).id);
+                intent.putExtra(Params.BUSINESS_ID_STRING, items.get(position).businessID);
+                intent.putExtra(Params.POST_ID_INT, items.get(position).id);
                 activity.startActivityForResult(intent, Params.ACTION_EDIT_POST);
             }
         });

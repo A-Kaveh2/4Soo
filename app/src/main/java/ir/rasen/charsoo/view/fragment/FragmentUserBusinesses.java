@@ -56,7 +56,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), ActivityBusiness.class);
-                intent.putExtra(Params.BUSINESS_ID, userBusinesses.get(i).id);
+                intent.putExtra(Params.BUSINESS_ID_STRING, userBusinesses.get(i).id);
                 startActivityForResult(intent, Params.ACTION_DELETE_BUSIENSS);
             }
         });
@@ -118,13 +118,13 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
         // TODO:: TEMPORARY
         recursivelyCallHandler();
 
-        // TODO:: WEBSERVICE SHOULD BE WRITTEN ON WEB SIDE AND THEN THIS CODE CAN BE UNCOMMENTED::
+        // TODO:: WEBSERVICE SHOULD BE WRITTEN ON WEB SIDE AND THEN THIS POST_CODE_STRING CAN BE UNCOMMENTED::
         //new GetUserBusinesses(getActivity(),FragmentUserBusinesses.this).execute();
 
         deleteBusinessReciever = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                int deletedBusinessId = intent.getIntExtra(Params.BUSINESS_ID,0);
+                int deletedBusinessId = intent.getIntExtra(Params.BUSINESS_ID_STRING,0);
                 //TODO:: UPDATE THE BUSINESSES LIST
                 ((ActivityMain)getActivity()).setFragment(ActivityMain.FragmentTag.BUSINESSES);
             }
@@ -214,7 +214,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                     adapterUserBusinesses.notifyDataSetChanged();
 
             } else if (requestCode == Params.ACTION_DELETE_BUSIENSS) {
-                int businessId = data.getExtras().getInt(Params.BUSINESS_ID);
+                int businessId = data.getExtras().getInt(Params.BUSINESS_ID_STRING);
                 for (int i = 0; i < myApplication.userBusinesses.size(); i++)
                     if (myApplication.userBusinesses.get(i).businessId == businessId) {
                         myApplication.userBusinesses.remove(i);

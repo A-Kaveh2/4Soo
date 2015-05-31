@@ -64,9 +64,9 @@ public class SearchBusinessesLocation extends AsyncTask<Void, Void, ArrayList<Se
                 JSONArray jsonArray = serverAnswer.getResultList();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    list.add(new SearchItemBusiness(context.getResources(),jsonObject.getInt(Params.BUSINESS_ID),
-                            jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID),
-                            jsonObject.getString(Params.BUSINESS_USER_NAME),
+                    list.add(new SearchItemBusiness(context.getResources(),jsonObject.getInt(Params.BUSINESS_ID_STRING),
+                            jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT),
+                            jsonObject.getString(Params.BUSINESS_USERNAME_STRING),
                             jsonObject.getDouble(Params.DISTANCE)));
                 }
                 return list;

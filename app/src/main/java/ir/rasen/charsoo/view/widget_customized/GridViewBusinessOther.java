@@ -153,8 +153,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityBusinessFollowers.class);
-                    intent1.putExtra(Params.BUSINESS_ID, business.id);
-                    intent1.putExtra(Params.USER_ID, business.userID);
+                    intent1.putExtra(Params.BUSINESS_ID_STRING, business.id);
+                    intent1.putExtra(Params.USER_ID_INT, business.userID);
 
                     activity.startActivity(intent1);
                 }
@@ -163,7 +163,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityBusinessReviews.class);
-                    intent1.putExtra(Params.BUSINESS_ID, business.id);
+                    intent1.putExtra(Params.BUSINESS_ID_STRING, business.id);
                     intent1.putExtra(Params.BUSINESS_OWNER, false);
                     activity.startActivity(intent1);
                 }

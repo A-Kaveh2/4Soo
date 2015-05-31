@@ -55,10 +55,10 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
         setContentView(R.layout.activity_post_add);
 
 
-        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
         try {
             //if there is postId it means the user is editing the post
-            postId = getIntent().getExtras().getInt(Params.POST_ID);
+            postId = getIntent().getExtras().getInt(Params.POST_ID_INT);
         } catch (Exception e) {
 
         }

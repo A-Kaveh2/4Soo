@@ -39,7 +39,7 @@ public class RegisterUser extends AsyncTask<Void, Void, ResultStatus> {
         WebservicePOST webservicePOST = new WebservicePOST(URLs.REGISTER_USER);
 
         try {
-            webservicePOST.addParam(Params.USER_ID, user.userIdentifier);
+            webservicePOST.addParam(Params.USER_ID_INT, user.userIdentifier);
             webservicePOST.addParam(Params.NAME, user.name);
             webservicePOST.addParam(Params.EMAIL, user.email);
             webservicePOST.addParam(Params.PASSWORD, user.password);
@@ -58,7 +58,7 @@ public class RegisterUser extends AsyncTask<Void, Void, ResultStatus> {
                 int user_id = 0, profilePictureId = 2022;
                 String access_token = null;
                 if (jsonObject != null) {
-                    user_id = jsonObject.getInt(Params.USER_ID);
+                    user_id = jsonObject.getInt(Params.USER_ID_INT);
                     if (!TestUnit.isTestingCommentActivity)
                         profilePictureId = jsonObject.getInt(Params.PROFILE_PICTURE_ID);
 

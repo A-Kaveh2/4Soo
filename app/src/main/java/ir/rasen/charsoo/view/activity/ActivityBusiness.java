@@ -50,7 +50,7 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business);
 
-        selectedBusinessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+        selectedBusinessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -65,7 +65,7 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
             @Override
             public void onReceive(Context context, Intent intent) {
                 //if the user delete a post from ActivityPost
-                gridViewBusiness.notifyDeletePost(intent.getIntExtra(Params.POST_ID, 0));
+                gridViewBusiness.notifyDeletePost(intent.getIntExtra(Params.POST_ID_INT, 0));
             }
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(deletePost, new IntentFilter(Params.DELETE_POST_FROM_ACTIVITY));
@@ -133,7 +133,7 @@ public class ActivityBusiness extends NoActionBarActivity implements ISelectBusi
                     }
                 } else if (data.getStringExtra(Params.TYPE).equals(Business.ChangeType.DELETE.name())) {
                     Intent i = getIntent();
-                    i.putExtra(Params.BUSINESS_ID, data.getIntExtra(Params.BUSINESS_ID, 0));
+                    i.putExtra(Params.BUSINESS_ID_STRING, data.getIntExtra(Params.BUSINESS_ID_STRING, 0));
                     setResult(RESULT_OK, i);
                     finish();
                 }

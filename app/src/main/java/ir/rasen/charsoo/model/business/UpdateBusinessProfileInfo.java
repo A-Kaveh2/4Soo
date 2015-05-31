@@ -35,7 +35,7 @@ public class UpdateBusinessProfileInfo extends AsyncTask<Void, Void, ResultStatu
         WebservicePOST webservicePOST = new WebservicePOST(URLs.UPDATE_PROFILE_BUSINESS);
 
         try {
-            webservicePOST.addParam(Params.BUSINESS_ID,String.valueOf(business.id));
+            webservicePOST.addParam(Params.BUSINESS_ID_STRING,String.valueOf(business.id));
             webservicePOST.addParam(Params.NAME, business.name);
             webservicePOST.addParam(Params.EMAIL, business.email);
             if (business.coverPicture != null)
@@ -48,7 +48,7 @@ public class UpdateBusinessProfileInfo extends AsyncTask<Void, Void, ResultStatu
                 webservicePOST.addParam(Params.PROFILE_PICTURE, "");
             webservicePOST.addParam(Params.CATEGORY_ID, String.valueOf(business.categoryID));
             webservicePOST.addParam(Params.SUB_CATEGORY_ID, String.valueOf(business.subCategoryID));
-            webservicePOST.addParam(Params.DESCRIPTION, business.description);
+            webservicePOST.addParam(Params.DESCRIPTION_STRING, business.description);
             webservicePOST.addParam(Params.WORK_DAYS, business.workTime.getWorkDaysString());
             webservicePOST.addParam(Params.WORK_TIME_OPEN, String.valueOf(business.workTime.getTimeWorkOpenWebservice()));
             webservicePOST.addParam(Params.WORK_TIME_CLOSE, String.valueOf(business.workTime.getTimeWorkCloseWebservice()));

@@ -44,7 +44,7 @@ public class UNUSED_DrawerLayoutBusiness implements IChangeBusiness {
                 /*PopupEditDeleteBusiness p = new PopupEditDeleteBusiness(activity,selectedBusinessId,businessIdentifier, iChangeBusiness);
                 p.show();*/
                 /*Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
-                intent.putExtra(Params.BUSINESS_ID,displayedBusinessId);
+                intent.putExtra(Params.BUSINESS_ID_STRING,displayedBusinessId);
                 intent.putExtra(Params.BUSINESS_IDENTIFIER,businessIdentifier);
                 activity.startActivityForResult(intent,Params.ACTION_EDIT_BUSINESS);
             }
@@ -60,7 +60,7 @@ public class UNUSED_DrawerLayoutBusiness implements IChangeBusiness {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-                intent.putExtra(Params.BUSINESS_ID,displayedBusinessId);
+                intent.putExtra(Params.BUSINESS_ID_STRING,displayedBusinessId);
                 activity.startActivityForResult(intent,Params.ACTION_ADD_POST);
                 mDrawerLayout.closeDrawer(Gravity.RIGHT);
             }

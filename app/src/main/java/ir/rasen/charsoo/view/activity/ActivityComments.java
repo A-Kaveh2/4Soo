@@ -77,7 +77,7 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
 
         }
 
-        postId = getIntent().getExtras().getInt(Params.POST_ID);
+        postId = getIntent().getExtras().getInt(Params.POST_ID_INT);
         postOwnerBusinessId = getIntent().getExtras().getInt(Params.POST_OWNER_BUSINESS_ID);
         isUserOwner = getIntent().getExtras().getBoolean(Params.IS_OWNER);
 
