@@ -52,8 +52,8 @@ public class GetBusinessReviews extends AsyncTask<Void, Void, ArrayList<Review>>
                      JSONObject jsonObject = jsonArray.getJSONObject(i);
                     Review review = new Review();
                     review.id = jsonObject.getInt(Params.REVIEW_ID);
-                    review.userID = jsonObject.getInt(Params.USER_ID);
-                    review.userName = jsonObject.getString(Params.USER_NAME);
+                    review.userID = jsonObject.getInt(Params.USER_ID_INT);
+                    review.userName = jsonObject.getString(Params.USER_NAME_STRING);
                     review.rate = jsonObject.getInt(Params.RATE);
                     review.userPicutreId = jsonObject.getInt(Params.USER_PROFILE_PICTURE_ID);
                     review.text = jsonObject.getString(Params.TEXT);

@@ -80,7 +80,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                int postId = intent.getIntExtra(Params.POST_ID, 0);
+                int postId = intent.getIntExtra(Params.POST_ID_INT, 0);
 
                 //remove canceled post
                 cancelShare(postId);
@@ -88,7 +88,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 //update time line
                 Intent intentUpdateTimeLine = new Intent(Params.UPATE_TIME_LINE);
                 intentUpdateTimeLine.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
-                intentUpdateTimeLine.putExtra(Params.POST_ID, postId);
+                intentUpdateTimeLine.putExtra(Params.POST_ID_INT, postId);
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(intentUpdateTimeLine);
             }
         };

@@ -67,8 +67,8 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
         } catch (Exception e) {
 
         }
-        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
-        int userId = getIntent().getExtras().getInt(Params.USER_ID);
+        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
+        int userId = getIntent().getExtras().getInt(Params.USER_ID_INT);
         if (userId != LoginInfo.getUserId(this))
             (findViewById(R.id.btn_blocked_users)).setVisibility(View.GONE);
         followers = new ArrayList<>();
@@ -87,7 +87,7 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityBusinessFollowers.this, ActivityBusinessBlockedUsers.class);
-                intent.putExtra(Params.BUSINESS_ID, businessId);
+                intent.putExtra(Params.BUSINESS_ID_STRING, businessId);
                 startActivity(intent);
             }
         });

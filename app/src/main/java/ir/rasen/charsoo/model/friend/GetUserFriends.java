@@ -51,7 +51,7 @@ public class GetUserFriends extends AsyncTask<Void, Void, ArrayList<BaseAdapterI
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.ID),
                             jsonObject.getInt(Params.USER_PROFILE_PICTURE_ID),
-                            jsonObject.getString(Params.USER_ID)));
+                            jsonObject.getString(Params.USER_ID_INT)));
                 }
                 //this webservice has bug and returns the own user as friend.
                 //we should remove the user from friend list

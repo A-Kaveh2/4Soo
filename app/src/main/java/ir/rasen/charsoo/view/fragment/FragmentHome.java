@@ -90,10 +90,10 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
                 Bundle bundle = intent.getExtras();
                 switch (bundle.getString(Params.UPDATE_TIME_LINE_TYPE)) {
                     case Params.UPATE_TIME_LINE_TYPE_SHARE:
-                        updateShare(true, bundle.getInt(Params.POST_ID));
+                        updateShare(true, bundle.getInt(Params.POST_ID_INT));
                         break;
                     case Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE:
-                        updateShare(false, bundle.getInt(Params.POST_ID));
+                        updateShare(false, bundle.getInt(Params.POST_ID_INT));
                         break;
                 }
 
@@ -107,7 +107,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
                 Bundle bundle = intent.getExtras();
 
                 //if the comment is one of the post's last three comments
-                int postId = bundle.getInt(Params.POST_ID);
+                int postId = bundle.getInt(Params.POST_ID_INT);
                 for (int i = 0; i < results.size(); i++) {
                     if (results.get(i).id == postId)
                         new GetTimeLinePost(getActivity(), postId, results, FragmentHome.this).execute();

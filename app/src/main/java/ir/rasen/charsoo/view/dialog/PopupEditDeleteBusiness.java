@@ -60,7 +60,7 @@ public class PopupEditDeleteBusiness extends MyPopup {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
-                intent.putExtra(Params.BUSINESS_ID,businessId);
+                intent.putExtra(Params.BUSINESS_ID_STRING,businessId);
                 intent.putExtra(Params.BUSINESS_IDENTIFIER,businessIdentifier);
                 activity.startActivityForResult(intent,Params.ACTION_EDIT_BUSINESS);
                 dismiss();

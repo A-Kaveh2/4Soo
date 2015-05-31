@@ -19,7 +19,7 @@ public class LoginInfo {
     public static boolean isLoggedIn(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(
                 context.getPackageName(), Context.MODE_PRIVATE);
-        if (preferences.getInt(Params.USER_ID, 0) != 0)
+        if (preferences.getInt(Params.USER_ID_INT, 0) != 0)
             return true;
         return false;
     }
@@ -28,7 +28,7 @@ public class LoginInfo {
         SharedPreferences preferences = activity.getSharedPreferences(
                 activity.getPackageName(), Context.MODE_PRIVATE);
         Editor edit = preferences.edit();
-        edit.putInt(Params.USER_ID, 0);
+        edit.putInt(Params.USER_ID_INT, 0);
         edit.commit();
 
         ((MyApplication) activity.getApplication()).isHomeCreated = false;
@@ -42,7 +42,7 @@ public class LoginInfo {
         SharedPreferences preferences = context.getSharedPreferences(
                 context.getPackageName(), Context.MODE_PRIVATE);
         Editor edit = preferences.edit();
-        edit.putInt(Params.USER_ID, userID);
+        edit.putInt(Params.USER_ID_INT, userID);
         edit.putInt(Params.PROFILE_PICTURE_ID, profilePictureId);
         edit.putString(Params.ACCESS_TOKEN, accessToken);
         edit.putString(Params.USER_IDENTIFIER, userIdentifier);
@@ -94,8 +94,8 @@ public class LoginInfo {
 
         SharedPreferences preferences = context.getSharedPreferences(
                 context.getPackageName(), Context.MODE_PRIVATE);
-        int i = preferences.getInt(Params.USER_ID, 0);
-        return preferences.getInt(Params.USER_ID, 0);
+        int i = preferences.getInt(Params.USER_ID_INT, 0);
+        return preferences.getInt(Params.USER_ID_INT, 0);
 
     }
 

@@ -55,8 +55,8 @@ public class SearchPost extends AsyncTask<Void, Void, ArrayList<SearchItemPost>>
                 JSONArray jsonArray = serverAnswer.getResultList();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    list.add(new SearchItemPost(jsonObject.getInt(Params.POST_ID),
-                            jsonObject.getInt(Params.POST_PICTURE_ID),""));
+                    list.add(new SearchItemPost(jsonObject.getInt(Params.POST_ID_INT),
+                            jsonObject.getInt(Params.POST_PICTURE_ID_INT),""));
                 }
                 return list;
             }

@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.RemoteViews;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
@@ -51,7 +48,7 @@ public class CommentNotification {
     }
 
     private static String getVariableName(Context context){
-        String v = Params.USER_ID+":"+String.valueOf(LoginInfo.getUserId(context));;
+        String v = Params.USER_ID_INT +":"+String.valueOf(LoginInfo.getUserId(context));;
         return v;
     }
     public static boolean isDisplayed(Context context, int commentId) {

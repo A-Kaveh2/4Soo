@@ -137,7 +137,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(activity, ActivityBusinessRegisterEdit.class);
-                    intent.putExtra(Params.BUSINESS_ID, business.id);
+                    intent.putExtra(Params.BUSINESS_ID_STRING, business.id);
                     intent.putExtra(Params.BUSINESS_IDENTIFIER, business.businessIdentifier);
                     activity.startActivityForResult(intent, Params.ACTION_EDIT_BUSINESS);
                 }
@@ -147,8 +147,8 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityBusinessFollowers.class);
-                    intent1.putExtra(Params.BUSINESS_ID, business.id);
-                    intent1.putExtra(Params.USER_ID, LoginInfo.getUserId(activity));
+                    intent1.putExtra(Params.BUSINESS_ID_STRING, business.id);
+                    intent1.putExtra(Params.USER_ID_INT, LoginInfo.getUserId(activity));
                     activity.startActivity(intent1);
                 }
             });
@@ -156,7 +156,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(activity, ActivityBusinessReviews.class);
-                    intent1.putExtra(Params.BUSINESS_ID, business.id);
+                    intent1.putExtra(Params.BUSINESS_ID_STRING, business.id);
                     intent1.putExtra(Params.BUSINESS_OWNER, true);
                     activity.startActivity(intent1);
                 }
@@ -300,7 +300,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
 
     private void addNewPost() {
         Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-        intent.putExtra(Params.BUSINESS_ID,business.id);
+        intent.putExtra(Params.BUSINESS_ID_STRING,business.id);
         activity.startActivityForResult(intent, Params.ACTION_ADD_POST);
     }
 

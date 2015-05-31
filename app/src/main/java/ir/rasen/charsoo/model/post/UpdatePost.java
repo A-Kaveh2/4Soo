@@ -35,12 +35,12 @@ public class UpdatePost extends AsyncTask<Void, Void, Post> {
         WebservicePOST webservicePOST = new WebservicePOST(URLs.UPDATE_POST);
 
         try {
-            webservicePOST.addParam(Params.POST_ID, String.valueOf(post.id));
-            webservicePOST.addParam(Params.TITLE, post.title);
-            webservicePOST.addParam(Params.PICTURE, post.picture);
-            webservicePOST.addParam(Params.DESCRIPTION, post.description);
-            webservicePOST.addParam(Params.PRICE, post.price);
-            webservicePOST.addParam(Params.CODE, post.code);
+            webservicePOST.addParam(Params.POST_ID_INT, String.valueOf(post.id));
+            webservicePOST.addParam(Params.POST_TITLE_STRING, post.title);
+            webservicePOST.addParam(Params.POST_PICTURE_STRING, post.picture);
+            webservicePOST.addParam(Params.POST_DESCRIPTION_STRING, post.description);
+            webservicePOST.addParam(Params.POST_PRICE_STRING, post.price);
+            webservicePOST.addParam(Params.POST_CODE_STRING, post.code);
             webservicePOST.addParam(Params.HASHTAG_LIST, Hashtag.getStringFromList(post.hashtagList));
             //discount will be added  next phase
             webservicePOST.addParam(Params.DISCOUNT,"0");

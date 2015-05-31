@@ -91,8 +91,8 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
         setTitle(getString(R.string.product));
-        postId = getIntent().getExtras().getInt(Params.POST_ID);
-        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+        postId = getIntent().getExtras().getInt(Params.POST_ID_INT);
+        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
         final String postType = getIntent().getExtras().getString(Params.POST_TYPE);
         if (postType.equals(Post.GetPostType.BUSINESS.name()))
             getPostType = Post.GetPostType.BUSINESS;
@@ -185,8 +185,8 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
                 if (getPostType == Post.GetPostType.BUSINESS) {
                     //it is edit
                     Intent intent = new Intent(ActivityPost.this, ActivityPostAddEdit.class);
-                    intent.putExtra(Params.BUSINESS_ID, businessId);
-                    intent.putExtra(Params.POST_ID, postId);
+                    intent.putExtra(Params.BUSINESS_ID_STRING, businessId);
+                    intent.putExtra(Params.POST_ID_INT, postId);
                     startActivityForResult(intent, Params.ACTION_EDIT_POST);
                 } else {
                     if (post.isLiked) {
@@ -388,7 +388,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
     @Override
     public void notifyDeletePost(int postId) {
         Intent intent = new Intent(Params.DELETE_POST_FROM_ACTIVITY);
-        intent.putExtra(Params.POST_ID,postId);
+        intent.putExtra(Params.POST_ID_INT,postId);
         LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intent);
 
         finish();
@@ -398,7 +398,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
     public void notifyUpdateTimeLineShare(int postId) {
         Intent intent = new Intent(Params.UPATE_TIME_LINE);
         intent.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_SHARE);
-        intent.putExtra(Params.POST_ID, postId);
+        intent.putExtra(Params.POST_ID_INT, postId);
         LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intent);
     }
 
@@ -407,14 +407,14 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         //it goes to the FragmentUser and the goes to FragmentHome
         if (getPostType == Post.GetPostType.SHARE) {
             Intent intent = new Intent(Params.CANCEL_USER_SHARE_POST);
-            intent.putExtra(Params.POST_ID, postId);
+            intent.putExtra(Params.POST_ID_INT, postId);
             LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intent);
             //finish();
         } else {
             //update time line
             Intent intentUpdateTimeLine = new Intent(Params.UPATE_TIME_LINE);
             intentUpdateTimeLine.putExtra(Params.UPDATE_TIME_LINE_TYPE, Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
-            intentUpdateTimeLine.putExtra(Params.POST_ID, postId);
+            intentUpdateTimeLine.putExtra(Params.POST_ID_INT, postId);
             LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intentUpdateTimeLine);
         }
     }

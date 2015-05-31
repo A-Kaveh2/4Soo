@@ -60,7 +60,7 @@ public class GetBusinessProfileInfo extends AsyncTask<Void, Void, Business> {
                 business.coverPicture = jsonObject.getString(Params.COVER_PICTURE);
                 business.category = jsonObject.getString(Params.CATEGORY);
                 business.subcategory = jsonObject.getString(Params.SUBCATEGORY);
-                business.description = jsonObject.getString(Params.DESCRIPTION);
+                business.description = jsonObject.getString(Params.DESCRIPTION_STRING);
                 WorkTime workTime = new WorkTime();
                 workTime.setWorkDaysFromString(jsonObject.getString(Params.WORK_DAYS));
                 workTime.setTimeWorkOpenFromString(jsonObject.getString(Params.WORK_TIME_OPEN));

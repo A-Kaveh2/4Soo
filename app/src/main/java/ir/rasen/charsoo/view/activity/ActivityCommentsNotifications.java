@@ -58,7 +58,7 @@ public class ActivityCommentsNotifications extends CharsooActivity implements IW
         setContentView(R.layout.layout_listview_pull_to_refresh);
         setTitle(getString(R.string.comments));
 
-        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID);
+        businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
         commentNotifications = new ArrayList<>();
         status = Status.FIRST_TIME;
 

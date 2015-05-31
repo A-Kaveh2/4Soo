@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.adapter;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
@@ -18,9 +17,7 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.activity.ActivityPost;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.view.dialog.PopupBlockUser;
 import ir.rasen.charsoo.view.dialog.PopupDeleteCommentBlockUser;
 import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
 import ir.rasen.charsoo.controller.helper.Image_M;
@@ -139,7 +136,7 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
             if (comments.get(i).id == commentId) {
                 //notify the FragmentHome to get updated last three comments for the post
                 Intent intent = new Intent(Params.UPDATE_TIME_LINE_POST_LAST_THREE_COMMENTS);
-                intent.putExtra(Params.POST_ID, postId);
+                intent.putExtra(Params.POST_ID_INT, postId);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
                 comments.remove(i);
@@ -156,7 +153,7 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
             if (comments.get(i).id == comment.id) {
                 comments.get(i).text = comment.text;
                 Intent intent = new Intent(Params.UPDATE_TIME_LINE_POST_LAST_THREE_COMMENTS);
-                intent.putExtra(Params.POST_ID, postId);
+                intent.putExtra(Params.POST_ID_INT, postId);
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
         }

@@ -65,7 +65,7 @@ public class Comment {
             Comment comment = new Comment();
             comment.id = jsonObjectComment.getInt(Params.COMMENT_ID);
             comment.userID = jsonObjectComment.getInt(Params.USER_UNDER_LINE_ID);
-            comment.username = jsonObjectComment.getString(Params.USER_NAME);
+            comment.username = jsonObjectComment.getString(Params.USER_NAME_STRING);
             comment.userProfilePictureID = jsonObjectComment.getInt(Params.PROFILE_PICTURE_ID);
             comment.text = jsonObjectComment.getString(Params.TEXT);
             comments.add(comment);
@@ -83,7 +83,7 @@ public class Comment {
 
     public static void openCommentActivity(Context context, boolean isOwner, int postId, int postOwnerBusinessId) {
         Intent intent = new Intent(context, ActivityComments.class);
-        intent.putExtra(Params.POST_ID, postId);
+        intent.putExtra(Params.POST_ID_INT, postId);
         intent.putExtra(Params.POST_OWNER_BUSINESS_ID, postOwnerBusinessId);
         intent.putExtra(Params.IS_OWNER, isOwner);
         context.startActivity(intent);

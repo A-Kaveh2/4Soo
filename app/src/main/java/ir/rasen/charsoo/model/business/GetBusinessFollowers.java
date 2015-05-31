@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.model.business;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -50,9 +49,9 @@ public class GetBusinessFollowers extends AsyncTask<Void, Void, ArrayList<BaseAd
                 JSONArray jsonArray = serverAnswer.getResultList();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.USER_ID),
+                    list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.USER_ID_INT),
                             jsonObject.getInt(Params.USER_PROFILE_PICTURE_ID),
-                            jsonObject.getString(Params.USER_NAME)));
+                            jsonObject.getString(Params.USER_NAME_STRING)));
                 }
                 return list;
             }

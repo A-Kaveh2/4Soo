@@ -65,8 +65,8 @@ public class GetAllCommentNotifications extends AsyncTask<Void, Void, ArrayList<
 
                     list.add(new CommentNotification(
                             jsonObject.getInt(Params.COMMENT_ID),
-                            jsonObject.getInt(Params.POST_ID),
-                            jsonObject.getString(Params.USER_NAME),
+                            jsonObject.getInt(Params.POST_ID_INT),
+                            jsonObject.getString(Params.USER_NAME_STRING),
                             userPicture,
                             postPicture,
                             jsonObject.getString(Params.TEXT),

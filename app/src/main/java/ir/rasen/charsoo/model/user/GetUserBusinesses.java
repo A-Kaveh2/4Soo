@@ -47,9 +47,9 @@ public class GetUserBusinesses extends AsyncTask<Void, Void, ArrayList<BaseAdapt
                 JSONArray jsonArray = serverAnswer.getResultList();
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.BUSINESS_ID),
+                    list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.BUSINESS_ID_STRING),
                             jsonObject.getInt(Params.SEARCH_PICTURE_ID),
-                            jsonObject.getString(Params.BUSINESS_USER_NAME)));
+                            jsonObject.getString(Params.BUSINESS_USERNAME_STRING)));
                 }
                 return list;
             }

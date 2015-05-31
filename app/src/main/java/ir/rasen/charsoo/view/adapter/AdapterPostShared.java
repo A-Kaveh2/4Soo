@@ -287,7 +287,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
     public void notifyUpdateTimeLineShare(int postId) {
         Intent intent = new Intent(Params.UPATE_TIME_LINE);
         intent.putExtra(Params.UPDATE_TIME_LINE_TYPE,Params.UPATE_TIME_LINE_TYPE_SHARE);
-        intent.putExtra(Params.POST_ID,postId);
+        intent.putExtra(Params.POST_ID_INT,postId);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
@@ -295,7 +295,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost,IUpdat
     public void notifyUpdateTimeLineCancelShare(int postId) {
         Intent intent = new Intent(Params.UPATE_TIME_LINE);
         intent.putExtra(Params.UPDATE_TIME_LINE_TYPE,Params.UPATE_TIME_LINE_TYPE_CANCEL_SHARE);
-        intent.putExtra(Params.POST_ID,postId);
+        intent.putExtra(Params.POST_ID_INT,postId);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
