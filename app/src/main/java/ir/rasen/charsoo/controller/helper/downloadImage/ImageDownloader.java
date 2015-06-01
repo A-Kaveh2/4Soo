@@ -46,8 +46,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.ImageHelper;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.URLs;
 import ir.rasen.charsoo.model.WebserviceGET;
 
@@ -63,9 +66,12 @@ public class ImageDownloader {
     MemoryCache memoryCache = new MemoryCache();
     FileCache fileCache;
     private static final String TAG = "ImageDownloader";
+    private ServerAnswer serverAnswer;
+    private Context context;
 
     public ImageDownloader(Context context) {
         fileCache = new FileCache(context);
+        this.context = context;
     }
 
     public void DownloadImage(String url, int size, OnImageDownloadListener downloadListener) {
@@ -91,25 +97,47 @@ public class ImageDownloader {
             }
         }
     */
-    private void queuePhoto(Integer pictureId, int imageSize, Image_M.ImageType imageType, ImageView imageView, boolean isRounded) {
-        PhotoToLoad p = new PhotoToLoad(pictureId,imageSize,imageType,imageView,isRounded);
+    private void queuePhoto(Integer pictureId, final int imageSize, Image_M.ImageType imageType, ImageView imageView, boolean isRounded) {
+        PhotoToLoad p = new PhotoToLoad(pictureId, imageSize, imageType, imageView, isRounded);
+
         AsyncTask<PhotoToLoad, Integer, Bitmap> asyncTask = new AsyncTask<PhotoToLoad, Integer, Bitmap>() {
             @Override
             protected Bitmap doInBackground(PhotoToLoad... params) {
                 PhotoToLoad pl = params[0];
+                String imageString;
+                Bitmap bitmap;
+
                 if (pl == null)
                     return null;
 
                 WebserviceGET webserviceGET = new WebserviceGET(URLs.DOWNLOAD_IMAGE, new ArrayList<>(
                         String.valueOf(pl.pictureId),
-                                String.valueOf(pl.imageSize)));
+                        String.valueOf(pl.imageSize)));
                 try {
                     serverAnswer = webserviceGET.execute(context);
                     if (serverAnswer.getSuccessStatus()) {
                         JSONObject jsonObject = serverAnswer.getResult();
-                        if (jsonObject != null) {
-                            return jsonObject.getString(Params.IMAGE);
+                        if (jsonObject == null)
+                            return null;
+
+                        imageString = jsonObject.getString(Params.IMAGE);
+                        if (imageString == null)
+                            bitmap = BitmapFactory.decodeResource(context.getResources(), Image_M.getDefaultImage(pl.imageType));
+                        else {
+                            bitmap = Image_M.getBitmapFromString(imageString);
+                            if(bitmap == null)
+                                return null;
+
+                            if (bitmap != null) {
+                                images.put(key, bitmap);
+                                if (isRounded)
+                                    downloadQueue.get(0).imageView.setImageBitmap(ImageHelper.getRoundedCornerBitmap(bitmap, context.getResources().getInteger(R.integer.squar_image_corner)));
+                                else
+                                    downloadQueue.get(0).imageView.setImageBitmap(bitmap);
+                                Image_M.saveBitmap(storagePath, downloadQueue.get(0).imageID + "_" + downloadQueue.get(0).imageSize + ".jpg", bitmap);
+                            }
                         }
+
                     } else
                         return null;
                 } catch (Exception e) {
@@ -235,7 +263,7 @@ public class ImageDownloader {
 
     // Task for the queue
     private class PhotoToLoad {
-        public int pictureId,imageSize;
+        public int pictureId, imageSize;
         Image_M.ImageType imageType;
         ImageView imageView;
         boolean isRounded;
