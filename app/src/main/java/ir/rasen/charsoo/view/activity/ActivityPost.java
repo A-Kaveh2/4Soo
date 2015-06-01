@@ -36,6 +36,8 @@ import ir.rasen.charsoo.model.post.GetPost;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
+import ir.rasen.charsoo.view.adapter.AdapterPostShared;
+import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationUserShared;
 import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupCancelSharePost;
@@ -229,10 +231,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
                     if (post.isShared) {
                         //cancel share the post
 
-                        new CancelShare(ActivityPost.this, LoginInfo.getUserId(ActivityPost.this), post.id,ActivityPost.this).execute();
-
-                        post.isShared = false;
-                        imageViewShare.setImageResource(R.drawable.ic_reply_grey);
+                        new DialogCancelShareConfirmationUserShared(ActivityPost.this, post.id, ActivityPost.this).show();
                     } else {
                         //share the post
 
@@ -409,7 +408,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
             Intent intent = new Intent(Params.CANCEL_USER_SHARE_POST);
             intent.putExtra(Params.POST_ID_INT, postId);
             LocalBroadcastManager.getInstance(ActivityPost.this).sendBroadcast(intent);
-            //finish();
+            finish();
         } else {
             //update time line
             Intent intentUpdateTimeLine = new Intent(Params.UPATE_TIME_LINE);
