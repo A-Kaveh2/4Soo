@@ -19,6 +19,7 @@ import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.MyGestureDetector;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
+import ir.rasen.charsoo.controller.helper.downloadImage.ImageDownloader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.Post;
@@ -27,6 +28,7 @@ import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
+import ir.rasen.charsoo.view.activity.ActivityPost;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationTimeLine;
 import ir.rasen.charsoo.view.dialog.PopupReportPostAdapter;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
@@ -137,7 +139,10 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
 
         //all post's types have these three fields
-        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
+        //downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
+        ImageDownloader imageDownloader = new ImageDownloader(context, items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage);
+        imageDownloader.DownloadImage();
+
         holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
         holder.textViewBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +165,11 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.llAnnouncementSection.setVisibility(View.GONE);
             holder.llCompleteSection.setVisibility(View.VISIBLE);
 
-            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, false);
+            //downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, false);
+            imageDownloader = new ImageDownloader(context, items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost);
+            imageDownloader.DownloadImage();
+
+
             holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
             holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
