@@ -46,11 +46,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+<<<<<<< HEAD
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.Params;
+=======
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.ImageHelper;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+>>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
 import ir.rasen.charsoo.controller.helper.URLs;
 import ir.rasen.charsoo.model.WebserviceGET;
 
@@ -66,6 +71,11 @@ public class ImageDownloader {
     MemoryCache memoryCache = new MemoryCache();
     FileCache fileCache;
     private static final String TAG = "ImageDownloader";
+<<<<<<< HEAD
+
+    public ImageDownloader(Context context) {
+        fileCache = new FileCache(context);
+=======
     private ServerAnswer serverAnswer;
     private Context context;
     private int pictureId,imageSize;
@@ -74,10 +84,14 @@ public class ImageDownloader {
     public ImageDownloader(Context context,Integer pictureId, int imageSize, Image_M.ImageType imageType, ImageView imageView) {
         fileCache = new FileCache(context);
         this.context = context;
+<<<<<<< HEAD
         this.pictureId = pictureId;
         this.imageSize = imageSize;
         this.imageType = imageType;
         this.imageView = imageView;
+=======
+>>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
+>>>>>>> a9c236e464533e7fc1df1d046ec4b1bbd615d3df
     }
 
     public void DownloadImage() {
@@ -92,21 +106,46 @@ public class ImageDownloader {
         }
     }
 
+<<<<<<< HEAD
     private void queuePhoto(Integer pictureId, final int imageSize, final Image_M.ImageType imageType) {
         final PhotoToLoad p = new PhotoToLoad(pictureId, imageSize, imageType);
+=======
+    /*    public void CreateBitmap(String url, Bitmap bitmap, int size) {
+            imageViews.put(bitmap, url);
+            Bitmap bitmap = memoryCache.get(url);
+            if (bitmap != null) {
+                imageView.setImageBitmap(bitmap);
+            } else {
+                queuePhoto(url, imageView, size);
+                imageView.setImageResource(R.drawable.ic_setting);
+            }
+        }
+    */
+<<<<<<< HEAD
+    private void queuePhoto(Integer pictureId, int imageSize, Image_M.ImageType imageType, ImageView imageView, boolean isRounded) {
+        PhotoToLoad p = new PhotoToLoad(pictureId,imageSize,imageType,imageView,isRounded);
+=======
+    private void queuePhoto(Integer pictureId, final int imageSize, Image_M.ImageType imageType, ImageView imageView, boolean isRounded) {
+        PhotoToLoad p = new PhotoToLoad(pictureId, imageSize, imageType, imageView, isRounded);
+>>>>>>> a9c236e464533e7fc1df1d046ec4b1bbd615d3df
 
+>>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
         AsyncTask<PhotoToLoad, Integer, Bitmap> asyncTask = new AsyncTask<PhotoToLoad, Integer, Bitmap>() {
             @Override
             protected Bitmap doInBackground(PhotoToLoad... params) {
                 PhotoToLoad pl = params[0];
+<<<<<<< HEAD
+=======
                 String imageString;
                 Bitmap bitmap;
 
+>>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
                 if (pl == null)
                     return null;
 
                 WebserviceGET webserviceGET = new WebserviceGET(URLs.DOWNLOAD_IMAGE, new ArrayList<>(Arrays.asList(
                         String.valueOf(pl.pictureId),
+<<<<<<< HEAD
                         String.valueOf(pl.imageSize))));
                 try {
                     serverAnswer = webserviceGET.execute(context);
@@ -115,13 +154,44 @@ public class ImageDownloader {
                     JSONObject jsonObject = serverAnswer.getResult();
                     if (jsonObject == null)
                         return null;
+=======
+<<<<<<< HEAD
+                                String.valueOf(pl.imageSize)));
+=======
+                        String.valueOf(pl.imageSize)));
+>>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
+                try {
+                    serverAnswer = webserviceGET.execute(context);
+                    if (serverAnswer.getSuccessStatus()) {
+                        JSONObject jsonObject = serverAnswer.getResult();
+<<<<<<< HEAD
+                        if (jsonObject != null) {
+                            return jsonObject.getString(Params.IMAGE);
+                        }
+=======
+                        if (jsonObject == null)
+                            return null;
+
+                        imageString = jsonObject.getString(Params.IMAGE);
+                        if (imageString == null)
+                            bitmap = BitmapFactory.decodeResource(context.getResources(), Image_M.getDefaultImage(pl.imageType));
+                        else {
+                            bitmap = Image_M.getBitmapFromString(imageString);
+                            if(bitmap == null)
+                                return null;
+>>>>>>> a9c236e464533e7fc1df1d046ec4b1bbd615d3df
 
                     imageString = jsonObject.getString(Params.IMAGE);
                     if (imageString == null)
                         return null;
 
+<<<<<<< HEAD
                     bitmap = Image_M.getBitmapFromString(imageString);
                     if (bitmap == null)
+=======
+>>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
+                    } else
+>>>>>>> a9c236e464533e7fc1df1d046ec4b1bbd615d3df
                         return null;
                     if (imageType == Image_M.ImageType.BUSINESS)
                         bitmap = ImageHelper.getRoundedCornerBitmap(bitmap, context.getResources().getInteger(R.integer.squar_image_corner));
@@ -153,7 +223,11 @@ public class ImageDownloader {
     }
     // Task for the queue
     private class PhotoToLoad {
+<<<<<<< HEAD
+        public int pictureId,imageSize;
+=======
         public int pictureId, imageSize;
+>>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
         Image_M.ImageType imageType;
 
 
