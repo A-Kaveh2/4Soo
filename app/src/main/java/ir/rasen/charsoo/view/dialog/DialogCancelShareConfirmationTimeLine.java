@@ -21,7 +21,7 @@ public class DialogCancelShareConfirmationTimeLine extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogCancelShareConfirmationTimeLine(final Context context, final Post post, final ImageView imageViewShareIcon) {
+    public DialogCancelShareConfirmationTimeLine(final Context context, final Post post, final ImageView imageViewShareIcon ) {
         super(context, context.getResources().getString(R.string.popup_warning),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.cancel_share));
