@@ -90,10 +90,10 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
                 break;
             case R.id.btn_login_register:
                 //The main function commented here because of the test
-                Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
-                startActivity(intent);
-                /*Intent intent = new Intent(this, ActivityMain.class);
+                /*Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
                 startActivity(intent);*/
+                Intent intent = new Intent(this, ActivityMain.class);
+                startActivity(intent);
                 break;
         }
     }
