@@ -29,7 +29,6 @@ import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
-import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationTimeLine;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationUserShared;
 import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
@@ -182,7 +181,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
                 holder.textViewComment3.setVisibility(View.VISIBLE);
             }
             if (items.get(position).isLiked)
-                holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                holder.imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
             if (items.get(position).isShared)
                 holder.imageViewShare.setImageResource(R.drawable.ic_reply_blue);
             else
@@ -232,7 +231,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
                         new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
 
                         items.get(position).isLiked = true;
-                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
                     }
 
                 }
