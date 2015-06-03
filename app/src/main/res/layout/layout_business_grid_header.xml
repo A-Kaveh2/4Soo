@@ -105,8 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
-            android:textColor="@color/Black"
-            android:textSize="@dimen/font_size_header" />
+            android:textColor="@color/Black"/>
 
         <ir.rasen.charsoo.view.widget_customized.TextViewFont
             android:id="@+id/textView_business_identifier"
@@ -114,7 +113,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:textColor="@color/DarkOrange"
-            android:textSize="@dimen/text_size_normal"
             android:visibility="gone" />
 
 
@@ -152,8 +150,7 @@
                         android:layout_gravity="center_horizontal"
                         android:gravity="center"
                         android:text="12345"
-                        android:textColor="@color/Gray"
-                        android:textSize="@dimen/font_size_header" />
+                        android:textColor="@color/Gray" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -185,7 +182,6 @@
                         android:gravity="center"
                         android:text="12345"
                         android:textColor="@color/Black"
-                        android:textSize="@dimen/font_size_header"
                         android:visibility="gone" />
                 </RelativeLayout>
 
@@ -195,8 +191,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/reviews"
-                    android:textColor="@color/Gray"
-                    android:textSize="@dimen/font_size_header" />
+                    android:textColor="@color/Gray" />
 
             </LinearLayout>
 
@@ -228,7 +223,6 @@
                         android:gravity="center"
                         android:text="12345"
                         android:textColor="@color/Black"
-                        android:textSize="@dimen/font_size_header"
                         android:visibility="gone" />
                 </RelativeLayout>
 
@@ -238,8 +232,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/info"
-                    android:textColor="@color/Gray"
-                    android:textSize="@dimen/font_size_header" />
+                    android:textColor="@color/Gray" />
 
             </LinearLayout>
 

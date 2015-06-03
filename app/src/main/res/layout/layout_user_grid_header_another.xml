@@ -93,7 +93,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/material_black"
-                    android:textSize="@dimen/font_size_header"
                     android:layout_gravity="end"
                     android:text="username"/>
 
@@ -103,7 +102,6 @@
                     android:layout_height="wrap_content"
                     android:text="userId"
                     android:textColor="@color/material_gray"
-                    android:textSize="@dimen/text_size_normal"
                     android:layout_gravity="end"/>
             </LinearLayout>
         </RelativeLayout>
@@ -146,7 +144,6 @@
                         android:gravity="center"
                         android:text="12345"
                         android:textColor="@color/Black"
-                        android:textSize="@dimen/font_size_header"
                         android:visibility="gone" />
                 </RelativeLayout>
 
@@ -156,8 +153,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/friends"
-                    android:textColor="@color/Gray"
-                    android:textSize="@dimen/font_size_header" />
+                    android:textColor="@color/Gray" />
 
             </LinearLayout>
 
@@ -189,7 +185,6 @@
                         android:gravity="center"
                         android:text="12345"
                         android:textColor="@color/Black"
-                        android:textSize="@dimen/font_size_header"
                         android:visibility="gone" />
                 </RelativeLayout>
 
@@ -199,8 +194,7 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:text="@string/reviews"
-                    android:textColor="@color/Gray"
-                    android:textSize="@dimen/font_size_header" />
+                    android:textColor="@color/Gray" />
 
             </LinearLayout>
 
@@ -242,8 +236,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="@string/businesses"
-                        android:textColor="@color/Gray"
-                        android:textSize="@dimen/font_size_header" />
+                        android:textColor="@color/Gray" />
                 </LinearLayout>
 
 

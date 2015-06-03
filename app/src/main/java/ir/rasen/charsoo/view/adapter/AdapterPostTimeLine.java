@@ -1,6 +1,9 @@
 package ir.rasen.charsoo.view.adapter;
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -131,8 +134,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             //announcement parts
             holder.llAnnouncementSection = (LinearLayout) view.findViewById(R.id.ll_announcement);
             holder.textViewAnnouncementUserIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_userIdentifier_title);
-            holder.textViewAnnouncementBusinessStaticPart = (TextViewFont) view.findViewById(R.id.textView_announcement_business_static_part);
-            holder.textViewAnnouncementBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_announcement_business_identifier);
+            holder.textViewAnnouncementBusiness = (TextViewFont) view.findViewById(R.id.textView_announcement_business);
             holder.btnView = (ButtonFont) view.findViewById(R.id.btn_announcement_view);
 
             view.setTag(holder);
@@ -362,18 +364,17 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
                 }
             });
 
-            holder.textViewAnnouncementBusinessIdentifier.setText(items.get(position).businessUserName);
-            holder.textViewAnnouncementBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Business.goBusinessHomeInfoPage(context, items.get(position).businessID);
-                }
-            });
 
-            if (items.get(position).type == Post.Type.Follow)
-                holder.textViewAnnouncementBusinessStaticPart.setText(context.getResources().getString(R.string.follow_announcement));
-            else if (items.get(position).type == Post.Type.Review)
-                holder.textViewAnnouncementBusinessStaticPart.setText(context.getResources().getString(R.string.review_announcement));
+            Spannable wordtoSpan = new SpannableString(context.getString(R.string.business)+" "
+                    + items.get(position).businessUserName + " "
+                    + (items.get(position).type == Post.Type.Follow ?
+                    context.getString(R.string.follow_announcement): "")
+                    + (items.get(position).type == Post.Type.Review ?
+                    context.getResources().getString(R.string.review_announcement):""));
+
+            wordtoSpan.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.material_blue)), (context.getString(R.string.business)+" ").length(), (context.getString(R.string.business)+" "+items.get(position).businessUserName).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+            holder.textViewAnnouncementBusiness.setText(wordtoSpan);
 
             holder.btnView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -429,8 +430,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         //announcement parts
         LinearLayout llAnnouncementSection;
         TextViewFont textViewAnnouncementUserIdentifier;
-        TextViewFont textViewAnnouncementBusinessIdentifier;
-        TextViewFont textViewAnnouncementBusinessStaticPart;
+        TextViewFont textViewAnnouncementBusiness;
 
         GestureDetector gestureDetector;
 
