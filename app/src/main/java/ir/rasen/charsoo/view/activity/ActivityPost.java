@@ -25,7 +25,7 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
-import ir.rasen.charsoo.controller.helper.downloadImage.ImageDownloader;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.MyApplication;
@@ -80,8 +80,8 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
     TextViewFont textViewCode;
     LinearLayout llPriceSection, llCodeSection;
     Post post;
-    //DownloadImages downloadImages;
-    ImageDownloader imageDownloader;
+    //SimpleLoader simpleLoader;
+    SimpleLoader simpleLoader;
     Post.GetPostType getPostType;
     int postId, businessId;
 
@@ -102,6 +102,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         else if (postType.equals(Post.GetPostType.SEARCH.name()))
             getPostType = Post.GetPostType.SEARCH;
 
+        simpleLoader = new SimpleLoader(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -331,14 +332,12 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
 
     public void initialize() {
         //downloadImages.download(post.businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, imageViewProfileImage, true);
-        imageDownloader = new ImageDownloader(ActivityPost.this,post.businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, imageViewProfileImage);
-        imageDownloader.DownloadImage();
+        simpleLoader.loadImage(post.businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, imageViewProfileImage);
         textViewDate.setText(PersianDate.getCreationDate(ActivityPost.this, post.creationDate));
         textViewBusinessIdentifier.setText(post.businessUserName);
 
         //downloadImages.download(post.pictureId, Image_M.LARGE, Image_M.ImageType.POST, imageViewPost, false);
-        imageDownloader = new ImageDownloader(ActivityPost.this,post.pictureId, Image_M.LARGE, Image_M.ImageType.POST, imageViewPost);
-        imageDownloader.DownloadImage();
+        simpleLoader.loadImage(post.pictureId, Image_M.LARGE, Image_M.ImageType.POST, imageViewPost);
         textViewLikeNumber.setText(String.valueOf(post.likeNumber));
         textViewCommentNumber.setText(String.valueOf(post.commentNumber));
         textViewShareNumber.setText(String.valueOf(post.shareNumber));

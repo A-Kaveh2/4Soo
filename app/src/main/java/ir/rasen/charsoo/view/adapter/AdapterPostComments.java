@@ -14,19 +14,19 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupDeleteCommentBlockUser;
 import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
-import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.
@@ -39,7 +39,7 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
 
     private ArrayList<Comment> comments;
     private Activity context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     IWebserviceResponse iWebserviceResponse;
     ProgressDialog progressDialog;
     int postOwnerBusinessId, postId;
@@ -49,7 +49,7 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
     public AdapterPostComments(Activity context, boolean isUserOwner, int postId, int postOwnerBusinessId, ArrayList<Comment> comments, ProgressDialog progressDialog) {
         this.context = context;
         this.comments = comments;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         this.iWebserviceResponse = this;
         this.progressDialog = progressDialog;
         this.postOwnerBusinessId = postOwnerBusinessId;
@@ -95,7 +95,7 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
 
 
         //download image with customized class via imageId
-        downloadImages.download(comments.get(position).userProfilePictureID, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage, false);
+        simpleLoader.loadImage(comments.get(position).userProfilePictureID, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage);
         holder.textViewUserIdentifier.setText(comments.get(position).username);
         holder.textViewText.setText(comments.get(position).text);
 

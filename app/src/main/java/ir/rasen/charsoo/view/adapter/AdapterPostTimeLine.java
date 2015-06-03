@@ -22,18 +22,18 @@ import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.MyGestureDetector;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
-import ir.rasen.charsoo.controller.helper.downloadImage.ImageDownloader;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationTimeLine;
 import ir.rasen.charsoo.view.dialog.PopupReportPostAdapter;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
+import ir.rasen.charsoo.view.widget_customized.MaterialProgressBar;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 
@@ -45,7 +45,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
     private ArrayList<Post> items;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     private int screedWidth;
     private IReportPost iReportPost;
     GridView gridView;
@@ -54,7 +54,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
     public AdapterPostTimeLine(Context context, ArrayList<Post> items) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         screedWidth = context.getResources().getDisplayMetrics().widthPixels;
         iReportPost = this;
 
@@ -109,6 +109,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             //complete section
             holder.llCompleteSection = (LinearLayout) view.findViewById(R.id.ll_complete_post_section);
             holder.imageViewPost = (ImageView) view.findViewById(R.id.imageView_post);
+            holder.pbPost = (MaterialProgressBar) view.findViewById(R.id.progressBarIndeterminate);
             holder.imageViewPostLike = (ImageView) view.findViewById(R.id.imageView_post_like);
 
             holder.imageViewLike = (ImageView) view.findViewById(R.id.imageView_like);
@@ -163,16 +164,14 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
         if (items.get(position).type == Post.Type.Complete) {
             //this post is not an announcement
-            ImageDownloader imageDownloader = new ImageDownloader(context, items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage);
-            imageDownloader.DownloadImage();
+            SimpleLoader simpleLoader = new SimpleLoader(context);
+            simpleLoader.loadImage(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage);
 
             holder.llAnnouncementSection.setVisibility(View.GONE);
             holder.llCompleteSection.setVisibility(View.VISIBLE);
 
             //downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, false);
-            imageDownloader = new ImageDownloader(context, items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost);
-            imageDownloader.DownloadImage();
-
+            simpleLoader.loadImage(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, holder.pbPost);
 
             holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
             holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
@@ -353,8 +352,8 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder.llCompleteSection.setVisibility(View.GONE);
             holder.llAnnouncementSection.setVisibility(View.VISIBLE);
 
-            ImageDownloader imageDownloader = new ImageDownloader(context, items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImageShared);
-            imageDownloader.DownloadImage();
+            SimpleLoader simpleLoader = new SimpleLoader(context);
+            simpleLoader.loadImage(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImageShared);
 
             holder.textViewAnnouncementUserIdentifier.setText(items.get(position).userName);
             holder.textViewAnnouncementUserIdentifier.setOnClickListener(new View.OnClickListener() {
@@ -365,14 +364,15 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             });
 
 
-            Spannable wordtoSpan = new SpannableString(context.getString(R.string.business)+" "
-                    + items.get(position).businessUserName + " "
+            Spannable wordtoSpan = new SpannableString(//context.getString(R.string.business)+" "+
+                    "\u200F"+
+                    items.get(position).businessUserName + " "
                     + (items.get(position).type == Post.Type.Follow ?
                     context.getString(R.string.follow_announcement): "")
                     + (items.get(position).type == Post.Type.Review ?
                     context.getResources().getString(R.string.review_announcement):""));
 
-            wordtoSpan.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.material_blue)), (context.getString(R.string.business)+" ").length(), (context.getString(R.string.business)+" "+items.get(position).businessUserName).length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            wordtoSpan.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.material_blue)), 0, (items.get(position).businessUserName).length()+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             holder.textViewAnnouncementBusiness.setText(wordtoSpan);
 
@@ -407,6 +407,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
         //complete post section
         LinearLayout llCompleteSection;
         ImageView imageViewPost;
+        MaterialProgressBar pbPost;
         ImageView imageViewPostLike;
         TextViewFont textViewLikeNumber;
         TextViewFont textViewCommentNumber;

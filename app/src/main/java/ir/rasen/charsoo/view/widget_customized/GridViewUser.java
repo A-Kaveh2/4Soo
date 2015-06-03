@@ -20,9 +20,9 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.Permission;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.activity.ActivityUserProfile;
@@ -148,8 +148,8 @@ public class GridViewUser implements IWebserviceResponse {
             if (!hasRequest)
                 imageViewHasRequest.setVisibility(View.GONE);
 
-            DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
-            downloadCoverImage.download(profilePictureId, imageViewCover, Image_M.ImageType.USER);
+            SimpleLoader simpleLoader = new SimpleLoader(activity);
+            simpleLoader.loadImage(profilePictureId, Image_M.LARGE, Image_M.ImageType.USER, imageViewCover);
 
             imageViewEdit.setOnClickListener(new View.OnClickListener() {
                 @Override

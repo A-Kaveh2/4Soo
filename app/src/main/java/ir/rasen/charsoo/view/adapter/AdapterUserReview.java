@@ -12,15 +12,17 @@ import android.widget.RatingBar;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.view.dialog.PopupEditDeleteReview;
-import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
+import ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView;
 
 /**
  * Created by android on 3/7/2015.
@@ -29,7 +31,7 @@ public class AdapterUserReview extends BaseAdapter implements  IReviewChange {
 
     private ArrayList<Review> reviews;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     IWebserviceResponse iWebserviceResponse;
     IReviewChange iReviewChange;
     ProgressDialog progressDialog;
@@ -38,7 +40,7 @@ public class AdapterUserReview extends BaseAdapter implements  IReviewChange {
     public AdapterUserReview(Context context,int visitedUserId, ArrayList<Review> reviews, IWebserviceResponse iWebserviceResponse, ProgressDialog progressDialog) {
         this.context = context;
         this.reviews = reviews;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         this.iWebserviceResponse = iWebserviceResponse;
         iReviewChange = this;
         this.progressDialog = progressDialog;
@@ -72,7 +74,7 @@ public class AdapterUserReview extends BaseAdapter implements  IReviewChange {
         if (view == null) {
             holder = new Holder();
             view = LayoutInflater.from(context).inflate(R.layout.item_user_review_adapter, viewGroup, false);
-            holder.imageViewImage = (ImageView) view.findViewById(R.id.imageView_review_adapter_item_image_user);
+            holder.imageViewImage = (RoundedImageView) view.findViewById(R.id.imageView_review_adapter_item_image_user);
             holder.textViewIdentifier = (TextViewFont) view.findViewById(R.id.textView_review_adapter_item_title);
             holder.textViewText = (TextViewFont) view.findViewById(R.id.textView_review_adapter_item_text);
             holder.ratingBar = (RatingBar) view.findViewById(R.id.ratingBar_review);
@@ -82,7 +84,7 @@ public class AdapterUserReview extends BaseAdapter implements  IReviewChange {
             holder = (Holder) view.getTag();
 
         //download business profile picture with customized class via imageId
-        downloadImages.download(reviews.get(position).businessPicutreId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage,true);
+        simpleLoader.loadImage(reviews.get(position).businessPicutreId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage);
         holder.textViewIdentifier.setText(reviews.get(position).businessUserName);
         holder.textViewText.setText(reviews.get(position).text);
         holder.ratingBar.setRating(reviews.get(position).rate);

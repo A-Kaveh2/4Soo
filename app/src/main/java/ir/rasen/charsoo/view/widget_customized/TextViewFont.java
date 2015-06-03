@@ -10,6 +10,8 @@ import android.widget.TextView;
 public class TextViewFont extends TextView {
     final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";
 
+    boolean textSet = false;
+
     public TextViewFont(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(attrs);
@@ -64,4 +66,5 @@ public class TextViewFont extends TextView {
             }
         }
     }
+
 }

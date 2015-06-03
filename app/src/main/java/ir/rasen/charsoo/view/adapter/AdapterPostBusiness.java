@@ -11,19 +11,19 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Comment;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
+import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
+import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
 import ir.rasen.charsoo.view.interface_m.IDeletePost;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
 
 /**
  * Created by android on 3/7/2015.
@@ -32,7 +32,7 @@ public class AdapterPostBusiness extends BaseAdapter {
 
     private ArrayList<Post> items;
     private Activity activity;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     private int screedWidth;
     private IDeletePost iDeletePost;
     private boolean isUserOwner;
@@ -40,7 +40,7 @@ public class AdapterPostBusiness extends BaseAdapter {
     public AdapterPostBusiness(Activity activity, ArrayList<Post> items, boolean isUserOwner, IDeletePost iDeletePost) {
         this.activity = activity;
         this.items = items;
-        downloadImages = new DownloadImages(activity);
+        simpleLoader = new SimpleLoader(activity);
         screedWidth = this.activity.getResources().getDisplayMetrics().widthPixels;
         this.iDeletePost = iDeletePost;
         this.isUserOwner = isUserOwner;
@@ -110,14 +110,14 @@ public class AdapterPostBusiness extends BaseAdapter {
         holder.llAnnouncementSection.setVisibility(View.GONE);
 
         //all post's types have these three fields
-        downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
+        simpleLoader.loadImage(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage);
         holder.textViewDate.setText(PersianDate.getCreationDate(activity, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
 
         if (items.get(position).picture != null && !items.get(position).picture.equals("") && items.get(position).pictureId == 0)
             holder.imageViewPost.setImageBitmap(Image_M.getBitmapFromString(items.get(position).picture));
         else
-            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, false);
+            simpleLoader.loadImage(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost);
         holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
         holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
         holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));

@@ -2,11 +2,8 @@ package ir.rasen.charsoo.view.widget_customized.imageviews;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
-public class RoundedSquareImageView extends ImageView {
+public class RoundedSquareImageView extends RoundedImageView {
 
     public RoundedSquareImageView(Context context) {
         super(context);
@@ -24,10 +21,6 @@ public class RoundedSquareImageView extends ImageView {
     }
 
     private void init(Context context) {
-        RelativeLayout.LayoutParams params = new RelativeLayout
-                .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                context.getResources().getDisplayMetrics().widthPixels);
-        setLayoutParams(params);
     }
 
     @Override

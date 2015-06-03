@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/img_grid_post"/>
+    <ir.rasen.charsoo.view.widget_customized.MaterialProgressBar
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:background="@color/material_blue"
+        android:layout_centerInParent="true"
+        android:id="@+id/pb_grid_post"/>
+
+</RelativeLayout>

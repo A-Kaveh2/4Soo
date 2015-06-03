@@ -12,12 +12,12 @@ import android.widget.RatingBar;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.
@@ -26,7 +26,7 @@ public class AdapterBusinessReview extends BaseAdapter  {
 
     private ArrayList<Review> reviews;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     ListView listView;
 
 
@@ -34,7 +34,7 @@ public class AdapterBusinessReview extends BaseAdapter  {
     public AdapterBusinessReview(Context context, ArrayList<Review> reviews) {
         this.context = context;
         this.reviews = reviews;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
     }
     public void loadMore(ArrayList<Review> newItem){
         this.reviews.addAll(newItem);
@@ -78,7 +78,7 @@ public class AdapterBusinessReview extends BaseAdapter  {
             holder = (Holder) view.getTag();
 
         //download business profile picture with customized class via imageId
-        downloadImages.download(reviews.get(position).userPicutreId, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
+        simpleLoader.loadImage(reviews.get(position).userPicutreId, Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage);
         holder.textViewIdentifier.setText(reviews.get(position).userName);
         holder.textViewText.setText(reviews.get(position).text);
         holder.ratingBar.setRating(reviews.get(position).rate);
