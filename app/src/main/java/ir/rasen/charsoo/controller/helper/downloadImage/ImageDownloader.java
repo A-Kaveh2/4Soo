@@ -53,6 +53,7 @@ import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.URLs;
+import ir.rasen.charsoo.controller.image_loader.cache.memory.MemoryCache;
 import ir.rasen.charsoo.model.WebserviceGET;
 
 /**
