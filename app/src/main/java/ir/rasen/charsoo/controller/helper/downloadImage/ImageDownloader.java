@@ -45,17 +45,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-<<<<<<< HEAD
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
-=======
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.ImageHelper;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
->>>>>>> 5ab01b795b1f84cf7476642bc3ec399e52069180
 import ir.rasen.charsoo.controller.helper.URLs;
 import ir.rasen.charsoo.model.WebserviceGET;
 
@@ -71,11 +67,11 @@ public class ImageDownloader {
     MemoryCache memoryCache = new MemoryCache();
     FileCache fileCache;
     private static final String TAG = "ImageDownloader";
-<<<<<<< HEAD
+
 
     public ImageDownloader(Context context) {
         fileCache = new FileCache(context);
-=======
+    }
     private ServerAnswer serverAnswer;
     private Context context;
     private int pictureId,imageSize;
@@ -84,7 +80,6 @@ public class ImageDownloader {
     public ImageDownloader(Context context,Integer pictureId, int imageSize, Image_M.ImageType imageType, ImageView imageView) {
         fileCache = new FileCache(context);
         this.context = context;
-<<<<<<< HEAD
         this.pictureId = pictureId;
         this.imageSize = imageSize;
         this.imageType = imageType;
