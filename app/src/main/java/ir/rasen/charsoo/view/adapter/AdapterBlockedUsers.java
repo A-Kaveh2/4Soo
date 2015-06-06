@@ -14,10 +14,10 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.model.business.UnblockUser;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.
@@ -26,7 +26,7 @@ public class AdapterBlockedUsers extends BaseAdapter {
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     ListView listView;
     int businessId;
 
@@ -34,7 +34,7 @@ public class AdapterBlockedUsers extends BaseAdapter {
     public AdapterBlockedUsers(Context context,int businessId, ArrayList<BaseAdapterItem> items) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         this.businessId = businessId;
     }
 
@@ -78,7 +78,7 @@ public class AdapterBlockedUsers extends BaseAdapter {
             holder = (Holder) view.getTag();
 
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
+        simpleLoader.loadImage(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
         holder.imageViewUnblock.setOnClickListener(new View.OnClickListener() {
             @Override

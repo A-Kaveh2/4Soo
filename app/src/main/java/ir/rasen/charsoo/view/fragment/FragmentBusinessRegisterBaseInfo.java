@@ -17,13 +17,6 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.Category;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.SubCategory;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
-import ir.rasen.charsoo.view.dialog.PopupCategories;
-import ir.rasen.charsoo.view.dialog.PopupSubCategories;
 import ir.rasen.charsoo.controller.helper.ImageHelper;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
@@ -31,14 +24,21 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.helper.WebservicesHandler;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.Category;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.SubCategory;
+import ir.rasen.charsoo.model.business.GetBusinessGategories;
+import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.dialog.PopupCategories;
+import ir.rasen.charsoo.view.dialog.PopupSubCategories;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
-import ir.rasen.charsoo.model.business.GetBusinessGategories;
-import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
 
 public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
     public static final String TAG="FragmentBusinessRegisterBaseInfo";
@@ -157,8 +157,8 @@ public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebse
         //if the user is editing the business
         if (isEditing) {
             editingBusiness = ((MyApplication) getActivity().getApplication()).business;
-            DownloadImages downloadImages = new DownloadImages(getActivity());
-            downloadImages.download(editingBusiness.profilePictureId, Image_M.MEDIUM, Image_M.ImageType.BUSINESS, imageViewPicture, true);
+            SimpleLoader simpleLoader = new SimpleLoader(getActivity());
+            simpleLoader.loadImage(editingBusiness.profilePictureId, Image_M.MEDIUM, Image_M.ImageType.BUSINESS, imageViewPicture);
             editTextName.setText(editingBusiness.name);
             editTextIdentifier.setText(editingBusiness.businessIdentifier);
             editTextIdentifier.setEnabled(false);

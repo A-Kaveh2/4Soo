@@ -12,16 +12,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.view.interface_m.IFriendRequest;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.AnswerRequestFriendship;
+import ir.rasen.charsoo.view.interface_m.IFriendRequest;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.
@@ -30,7 +29,7 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     ListView listView;
     ArrayList<BaseAdapterItem> acceptedUsers;
     IFriendRequest iFriendRequest;
@@ -39,7 +38,7 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
     public AdapterUserFriendshipRequest(Context context, ArrayList<BaseAdapterItem> items) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         acceptedUsers = new ArrayList<>();
         this.iFriendRequest = iFriendRequest;
     }
@@ -103,7 +102,7 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
             }
         });
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
+        simpleLoader.loadImage(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
 
         return view;

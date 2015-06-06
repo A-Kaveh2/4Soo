@@ -9,8 +9,8 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 import ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView;
 
@@ -21,12 +21,12 @@ public class AdapterUserBusinesses extends BaseAdapter {
 
     private ArrayList<Business> items;
     private Context context;
-    private DownloadImages downloadImages;
+    private SimpleLoader simpleLoader;
 
     public AdapterUserBusinesses(Context context, ArrayList<Business> items) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
     }
 
 

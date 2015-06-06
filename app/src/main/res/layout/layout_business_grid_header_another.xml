@@ -107,7 +107,6 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@color/material_black"
-                    android:textSize="@dimen/font_size_header"
                     android:layout_gravity="end"/>
 
                 <ir.rasen.charsoo.view.widget_customized.TextViewFont
@@ -116,7 +115,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/businesses"
                     android:textColor="@color/material_gray"
-                    android:textSize="@dimen/text_size_normal"
                     android:layout_gravity="end"/>
             </LinearLayout>
         </RelativeLayout>
@@ -156,8 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textColor="@color/Gray"
-                        android:textSize="@dimen/font_size_header" />
+                        android:textColor="@color/Gray" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -182,8 +179,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/reviews"
-                    android:textColor="@color/Gray"
-                    android:textSize="@dimen/font_size_header" />
+                    android:textColor="@color/Gray" />
             </LinearLayout>
 
 
@@ -208,8 +204,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/info"
-                    android:textColor="@color/Gray"
-                    android:textSize="@dimen/font_size_header" />
+                    android:textColor="@color/Gray" />
             </LinearLayout>
 
         </LinearLayout>

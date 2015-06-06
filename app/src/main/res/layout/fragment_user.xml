@@ -3,12 +3,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ll_container"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:layout_width="match_parent">
 
     <com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter
-        android:background="@color/White"
-        android:cacheColorHint="#00000000"
-        android:divider="#19000000"
         android:fadingEdge="none"
         android:fastScrollEnabled="false"
         android:footerDividersEnabled="false"
@@ -17,6 +15,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
+        android:divider="@android:color/transparent"
         android:smoothScrollbar="true" />
 </LinearLayout>
 

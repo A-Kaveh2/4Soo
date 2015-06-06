@@ -56,7 +56,7 @@
             android:layout_alignParentRight="true"
             android:gravity="center">
 
-            <ImageView
+            <ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView
                 android:layout_width="@dimen/adapter_user_image_height"
                 android:layout_height="@dimen/adapter_user_image_height"
                 android:id="@+id/imageView_review_adapter_item_image_user"

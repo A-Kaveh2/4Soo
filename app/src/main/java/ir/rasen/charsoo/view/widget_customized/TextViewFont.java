@@ -7,57 +7,64 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
 
-import ir.rasen.charsoo.R;
-
 public class TextViewFont extends TextView {
+    final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";
+
+    boolean textSet = false;
+
     public TextViewFont(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init();
+        init(attrs);
     }
 
     public TextViewFont(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public TextViewFont(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
-    private void init() {
+    private void init(AttributeSet attrs) {
         if (!isInEditMode()) {
             Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/font.ttf");
             setTypeface(tf);
 
             int density = getResources().getDisplayMetrics().densityDpi;
 
-            int baseFontSize = 0;
-            int screenSize = getResources().getConfiguration().screenLayout &
-                    Configuration.SCREENLAYOUT_SIZE_MASK;
+            int textSize = attrs!=null ? attrs.getAttributeResourceValue(ANDROIDXML,"textSize",-1) : -1;
 
-            switch (screenSize) {
-                case Configuration.SCREENLAYOUT_SIZE_SMALL:
-                    baseFontSize = 8;
-                    break;
-                case Configuration.SCREENLAYOUT_SIZE_NORMAL:
-                    if (density < DisplayMetrics.DENSITY_XHIGH)
+            if(textSize==-1) {
+                int baseFontSize = 0;
+                int screenSize = getResources().getConfiguration().screenLayout &
+                        Configuration.SCREENLAYOUT_SIZE_MASK;
+
+                switch (screenSize) {
+                    case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                        baseFontSize = 8;
+                        break;
+                    case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                        if (density < DisplayMetrics.DENSITY_XHIGH)
+                            baseFontSize = 11;
+                        else
+                            baseFontSize = 14;
+                        break;
+                    case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                        baseFontSize = 15;
+                        break;
+                    case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                        baseFontSize = 18;
+                        break;
+                    case Configuration.SCREENLAYOUT_SIZE_UNDEFINED:
                         baseFontSize = 11;
-                    else
-                        baseFontSize = 14;
-                    break;
-                case Configuration.SCREENLAYOUT_SIZE_LARGE:
-                    baseFontSize = 15;
-                    break;
-                case Configuration.SCREENLAYOUT_SIZE_XLARGE:
-                    baseFontSize = 18;
-                    break;
-                case Configuration.SCREENLAYOUT_SIZE_UNDEFINED:
-                    baseFontSize = 11;
-                    break;
+                        break;
 
+                }
+                setTextSize(baseFontSize);
             }
-            setTextSize(baseFontSize);
         }
     }
+
 }

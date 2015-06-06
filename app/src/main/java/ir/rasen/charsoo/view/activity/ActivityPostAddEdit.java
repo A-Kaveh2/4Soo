@@ -23,9 +23,9 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.helper.WebservicesHandler;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.AddPost;
 import ir.rasen.charsoo.model.post.GetPost;
 import ir.rasen.charsoo.model.post.UpdatePost;
@@ -243,8 +243,8 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
                 Post post = (Post) result;
                 editTextTitle.setText(post.title);
                 //download and display the post picture
-                DownloadImages downloadImages = new DownloadImages(ActivityPostAddEdit.this);
-                downloadImages.download(post.pictureId, Image_M.MEDIUM, Image_M.ImageType.POST, imageViewPostPicture, false);
+                SimpleLoader simpleLoader = new SimpleLoader(ActivityPostAddEdit.this);
+                simpleLoader.loadImage(post.pictureId, Image_M.MEDIUM, Image_M.ImageType.POST, imageViewPostPicture);
 
                 editTextDescription.setText(post.description);
                 if (post.hashtagList.size() != 0) {

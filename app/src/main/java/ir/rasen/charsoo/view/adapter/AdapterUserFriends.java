@@ -10,15 +10,15 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.view.interface_m.ICancelFriendship;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.RequestCancelFriendship;
+import ir.rasen.charsoo.view.interface_m.ICancelFriendship;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.
@@ -27,7 +27,7 @@ public class AdapterUserFriends extends BaseAdapter implements ICancelFriendship
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     ICancelFriendship iCancelFriendship;
     //IWebserviceResponse iWebserviceResponse;
     //ProgressDialog progressDialog;
@@ -36,7 +36,7 @@ public class AdapterUserFriends extends BaseAdapter implements ICancelFriendship
     public AdapterUserFriends(Context context, int visitedUserId, ArrayList<BaseAdapterItem> items) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         iCancelFriendship = this;
         //this.iWebserviceResponse = iWebserviceResponse;
         //this.progressDialog = progressDialog;
@@ -97,7 +97,7 @@ public class AdapterUserFriends extends BaseAdapter implements ICancelFriendship
         });
 
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage,false);
+        simpleLoader.loadImage(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
 
         return view;

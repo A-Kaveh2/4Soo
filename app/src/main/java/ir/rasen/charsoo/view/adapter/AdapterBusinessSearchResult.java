@@ -12,11 +12,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
+import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
 
 /**
  * Created by android on 3/7/2015.
@@ -25,14 +25,14 @@ public class AdapterBusinessSearchResult extends BaseAdapter {
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     ListView listView;
 
 
     public AdapterBusinessSearchResult(Context context, ArrayList<BaseAdapterItem> items) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
     }
 
     public void loadMore(ArrayList<BaseAdapterItem> newItem){
@@ -79,7 +79,7 @@ public class AdapterBusinessSearchResult extends BaseAdapter {
             }
         });
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage,true);
+        simpleLoader.loadImage(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
 
         return view;

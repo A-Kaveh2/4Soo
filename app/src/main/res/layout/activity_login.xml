@@ -88,8 +88,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="@string/forgot_password"
-                    android:textColor="@color/Black"
-                    android:textSize="@dimen/text_size_large" />
+                    android:textColor="@color/Black" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

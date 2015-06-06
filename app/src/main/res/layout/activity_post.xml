@@ -41,7 +41,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="right|center"
-                    android:textSize="@dimen/font_size_adapter_item_title"
                     android:layout_toRightOf="@+id/ll_image_yes"
                     android:layout_margin="@dimen/base_adapter_item_text_margin"
                     android:layout_toLeftOf="@+id/ll_image_profile"
@@ -101,8 +100,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-
-                        android:textSize="@dimen/font_size_adapter_item_text"
                         android:id="@+id/textView_share_number" />
 
                     <ImageView
@@ -116,8 +113,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-
-                        android:textSize="@dimen/font_size_adapter_item_text"
                         android:id="@+id/textView_comment_number" />
 
                     <ImageView
@@ -131,8 +126,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-
-                        android:textSize="@dimen/font_size_adapter_item_text"
                         android:id="@+id/textView_like_number" />
 
                     <ImageView
@@ -149,8 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
                     android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/font_size_adapter_item_title" />
+                    android:layout_marginTop="10dp" />
 
                 <ir.rasen.charsoo.view.widget_customized.TextViewFont
                     android:id="@+id/textView_description"
@@ -159,8 +151,7 @@
                     android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
                     android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="@dimen/post_adapter_description_margin"
-                    android:textSize="@dimen/font_size_adapter_item_title" />
+                    android:layout_marginBottom="@dimen/post_adapter_description_margin" />
 
                 <LinearLayout
                     android:id="@+id/ll_price_section"
@@ -177,21 +168,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
-                        android:text="@string/rial"
-                        android:textSize="@dimen/font_rial" />
+                        android:text="@string/rial" />
 
                     <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:id="@+id/textView_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:textSize="@dimen/font_size_adapter_item_title" />
+                        android:layout_marginRight="5dp" />
 
                     <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/price"
-                        android:textSize="@dimen/font_size_adapter_item_title" />
+                        android:text="@string/price" />
 
                 </LinearLayout>
 
@@ -211,14 +199,12 @@
                         android:id="@+id/textView_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:textSize="@dimen/font_size_adapter_item_title" />
+                        android:layout_marginRight="5dp" />
 
                     <ir.rasen.charsoo.view.widget_customized.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/product_code"
-                        android:textSize="@dimen/font_size_adapter_item_title" />
+                        android:text="@string/product_code" />
 
                 </LinearLayout>
 
@@ -248,7 +234,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment1_user_identifier"
-                            android:textSize="@dimen/font_size_adapter_item_title"
                             android:textColor="@color/Black"
                             android:visibility="gone" />
 
@@ -256,8 +241,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment1"
-                            android:visibility="gone"
-                            android:textSize="@dimen/font_size_adapter_item_text" />
+                            android:visibility="gone" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -273,15 +257,13 @@
                             android:layout_height="wrap_content"
                             android:visibility="gone"
                             android:id="@+id/textView_comment2_user_identifier"
-                            android:textSize="@dimen/font_size_adapter_item_title"
                             android:textColor="@color/Black" />
 
                         <ir.rasen.charsoo.view.widget_customized.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment2"
-                            android:visibility="gone"
-                            android:textSize="@dimen/font_size_adapter_item_text" />
+                            android:visibility="gone" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -297,15 +279,13 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment3_user_identifier"
                             android:visibility="gone"
-                            android:textSize="@dimen/font_size_adapter_item_title"
                             android:textColor="@color/Black" />
 
                         <ir.rasen.charsoo.view.widget_customized.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment3"
-                            android:visibility="gone"
-                            android:textSize="@dimen/font_size_adapter_item_text" />
+                            android:visibility="gone" />
                     </LinearLayout>
                 </LinearLayout>
 

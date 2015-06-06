@@ -5,24 +5,27 @@ package ir.rasen.charsoo.view.adapter;
  */
 
 import android.app.Activity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
 
+import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.view.widget_customized.MaterialProgressBar;
+import ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView;
 
 public class AdapterPostGrid extends BaseAdapter {
     private Activity activity;
     ArrayList<SearchItemPost> items;
     private int screedWidth;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     //GridViewHeaderFooter gridViewHF;
     com.handmark.pulltorefresh.library.HFGridView gridView;
     int businessIdForBusinessPosts;
@@ -33,7 +36,7 @@ public class AdapterPostGrid extends BaseAdapter {
         this.activity = activity;
         items = posts;
         screedWidth = activity.getResources().getDisplayMetrics().widthPixels;
-        downloadImages = new DownloadImages(activity);
+        simpleLoader = new SimpleLoader(activity);
         this.businessIdForBusinessPosts = businessIdForBusinessPosts;
         this.getPostType = getPostType;
     }
@@ -56,8 +59,7 @@ public class AdapterPostGrid extends BaseAdapter {
     }
 
     // create a new ImageView for each item referenced by the Adapter
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        ImageView imageView = null;
+    public View getView(final int position, View view, ViewGroup parent) {
        /* if (gridView == null) {
             try {
                 gridView = (com.handmark.pulltorefresh.library.HFGridView) parent;
@@ -69,24 +71,21 @@ public class AdapterPostGrid extends BaseAdapter {
             }
 
         }*/
-        if (convertView == null) {
-            imageView = new ImageView(activity);
-            imageView.setLayoutParams(new GridView.LayoutParams((screedWidth / 3), (screedWidth / 3)));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        } else {
-            try {
-                imageView = (ImageView) convertView;
-            } catch (Exception e) {
-                //new DialogMessage(context, context.getString(R.string.try_again)).show();
-            }
-        }
+        final Holder holder;
+        if (view == null) {
+            holder = new Holder();
+            view = LayoutInflater.from(activity).inflate(R.layout.item_post_adapter_grid, parent, false);
+            holder.imageView = (SquareImageView) view.findViewById(R.id.img_grid_post);
+            holder.progressBar = (MaterialProgressBar) view.findViewById(R.id.pb_grid_post);
+        } else
+            holder = (Holder) view.getTag();
 
         if (items.get(position).postPictureId == 0 && items.get(position).postPicture != null && !items.get(position).postPicture.equals(""))
-            imageView.setImageBitmap(Image_M.getBitmapFromString(items.get(position).postPicture));
+            holder.imageView.setImageBitmap(Image_M.getBitmapFromString(items.get(position).postPicture));
         else
-            downloadImages.download(items.get(position).postPictureId, Image_M.MEDIUM, Image_M.ImageType.POST, imageView, false);
-        if (imageView != null)
-            imageView.setOnClickListener(new View.OnClickListener() {
+            simpleLoader.loadImage(items.get(position).postPictureId, Image_M.MEDIUM, Image_M.ImageType.POST, holder.imageView, holder.progressBar);
+        if (holder.imageView != null)
+            holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (getPostType == Post.GetPostType.SHARE)
@@ -96,6 +95,11 @@ public class AdapterPostGrid extends BaseAdapter {
                 }
             });
 
-        return imageView;
+        return view;
+    }
+
+    private class Holder {
+        ImageView imageView;
+        MaterialProgressBar progressBar;
     }
 }

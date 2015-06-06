@@ -11,9 +11,9 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.business.GetBusinessContactInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
@@ -41,8 +41,8 @@ public class ActivityBusinessContactInfo extends CharsooActivity implements IWeb
         new GetBusinessContactInfo(this, myApplication.business.id, this).execute();
 
 
-        DownloadCoverImage downloadCoverImage = new DownloadCoverImage(this);
-        downloadCoverImage.download(myApplication.business.profilePictureId, (ImageView) findViewById(R.id.imageView_cover), Image_M.ImageType.BUSINESS);
+        SimpleLoader simpleLoader = new SimpleLoader(this);
+        simpleLoader.loadImage(myApplication.business.profilePictureId, Image_M.LARGE, Image_M.ImageType.BUSINESS, (ImageView) findViewById(R.id.imageView_cover));
 
         ((TextViewFont) findViewById(R.id.editText_name)).setText(myApplication.business.name);
         ((TextViewFont) findViewById(R.id.editText_identifier)).setText(myApplication.business.businessIdentifier);

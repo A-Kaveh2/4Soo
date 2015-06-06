@@ -26,8 +26,8 @@ import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Sex;
 import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.user.GetUserProfileInfo;
 import ir.rasen.charsoo.model.user.UpdateUserProfile;
 import ir.rasen.charsoo.view.dialog.DialogChangePassword;
@@ -105,8 +105,8 @@ public class ActivityUserProfile extends CharsooActivity implements View.OnClick
         if (result instanceof User) {
             //GetUserProfileInfo result
             user = (User) result;
-            DownloadCoverImage downloadCoverImage = new DownloadCoverImage(this);
-            downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
+            SimpleLoader simpleLoader = new SimpleLoader(this);
+            simpleLoader.loadImage(user.profilePictureId, Image_M.LARGE, Image_M.ImageType.USER, imageViewCover);
 
             //initial view
             editTextName.setText(user.name);

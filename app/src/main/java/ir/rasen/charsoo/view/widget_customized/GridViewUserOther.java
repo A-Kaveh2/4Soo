@@ -20,9 +20,9 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.friend.RequestCancelFriendship;
 import ir.rasen.charsoo.model.friend.RequestFriendship;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
@@ -159,8 +159,8 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                 }
             });
 
-            DownloadCoverImage downloadCoverImage = new DownloadCoverImage(context);
-            downloadCoverImage.download(user.profilePictureId, imageViewCover, Image_M.ImageType.USER);
+            SimpleLoader simpleLoader = new SimpleLoader(context);
+            simpleLoader.loadImage(user.profilePictureId, Image_M.LARGE, Image_M.ImageType.USER, imageViewCover);
 
             imageViewBack.setOnClickListener(new View.OnClickListener() {
                 @Override

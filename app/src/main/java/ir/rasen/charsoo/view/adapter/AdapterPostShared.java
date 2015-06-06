@@ -21,15 +21,14 @@ import ir.rasen.charsoo.controller.helper.MyGestureDetector;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.DownloadImages;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
-import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationTimeLine;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationUserShared;
 import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
@@ -43,14 +42,14 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
 
     private ArrayList<Post> items;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     private IReportPost iReportPost;
     IUpdateTimeLine iUpdateTimeLine;
 
     public AdapterPostShared(Context context, ArrayList<Post> items) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         iReportPost = this;
         this.iUpdateTimeLine = this;
         this.iReportPost = this;
@@ -125,7 +124,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
                 holder = (Holder) view.getTag();
 
             //all post's types have these three fields
-            downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
+            simpleLoader.loadImage(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage);
             holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
             holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
 
@@ -144,7 +143,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
                 }
             });
 
-            downloadImages.download(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost, false);
+            simpleLoader.loadImage(items.get(position).pictureId, Image_M.LARGE, Image_M.ImageType.POST, holder.imageViewPost);
             holder.textViewLikeNumber.setText(String.valueOf(items.get(position).likeNumber));
             holder.textViewCommentNumber.setText(String.valueOf(items.get(position).commentNumber));
             holder.textViewShareNumber.setText(String.valueOf(items.get(position).shareNumber));
@@ -182,7 +181,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
                 holder.textViewComment3.setVisibility(View.VISIBLE);
             }
             if (items.get(position).isLiked)
-                holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                holder.imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
             if (items.get(position).isShared)
                 holder.imageViewShare.setImageResource(R.drawable.ic_reply_blue);
             else
@@ -232,7 +231,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
                         new Like(context, LoginInfo.getUserId(context), items.get(position).id).execute();
 
                         items.get(position).isLiked = true;
-                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                        holder.imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
                     }
 
                 }

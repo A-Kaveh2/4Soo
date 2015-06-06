@@ -25,19 +25,16 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PersianDate;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TextProcessor;
-import ir.rasen.charsoo.controller.helper.downloadImage.ImageDownloader;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.DownloadImages;
-import ir.rasen.charsoo.model.post.CancelShare;
 import ir.rasen.charsoo.model.post.GetPost;
 import ir.rasen.charsoo.model.post.Like;
 import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
-import ir.rasen.charsoo.view.adapter.AdapterPostShared;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationUserShared;
 import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
@@ -83,8 +80,8 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
     TextViewFont textViewCode;
     LinearLayout llPriceSection, llCodeSection;
     Post post;
-    //DownloadImages downloadImages;
-    ImageDownloader imageDownloader;
+    //SimpleLoader simpleLoader;
+    SimpleLoader simpleLoader;
     Post.GetPostType getPostType;
     int postId, businessId;
 
@@ -105,6 +102,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         else if (postType.equals(Post.GetPostType.SEARCH.name()))
             getPostType = Post.GetPostType.SEARCH;
 
+        simpleLoader = new SimpleLoader(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -199,13 +197,13 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
 
                         new Unlike(ActivityPost.this, LoginInfo.getUserId(ActivityPost.this), post.id).execute();
                         post.isLiked = false;
-                        imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
+                        imageViewLike.setImageResource(R.drawable.ic_like);
                     } else {
                         //like the post
 
                         new Like(ActivityPost.this, LoginInfo.getUserId(ActivityPost.this), post.id).execute();
                         post.isLiked = true;
-                        imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+                        imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
                     }
                 }
 
@@ -334,14 +332,12 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
 
     public void initialize() {
         //downloadImages.download(post.businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, imageViewProfileImage, true);
-        imageDownloader = new ImageDownloader(ActivityPost.this,post.businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, imageViewProfileImage);
-        imageDownloader.DownloadImage();
+        simpleLoader.loadImage(post.businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, imageViewProfileImage);
         textViewDate.setText(PersianDate.getCreationDate(ActivityPost.this, post.creationDate));
         textViewBusinessIdentifier.setText(post.businessUserName);
 
         //downloadImages.download(post.pictureId, Image_M.LARGE, Image_M.ImageType.POST, imageViewPost, false);
-        imageDownloader = new ImageDownloader(ActivityPost.this,post.pictureId, Image_M.LARGE, Image_M.ImageType.POST, imageViewPost);
-        imageDownloader.DownloadImage();
+        simpleLoader.loadImage(post.pictureId, Image_M.LARGE, Image_M.ImageType.POST, imageViewPost);
         textViewLikeNumber.setText(String.valueOf(post.likeNumber));
         textViewCommentNumber.setText(String.valueOf(post.commentNumber));
         textViewShareNumber.setText(String.valueOf(post.shareNumber));
@@ -378,7 +374,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
             textViewComment3.setVisibility(View.VISIBLE);
         }
         if (post.isLiked && getPostType != Post.GetPostType.BUSINESS)
-            imageViewLike.setBackgroundResource(R.drawable.ic_favorite_red);
+            imageViewLike.setBackgroundResource(R.drawable.ic_favorite_blue);
         if (post.isShared)
             imageViewShare.setBackgroundResource(R.drawable.ic_reply_blue);
 

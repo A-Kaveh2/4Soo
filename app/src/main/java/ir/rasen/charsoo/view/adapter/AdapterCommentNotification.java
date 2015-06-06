@@ -11,11 +11,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.CommentNotification;
 import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
+import ir.rasen.charsoo.controller.object.CommentNotification;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.
@@ -24,13 +24,13 @@ public class AdapterCommentNotification extends BaseAdapter {
 
     private ArrayList<CommentNotification> commentNotifications;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
 
 
     public AdapterCommentNotification(Context context, ArrayList<CommentNotification> commentNotifications) {
         this.context = context;
         this.commentNotifications = commentNotifications;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
     }
 
     @Override

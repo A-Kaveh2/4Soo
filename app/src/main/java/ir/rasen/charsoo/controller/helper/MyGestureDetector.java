@@ -48,7 +48,7 @@ public class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
 
         if (postLikeStatus) {
             //unlike the post
-            imageViewPostLike.setImageResource(R.drawable.ic_favorite_grey);
+            imageViewPostLike.setImageResource(R.drawable.ic_like);
             imageViewPostLike.setVisibility(View.VISIBLE);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -60,11 +60,11 @@ public class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
 
             new Unlike(context, LoginInfo.getUserId(context), position).execute();
             postLikeStatus = false;
-            imageViewLike.setImageResource(R.drawable.ic_favorite_grey);
+            imageViewLike.setImageResource(R.drawable.ic_like);
         } else {
             //like the post
 
-            imageViewPostLike.setImageResource(R.drawable.ic_favorite_red);
+            imageViewPostLike.setImageResource(R.drawable.ic_favorite_blue);
             imageViewPostLike.setVisibility(View.VISIBLE);
             Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -76,7 +76,7 @@ public class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
             //Anim.fadeOut(imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE,View.INVISIBLE);
             new Like(context, LoginInfo.getUserId(context), postId).execute();
             postLikeStatus = true;
-            imageViewLike.setImageResource(R.drawable.ic_favorite_red);
+            imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
         }
         return true;
     }

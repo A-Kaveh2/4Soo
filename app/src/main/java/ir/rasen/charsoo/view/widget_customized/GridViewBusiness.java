@@ -17,9 +17,9 @@ import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
 import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
@@ -61,7 +61,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     IWebserviceResponse iWebserviceResponse;
     ArrayList<Post> posts;
     boolean hasHeader;
-    DownloadCoverImage downloadCoverImage;
+    SimpleLoader simpleLoader;
     View switchGrid, switchList;
 
     public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
@@ -130,8 +130,8 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
             textViewName.setText(String.valueOf(business.name));
             textViewFollowersNumber.setText(String.valueOf(business.followersNumber)+" "+activity.getString(R.string.followers_num));
 
-            downloadCoverImage = new DownloadCoverImage(activity);
-            downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
+            simpleLoader = new SimpleLoader(activity);
+            simpleLoader.loadImage(business.profilePictureId, Image_M.LARGE, Image_M.ImageType.BUSINESS, imageViewCover);
 
             imageViewEdit.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -19,10 +19,10 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.model.DownloadCoverImage;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
 import ir.rasen.charsoo.model.user.FollowBusiness;
 import ir.rasen.charsoo.model.user.UnFollowBusiness;
@@ -120,8 +120,8 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
             textViewName.setText(String.valueOf(business.name));
             textViewFollowersNumber.setText(String.valueOf(business.followersNumber)+" "+activity.getString(R.string.followers_num));
 
-            DownloadCoverImage downloadCoverImage = new DownloadCoverImage(activity);
-            downloadCoverImage.download(business.profilePictureId, imageViewCover, Image_M.ImageType.BUSINESS);
+            SimpleLoader simpleLoader = new SimpleLoader(activity);
+            simpleLoader.loadImage(business.profilePictureId, Image_M.LARGE, Image_M.ImageType.BUSINESS, imageViewCover);
 
             if (business.isFollowing) {
                 buttonFollowStatus.setText(activity.getString(R.string.followed_business_page));

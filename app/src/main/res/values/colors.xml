@@ -18,6 +18,7 @@
 
     <color name="material_pink">#FF4081</color>
     <color name="material_blue">#03A9F4</color>
+    <color name="material_gray_dark">#626262</color>
     <color name="material_gray">#727272</color>
     <color name="material_gray_light">#ededed</color>
     <color name="material_blue_light">#B3E5Fc</color>

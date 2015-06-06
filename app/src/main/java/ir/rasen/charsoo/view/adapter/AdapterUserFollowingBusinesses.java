@@ -11,14 +11,15 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.view.dialog.PopupUnfollowBusiness;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
+import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.view.dialog.PopupUnfollowBusiness;
 import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.model.DownloadImages;
+import ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView;
 
 /**
  * Created by android on 3/7/2015.
@@ -27,7 +28,7 @@ public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfo
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
-    DownloadImages downloadImages;
+    SimpleLoader simpleLoader;
     IUnfollowBusiness iUnfollowBusiness;
     //IWebserviceResponse iWebserviceResponse;
     ProgressDialog progressDialog;
@@ -36,7 +37,7 @@ public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfo
     public AdapterUserFollowingBusinesses(Context context, int visitedUserId, ArrayList<BaseAdapterItem> items, ProgressDialog progressDialog) {
         this.context = context;
         this.items = items;
-        downloadImages = new DownloadImages(context);
+        simpleLoader = new SimpleLoader(context);
         iUnfollowBusiness = this;
         //this.iWebserviceResponse = iWebserviceResponse;
         this.progressDialog = progressDialog;
@@ -70,7 +71,7 @@ public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfo
         if (view == null) {
             holder = new Holder();
             view = LayoutInflater.from(context).inflate(R.layout.item_base_adapter_squar_image_selectable, viewGroup, false);
-            holder.imageViewImage = (ImageView) view.findViewById(R.id.imageView_base_adapter_item_image);
+            holder.imageViewImage = (RoundedImageView) view.findViewById(R.id.imageView_base_adapter_item_image);
             holder.textViewUserIdentifier = (TextViewFont) view.findViewById(R.id.textView_base_adapter_item_title);
             holder.imgMore = (ImageView) view.findViewById(R.id.img_more);
             view.setTag(holder);
@@ -96,7 +97,7 @@ public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfo
         });
 
         //download image with customized class via imageId
-        downloadImages.download(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage,true);
+        simpleLoader.loadImage(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewImage);
         holder.textViewUserIdentifier.setText(items.get(position).getTitle());
 
         return view;

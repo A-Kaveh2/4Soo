@@ -15,7 +15,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import ir.rasen.charsoo.R;
 
@@ -51,6 +53,9 @@ public class ImageViewCircle extends ImageView {
     private boolean mReady;
     private boolean mSetupPending;
 
+    private Context context;
+    private boolean isRounded = false;
+
     public ImageViewCircle(Context context) {
         super(context);
 
@@ -72,6 +77,22 @@ public class ImageViewCircle extends ImageView {
         a.recycle();
 
         init();
+    }
+
+    private void setRounded(boolean isRounded) {
+        this.isRounded = isRounded;
+        if(isRounded) {
+            RelativeLayout.LayoutParams params = new RelativeLayout
+                    .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    context.getResources().getDisplayMetrics().widthPixels);
+            setLayoutParams(params);
+        } else {
+            RelativeLayout.LayoutParams params = new RelativeLayout
+                    .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+            setLayoutParams(params);
+            setImageDrawable(getDrawable());
+        }
     }
 
     private void init() {
@@ -204,6 +225,8 @@ public class ImageViewCircle extends ImageView {
     }
 
     private void setup() {
+        if(isRounded)
+            return;
         if (!mReady) {
             mSetupPending = true;
             return;
