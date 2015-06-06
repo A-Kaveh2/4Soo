@@ -13,4 +13,4 @@
         android:src="@drawable/default_ptr_rotate"
         android:layout_centerHorizontal="true" />
 
-</RelativeLayout><!-- From: file:/E:/Android/Dev/4Soo/libs/pull_to_refresh_lib/src/main/res/layout/layout_loading_more_footer.xml -->
+</RelativeLayout><!-- From: file:/E:/Android/4Soo/libs/pull_to_refresh_lib/src/main/res/layout/layout_loading_more_footer.xml -->

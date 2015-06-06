@@ -32,11 +32,10 @@ import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
-import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewUser;
 
-public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh {
+public class FragmentUser extends Fragment implements IWebserviceResponse, IPullToRefresh {
 
     public static final String TAG="FargmentUser";
     private HFGridView gridView;
@@ -44,7 +43,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     ProgressDialog progressDialog;
     private User user;
     GridViewUser gridViewUser;
-    static IUpdateUserProfile iUpdateUserProfile;
+
     ArrayList<Post> sharedPosts;
     BroadcastReceiver cancelShareReceiver, removeRequestAnnouncement, updateUserProfilePicture;
     //PullToRefreshGridViewWithHeaderAndFooter pullToRefreshGridViewWithHeaderAndFooter;
@@ -61,7 +60,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                     container, false);
 
             visitedUserId = LoginInfo.getUserId(getActivity());
-            iUpdateUserProfile = this;
+
 
             //set progress dialog
             progressDialog = new ProgressDialog(getActivity());
@@ -108,7 +107,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getExtras();
-                notifyUpdateUserProfile(bundle.getString(Params.USER_PICUTE));
+                gridViewUser.initialProfilePicture(bundle.getString(Params.USER_PICUTE));
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(updateUserProfilePicture, new IntentFilter(Params.UPDATE_USER_PROFILE_PCITURE));
@@ -205,10 +204,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     }
 
 
-    @Override
-    public void notifyUpdateUserProfile(String userPictureString) {
-        gridViewUser.initialProfilePicture(userPictureString);
-    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
