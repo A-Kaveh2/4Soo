@@ -33,8 +33,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_size_register"
                 android:nextFocusDown="@+id/edt_description"
-                android:singleLine="true"
-                android:maxLength="@integer/restriction_identifier_length"
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="5dp" />
 
