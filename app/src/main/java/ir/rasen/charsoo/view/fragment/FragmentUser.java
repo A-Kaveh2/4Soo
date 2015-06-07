@@ -44,6 +44,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     private User user;
     GridViewUser gridViewUser;
 
+    boolean isRefreshing;
     ArrayList<Post> sharedPosts;
     BroadcastReceiver cancelShareReceiver, removeRequestAnnouncement, updateUserProfilePicture;
     //PullToRefreshGridViewWithHeaderAndFooter pullToRefreshGridViewWithHeaderAndFooter;
@@ -59,6 +60,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
             view = inflater.inflate(R.layout.fragment_user,
                     container, false);
 
+            isRefreshing=false;
             visitedUserId = LoginInfo.getUserId(getActivity());
 
 
@@ -182,7 +184,10 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
 
         } else if (result instanceof ArrayList) {
             progressDialog.dismiss();
-
+            if (isRefreshing){
+                sharedPosts.clear();
+                isRefreshing=false;
+            }
 
             //GetSharedPosts result
             sharedPosts = (ArrayList<Post>) result;
@@ -229,7 +234,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     @Override
     public void notifyRefresh() {
         if (sharedPosts != null) {
-            sharedPosts.clear();
+            isRefreshing=true;
             new GetSharedPosts(getActivity(), visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentUser.this).execute();
             /*((MyApplication) getActivity().getApplication()).isUserCreated = false;
             gridViewUser.resetHeadear();
