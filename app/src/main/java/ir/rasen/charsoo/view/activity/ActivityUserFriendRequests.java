@@ -169,8 +169,16 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
             ((MyApplication) getApplication()).newFriends = new ArrayList<>();
             i.putExtra(Params.NEW_FIREND, false);
         }
-        int remainingUnhandledRequests=adapterFriendshipRequest.getRemainingFriendRequestCount()-adapterFriendshipRequest.getAcceptedUsers().size();
-        i.putExtra(Params.REMAINIG_FRIEND_REQUEST_COUNT_INT,remainingUnhandledRequests);
+        ArrayList<BaseAdapterItem> acceptedUsers=adapterFriendshipRequest.getAcceptedUsers(),items=adapterFriendshipRequest.getRemainingFriendRequests();
+        boolean hasRemainingRequests=false;
+        for (int j = 0; j < items.size(); j++) {
+            if (!acceptedUsers.contains(items.get(j)))
+            {
+                hasRemainingRequests=true;
+                break;
+            }
+        }
+        i.putExtra(Params.HAS_REMAINIG_FRIEND_REQUESTS_STRING,hasRemainingRequests);
         setResult(RESULT_OK, i);
         finish();
     }

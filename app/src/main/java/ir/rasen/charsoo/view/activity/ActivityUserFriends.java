@@ -44,12 +44,11 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
     @Override
     public void notifyRefresh() {
         status = Status.REFRESHING;
-        friends.clear();
-        new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
         if (visitedUserId == LoginInfo.getUserId(this)){
             new GetUserHomeInfo(this,visitedUserId,visitedUserId,ActivityUserFriends.this).execute();
         }
-
+        friends.clear();
+        new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
     }
 
     @Override
@@ -186,14 +185,14 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                     friends.addAll(0,((MyApplication)getApplication()).newFriends);
                     adapterFriends.notifyDataSetChanged();
                 }
-                if(data.getExtras().getInt(Params.REMAINIG_FRIEND_REQUEST_COUNT_INT)<=0){
+                if(data.getExtras().getBoolean(Params.HAS_REMAINIG_FRIEND_REQUESTS_STRING)){
                    // hasRequest=false;
-                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
+                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
                 }
                 else
                 {
                   //  hasRequest=true;
-                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
+                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
                 }
             }
         }

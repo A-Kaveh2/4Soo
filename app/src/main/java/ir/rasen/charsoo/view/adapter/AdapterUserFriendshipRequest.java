@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
@@ -32,8 +36,8 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
     ListView listView;
     ArrayList<BaseAdapterItem> acceptedUsers;
 
-    public int getRemainingFriendRequestCount(){
-        return items.size();
+    public ArrayList<BaseAdapterItem> getRemainingFriendRequests(){
+        return items;
     }
 
     public AdapterUserFriendshipRequest(Context context, ArrayList<BaseAdapterItem> items) {
@@ -116,11 +120,10 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
 
     }
 
-    private void answerYes(int position, Holder holder) {
+    private void answerYes(final int position, Holder holder) {
         holder.imageViewYes.setImageResource(R.drawable.ic_check_green);
         holder.imageViewNo.setVisibility(View.GONE);
         acceptedUsers.add(items.get(position));
-
         new AnswerRequestFriendship(context,LoginInfo.getUserId(context), items.get(position).getId(), true).execute();
 
     }
