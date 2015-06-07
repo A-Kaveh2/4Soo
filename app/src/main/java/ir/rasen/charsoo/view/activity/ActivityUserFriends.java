@@ -21,7 +21,9 @@ import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.GetUserFriends;
+import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
@@ -37,12 +39,16 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
     ListView listView;
     ArrayList<BaseAdapterItem> friends;
     ArrayList<BaseAdapterItem> sampleFriends;
+    boolean hasRequest = false;
 
     @Override
     public void notifyRefresh() {
         status = Status.REFRESHING;
         friends.clear();
         new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
+        if (visitedUserId == LoginInfo.getUserId(this)){
+            new GetUserHomeInfo(this,visitedUserId,visitedUserId,ActivityUserFriends.this).execute();
+        }
 
     }
 
@@ -63,7 +69,7 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
         setTitle(getString(R.string.friends));
-        boolean hasRequest = false;
+
         try {
             sampleFriends = TestUnit.getBaseAdapterItems(getResources());
             hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
@@ -148,6 +154,13 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                 adapterFriends.loadMore(temp);
             }
             status = Status.NONE;
+
+        }
+        else if (result instanceof User){
+            User tempUser=(User)result;
+            hasRequest = (tempUser.friendRequestNumber> 0) ? true : false;
+            if (tempUser.friendRequestNumber> 0)
+                (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
 
         }
     }
