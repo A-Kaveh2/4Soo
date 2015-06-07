@@ -206,6 +206,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
+        pullToRefreshGridView.onRefreshComplete();
     }
 
 
