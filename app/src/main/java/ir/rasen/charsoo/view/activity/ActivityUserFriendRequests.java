@@ -156,6 +156,10 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
 
     @Override
     public void onBackPressed() {
+        backToParent();
+    }
+
+    public void backToParent(){
         Intent i = getIntent();
         if(adapterFriendshipRequest.getAcceptedUsers().size() != 0) {
             ((MyApplication) getApplication()).newFriends = adapterFriendshipRequest.getAcceptedUsers();
@@ -165,7 +169,10 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
             ((MyApplication) getApplication()).newFriends = new ArrayList<>();
             i.putExtra(Params.NEW_FIREND, false);
         }
+        int remainingUnhandledRequests=adapterFriendshipRequest.getRemainingFriendRequestCount()-adapterFriendshipRequest.getAcceptedUsers().size();
+        i.putExtra(Params.REMAINIG_FRIEND_REQUEST_COUNT_INT,remainingUnhandledRequests);
         setResult(RESULT_OK, i);
         finish();
     }
+
 }

@@ -210,6 +210,7 @@ public class Params {
     public static final String UPATE_TIME_LINE_TYPE_CANCEL_SHARE = "updateTimeLineTypeCancelShare";
     public static final String DELETE_POST_FROM_ACTIVITY = "deletePostFromActivity";
     public static final String DELETE_BUSINESS= "deleteBusiness";
+    public static final String REMAINIG_FRIEND_REQUEST_COUNT_INT="remainingFriendReqCount";
 
     //Actions
     public static int ACTION_ADD_NEW_BUSIENSS_SUCCESS = 1001;

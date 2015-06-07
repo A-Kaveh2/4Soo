@@ -32,7 +32,9 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
     ListView listView;
     ArrayList<BaseAdapterItem> acceptedUsers;
 
-
+    public int getRemainingFriendRequestCount(){
+        return items.size();
+    }
 
     public AdapterUserFriendshipRequest(Context context, ArrayList<BaseAdapterItem> items) {
         this.context = context;
@@ -118,6 +120,7 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
         holder.imageViewYes.setImageResource(R.drawable.ic_check_green);
         holder.imageViewNo.setVisibility(View.GONE);
         acceptedUsers.add(items.get(position));
+
         new AnswerRequestFriendship(context,LoginInfo.getUserId(context), items.get(position).getId(), true).execute();
 
     }

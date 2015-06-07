@@ -183,7 +183,7 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
                     Intent intent1 = new Intent(activity, ActivityUserFriends.class);
                     intent1.putExtra(Params.VISITED_USER_ID, visitedUserId);
                     intent1.putExtra(Params.HAS_REQUEST, hasRequest);
-                    activity.startActivity(intent1);
+                    activity.startActivityForResult(intent1, 0);
                 }
             });
 
@@ -354,4 +354,6 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
         if(adapterPostGrid!=null)
             adapterPostGrid.removePostByIntID(postID_int);
     }
+
+
 }

@@ -39,7 +39,7 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
     ListView listView;
     ArrayList<BaseAdapterItem> friends;
     ArrayList<BaseAdapterItem> sampleFriends;
-    boolean hasRequest = false;
+    //boolean hasRequest = false;
 
     @Override
     public void notifyRefresh() {
@@ -72,14 +72,19 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
 
         try {
             sampleFriends = TestUnit.getBaseAdapterItems(getResources());
-            hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
+           // hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
         } catch (Exception e) {
 
         }
 
         visitedUserId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
-        if (visitedUserId != LoginInfo.getUserId(this) || !hasRequest)
-            (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
+        (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
+        if (visitedUserId == LoginInfo.getUserId(this))
+        {
+            //help: checkout getResult Method of this
+            new GetUserHomeInfo(this,visitedUserId,visitedUserId,ActivityUserFriends.this).execute();
+        }
+
 
         friends = new ArrayList<>();
         status = Status.FIRST_TIME;
@@ -158,7 +163,7 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
         }
         else if (result instanceof User){
             User tempUser=(User)result;
-            hasRequest = (tempUser.friendRequestNumber> 0) ? true : false;
+           // hasRequest = (tempUser.friendRequestNumber> 0) ? true : false;
             if (tempUser.friendRequestNumber> 0)
                 (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
 
@@ -180,6 +185,15 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                 if(data.getExtras().getBoolean(Params.NEW_FIREND)){
                     friends.addAll(0,((MyApplication)getApplication()).newFriends);
                     adapterFriends.notifyDataSetChanged();
+                }
+                if(data.getExtras().getInt(Params.REMAINIG_FRIEND_REQUEST_COUNT_INT)<=0){
+                   // hasRequest=false;
+                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
+                }
+                else
+                {
+                  //  hasRequest=true;
+                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
                 }
             }
         }
