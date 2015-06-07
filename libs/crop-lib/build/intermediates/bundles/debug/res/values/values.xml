@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/E:/Android/4Soo/libs/crop-lib/res/values/colors.xml -->
+    <!-- From: file:/E:/Android/Dev/4Soo2/libs/crop-lib/res/values/colors.xml -->
     <eat-comment/>
     <color name="AliceBlue">#F0F8FF</color>
     <color name="AntiqueWhite">#FAEBD7</color>
@@ -182,7 +182,7 @@
     <drawable name="list_clicked">#ffe09cee</drawable>
     <drawable name="list_selected">#E0E</drawable>
     <drawable name="transparent">@android:color/transparent</drawable>
-    <!-- From: file:/E:/Android/4Soo/libs/crop-lib/res/values/strings.xml -->
+    <!-- From: file:/E:/Android/Dev/4Soo2/libs/crop-lib/res/values/strings.xml -->
     <eat-comment/>
     <string name="cancel">Cancel</string>
     <string name="no_storage_card">No storage card</string>
@@ -190,7 +190,7 @@
     <string name="preparing_card">Preparing card</string>
     <string name="save">Save</string>
     <string name="saving_image">Saving image</string>
-    <!-- From: file:/E:/Android/4Soo/libs/crop-lib/res/values/styles.xml -->
+    <!-- From: file:/E:/Android/Dev/4Soo2/libs/crop-lib/res/values/styles.xml -->
     <eat-comment/>
     <style name="CropButton">
         <item name="android:layout_margin">1dp</item>

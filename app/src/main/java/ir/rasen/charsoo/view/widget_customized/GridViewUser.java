@@ -33,13 +33,14 @@ import ir.rasen.charsoo.view.activity.ActivityUserReviews;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.adapter.AdapterPostShared;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.GridViewUserListener;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 
 /**
  * Created by android on 3/14/2015.
  */
-public class GridViewUser implements IWebserviceResponse {
+public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
     public static final String TAG="GridViewUser";
 
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
@@ -99,7 +100,7 @@ public class GridViewUser implements IWebserviceResponse {
 
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, 0, Post.GetPostType.SHARE);
 
-        adapterPostShared = new AdapterPostShared(activity, posts);
+        adapterPostShared = new AdapterPostShared(activity, posts,GridViewUser.this);
 
 
         if (!hasHeader) {
@@ -280,18 +281,31 @@ public class GridViewUser implements IWebserviceResponse {
             gridViewHeader.setNumColumns(1);
             gridViewHeader.setAdapter(adapterPostShared);
         }*/
-        gridViewHeader.setNumColumns(1);
-        gridViewHeader.setAdapter(adapterPostShared);
-        //now it has one column
-        isThreeColumn = false;
-        switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-        switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
-
-        prepareGridThreeColumn(gridViewHeader);
-        gridViewHeader.setAdapter(adapterPostGrid);
-        // now it has three column
-        switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-        switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
+        if (isThreeColumn) {
+//            gridViewHeader.setNumColumns(3);
+//            gridViewHeader.setVerticalSpacing(3);
+//            gridViewHeader.setHorizontalSpacing(9);
+            //        gridViewHeader.setAdapter(adapterPostShared);
+            //now it has one column
+            //        isThreeColumn = false;
+            //        switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+            //        switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
+//            gridViewHeader.setNumColumns(3);
+//            gridViewHeader.setVerticalSpacing(3);
+//            gridViewHeader.setHorizontalSpacing(9);
+            prepareGridThreeColumn(gridViewHeader);
+            gridViewHeader.setAdapter(adapterPostGrid);
+            // now it has three column
+            switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+            switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
+        }
+        else
+        {
+            gridViewHeader.setNumColumns(1);
+            gridViewHeader.setAdapter(adapterPostShared);
+            switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+            switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
+        }
     }
 
     // LOAD MORE DATA
@@ -306,6 +320,7 @@ public class GridViewUser implements IWebserviceResponse {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
+        gridViewHeader.setViewWidthIfItsZero(activity.getWindowManager().getDefaultDisplay().getWidth());
         isThreeColumn=true;
     }
 
@@ -332,5 +347,11 @@ public class GridViewUser implements IWebserviceResponse {
 
     public void hideLoader() {
         listFooterView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void notifyOnShareCanceled(int postID_int) {
+        if(adapterPostGrid!=null)
+            adapterPostGrid.removePostByIntID(postID_int);
     }
 }

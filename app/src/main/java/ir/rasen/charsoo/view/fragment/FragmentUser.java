@@ -153,7 +153,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
         } else {
             try {
 
-                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), gridViewUser.isThreeColumn, hasHeader);
+                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn, hasHeader);
             } catch (Exception e) {
 
             }
@@ -230,8 +230,11 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     public void notifyRefresh() {
         if (sharedPosts != null) {
             sharedPosts.clear();
-            ((MyApplication) getActivity().getApplication()).isUserCreated = false;
-            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
+            new GetSharedPosts(getActivity(), visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentUser.this).execute();
+            /*((MyApplication) getActivity().getApplication()).isUserCreated = false;
+            gridViewUser.resetHeadear();
+            initializeUser();*/
+//            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
         } else
             pullToRefreshGridView.onRefreshComplete();
     }

@@ -84,7 +84,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
             searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
 
         adapterPostGrid = new AdapterPostGrid(context, searchItemPosts,0, Post.GetPostType.SHARE);
-        adapterPostShared = new AdapterPostShared(context, posts);
+        adapterPostShared = new AdapterPostShared(context, posts,null);
 
         if (!headerInitialized) {
             viewHeader = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_user_grid_header_another, null);

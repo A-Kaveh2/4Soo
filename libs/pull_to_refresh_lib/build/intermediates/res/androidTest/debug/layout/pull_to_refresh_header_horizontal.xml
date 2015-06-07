@@ -26,4 +26,4 @@
             android:visibility="gone" />
     </FrameLayout>
 
-</merge><!-- From: file:/E:/Android/4Soo/libs/pull_to_refresh_lib/src/main/res/layout/pull_to_refresh_header_horizontal.xml --><!-- From: file:/E:/Android/4Soo/libs/pull_to_refresh_lib/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_horizontal.xml -->
+</merge><!-- From: file:/E:/Android/Dev/4Soo2/libs/pull_to_refresh_lib/src/main/res/layout/pull_to_refresh_header_horizontal.xml --><!-- From: file:/E:/Android/Dev/4Soo2/libs/pull_to_refresh_lib/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_horizontal.xml -->
