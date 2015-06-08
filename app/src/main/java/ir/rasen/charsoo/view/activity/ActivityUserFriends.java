@@ -44,11 +44,10 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
     @Override
     public void notifyRefresh() {
         status = Status.REFRESHING;
+        new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
         if (visitedUserId == LoginInfo.getUserId(this)){
             new GetUserHomeInfo(this,visitedUserId,visitedUserId,ActivityUserFriends.this).execute();
         }
-        friends.clear();
-        new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
     }
 
     @Override
@@ -150,6 +149,9 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                 adapterFriends = new AdapterUserFriends(ActivityUserFriends.this, visitedUserId, friends);
                 listView.setAdapter(adapterFriends);
             } else if (status == Status.REFRESHING) {
+                friends.clear();
+                adapterFriends.notifyDataSetChanged();
+                friends.addAll(temp);
                 adapterFriends.notifyDataSetChanged();
                 pullToRefreshListView.onRefreshComplete();
             } else {

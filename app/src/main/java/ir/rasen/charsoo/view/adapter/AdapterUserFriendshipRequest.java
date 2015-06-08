@@ -2,6 +2,7 @@ package ir.rasen.charsoo.view.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,8 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
     ListView listView;
     ArrayList<BaseAdapterItem> acceptedUsers;
 
+
+
     public ArrayList<BaseAdapterItem> getRemainingFriendRequests(){
         return items;
     }
@@ -45,6 +48,7 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
         this.items = items;
         simpleLoader = new SimpleLoader(context);
         acceptedUsers = new ArrayList<>();
+
     }
 
     public void loadMore(ArrayList<BaseAdapterItem> newItem){
@@ -125,7 +129,23 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
         holder.imageViewNo.setVisibility(View.GONE);
         acceptedUsers.add(items.get(position));
         new AnswerRequestFriendship(context,LoginInfo.getUserId(context), items.get(position).getId(), true).execute();
-
+        new AsyncTask<Integer, Void, Void>() {
+            @Override
+            protected Void doInBackground(Integer... integers) {
+                int p=Integer.valueOf(integers[0]);
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                items.remove(p);
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void result) {
+                notifyDataSetChanged();
+            }
+        }.execute(position);
     }
 
     public ArrayList<BaseAdapterItem> getAcceptedUsers() {
@@ -138,4 +158,5 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
         ImageView imageViewYes;
         ImageView imageViewNo;
     }
+    
 }
