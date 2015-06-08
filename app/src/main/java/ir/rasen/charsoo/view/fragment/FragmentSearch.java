@@ -2,7 +2,11 @@ package ir.rasen.charsoo.view.fragment;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -70,7 +74,7 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search,
+        final View view = inflater.inflate(R.layout.fragment_search,
                 container, false);
 
         iSelectCategory = this;
@@ -78,6 +82,11 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading SearchFragment");
+
+        //Map section
+        MapsInitializer.initialize(this.getActivity());
+        mapView = (MapView) view.findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
 
         textViewCategories = (TextViewFont) view.findViewById(R.id.textView_category);
         textViewSubCategories = (TextViewFont) view.findViewById(R.id.textView_sub_category);
@@ -169,10 +178,7 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
         });
 
 
-        //Map section
-        MapsInitializer.initialize(this.getActivity());
-        mapView = (MapView) view.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
+
 
         if (!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity())) {
             view.findViewById(R.id.textView_map_error).setVisibility(View.VISIBLE);
@@ -198,8 +204,8 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
 
         }
         //Map section
-
         recursivelyCallHandler();
+
 
         return view;
     }
@@ -243,7 +249,13 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
+        if (!((MyApplication) getActivity().getApplication()).isSearchCreated)
+            recursivelyCallHandler();
+//        if (){
+//
+//        }
     }
+
 
     private boolean search() {
         if (editTextSearch.getText().toString().equals("")) {

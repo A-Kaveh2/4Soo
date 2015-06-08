@@ -2,6 +2,7 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
     Validation validation;
     ProgressDialog progressDialog;
     MyApplication myApplication;
-
+    Intent activityMainIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,7 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
         findViewById(R.id.btn_login_login).setOnClickListener(this);
         findViewById(R.id.btn_login_forget).setOnClickListener(this);
         findViewById(R.id.btn_login_register).setOnClickListener(this);
+        activityMainIntent=new Intent(ActivityLogin.this, ActivityMain.class);
 
     }
 
@@ -80,6 +82,7 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
                     editTextPassword.setError(Validation.getErrorMessage());
                     return;
                 }
+
                 progressDialog.show();
                 new Login(ActivityLogin.this, editTextEmail.getText().toString(), editTextPassword.getText().toString(), ActivityLogin.this).execute();
                 myApplication.setCurrentWebservice(WebservicesHandler.Webservices.LOGIN);
@@ -109,14 +112,14 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
     }
 
 
+
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
         if (!(result instanceof ResultStatus))
             return;
         if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.LOGIN) {
-            Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
-            startActivity(intent);
+            startActivity(activityMainIntent);
             myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
         } else if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.FORGET_PASSWORD) {
             new DialogMessage(ActivityLogin.this, getResources().getString(R.string.forgot_password_sent)).show();
@@ -134,5 +137,7 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
     public void onBackPressed() {
         finish();
     }*/
+
+
 
 }
