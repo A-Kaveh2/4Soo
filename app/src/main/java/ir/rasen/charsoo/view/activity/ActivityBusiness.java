@@ -73,16 +73,6 @@ public class ActivityBusiness extends NoActionBarActivity implements  IWebservic
 
     }
 
-
-   /* @Override
-    public void notifySelectBusiness(int businessId) {
-        gridView.removeHeaderView(gridView.getHeaderView());
-        gridView.setVisibility(View.GONE);
-        progressDialog.show();
-
-        new GetBusinessHomeInfo(ActivityBusiness.this, businessId, LoginInfo.getUserId(ActivityBusiness.this), ActivityBusiness.this).execute();
-    }*/
-
     @Override
     public void getResult(Object result) {
         if (result instanceof Business) {

@@ -17,7 +17,6 @@ public class SearchItemPost {
         this.postId =  postId;
         this.postPictureId = postPictureId;
         this.postPicture = postPicture;
-
     }
 
     public static ArrayList<SearchItemPost> getItems(ArrayList<Post> posts){
