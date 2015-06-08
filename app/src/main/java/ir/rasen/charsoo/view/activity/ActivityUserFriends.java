@@ -21,7 +21,9 @@ import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.GetUserFriends;
+import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
@@ -37,13 +39,15 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
     ListView listView;
     ArrayList<BaseAdapterItem> friends;
     ArrayList<BaseAdapterItem> sampleFriends;
+    //boolean hasRequest = false;
 
     @Override
     public void notifyRefresh() {
         status = Status.REFRESHING;
-        friends.clear();
         new GetUserFriends(ActivityUserFriends.this, visitedUserId, ActivityUserFriends.this).execute();
-
+        if (visitedUserId == LoginInfo.getUserId(this)){
+            new GetUserHomeInfo(this,visitedUserId,visitedUserId,ActivityUserFriends.this).execute();
+        }
     }
 
     @Override
@@ -63,17 +67,22 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
         setTitle(getString(R.string.friends));
-        boolean hasRequest = false;
+
         try {
             sampleFriends = TestUnit.getBaseAdapterItems(getResources());
-            hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
+           // hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
         } catch (Exception e) {
 
         }
 
         visitedUserId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
-        if (visitedUserId != LoginInfo.getUserId(this) || !hasRequest)
-            (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
+        (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
+        if (visitedUserId == LoginInfo.getUserId(this))
+        {
+            //help: checkout getResult Method of this
+            new GetUserHomeInfo(this,visitedUserId,visitedUserId,ActivityUserFriends.this).execute();
+        }
+
 
         friends = new ArrayList<>();
         status = Status.FIRST_TIME;
@@ -140,6 +149,9 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                 adapterFriends = new AdapterUserFriends(ActivityUserFriends.this, visitedUserId, friends);
                 listView.setAdapter(adapterFriends);
             } else if (status == Status.REFRESHING) {
+                friends.clear();
+                adapterFriends.notifyDataSetChanged();
+                friends.addAll(temp);
                 adapterFriends.notifyDataSetChanged();
                 pullToRefreshListView.onRefreshComplete();
             } else {
@@ -148,6 +160,13 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                 adapterFriends.loadMore(temp);
             }
             status = Status.NONE;
+
+        }
+        else if (result instanceof User){
+            User tempUser=(User)result;
+           // hasRequest = (tempUser.friendRequestNumber> 0) ? true : false;
+            if (tempUser.friendRequestNumber> 0)
+                (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
 
         }
     }
@@ -167,6 +186,15 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                 if(data.getExtras().getBoolean(Params.NEW_FIREND)){
                     friends.addAll(0,((MyApplication)getApplication()).newFriends);
                     adapterFriends.notifyDataSetChanged();
+                }
+                if(data.getExtras().getBoolean(Params.HAS_REMAINIG_FRIEND_REQUESTS_STRING)){
+                   // hasRequest=false;
+                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                  //  hasRequest=true;
+                    (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
                 }
             }
         }

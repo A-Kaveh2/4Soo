@@ -70,7 +70,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         this.gridViewHeader = gridViewHeader;
     }
 
-    public void notifyDatasetChanged() {
+    public void notifyDataSetChanged() {
         adapterPostBusiness.notifyDataSetChanged();
     }
 
@@ -261,6 +261,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
+        gridViewHeader.setViewWidthIfItsZero(activity.getWindowManager().getDefaultDisplay().getWidth());
     }
 
     @Override

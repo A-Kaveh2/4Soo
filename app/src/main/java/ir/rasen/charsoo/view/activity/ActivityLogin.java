@@ -129,4 +129,10 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
         progressDialog.dismiss();
         new DialogMessage(ActivityLogin.this, ServerAnswer.getError(ActivityLogin.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
+
+    /*@Override
+    public void onBackPressed() {
+        finish();
+    }*/
+
 }

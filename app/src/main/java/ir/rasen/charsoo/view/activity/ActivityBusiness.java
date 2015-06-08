@@ -141,7 +141,7 @@ public class ActivityBusiness extends NoActionBarActivity implements  IWebservic
                         break;
                     }
                 }
-                gridViewBusiness.notifyDatasetChanged();
+                gridViewBusiness.notifyDataSetChanged();
             }
 
 

@@ -195,4 +195,10 @@ public class HFGridView extends ListView {
 		}
 		return this.stretchMode;
 	}
+
+	public void setViewWidthIfItsZero(int newWith){
+		if (viewWidth<=0){
+			viewWidth=newWith;
+		}
+	}
 }

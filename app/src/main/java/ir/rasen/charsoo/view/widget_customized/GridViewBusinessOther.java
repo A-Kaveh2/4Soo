@@ -77,7 +77,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         /*adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();*/
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts,business.id, Post.GetPostType.SHARE);
-        adapterPostBusiness = new AdapterPostShared(activity, posts);
+        adapterPostBusiness = new AdapterPostShared(activity, posts,null);
 
         if (isThreeColumn) {
             gridViewHeader.setAdapter(adapterPostGrid);
@@ -96,7 +96,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         for (Post post : posts)
             searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts,business.id, Post.GetPostType.SHARE);
-        adapterPostBusiness = new AdapterPostShared(activity, posts);
+        adapterPostBusiness = new AdapterPostShared(activity, posts,null);
 
 
         if (!hasHeader) {

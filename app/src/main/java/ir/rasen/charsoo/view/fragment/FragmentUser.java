@@ -44,6 +44,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     private User user;
     GridViewUser gridViewUser;
 
+    boolean isRefreshing;
     ArrayList<Post> sharedPosts;
     BroadcastReceiver cancelShareReceiver, removeRequestAnnouncement, updateUserProfilePicture;
     //PullToRefreshGridViewWithHeaderAndFooter pullToRefreshGridViewWithHeaderAndFooter;
@@ -59,6 +60,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
             view = inflater.inflate(R.layout.fragment_user,
                     container, false);
 
+            isRefreshing=false;
             visitedUserId = LoginInfo.getUserId(getActivity());
 
 
@@ -153,7 +155,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
         } else {
             try {
 
-                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), gridViewUser.isThreeColumn, hasHeader);
+                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn, hasHeader);
             } catch (Exception e) {
 
             }
@@ -182,7 +184,10 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
 
         } else if (result instanceof ArrayList) {
             progressDialog.dismiss();
-
+            if (isRefreshing){
+                sharedPosts.clear();
+                isRefreshing=false;
+            }
 
             //GetSharedPosts result
             sharedPosts = (ArrayList<Post>) result;
@@ -201,6 +206,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
+        pullToRefreshGridView.onRefreshComplete();
     }
 
 
@@ -229,9 +235,12 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     @Override
     public void notifyRefresh() {
         if (sharedPosts != null) {
-            sharedPosts.clear();
-            ((MyApplication) getActivity().getApplication()).isUserCreated = false;
-            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
+            isRefreshing=true;
+            new GetSharedPosts(getActivity(), visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentUser.this).execute();
+            /*((MyApplication) getActivity().getApplication()).isUserCreated = false;
+            gridViewUser.resetHeadear();
+            initializeUser();*/
+//            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
         } else
             pullToRefreshGridView.onRefreshComplete();
     }
