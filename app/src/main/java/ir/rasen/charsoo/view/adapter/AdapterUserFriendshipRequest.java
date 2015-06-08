@@ -158,5 +158,5 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
         ImageView imageViewYes;
         ImageView imageViewNo;
     }
-    
+
 }
