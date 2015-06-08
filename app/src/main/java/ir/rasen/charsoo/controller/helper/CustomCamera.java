@@ -25,7 +25,7 @@ import ir.rasen.charsoo.view.interface_m.ICropResult;
 /**
  * Created by android on 1/11/2015.
  */
-public class CustomeCamera {
+public class CustomCamera {
 
     Activity activity;
     private Camera mCamera;
@@ -40,7 +40,7 @@ public class CustomeCamera {
     private boolean autoFocusEnabled = false;
     Camera camera = null;
 
-    public CustomeCamera(Activity activity, FrameLayout cameraPreviewLayout, Integer size, Integer quality) throws Exception{
+    public CustomCamera(Activity activity, FrameLayout cameraPreviewLayout, Integer size, Integer quality) throws Exception{
         this.activity = activity;
         this.size = size;
         this.quality = quality;

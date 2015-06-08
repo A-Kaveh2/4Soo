@@ -351,7 +351,7 @@ public class TestUnit {
         return posts;
     }
 
-    public static ArrayList<BusinessListItem> getBusinessListItems() {
+    /*public static ArrayList<BusinessListItem> getBusinessListItems() {
         ArrayList<BusinessListItem> b = new ArrayList<>();
         b.add(new BusinessListItem(2, "business_2"));
         b.add(new BusinessListItem(3, "business_3"));
@@ -367,7 +367,7 @@ public class TestUnit {
 
         return b;
     }
-
+*/
     public static User getUser() {
         User user = new User();
         user.id = 4;
