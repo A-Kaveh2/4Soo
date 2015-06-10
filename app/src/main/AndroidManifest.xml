@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
+
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -154,6 +156,12 @@
             android:value="@string/google_maps_key" />
 
         <receiver android:name=".controller.helper.AlarmReciever" />
+
+        <receiver android:name=".model.NetworkConnectivityReciever">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

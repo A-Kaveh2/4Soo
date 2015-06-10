@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -70,12 +71,12 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
 
             pullToRefreshGridView = new PullToRefreshGrid(getActivity(), (PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF), FragmentUser.this);
             gridView = pullToRefreshGridView.getGridViewHeaderFooter();
-
             recursivelyCallHandler();
 
         } catch (Exception e) {
             String s = e.getMessage();
         }
+
 
         cancelShareReceiver = new BroadcastReceiver() {
             @Override
@@ -113,6 +114,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(updateUserProfilePicture, new IntentFilter(Params.UPDATE_USER_PROFILE_PCITURE));
+
 
         return view;
     }
@@ -207,6 +209,8 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
         progressDialog.dismiss();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
         pullToRefreshGridView.onRefreshComplete();
+        if(!((MyApplication) getActivity().getApplication()).isUserCreated)
+            recursivelyCallHandler();
     }
 
 

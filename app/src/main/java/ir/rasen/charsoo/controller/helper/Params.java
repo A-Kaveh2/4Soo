@@ -211,6 +211,10 @@ public class Params {
     public static final String DELETE_POST_FROM_ACTIVITY = "deletePostFromActivity";
     public static final String DELETE_BUSINESS= "deleteBusiness";
     public static final String HAS_REMAINIG_FRIEND_REQUESTS_STRING="hasRemainingFriendRequests";
+    public static final String NETWORK_IS_CONNECTED = "networkIsConnected";
+    public static final String NETWORK_IS_DISCONNECTED ="networkIsDisconnected";
+    public static final String NETWORK_STATE ="networkState";
+    public static final String DO_ON_NETWORK_STATE_CHANGE="doOnNetworkStateChange";
 
     //Actions
     public static int ACTION_ADD_NEW_BUSIENSS_SUCCESS = 1001;

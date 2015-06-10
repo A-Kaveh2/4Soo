@@ -42,6 +42,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
     ProgressDialog progressDialog;
     int screenWidth;
 
+
     public enum FragmentTag {HOME, SEARCH, BUSINESSES, USER}
 
     ArrayList<FragmentTag> fragmentTagList = new ArrayList<>();
@@ -176,12 +177,14 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getApplication()).isUserCreated) {
-                    ft = fm.beginTransaction();
-                    ft.show(fm.findFragmentById(R.id.frag_user_businesses));
-                    ft.hide(fm.findFragmentById(R.id.frag_search));
-                    ft.hide(fm.findFragmentById(R.id.frag_home));
-                    ft.hide(fm.findFragmentById(R.id.frag_user));
-                    ft.commit();
+                    if (footerBusiness) {
+                        ft = fm.beginTransaction();
+                        ft.show(fm.findFragmentById(R.id.frag_user_businesses));
+                        ft.hide(fm.findFragmentById(R.id.frag_search));
+                        ft.hide(fm.findFragmentById(R.id.frag_home));
+                        ft.hide(fm.findFragmentById(R.id.frag_user));
+                        ft.commit();
+                    }
                 } else
                     recursivelyCallHandlerUserBusinessesFragment();
             }
@@ -197,12 +200,14 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getApplication()).isSearchCreated) {
-                    ft = fm.beginTransaction();
-                    ft.show(fm.findFragmentById(R.id.frag_user));
-                    ft.hide(fm.findFragmentById(R.id.frag_search));
-                    ft.hide(fm.findFragmentById(R.id.frag_home));
-                    ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-                    ft.commit();
+                    if (footerUser) {
+                        ft = fm.beginTransaction();
+                        ft.show(fm.findFragmentById(R.id.frag_user));
+                        ft.hide(fm.findFragmentById(R.id.frag_search));
+                        ft.hide(fm.findFragmentById(R.id.frag_home));
+                        ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
+                        ft.commit();
+                    }
                 } else
                     recursivelyCallHandlerUserFragment();
             }
@@ -218,12 +223,14 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getApplication()).isSearchCreated) {
-                    ft = fm.beginTransaction();
-                    ft.show(fm.findFragmentById(R.id.frag_search));
-                    ft.hide(fm.findFragmentById(R.id.frag_home));
-                    ft.hide(fm.findFragmentById(R.id.frag_user));
-                    ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-                    ft.commit();
+                    if (footerSearch) {
+                        ft = fm.beginTransaction();
+                        ft.show(fm.findFragmentById(R.id.frag_search));
+                        ft.hide(fm.findFragmentById(R.id.frag_home));
+                        ft.hide(fm.findFragmentById(R.id.frag_user));
+                        ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
+                        ft.commit();
+                    }
                 } else
                     recursivelyCallHandlerSearchFragment();
             }
@@ -272,8 +279,41 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                 footerUser=false;
 
                 ft = fm.beginTransaction();
+                ft.show(fm.findFragmentById(R.id.frag_search));
+                ft.hide(fm.findFragmentById(R.id.frag_home));
+                ft.hide(fm.findFragmentById(R.id.frag_user));
+                ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
+                ft.commit();
+                //ft.replace(R.id.fragmentContainer, fragmentSearch);
+                /*if (((MyApplication) getApplication()).isSearchCreated) {
+                    ft.show(fm.findFragmentById(R.id.frag_search));
+                    ft.hide(fm.findFragmentById(R.id.frag_home));
+                    ft.hide(fm.findFragmentById(R.id.frag_user));
+                    ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
+                    ft.commit();
+                } else
+                    recursivelyCallHandlerSearchFragment();*/
+                if (!((MyApplication) getApplication()).isSearchCreated)
+                    recursivelyCallHandlerSearchFragment();
+                break;
+                /*if (footerSearch)
+                    return;
+
+                //getSupportActionBar().hide();
+                addFragment(FragmentTag.SEARCH);
+
+                nothingChoseInHeader();
+                imageViewSearch.setImageResource(R.drawable.ic_search_blue_36dp);
+
+                footerHome=false;
+                footerBusiness=false;
+                footerSearch=true;
+                footerUser=false;
+
+
                 //ft.replace(R.id.fragmentContainer, fragmentSearch);
                 if (((MyApplication) getApplication()).isSearchCreated) {
+                    ft = fm.beginTransaction();
                     ft.show(fm.findFragmentById(R.id.frag_search));
                     ft.hide(fm.findFragmentById(R.id.frag_home));
                     ft.hide(fm.findFragmentById(R.id.frag_user));
@@ -281,9 +321,36 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                     ft.commit();
                 } else
                     recursivelyCallHandlerSearchFragment();
-                break;
+                break;*/
             case R.id.rl_user:
                 if (footerUser)
+                    return;
+
+                //getSupportActionBar().hide();
+                addFragment(FragmentTag.USER);
+
+                nothingChoseInHeader();
+                imageViewUser.setImageResource(R.drawable.ic_person_blue_36dp);
+
+                footerHome=false;
+                footerBusiness=false;
+                footerSearch=false;
+                footerUser=true;
+
+                ft = fm.beginTransaction();
+                ft.show(fm.findFragmentById(R.id.frag_user));
+                ft.hide(fm.findFragmentById(R.id.frag_search));
+                ft.hide(fm.findFragmentById(R.id.frag_home));
+                ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
+                ft.commit();
+                //ft.replace(R.id.fragmentContainer, fragmentUser);
+
+                if (((MyApplication) getApplication()).isUserCreated)
+                    recursivelyCallHandlerUserFragment();
+                break;
+
+                    //old code
+                /*if (footerUser)
                     return;
 
                 //getSupportActionBar().hide();
@@ -308,10 +375,11 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
                     ft.commit();
                 } else
                     recursivelyCallHandlerUserFragment();
-                break;
-
+                break;*/
             case R.id.rl_businesses2:
                 //getSupportActionBar().hide();
+                if (footerBusiness)
+                    return;
                 addFragment(FragmentTag.BUSINESSES);
                 initialUserBusinessesTab();
                 break;
@@ -342,6 +410,26 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
         footerUser=false;
 
         ft = fm.beginTransaction();
+        ft.hide(fm.findFragmentById(R.id.frag_search));
+        ft.hide(fm.findFragmentById(R.id.frag_home));
+        ft.hide(fm.findFragmentById(R.id.frag_user));
+        ft.show(fm.findFragmentById(R.id.frag_user_businesses));
+        ft.commit();
+        //ft.replace(R.id.fragmentContainer, fragmentUser);
+
+        //if user.businesses in intialized
+        if (((MyApplication) getApplication()).isUserCreated)
+            recursivelyCallHandlerUserBusinessesFragment();
+        /*nothingChoseInHeader();
+
+        imageViewBusinesses.setImageResource(R.drawable.ic_store_mall_directory_blue_36dp);
+
+        footerHome=false;
+        footerBusiness=true;
+        footerSearch=false;
+        footerUser=false;
+
+        ft = fm.beginTransaction();
         //ft.replace(R.id.fragmentContainer, fragmentUser);
 
         //if user.businesses in intialized
@@ -353,7 +441,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
             ft.show(fm.findFragmentById(R.id.frag_user_businesses));
             ft.commit();
         } else
-            recursivelyCallHandlerUserBusinessesFragment();
+            recursivelyCallHandlerUserBusinessesFragment();*/
     }
 
 
