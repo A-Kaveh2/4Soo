@@ -185,7 +185,7 @@ public class Post {
         post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         post.code = jsonObject.getString(Params.POST_CODE_STRING);
         post.price = jsonObject.getString(Params.POST_PRICE_STRING);
-
+        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
         String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
         JSONArray jsonArrayComments = new JSONArray(comments);
 

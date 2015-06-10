@@ -75,13 +75,13 @@ public class ServerAnswer {
             case 18:
                 return errorPrefix+context.getResources().getString(R.string.err_no_review);
             case 19:
-                return errorPrefix+"repeated review";
+                return errorPrefix+context.getResources().getString(R.string.err_repeated_review);
             case 20:
-                return errorPrefix+"repeated business identifier";
+                return errorPrefix+context.getResources().getString(R.string.err_repeated_business_identifier);
             case 21:
-                return errorPrefix+"share doesn't exist";
+                return errorPrefix+context.getResources().getString(R.string.err_share_does_not_exist);
             case 22:
-                return errorPrefix+"user is blocked";
+                return errorPrefix+context.getResources().getString(R.string.err_user_is_blocked);
 
         }
 

@@ -8,6 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="3dp"
+        android:divider="@android:color/transparent"
+        android:smoothScrollbar="true"
         android:id="@+id/gridView" />
 
     <ir.rasen.charsoo.view.widget_customized.TextViewFont
@@ -16,7 +18,8 @@
         android:layout_height="wrap_content"
         android:text="@string/no_results_found"
         android:visibility="gone"
-        android:layout_centerInParent="true"/>
 
+        android:layout_centerInParent="true"/>
+l
 </RelativeLayout>
 

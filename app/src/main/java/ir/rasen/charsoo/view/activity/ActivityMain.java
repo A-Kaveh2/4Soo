@@ -86,7 +86,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
         screenWidth = getResources().getDisplayMetrics().widthPixels;
 
         if (LoginInfo.hasBusiness(this)) {
-            //display four tab
+            //if user has any business, display four tab
             makeItFour();
         } else {
             //display three tab
@@ -141,9 +141,11 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
 
     private void addFragment(FragmentTag fragmentTag) {
         int fragmentPosition = checkFragment(fragmentTag);
+        //if the fragment is not added before
         if (fragmentPosition == -1)
             fragmentTagList.add(fragmentTag);
         else {
+            //if the fragment is added before, remove it and add the fragment in the end of the list
             fragmentTagList.remove(fragmentPosition);
             fragmentTagList.add(fragmentTag);
         }
