@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="50dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
+        android:layout_width="@dimen/register_profile_picture_height"
+        android:layout_height="@dimen/register_profile_picture_height"
+        android:id="@+id/imageView_user_picture"
+        android:src="@drawable/ic_account_orange" />
+
+    <ir.rasen.charsoo.view.widget_customized.EditTextFont
+        android:id="@+id/editText_name"
+        android:layout_width="match_parent"
+        android:hint="@string/user_name_field_hint"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_register"
+        android:singleLine="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="35dp"
+        android:nextFocusDown="@+id/editText_identifier"
+        android:layout_marginLeft="35dp"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+    <ir.rasen.charsoo.view.widget_customized.EditTextFont
+        android:id="@+id/editText_identifier"
+        android:layout_width="match_parent"
+        android:hint="@string/identifier_field_hint"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_register"
+        android:singleLine="true"
+        android:layout_marginRight="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:imeOptions="actionDone"/>
+
+
+
+
+</LinearLayout>
