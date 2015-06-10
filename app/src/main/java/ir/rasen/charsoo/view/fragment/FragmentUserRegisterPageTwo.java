@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.fragment;
 
 import android.app.Fragment;
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Validation;
-import ir.rasen.charsoo.view.activity.ActivityUserRegisterPageOne;
+import ir.rasen.charsoo.view.activity.ActivityUserRegister;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
@@ -62,7 +61,7 @@ public class FragmentUserRegisterPageTwo extends Fragment {
                         public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
                                 boolean handeled = false;
                                 if (actionID == EditorInfo.IME_ACTION_DONE) {
-                                        ((ActivityUserRegisterPageOne)getActivity()).onDoneButtonPressed(TAG);
+                                        ((ActivityUserRegister)getActivity()).onDoneButtonPressed(TAG);
                                 }
                                 return handeled;
                         }

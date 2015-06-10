@@ -19,18 +19,18 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.fragment.FragmentUserLogin;
-import ir.rasen.charsoo.view.fragment.FragmentUserSignUpeEmailID;
-import ir.rasen.charsoo.view.fragment.FragmentUserSignUpeNamePassword;
-import ir.rasen.charsoo.view.fragment.FragmentUserSignUpePicture;
+import ir.rasen.charsoo.view.fragment.NOT_USED___FragmentUserSignUpeEmailID;
+import ir.rasen.charsoo.view.fragment.NOT_USED___FragmentUserSignUpeNamePassword;
+import ir.rasen.charsoo.view.fragment.NOT_USED___FragmentUserSignUpePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserviceResponse {
+public class NOT_USED___ActivityUserLoginSignUp extends CharsooActivity implements IWebserviceResponse {
 
     FragmentUserLogin fragmentUserLogin;
-    FragmentUserSignUpeEmailID fragmentEmailID;
-    FragmentUserSignUpeNamePassword fragmentNamePassword;
-    FragmentUserSignUpePicture fragmentPicture;
+    NOT_USED___FragmentUserSignUpeEmailID fragmentEmailID;
+    NOT_USED___FragmentUserSignUpeNamePassword fragmentNamePassword;
+    NOT_USED___FragmentUserSignUpePicture fragmentPicture;
     ProgressDialog progressDialog;
 
     private enum Fragments {LOGIN, REGISTER_EMAIL_ID, REGISTER_NAME_PASSWORD, REGISTER_PICTURE}
@@ -55,9 +55,9 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
 
 
         fragmentUserLogin = new FragmentUserLogin();
-        fragmentEmailID = new FragmentUserSignUpeEmailID();
-        fragmentNamePassword = new FragmentUserSignUpeNamePassword();
-        fragmentPicture = new FragmentUserSignUpePicture();
+        fragmentEmailID = new NOT_USED___FragmentUserSignUpeEmailID();
+        fragmentNamePassword = new NOT_USED___FragmentUserSignUpeNamePassword();
+        fragmentPicture = new NOT_USED___FragmentUserSignUpePicture();
 
         fragmentCurrent = Fragments.LOGIN;
         fm = getFragmentManager();
@@ -166,7 +166,7 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserLoginSignUp.this, ServerAnswer.getError(ActivityUserLoginSignUp.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+        new DialogMessage(NOT_USED___ActivityUserLoginSignUp.this, ServerAnswer.getError(NOT_USED___ActivityUserLoginSignUp.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     private void nextFragment() {
