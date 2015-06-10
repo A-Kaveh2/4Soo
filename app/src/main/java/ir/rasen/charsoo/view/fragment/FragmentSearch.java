@@ -1,5 +1,6 @@
 package ir.rasen.charsoo.view.fragment;
 
+import android.app.Application;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -218,6 +219,8 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
             public void run() {
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
+
+                MyApplication a=(MyApplication) getActivity().getApplication();
                 if (((MyApplication) getActivity().getApplication()).isHomeCreated) {
                     ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
                     new GetBusinessGategories(getActivity(), FragmentSearch.this).execute();

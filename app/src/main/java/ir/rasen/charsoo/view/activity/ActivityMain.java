@@ -45,7 +45,7 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
 
     public enum FragmentTag {HOME, SEARCH, BUSINESSES, USER}
 
-    ArrayList<FragmentTag> fragmentTagList = new ArrayList<>();
+    ArrayList<FragmentTag> fragmentTagList = new ArrayList<FragmentTag>();
 
 
     @Override

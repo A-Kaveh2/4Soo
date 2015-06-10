@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
@@ -93,10 +94,12 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
                 break;
             case R.id.btn_login_register:
                 //The main function commented here because of the test
-                /*Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
-                startActivity(intent);*/
-                Intent intent = new Intent(this, ActivityMain.class);
+                Intent intent = new Intent(ActivityLogin.this, ActivityUserRegisterPageOne.class);
                 startActivity(intent);
+                /*if(LoginInfo.getUserId(this)>0){
+                    Intent intent = new Intent(this, ActivityMain.class);
+                    startActivity(intent);
+                }*/
                 break;
         }
     }

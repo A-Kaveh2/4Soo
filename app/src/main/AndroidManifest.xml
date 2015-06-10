@@ -155,6 +155,11 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".view.activity.ActivityUserRegisterPageOne"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:screenOrientation="portrait" />
+
         <receiver android:name=".controller.helper.AlarmReciever" />
 
         <receiver android:name=".model.NetworkConnectivityReciever">
