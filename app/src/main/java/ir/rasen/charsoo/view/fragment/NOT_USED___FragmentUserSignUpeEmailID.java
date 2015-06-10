@@ -14,8 +14,8 @@ import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
-public class FragmentUserSignUpeEmailID extends Fragment implements IWebserviceResponse {
-    public static final String TAG="FragmentUserSignUpeEmailID";
+public class NOT_USED___FragmentUserSignUpeEmailID extends Fragment implements IWebserviceResponse {
+    public static final String TAG="NOT_USED___FragmentUserSignUpeEmailID";
 
     EditTextFont editText1, editText2,editText3;
     ImageViewCircle imageViewUserPicture;

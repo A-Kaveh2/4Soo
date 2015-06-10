@@ -2,7 +2,6 @@ package ir.rasen.charsoo.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -94,7 +93,11 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
                 break;
             case R.id.btn_login_register:
                 //The main function commented here because of the test
+<<<<<<< HEAD
                 Intent intent = new Intent(ActivityLogin.this, ActivityUserRegisterPageOne.class);
+=======
+                Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
+>>>>>>> d091ce120147112ac3155e2b5224d2496a491753
                 startActivity(intent);
                 /*if(LoginInfo.getUserId(this)>0){
                     Intent intent = new Intent(this, ActivityMain.class);

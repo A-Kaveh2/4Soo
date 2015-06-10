@@ -54,6 +54,14 @@
     <string name="email">ایمیل</string>
     <string name="password">رمز عبور</string>
     <string name="forgot_password_sent">کلمه ی عبور شما از طریق ایمیل برایتان ارسال خواهد شد.</string>
+
+    <!--REGISTER USER-->
+    <string name="str_Continue">ادامه</string>
+    <string name="str_Back">بازگشت</string>
+    <string name="str_Cancel">انصراف</string>
+
+
+
     <!-- REGISTER PAGE -->
     <string name="register">ثبت نام</string>
     <string name="register_business">ثبت نام کسب و کار</string>
@@ -453,7 +461,6 @@
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
-    <string name="identifier_field_hint">نام کاربری</string>
     <string name="identifier_business">شناسه کاربری (انگلیسی)</string>
     <string name="description">توضیحات</string>
     <string name="user_name_field_hint">نام</string>
@@ -547,5 +554,13 @@
         <item>همدان</item>
         <item>يزد</item>
     </string-array>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_RegisterInCharsoo">ثبت نام در چارسو</string>
+    <string name="licenseAgreement_Farsi">با کلیک بر روی گزینه ثبت نام با سیاستها و قوانین چارسو موافقت نموده اید.</string>
+    <string name="identifier_field_hint">شناسه کاربری (لاتین)</string>
+    <string name="licenseAgreementEnglish">By signing up, you agree to the \nPrivacy Policy and Terms of Service.</string>
+    <string name="licenseAgreementPersian">با انجام ثبت نام، شما با\nسیاستها و قوانین چارسو موافقت مینمایید.</string>
 
 </resources>

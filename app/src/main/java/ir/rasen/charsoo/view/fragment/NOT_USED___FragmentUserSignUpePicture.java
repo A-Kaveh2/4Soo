@@ -14,9 +14,8 @@ import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
-public class FragmentUserSignUpeNamePassword extends Fragment implements IWebserviceResponse {
-
-    String tag="FragmentUserSignUpeNamePassword";
+public class NOT_USED___FragmentUserSignUpePicture extends Fragment implements IWebserviceResponse {
+    public static final String TAG="NOT_USED___FragmentUserSignUpePicture";
     EditTextFont editText1, editText2,editText3;
     ImageViewCircle imageViewUserPicture;
     String filePath,userPictureString;
@@ -47,7 +46,7 @@ public class FragmentUserSignUpeNamePassword extends Fragment implements IWebser
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+tag)).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
     }
 
 

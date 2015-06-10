@@ -52,7 +52,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.ActivityUserRegister"
+            android:name=".view.activity.NOT_USED___ActivityUserRegister"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
@@ -156,7 +156,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
+<<<<<<< HEAD
             android:name=".view.activity.ActivityUserRegisterPageOne"
+=======
+            android:name=".view.activity.ActivityUserRegister"
+>>>>>>> d091ce120147112ac3155e2b5224d2496a491753
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
 
