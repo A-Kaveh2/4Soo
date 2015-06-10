@@ -22,66 +22,70 @@ public class ServerAnswer {
     public static int NETWORK_CONNECTION_ERROR = -4;
 
 
-    public static String getError(Context context, int errorCode,String callerStringID) {
-        String errorPrefix=""; //mhfathi
+    public static String getError(Context context, int errorCode, String callerStringID) {
+        String errorPrefix = ""; //mhfathi
         if (Params.isTestVersion) //mhfathi
         {
-            errorPrefix ="Error Created By: "+callerStringID+" :";
+            errorPrefix = "Error Created By: " + callerStringID + " :";
         }
 
         switch (errorCode) {
             case -4:
-                return errorPrefix+context.getResources().getString(R.string.err_network_connection);
+                return errorPrefix + context.getResources().getString(R.string.err_network_connection);
             case -2:
-                return errorPrefix+context.getResources().getString(R.string.err_execution);
+                return errorPrefix + context.getResources().getString(R.string.err_execution);
             case -1:
-                return errorPrefix+context.getResources().getString(R.string.err_none);
+                return errorPrefix + context.getResources().getString(R.string.err_none);
             case 0:
-                return errorPrefix+context.getResources().getString(R.string.err_unknown);
+                return errorPrefix + context.getResources().getString(R.string.err_unknown);
             case 1:
-                return errorPrefix+context.getResources().getString(R.string.err_database_connection);
+                return errorPrefix + context.getResources().getString(R.string.err_database_connection);
             case 2:
-                return errorPrefix+context.getResources().getString(R.string.err_user_dose_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_user_dose_not_exist);
             case 3:
-                return errorPrefix+context.getResources().getString(R.string.err_password_incorrect);
+                return errorPrefix + context.getResources().getString(R.string.err_password_incorrect);
             case 4:
-                return errorPrefix+context.getResources().getString(R.string.err_business_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_business_does_not_exist);
             case 5:
-                return errorPrefix+context.getResources().getString(R.string.err_post_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_post_does_not_exist);
             case 6:
-                return errorPrefix+context.getResources().getString(R.string.err_json_serialization);
+                return errorPrefix + context.getResources().getString(R.string.err_json_serialization);
             case 7:
-                return errorPrefix+context.getResources().getString(R.string.err_further_development);
+                return errorPrefix + context.getResources().getString(R.string.err_further_development);
             case 8:
-                return errorPrefix+context.getResources().getString(R.string.err_empty_post_request);
+                return errorPrefix + context.getResources().getString(R.string.err_empty_post_request);
             case 9:
-                return errorPrefix+context.getResources().getString(R.string.err_invalid_base64_string);
+                return errorPrefix + context.getResources().getString(R.string.err_invalid_base64_string);
             case 10:
-                return errorPrefix+context.getResources().getString(R.string.err_database_constraints_violation);
+                return errorPrefix + context.getResources().getString(R.string.err_database_constraints_violation);
             case 11:
-                return errorPrefix+context.getResources().getString(R.string.err_block_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_block_does_not_exist);
             case 12:
-                return errorPrefix+context.getResources().getString(R.string.err_comment_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_comment_does_not_exist);
             case 13:
-                return errorPrefix+context.getResources().getString(R.string.err_follow_already_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_follow_already_exist);
             case 14:
-                return errorPrefix+context.getResources().getString(R.string.err_follow_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_follow_does_not_exist);
             case 15:
-                return errorPrefix+context.getResources().getString(R.string.err_friend_request_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_friend_request_does_not_exist);
             case 16:
-                return errorPrefix+context.getResources().getString(R.string.err_image_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_image_does_not_exist);
             case 17:
-                return errorPrefix+context.getResources().getString(R.string.err_no_rate);
+                return errorPrefix + context.getResources().getString(R.string.err_no_rate);
             case 18:
-                return errorPrefix+context.getResources().getString(R.string.err_no_review);
+                return errorPrefix + context.getResources().getString(R.string.err_no_review);
             case 19:
-                return errorPrefix+context.getResources().getString(R.string.err_repeated_review);
+                return errorPrefix + context.getResources().getString(R.string.err_repeated_review);
             case 20:
-                return errorPrefix+context.getResources().getString(R.string.err_repeated_business_identifier);
+                return errorPrefix + context.getResources().getString(R.string.err_repeated_business_identifier);
             case 21:
-                return errorPrefix+context.getResources().getString(R.string.err_share_does_not_exist);
+                return errorPrefix + context.getResources().getString(R.string.err_share_does_not_exist);
             case 22:
-                return errorPrefix+context.getResources().getString(R.string.err_user_is_blocked);
+                return errorPrefix + context.getResources().getString(R.string.err_user_is_blocked);
+            case 23:
+                return errorPrefix + "email is repeated";
+            case 24:
+                return errorPrefix + "business' userId is same as a user's userId";
 
         }
 

@@ -26,13 +26,15 @@ public class Post {
     public int businessID;
     public String businessUserName;
     public String businessIdentifier;
+    public String friendUserIdentifier;//the user's friend's userId, used when post type is not complete
     public int businessProfilePictureId;
 
     //here is 3 types of post: ordinary post, follow announcement post and review annoucement post
     //follow announcement post fields: businessID,businessUserName,userId,userName,type
     //review announcement post fields: businessID,businessUserName,userId,userName,type,description(review json object that contains review text and rate)
 
-    public int userId;//used when post is follow or review announcement
+    public int userId;//business owner's user id
+    public int friendUserId;//the user's friend's user_id, used when post type is not complete
     public String userName;////used when post is follow or review announcement
 
     public Date creationDate;
@@ -236,8 +238,12 @@ public class Post {
 
             post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
         } else if (post.type == Type.Follow) {
-
+            post.friendUserId = jsonObject.getInt(Params.FRIEND_USER_ID_INT);//the friend's user.id
+            post.friendUserIdentifier = jsonObject.getString(Params.FRIEND_USER_ID_STRING);
         } else if (post.type == Type.Review) {
+            post.friendUserId = jsonObject.getInt(Params.USER_ID_INT);//the friend's user.id
+            post.friendUserIdentifier = jsonObject.getString(Params.FRIEND_USER_ID_STRING);
+
             String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         }
         return post;

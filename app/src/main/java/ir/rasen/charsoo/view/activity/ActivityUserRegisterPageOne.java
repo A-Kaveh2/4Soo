@@ -45,7 +45,7 @@ public class ActivityUserRegisterPageOne extends CharsooActivity  implements IWe
         setContentView(R.layout.activity_user_register_new);
         setTitle(getString(R.string.str_RegisterInCharsoo));
         fragOne=new FragmentUserRegisterPageOne();
-        fragTwo=new FragmentUserRegisterPageTwo();
+        fragTwo=new FragmentUserRegisterPageTwo();zz
         ft=getFragmentManager().beginTransaction();
         ft.replace(R.id.fragmentContainer,fragOne);
         currentFragment=FIRST_PAGE;

@@ -85,12 +85,14 @@ public class Params {
     public static String PASSWORD = "Password";
     public static String PASSWORD_NEW = "PasswordNew";
     public static String USER_ID_INT = "UserId";
+    public static String FRIEND_USER_ID_INT = "FriendUser_Id";
     public static String USER_UNDER_LINE_ID = "User_Id";
     public static String USERS_BUSINESS = "userBusiness";
     public static String USERS_SEEN_NOTIFICATIONS_PREFERENCE_NAME ="userSeenNotifications";
     public static String NOTIFICATION_ID = "NotificationId";
     public static String USER_IDENTIFIER = "UserIdentifier";
     public static String USER_ID_STRING = "UserName";
+    public static String FRIEND_USER_ID_STRING = "FriendUserId";
     public static String NAME = "Name";
     public static String ABOUT_ME = "AboutMe";
     public static String SEX = "Sex";

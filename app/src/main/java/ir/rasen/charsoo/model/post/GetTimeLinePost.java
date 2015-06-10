@@ -40,7 +40,7 @@ public class GetTimeLinePost extends AsyncTask<Void, Void, Post> {
     protected Post doInBackground(Void... voids) {
         Post targetPost = new Post();
         //currentPosts.get(Post.getIndexOfPost(currentPosts,postId)-1) returns the id of the post before the target post in time line
-        WebserviceGET webserviceGET = new WebserviceGET(URLs.GET_TIME_LINE_POSTS,new ArrayList<>(
+        WebserviceGET webserviceGET = new WebserviceGET(URLs.GET_TIME_LINE_POSTS,new ArrayList<String>(
                 Arrays.asList(String.valueOf(LoginInfo.getUserId(context)),
                         String.valueOf(currentPosts.get(Post.getIndexOfPost(currentPosts,postId)-1).id),
                         String.valueOf(1))));
