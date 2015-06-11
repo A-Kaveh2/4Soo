@@ -175,6 +175,7 @@ public abstract class Button extends CustomView {
 
     // Set color of background
     public void setBackgroundColor(int color) {
+        fillWithRipple=false;
         this.backgroundColor = color;
         if (isEnabled())
             beforeBackground = backgroundColor;
