@@ -1,5 +1,6 @@
 package ir.rasen.charsoo.view.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
@@ -14,11 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.view.activity.ActivityUserRegister;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
@@ -32,13 +35,8 @@ public class FragmentUserRegisterPageTwo extends Fragment {
         EditTextFont editTextEmail, editTextPassword,editTextPhoneNumber;
         ProgressDialog progressDialog;
 
-        TextViewFont persianLicenseTextView,englishLicenseTextView;
-//        ActivityRegisterListener listener;
+//        TextViewFont persianLicenseTextView,englishLicenseTextView;
 
-//
-//            public void setListener(ActivityRegisterListener lsr){
-//                    listener=lsr;
-//                    }
 
 
         @Override
@@ -49,25 +47,105 @@ public class FragmentUserRegisterPageTwo extends Fragment {
 
 
 
-//            (view.findViewById(R.id.btn_register)).setOnClickListener(this);
-//            (view.findViewById(R.id.btn_Cancel)).setOnClickListener(this);
-
-
             editTextEmail = (EditTextFont) view.findViewById(R.id.editText_email);
             editTextPassword = (EditTextFont) view.findViewById(R.id.editText_password);
             editTextPhoneNumber = (EditTextFont) view.findViewById(R.id.editText_PhoneNumber);
-                editTextPhoneNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                        @Override
-                        public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
-                                boolean handeled = false;
-                                if (actionID == EditorInfo.IME_ACTION_DONE) {
-                                        ((ActivityUserRegister)getActivity()).onDoneButtonPressed(TAG);
-                                }
-                                return handeled;
-                        }
-                });
 
-                String ss=getActivity().getString(R.string.licenseAgreementEnglish);
+
+            editTextEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
+                    boolean handeled = true;
+                    if (actionID == EditorInfo.IME_ACTION_NEXT) {
+                        if (editTextPassword.getText().toString().isEmpty()) {
+                            editTextPassword.requestFocus();
+                        } else if (editTextPhoneNumber.getText().toString().isEmpty()) {
+                            editTextPhoneNumber.requestFocus();
+                        } else {
+                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(editTextEmail.getWindowToken(), 0);
+                            ((ActivityUserRegister) getActivity()).onDoneButtonPressed(TAG);
+                        }
+                    }
+                    return handeled;
+                }
+            });
+
+            editTextPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
+                    boolean handeled = true;
+                    if (actionID == EditorInfo.IME_ACTION_NEXT) {
+                        if (editTextPhoneNumber.getText().toString().isEmpty()) {
+                            editTextPhoneNumber.requestFocus();
+                        } else if (editTextEmail.getText().toString().isEmpty()) {
+                            editTextEmail.requestFocus();
+                        } else {
+                            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                            inputMethodManager.hideSoftInputFromWindow(editTextPassword.getWindowToken(), 0);
+                            ((ActivityUserRegister) getActivity()).onDoneButtonPressed(TAG);
+                        }
+                    }
+                    return handeled;
+                }
+            });
+
+            editTextPhoneNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
+                    boolean handeled = true;
+                    if (actionID == EditorInfo.IME_ACTION_DONE) {
+                        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                        inputMethodManager.hideSoftInputFromWindow(editTextPhoneNumber.getWindowToken(), 0);
+                        ((ActivityUserRegister) getActivity()).onDoneButtonPressed(TAG);
+                    }
+                    return handeled;
+                }
+            });
+
+            editTextEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if (b) {
+                        editTextEmail.setHint("");
+                    } else {
+                        editTextEmail.setHint(getActivity().getString(R.string.email_field_hint));
+//                    if (editTextName.getText().toString().equals("")) {
+//                        editTextUserIdentifier.setHint(getActivity().getString(R.string.identifier_field_hint));
+//                    }
+                    }
+                }
+            });
+
+            editTextPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if (b) {
+                        editTextPassword.setHint("");
+                    } else {
+                        editTextPassword.setHint(getActivity().getString(R.string.password_field_hint));
+//                    if (editTextName.getText().toString().equals("")) {
+//                        editTextUserIdentifier.setHint(getActivity().getString(R.string.identifier_field_hint));
+//                    }
+                    }
+                }
+            });
+
+            editTextPhoneNumber.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    if (b) {
+                        editTextPhoneNumber.setHint("");
+                    } else {
+                        editTextPhoneNumber.setHint(getActivity().getString(R.string.mobile));
+//                    if (editTextName.getText().toString().equals("")) {
+//                        editTextUserIdentifier.setHint(getActivity().getString(R.string.identifier_field_hint));
+//                    }
+                    }
+                }
+            });
+
+                /*String ss=getActivity().getString(R.string.licenseAgreementEnglish);
                 SpannableString licenseInEnglish = new SpannableString(ss);
                 ClickableSpan clickableSpan = new ClickableSpan() {
                         @Override
@@ -83,7 +161,7 @@ public class FragmentUserRegisterPageTwo extends Fragment {
                 licenseInEnglish.setSpan(new StyleSpan(Typeface.ITALIC), leftIndex, rightIndex, 0);
                 englishLicenseTextView=(TextViewFont) view.findViewById(R.id.licensesInEnglish);
                 englishLicenseTextView.setText(licenseInEnglish);
-                englishLicenseTextView.setMovementMethod(LinkMovementMethod.getInstance());
+                englishLicenseTextView.setMovementMethod(LinkMovementMethod.getInstance());*/
 //                persianLicenseTextView=(TextViewFont) view.findViewById(R.id.licensesInPersian);
 //                persianLicenseTextView.setText(licenseInEnglish);
 //                persianLicenseTextView.setMovementMethod(LinkMovementMethod.getInstance());

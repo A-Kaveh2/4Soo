@@ -183,6 +183,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                 public void onClick(View v) {
                     gridViewHeader.setNumColumns(1);
                     gridViewHeader.setAdapter(adapterPostBusiness);
+
                     //now it has one column
                     isThreeColumn = false;
                     switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
@@ -266,13 +267,15 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     public void getResult(Object result) {
         if (result instanceof ArrayList) {
             //GetBusinessPosts' result
-            ArrayList<Post> posts = (ArrayList<Post>) result;
+            ArrayList<Post> newPosts = (ArrayList<Post>) result;
+            posts.addAll(newPosts);
             listFooterView.setVisibility(View.GONE);
-            if (isThreeColumn)
-                adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
-            else
-                adapterPostBusiness.loadMore(posts);
-
+            if (isThreeColumn){
+                adapterPostGrid.loadMore(SearchItemPost.getItems(newPosts));
+            }
+            else{
+                adapterPostBusiness.loadMore(newPosts);
+            }
             isLoadingMore=false;
 
         } else if (result instanceof ResultStatus) {

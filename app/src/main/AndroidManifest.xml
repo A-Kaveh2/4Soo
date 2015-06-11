@@ -157,7 +157,7 @@
 
         <activity
             android:name=".view.activity.ActivityUserRegister"
-            android:windowSoftInputMode="stateHidden|adjustResize"
+            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
 
         <receiver android:name=".controller.helper.AlarmReciever" />

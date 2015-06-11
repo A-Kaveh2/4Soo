@@ -55,7 +55,7 @@ public class SearchUser extends AsyncTask<Void, Void, ArrayList<BaseAdapterItem>
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.ID),
                             jsonObject.getInt(Params.USER_PROFILE_PICTURE_ID),
-                            jsonObject.getString(Params.USER_ID_INT)
+                            jsonObject.getString(Params.USER_ID_INT_FOR_SearchUser)
                     ));
                 }
                 return list;

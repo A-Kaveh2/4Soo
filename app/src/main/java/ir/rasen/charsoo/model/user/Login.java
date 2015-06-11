@@ -58,7 +58,7 @@ public class Login extends AsyncTask<Void, Void, ResultStatus> {
                 String access_token = null, userIdentifier = null;
 
                 if (jsonObject != null) {
-                    user_id = jsonObject.getInt(Params.USER_ID_INT);
+                    user_id = jsonObject.getInt(Params.USER_ID_INT_FOR_LOGIN);
                     if (!TestUnit.isTestingCommentActivity)
                         profilePictureId = jsonObject.getInt(Params.PROFILE_PICTURE_ID);
                     access_token = jsonObject.getString(Params.ACCESS_TOKEN);

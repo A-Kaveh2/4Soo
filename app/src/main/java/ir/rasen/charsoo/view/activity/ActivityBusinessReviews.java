@@ -36,6 +36,7 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
     ListView listView;
     ArrayList<Review> results;
     ArrayList<Review> sampleResults;
+    int visitorIntId;
 
 
     //pull_to_refresh_lib
@@ -45,7 +46,7 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
     public void notifyRefresh() {
         status = Status.REFRESHING;
         results.clear();
-        new GetBusinessReviews(ActivityBusinessReviews.this, businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
+        new GetBusinessReviews(ActivityBusinessReviews.this, visitorIntId,businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
     }
 
     @Override
@@ -62,9 +63,10 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_reviews);
         setTitle(getResources().getString(R.string.reviews));
+        visitorIntId=LoginInfo.getUserId(this);
         try {
             sampleResults = TestUnit.getUserReviewAdapterItems();
-        } catch (Exception e) {
+        } catch (Exception ignored) {
 
         }
 
@@ -83,7 +85,7 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
 
 
         progressDialog.show();
-        new GetBusinessReviews(ActivityBusinessReviews.this, businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
+        new GetBusinessReviews(ActivityBusinessReviews.this, visitorIntId,businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
 
         (findViewById(R.id.imageView_add)).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +102,7 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
         pullToRefreshListView.setFooterVisibility(View.VISIBLE);
-        new GetBusinessReviews(ActivityBusinessReviews.this, businessId, results.get(results.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
+        new GetBusinessReviews(ActivityBusinessReviews.this,visitorIntId,businessId, results.get(results.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
     }
 
     @Override

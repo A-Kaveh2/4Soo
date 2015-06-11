@@ -61,12 +61,12 @@ public class Image_M {
         BitmapFactory.Options ops = new BitmapFactory.Options();
         ops.inSampleSize = 1;
 
-        //because of the webservice's bug, we have to decrease the volume of the image
-        while (Image_M.sizeOf(bm) > 100000) {
-            ops.inSampleSize++;
-            bm = BitmapFactory.decodeFile(imageFilePath, ops);
-            si = Image_M.sizeOf(bm);
-        }
+//        //because of the webservice's bug, we have to decrease the volume of the image
+//        while (Image_M.sizeOf(bm) > 100000) {
+//            ops.inSampleSize++;
+//            bm = BitmapFactory.decodeFile(imageFilePath, ops);
+//            si = Image_M.sizeOf(bm);
+//        }
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object

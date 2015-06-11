@@ -51,7 +51,7 @@ public class Post {
     public int commentNumber;
     public int shareNumber;
 
-    public enum Type {Complete, Follow, Review}
+    public enum Type {CompleteByFollowedBusiness, FriendFollowAnnouncement, FriendReviewAnnouncement, CompleteSharedByFriend}
 
     public enum GetPostType {TIMELINE, SHARE, BUSINESS, SEARCH}
 
@@ -76,26 +76,29 @@ public class Post {
     public static Type getType(int type) {
         switch (type) {
             case 1:
-                return Type.Complete;
+                return Type.CompleteByFollowedBusiness;
             case 2:
-                return Type.Follow;
+                return Type.FriendFollowAnnouncement;
             case 3:
-                return Type.Review;
+                return Type.FriendReviewAnnouncement;
+            case 4:
+                return Type.CompleteSharedByFriend;
         }
 
-        return Type.Complete;
+        return Type.CompleteByFollowedBusiness;
     }
 
     public static int getTypeCode(Type type) {
         switch (type) {
-            case Complete:
+            case CompleteByFollowedBusiness:
                 return 1;
-            case Follow:
+            case FriendFollowAnnouncement:
                 return 2;
-            case Review:
+            case FriendReviewAnnouncement:
                 return 3;
+            case CompleteSharedByFriend:
+                return 4;
         }
-
         return 0;
     }
 
@@ -208,12 +211,12 @@ public class Post {
         Post post = new Post();
         post.id = jsonObject.getInt(Params.POST_ID_INT);
         post.businessID = jsonObject.getInt(Params.BUSINESS_ID_INT);
-        post.businessUserName = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
-        post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
+        post.businessUserName = jsonObject.getString(Params.BUSINESS_ID_STRING);
+        post.userId = jsonObject.getInt(Params.POST_USER_ID_INT_FOR_GETTIMELINEPOSTS);//business owner' user.id
         post.userName = jsonObject.getString(Params.USER_NAME_STRING);
         post.type = getType(jsonObject.getInt(Params.TYPE));
         post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
-        if (post.type == Type.Complete) {
+        if (post.type == Type.CompleteByFollowedBusiness) {
             //post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
             post.title = jsonObject.getString(Params.POST_TITLE_STRING);
             post.creationDate = setCreationDate(jsonObject);
@@ -235,9 +238,9 @@ public class Post {
 
 
             post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
-        } else if (post.type == Type.Follow) {
+        } else if (post.type == Type.FriendFollowAnnouncement) {
 
-        } else if (post.type == Type.Review) {
+        } else if (post.type == Type.FriendReviewAnnouncement) {
             String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         }
         return post;

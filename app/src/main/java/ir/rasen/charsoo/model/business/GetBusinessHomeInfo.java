@@ -21,7 +21,7 @@ import ir.rasen.charsoo.model.WebserviceGET;
  * Created by android on 12/16/2014.
  */
 public class GetBusinessHomeInfo extends AsyncTask<Void, Void, Business> {
-    private static final String TAG = "GetUserHomeInfo";
+    private static final String TAG = "GetBusinessHomeInfo";
     private IWebserviceResponse delegate = null;
     private int businessID;
     private int userID;
@@ -48,7 +48,7 @@ public class GetBusinessHomeInfo extends AsyncTask<Void, Void, Business> {
                 JSONObject jsonObject = serverAnswer.getResult();
                 business.id = businessID;
                 business.businessIdentifier = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
-                business.userID = jsonObject.getInt(Params.USER_ID_INT);
+                business.userID = jsonObject.getInt(Params.USER_ID_INT_FOR_GETBUSINESSHOMEINFO);
                 business.name = jsonObject.getString(Params.BUSINESS_NAME);//mhfathi
                 business.profilePictureId = jsonObject.getInt(Params.PROFILE_PICTURE_ID);
                 business.coverPictureId = jsonObject.getInt(Params.COVER_PICTURE_ID);

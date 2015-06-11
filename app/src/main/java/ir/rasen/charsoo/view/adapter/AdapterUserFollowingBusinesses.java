@@ -71,7 +71,7 @@ public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfo
         if (view == null) {
             holder = new Holder();
             view = LayoutInflater.from(context).inflate(R.layout.item_base_adapter_squar_image_selectable, viewGroup, false);
-            holder.imageViewImage = (RoundedImageView) view.findViewById(R.id.imageView_base_adapter_item_image);
+            holder.imageViewImage = (ImageView) view.findViewById(R.id.imageView_base_adapter_item_image);
             holder.textViewUserIdentifier = (TextViewFont) view.findViewById(R.id.textView_base_adapter_item_title);
             holder.imgMore = (ImageView) view.findViewById(R.id.img_more);
             view.setTag(holder);

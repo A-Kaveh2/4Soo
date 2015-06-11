@@ -55,7 +55,7 @@ public class GetUserHomeInfo extends AsyncTask<Void, Void, User> {
             if (serverAnswer.getSuccessStatus()) {
                 JSONObject jsonObject = serverAnswer.getResult();
                 user.id = visitedUserID;
-                user.userIdentifier = jsonObject.getString(Params.USER_ID_INT);
+                user.userIdentifier = jsonObject.getString(Params.USER_ID_STRING_FOR_GETUSERHOMEINFO);
                 user.name = jsonObject.getString(Params.NAME);
                 user.aboutMe = jsonObject.getString(Params.ABOUT_ME);
                 user.profilePictureId = jsonObject.getInt(Params.PROFILE_PICTURE_ID);

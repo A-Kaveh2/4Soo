@@ -129,16 +129,7 @@ public class ActivityUserRegister extends CharsooActivity  implements IWebservic
         } else if (item.getItemId() == R.id.action_next) {
             switch (currentFragment) {
                 case FIRST_PAGE:
-                    String[] tempStringOne=fragOne.getInputData();
-                    if (tempStringOne!=null) {
-                        userFullName=tempStringOne[0];
-                        userStringId=tempStringOne[1];
-                        ft=getFragmentManager().beginTransaction();
-                        ft.replace(R.id.fragmentContainer,fragTwo);
-                        currentFragment=SECOND_PAGE;
-                        ft.commit();
-                        menuItemNext.setIcon(R.drawable.ic_check_white_24dp);
-                    }
+                    switchToSecondPage();
                     break;
                 case SECOND_PAGE:
                     //register User
@@ -165,7 +156,28 @@ public class ActivityUserRegister extends CharsooActivity  implements IWebservic
 
     public void onDoneButtonPressed(String callerStringId)
     {
-        doRegisterUser();
+        if (callerStringId.equals(FIRST_PAGE))
+        {
+            switchToSecondPage();
+        }
+        else{
+            doRegisterUser();
+        }
+
+    }
+
+
+    private void switchToSecondPage(){
+        String[] tempStringOne=fragOne.getInputData();
+        if (tempStringOne!=null) {
+            userFullName=tempStringOne[0];
+            userStringId=tempStringOne[1];
+            ft=getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContainer,fragTwo);
+            currentFragment=SECOND_PAGE;
+            ft.commit();
+            menuItemNext.setIcon(R.drawable.ic_check_white_24dp);
+        }
     }
 
     private void doRegisterUser(){
