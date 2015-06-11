@@ -264,7 +264,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 nothingChoseInHeader();
                 btnSearch.setDrawableIcon(R.drawable.ic_search_blue_36dp);
-                btnSearch.setDrawableIcon(R.drawable.ic_home_blue_36dp);
                 if(autoSetBackground)
                     btnSearch.setBackgroundColor(getResources().getColor(android.R.color.white));
                 else
@@ -328,7 +327,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 nothingChoseInHeader();
                 btnUser.setDrawableIcon(R.drawable.ic_person_blue_36dp);
-                btnUser.setDrawableIcon(R.drawable.ic_home_blue_36dp);
                 if(autoSetBackground)
                     btnUser.setBackgroundColor(getResources().getColor(android.R.color.white));
                 else
@@ -402,7 +400,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         nothingChoseInHeader();
 
         btnBusiness.setDrawableIcon(R.drawable.ic_store_mall_directory_blue_36dp);
-        btnBusiness.setDrawableIcon(R.drawable.ic_home_blue_36dp);
         if(autoSetBackground)
             btnBusiness.setBackgroundColor(getResources().getColor(android.R.color.white));
         else
