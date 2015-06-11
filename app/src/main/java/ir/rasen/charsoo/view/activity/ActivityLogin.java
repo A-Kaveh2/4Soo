@@ -8,11 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
-<<<<<<< HEAD
-import ir.rasen.charsoo.controller.helper.Params;
-=======
->>>>>>> 4766ff491fd417514754d50bbb0143c447726456
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
@@ -32,17 +27,11 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
     Validation validation;
     ProgressDialog progressDialog;
     MyApplication myApplication;
-    Intent activityMainIntent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if((LoginInfo.getUserId(this)>0) && (!Params.isTestVersion)){
-            Intent intent = new Intent(this, ActivityMain.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
-        }
         setContentView(R.layout.activity_login);
 
         init(getString(R.string.login));
@@ -62,12 +51,11 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
         //edit texts
         editTextEmail = (EditTextFont) findViewById(R.id.edt_login_email);
         editTextPassword = (EditTextFont) findViewById(R.id.edt_login_password);
-        editTextPassword.setText("salam");
+
         //views which do an action
         findViewById(R.id.btn_login_login).setOnClickListener(this);
         findViewById(R.id.btn_login_forget).setOnClickListener(this);
         findViewById(R.id.btn_login_register).setOnClickListener(this);
-        activityMainIntent=new Intent(ActivityLogin.this, ActivityMain.class);
 
     }
 
@@ -92,7 +80,6 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
                     editTextPassword.setError(Validation.getErrorMessage());
                     return;
                 }
-
                 progressDialog.show();
                 new Login(ActivityLogin.this, editTextEmail.getText().toString(), editTextPassword.getText().toString(), ActivityLogin.this).execute();
                 myApplication.setCurrentWebservice(WebservicesHandler.Webservices.LOGIN);
@@ -103,16 +90,10 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
                 break;
             case R.id.btn_login_register:
                 //The main function commented here because of the test
-<<<<<<< HEAD
-                Intent intent = new Intent(ActivityLogin.this, ActivityUserRegisterPageOne.class);
-=======
-                Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
->>>>>>> d091ce120147112ac3155e2b5224d2496a491753
+                /*Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
+                startActivity(intent);*/
+                Intent intent = new Intent(this, ActivityMain.class);
                 startActivity(intent);
-                /*if(LoginInfo.getUserId(this)>0){
-                    Intent intent = new Intent(this, ActivityMain.class);
-                    startActivity(intent);
-                }*/
                 break;
         }
     }
@@ -128,14 +109,14 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
     }
 
 
-
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
         if (!(result instanceof ResultStatus))
             return;
         if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.LOGIN) {
-            startActivity(activityMainIntent);
+            Intent intent = new Intent(ActivityLogin.this, ActivityMain.class);
+            startActivity(intent);
             myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
         } else if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.FORGET_PASSWORD) {
             new DialogMessage(ActivityLogin.this, getResources().getString(R.string.forgot_password_sent)).show();
@@ -148,12 +129,4 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
         progressDialog.dismiss();
         new DialogMessage(ActivityLogin.this, ServerAnswer.getError(ActivityLogin.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
-
-    /*@Override
-    public void onBackPressed() {
-        finish();
-    }*/
-
-
-
 }

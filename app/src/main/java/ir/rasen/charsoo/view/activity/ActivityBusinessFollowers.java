@@ -40,6 +40,7 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
     @Override
     public void notifyRefresh() {
         status = Status.REFRESHING;
+        followers.clear();
         new GetBusinessFollowers(ActivityBusinessFollowers.this, businessId, ActivityBusinessFollowers.this).execute();
     }
 
@@ -134,9 +135,6 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
                 adapterFollowers = new AdapterBusinessFollowers(ActivityBusinessFollowers.this, followers);
                 listView.setAdapter(adapterFollowers);
             } else if (status == Status.REFRESHING) {
-                followers.clear();
-                adapterFollowers.notifyDataSetChanged();
-                followers.addAll(temp);
                 adapterFollowers.notifyDataSetChanged();
                 pullToRefreshListView.onRefreshComplete();
             } else {

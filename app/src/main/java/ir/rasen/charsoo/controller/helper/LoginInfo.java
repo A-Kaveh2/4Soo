@@ -94,7 +94,7 @@ public class LoginInfo {
 
         SharedPreferences preferences = context.getSharedPreferences(
                 context.getPackageName(), Context.MODE_PRIVATE);
-//        int i = preferences.getInt(Params.USER_ID_INT, 0);
+        int i = preferences.getInt(Params.USER_ID_INT, 0);
         return preferences.getInt(Params.USER_ID_INT, 0);
 
     }

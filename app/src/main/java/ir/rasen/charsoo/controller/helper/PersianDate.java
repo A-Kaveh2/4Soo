@@ -156,11 +156,7 @@ public class PersianDate {
     public static String getCreationDate(Context context, Date date) {
         Resources resources = context.getResources();
         String creationDate = "";
-
-        //for the test
         int hours = 0;
-        //for the test
-
         if (hours < 0) {
             //this is the future!
             creationDate = resources.getString(R.string.err_creation_date_invalid);

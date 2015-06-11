@@ -70,7 +70,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         this.gridViewHeader = gridViewHeader;
     }
 
-    public void notifyDataSetChanged() {
+    public void notifyDatasetChanged() {
         adapterPostBusiness.notifyDataSetChanged();
     }
 
@@ -221,8 +221,10 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         }
 
         gridViewHeader.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int currentFirstVisibleItem,
-                    currentVisibleItemCount,
+            int currentFirstVisibleItem
+                    ,
+                    currentVisibleItemCount
+                    ,
                     currentScrollState;
 
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
@@ -259,22 +261,18 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
-        gridViewHeader.setViewWidthIfItsZero(activity.getWindowManager().getDefaultDisplay().getWidth());
     }
 
     @Override
     public void getResult(Object result) {
         if (result instanceof ArrayList) {
             //GetBusinessPosts' result
-            ArrayList<Post> newPosts = (ArrayList<Post>) result;
-            posts.addAll(newPosts);
+            ArrayList<Post> posts = (ArrayList<Post>) result;
             listFooterView.setVisibility(View.GONE);
-            if (isThreeColumn){
-                adapterPostGrid.loadMore(SearchItemPost.getItems(newPosts));
-            }
-            else{
-                adapterPostBusiness.loadMore(newPosts);
-            }
+            if (isThreeColumn)
+                adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
+            else
+                adapterPostBusiness.loadMore(posts);
             isLoadingMore=false;
         }
 

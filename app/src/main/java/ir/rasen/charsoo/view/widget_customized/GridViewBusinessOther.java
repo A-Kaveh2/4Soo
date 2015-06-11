@@ -77,7 +77,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         /*adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();*/
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts,business.id, Post.GetPostType.SHARE);
-        adapterPostBusiness = new AdapterPostShared(activity, posts,null);
+        adapterPostBusiness = new AdapterPostShared(activity, posts);
 
         if (isThreeColumn) {
             gridViewHeader.setAdapter(adapterPostGrid);
@@ -96,7 +96,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         for (Post post : posts)
             searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts,business.id, Post.GetPostType.SHARE);
-        adapterPostBusiness = new AdapterPostShared(activity, posts,null);
+        adapterPostBusiness = new AdapterPostShared(activity, posts);
 
 
         if (!hasHeader) {
@@ -183,7 +183,6 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                 public void onClick(View v) {
                     gridViewHeader.setNumColumns(1);
                     gridViewHeader.setAdapter(adapterPostBusiness);
-
                     //now it has one column
                     isThreeColumn = false;
                     switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
@@ -267,15 +266,13 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     public void getResult(Object result) {
         if (result instanceof ArrayList) {
             //GetBusinessPosts' result
-            ArrayList<Post> newPosts = (ArrayList<Post>) result;
-            posts.addAll(newPosts);
+            ArrayList<Post> posts = (ArrayList<Post>) result;
             listFooterView.setVisibility(View.GONE);
-            if (isThreeColumn){
-                adapterPostGrid.loadMore(SearchItemPost.getItems(newPosts));
-            }
-            else{
-                adapterPostBusiness.loadMore(newPosts);
-            }
+            if (isThreeColumn)
+                adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
+            else
+                adapterPostBusiness.loadMore(posts);
+
             isLoadingMore=false;
 
         } else if (result instanceof ResultStatus) {

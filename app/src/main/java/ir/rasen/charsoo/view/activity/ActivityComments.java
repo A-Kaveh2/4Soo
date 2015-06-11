@@ -81,7 +81,7 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
         postOwnerBusinessId = getIntent().getExtras().getInt(Params.POST_OWNER_BUSINESS_ID);
         isUserOwner = getIntent().getExtras().getBoolean(Params.IS_OWNER);
 
-        comments = new ArrayList<Comment>();
+        comments = new ArrayList<>();
         status = Status.FIRST_TIME;
 
         progressDialog = new ProgressDialog(this);
@@ -142,7 +142,6 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
     public void getResult(Object result) {
         progressDialog.dismiss();
         if (result instanceof ArrayList) {
-            //result of GetPostAllComments
             ArrayList<Comment> temp = (ArrayList<Comment>) result;
             comments.addAll(temp);
 
@@ -163,7 +162,7 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
             status = Status.NONE;
 
         } else if (result instanceof Integer) {
-            //result of SentComment
+            //comments.add(0, new Comment((Integer) result, LoginInfo.getUserId(ActivityComments.this), LoginInfo.getAccessUserIdentifier(ActivityComments.this), commentText));
             comments.add(0, Comment.getSentComment(ActivityComments.this, (Integer) result, commentText));
             adapterPostComments.notifyDataSetChanged();
             editTextComment.setText("");

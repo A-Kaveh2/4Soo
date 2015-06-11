@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.CustomCamera;
+import ir.rasen.charsoo.controller.helper.CustomeCamera;
 import ir.rasen.charsoo.view.interface_m.ICropResult;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
@@ -21,7 +21,7 @@ public class ActivityCamera extends CharsooActivity implements ICropResult {
 
     private static String TAG = "CameraActivity";
     FrameLayout cameraPreview;
-    CustomCamera customCamera;
+    CustomeCamera customeCamera;
     RelativeLayout rl_camera_cover;
     ImageView picView;
     ImageView imageView_capture;
@@ -54,8 +54,8 @@ public class ActivityCamera extends CharsooActivity implements ICropResult {
 
 
         try {
-            customCamera = new CustomCamera(this, cameraPreview, getResources().getInteger(R.integer.image_size), getResources().getInteger(R.integer.image_quality));
-            customCamera.delegate = this;
+            customeCamera = new CustomeCamera(this, cameraPreview, getResources().getInteger(R.integer.image_size), getResources().getInteger(R.integer.image_quality));
+            customeCamera.delegate = this;
         } catch (Exception e) {
             //new DialogMessage(ActivityCamera.this, e.getMessage()).show();
             String s = e.getMessage();
@@ -66,7 +66,7 @@ public class ActivityCamera extends CharsooActivity implements ICropResult {
                     @Override
                     public void onClick(View v) {
                         try {
-                            customCamera.capturePhoto();
+                            customeCamera.capturePhoto();
                         } catch (Exception e) {
                             Log.d(TAG, e.getMessage());
                         }
@@ -79,7 +79,7 @@ public class ActivityCamera extends CharsooActivity implements ICropResult {
     @Override
     protected void onPause() {
         super.onPause();
-        customCamera.stopPreview();
+        customeCamera.stopPreview();
     }
 
     @Override

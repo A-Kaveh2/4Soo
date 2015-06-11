@@ -26,13 +26,13 @@ import ir.rasen.charsoo.model.business.GetBusinessHomeInfo;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
-
+import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewBusiness;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
 
 
-public class ActivityBusiness extends NoActionBarActivity implements  IWebserviceResponse, IPullToRefresh {
+public class ActivityBusiness extends NoActionBarActivity implements ISelectBusiness, IWebserviceResponse, IPullToRefresh {
     ProgressDialog progressDialog;
     int selectedBusinessId, businessProfilePictureId;
     HFGridView gridView;
@@ -71,6 +71,16 @@ public class ActivityBusiness extends NoActionBarActivity implements  IWebservic
         LocalBroadcastManager.getInstance(this).registerReceiver(deletePost, new IntentFilter(Params.DELETE_POST_FROM_ACTIVITY));
 
 
+    }
+
+
+    @Override
+    public void notifySelectBusiness(int businessId) {
+        gridView.removeHeaderView(gridView.getHeaderView());
+        gridView.setVisibility(View.GONE);
+        progressDialog.show();
+
+        new GetBusinessHomeInfo(ActivityBusiness.this, businessId, LoginInfo.getUserId(ActivityBusiness.this), ActivityBusiness.this).execute();
     }
 
     @Override
@@ -141,7 +151,7 @@ public class ActivityBusiness extends NoActionBarActivity implements  IWebservic
                         break;
                     }
                 }
-                gridViewBusiness.notifyDataSetChanged();
+                gridViewBusiness.notifyDatasetChanged();
             }
 
 

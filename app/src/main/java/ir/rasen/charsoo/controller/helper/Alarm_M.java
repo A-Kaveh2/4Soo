@@ -13,7 +13,7 @@ import ir.rasen.charsoo.R;
  * Created by android on 12/29/2014.
  */
 public class Alarm_M {
-;;;
+
     private int INTENT_ID = 1234567;
 
     public void checkInterval(Context context, int intervalTime) {

@@ -55,9 +55,7 @@ public class DialogExit extends MyDialogOkCancel {
             @Override
             public void onClick(View view) {
                 LoginInfo.logout(activity);
-                Intent i= new Intent(activity, ActivityLogin.class);
-                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                activity.startActivity(i);
+                activity.startActivity(new Intent(activity, ActivityLogin.class));
                 dismiss();
             }
         });

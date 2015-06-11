@@ -31,7 +31,6 @@ import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationUserShared;
 import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
-import ir.rasen.charsoo.view.interface_m.GridViewUserListener;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
@@ -46,16 +45,14 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
     SimpleLoader simpleLoader;
     private IReportPost iReportPost;
     IUpdateTimeLine iUpdateTimeLine;
-    GridViewUserListener parentListener;
 
-    public AdapterPostShared(Context context, ArrayList<Post> items,GridViewUserListener delegate) {
+    public AdapterPostShared(Context context, ArrayList<Post> items) {
         this.context = context;
         this.items = items;
         simpleLoader = new SimpleLoader(context);
         iReportPost = this;
         this.iUpdateTimeLine = this;
         this.iReportPost = this;
-        parentListener=delegate;
     }
 
     public void loadMore(ArrayList<Post> newItem) {
@@ -300,9 +297,13 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
         intent.putExtra(Params.POST_ID_INT, postId);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-        removePostByIntID(postId);
-        if (parentListener!=null)
-            parentListener.notifyOnShareCanceled(postId);
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).id == postId) {
+                items.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
     }
 
 
@@ -339,13 +340,5 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
 
     }
 
-    public void removePostByIntID(int postID_int){
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).id == postID_int) {
-                items.remove(i);
-                notifyDataSetChanged();
-                break;
-            }
-        }
-    }
+
 }

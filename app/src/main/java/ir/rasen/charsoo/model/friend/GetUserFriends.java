@@ -51,16 +51,14 @@ public class GetUserFriends extends AsyncTask<Void, Void, ArrayList<BaseAdapterI
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.ID),
                             jsonObject.getInt(Params.USER_PROFILE_PICTURE_ID),
-                            jsonObject.getString(Params.USER_ID_STRING_FOR_GETUSERFRIENDS)));
+                            jsonObject.getString(Params.USER_ID_INT)));
                 }
-
-                // TODO Remove own user from his friend list if exists in server answer
-//                //this webservice has bug and returns the own user as friend.
-//                //we should remove the user from friend list
-//                for (int i = 0;i<list.size();i++){
-//                    if (list.get(i).getId() == LoginInfo.getUserId(context))
-//                        list.remove(i);
-//                }
+                //this webservice has bug and returns the own user as friend.
+                //we should remove the user from friend list
+                for (int i = 0;i<list.size();i++){
+                    if (list.get(i).getId() == LoginInfo.getUserId(context))
+                        list.remove(i);
+                }
                 return list;
             }
 

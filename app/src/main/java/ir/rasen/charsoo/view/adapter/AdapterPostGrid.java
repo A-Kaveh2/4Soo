@@ -102,14 +102,4 @@ public class AdapterPostGrid extends BaseAdapter {
         ImageView imageView;
         MaterialProgressBar progressBar;
     }
-
-    public void removePostByIntID(int postID_int){
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).postId == postID_int) {
-                items.remove(i);
-                notifyDataSetChanged();
-                break;
-            }
-        }
-    }
 }

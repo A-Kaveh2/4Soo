@@ -43,7 +43,7 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
-    private Status status;      //zsdfsdfsd
+    private Status status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,12 +146,6 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
 
             if (status == Status.FIRST_TIME) {
                 adapterPostGrid = new AdapterPostGrid(ActivitySearchPostResult.this,results,0, Post.GetPostType.SEARCH);
-
-                gridView.setNumColumns(3);
-                gridView.setVerticalSpacing(3);
-                gridView.setHorizontalSpacing(9);
-                gridView.setViewWidthIfItsZero(getWindowManager().getDefaultDisplay().getWidth());
-
                 gridView.setAdapter(adapterPostGrid);
             } else {
                 //it is loading more

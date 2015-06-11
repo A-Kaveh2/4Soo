@@ -84,32 +84,13 @@ public class Params {
     public static String EMAIL = "Email";
     public static String PASSWORD = "Password";
     public static String PASSWORD_NEW = "PasswordNew";
-    public static String USER_ID_INT_FOR_LOGIN="UserId";
     public static String USER_ID_INT = "UserId";
-<<<<<<< HEAD
-//    public static String
-    public static String USER_ID_STRING_FOR_GETUSERFRIENDS="UserId";
-    public static String USER_ID_INT_FOR_GETBUSINESSHOMEINFO="UserId";
-    public static String USER_ID_STRING_FOR_GETUSERHOMEINFO="UserId";
-    public static String POST_USER_ID_INT_FOR_GETTIMELINEPOSTS="UserId";
-    public static String USER_ID_INT_FOR_GETBUSINESSREVIEWS="UserId";
-    public static String USER_ID_INT_FOR_SearchUser="UserId";
-=======
-    public static String FRIEND_USER_ID_INT = "FriendUser_Id";
->>>>>>> 4766ff491fd417514754d50bbb0143c447726456
     public static String USER_UNDER_LINE_ID = "User_Id";
-    public static String USER_ID_INT_FOR_COMMENT = "User_Id";
-    public static String USER_ID_INT_FOR_GETPOSTALLCOMMENTS="UserId";
     public static String USERS_BUSINESS = "userBusiness";
     public static String USERS_SEEN_NOTIFICATIONS_PREFERENCE_NAME ="userSeenNotifications";
     public static String NOTIFICATION_ID = "NotificationId";
     public static String USER_IDENTIFIER = "UserIdentifier";
-<<<<<<< HEAD
-    public static String USER_ID_STRING = "UserId";
-=======
     public static String USER_ID_STRING = "UserName";
-    public static String FRIEND_USER_ID_STRING = "FriendUserId";
->>>>>>> 4766ff491fd417514754d50bbb0143c447726456
     public static String NAME = "Name";
     public static String ABOUT_ME = "AboutMe";
     public static String SEX = "Sex";
@@ -155,7 +136,6 @@ public class Params {
     public static String REQUESTED_USER_ID= "RequestedId";
     public static String ANSWER= "Answer";
     public static String BUSINESS_ID_STRING = "BusinessId";
-    public static String BUSINESS_ID_INT_FOR_GETFOLLOWINGBUSINESSES="BusinessId";
     public static String BUSINESS_ID_INT = "Business_Id";
     public static String BUSINESS_IDENTIFIER= "BusinessIdentifier";
     public static String BUSINESS_USERNAME_STRING = "BusinessUserName";
@@ -230,11 +210,6 @@ public class Params {
     public static final String UPATE_TIME_LINE_TYPE_CANCEL_SHARE = "updateTimeLineTypeCancelShare";
     public static final String DELETE_POST_FROM_ACTIVITY = "deletePostFromActivity";
     public static final String DELETE_BUSINESS= "deleteBusiness";
-    public static final String HAS_REMAINIG_FRIEND_REQUESTS_STRING="hasRemainingFriendRequests";
-    public static final String NETWORK_IS_CONNECTED = "networkIsConnected";
-    public static final String NETWORK_IS_DISCONNECTED ="networkIsDisconnected";
-    public static final String NETWORK_STATE ="networkState";
-    public static final String DO_ON_NETWORK_STATE_CHANGE="doOnNetworkStateChange";
 
     //Actions
     public static int ACTION_ADD_NEW_BUSIENSS_SUCCESS = 1001;

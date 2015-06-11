@@ -162,7 +162,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             }
         });
 
-        if (items.get(position).type == Post.Type.CompleteByFollowedBusiness) {
+        if (items.get(position).type == Post.Type.Complete) {
             //this post is not an announcement
             SimpleLoader simpleLoader = new SimpleLoader(context);
             simpleLoader.loadImage(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage);
@@ -367,9 +367,9 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             Spannable wordtoSpan = new SpannableString(//context.getString(R.string.business)+" "+
                     "\u200F"+
                     items.get(position).businessUserName + " "
-                    + (items.get(position).type == Post.Type.FriendFollowAnnouncement ?
+                    + (items.get(position).type == Post.Type.Follow ?
                     context.getString(R.string.follow_announcement): "")
-                    + (items.get(position).type == Post.Type.FriendReviewAnnouncement ?
+                    + (items.get(position).type == Post.Type.Review ?
                     context.getResources().getString(R.string.review_announcement):""));
 
             wordtoSpan.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.material_blue)), 0, (items.get(position).businessUserName).length()+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

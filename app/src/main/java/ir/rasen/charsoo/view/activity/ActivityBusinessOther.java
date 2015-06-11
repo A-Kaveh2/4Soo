@@ -26,7 +26,7 @@ import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewBusinessOther;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
 
-public class  ActivityBusinessOther extends NoActionBarActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityBusinessOther extends NoActionBarActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int selectedBusinessId;

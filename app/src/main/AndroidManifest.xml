@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
-
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -52,7 +50,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".view.activity.NOT_USED___ActivityUserRegister"
+            android:name=".view.activity.ActivityUserRegister"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
@@ -63,8 +61,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ActivityMain"
-            android:screenOrientation="portrait"
-            android:theme="@style/ToolbarTheme" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ActivityUserSetting"
             android:screenOrientation="portrait" />
@@ -156,26 +153,7 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-<<<<<<< HEAD
-            android:name=".view.activity.ActivityUserRegisterPageOne"
-=======
-            android:name=".view.activity.ActivityUserRegister"
-<<<<<<< HEAD
-            android:windowSoftInputMode="adjustResize"
-=======
->>>>>>> d091ce120147112ac3155e2b5224d2496a491753
-            android:windowSoftInputMode="stateHidden|adjustResize"
->>>>>>> 4766ff491fd417514754d50bbb0143c447726456
-            android:screenOrientation="portrait" />
-
         <receiver android:name=".controller.helper.AlarmReciever" />
-
-        <receiver android:name=".model.NetworkConnectivityReciever">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
 
     </application>
 

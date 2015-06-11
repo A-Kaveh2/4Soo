@@ -168,7 +168,7 @@ public class TestUnit {
         post7.businessID = 1;
         post7.userId = 3;
         post7.userName = "ali_1";
-        post7.type = Post.Type.FriendFollowAnnouncement;
+        post7.type = Post.Type.Follow;
 
         Post post8 = new Post();
         post8.businessProfilePictureId = 2022;
@@ -177,7 +177,7 @@ public class TestUnit {
         post8.businessID = 1;
         post8.userId = 4;
         post8.userName = "ali_2";
-        post8.type = Post.Type.FriendReviewAnnouncement;
+        post8.type = Post.Type.Review;
 
         posts.add(post7);
         posts.add(post8);
@@ -187,7 +187,7 @@ public class TestUnit {
             post.businessProfilePictureId = 2022;
             post.businessUserName = "business1";
             post.businessID = 1;
-            post.type = Post.Type.CompleteByFollowedBusiness;
+            post.type = Post.Type.Complete;
             post.pictureId = 2022;
             //post.creationDate = -10;
             post.likeNumber = 325485;
@@ -269,7 +269,7 @@ public class TestUnit {
             post.businessProfilePictureId = 2022;
             post.businessUserName = "business1";
             post.businessID = 1;
-            post.type = Post.Type.CompleteByFollowedBusiness;
+            post.type = Post.Type.Complete;
             post.pictureId = 2022;
             //post.creationDate = -10;
             post.likeNumber = 325485;
@@ -351,7 +351,7 @@ public class TestUnit {
         return posts;
     }
 
-    /*public static ArrayList<BusinessListItem> getBusinessListItems() {
+    public static ArrayList<BusinessListItem> getBusinessListItems() {
         ArrayList<BusinessListItem> b = new ArrayList<>();
         b.add(new BusinessListItem(2, "business_2"));
         b.add(new BusinessListItem(3, "business_3"));
@@ -367,7 +367,7 @@ public class TestUnit {
 
         return b;
     }
-*/
+
     public static User getUser() {
         User user = new User();
         user.id = 4;

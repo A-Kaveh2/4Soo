@@ -53,9 +53,7 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
     String filePath, businessPictureString;
 
 
-    private enum Fragments {BASE_INFO, CONTACT_INFO, LOCATION_INFO}
-
-    ;
+    private enum Fragments {BASE_INFO, CONTACT_INFO, LOCATION_INFO};
 
     private Fragments fragmentCurrent;
     FragmentManager fm;
@@ -93,6 +91,7 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
         } catch (Exception e) {
 
         }
+
         Bundle bundle = new Bundle();
         if (businessId != 0) {
             ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(getString(R.string.profile_edit_business));
@@ -202,6 +201,9 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
                         if (businessPictureString != null)
                             ((MyApplication) getApplication()).business.profilePicture = businessPictureString;
 
+                        //if user doesn't choose the location
+
+
                         if (businessId != 0)
                             //it is editing
                             new UpdateBusinessProfileInfo(ActivityBusinessRegisterEdit.this, ((MyApplication) getApplication()).business, ActivityBusinessRegisterEdit.this).execute();
@@ -233,7 +235,6 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
             ((MyApplication) getApplication()).business.businessIdentifier = businessIdentifier;
             ft.commit();
         } else if (result instanceof ResultStatus) {
-            //UpdateBusinessProfileInfo
             Intent i = getIntent();
             i.putExtra(Params.PROFILE_PICTURE, ((MyApplication) getApplication()).business.profilePicture);
             i.putExtra(Params.TYPE, Business.ChangeType.EDIT.name());
@@ -243,9 +244,9 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
     }
 
     @Override
-    public void getError(Integer errorCode, String callerStringID) {
+    public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBusinessRegisterEdit.this, ServerAnswer.getError(ActivityBusinessRegisterEdit.this, errorCode, callerStringID + ">" + this.getLocalClassName())).show();
+        new DialogMessage(ActivityBusinessRegisterEdit.this, ServerAnswer.getError(ActivityBusinessRegisterEdit.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     @Override
@@ -285,9 +286,13 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
 
     @Override
     public void notifyDeleteBusiness(int businessId) {
+       /* Intent intent = new Intent(Params.DELETE_BUSINESS);
+        intent.putExtra(Params.BUSINESS_ID_STRING, businessId);
+        LocalBroadcastManager.getInstance(ActivityBusinessRegisterEdit.this).sendBroadcast(intent);*/
+
         Intent i = getIntent();
         i.putExtra(Params.BUSINESS_ID_STRING, businessId);
-        i.putExtra(Params.TYPE, Business.ChangeType.DELETE.name());
+        i.putExtra(Params.TYPE,Business.ChangeType.DELETE.name());
         setResult(RESULT_OK, i);
         finish();
     }

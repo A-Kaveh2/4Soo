@@ -54,7 +54,7 @@ public class GetPostAllComments extends AsyncTask<Void, Void, ArrayList<Comment>
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     Comment comment = new Comment();
                     comment.id = jsonObject.getInt(Params.COMMENT_ID);
-                    comment.userID = jsonObject.getInt(Params.USER_ID_INT_FOR_GETPOSTALLCOMMENTS);
+                    comment.userID = jsonObject.getInt(Params.USER_ID_INT);
                     comment.username = jsonObject.getString(Params.USER_NAME_STRING);
                     comment.userProfilePictureID = jsonObject.getInt(Params.USER_PROFILE_PICTURE_ID);
                     comment.text = jsonObject.getString(Params.COMMENT);

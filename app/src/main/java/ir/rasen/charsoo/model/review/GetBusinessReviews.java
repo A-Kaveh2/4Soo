@@ -24,27 +24,25 @@ import ir.rasen.charsoo.model.WebserviceGET;
 public class GetBusinessReviews extends AsyncTask<Void, Void, ArrayList<Review>> {
     private static final String TAG = "GetBusinessReviews";
     private IWebserviceResponse delegate = null;
-    private int userIntId;
     private int businessID;
     private int afterThisID;
     private int limitation;
     private ServerAnswer serverAnswer;
     private Context context;
 
-    public GetBusinessReviews(Context context,int userId_Int, int businessID, int afterThisID, int limitation, IWebserviceResponse delegate) {
+    public GetBusinessReviews(Context context,int businessID, int afterThisID, int limitation, IWebserviceResponse delegate) {
         this.businessID = businessID;
         this.afterThisID = afterThisID;
         this.limitation = limitation;
         this.delegate = delegate;
         this.context = context;
-        this.userIntId=userId_Int;
     }
 
     @Override
     protected ArrayList<Review> doInBackground(Void... voids) {
         ArrayList<Review> list = new ArrayList<Review>();
         WebserviceGET webserviceGET = new WebserviceGET(URLs.GET_BUSINESS_REVIEWS, new ArrayList<>(
-                Arrays.asList(String.valueOf(userIntId),String.valueOf(businessID), String.valueOf(afterThisID), String.valueOf(limitation))));
+                Arrays.asList(String.valueOf(businessID), String.valueOf(afterThisID), String.valueOf(limitation))));
 
         try {
             serverAnswer = webserviceGET.executeList(context);
@@ -54,7 +52,7 @@ public class GetBusinessReviews extends AsyncTask<Void, Void, ArrayList<Review>>
                      JSONObject jsonObject = jsonArray.getJSONObject(i);
                     Review review = new Review();
                     review.id = jsonObject.getInt(Params.REVIEW_ID);
-                    review.userID = jsonObject.getInt(Params.USER_ID_INT_FOR_GETBUSINESSREVIEWS);
+                    review.userID = jsonObject.getInt(Params.USER_ID_INT);
                     review.userName = jsonObject.getString(Params.USER_NAME_STRING);
                     review.rate = jsonObject.getInt(Params.RATE);
                     review.userPicutreId = jsonObject.getInt(Params.USER_PROFILE_PICTURE_ID);

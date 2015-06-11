@@ -5,4 +5,7 @@ package ir.rasen.charsoo.view.interface_m;
  */
 public interface IChangeBusiness {
     public void notifyDeleteBusiness(int businessId);
+    //public void notifyChangeBusiness(Business business);
+    //public void notifyChangeBusiness(Business business);
+
 }

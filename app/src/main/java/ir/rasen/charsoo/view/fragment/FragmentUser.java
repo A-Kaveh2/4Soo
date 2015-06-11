@@ -7,7 +7,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -33,10 +32,11 @@ import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
+import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewUser;
 
-public class FragmentUser extends Fragment implements IWebserviceResponse, IPullToRefresh {
+public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh {
 
     public static final String TAG="FargmentUser";
     private HFGridView gridView;
@@ -44,8 +44,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     ProgressDialog progressDialog;
     private User user;
     GridViewUser gridViewUser;
-
-    boolean isRefreshing;
+    static IUpdateUserProfile iUpdateUserProfile;
     ArrayList<Post> sharedPosts;
     BroadcastReceiver cancelShareReceiver, removeRequestAnnouncement, updateUserProfilePicture;
     //PullToRefreshGridViewWithHeaderAndFooter pullToRefreshGridViewWithHeaderAndFooter;
@@ -61,9 +60,8 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
             view = inflater.inflate(R.layout.fragment_user,
                     container, false);
 
-            isRefreshing=false;
             visitedUserId = LoginInfo.getUserId(getActivity());
-
+            iUpdateUserProfile = this;
 
             //set progress dialog
             progressDialog = new ProgressDialog(getActivity());
@@ -71,12 +69,12 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
 
             pullToRefreshGridView = new PullToRefreshGrid(getActivity(), (PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF), FragmentUser.this);
             gridView = pullToRefreshGridView.getGridViewHeaderFooter();
+
             recursivelyCallHandler();
 
         } catch (Exception e) {
             String s = e.getMessage();
         }
-
 
         cancelShareReceiver = new BroadcastReceiver() {
             @Override
@@ -110,11 +108,10 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
             @Override
             public void onReceive(Context context, Intent intent) {
                 Bundle bundle = intent.getExtras();
-                gridViewUser.initialProfilePicture(bundle.getString(Params.USER_PICUTE));
+                notifyUpdateUserProfile(bundle.getString(Params.USER_PICUTE));
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(updateUserProfilePicture, new IntentFilter(Params.UPDATE_USER_PROFILE_PCITURE));
-
 
         return view;
     }
@@ -157,7 +154,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
         } else {
             try {
 
-                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn, hasHeader);
+                gridViewUser.InitialGridViewUser(new ArrayList<Post>(), gridViewUser.isThreeColumn, hasHeader);
             } catch (Exception e) {
 
             }
@@ -186,10 +183,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
 
         } else if (result instanceof ArrayList) {
             progressDialog.dismiss();
-            if (isRefreshing){
-                sharedPosts.clear();
-                isRefreshing=false;
-            }
+
 
             //GetSharedPosts result
             sharedPosts = (ArrayList<Post>) result;
@@ -208,13 +202,13 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
-        pullToRefreshGridView.onRefreshComplete();
-        if(!((MyApplication) getActivity().getApplication()).isUserCreated)
-            recursivelyCallHandler();
     }
 
 
-
+    @Override
+    public void notifyUpdateUserProfile(String userPictureString) {
+        gridViewUser.initialProfilePicture(userPictureString);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -239,12 +233,9 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IPull
     @Override
     public void notifyRefresh() {
         if (sharedPosts != null) {
-            isRefreshing=true;
-            new GetSharedPosts(getActivity(), visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentUser.this).execute();
-            /*((MyApplication) getActivity().getApplication()).isUserCreated = false;
-            gridViewUser.resetHeadear();
-            initializeUser();*/
-//            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
+            sharedPosts.clear();
+            ((MyApplication) getActivity().getApplication()).isUserCreated = false;
+            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
         } else
             pullToRefreshGridView.onRefreshComplete();
     }

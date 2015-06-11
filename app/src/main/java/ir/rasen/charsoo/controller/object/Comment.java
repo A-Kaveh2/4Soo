@@ -64,7 +64,7 @@ public class Comment {
 
             Comment comment = new Comment();
             comment.id = jsonObjectComment.getInt(Params.COMMENT_ID);
-            comment.userID = jsonObjectComment.getInt(Params.USER_ID_INT_FOR_COMMENT);
+            comment.userID = jsonObjectComment.getInt(Params.USER_UNDER_LINE_ID);
             comment.username = jsonObjectComment.getString(Params.USER_NAME_STRING);
             comment.userProfilePictureID = jsonObjectComment.getInt(Params.PROFILE_PICTURE_ID);
             comment.text = jsonObjectComment.getString(Params.TEXT);

@@ -26,15 +26,13 @@ public class Post {
     public int businessID;
     public String businessUserName;
     public String businessIdentifier;
-    public String friendUserIdentifier;//the user's friend's userId, used when post type is not complete
     public int businessProfilePictureId;
 
     //here is 3 types of post: ordinary post, follow announcement post and review annoucement post
     //follow announcement post fields: businessID,businessUserName,userId,userName,type
     //review announcement post fields: businessID,businessUserName,userId,userName,type,description(review json object that contains review text and rate)
 
-    public int userId;//business owner's user id
-    public int friendUserId;//the user's friend's user_id, used when post type is not complete
+    public int userId;//used when post is follow or review announcement
     public String userName;////used when post is follow or review announcement
 
     public Date creationDate;
@@ -53,7 +51,7 @@ public class Post {
     public int commentNumber;
     public int shareNumber;
 
-    public enum Type {CompleteByFollowedBusiness, FriendFollowAnnouncement, FriendReviewAnnouncement, CompleteSharedByFriend}
+    public enum Type {Complete, Follow, Review}
 
     public enum GetPostType {TIMELINE, SHARE, BUSINESS, SEARCH}
 
@@ -78,29 +76,26 @@ public class Post {
     public static Type getType(int type) {
         switch (type) {
             case 1:
-                return Type.CompleteByFollowedBusiness;
+                return Type.Complete;
             case 2:
-                return Type.FriendFollowAnnouncement;
+                return Type.Follow;
             case 3:
-                return Type.FriendReviewAnnouncement;
-            case 4:
-                return Type.CompleteSharedByFriend;
+                return Type.Review;
         }
 
-        return Type.CompleteByFollowedBusiness;
+        return Type.Complete;
     }
 
     public static int getTypeCode(Type type) {
         switch (type) {
-            case CompleteByFollowedBusiness:
+            case Complete:
                 return 1;
-            case FriendFollowAnnouncement:
+            case Follow:
                 return 2;
-            case FriendReviewAnnouncement:
+            case Review:
                 return 3;
-            case CompleteSharedByFriend:
-                return 4;
         }
+
         return 0;
     }
 
@@ -190,7 +185,7 @@ public class Post {
         post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         post.code = jsonObject.getString(Params.POST_CODE_STRING);
         post.price = jsonObject.getString(Params.POST_PRICE_STRING);
-        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
+
         String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
         JSONArray jsonArrayComments = new JSONArray(comments);
 
@@ -212,13 +207,13 @@ public class Post {
     public static Post getFromJSONObjectTimeLine(JSONObject jsonObject) throws Exception {
         Post post = new Post();
         post.id = jsonObject.getInt(Params.POST_ID_INT);
-        post.businessID = jsonObject.getInt(Params.BUSINESS_ID_INT);
-        post.businessUserName = jsonObject.getString(Params.BUSINESS_ID_STRING);
-        post.userId = jsonObject.getInt(Params.POST_USER_ID_INT_FOR_GETTIMELINEPOSTS);//business owner' user.id
+        post.businessID = jsonObject.getInt(Params.BUSINESS_ID_STRING);
+        post.businessUserName = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
+        post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
         post.userName = jsonObject.getString(Params.USER_NAME_STRING);
         post.type = getType(jsonObject.getInt(Params.TYPE));
         post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
-        if (post.type == Type.CompleteByFollowedBusiness) {
+        if (post.type == Type.Complete) {
             //post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
             post.title = jsonObject.getString(Params.POST_TITLE_STRING);
             post.creationDate = setCreationDate(jsonObject);
@@ -240,19 +235,9 @@ public class Post {
 
 
             post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
-<<<<<<< HEAD
-        } else if (post.type == Type.FriendFollowAnnouncement) {
-
-        } else if (post.type == Type.FriendReviewAnnouncement) {
-=======
         } else if (post.type == Type.Follow) {
-            post.friendUserId = jsonObject.getInt(Params.FRIEND_USER_ID_INT);//the friend's user.id
-            post.friendUserIdentifier = jsonObject.getString(Params.FRIEND_USER_ID_STRING);
-        } else if (post.type == Type.Review) {
-            post.friendUserId = jsonObject.getInt(Params.USER_ID_INT);//the friend's user.id
-            post.friendUserIdentifier = jsonObject.getString(Params.FRIEND_USER_ID_STRING);
 
->>>>>>> 4766ff491fd417514754d50bbb0143c447726456
+        } else if (post.type == Type.Review) {
             String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         }
         return post;
