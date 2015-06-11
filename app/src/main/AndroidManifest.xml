@@ -63,7 +63,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ActivityMain"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/ToolbarTheme"/>
         <activity
             android:name=".view.activity.ActivityUserSetting"
             android:screenOrientation="portrait" />
