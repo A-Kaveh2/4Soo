@@ -28,6 +28,7 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.user.GetUserBusinesses;
 import ir.rasen.charsoo.view.activity.ActivityBusiness;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.view.activity.ActivityMain;
@@ -120,7 +121,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
         recursivelyCallHandler();
 
         // TODO:: WEBSERVICE SHOULD BE WRITTEN ON WEB SIDE AND THEN THIS POST_CODE_STRING CAN BE UNCOMMENTED::
-        //new GetUserBusinesses(getActivity(),FragmentUserBusinesses.this).execute();
+//        new GetUserBusinesses(getActivity(),FragmentUserBusinesses.this).execute();
 
         deleteBusinessReciever = new BroadcastReceiver() {
             @Override
