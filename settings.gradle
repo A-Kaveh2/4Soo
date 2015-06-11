@@ -1,3 +1,2 @@
 include ':app', ':MaterialDesign', ':libs'
 include ':libs:crop-lib'
-include ':libs:pull_to_refresh_lib'

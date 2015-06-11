@@ -34,12 +34,21 @@ public class ButtonFloat extends Button{
 	
 	float showPosition;
 	float hidePosition;
-	
-	
+
+	int backgroundDrawableId = R.drawable.background_button_float;
+	public void setBackgroundShadow(boolean shadow) {
+		if(shadow) {
+			backgroundDrawableId = R.drawable.background_button_float;
+		} else {
+			backgroundDrawableId = R.drawable.background_button_float_no_shadow;
+		}
+		setBackgroundResource(backgroundDrawableId);
+		setBackgroundColor(backgroundColor);
+	}
 	
 	public ButtonFloat(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setBackgroundResource(R.drawable.background_button_float);
+		setBackgroundResource(backgroundDrawableId);
 		setBackgroundColor(backgroundColor);
 		sizeRadius = 28;
 		setDefaultProperties();
@@ -61,7 +70,7 @@ public class ButtonFloat extends Button{
 		rippleSize = Utils.dpToPx(5, getResources());
 		setMinimumWidth(Utils.dpToPx(sizeRadius*2, getResources()));
 		setMinimumHeight(Utils.dpToPx(sizeRadius*2, getResources()));
-		super.background = R.drawable.background_button_float;
+		super.background = backgroundDrawableId;
 //		super.setDefaultProperties();
 	}
 	
@@ -80,20 +89,6 @@ public class ButtonFloat extends Button{
 				setBackgroundColor(background);
 		}
 		
-		// Set Ripple Color
-		// Color by resource
-		int rippleColor = attrs.getAttributeResourceValue(MATERIALDESIGNXML,
-				"rippleColor", -1);
-		if (rippleColor != -1) {
-			setRippleColor(getResources().getColor(rippleColor));
-		} else {
-			// Color by hexadecimal
-			int background = attrs.getAttributeIntValue(MATERIALDESIGNXML, "rippleColor", -1);
-			if (background != -1)
-				setRippleColor(background);
-			else
-				setRippleColor(makePressColor());
-		}
 		// Icon of button
 		int iconResource = attrs.getAttributeResourceValue(MATERIALDESIGNXML,"iconDrawable",-1);
 		if(iconResource != -1)
@@ -113,7 +108,7 @@ public class ButtonFloat extends Button{
 			});
 					
 	}
-		
+
 	Integer height;
 	Integer width;
 	@Override
@@ -142,10 +137,17 @@ public class ButtonFloat extends Button{
 		return drawableIcon;
 	}
 
+	public void setDrawableIcon(int drawableId) {
+		try {
+			setDrawableIcon(getContext().getDrawable(drawableId));
+		} catch (NoSuchMethodError e) {
+			setDrawableIcon(getContext().getResources().getDrawable(drawableId));
+		}
+	}
 	public void setDrawableIcon(Drawable drawableIcon) {
 		this.drawableIcon = drawableIcon;
 		try {
-			icon.setBackground(drawableIcon);
+			icon.setImageDrawable(drawableIcon);
 		} catch (NoSuchMethodError e) {
 			icon.setBackgroundDrawable(drawableIcon);
 		}
@@ -164,7 +166,7 @@ public class ButtonFloat extends Button{
 	    canvas.drawARGB(0, 0, 0, 0);
 	    paint.setColor(color);
 	    canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
-	            bitmap.getWidth()/2, paint);
+				bitmap.getWidth() / 2, paint);
 	    paint.setXfermode(new PorterDuffXfermode(Mode.SRC_IN));
 	    canvas.drawBitmap(bitmap, rect, rect, paint);
 	    return output;
@@ -175,10 +177,7 @@ public class ButtonFloat extends Button{
 		return null;
 	}
 */
-	public void setRippleColor(int rippleColor) {
-		this.rippleColor = rippleColor;
-	}
-	
+
 	public void show(){
 		ObjectAnimator animator = ObjectAnimator.ofFloat(ButtonFloat.this, "y", showPosition);
 		animator.setInterpolator(new BounceInterpolator());
@@ -196,7 +195,7 @@ public class ButtonFloat extends Button{
 		
 		isShow = false;
 	}
-	
+
 	public boolean isShow(){
 		return isShow;
 	}
