@@ -59,7 +59,7 @@ public class ActivityCommentsNotifications extends CharsooActivity implements IW
         setTitle(getString(R.string.comments));
 
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
-        commentNotifications = new ArrayList<>();
+        commentNotifications = new ArrayList<CommentNotification>();
         status = Status.FIRST_TIME;
 
         progressDialog = new ProgressDialog(this);

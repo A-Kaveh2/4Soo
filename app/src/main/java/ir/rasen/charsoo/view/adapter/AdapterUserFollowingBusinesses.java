@@ -117,7 +117,7 @@ public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfo
     //Each item in this adapter has a picture and a title
 
     private class Holder {
-        ImageView imageViewImage;
+        RoundedImageView imageViewImage;
         TextViewFont textViewUserIdentifier;
         ImageView imgMore;
     }

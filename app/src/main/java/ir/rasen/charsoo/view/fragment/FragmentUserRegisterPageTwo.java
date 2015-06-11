@@ -2,6 +2,10 @@ package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+<<<<<<< HEAD
+import android.app.Notification;
+=======
+>>>>>>> d091ce120147112ac3155e2b5224d2496a491753
 import android.app.ProgressDialog;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -20,8 +24,15 @@ import android.widget.TextView;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Validation;
+<<<<<<< HEAD
+import ir.rasen.charsoo.view.activity.ActivityUserRegisterPageOne;
+=======
 import ir.rasen.charsoo.view.activity.ActivityUserRegister;
+<<<<<<< HEAD
 import ir.rasen.charsoo.view.dialog.DialogMessage;
+=======
+>>>>>>> d091ce120147112ac3155e2b5224d2496a491753
+>>>>>>> 4766ff491fd417514754d50bbb0143c447726456
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
@@ -50,6 +61,7 @@ public class FragmentUserRegisterPageTwo extends Fragment {
             editTextEmail = (EditTextFont) view.findViewById(R.id.editText_email);
             editTextPassword = (EditTextFont) view.findViewById(R.id.editText_password);
             editTextPhoneNumber = (EditTextFont) view.findViewById(R.id.editText_PhoneNumber);
+<<<<<<< HEAD
 
 
             editTextEmail.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -84,6 +96,20 @@ public class FragmentUserRegisterPageTwo extends Fragment {
                             InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
                             inputMethodManager.hideSoftInputFromWindow(editTextPassword.getWindowToken(), 0);
                             ((ActivityUserRegister) getActivity()).onDoneButtonPressed(TAG);
+=======
+                editTextPhoneNumber.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                        @Override
+                        public boolean onEditorAction(TextView textView, int actionID, KeyEvent keyEvent) {
+                                boolean handeled = false;
+                                if (actionID == EditorInfo.IME_ACTION_DONE) {
+<<<<<<< HEAD
+                                        ((ActivityUserRegisterPageOne)getActivity()).onDoneButtonPressed(TAG);
+=======
+                                        ((ActivityUserRegister)getActivity()).onDoneButtonPressed(TAG);
+>>>>>>> d091ce120147112ac3155e2b5224d2496a491753
+                                }
+                                return handeled;
+>>>>>>> 4766ff491fd417514754d50bbb0143c447726456
                         }
                     }
                     return handeled;

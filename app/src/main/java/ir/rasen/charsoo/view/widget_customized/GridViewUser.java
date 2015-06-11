@@ -40,8 +40,8 @@ import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 /**
  * Created by android on 3/14/2015.
  */
-public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
-    public static final String TAG="GridViewUser";
+public class GridViewUser implements IWebserviceResponse, GridViewUserListener {
+    public static final String TAG = "GridViewUser";
 
     com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
@@ -100,7 +100,7 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
 
         adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, 0, Post.GetPostType.SHARE);
 
-        adapterPostShared = new AdapterPostShared(activity, posts,GridViewUser.this);
+        adapterPostShared = new AdapterPostShared(activity, posts, GridViewUser.this);
 
 
         if (!hasHeader) {
@@ -130,13 +130,13 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
 
             SpannableStringBuilder builder = new SpannableStringBuilder();
 
-            String userId = userIdentifier+"@"  ;
+            String userId = userIdentifier + "@";
             SpannableString redSpannable = new SpannableString(userId);
             redSpannable.setSpan(new ForegroundColorSpan(activity.getResources().getColor(R.color.button_on_dark)), 0, userId.length(), 0);
 
 
             builder.append(userName);
-            builder.append("(" );
+            builder.append("(");
             builder.append(redSpannable);
             builder.append(")");
 
@@ -232,7 +232,7 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
             listFooterView = ((LayoutInflater) activity.getSystemService(activity.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
             gridViewHeader.addFooterView(listFooterView);
         } else {
-            if (listFooterView!= null) {
+            if (listFooterView != null) {
                 listFooterView.setVisibility(View.GONE);
             }
         }
@@ -298,9 +298,7 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
             // now it has three column
             switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
             switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
-        }
-        else
-        {
+        } else {
             gridViewHeader.setNumColumns(1);
             gridViewHeader.setAdapter(adapterPostShared);
             switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
@@ -321,7 +319,7 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
         gridViewHeader.setViewWidthIfItsZero(activity.getWindowManager().getDefaultDisplay().getWidth());
-        isThreeColumn=true;
+        isThreeColumn = true;
     }
 
     @Override
@@ -334,15 +332,15 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
                 adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
             else
                 adapterPostShared.loadMore(posts);
-            isLoadingMore=false;
+            isLoadingMore = false;
 
 
         }
     }
 
     @Override
-    public void getError(Integer errorCode,String callerStringID) {
-        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode,callerStringID+">"+TAG)).show();
+    public void getError(Integer errorCode, String callerStringID) {
+        new DialogMessage(activity, ServerAnswer.getError(activity, errorCode, callerStringID + ">" + TAG)).show();
     }
 
     public void hideLoader() {
@@ -351,7 +349,7 @@ public class GridViewUser implements IWebserviceResponse,GridViewUserListener {
 
     @Override
     public void notifyOnShareCanceled(int postID_int) {
-        if(adapterPostGrid!=null)
+        if (adapterPostGrid != null)
             adapterPostGrid.removePostByIntID(postID_int);
     }
 

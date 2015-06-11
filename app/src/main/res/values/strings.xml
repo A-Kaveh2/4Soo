@@ -123,6 +123,10 @@
     <string name="err_choose_one_state">ااستان را انتخاب کنید</string>
     <string name="err_choose_location">محل کسب و کار خود را بر روی نقشه مشخص نمایید</string>
     <string name="err_choose_location_search">محدوده مکان جستجوی خود را مشخص کنید</string>
+    <string name="err_repeated_review">COMMENT DOES NOT EXIST! Error: 12</string>
+    <string name="err_repeated_business_identifier">COMMENT DOES NOT EXIST! Error: 12</string>
+    <string name="err_share_does_not_exist">COMMENT DOES NOT EXIST! Error: 12</string>
+    <string name="err_user_is_blocked">COMMENT DOES NOT EXIST! Error: 12</string>
     <string name="err_comment_does_not_exist">COMMENT DOES NOT EXIST! Error: 12</string>
     <string name="err_follow_already_exist">FOLLOW ALREADY EXISTS! Error: 13</string>
     <string name="err_follow_does_not_exist">FOLLOW DOES NOT EXIST! Error: 14</string>

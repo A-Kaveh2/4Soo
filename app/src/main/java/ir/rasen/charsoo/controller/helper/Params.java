@@ -86,6 +86,7 @@ public class Params {
     public static String PASSWORD_NEW = "PasswordNew";
     public static String USER_ID_INT_FOR_LOGIN="UserId";
     public static String USER_ID_INT = "UserId";
+<<<<<<< HEAD
 //    public static String
     public static String USER_ID_STRING_FOR_GETUSERFRIENDS="UserId";
     public static String USER_ID_INT_FOR_GETBUSINESSHOMEINFO="UserId";
@@ -93,6 +94,9 @@ public class Params {
     public static String POST_USER_ID_INT_FOR_GETTIMELINEPOSTS="UserId";
     public static String USER_ID_INT_FOR_GETBUSINESSREVIEWS="UserId";
     public static String USER_ID_INT_FOR_SearchUser="UserId";
+=======
+    public static String FRIEND_USER_ID_INT = "FriendUser_Id";
+>>>>>>> 4766ff491fd417514754d50bbb0143c447726456
     public static String USER_UNDER_LINE_ID = "User_Id";
     public static String USER_ID_INT_FOR_COMMENT = "User_Id";
     public static String USER_ID_INT_FOR_GETPOSTALLCOMMENTS="UserId";
@@ -100,7 +104,12 @@ public class Params {
     public static String USERS_SEEN_NOTIFICATIONS_PREFERENCE_NAME ="userSeenNotifications";
     public static String NOTIFICATION_ID = "NotificationId";
     public static String USER_IDENTIFIER = "UserIdentifier";
+<<<<<<< HEAD
     public static String USER_ID_STRING = "UserId";
+=======
+    public static String USER_ID_STRING = "UserName";
+    public static String FRIEND_USER_ID_STRING = "FriendUserId";
+>>>>>>> 4766ff491fd417514754d50bbb0143c447726456
     public static String NAME = "Name";
     public static String ABOUT_ME = "AboutMe";
     public static String SEX = "Sex";

@@ -41,7 +41,7 @@ public class GetPost extends AsyncTask<Void, Void, Post> {
     @Override
     protected Post doInBackground(Void... voids) {
         Post post = new Post();
-        WebserviceGET webserviceGET = new WebserviceGET(URLs.GET_USER_POST, new ArrayList<>(
+        WebserviceGET webserviceGET = new WebserviceGET(URLs.GET_USER_POST, new ArrayList<String>(
                 Arrays.asList(String.valueOf(userId),String.valueOf(postId))));
 
 

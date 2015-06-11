@@ -26,13 +26,15 @@ public class Post {
     public int businessID;
     public String businessUserName;
     public String businessIdentifier;
+    public String friendUserIdentifier;//the user's friend's userId, used when post type is not complete
     public int businessProfilePictureId;
 
     //here is 3 types of post: ordinary post, follow announcement post and review annoucement post
     //follow announcement post fields: businessID,businessUserName,userId,userName,type
     //review announcement post fields: businessID,businessUserName,userId,userName,type,description(review json object that contains review text and rate)
 
-    public int userId;//used when post is follow or review announcement
+    public int userId;//business owner's user id
+    public int friendUserId;//the user's friend's user_id, used when post type is not complete
     public String userName;////used when post is follow or review announcement
 
     public Date creationDate;
@@ -188,7 +190,7 @@ public class Post {
         post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         post.code = jsonObject.getString(Params.POST_CODE_STRING);
         post.price = jsonObject.getString(Params.POST_PRICE_STRING);
-
+        post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
         String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
         JSONArray jsonArrayComments = new JSONArray(comments);
 
@@ -238,9 +240,19 @@ public class Post {
 
 
             post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
+<<<<<<< HEAD
         } else if (post.type == Type.FriendFollowAnnouncement) {
 
         } else if (post.type == Type.FriendReviewAnnouncement) {
+=======
+        } else if (post.type == Type.Follow) {
+            post.friendUserId = jsonObject.getInt(Params.FRIEND_USER_ID_INT);//the friend's user.id
+            post.friendUserIdentifier = jsonObject.getString(Params.FRIEND_USER_ID_STRING);
+        } else if (post.type == Type.Review) {
+            post.friendUserId = jsonObject.getInt(Params.USER_ID_INT);//the friend's user.id
+            post.friendUserIdentifier = jsonObject.getString(Params.FRIEND_USER_ID_STRING);
+
+>>>>>>> 4766ff491fd417514754d50bbb0143c447726456
             String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
         }
         return post;
