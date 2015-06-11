@@ -134,10 +134,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ActivityUserOther"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/ToolbarTheme"/>
         <activity
             android:name=".view.activity.ActivityBusinessOther"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/ToolbarTheme"/>
         <activity
             android:name=".view.activity.ActivityPost"
             android:screenOrientation="portrait" />

@@ -2,12 +2,15 @@ package ir.rasen.charsoo.view.widget_customized.charsoo_activity;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
@@ -62,7 +65,7 @@ public class CharsooActivity extends ActionBarActivity {
 
     private void customizeActionbar() {
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null && toolbar==null) {
+        if (actionBar != null && toolbar == null) {
             actionBar.setDisplayShowTitleEnabled(false);
             actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -72,4 +75,15 @@ public class CharsooActivity extends ActionBarActivity {
             setTitle(null);
         }
     }
+
+    public void hideToolbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+    }
+
+    public void showToolbar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+    }
+
 }
