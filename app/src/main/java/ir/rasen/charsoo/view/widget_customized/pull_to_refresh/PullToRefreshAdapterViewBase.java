@@ -125,19 +125,20 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
             updateIndicatorViewsVisibility();
         }
 
+        int currentFirstVisibleItem = firstVisibleItem;
+        if (currentFirstVisibleItem > lastFirstVisibleItem) {
+            if (getContext() instanceof CharsooActivity)
+                ((CharsooActivity) getContext()).hideToolbar();
+        } else if (currentFirstVisibleItem < lastFirstVisibleItem) {
+            // getSherlockActivity().getSupportActionBar().show();
+            if (getContext() instanceof CharsooActivity)
+                ((CharsooActivity) getContext()).showToolbar();
+        }
+        lastFirstVisibleItem = currentFirstVisibleItem;
+
         // Finally call OnScrollListener if we have one
         if (null != mOnScrollListener) {
             mOnScrollListener.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
-            int currentFirstVisibleItem = firstVisibleItem;
-            if (currentFirstVisibleItem > lastFirstVisibleItem) {
-                if (getContext() instanceof CharsooActivity)
-                    ((CharsooActivity) getContext()).hideToolbar();
-            } else if (currentFirstVisibleItem < lastFirstVisibleItem) {
-                // getSherlockActivity().getSupportActionBar().show();
-                if (getContext() instanceof CharsooActivity)
-                    ((CharsooActivity) getContext()).showToolbar();
-            }
-
         }
     }
 

@@ -58,6 +58,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setMovingObject(findViewById(R.id.ll_footer));
 
         fm = getFragmentManager();
         ft = fm.beginTransaction();

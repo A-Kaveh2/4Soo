@@ -21,6 +21,7 @@ import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
 public class CharsooActivity extends ActionBarActivity {
 
     Toolbar toolbar;
+    View movingObject;
     boolean actionBarSet = false;
 
     @Override
@@ -58,6 +59,7 @@ public class CharsooActivity extends ActionBarActivity {
         }
         actionBarSet = true;
         this.toolbar = toolbar;
+        this.movingObject = toolbar;
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setSupportActionBar(toolbar);
         customizeActionbar();
@@ -77,17 +79,21 @@ public class CharsooActivity extends ActionBarActivity {
     }
 
     public void hideToolbar() {
-        if(toolbar==null)
+        if(movingObject==null)
             return;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-            toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
+            movingObject.animate().translationY(-movingObject.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
     }
 
     public void showToolbar() {
-        if(toolbar==null)
+        if(movingObject==null)
             return;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-            toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+            movingObject.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
+    }
+
+    public void setMovingObject(View view) {
+        movingObject = view;
     }
 
 }
