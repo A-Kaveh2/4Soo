@@ -136,6 +136,7 @@ public class Params {
     public static String REQUESTED_USER_ID= "RequestedId";
     public static String ANSWER= "Answer";
     public static String BUSINESS_ID_STRING = "BusinessId";
+    public static String BUSINESS_ID_STRING_TIMELINE = "Business_Id";
     public static String BUSINESS_ID_INT = "Business_Id";
     public static String BUSINESS_IDENTIFIER= "BusinessIdentifier";
     public static String BUSINESS_USERNAME_STRING = "BusinessUserName";

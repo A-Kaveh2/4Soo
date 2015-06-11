@@ -207,7 +207,7 @@ public class Post {
     public static Post getFromJSONObjectTimeLine(JSONObject jsonObject) throws Exception {
         Post post = new Post();
         post.id = jsonObject.getInt(Params.POST_ID_INT);
-        post.businessID = jsonObject.getInt(Params.BUSINESS_ID_STRING);
+        post.businessID = jsonObject.getInt(Params.BUSINESS_ID_STRING_TIMELINE);
         post.businessUserName = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
         post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
         post.userName = jsonObject.getString(Params.USER_NAME_STRING);
