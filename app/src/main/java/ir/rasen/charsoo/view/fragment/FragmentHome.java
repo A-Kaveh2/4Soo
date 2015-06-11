@@ -21,20 +21,20 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.model.NetworkConnectivityReciever;
-import ir.rasen.charsoo.model.post.GetTimeLinePost;
-import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.model.NetworkConnectivityReciever;
+import ir.rasen.charsoo.model.post.GetTimeLinePost;
+import ir.rasen.charsoo.model.post.GetTimeLinePosts;
+import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IGetNewTimeLinePost;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.model.post.GetTimeLinePosts;
 
 public class FragmentHome extends Fragment implements IWebserviceResponse, IPullToRefresh, IGetNewTimeLinePost {
 
@@ -44,14 +44,6 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
     AdapterPostTimeLine adapterPostTimeLine;
     ListView listView;
     ArrayList<Post> results;
-    ArrayList<Post> sampleResults;
-
-
-
-
-    //pull_to_refresh_lib
-    //private PullToRefreshListView pullToRefreshListView;
-
 
     private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
 
@@ -73,7 +65,6 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
 //        } catch (Exception e) {
 //
 //        }
-
 
         status = Status.FIRST_TIME;
         results = new ArrayList<>();

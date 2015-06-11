@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,10 +27,10 @@ import ir.rasen.charsoo.view.dialog.DialogExit;
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 
-public class ActivityMain extends NoActionBarActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs {
+public class ActivityMain extends CharsooActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs {
 
     PopupWindow popupWindow;
 
@@ -55,6 +56,8 @@ public class ActivityMain extends NoActionBarActivity implements View.OnClickLis
 
         progressDialog = new ProgressDialog(this);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         fm = getFragmentManager();
         ft = fm.beginTransaction();

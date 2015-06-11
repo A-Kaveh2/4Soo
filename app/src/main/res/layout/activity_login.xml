@@ -27,7 +27,7 @@
                 android:inputType="textEmailAddress|textNoSuggestions"
                 android:singleLine="true"
                 android:textColor="@color/Black"
-
+                android:text="hamid1@gmail.com"
                 android:textColorHint="@color/Black" />
 
             <ir.rasen.charsoo.view.widget_customized.EditTextFont
@@ -43,6 +43,7 @@
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:textColor="@color/Black"
+                android:text="salam"
                 android:textColorHint="@color/Black" />
 
             <LinearLayout

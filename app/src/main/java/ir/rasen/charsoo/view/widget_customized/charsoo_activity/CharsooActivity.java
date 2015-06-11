@@ -5,6 +5,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -16,17 +17,13 @@ import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
  */
 public class CharsooActivity extends ActionBarActivity {
 
+    Toolbar toolbar;
+    boolean actionBarSet = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setDisplayShowCustomEnabled(true);
-            setTitle(getTitle());
-        }
+        customizeActionbar();
     }
 
     @Override
@@ -34,7 +31,7 @@ public class CharsooActivity extends ActionBarActivity {
         super.setTitle(title);
 
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!=null) {
+        if (actionBar != null) {
             LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View v = inflator.inflate(R.layout.layout_action_bar_home, null);
             ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(title);
@@ -47,5 +44,32 @@ public class CharsooActivity extends ActionBarActivity {
         super.setTitle(titleId);
 
         setTitle(getString(titleId));
+    }
+
+    @Override
+    public void setSupportActionBar(Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+        if (actionBarSet) {
+            actionBarSet = false;
+            return;
+        }
+        actionBarSet = true;
+        this.toolbar = toolbar;
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setSupportActionBar(toolbar);
+        customizeActionbar();
+    }
+
+    private void customizeActionbar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null && toolbar==null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowCustomEnabled(true);
+            setTitle(getTitle());
+        } else {
+            setTitle(null);
+        }
     }
 }
