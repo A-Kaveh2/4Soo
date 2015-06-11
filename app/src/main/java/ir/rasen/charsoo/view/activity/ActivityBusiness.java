@@ -9,9 +9,6 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 
-import com.handmark.pulltorefresh.library.HFGridView;
-import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
-
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -29,10 +26,12 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewBusiness;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 
-public class ActivityBusiness extends NoActionBarActivity implements ISelectBusiness, IWebserviceResponse, IPullToRefresh {
+public class ActivityBusiness extends CharsooActivity implements ISelectBusiness, IWebserviceResponse, IPullToRefresh {
     ProgressDialog progressDialog;
     int selectedBusinessId, businessProfilePictureId;
     HFGridView gridView;

@@ -77,11 +77,15 @@ public class CharsooActivity extends ActionBarActivity {
     }
 
     public void hideToolbar() {
+        if(toolbar==null)
+            return;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
             toolbar.animate().translationY(-toolbar.getBottom()).setInterpolator(new AccelerateInterpolator()).start();
     }
 
     public void showToolbar() {
+        if(toolbar==null)
+            return;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
             toolbar.animate().translationY(0).setInterpolator(new DecelerateInterpolator()).start();
     }

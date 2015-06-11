@@ -6,7 +6,7 @@
     android:background="@color/background"
     android:layout_width="match_parent">
 
-    <com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter
+    <ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter
         android:fadingEdge="none"
         android:fastScrollEnabled="false"
         android:footerDividersEnabled="false"

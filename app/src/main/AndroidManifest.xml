@@ -34,7 +34,8 @@
             android:name=".view.activity.ActivityLogin"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:theme="@style/ToolbarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +48,8 @@
 
         <activity
             android:name=".view.activity.ActivityBusiness"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/ToolbarTheme"/>
 
         <activity
             android:name=".view.activity.ActivityUserRegister"

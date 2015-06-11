@@ -101,7 +101,6 @@
     <orderEntry type="library" exported="" name="support-v4-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
     <orderEntry type="module" module-name="MaterialDesign" exported="" />
-    <orderEntry type="module" module-name="pull_to_refresh_lib" exported="" />
     <orderEntry type="module" module-name="crop-lib" exported="" />
   </component>
 </module>

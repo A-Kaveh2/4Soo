@@ -18,10 +18,9 @@ import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoBackActivity;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-
-public class ActivityLogin extends NoBackActivity implements View.OnClickListener, IWebserviceResponse {
+public class ActivityLogin extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {
 
     EditTextFont editTextEmail, editTextPassword;
     Validation validation;
@@ -34,7 +33,7 @@ public class ActivityLogin extends NoBackActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        init(getString(R.string.login));
+        setTitle(getString(R.string.login));
 
         //for the test I need to disable automatically going to ActivityMain
        /* if (LoginInfo.isLoggedIn(this)) {

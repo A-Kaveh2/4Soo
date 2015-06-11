@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter
+            <ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter
                 android:id="@+id/gridView_HF"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

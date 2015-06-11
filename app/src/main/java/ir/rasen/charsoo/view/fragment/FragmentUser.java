@@ -14,8 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.handmark.pulltorefresh.library.HFGridView;
-import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
 

@@ -15,7 +15,7 @@
         android:layout_margin="20dp"
         android:layout_alignParentTop="true" />
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

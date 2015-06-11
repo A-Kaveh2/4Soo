@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 
-import com.handmark.pulltorefresh.library.HFGridView;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 
 import java.util.ArrayList;
 
@@ -67,7 +67,7 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
 
     Activity activity;
 
-    public GridViewUserOther(final Activity context, final User displayedUser, com.handmark.pulltorefresh.library.HFGridView gViewHeader) {
+    public GridViewUserOther(final Activity context, final User displayedUser, HFGridView gViewHeader) {
         this.context = context;
         this.user = displayedUser;
         this.gridViewHeader = gViewHeader;

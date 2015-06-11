@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 
-import com.handmark.pulltorefresh.library.HFGridView;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 
 import java.util.ArrayList;
 
@@ -63,7 +63,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
     IWebserviceResponse iWebserviceResponse;
     View switchGrid, switchList;
 
-    public GridViewBusinessOther(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
+    public GridViewBusinessOther(Activity activity, Business business, HFGridView gridViewHeader) {
         this.activity = activity;
         this.business = business;
         this.gridViewHeader = gridViewHeader;

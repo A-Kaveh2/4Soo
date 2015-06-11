@@ -35,6 +35,7 @@ import ir.rasen.charsoo.view.adapter.AdapterPostShared;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 
 /**
  * Created by android on 3/14/2015.
@@ -42,7 +43,7 @@ import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 public class GridViewUser implements IWebserviceResponse {
     public static final String TAG="GridViewUser";
 
-    com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
+    HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostShared adapterPostShared;
     public boolean isThreeColumn = true;
@@ -65,7 +66,7 @@ public class GridViewUser implements IWebserviceResponse {
     String userIdentifier, userName, aboutMe;
     Permission userPermissions;
 
-    public GridViewUser(Activity activity, User user, int visitedUserId, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
+    public GridViewUser(Activity activity, User user, int visitedUserId, HFGridView gridViewHeader) {
         this.activity = activity;
         this.profilePictureId = user.profilePictureId;
         this.gridViewHeader = gridViewHeader;
@@ -302,7 +303,7 @@ public class GridViewUser implements IWebserviceResponse {
         new GetSharedPosts(activity, visitedUserId, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewUser.this).execute();
     }
 
-    private void prepareGridThreeColumn(com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
+    private void prepareGridThreeColumn(HFGridView gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);

@@ -14,7 +14,7 @@
         android:background="@drawable/shape_action_bar"/>
 
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
         android:layout_below="@id/ll_divider"
         android:layout_width="fill_parent"

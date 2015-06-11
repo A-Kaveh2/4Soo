@@ -20,6 +20,7 @@ import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.view.widget_customized.MaterialProgressBar;
 import ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 
 public class AdapterPostGrid extends BaseAdapter {
     private Activity activity;
@@ -27,7 +28,7 @@ public class AdapterPostGrid extends BaseAdapter {
     private int screedWidth;
     SimpleLoader simpleLoader;
     //GridViewHeaderFooter gridViewHF;
-    com.handmark.pulltorefresh.library.HFGridView gridView;
+    HFGridView gridView;
     int businessIdForBusinessPosts;
     Post.GetPostType getPostType;
 
@@ -60,17 +61,7 @@ public class AdapterPostGrid extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View view, ViewGroup parent) {
-       /* if (gridView == null) {
-            try {
-                gridView = (com.handmark.pulltorefresh.library.HFGridView) parent;
-                gridView.setVerticalSpacing(3);
-                gridView.setHorizontalSpacing(9);
-                gridView.setNumColumns(3);
-            } catch (Exception e) {
 
-            }
-
-        }*/
         final Holder holder;
         if (view == null) {
             holder = new Holder();

@@ -1,4 +1,7 @@
 <resources>
+    <item type="id" name="gridview" />
+    <item type="id" name="webview" />
+    <item type="id" name="scrollview" />
 
     <item name="img_userbusinesses_pic" type="id"/>
     <item name="txt_userbusinesses_name" type="id"/>

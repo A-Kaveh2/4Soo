@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import com.handmark.pulltorefresh.library.Footer;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.Footer;
 
 import java.util.ArrayList;
 

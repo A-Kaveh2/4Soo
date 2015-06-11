@@ -4,9 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
 
-import com.handmark.pulltorefresh.library.HFGridView;
-import com.handmark.pulltorefresh.library.PullToRefreshGridViewWithHeaderAndFooter;
-
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -23,9 +20,11 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewUserOther;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.NoActionBarActivity;
+import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
-public class ActivityUserOther extends NoActionBarActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityUserOther extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
     private HFGridView gridView;
     private int visitedUserId;

@@ -32,6 +32,7 @@ import ir.rasen.charsoo.view.interface_m.IDeletePost;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 import ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 
 /**
  * Created by android on 3/14/2015.
@@ -39,7 +40,7 @@ import ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView;
 public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     public static final String TAG="GridViewBusiness";
 
-    com.handmark.pulltorefresh.library.HFGridView gridViewHeader;
+    HFGridView gridViewHeader;
     AdapterPostGrid adapterPostGrid;
     AdapterPostBusiness adapterPostBusiness;
     public boolean isThreeColumn = true;
@@ -64,7 +65,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     SimpleLoader simpleLoader;
     View switchGrid, switchList;
 
-    public GridViewBusiness(Activity activity, Business business, com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
+    public GridViewBusiness(Activity activity, Business business, HFGridView gridViewHeader) {
         this.activity = activity;
         this.business = business;
         this.gridViewHeader = gridViewHeader;
@@ -257,7 +258,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         new GetBusinessPosts(activity, LoginInfo.getUserId(activity), business.id, posts.get(posts.size() - 1).id, activity.getResources().getInteger(R.integer.lazy_load_limitation), GridViewBusiness.this).execute();
     }
 
-    private void prepareGridThreeColumn(com.handmark.pulltorefresh.library.HFGridView gridViewHeader) {
+    private void prepareGridThreeColumn(HFGridView gridViewHeader) {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
