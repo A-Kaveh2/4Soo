@@ -61,7 +61,17 @@ public class AdapterPostGrid extends BaseAdapter {
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(final int position, View view, ViewGroup parent) {
+       /* if (gridView == null) {
+            try {
+                gridView = (com.handmark.pulltorefresh.library.HFGridView) parent;
+                gridView.setVerticalSpacing(3);
+                gridView.setHorizontalSpacing(9);
+                gridView.setNumColumns(3);
+            } catch (Exception e) {
 
+            }
+
+        }*/
         final Holder holder;
         if (view == null) {
             holder = new Holder();
@@ -92,5 +102,15 @@ public class AdapterPostGrid extends BaseAdapter {
     private class Holder {
         ImageView imageView;
         MaterialProgressBar progressBar;
+    }
+
+    public void removePostByIntID(int postID_int){
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).postId == postID_int) {
+                items.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
     }
 }
