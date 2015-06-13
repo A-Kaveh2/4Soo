@@ -41,9 +41,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+        <!--<activity
             android:name=".view.activity.ActivityTest"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />-->
 
         <activity
             android:name=".view.activity.ActivityBusiness"
@@ -51,7 +51,7 @@
             android:theme="@style/ToolbarTheme"/>
 
         <activity
-            android:name=".view.activity.ActivityUserRegister"
+            android:name=".view.activity.NOT_USED___ActivityUserRegister"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
         <activity
@@ -131,9 +131,11 @@
             android:name=".view.activity.ActivityBusinessReviews"
             android:screenOrientation="portrait" />
 
-        <activity
+        <!--<activity
             android:name=".view.activity.ActivityUserBusinesses"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" />-->
+
+
         <activity
             android:name=".view.activity.ActivityUserOther"
             android:screenOrientation="portrait"
@@ -148,6 +150,11 @@
 
         <activity
             android:name="eu.janmuller.android.simplecropimage.CropImage"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".view.activity.ActivityUserRegister"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
 
         <meta-data
