@@ -234,6 +234,16 @@ public class Params {
     /**
      * Created by MHFathi
      */
+
+    public static final String FULL_NAME= "fullName";
+    public static final String STRING_IDENTIFIER="stringIdentifier";
+    public static final String STRING_PICTURE="stringPicture";
+    public static final String IS_STR_ID_AVAILABLE="IsStrIdAvailable";
+    public static final String DESCRIPTION="Description";
+    public static final String BUSINESS_CATEGORY="Category";
+    public static final String BUSINESS_SUBCATEGORY="Subcategory";
+    public static final String HASHTAGS="Hashtags";
+
     public static final boolean isTestVersion=true;
 
 }

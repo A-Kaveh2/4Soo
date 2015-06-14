@@ -59,6 +59,7 @@ public class FragmentUserRegisterPageOne extends Fragment {
 
         editTextUserIdentifier = (EditTextFont) view.findViewById(R.id.editText_identifier);
         editTextName = (EditTextFont) view.findViewById(R.id.editText_name);
+
         editTextName.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -167,6 +168,7 @@ public class FragmentUserRegisterPageOne extends Fragment {
             new DialogMessage(getActivity(),getString(R.string.choose_user_picture)).show();
             return false;
         }
+
         return true;
     }
 

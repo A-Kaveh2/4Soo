@@ -210,7 +210,7 @@
     <string name="filter_all">فیلتر: تمام موضوعات</string>
     <string name="search_businesses">جستجوی کسب و کار ها</string>
     <string name="search_products">جستجوی محصولات</string>
-    <string name="choose_category">انتخاب موضوع</string>
+    <string name="choose_category">دسته بندی را انتخاب کنید</string>
     <string name="choose_category_search">ددسته بندی کسب و کار را انتخاب کنید</string>
     <string name="selected_location">جستجوی مکان انتخابی</string>
     <string name="no_results_found">جستجو نتیجه ای در بر نداشت.</string>
@@ -553,5 +553,22 @@
     <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
     <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
     <string name="str_RegisterInCharsoo">ثبت نام در چارسو</string>
+    <string name="txt_StringIdentifierIsNotAvailable">نام کاربری در دسترس نیست</string>
+
+    <string-array name="categories_default">
+        <item>دسته بندی</item>
+
+    </string-array>
+
+    <string-array name="subcategories_default">
+        <item>زیر دسته بندی</item>
+
+    </string-array>
+
+    <string name="choose_subcategory">زیر دسته بندی را انتخاب کنید</string>
+    <string name="txt_Subcategory">زیر دسته بندی</string>
+    <string name="txt_Category">دسته بندی</string>
+    <string name="txt_PleaseSelectSubcategory">لطفا زیر دسته بندی را انتخاب کنید</string>
+    <string name="txt_PleaseSelectCategory">لطفا دسته بندی را انتخاب کنید</string>
 
 </resources>

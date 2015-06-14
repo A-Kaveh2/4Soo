@@ -70,4 +70,5 @@ public class URLs {
     public static String GET_BUSINESS_CONTACT_INFO= MAIN_URL+"getBusinessContactInfo";
     public static String GET_BUSINESS_SUBCATEGORIES= MAIN_URL+"getBusinessSubCategories";
     public static String DOWNLOAD_IMAGE= MAIN_URL+"downloadImage";
+    public static String CHECK_BUSINESS_IDENTIFIER = MAIN_URL + "checkBusinessIdentifier";
 }

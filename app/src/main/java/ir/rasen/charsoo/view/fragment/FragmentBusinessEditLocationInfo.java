@@ -27,7 +27,7 @@ import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityMapChoose;
 
-public class FragmentBusinessRegisterLocationInfo extends Fragment {
+public class FragmentBusinessEditLocationInfo extends Fragment {
 
     private Spinner spinnerStates;
     EditTextFont editTextCity, editTextStreet;
@@ -45,7 +45,7 @@ public class FragmentBusinessRegisterLocationInfo extends Fragment {
         View view = inflater.inflate(R.layout.fragment_register_business_location_info,
                 container, false);
 
-        spinnerStates = (Spinner) view.findViewById(R.id.spinner_states);
+        spinnerStates = (Spinner) view.findViewById(R.id.spinner_States);
         editTextCity = (EditTextFont) view.findViewById(R.id.edt_city);
         editTextStreet = (EditTextFont) view.findViewById(R.id.edt_street);
 

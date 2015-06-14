@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import java.io.File;
+import java.util.Hashtable;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
@@ -38,113 +39,88 @@ import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessEditBaseInfo;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessEditContactInfo;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessEditLocationInfo;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageOne;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageThree;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageTwo;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
+public class ActivityBusinessRegister extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
 
-    FragmentBusinessEditBaseInfo fragmentBaseInfo;
-    FragmentBusinessEditContactInfo fragmentContactInfo;
-    FragmentBusinessEditLocationInfo fragmentLocationInfo;
+    public static final String FRAG_ONE="FragOne";
+    public static final String FRAG_TWO="FragTwo";
+    public static final String FRAG_THREE="FragThree";
+
+
+    FragmentBusinessRegisterPageOne fragOne;
+    FragmentBusinessRegisterPageTwo fragTwo;
+    FragmentBusinessRegisterPageThree fragThree;
     ProgressDialog progressDialog;
     String filePath, businessPictureString;
+    String currentFragment;
 
-
-    private enum Fragments {BASE_INFO, CONTACT_INFO, LOCATION_INFO};
-
-    private Fragments fragmentCurrent;
+    Business unregisteredBusiness;
     FragmentManager fm;
     FragmentTransaction ft;
-    LinearLayout llIndicatorBase, llIndicatorContact, llIndicatorLocation;
     MenuItem menuItemNext;
+
+    boolean isCheckingIdAvailability;
     int businessId = 0;
     String businessIdentifier;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_register);
+        setContentView(R.layout.activity_business_register_new);
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.layout_action_bar_home, null);
 
-
+        unregisteredBusiness=new Business();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        llIndicatorBase = (LinearLayout) findViewById(R.id.ll_indicator_base);
-        llIndicatorContact = (LinearLayout) findViewById(R.id.ll_indicator_contact);
-        llIndicatorLocation = (LinearLayout) findViewById(R.id.ll_indicator_location);
 
-        fragmentBaseInfo = new FragmentBusinessEditBaseInfo();
-        fragmentContactInfo = new FragmentBusinessEditContactInfo();
-        fragmentLocationInfo = new FragmentBusinessEditLocationInfo();
-        fragmentCurrent = Fragments.BASE_INFO;
-
-
-        try {
-            businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
-            businessIdentifier = getIntent().getExtras().getString(Params.BUSINESS_IDENTIFIER);
-        } catch (Exception e) {
-
-        }
-
-        Bundle bundle = new Bundle();
-        if (businessId != 0) {
-            ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(getString(R.string.profile_edit_business));
-            new GetBusinessProfileInfo(ActivityBusinessRegisterEdit.this, businessId, ActivityBusinessRegisterEdit.this).execute();
-            bundle.putBoolean(Params.IS_EDITTING, true);
-            progressDialog.show();
-        } else {
-            ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(getString(R.string.register_business));
-            bundle.putBoolean(Params.IS_EDITTING, false);
-        }
-        getSupportActionBar().setCustomView(v);
-
-        fragmentBaseInfo.setArguments(bundle);
-        fragmentContactInfo.setArguments(bundle);
-        fragmentLocationInfo.setArguments(bundle);
+        fragOne=new FragmentBusinessRegisterPageOne();
+        fragTwo=new FragmentBusinessRegisterPageTwo();
+        fragThree=new FragmentBusinessRegisterPageThree();
 
         fm = getFragmentManager();
         ft = fm.beginTransaction();
-        ft.add(R.id.fragmentContainer, fragmentBaseInfo);
+        currentFragment=FRAG_ONE;
+        ft.replace(R.id.fragmentContainer, fragOne);
+        ft.commit();
 
-        //if the user is editing the business profile, he should wait to get GetBusinessProfileInfo's result
-        //then goes to the fragment
-        if (businessId == 0)
-            ft.commit();
 
-        Business b = ((MyApplication) getApplication()).business;
+        ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(getString(R.string.register_business));
+
 
     }
 
     @Override
     public void onBackPressed() {
-        switch (fragmentCurrent) {
-            case BASE_INFO:
-                fragmentCurrent = Fragments.BASE_INFO;
+        switch (currentFragment) {
+            case FRAG_ONE:
                 finish();
                 break;
-            case CONTACT_INFO:
-                fragmentCurrent = Fragments.BASE_INFO;
+            case FRAG_TWO:
                 ft = fm.beginTransaction();
-                ft.replace(R.id.fragmentContainer, fragmentBaseInfo);
+                currentFragment=FRAG_ONE;
+                ft.replace(R.id.fragmentContainer, fragOne);
                 ft.commit();
-                llIndicatorContact.setVisibility(View.GONE);
-                llIndicatorBase.setVisibility(View.VISIBLE);
+
                 break;
-            case LOCATION_INFO:
-                fragmentCurrent = Fragments.CONTACT_INFO;
+            case FRAG_THREE:
                 ft = fm.beginTransaction();
-                ft.replace(R.id.fragmentContainer, fragmentContactInfo);
+                currentFragment=FRAG_TWO;
+                ft.replace(R.id.fragmentContainer, fragTwo);
                 ft.commit();
+                fragTwo.setSpinners(this);
                 menuItemNext.setIcon(R.drawable.ic_arrow_next_white_24dp);
-                ;
-                llIndicatorLocation.setVisibility(View.GONE);
-                llIndicatorContact.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -153,10 +129,7 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
-        if (businessId != 0)
-            inflater.inflate(R.menu.menu_next_delete, menu);
-        else
-            inflater.inflate(R.menu.menu_next_button, menu);
+        inflater.inflate(R.menu.menu_next_button, menu);
 
         this.menuItemNext = menu.findItem(R.id.action_next);
         return true;
@@ -167,50 +140,19 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
             return true;
-        } else if (item.getItemId() == R.id.action_delete) {
-
-            new DialogDeleteBusinessConfirmation(ActivityBusinessRegisterEdit.this, businessId, ActivityBusinessRegisterEdit.this).show();
-            return true;
         } else if (item.getItemId() == R.id.action_next) {
-            switch (fragmentCurrent) {
-                case BASE_INFO:
-                    if (fragmentBaseInfo.isVerified()) {
-                        ft = fm.beginTransaction();
-                        ft.replace(R.id.fragmentContainer, fragmentContactInfo);
-                        ft.commit();
-                        fragmentCurrent = Fragments.CONTACT_INFO;
-                        llIndicatorBase.setVisibility(View.GONE);
-                        llIndicatorContact.setVisibility(View.VISIBLE);
-                    }
+            switch (currentFragment) {
+                case FRAG_ONE:
+                    // go fragment two
+                    switchToSecondPage();
                     break;
-                case CONTACT_INFO:
-                    if (fragmentContactInfo.isVerified()) {
-                        ft = fm.beginTransaction();
-                        ft.replace(R.id.fragmentContainer, fragmentLocationInfo);
-                        ft.commit();
-                        fragmentCurrent = Fragments.LOCATION_INFO;
-                        menuItemNext.setIcon(R.drawable.ic_check_white_24dp);
-                        //menuItemNext.setVisible(false);
-                        llIndicatorContact.setVisibility(View.GONE);
-                        llIndicatorLocation.setVisibility(View.VISIBLE);
-                    }
+                case FRAG_TWO:
+                    // GO FRAGMNET TWO
+                    switchToThirdPage();
                     break;
-                case LOCATION_INFO:
-                    if (fragmentLocationInfo.isVerified()) {
-                        progressDialog.show();
-                        if (businessPictureString != null)
-                            ((MyApplication) getApplication()).business.profilePicture = businessPictureString;
-
-                        //if user doesn't choose the location
-
-
-                        if (businessId != 0)
-                            //it is editing
-                            new UpdateBusinessProfileInfo(ActivityBusinessRegisterEdit.this, ((MyApplication) getApplication()).business, ActivityBusinessRegisterEdit.this).execute();
-                        else
-                            new RegisterBusiness(ActivityBusinessRegisterEdit.this, ((MyApplication) getApplication()).business, ActivityBusinessRegisterEdit.this).execute();
-
-                    }
+                case FRAG_THREE:
+                    // DO REGISTER BUSINESS
+                    // BEFORE REGISTER  CHECK FOR STRING ID AVAILABILITY
                     break;
             }
             return true;
@@ -234,7 +176,40 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
             ((MyApplication) getApplication()).business = (Business) result;
             ((MyApplication) getApplication()).business.businessIdentifier = businessIdentifier;
             ft.commit();
-        } else if (result instanceof ResultStatus) {
+        }
+        else if (result instanceof Boolean){
+            if ((Boolean)result)
+            {
+                progressDialog.dismiss();
+                isCheckingIdAvailability=false;
+                if (currentFragment.equals(FRAG_ONE)){
+                    ft= fm.beginTransaction();
+                    currentFragment=FRAG_TWO;
+                    ft.replace(R.id.fragmentContainer,fragTwo);
+                    ft.commit();
+                }
+            }
+            else{
+                progressDialog.dismiss();
+                isCheckingIdAvailability=false;
+                if (!currentFragment.equals(FRAG_ONE)){
+                    menuItemNext.setIcon(R.drawable.ic_arrow_next_white_24dp);
+                }
+                ft = fm.beginTransaction();
+                currentFragment=FRAG_ONE;
+                ft.replace(R.id.fragmentContainer, fragOne);
+                ft.commit();
+                fragOne.setErrorStringIdIsNotAvailable();
+
+                // TODO: a well behavior on id not availability is like below
+                /*if (currentFragment.equals(FRAG_ONE)){
+                    fragOne.setErrorStringIdIsNotAvailable();
+                }
+                else{
+                    // open pupup to get new String identifier
+                }*/
+            }
+        }else if (result instanceof ResultStatus) {
             Intent i = getIntent();
             i.putExtra(Params.PROFILE_PICTURE, ((MyApplication) getApplication()).business.profilePicture);
             i.putExtra(Params.TYPE, Business.ChangeType.EDIT.name());
@@ -246,12 +221,12 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityBusinessRegisterEdit.this, ServerAnswer.getError(ActivityBusinessRegisterEdit.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+        new DialogMessage(ActivityBusinessRegister.this, ServerAnswer.getError(ActivityBusinessRegister.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
     @Override
     public void notifyCallForTakePicture() {
-        new PopupSelectCameraGallery(ActivityBusinessRegisterEdit.this).show();
+        new PopupSelectCameraGallery(ActivityBusinessRegister.this).show();
     }
 
     @Override
@@ -276,8 +251,8 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
         if (file.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
             try {
-                fragmentBaseInfo.setPicture(myBitmap);
-                businessPictureString = Image_M.getBase64String(filePath);
+                fragOne.setPicture(myBitmap);
+                unregisteredBusiness.profilePicture = Image_M.getBase64String(filePath);
             } catch (Exception e) {
                 String s = e.getMessage();
             }
@@ -297,5 +272,33 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
         finish();
     }
 
+
+    public void switchToSecondPage(){
+        isCheckingIdAvailability=true;
+        Hashtable<String,String> tempInputData=fragOne.getInputData();
+        if (tempInputData!=null) {
+            progressDialog.show();
+            unregisteredBusiness.businessIdentifier=tempInputData.get(Params.STRING_IDENTIFIER);
+            unregisteredBusiness.name=tempInputData.get(Params.FULL_NAME);
+        }
+    }
+
+    public void switchToThirdPage(){
+        if (fragTwo.isVerified()){
+
+            unregisteredBusiness.category=fragTwo.selectedCategory.name;
+            unregisteredBusiness.categoryID=fragTwo.selectedCategory.id;
+            unregisteredBusiness.subcategory=fragTwo.selectedSubcategory.name;
+            unregisteredBusiness.subCategoryID=fragTwo.selectedSubcategory.id;
+            unregisteredBusiness.description=fragTwo.getInputDescription();
+            unregisteredBusiness.hashtagList=fragTwo.getHashtagList();
+            ft = fm.beginTransaction();
+            currentFragment=FRAG_THREE;
+            ft.replace(R.id.fragmentContainer, fragThree);
+            ft.commit();
+            menuItemNext.setIcon(R.drawable.ic_check_white_24dp);
+        }
+
+    }
 
 }

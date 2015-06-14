@@ -28,6 +28,7 @@ import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.activity.ActivityBusiness;
+import ir.rasen.charsoo.view.activity.ActivityBusinessRegister;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.adapter.AdapterUserBusinesses;
@@ -106,7 +107,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ActivityBusinessRegisterEdit.class);
+                Intent intent = new Intent(getActivity(), ActivityBusinessRegister.class);
                 startActivityForResult(intent, Params.ACTION_REGISTER_BUSINESS);
             }
         });
