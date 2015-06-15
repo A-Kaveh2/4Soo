@@ -24,13 +24,15 @@ import ir.rasen.charsoo.model.WebserviceGET;
 public class GetBusinessReviews extends AsyncTask<Void, Void, ArrayList<Review>> {
     private static final String TAG = "GetBusinessReviews";
     private IWebserviceResponse delegate = null;
+    private int userIntId;
     private int businessID;
     private int afterThisID;
     private int limitation;
     private ServerAnswer serverAnswer;
     private Context context;
 
-    public GetBusinessReviews(Context context,int businessID, int afterThisID, int limitation, IWebserviceResponse delegate) {
+    public GetBusinessReviews(Context context,int userIntId,int businessID, int afterThisID, int limitation, IWebserviceResponse delegate) {
+        this.userIntId=userIntId;
         this.businessID = businessID;
         this.afterThisID = afterThisID;
         this.limitation = limitation;
@@ -42,7 +44,8 @@ public class GetBusinessReviews extends AsyncTask<Void, Void, ArrayList<Review>>
     protected ArrayList<Review> doInBackground(Void... voids) {
         ArrayList<Review> list = new ArrayList<Review>();
         WebserviceGET webserviceGET = new WebserviceGET(URLs.GET_BUSINESS_REVIEWS, new ArrayList<>(
-                Arrays.asList(String.valueOf(businessID), String.valueOf(afterThisID), String.valueOf(limitation))));
+                Arrays.asList(String.valueOf(userIntId), String.valueOf(businessID),
+                        String.valueOf(afterThisID), String.valueOf(limitation))));
 
         try {
             serverAnswer = webserviceGET.executeList(context);

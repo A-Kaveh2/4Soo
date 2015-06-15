@@ -327,12 +327,13 @@ public class GridViewUser implements IWebserviceResponse, ISharePostChange {
     public void getResult(Object result) {
         if (result instanceof ArrayList) {
             //GetBusinessPosts' result
-            ArrayList<Post> posts = (ArrayList<Post>) result;
+            ArrayList<Post> newposts = (ArrayList<Post>) result;
+            posts.addAll(newposts);
             listFooterView.setVisibility(View.GONE);
             if (isThreeColumn)
-                adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
+                adapterPostGrid.loadMore(SearchItemPost.getItems(newposts));
             else
-                adapterPostShared.loadMore(posts);
+                adapterPostShared.loadMore(newposts);
             isLoadingMore = false;
 
 
