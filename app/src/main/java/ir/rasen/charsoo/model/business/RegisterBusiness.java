@@ -47,28 +47,27 @@ public class RegisterBusiness extends AsyncTask<Void, Void, Integer> {
             //webservicePOST.addParam(Params.USER_ID_INT, String.valueOf(business.userID));
             webservicePOST.addParam(Params.BUSINESS_ID_STRING, business.businessIdentifier);
             webservicePOST.addParam(Params.NAME, business.name);
-            webservicePOST.addParam(Params.EMAIL, business.email);
+            webservicePOST.addParam(Params.EMAIL, null);
             if (business.coverPicture != null)
                 webservicePOST.addParam(Params.COVER_PICTURE, business.coverPicture);
             else
                 webservicePOST.addParam(Params.COVER_PICTURE, "");
-            if (business.profilePicture != null)
+            if (business.profilePicture != business.email)
                 webservicePOST.addParam(Params.PROFILE_PICTURE, business.profilePicture);
             else
                 webservicePOST.addParam(Params.PROFILE_PICTURE, "");
             webservicePOST.addParam(Params.CATEGORY_ID, String.valueOf(business.categoryID));
             webservicePOST.addParam(Params.SUB_CATEGORY_ID, String.valueOf(business.subCategoryID));
             webservicePOST.addParam(Params.DESCRIPTION_STRING, business.description);
-            webservicePOST.addParam(Params.WORK_DAYS, business.workTime.getWorkDaysString());
-            webservicePOST.addParam(Params.WORK_TIME_OPEN, business.workTime.getTimeWorkOpenWebservice());
-            webservicePOST.addParam(Params.WORK_TIME_CLOSE, business.workTime.getTimeWorkCloseWebservice());
+            webservicePOST.addParam(Params.WORK_DAYS, null);
+            webservicePOST.addParam(Params.WORK_TIME_OPEN, null);
+            webservicePOST.addParam(Params.WORK_TIME_CLOSE, null);
             webservicePOST.addParam(Params.PHONE, business.phone);
             webservicePOST.addParam(Params.STATE, business.state);
             webservicePOST.addParam(Params.CITY, business.city);
             webservicePOST.addParam(Params.ADDRESS, business.address);
             webservicePOST.addParam(Params.LOCATION_LATITUDE, business.location_m.getLatitude());
             webservicePOST.addParam(Params.LOCATION_LONGITUDE, business.location_m.getLongitude());
-            webservicePOST.addParam(Params.EMAIL, business.email);
             webservicePOST.addParam(Params.MOBILE, business.mobile);
             webservicePOST.addParam(Params.WEBSITE, business.webSite);
             webservicePOST.addParam(Params.HASHTAG_LIST, Hashtag.getStringFromList(business.hashtagList));

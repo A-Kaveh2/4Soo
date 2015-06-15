@@ -36,7 +36,7 @@
                     android:id="@+id/spinner_States"
                     android:gravity="center_vertical|center_horizontal"
                     android:background="@drawable/shape_edit_text_back"
-                    android:prompt="@string/choose_category"
+                    android:prompt="@string/choose_state"
                     android:spinnerMode="dialog"
                     style="@style/spinner_style" />
 
@@ -48,16 +48,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:weightSum="100"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="15dp">
 
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/spinner_Cities"
-                    android:entries="@array/subcategories_default"
+                    android:entries="@array/cities_default"
                     android:gravity="center_vertical|center|center_horizontal"
                     android:background="@drawable/shape_edit_text_back"
-                    android:prompt="@string/choose_subcategory"
+                    android:prompt="@string/choose_city"
                     style="@style/spinner_style"
                     android:spinnerMode="dialog" />
             </LinearLayout>

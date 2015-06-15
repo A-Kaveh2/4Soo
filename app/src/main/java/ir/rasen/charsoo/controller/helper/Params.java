@@ -243,6 +243,12 @@ public class Params {
     public static final String BUSINESS_CATEGORY="Category";
     public static final String BUSINESS_SUBCATEGORY="Subcategory";
     public static final String HASHTAGS="Hashtags";
+    public static final String SELECTED_STATE="selectedState";
+    public static final String SELECTED_CITY="selectedCity";
+    public static final String STREET_ADDRESS="streetAddress";
+    public static final String LOC_LATITUDE="locationLatitude";
+    public static final String LOC_LONGITUDE="locationLongitude";
+
 
     public static final boolean isTestVersion=true;
 

@@ -2,39 +2,47 @@ package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.google.android.gms.maps.GoogleMap;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LocationManagerTracker;
 import ir.rasen.charsoo.controller.helper.Location_M;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.model.GetCountryStates;
+import ir.rasen.charsoo.model.GetStateCities;
 import ir.rasen.charsoo.view.activity.ActivityMapChoose;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 
 /**
  * Created by hossein-pc on 6/14/2015.
  */
-public class FragmentBusinessRegisterPageThree extends Fragment {
+public class FragmentBusinessRegisterPageThree extends Fragment implements IWebserviceResponse{
+    public static final String TAG="FragmentBusinessRegisterPageThree";
 
     private Spinner spinnerStates,spinnerCities;
 
-    EditTextFont editTextCity, editTextStreet;
+    EditTextFont editTextStreet;
     private GoogleMap googleMap;
     //MapView mapView;
     //LatLng choosedLatLng;
@@ -42,7 +50,13 @@ public class FragmentBusinessRegisterPageThree extends Fragment {
     String latitude, longitude;
     ButtonFont buttonMap;
     boolean isStatesLoaded=false;
-    boolean isEditting = false;
+    boolean doRefreshCitiesList=true;
+    int selectedStatePosition, selectedCityPosition;
+
+    String selectedState, selectedCity, streetAddress="";
+    List<String> stateList, cityList;
+    private android.app.ProgressDialog progressDialog;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,40 +64,54 @@ public class FragmentBusinessRegisterPageThree extends Fragment {
         View view = inflater.inflate(R.layout.fragment_business_register_page_three,
                 container, false);
 
+        progressDialog = new android.app.ProgressDialog(getActivity());
+        progressDialog.setMessage(getResources().getString(R.string.please_wait));
+
         spinnerStates = (Spinner) view.findViewById(R.id.spinner_States);
         spinnerCities = (Spinner) view.findViewById(R.id.spinner_Cities);
-        editTextCity = (EditTextFont) view.findViewById(R.id.edt_city);
+
+        if (selectedState == null){
+            stateList =new ArrayList<>();
+            setSpinnerStatesAdapter(new ArrayList<String>(),getActivity());
+            progressDialog.show();
+            new GetCountryStates(getActivity(),FragmentBusinessRegisterPageThree.this).execute();
+        }
+        else {
+            doRefreshCitiesList=false;
+            final int tempStatePosition = selectedStatePosition;
+            setSpinnerStatesAdapter(stateList,getActivity());
+            spinnerStates.post(new Runnable() {
+                @Override
+                public void run() {
+                    doRefreshCitiesList=false;
+                    spinnerStates.setSelection(tempStatePosition);
+                }
+            });
+        }
+
+        if (selectedCity==null){
+            cityList =new ArrayList<>();
+            setSpinnerCitiesAdapter(new ArrayList<String>(),getActivity());
+        }
+        else{
+            final int tempCityPosition= selectedCityPosition;
+            setSpinnerCitiesAdapter(cityList,getActivity());
+            spinnerCities.post(new Runnable() {
+                @Override
+                public void run() {
+                    spinnerCities.setSelection(tempCityPosition);
+                }
+            });
+        }
+
         editTextStreet = (EditTextFont) view.findViewById(R.id.edt_street);
 
-        List<String> states = Arrays.asList(getResources().getStringArray(R.array.states));
-        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.layout_spinner_back, states);
-        categoryAdapter.setDropDownViewResource(R.layout.layout_spinner_back_drop_down);
-        spinnerStates.setAdapter(categoryAdapter);
+
+//        setSpinnerStatesAdapter(stateList,getActivity());
 
 
-        try {
-            isEditting = getArguments().getBoolean(Params.IS_EDITTING);
-        } catch (Exception e) {
-
-        }
 
         buttonMap = (ButtonFont) view.findViewById(R.id.btn_map);
-
-        if (isEditting) {
-            business = ((MyApplication) getActivity().getApplication()).business;
-            editTextCity.setText(business.city);
-            editTextStreet.setText(business.address);
-            for (int i = 0; i < states.size(); i++) {
-                if (business.state.equals(states.get(i))) {
-                    spinnerStates.setSelection(i);
-                    break;
-                }
-            }
-
-            buttonMap.setBackgroundResource(R.drawable.selector_button_register);
-            buttonMap.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
-        }
 
         if (!LocationManagerTracker.isGooglePlayServicesAvailable(getActivity())) {
             buttonMap.setEnabled(false);
@@ -103,17 +131,45 @@ public class FragmentBusinessRegisterPageThree extends Fragment {
                 lt.showSettingsAlert();
             }
         }
+
         buttonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ActivityMapChoose.class);
-                if (isEditting) {
-                    intent.putExtra(Params.LATITUDE, business.location_m.getLatitude());
-                    intent.putExtra(Params.LONGITUDE, business.location_m.getLongitude());
-                    intent.putExtra(Params.IS_EDITTING, true);
-                } else
-                    intent.putExtra(Params.IS_EDITTING, false);
+                intent.putExtra(Params.IS_EDITTING, false);
                 startActivityForResult(intent, Params.ACTION_CHOOSE_LOCATION);
+            }
+        });
+
+        spinnerStates.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedStatePosition=i;
+                selectedState=adapterView.getItemAtPosition(i).toString();
+                if (doRefreshCitiesList){
+                    progressDialog.show();
+                    new GetStateCities(getActivity(),selectedState,FragmentBusinessRegisterPageThree.this).execute();
+                }
+                else
+                    doRefreshCitiesList=true;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinnerCities.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedCityPosition = i;
+                selectedCity=adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
@@ -132,26 +188,16 @@ public class FragmentBusinessRegisterPageThree extends Fragment {
             new DialogMessage(getActivity(), getString(R.string.err_choose_one_state)).show();
             return false;
         }
-        if (!Validation.validateCity(getActivity(), editTextCity.getText().toString()).isValid()) {
-            editTextCity.setError(Validation.getErrorMessage());
+        if (spinnerCities.getSelectedItemPosition()==0){
+            new DialogMessage(getActivity(), getString(R.string.err_choose_city)).show();
             return false;
         }
         if (!Validation.validateAddress(getActivity(), editTextStreet.getText().toString()).isValid()) {
             editTextStreet.setError(Validation.getErrorMessage());
             return false;
         }
-        if (isEditting)
-            ((MyApplication) getActivity().getApplication()).business.location_m = business.location_m;
-        else {
-            if (latitude == null || longitude == null) {
-                new DialogMessage(getActivity(), getString(R.string.err_choose_location)).show();
-                return false;
-            }
-        }
-        ((MyApplication) getActivity().getApplication()).business.state = String.valueOf(spinnerStates.getSelectedItem());
-        ((MyApplication) getActivity().getApplication()).business.city = editTextCity.getText().toString();
-        ((MyApplication) getActivity().getApplication()).business.address = editTextStreet.getText().toString();
-
+        else
+            streetAddress=editTextStreet.getText().toString();
 
         return true;
     }
@@ -161,12 +207,68 @@ public class FragmentBusinessRegisterPageThree extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Params.ACTION_CHOOSE_LOCATION && resultCode == Activity.RESULT_OK) {
             latitude = data.getStringExtra(Params.LATITUDE);
-            String s = data.getStringExtra(Params.LATITUDE);
             longitude = data.getStringExtra(Params.LONGITUDE);
-            ((MyApplication) getActivity().getApplication()).business.location_m = new Location_M(String.valueOf(latitude), String.valueOf(longitude));
             buttonMap.setBackgroundResource(R.drawable.selector_button_register);
             buttonMap.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
         }
     }
 
+
+    private void setSpinnerStatesAdapter(List<String> states,Context c){
+        List<String> tempList=new ArrayList<>();
+        tempList.add(c.getString(R.string.txt_state));
+        tempList.addAll(states);
+        ArrayAdapter<String> statesAdapter = new ArrayAdapter<String>(c,
+                android.R.layout.simple_spinner_dropdown_item, tempList);
+        spinnerStates.setAdapter(statesAdapter);
+    }
+
+    private void setSpinnerCitiesAdapter(List<String> cities,Context c){
+        List<String> tempList=new ArrayList<>();
+        tempList.add(c.getString(R.string.txt_City));
+        tempList.addAll(cities);
+        ArrayAdapter<String> citiesAdapter = new ArrayAdapter<String>(c,
+                android.R.layout.simple_spinner_dropdown_item, tempList);
+        spinnerCities.setAdapter(citiesAdapter);
+    }
+
+
+    @Override
+    public void getResult(Object result) {
+        progressDialog.dismiss();
+        if (result instanceof ArrayList) {
+            if (!isStatesLoaded) {
+                stateList.clear();
+                stateList = (ArrayList<String>) result;
+                setSpinnerStatesAdapter(stateList, getActivity());
+                isStatesLoaded = true;
+            } else {
+                cityList.clear();
+                cityList = (ArrayList<String>) result;
+                setSpinnerCitiesAdapter(cityList, getActivity());
+            }
+        }
+    }
+
+    @Override
+    public void getError(Integer errorCode, String callerStringID) {
+        progressDialog.dismiss();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode, callerStringID + ">" + TAG)).show();
+    }
+
+    public Hashtable<String,String> getInputData(){
+        if (isVerified()){
+            Hashtable<String,String> result=new Hashtable<>();
+            result.put(Params.SELECTED_STATE,selectedState);
+            result.put(Params.SELECTED_CITY, selectedCity);
+            result.put(Params.STREET_ADDRESS, streetAddress);
+            if ((latitude !=null)&&(longitude!=null)) {
+                result.put(Params.LOC_LATITUDE, latitude);
+                result.put(Params.LOC_LONGITUDE, longitude);
+            }
+            return result;
+        }
+        else
+            return null;
+    }
 }

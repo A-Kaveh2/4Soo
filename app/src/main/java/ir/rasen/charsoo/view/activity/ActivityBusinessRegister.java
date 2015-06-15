@@ -18,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import java.io.File;
 import java.util.Hashtable;
@@ -30,15 +29,10 @@ import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.model.business.GetBusinessProfileInfo;
+import ir.rasen.charsoo.model.business.GetBusinessStrIdAvailability;
 import ir.rasen.charsoo.model.business.RegisterBusiness;
-import ir.rasen.charsoo.model.business.UpdateBusinessProfileInfo;
-import ir.rasen.charsoo.view.dialog.DialogDeleteBusinessConfirmation;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessEditBaseInfo;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessEditContactInfo;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessEditLocationInfo;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageOne;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageThree;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageTwo;
@@ -48,7 +42,7 @@ import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
-public class ActivityBusinessRegister extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
+public class ActivityBusinessRegister extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture {
 
     public static final String FRAG_ONE="FragOne";
     public static final String FRAG_TWO="FragTwo";
@@ -59,7 +53,7 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
     FragmentBusinessRegisterPageTwo fragTwo;
     FragmentBusinessRegisterPageThree fragThree;
     ProgressDialog progressDialog;
-    String filePath, businessPictureString;
+    String filePath;
     String currentFragment;
 
     Business unregisteredBusiness;
@@ -130,7 +124,6 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_next_button, menu);
-
         this.menuItemNext = menu.findItem(R.id.action_next);
         return true;
     }
@@ -144,15 +137,16 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
             switch (currentFragment) {
                 case FRAG_ONE:
                     // go fragment two
-                    switchToSecondPage();
+                    goSecondPageOnNextPressed();
                     break;
                 case FRAG_TWO:
                     // GO FRAGMNET TWO
-                    switchToThirdPage();
+                    goThirdPageOnNextPressed();
                     break;
                 case FRAG_THREE:
                     // DO REGISTER BUSINESS
                     // BEFORE REGISTER  CHECK FOR STRING ID AVAILABILITY
+                    checkIdThenRegister();
                     break;
             }
             return true;
@@ -165,24 +159,23 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
         if (result instanceof Integer) {
             //RegisterBusiness' result
             //result is the registered business' id
-            ((MyApplication) getApplication()).business.id = (Integer) result;
+            unregisteredBusiness.id=(Integer) result;
+            ((MyApplication) getApplication()).business = unregisteredBusiness;
             Intent i = getIntent();
             setResult(RESULT_OK, i);
             finish();
 
 
-        } else if (result instanceof Business) {
-            //GetBusinessProfileInfo's result
-            ((MyApplication) getApplication()).business = (Business) result;
-            ((MyApplication) getApplication()).business.businessIdentifier = businessIdentifier;
-            ft.commit();
         }
         else if (result instanceof Boolean){
             if ((Boolean)result)
             {
                 progressDialog.dismiss();
                 isCheckingIdAvailability=false;
-                if (currentFragment.equals(FRAG_ONE)){
+                if (currentFragment.equals(FRAG_THREE)){
+                    new RegisterBusiness(ActivityBusinessRegister.this, unregisteredBusiness, ActivityBusinessRegister.this).execute();
+                }
+                else if (currentFragment.equals(FRAG_ONE)){
                     ft= fm.beginTransaction();
                     currentFragment=FRAG_TWO;
                     ft.replace(R.id.fragmentContainer,fragTwo);
@@ -259,21 +252,8 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
         }
     }
 
-    @Override
-    public void notifyDeleteBusiness(int businessId) {
-       /* Intent intent = new Intent(Params.DELETE_BUSINESS);
-        intent.putExtra(Params.BUSINESS_ID_STRING, businessId);
-        LocalBroadcastManager.getInstance(ActivityBusinessRegisterEdit.this).sendBroadcast(intent);*/
 
-        Intent i = getIntent();
-        i.putExtra(Params.BUSINESS_ID_STRING, businessId);
-        i.putExtra(Params.TYPE,Business.ChangeType.DELETE.name());
-        setResult(RESULT_OK, i);
-        finish();
-    }
-
-
-    public void switchToSecondPage(){
+    public void goSecondPageOnNextPressed(){
         isCheckingIdAvailability=true;
         Hashtable<String,String> tempInputData=fragOne.getInputData();
         if (tempInputData!=null) {
@@ -283,9 +263,8 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
         }
     }
 
-    public void switchToThirdPage(){
+    public void goThirdPageOnNextPressed(){
         if (fragTwo.isVerified()){
-
             unregisteredBusiness.category=fragTwo.selectedCategory.name;
             unregisteredBusiness.categoryID=fragTwo.selectedCategory.id;
             unregisteredBusiness.subcategory=fragTwo.selectedSubcategory.name;
@@ -299,6 +278,19 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
             menuItemNext.setIcon(R.drawable.ic_check_white_24dp);
         }
 
+    }
+
+    private void checkIdThenRegister(){
+        Hashtable<String,String> tempData = fragThree.getInputData();
+        if (tempData!=null){
+            unregisteredBusiness.state=tempData.get(Params.SELECTED_STATE);
+            unregisteredBusiness.city=tempData.get(Params.SELECTED_CITY);
+            unregisteredBusiness.address = tempData.get(Params.STREET_ADDRESS);
+            unregisteredBusiness.location_m.setLatitude(tempData.get(Params.LOC_LATITUDE));
+            unregisteredBusiness.location_m.setLongitude(tempData.get(Params.LOC_LONGITUDE));
+
+            new GetBusinessStrIdAvailability(this,unregisteredBusiness.businessIdentifier,ActivityBusinessRegister.this).execute();
+        }
     }
 
 }

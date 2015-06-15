@@ -98,15 +98,20 @@ public class FragmentBusinessRegisterPageTwo extends Fragment implements IWebser
                 progressDialog.show();
                 new GetBusinessGategories(getActivity(), FragmentBusinessRegisterPageTwo.this).execute();
             }
+            else{
+                setCategorySpinnerAdapter(categories,getActivity());
+            }
+
         }
         else{
             doRefreshSubcategoryList=false;
+            final int i=selectedCategoryPosition;
             setCategorySpinnerAdapter(categories, getActivity());
             spinnerCategory.post(new Runnable() {
                 @Override
                 public void run() {
                     doRefreshSubcategoryList=false;
-                    spinnerCategory.setSelection(selectedCategoryPosition);
+                    spinnerCategory.setSelection(i);
                 }
             });
         }
@@ -116,14 +121,16 @@ public class FragmentBusinessRegisterPageTwo extends Fragment implements IWebser
         if (selectedSubcategory==null){
             if (subcategoryHashtable==null){
                 subcategoryHashtable=new Hashtable<>();
+                setSubcategorySpinnerAdapter(new ArrayList<SubCategory>(),getActivity());
             }
         }
         else {
+            final int i=selectedSubcategoryPosition;
             setSubcategorySpinnerAdapter(subCategories, getActivity());
             spinnerSubcategory.post(new Runnable() {
                 @Override
                 public void run() {
-                    spinnerSubcategory.setSelection(selectedSubcategoryPosition);
+                    spinnerSubcategory.setSelection(i);
                 }
             });
         }
@@ -239,24 +246,12 @@ public class FragmentBusinessRegisterPageTwo extends Fragment implements IWebser
 
     public boolean isVerified() {
 
-        if (selectedCategory!=null){
-            if (selectedCategory.name.equals(getActivity().getString(R.string.txt_Category))){
-                new DialogMessage(getActivity(), getActivity().getString(R.string.txt_PleaseSelectCategory)).show();
-                return false;
-            }
-        }
-        else {
+        if (spinnerCategory.getSelectedItemPosition()==0){
             new DialogMessage(getActivity(), getActivity().getString(R.string.txt_PleaseSelectCategory)).show();
             return false;
         }
 
-        if (selectedSubcategory!=null) {
-            if (selectedSubcategory.name.equals(getActivity().getString(R.string.txt_Subcategory))){
-                new DialogMessage(getActivity(), getActivity().getString(R.string.txt_PleaseSelectSubcategory)).show();
-                return false;
-            }
-        }
-        else{
+        if (spinnerSubcategory.getSelectedItemPosition()==0){
             new DialogMessage(getActivity(), getActivity().getString(R.string.txt_PleaseSelectSubcategory)).show();
             return false;
         }
@@ -306,7 +301,7 @@ public class FragmentBusinessRegisterPageTwo extends Fragment implements IWebser
         categoriesList.addAll(new ArrayList<>(categoryHashtable.keySet()));
         String[] items = new String[categoriesList.size()];
         items = categoriesList.toArray(items);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
 
         spinnerCategory.setAdapter(adapter);
     }
@@ -324,7 +319,7 @@ public class FragmentBusinessRegisterPageTwo extends Fragment implements IWebser
         subCategoriesList.addAll(new ArrayList<String>(subcategoryHashtable.keySet()));
         String[] items = new String[subCategoriesList.size()];
         items = subCategoriesList.toArray(items);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
         spinnerSubcategory.setAdapter(adapter);
     }
 
