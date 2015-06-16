@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.Footer;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.Footer;
 
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import ir.rasen.charsoo.model.business.GetBlockedUsers;
 import ir.rasen.charsoo.view.adapter.AdapterBlockedUsers;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityBusinessBlockedUsers extends CharsooActivity implements IWebserviceResponse {

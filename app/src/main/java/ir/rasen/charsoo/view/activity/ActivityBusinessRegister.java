@@ -36,11 +36,10 @@ import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageOne;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageThree;
 import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageTwo;
-import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFontActionBarTitle;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.TextViewFontActionBarTitle;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivityBusinessRegister extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture {
 

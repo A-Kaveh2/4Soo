@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.CurrentLocationProvider;
 import ir.rasen.charsoo.controller.helper.Params;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivityMapChoose extends CharsooActivity {
 

@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ import ir.rasen.charsoo.model.search.SearchPost;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivitySearchPostResult extends CharsooActivity implements IWebserviceResponse {
 

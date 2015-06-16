@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView
+    <ir.rasen.charsoo.view.widgets.imageviews.SquareImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/img_grid_post"/>
-    <ir.rasen.charsoo.view.widget_customized.MaterialProgressBar
+    <ir.rasen.charsoo.view.widgets.MaterialProgressBar
         android:layout_width="@dimen/btn_height"
         android:layout_height="@dimen/btn_height"
         android:background="@color/material_blue"

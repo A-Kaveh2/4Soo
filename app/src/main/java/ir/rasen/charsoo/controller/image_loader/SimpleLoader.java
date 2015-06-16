@@ -37,7 +37,7 @@ import ir.rasen.charsoo.controller.image_loader.core.ImageLoaderConfiguration;
 import ir.rasen.charsoo.controller.image_loader.core.assist.FailReason;
 import ir.rasen.charsoo.controller.image_loader.core.listener.ImageLoadingProgressListener;
 import ir.rasen.charsoo.controller.image_loader.core.listener.SimpleImageLoadingListener;
-import ir.rasen.charsoo.view.widget_customized.MaterialProgressBar;
+import ir.rasen.charsoo.view.widgets.MaterialProgressBar;
 
 /**
  * Class for Downloading image

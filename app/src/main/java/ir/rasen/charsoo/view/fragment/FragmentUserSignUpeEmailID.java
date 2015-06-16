@@ -11,8 +11,8 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
 public class FragmentUserSignUpeEmailID extends Fragment implements IWebserviceResponse {
     public static final String TAG="FragmentUserSignUpeEmailID";

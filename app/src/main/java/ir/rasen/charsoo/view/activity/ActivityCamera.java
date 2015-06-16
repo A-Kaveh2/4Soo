@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.CustomeCamera;
 import ir.rasen.charsoo.view.interface_m.ICropResult;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityCamera extends CharsooActivity implements ICropResult {

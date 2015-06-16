@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView
+        <ir.rasen.charsoo.view.widgets.imageviews.ExpandableImageView
             android:id="@+id/imageView_cover"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -57,7 +57,7 @@
 
         </LinearLayout>
 
-        <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
+        <ir.rasen.charsoo.view.widgets.buttons.FloatButton
             android:id="@+id/imageView_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">-->
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:id="@+id/textView_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                         android:textColor="@android:color/black"/>
                 </LinearLayout>
         -->
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:id="@+id/textView_user_about_me"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:textColor="@color/Black"
             android:textSize="@dimen/font_size_header" />
 
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:id="@+id/textView_user_identifier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content">
 
 
-                    <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
+                    <ir.rasen.charsoo.view.widgets.buttons.FloatButton
                         android:id="@+id/imageView_friends"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_info_orange_24dp" />
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:id="@+id/textView_friends_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
                         android:visibility="gone" />
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -188,7 +188,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
+                    <ir.rasen.charsoo.view.widgets.buttons.FloatButton
                         android:id="@+id/imageView_reviews"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
                         materialdesign:animate="false"
                         materialdesign:iconDrawable="@drawable/ic_review" />
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:id="@+id/textView_reviews_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -211,7 +211,7 @@
                         android:visibility="gone" />
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -229,7 +229,7 @@
                 android:orientation="vertical">
 
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.FloatButton
+                <ir.rasen.charsoo.view.widgets.buttons.FloatButton
                     android:id="@+id/imageView_businesses"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
                     materialdesign:animate="false"
                     materialdesign:iconDrawable="@drawable/ic_shop" />
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:id="@+id/textView_businesses_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -251,7 +251,7 @@
                     android:textSize="@dimen/font_size_header"
                     android:visibility="gone" />
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

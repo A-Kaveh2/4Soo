@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView
+    <ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -77,7 +77,7 @@
                 <!--/>-->
 
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/edt_street"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:layout_marginTop="30dp"
                 />
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_large_x"
@@ -103,7 +103,7 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/map_height" />
-            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+            <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                 android:id="@+id/btn_map"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
@@ -111,7 +111,7 @@
                 android:layout_marginTop="40dp"
                 android:background="@color/OrangeRed" />
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:id="@+id/textView_play_service"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

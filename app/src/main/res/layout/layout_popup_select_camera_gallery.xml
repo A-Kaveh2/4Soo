@@ -18,7 +18,7 @@
             android:background="@drawable/selector_popup_top_item"
             android:gravity="right|center_vertical">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/camera"
@@ -44,7 +44,7 @@
             android:background="@drawable/selector_popup_bottom_item"
             android:gravity="right|center_vertical">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gallery"

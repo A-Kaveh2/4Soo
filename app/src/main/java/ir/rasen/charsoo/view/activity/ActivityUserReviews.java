@@ -20,7 +20,7 @@ import ir.rasen.charsoo.model.review.GetUserReviews;
 import ir.rasen.charsoo.view.adapter.AdapterUserReview;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityUserReviews extends CharsooActivity implements IWebserviceResponse {

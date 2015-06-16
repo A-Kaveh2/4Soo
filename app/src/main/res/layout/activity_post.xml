@@ -30,14 +30,14 @@
                 android:layout_height="@dimen/base_adapter_item_height"
                 android:weightSum="1">
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:id="@+id/textView_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/adapter_item_margin"
                     android:layout_centerVertical="true" />
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="right|center"
@@ -70,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView
+                    <ir.rasen.charsoo.view.widgets.imageviews.SquareImageView
                         android:id="@+id/imageView_post"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -79,8 +79,8 @@
 
                     <ImageView
                         android:id="@+id/imageView_post_like"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:scaleType="fitXY"
                         android:layout_centerInParent="true"
                         android:visibility="invisible" />
@@ -96,7 +96,7 @@
                     android:gravity="right|center_vertical"
                     android:weightSum="100">
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -109,7 +109,7 @@
                         android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
                         android:src="@drawable/ic_reply_grey" />
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -122,7 +122,7 @@
                         android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
                         android:src="@drawable/ic_insert_comment_grey" />
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
@@ -136,7 +136,7 @@
                         android:id="@+id/imageView_like_small" />
                 </LinearLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:id="@+id/textView_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                     android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
                     android:layout_marginTop="10dp" />
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:id="@+id/textView_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -164,19 +164,19 @@
                     android:layout_marginTop="10dp"
                     android:gravity="right">
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:text="@string/rial" />
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:id="@+id/textView_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp" />
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/price" />
@@ -195,13 +195,13 @@
                     android:gravity="right">
 
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:id="@+id/textView_code"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp" />
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/product_code" />
@@ -230,14 +230,14 @@
                         android:gravity="right"
                         android:orientation="vertical">
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment1_user_identifier"
                             android:textColor="@color/Black"
                             android:visibility="gone" />
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment1"
@@ -252,14 +252,14 @@
                         android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
                         android:orientation="vertical">
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:visibility="gone"
                             android:id="@+id/textView_comment2_user_identifier"
                             android:textColor="@color/Black" />
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment2"
@@ -274,14 +274,14 @@
                         android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
                         android:orientation="vertical">
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment3_user_identifier"
                             android:visibility="gone"
                             android:textColor="@color/Black" />
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView_comment3"

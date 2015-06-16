@@ -23,9 +23,9 @@ import ir.rasen.charsoo.view.activity.ActivityUserOther;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.GridViewUserOther;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.view.widgets.GridViewUserOther;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 public class FragmentUserOther extends Fragment implements IWebserviceResponse, IPullToRefresh {
 

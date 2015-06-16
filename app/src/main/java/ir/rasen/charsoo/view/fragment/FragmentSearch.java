@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LocationManagerTracker;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.object.Category;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.SubCategory;
@@ -43,8 +42,8 @@ import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.view.activity.ActivitySearchBusinessResult;
 import ir.rasen.charsoo.view.activity.ActivitySearchPostResult;
 import ir.rasen.charsoo.view.activity.ActivitySearchUser;

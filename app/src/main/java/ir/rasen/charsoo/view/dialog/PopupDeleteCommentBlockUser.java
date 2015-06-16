@@ -12,7 +12,7 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 
 
 public class PopupDeleteCommentBlockUser extends MyPopup {

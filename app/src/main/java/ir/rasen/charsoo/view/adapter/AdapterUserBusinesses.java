@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.imageviews.RoundedImageView;
 
 /**
  * Created by 'Sina KH' on 5/18/2015.

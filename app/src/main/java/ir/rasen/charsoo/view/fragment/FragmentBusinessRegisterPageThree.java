@@ -31,8 +31,8 @@ import ir.rasen.charsoo.model.GetStateCities;
 import ir.rasen.charsoo.view.activity.ActivityMapChoose;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.buttons.ButtonFont;
 
 /**
  * Created by hossein-pc on 6/14/2015.

@@ -28,7 +28,7 @@
                 android:id="@+id/imageView_user_picture"
                 android:src="@drawable/ic_account_blue" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_name"
                 android:layout_width="match_parent"
                 android:hint="@string/user_name_field_hint"
@@ -42,7 +42,7 @@
                 android:textAlignment="center"
                 android:gravity="center_horizontal" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_identifier"
                 android:layout_width="match_parent"
                 android:hint="@string/identifier_field_hint"

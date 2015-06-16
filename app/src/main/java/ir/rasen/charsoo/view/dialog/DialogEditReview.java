@@ -14,8 +14,8 @@ import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.model.review.UpdateReview;
 
 

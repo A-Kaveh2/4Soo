@@ -37,8 +37,8 @@ import ir.rasen.charsoo.view.dialog.PopupSubCategories;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 
 public class FragmentBusinessEditBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
     public static final String TAG="FragmentBusinessEditBaseInfo";

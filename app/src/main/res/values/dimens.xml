@@ -10,7 +10,7 @@
     <dimen name="adapter_friend_request_item_width">122dp</dimen>
     <dimen name="comment_notification_adapter_post_image_height">52dp</dimen>
     <dimen name="post_adapter_small_icon">20dp</dimen>
-    <dimen name="post_adapter_icon">35dp</dimen>
+    <dimen name="post_adapter_icon">24dp</dimen>
 
     <!--Margins-->
     <dimen name="base_adapter_item_text_margin">2dp</dimen>

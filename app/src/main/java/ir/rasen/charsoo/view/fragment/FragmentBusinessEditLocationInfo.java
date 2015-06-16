@@ -23,8 +23,8 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.Location_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.Validation;
-import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widgets.buttons.ButtonFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityMapChoose;
 
 public class FragmentBusinessEditLocationInfo extends Fragment {

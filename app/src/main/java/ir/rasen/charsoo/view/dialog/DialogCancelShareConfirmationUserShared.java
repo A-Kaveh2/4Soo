@@ -5,18 +5,13 @@ import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-
-import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.post.CancelShare;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 
 
 public class DialogCancelShareConfirmationUserShared extends MyDialogOkCancel {

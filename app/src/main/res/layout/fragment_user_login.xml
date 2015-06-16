@@ -17,7 +17,7 @@
             android:layout_marginLeft="20dp"
             android:id="@+id/relativeLayout">
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/edt_login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
 
                 android:drawableRight="@drawable/ic_email_blue_24dp" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/edt_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                     android:id="@+id/btn_login_login"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
@@ -64,7 +64,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp" />
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:id="@+id/btn_login_forget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

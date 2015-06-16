@@ -18,8 +18,8 @@ import android.view.ViewGroup;
 
 import ir.rasen.charsoo.model.NetworkConnectivityReciever;
 import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
 
@@ -38,7 +38,7 @@ import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.GridViewUser;
+import ir.rasen.charsoo.view.widgets.GridViewUser;
 
 public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh, NetworkStateChangeListener {
 

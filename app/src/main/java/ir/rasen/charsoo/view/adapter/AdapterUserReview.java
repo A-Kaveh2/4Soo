@@ -20,9 +20,8 @@ import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.view.dialog.PopupEditDeleteReview;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
-import ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.imageviews.RoundedImageView;
 
 /**
  * Created by android on 3/7/2015.

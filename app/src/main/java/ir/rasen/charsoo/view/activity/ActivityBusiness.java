@@ -25,10 +25,10 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.GridViewBusiness;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.view.widgets.GridViewBusiness;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 
 public class ActivityBusiness extends CharsooActivity implements ISelectBusiness, IWebserviceResponse, IPullToRefresh {

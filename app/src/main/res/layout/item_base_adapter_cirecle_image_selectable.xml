@@ -12,7 +12,7 @@
         android:layout_height="@dimen/base_adapter_item_height">
 
 
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="right|center"
@@ -30,7 +30,7 @@
             android:layout_height="@dimen/adapter_item_height"
             android:gravity="center">
 
-            <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
+            <ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle
                 android:layout_width="@dimen/adapter_user_image_height"
                 android:layout_height="@dimen/adapter_user_image_height"
                 android:id="@+id/imageView_base_adapter_item_image" />

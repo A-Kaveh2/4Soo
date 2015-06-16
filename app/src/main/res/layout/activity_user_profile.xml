@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ir.rasen.charsoo.view.widget_customized.imageviews.ExpandableImageView
+                <ir.rasen.charsoo.view.widgets.imageviews.ExpandableImageView
                     android:id="@+id/imageView_cover"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -106,7 +106,7 @@
                 android:layout_marginTop="5dp"
                 android:gravity="center">
 
-                <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                <ir.rasen.charsoo.view.widgets.EditTextFont
                     android:id="@+id/editText_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                     android:textColor="@color/Black"
                     android:textSize="@dimen/font_user_profile_edit_text" />
 
-                <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                <ir.rasen.charsoo.view.widgets.EditTextFont
                     android:id="@+id/editText_identifier"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
                         android:layout_alignParentRight="true"
                         android:src="@drawable/ic_description_blue_24dp" />
 
-                    <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                    <ir.rasen.charsoo.view.widgets.EditTextFont
                         android:id="@+id/editText_about_me"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -174,7 +174,7 @@
 
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -220,7 +220,7 @@
                         android:layout_alignParentRight="true"
                         android:src="@drawable/ic_email_blue_24dp" />
 
-                    <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                    <ir.rasen.charsoo.view.widgets.EditTextFont
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -259,7 +259,7 @@
                         android:weightSum="100">
 
 
-                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                        <ir.rasen.charsoo.view.widgets.EditTextFont
                             android:id="@+id/edt_year"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -272,7 +272,7 @@
                             android:textColor="@color/Black"
                             android:textSize="@dimen/font_user_profile_edit_text" />
 
-                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                        <ir.rasen.charsoo.view.widgets.EditTextFont
                             android:id="@+id/edt_month"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -288,7 +288,7 @@
                             android:textColor="@color/Black"
                             android:textSize="@dimen/font_user_profile_edit_text" />
 
-                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                        <ir.rasen.charsoo.view.widgets.EditTextFont
                             android:id="@+id/edt_day"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
@@ -308,7 +308,7 @@
 
                 </RelativeLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -321,7 +321,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                     android:id="@+id/btn_change_password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
@@ -330,7 +330,7 @@
                     android:background="@color/DodgerBlue"
                     android:text="@string/change_password" />
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                     android:id="@+id/btn_clear_search_history"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
@@ -340,7 +340,7 @@
                     android:visibility="gone" />
                 </LinearLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                     android:id="@+id/btn_user_profile_submit"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/button_height"

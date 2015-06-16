@@ -45,8 +45,8 @@ import ir.rasen.charsoo.view.interface_m.IDeletePost;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityPost extends CharsooActivity implements IWebserviceResponse, IReportPost, IDeletePost, IUpdateTimeLine {

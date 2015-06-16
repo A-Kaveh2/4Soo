@@ -13,7 +13,7 @@ import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.model.post.CancelShare;
 import ir.rasen.charsoo.model.post.Report;
 

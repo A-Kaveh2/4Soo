@@ -33,10 +33,10 @@ import ir.rasen.charsoo.model.post.Unlike;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationTimeLine;
 import ir.rasen.charsoo.view.dialog.PopupReportPostAdapter;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
-import ir.rasen.charsoo.view.widget_customized.MaterialProgressBar;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
-
+import ir.rasen.charsoo.view.widgets.MaterialProgressBar;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.buttons.ButtonFont;
+import ir.rasen.charsoo.view.widgets.imageviews.RoundedImageView;
 
 /**
  * Created by android on 3/7/2015.
@@ -101,8 +101,8 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             holder = new Holder();
             view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list, viewGroup, false);
 
-            holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
-            holder.imageViewProfileImageShared = (ImageView) view.findViewById(R.id.imageView_profile_picture_shared);
+            holder.imageViewProfileImage = (RoundedImageView) view.findViewById(R.id.imageView_profile_picture);
+            holder.imageViewProfileImageShared = (RoundedImageView) view.findViewById(R.id.imageView_profile_picture_shared);
             holder.textViewBusinessIdentifier = (TextViewFont) view.findViewById(R.id.textView_business_identifier);
             holder.textViewDate = (TextViewFont) view.findViewById(R.id.textView_date);
 
@@ -141,7 +141,6 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             view.setTag(holder);
         } else
             holder = (Holder) view.getTag();
-
 
         //all post's types have these three fields
         //downloadImages.download(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage, true);
@@ -398,8 +397,8 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
     private class Holder {
 
-        ImageView imageViewProfileImage;
-        ImageView imageViewProfileImageShared;
+        RoundedImageView imageViewProfileImage;
+        RoundedImageView imageViewProfileImageShared;
         TextViewFont textViewBusinessIdentifier;
         TextViewFont textViewDate;
         ButtonFont btnView;

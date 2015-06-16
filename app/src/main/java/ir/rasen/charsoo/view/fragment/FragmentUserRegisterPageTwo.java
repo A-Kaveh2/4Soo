@@ -15,7 +15,7 @@ import android.widget.TextView;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.view.activity.ActivityUserRegister;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
 
 /**
  * Created by hossein-pc on 6/9/2015.

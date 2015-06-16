@@ -10,31 +10,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.ImageHelper;
-import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.controller.helper.TextProcessor;
 import ir.rasen.charsoo.controller.helper.Validation;
-import ir.rasen.charsoo.controller.helper.WebservicesHandler;
-import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
-import ir.rasen.charsoo.controller.object.Business;
-import ir.rasen.charsoo.controller.object.Category;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.SubCategory;
-import ir.rasen.charsoo.model.business.GetBusinessGategories;
 import ir.rasen.charsoo.model.business.GetBusinessStrIdAvailability;
-import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegister;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
-import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
 
 /**
  * Created by hossein-pc on 6/14/2015.

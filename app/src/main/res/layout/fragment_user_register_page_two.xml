@@ -22,7 +22,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_email"
                 android:layout_width="match_parent"
                 android:hint="@string/email_field_hint"
@@ -37,7 +37,7 @@
                 android:gravity="center_horizontal"
                 android:imeOptions="actionNext"/>
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_password"
                 android:layout_width="match_parent"
                 android:hint="@string/password_field_hint"
@@ -51,7 +51,7 @@
                 android:elegantTextHeight="true"
                 android:imeOptions="actionNext"/>
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_PhoneNumber"
                 android:hint="@string/mobile"
                 android:layout_width="match_parent"

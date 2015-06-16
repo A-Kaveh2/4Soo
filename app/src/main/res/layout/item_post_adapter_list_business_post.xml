@@ -1,379 +1,409 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
-    android:weightSum="100">
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/gray_light" />
-
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:gravity="right"
-        android:layout_margin="@dimen/adapter_item_margin"
-        android:layout_height="@dimen/base_adapter_item_height"
-        android:weightSum="1">
-
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
-            android:id="@+id/textView_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/adapter_item_margin"
-            android:layout_centerVertical="true"
-            android:text="2 ماه" />
-
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="right|center"
-            android:textSize="@dimen/font_size_adapter_item_title"
-            android:text="Large Text"
-            android:layout_toRightOf="@+id/ll_image_yes"
-            android:layout_margin="@dimen/base_adapter_item_text_margin"
-            android:layout_toLeftOf="@+id/ll_image_profile"
-            android:id="@+id/textView_business_identifier" />
-
-        <LinearLayout
-            android:id="@+id/ll_image_profile"
-            android:layout_width="@dimen/adapter_item_height"
-            android:layout_height="@dimen/adapter_item_height"
-            android:layout_alignParentRight="true"
-            android:gravity="center">
-
-            <ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView
-                android:layout_width="@dimen/adapter_user_image_height"
-                android:layout_height="@dimen/adapter_user_image_height"
-                android:id="@+id/imageView_profile_picture" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/ll_complete_post_section"
-        android:orientation="vertical">
-
-        <ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView
-            android:id="@+id/imageView_post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY" />
-
-
-        <LinearLayout
-            android:id="@+id/ll_numbers"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/adapter_item_margin"
-            android:gravity="right|center_vertical"
-            android:weightSum="100">
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="789"
-                android:textSize="@dimen/font_size_adapter_item_text"
-                android:id="@+id/textView_share_number" />
-
-            <ImageView
-                android:layout_width="@dimen/post_adapter_small_icon"
-                android:layout_height="@dimen/post_adapter_small_icon"
-                android:id="@+id/imageView_share_small"
-                android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-                android:src="@drawable/ic_reply_grey" />
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="123"
-                android:textSize="@dimen/font_size_adapter_item_text"
-                android:id="@+id/textView_comment_number" />
-
-            <ImageView
-                android:layout_width="@dimen/post_adapter_small_icon"
-                android:layout_height="@dimen/post_adapter_small_icon"
-                android:id="@+id/imageView_comment_small"
-                android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-                android:src="@drawable/ic_insert_comment_grey" />
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="456"
-                android:textSize="@dimen/font_size_adapter_item_text"
-                android:id="@+id/textView_like_number" />
-
-            <ImageView
-                android:layout_width="@dimen/post_adapter_small_icon"
-                android:layout_height="@dimen/post_adapter_small_icon"
-                android:src="@drawable/ic_favorite_grey"
-                android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-                android:id="@+id/imageView_like_small" />
-        </LinearLayout>
-
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
-            android:id="@+id/textView_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginTop="10dp"
-            android:textSize="@dimen/font_size_adapter_item_title" />
-
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
-            android:id="@+id/textView_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginTop="10dp"
-            android:textSize="@dimen/font_size_adapter_item_title" />
-
-        <LinearLayout
-            android:id="@+id/ll_price_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginBottom="@dimen/post_adapter_description_margin"
-            android:layout_marginTop="10dp"
-            android:gravity="right">
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="@string/rial"
-                android:textSize="@dimen/font_rial" />
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:id="@+id/textView_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:textSize="@dimen/font_size_adapter_item_title" />
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/price"
-                android:textSize="@dimen/font_size_adapter_item_title" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_code_section"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginBottom="@dimen/post_adapter_description_margin"
-            android:layout_marginTop="5dp"
-            android:gravity="right">
-
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:id="@+id/textView_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:textSize="@dimen/font_size_adapter_item_title" />
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/product_code"
-                android:textSize="@dimen/font_size_adapter_item_title" />
-
-        </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/activity_horizontal_margin_half"
+        android:background="@color/White"
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/post_item_divider"
-            android:background="@color/app_color" />
-
-        <LinearLayout
-            android:id="@+id/ll_comments"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
-            android:layout_marginBottom="@dimen/post_adapter_comments_bottom_margin"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:id="@+id/ll_comment1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:orientation="vertical">
-
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_comment1_user_identifier"
-                    android:textSize="@dimen/font_size_adapter_item_title"
-                    android:visibility="gone"
-                    android:textColor="@color/Black" />
-
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_comment1"
-                    android:visibility="gone"
-                    android:textSize="@dimen/font_size_adapter_item_text" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_comment2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
-                android:orientation="vertical">
-
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_comment2_user_identifier"
-                    android:textSize="@dimen/font_size_adapter_item_title"
-                    android:visibility="gone"
-                    android:textColor="@color/Black" />
-
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_comment2"
-                    android:visibility="gone"
-                    android:textSize="@dimen/font_size_adapter_item_text" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_comment3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
-                android:orientation="vertical">
-
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_comment3_user_identifier"
-                    android:textSize="@dimen/font_size_adapter_item_title"
-                    android:visibility="gone"
-                    android:textColor="@color/Black" />
-
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView_comment3"
-                    android:visibility="gone"
-                    android:textSize="@dimen/font_size_adapter_item_text" />
-            </LinearLayout>
-        </LinearLayout>
+            android:layout_height="1dp"
+            android:background="@color/gray_light" />
 
         <RelativeLayout
-            android:id="@+id/ll_functions"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/post_adapter_small_icons_margin"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/base_adapter_item_height"
+            android:layout_margin="@dimen/adapter_item_margin"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
-            <ImageView
-                android:layout_width="@dimen/post_adapter_icon"
-                android:layout_height="@dimen/post_adapter_icon"
-                android:id="@+id/imageView_edit"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/post_adapter_icons_margin"
-                android:src="@drawable/selector_edit_button_grey" />
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:id="@+id/textView_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="@string/time_ago"
+                android:textColor="@color/material_gray_dark" />
 
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:id="@+id/textView_business_identifier"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/base_adapter_item_text_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_toLeftOf="@+id/ll_image_profile"
+                android:layout_toRightOf="@+id/textView_date"
+                android:gravity="right|center"
+                android:text="@string/username"
+                android:textSize="@dimen/font_size_adapter_item_title" />
 
-            <ImageView
-                android:layout_width="@dimen/post_adapter_icon"
-                android:layout_height="@dimen/post_adapter_icon"
-                android:id="@+id/imageView_delete"
-                android:layout_toRightOf="@+id/imageView_edit"
-                android:layout_marginLeft="@dimen/post_adapter_icons_margin"
-                android:src="@drawable/selector_delete_button" />
+            <LinearLayout
+                android:id="@+id/ll_image_profile"
+                android:layout_width="@dimen/adapter_item_height"
+                android:layout_height="@dimen/adapter_item_height"
+                android:layout_alignParentRight="true"
+                android:gravity="center">
 
-            <ImageView
-                android:layout_width="@dimen/post_adapter_icon"
-                android:layout_height="@dimen/post_adapter_icon"
-                android:id="@+id/imageView_comment"
-                android:layout_toRightOf="@+id/imageView_delete"
-                android:layout_marginLeft="@dimen/post_adapter_icons_margin"
-                android:src="@drawable/selector_post_button_comment1" />
-
-
+                <ir.rasen.charsoo.view.widgets.imageviews.RoundedImageView
+                    android:id="@+id/imageView_profile_picture"
+                    android:layout_width="@dimen/adapter_user_image_height"
+                    android:layout_height="@dimen/adapter_user_image_height" />
+            </LinearLayout>
         </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ir.rasen.charsoo.view.widgets.imageviews.SquareImageView
+                android:id="@+id/imageView_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY" />
+
+            <LinearLayout
+                android:id="@+id/ll_numbers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin_half"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <ImageView
+                    android:id="@+id/imageView_like"
+                    android:layout_width="@dimen/post_adapter_icon"
+                    android:layout_height="@dimen/post_adapter_icon"
+                    android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
+                    android:src="@drawable/ic_like" />
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/textView_like_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin_1of4"
+                    android:text="322"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/material_gray"
+                    android:textSize="@dimen/font_size_adapter_item_text" />
+
+                <ImageView
+                    android:id="@+id/imageView_comment"
+                    android:layout_width="@dimen/post_adapter_icon"
+                    android:layout_height="@dimen/post_adapter_icon"
+                    android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
+                    android:src="@drawable/ic_comment" />
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/textView_comment_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin_1of4"
+                    android:text="322"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/material_gray"
+                    android:textSize="@dimen/font_size_adapter_item_text" />
+
+                <ImageView
+                    android:id="@+id/imageView_share"
+                    android:layout_width="@dimen/post_adapter_icon"
+                    android:layout_height="@dimen/post_adapter_icon"
+                    android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
+                    android:src="@drawable/ic_share" />
+
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/textView_share_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin_1of4"
+                    android:text="322"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/material_gray"
+                    android:textSize="@dimen/font_size_adapter_item_text" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView_edit"
+                        android:layout_width="@dimen/post_adapter_icon"
+                        android:layout_height="@dimen/post_adapter_icon"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="@dimen/post_adapter_icons_margin"
+                        android:src="@drawable/selector_edit_button_grey" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView_delete"
+                        android:layout_width="@dimen/post_adapter_icon"
+                        android:layout_height="@dimen/post_adapter_icon"
+                        android:layout_marginLeft="@dimen/post_adapter_icons_margin"
+                        android:layout_toRightOf="@+id/imageView_edit"
+                        android:src="@drawable/selector_delete_button" />
+
+                    <ImageView
+                        android:id="@+id/imageView_more"
+                        android:layout_width="@dimen/post_adapter_icon"
+                        android:layout_height="@dimen/post_adapter_icon"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/selector_post_button_more" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:id="@+id/textView_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin_2x"
+                android:gravity="right"
+                android:textSize="@dimen/font_size_adapter_item_title" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:id="@+id/textView_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:textSize="@dimen/font_size_adapter_item_title" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_price_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/post_adapter_description_margin"
+                android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
+                android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
+                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/rial"
+                    android:textSize="@dimen/font_rial" />
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/textView_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:textSize="@dimen/font_size_adapter_item_title" />
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price"
+                    android:textSize="@dimen/font_size_adapter_item_title" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_code_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/post_adapter_description_margin"
+                android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
+                android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
+                android:layout_marginTop="5dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/textView_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:textSize="@dimen/font_size_adapter_item_title" />
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_code"
+                    android:textSize="@dimen/font_size_adapter_item_title" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/post_adapter_comments_bottom_margin"
+                android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
+                android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
+                android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_comment1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
+                        android:id="@+id/textView_comment1_user_identifier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_gray_dark"
+                        android:textSize="@dimen/font_size_adapter_item_title"
+                        android:visibility="gone" />
+
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
+                        android:id="@+id/textView_comment1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_adapter_item_text"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_comment2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
+                        android:id="@+id/textView_comment2_user_identifier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_gray_dark"
+                        android:textSize="@dimen/font_size_adapter_item_title"
+                        android:visibility="gone" />
+
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
+                        android:id="@+id/textView_comment2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_adapter_item_text"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_comment3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/post_adapter_small_icons_margin"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
+                        android:id="@+id/textView_comment3_user_identifier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/material_gray_dark"
+                        android:textSize="@dimen/font_size_adapter_item_title"
+                        android:visibility="gone" />
+
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
+                        android:id="@+id/textView_comment3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/font_size_adapter_item_text"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_announcement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin_half"
+        android:background="@color/White"
         android:orientation="vertical"
-        android:layout_marginRight="@dimen/post_adapter_small_icons_margin"
-        android:layout_marginLeft="@dimen/post_adapter_small_icons_margin"
-        android:layout_marginTop="@dimen/post_adapter_description_margin"
-        android:layout_marginBottom="@dimen/post_adapter_description_margin">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="right">
+            android:visibility="visible"
+            android:weightSum="10">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:id="@+id/textView_announcement_userIdentifier"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/font_size_adapter_item_title"
-                android:layout_marginRight="2dp"
-                android:textColor="@color/DodgerBlue"
-                android:text="@string/your_friend" />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="8"
+                android:orientation="vertical">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:id="@+id/textView_announcement_userIdentifier_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="2dp"
-                android:textSize="@dimen/font_size_adapter_item_title"
-                android:text="@string/your_friend" />
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/textView_announcement_userIdentifier_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin_half"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:text="@string/your_friend"
+                    android:textColor="@color/material_blue"
+                    android:textSize="@dimen/font_large" />
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="@dimen/activity_vertical_margin"
+                    android:orientation="horizontal">
+
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
+                        android:id="@+id/textView_announcement_business"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="right"
+                        android:textSize="@dimen/font_size_adapter_item_title" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ir.rasen.charsoo.view.widgets.imageviews.RoundedSquareImageView
+                android:id="@+id/imageView_profile_picture_shared"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/adapter_user_image_height"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_weight="2" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="right">
-
-
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
-                android:id="@+id/textView_announcement_business_static_part"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/font_size_adapter_item_title"
-                android:layout_marginRight="2dp"
-                android:text="@string/follow_announcement" />
-        </LinearLayout>
-
-
+        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
+            android:id="@+id/btn_announcement_view"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginBottom="@dimen/activity_vertical_margin_half"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@color/white"
+            android:text="@string/view"
+            android:textColor="@color/material_blue" />
     </LinearLayout>
-
 
 </LinearLayout>

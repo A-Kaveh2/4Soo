@@ -17,7 +17,7 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.model.user.Login;
 

@@ -23,7 +23,7 @@ import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
 import ir.rasen.charsoo.view.dialog.DialogDeletePostConfirmation;
 import ir.rasen.charsoo.view.interface_m.IDeletePost;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 
 /**
  * Created by android on 3/7/2015.
@@ -140,7 +140,10 @@ public class AdapterPostBusiness extends BaseAdapter {
             holder.textViewComment1.setText(items.get(position).lastThreeComments.get(0).text);
             holder.textViewComment1UserIdentifier.setVisibility(View.VISIBLE);
             holder.textViewComment1.setVisibility(View.VISIBLE);
-        }
+
+            view.findViewById(R.id.ll_comments).setVisibility(View.GONE);
+        } else
+            view.findViewById(R.id.ll_comments).setVisibility(View.VISIBLE);
         if (lastThreeComments.size() > 1) {
             holder.textViewComment2UserIdentifier.setText(items.get(position).lastThreeComments.get(1).username);
             holder.textViewComment2.setText(items.get(position).lastThreeComments.get(1).text);

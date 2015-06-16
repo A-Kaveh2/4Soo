@@ -15,7 +15,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp">
 
-            <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
+            <ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle
                 android:layout_width="@dimen/register_profile_picture_height"
                 android:layout_height="@dimen/register_profile_picture_height"
                 android:id="@+id/imageView_user_picture"
@@ -39,7 +39,7 @@
                     android:drawableRight="@drawable/ic_person_blue_24dp"
                     android:layout_marginRight="5dp" />
 
-                <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                <ir.rasen.charsoo.view.widgets.EditTextFont
                     android:id="@+id/editText_name"
                     android:layout_width="match_parent"
                     android:hint="@string/user_name_field_hint"
@@ -53,7 +53,7 @@
                     android:nextFocusDown="@+id/editText_email" />
             </RelativeLayout>
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_email"
                 android:layout_width="match_parent"
                 android:hint="@string/email_field_hint"
@@ -66,7 +66,7 @@
                 android:layout_marginTop="20dp"
                 android:nextFocusDown="@+id/editText_password" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_password"
                 android:layout_width="match_parent"
                 android:hint="@string/password_field_hint"
@@ -80,7 +80,7 @@
                 android:layout_marginTop="20dp"
                 android:nextFocusDown="@+id/editText_password_repeat" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_password_repeat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 android:drawableRight="@drawable/ic_lock_blue_24dp"
                 android:layout_marginTop="20dp" />
 
-            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+            <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                 android:id="@+id/btn_register"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_height"

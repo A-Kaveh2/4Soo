@@ -35,7 +35,7 @@
                         android:orientation="horizontal"
                         android:gravity="center">
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:id="@+id/button_mon"
                             android:textColor="@color/White"
                             android:layout_width="@dimen/day_button_width"
@@ -43,7 +43,7 @@
                             android:background="@color/ForestGreen"
                             android:text="@string/Mon" />
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:id="@+id/button_sun"
                             android:textColor="@color/White"
                             android:layout_width="@dimen/day_button_width"
@@ -53,7 +53,7 @@
                             android:layout_marginLeft="@dimen/work_time_margi"
                             android:text="@string/Sun" />
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:id="@+id/button_sat"
                             android:textColor="@color/White"
                             android:layout_width="@dimen/day_button_width"
@@ -70,7 +70,7 @@
                         android:layout_marginTop="@dimen/work_time_margi"
                         android:gravity="center">
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:id="@+id/button_thr"
                             android:textColor="@color/White"
                             android:layout_width="@dimen/day_button_width"
@@ -78,7 +78,7 @@
                             android:background="@color/ForestGreen"
                             android:text="@string/Thr" />
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:id="@+id/button_wed"
                             android:textColor="@color/White"
                             android:layout_width="@dimen/day_button_width"
@@ -88,7 +88,7 @@
                             android:layout_marginLeft="@dimen/work_time_margi"
                             android:text="@string/Wed" />
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:id="@+id/button_tue"
                             android:textColor="@color/White"
                             android:layout_width="@dimen/day_button_width"
@@ -104,14 +104,14 @@
                         android:layout_marginTop="@dimen/work_time_margi"
                         android:gravity="center">
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:layout_width="@dimen/day_button_width"
                             android:layout_height="@dimen/day_button_height"
                             android:background="@color/ForestGreen"
                             android:visibility="invisible"
                             android:text="@string/Thr" />
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:layout_width="@dimen/day_button_width"
                             android:layout_height="@dimen/day_button_height"
                             android:background="@color/ForestGreen"
@@ -120,7 +120,7 @@
                             android:visibility="invisible"
                             android:text="@string/Wed" />
 
-                        <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                        <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                             android:id="@+id/button_fri"
                             android:textColor="@color/White"
                             android:layout_width="@dimen/day_button_width"
@@ -139,7 +139,7 @@
                     android:padding="10dp"
                     android:gravity="right">
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/work_time_open"
@@ -151,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left">
 
-                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                        <ir.rasen.charsoo.view.widgets.EditTextFont
                             android:id="@+id/edt_time_open_hour"
                             android:layout_width="@dimen/time_edit_text_width"
                             android:layout_marginRight="10dp"
@@ -163,14 +163,14 @@
                             android:singleLine="true"
                             android:layout_height="wrap_content" />
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_marginRight="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/font_large_x"
                             android:text=":" />
 
-                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                        <ir.rasen.charsoo.view.widgets.EditTextFont
                             android:id="@+id/edt_time_open_minute"
                             android:layout_width="@dimen/time_edit_text_width"
                             android:layout_marginRight="10dp"
@@ -195,7 +195,7 @@
                     android:padding="10dp"
                     android:gravity="right">
 
-                    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                    <ir.rasen.charsoo.view.widgets.TextViewFont
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/Black"
@@ -207,7 +207,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="left">
 
-                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                        <ir.rasen.charsoo.view.widgets.EditTextFont
                             android:id="@+id/edt_time_close_hour"
                             android:layout_width="@dimen/time_edit_text_width"
                             android:layout_marginRight="10dp"
@@ -219,7 +219,7 @@
                             android:gravity="center"
                             android:layout_height="wrap_content" />
 
-                        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                        <ir.rasen.charsoo.view.widgets.TextViewFont
                             android:layout_marginRight="5dp"
                             android:layout_width="wrap_content"
                             android:maxLength="2"
@@ -229,7 +229,7 @@
                             android:textSize="@dimen/font_large_x"
                             android:text=":" />
 
-                        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                        <ir.rasen.charsoo.view.widgets.EditTextFont
                             android:id="@+id/edt_time_close_minute"
                             android:layout_width="@dimen/time_edit_text_width"
                             android:layout_marginRight="10dp"
@@ -244,7 +244,7 @@
 
                 </LinearLayout>
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                     android:id="@+id/btn_submit"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"

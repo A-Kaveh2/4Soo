@@ -19,8 +19,8 @@ import ir.rasen.charsoo.model.user.Login;
 import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivityLogin extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {
 

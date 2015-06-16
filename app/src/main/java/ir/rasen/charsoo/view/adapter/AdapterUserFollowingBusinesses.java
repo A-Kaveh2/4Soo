@@ -18,8 +18,8 @@ import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.view.dialog.PopupUnfollowBusiness;
 import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.view.widget_customized.imageviews.RoundedImageView;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.imageviews.RoundedImageView;
 
 /**
  * Created by android on 3/7/2015.

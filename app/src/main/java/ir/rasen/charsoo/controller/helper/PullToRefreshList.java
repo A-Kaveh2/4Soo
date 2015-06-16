@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.ListView;
 
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.Footer;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshBase;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.Footer;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshBase;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 
 import ir.rasen.charsoo.R;

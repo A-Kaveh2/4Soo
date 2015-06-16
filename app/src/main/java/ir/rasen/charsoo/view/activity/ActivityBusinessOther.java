@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ import ir.rasen.charsoo.model.post.GetBusinessPosts;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.GridViewBusinessOther;
+import ir.rasen.charsoo.view.widgets.GridViewBusinessOther;
 
 public class ActivityBusinessOther extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 

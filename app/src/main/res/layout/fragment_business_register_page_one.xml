@@ -28,7 +28,7 @@
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_take_business_picture" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:singleLine="true"
                 android:textAlignment="center" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/editText_identifier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

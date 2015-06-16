@@ -6,7 +6,7 @@
     android:background="@color/White"
     android:orientation="vertical">
 
-    <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+    <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
         android:id="@+id/btn_friend_requests"
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height"
@@ -15,7 +15,7 @@
         android:layout_margin="20dp"
         android:layout_alignParentTop="true" />
 
-    <ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView
+    <ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

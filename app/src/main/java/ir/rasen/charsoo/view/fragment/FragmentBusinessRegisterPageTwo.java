@@ -30,7 +30,7 @@ import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
 
 /**
  * Created by hossein-pc on 6/14/2015.

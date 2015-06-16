@@ -10,7 +10,7 @@
         android:background="@color/DeepSkyBlue"
         android:layout_height="@dimen/button_height">
 
-        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+        <ir.rasen.charsoo.view.widgets.EditTextFont
             android:imeOptions="actionSearch"
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_weight="33.33333">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -67,7 +67,7 @@
             android:layout_height="match_parent"
             android:layout_weight="33.33333">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -92,7 +92,7 @@
             android:layout_height="match_parent"
             android:layout_weight="33.33333">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -119,7 +119,7 @@
         android:layout_below="@+id/ll_tab"
         android:layout_margin="20dp">
 
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:id="@+id/textViewFilters"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
             android:textSize="@dimen/font_large"
             android:textColor="@color/Black" />
 
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:id="@+id/textView_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
             android:background="@drawable/shape_edit_text_back"
             android:gravity="right" />
 
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:id="@+id/textView_sub_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -155,7 +155,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/textView_sub_category">
 
-            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+            <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:id="@+id/textView_map_error"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

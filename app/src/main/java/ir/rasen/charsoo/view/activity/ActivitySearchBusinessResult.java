@@ -20,7 +20,7 @@ import ir.rasen.charsoo.model.search.SearchBusinessesLocation;
 import ir.rasen.charsoo.view.adapter.AdapterBusinessSearchResult;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivitySearchBusinessResult extends CharsooActivity implements IWebserviceResponse {

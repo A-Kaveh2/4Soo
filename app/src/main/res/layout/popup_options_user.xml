@@ -28,7 +28,7 @@
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/activity_horizontal_margin">
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:gravity="right|center_vertical"
                 android:orientation="horizontal">
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
@@ -85,7 +85,7 @@
                 android:gravity="right|center_vertical"
                 android:orientation="horizontal">
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
@@ -104,7 +104,7 @@
                 android:gravity="right|center_vertical"
                 android:orientation="horizontal">
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
@@ -123,7 +123,7 @@
                 android:gravity="right|center_vertical"
                 android:orientation="horizontal">
 
-                <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                <ir.rasen.charsoo.view.widgets.TextViewFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"

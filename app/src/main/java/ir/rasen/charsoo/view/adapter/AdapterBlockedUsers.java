@@ -16,8 +16,8 @@ import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.model.business.UnblockUser;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.

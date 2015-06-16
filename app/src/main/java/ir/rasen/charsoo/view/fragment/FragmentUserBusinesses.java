@@ -39,7 +39,7 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
-import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
+import ir.rasen.charsoo.view.widgets.buttons.FloatButton;
 
 public class FragmentUserBusinesses extends Fragment implements IWebserviceResponse,NetworkStateChangeListener {
     public static final String TAG="FragmentUserBusinesses";

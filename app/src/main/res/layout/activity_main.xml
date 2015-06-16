@@ -27,7 +27,7 @@
                 android:layout_centerVertical="true"
                 android:orientation="horizontal">
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.NoShadowFloatButton
+                <ir.rasen.charsoo.view.widgets.buttons.NoShadowFloatButton
                     android:id="@+id/btn_home"
                     android:layout_width="@dimen/actionbar_height_4of5"
                     android:layout_height="@dimen/actionbar_height_4of5"
@@ -37,7 +37,7 @@
                     materialdesign:iconDrawable="@drawable/ic_home_blue_36dp"
                     materialdesign:rippleColor="@android:color/white" />
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.NoShadowFloatButton
+                <ir.rasen.charsoo.view.widgets.buttons.NoShadowFloatButton
                     android:id="@+id/btn_search"
                     android:layout_width="@dimen/actionbar_height_4of5"
                     android:layout_height="@dimen/actionbar_height_4of5"
@@ -46,7 +46,7 @@
                     materialdesign:iconDrawable="@drawable/ic_search_white_36dp"
                     materialdesign:rippleColor="@android:color/white"/>
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.NoShadowFloatButton
+                <ir.rasen.charsoo.view.widgets.buttons.NoShadowFloatButton
                     android:id="@+id/btn_businesses2"
                     android:layout_width="@dimen/actionbar_height_4of5"
                     android:layout_height="@dimen/actionbar_height_4of5"
@@ -55,7 +55,7 @@
                     materialdesign:iconDrawable="@drawable/ic_store_mall_directory_white_36dp"
                     materialdesign:rippleColor="@android:color/white"/>
 
-                <ir.rasen.charsoo.view.widget_customized.buttons.NoShadowFloatButton
+                <ir.rasen.charsoo.view.widgets.buttons.NoShadowFloatButton
                     android:id="@+id/btn_user"
                     android:layout_width="@dimen/actionbar_height_4of5"
                     android:layout_height="@dimen/actionbar_height_4of5"

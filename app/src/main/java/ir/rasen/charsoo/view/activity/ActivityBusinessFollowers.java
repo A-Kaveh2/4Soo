@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityBusinessFollowers extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {

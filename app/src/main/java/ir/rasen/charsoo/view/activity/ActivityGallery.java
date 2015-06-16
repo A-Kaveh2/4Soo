@@ -16,7 +16,7 @@ import java.util.Date;
 
 import eu.janmuller.android.simplecropimage.CropImage;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivityGallery extends CharsooActivity {
 

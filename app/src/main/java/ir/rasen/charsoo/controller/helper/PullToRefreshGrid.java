@@ -3,10 +3,10 @@ package ir.rasen.charsoo.controller.helper;
 import android.app.Activity;
 import android.view.View;
 
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.Footer;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshBase;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.Footer;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshBase;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;

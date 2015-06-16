@@ -19,13 +19,13 @@
             android:longClickable="false"
             android:layout_gravity="center_vertical" />
 
-        <ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle
+        <ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle
             android:layout_width="@dimen/register_profile_picture_height"
             android:layout_height="@dimen/register_profile_picture_height"
             android:id="@+id/imageView_user_picture"
             android:layout_alignParentRight="true" />
 
-        <ir.rasen.charsoo.view.widget_customized.TextViewFont
+        <ir.rasen.charsoo.view.widgets.TextViewFont
             android:id="@+id/textView_FriendStrId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical|right">
 
-            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+            <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                 android:id="@+id/btn_requestFriendship"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_height"

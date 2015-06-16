@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import ir.rasen.charsoo.model.NetworkConnectivityReciever;
 import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 import java.util.ArrayList;
 

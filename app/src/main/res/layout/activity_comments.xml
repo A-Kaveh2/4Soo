@@ -6,7 +6,7 @@
 
 
 
-    <ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView
+    <ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView
         android:id="@+id/pull_refresh_list"
         android:layout_width="match_parent"
         android:layout_above="@+id/rl_send_comment"
@@ -27,7 +27,7 @@
         android:orientation="horizontal"
         android:layout_margin="5dp"
         android:layout_alignParentBottom="true">
-        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+        <ir.rasen.charsoo.view.widgets.EditTextFont
             android:id="@+id/edt_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

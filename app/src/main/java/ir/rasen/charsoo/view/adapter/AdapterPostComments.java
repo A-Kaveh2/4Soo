@@ -25,8 +25,8 @@ import ir.rasen.charsoo.view.dialog.PopupDeleteCommentBlockUser;
 import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.

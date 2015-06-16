@@ -1,21 +1,12 @@
 package ir.rasen.charsoo.view.fragment;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.Validation;
-import ir.rasen.charsoo.view.activity.ActivityUserRegister;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 
 /**
  * Created by hossein-pc on 6/9/2015.

@@ -34,7 +34,7 @@ import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
 import ir.rasen.charsoo.view.interface_m.ISharePostChange;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 
 /**
  * Created by android on 3/7/2015.

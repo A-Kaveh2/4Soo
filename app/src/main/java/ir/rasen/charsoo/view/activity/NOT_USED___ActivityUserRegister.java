@@ -21,9 +21,9 @@ import ir.rasen.charsoo.model.user.RegisterUser;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.EditTextFont;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
+import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
 
 public class NOT_USED___ActivityUserRegister extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {

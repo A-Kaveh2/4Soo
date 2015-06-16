@@ -25,7 +25,7 @@
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/selector_button_choose_pitcure_landscape" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/edt_title"
                 android:layout_below="@+id/imageView_user_picture"
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="5dp" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/edt_description"
                 android:layout_width="match_parent"
                 android:hint="@string/description"
@@ -49,7 +49,7 @@
                 android:layout_marginTop="30dp"
                 android:nextFocusDown="@+id/edt_hashtags" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/edt_hashtags"
                 android:layout_width="match_parent"
                 android:hint="@string/hashtags"
@@ -60,7 +60,7 @@
                 android:layout_marginTop="30dp"
                 android:nextFocusDown="@+id/edt_price" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFontPasteDisabled
+            <ir.rasen.charsoo.view.widgets.EditTextFontPasteDisabled
                 android:id="@+id/edt_price"
                 android:layout_width="match_parent"
                 android:hint="@string/price_tooman"
@@ -74,7 +74,7 @@
                 android:maxLength="@integer/restriction_identifier_length"
                 android:nextFocusDown="@+id/editText_password_repeat" />
 
-            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+            <ir.rasen.charsoo.view.widgets.EditTextFont
                 android:id="@+id/edt_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 android:maxLength="@integer/restriction_identifier_length"
                 android:layout_marginTop="20dp" />
 
-            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+            <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
                 android:id="@+id/btn_submit"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/button_height"

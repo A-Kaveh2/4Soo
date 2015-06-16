@@ -11,7 +11,7 @@
         android:visibility="gone"
         android:layout_height="@dimen/button_height">
 
-        <ir.rasen.charsoo.view.widget_customized.EditTextFont
+        <ir.rasen.charsoo.view.widgets.EditTextFont
             android:imeOptions="actionSearch"
             android:id="@+id/edt_search"
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
         android:layout_height="match_parent"
         android:id="@+id/listView" />
 
-    <ir.rasen.charsoo.view.widget_customized.TextViewFont
+    <ir.rasen.charsoo.view.widgets.TextViewFont
         android:id="@+id/textView_no_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -18,9 +18,9 @@ import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.view.widget_customized.MaterialProgressBar;
-import ir.rasen.charsoo.view.widget_customized.imageviews.SquareImageView;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.MaterialProgressBar;
+import ir.rasen.charsoo.view.widgets.imageviews.SquareImageView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 
 public class AdapterPostGrid extends BaseAdapter {
     private Activity activity;

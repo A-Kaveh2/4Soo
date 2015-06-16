@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -11,8 +10,7 @@ import android.widget.LinearLayout;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
-import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 
 
 public class PopupEditDeleteComment extends MyPopup {
