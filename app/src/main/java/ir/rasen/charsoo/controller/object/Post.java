@@ -73,6 +73,8 @@ public class Post {
         Date date =  new Date(Long.parseLong(dateStr));
         return date;
     }
+
+
     public static Type getType(int type) {
         switch (type) {
             case 1:
@@ -131,7 +133,11 @@ public class Post {
 
         post.isLiked = jsonObject.getBoolean(Params.POST_IS_LIKED);
 
-        post.isShared = true;
+        try{
+            post.isShared = jsonObject.getBoolean(Params.POST_IS_SHARED);
+        }catch(Exception ee){
+            post.isShared = true;
+        }
 
         //post.likeNumber = jsonObject.getInt(Params.LIKE_NUMBER);
         //post.commentNumber = jsonObject.getInt(Params.COMMENT_NUMBER);

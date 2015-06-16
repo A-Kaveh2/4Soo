@@ -262,6 +262,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
+        gridViewHeader.setViewWidthIfItsZero(activity.getWindowManager().getDefaultDisplay().getWidth());
     }
 
     @Override
@@ -304,8 +305,22 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
 
     private void addNewPost() {
         Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-        intent.putExtra(Params.BUSINESS_ID_STRING,business.id);
+        intent.putExtra(Params.BUSINESS_ID_STRING, business.id);
         activity.startActivityForResult(intent, Params.ACTION_ADD_POST);
     }
+
+    public void refreshBusinessData(Business newBusiness){
+        if (this.business.profilePictureId != newBusiness.profilePictureId) {
+            this.business = newBusiness;
+            simpleLoader = new SimpleLoader(activity);
+            simpleLoader.loadImage(business.profilePictureId, Image_M.LARGE, Image_M.ImageType.BUSINESS, imageViewCover);
+        }
+        else
+            this.business = newBusiness;
+        textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
+        textViewName.setText(String.valueOf(business.name));
+        textViewFollowersNumber.setText(String.valueOf(business.followersNumber) + " " + activity.getString(R.string.followers_num));
+    }
+
 
 }

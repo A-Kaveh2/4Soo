@@ -6,13 +6,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import ir.rasen.charsoo.model.NetworkConnectivityReciever;
+import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
 import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView;
 
 import java.util.ArrayList;
@@ -33,7 +38,7 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.model.post.GetTimeLinePosts;
 
-public class FragmentHome extends Fragment implements IWebserviceResponse, IPullToRefresh, IGetNewTimeLinePost {
+public class FragmentHome extends Fragment implements IWebserviceResponse, IPullToRefresh, IGetNewTimeLinePost,NetworkStateChangeListener {
 
     public static final String TAG="FragmentHome";
 
@@ -43,7 +48,15 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
     ArrayList<Post> results;
     ArrayList<Post> sampleResults;
 
-
+    @Override
+    public void doOnNetworkConnected() {
+        try {
+            if (LoginInfo.isLoggedIn(getActivity())) {
+                if (!((MyApplication) getActivity().getApplication()).isHomeCreated)
+                    recursivelyCheckForTimeLinePosts();
+            }
+        }catch(Exception e){};
+    }
 
 
     //pull_to_refresh_lib
@@ -63,6 +76,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
         View view = inflater.inflate(R.layout.fragment_home,
                 container, false);
 
+        NetworkConnectivityReciever.setNetworkStateListener(TAG,FragmentHome.this);
 
         try {
             sampleResults = TestUnit.getPostAdapterListItems();
@@ -190,9 +204,13 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
 
     @Override
     public void notifyRefresh() {
-        status = Status.REFRESHING;
-        results.clear();
-        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+        if (((MyApplication) getActivity().getApplication()).isHomeCreated) {
+            status = Status.REFRESHING;
+            results.clear();
+            new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+        }
+        else
+            pullToRefreshListView.onRefreshComplete();
     }
 
     @Override
@@ -205,5 +223,24 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
         adapterPostTimeLine.updatePostLastThreeComments(post);
     }
 
+
+
+    Handler internetCheckHandler=new Handler();
+    private void recursivelyCheckForTimeLinePosts(){
+        internetCheckHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (!((MyApplication) getActivity().getApplication()).isHomeCreated) {
+                    new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+                } else {
+                    ConnectivityManager cm =
+                            (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+                    if (netInfo != null && netInfo.isConnectedOrConnecting())
+                        recursivelyCheckForTimeLinePosts();
+                }
+            }
+        }, 1000);
+    }
 
 }

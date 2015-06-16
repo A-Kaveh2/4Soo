@@ -93,7 +93,8 @@ public class GridViewUser implements IWebserviceResponse, ISharePostChange {
         this.hasHeader = hasHeader;
         this.posts = postList;
 
-        ((ActivityMain) activity).initPopupWindowUser();
+        if (activity instanceof ActivityMain)
+            ((ActivityMain) activity).initPopupWindowUser();
 
         searchItemPosts = new ArrayList<>();
         for (Post post : posts)
@@ -104,7 +105,9 @@ public class GridViewUser implements IWebserviceResponse, ISharePostChange {
         adapterPostShared = new AdapterPostShared(activity, posts, GridViewUser.this);
 
 
+
         if (!hasHeader) {
+
             viewHeader = (activity).getLayoutInflater().inflate(R.layout.layout_user_grid_header, null);
 
             viewHeader.findViewById(R.id.ll_action_bar).setOnClickListener(null);
@@ -227,7 +230,10 @@ public class GridViewUser implements IWebserviceResponse, ISharePostChange {
                 }
             });
 
+
             gridViewHeader.addHeaderView(viewHeader);
+//            if (gridViewHeader.getHeaderViewsCount()>1)
+//                gridViewHeader.removeHeaderView(gridViewHeader.getHeaderView());
             this.hasHeader = true;
 
             listFooterView = ((LayoutInflater) activity.getSystemService(activity.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
@@ -356,4 +362,43 @@ public class GridViewUser implements IWebserviceResponse, ISharePostChange {
     }
 
 
+    public void refreshUserData(User user, int visitedUserId){
+        if (this.profilePictureId != user.profilePictureId) {
+            this.profilePictureId = user.profilePictureId;
+            SimpleLoader simpleLoader = new SimpleLoader(activity);
+            simpleLoader.loadImage(profilePictureId, Image_M.LARGE, Image_M.ImageType.USER, imageViewCover);
+        }
+        this.visitedUserId = visitedUserId;
+        this.userIdentifier = user.userIdentifier;
+        this.userName = user.name;
+        this.userPermissions = user.permissions;
+        this.hasRequest = (user.friendRequestNumber > 0) ? true : false;
+        this.aboutMe = user.aboutMe;
+
+        textViewIdentifier.setText(String.valueOf(userIdentifier));
+
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        String userId = userIdentifier + "@";
+        SpannableString redSpannable = new SpannableString(userId);
+        redSpannable.setSpan(new ForegroundColorSpan(activity.getResources().getColor(R.color.button_on_dark)), 0, userId.length(), 0);
+
+
+        builder.append(userName);
+        builder.append("(");
+        builder.append(redSpannable);
+        builder.append(")");
+
+        textViewName.setText(builder, TextView.BufferType.SPANNABLE);
+
+        if (!aboutMe.equals("null"))
+            textViewAboutMe.setText(aboutMe);
+
+
+        if (!hasRequest)
+            imageViewHasRequest.setVisibility(View.GONE);
+
+
+
+    }
 }

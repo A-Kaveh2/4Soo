@@ -171,6 +171,12 @@
 
         <receiver android:name=".controller.helper.AlarmReciever" />
 
+        <receiver android:name=".model.NetworkConnectivityReciever">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

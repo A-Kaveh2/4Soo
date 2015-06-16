@@ -36,6 +36,16 @@ public class PersianDate {
     private static int YEAR_IN_SECOND = 12 * MONTH_IN_SECOND;
 
 
+    private static long SECOND_BOUND_IN_MILISECOND = 1000;
+    private static long MINUTE_BOUND_IN_MILISECOND = 60 * SECOND_BOUND_IN_MILISECOND;
+    private static long HOUR_BOUND_IN_MILISECOND = 60 * MINUTE_BOUND_IN_MILISECOND;
+    private static long DAY_BOUND_IN_MILISECOND = 24 * HOUR_BOUND_IN_MILISECOND;
+    private static long WEEK_BOUND_IN_MILISECOND = 7 * DAY_BOUND_IN_MILISECOND;
+    private static long MONTH_BOUND_IN_MILISECOND = 4 * WEEK_BOUND_IN_MILISECOND;
+    private static long YEAR_BOUND_IN_MILISECOND = 12 * MONTH_BOUND_IN_MILISECOND;
+    private static long CENTURY_BOUND_IN_MILISECOND = 100 * YEAR_BOUND_IN_MILISECOND;
+
+
     private Resources resources;
 
 
@@ -161,14 +171,49 @@ public class PersianDate {
         Resources resources = context.getResources();
         String creationDate = "";
         long hours=0;
+        long diffInMs = 0;
         if (date!=null){
             Date d=new Date();
             DateFormat.getDateTimeInstance().format(d);
-            long diffInMs = d.getTime() - date.getTime();
+            diffInMs = d.getTime() - date.getTime();
             hours = TimeUnit.MILLISECONDS.toHours(diffInMs);
         }
 
-
+        if ((int) (diffInMs / CENTURY_BOUND_IN_MILISECOND) > 0)
+        {
+            creationDate = String.valueOf((int) (diffInMs / CENTURY_BOUND_IN_MILISECOND))+ " "
+                    + context.getString(R.string.txt_Century)+context.getString(R.string.txt_Ago);
+        }
+        else if ((int)(diffInMs/YEAR_BOUND_IN_MILISECOND) > 0){
+            creationDate = String.valueOf((int)(diffInMs/YEAR_BOUND_IN_MILISECOND))+" "
+                    +context.getString(R.string.txt_Year)+context.getString(R.string.txt_Ago);
+        }
+        else if ((int) (diffInMs/MONTH_BOUND_IN_MILISECOND)>0){
+            creationDate = String.valueOf((int) (diffInMs/MONTH_BOUND_IN_MILISECOND))+" "
+                    + context.getString(R.string.txt_Month)+context.getString(R.string.txt_Ago);
+        }
+        else if ((int) (diffInMs/WEEK_BOUND_IN_MILISECOND)>0){
+            creationDate = String.valueOf((int) (diffInMs/WEEK_BOUND_IN_MILISECOND))+" "
+                    + context.getString(R.string.txt_Week)+context.getString(R.string.txt_Ago);
+        }
+        else if ((int) (diffInMs/DAY_BOUND_IN_MILISECOND)>0){
+            if ((int) (diffInMs/DAY_BOUND_IN_MILISECOND) == 1)
+                creationDate = context.getString(R.string.txt_Yesterday);
+            else
+                creationDate = String.valueOf((int) (diffInMs/DAY_BOUND_IN_MILISECOND))+" "
+                        + context.getString(R.string.txt_Day)+context.getString(R.string.txt_Ago);
+        }
+        else if ((int) (diffInMs/HOUR_BOUND_IN_MILISECOND)>0){
+            creationDate = String.valueOf((int) (diffInMs/HOUR_BOUND_IN_MILISECOND))+" "
+                    +context.getString(R.string.txt_Hour)+context.getString(R.string.txt_Ago);
+        }
+        else if ((int) (diffInMs/MINUTE_BOUND_IN_MILISECOND)>0){
+            creationDate = String.valueOf((int) (diffInMs/MINUTE_BOUND_IN_MILISECOND))+" "
+                    + context.getString(R.string.txt_Minute)+context.getString(R.string.txt_Ago);
+        }
+        else {
+            creationDate = context.getString(R.string.txt_MomentsAgo);
+        }
 //        Calendar calendar = Calendar.getInstance();
 //        DatePicker datePicker=new DatePicker(context);
 //        datePicker.get
@@ -176,34 +221,38 @@ public class PersianDate {
 //                timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
 //        long startTime = calendar.getTimeInMillis();
 //        int hours = 0;
-        if (hours < 0) {
-            //this is the future!
-            creationDate = resources.getString(R.string.err_creation_date_invalid);
-        } else if (hours == 0) {
-            //it is completely fresh!
-            creationDate = "1" + resources.getString(R.string.hour);
 
-        } else if (hours > 0 && hours < DAY_HOURS) {
-            //less than a day, creation date will display in hours
-            creationDate = hours + resources.getString(R.string.hour);
 
-        } else if (hours >= DAY_HOURS && hours < WEEK_HOURS) {
-            //more than a day and less than a week, creation date will display in days
-            creationDate = hours / DAY_HOURS + resources.getString(R.string.day);
+//        if (hours < 0) {
+//            //this is the future!
+//            creationDate = resources.getString(R.string.err_creation_date_invalid);
+//        } else if (hours == 0) {
+//            //it is completely fresh!
+//            creationDate = "1" + resources.getString(R.string.hour);
+//
+//        } else if (hours > 0 && hours < DAY_HOURS) {
+//            //less than a day, creation date will display in hours
+//            creationDate = hours + resources.getString(R.string.hour);
+//
+//        } else if (hours >= DAY_HOURS && hours < WEEK_HOURS) {
+//            //more than a day and less than a week, creation date will display in days
+//            creationDate = hours / DAY_HOURS + resources.getString(R.string.day);
+//
+//        } else if (hours >= WEEK_HOURS && hours < MONTH_HOURS) {
+//            //more than a week and less than a month, creation date will display in weeks
+//            creationDate = hours / WEEK_HOURS + resources.getString(R.string.week);
+//
+//        } else if (hours >= MONTH_HOURS && hours < YEAR_HOURS) {
+//            //more than a month and less than a year, creation date will display in months
+//            creationDate = hours / MONTH_HOURS + resources.getString(R.string.month);
+//
+//        } else if (hours >= YEAR_HOURS) {
+//            //more than a year, creation date will display in years
+//            creationDate = hours / YEAR_HOURS + resources.getString(R.string.year);
+//
+//        }
 
-        } else if (hours >= WEEK_HOURS && hours < MONTH_HOURS) {
-            //more than a week and less than a month, creation date will display in weeks
-            creationDate = hours / WEEK_HOURS + resources.getString(R.string.week);
-
-        } else if (hours >= MONTH_HOURS && hours < YEAR_HOURS) {
-            //more than a month and less than a year, creation date will display in months
-            creationDate = hours / MONTH_HOURS + resources.getString(R.string.month);
-
-        } else if (hours >= YEAR_HOURS) {
-            //more than a year, creation date will display in years
-            creationDate = hours / YEAR_HOURS + resources.getString(R.string.year);
-
-        }
+//        creationDate+="???";
 
         return creationDate;
     }

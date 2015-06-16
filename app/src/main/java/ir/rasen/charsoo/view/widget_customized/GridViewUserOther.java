@@ -3,10 +3,14 @@ package ir.rasen.charsoo.view.widget_customized;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -65,7 +69,6 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     ICancelFriendship iCancelFriendshipl;
     IWebserviceResponse iWebserviceResponse;
 
-    Activity activity;
 
     public GridViewUserOther(final Activity context, final User displayedUser, HFGridView gViewHeader) {
         this.context = context;
@@ -83,9 +86,9 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         for (Post post : posts)
             searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
 
-        adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, 0, Post.GetPostType.SHARE);
+        adapterPostGrid = new AdapterPostGrid(context, searchItemPosts, 0, Post.GetPostType.SHARE);
 
-        adapterPostShared = new AdapterPostShared(activity, posts, null);
+        adapterPostShared = new AdapterPostShared(context, posts, null);
 
         if (!headerInitialized) {
             viewHeader = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_user_grid_header_another, null);
@@ -355,4 +358,40 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         buttonFriendStatus.setText(context.getString(R.string.friendy));
         user.friendshipRelationStatus = FriendshipRelation.Status.NOT_FRIEND;
     }
+
+    public void refreshUserData(final User displayedUser){
+        if (this.user.profilePictureId != displayedUser.profilePictureId){
+            this.user = displayedUser;
+            SimpleLoader simpleLoader = new SimpleLoader(context);
+            simpleLoader.loadImage(user.profilePictureId, Image_M.LARGE, Image_M.ImageType.USER, imageViewCover);
+        }
+        else
+            this.user = displayedUser;
+
+        textViewIdentifier.setText(user.userIdentifier);
+        textViewName.setText(user.name);
+
+        switch (user.friendshipRelationStatus) {
+            case FRIEND:
+                buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_green);
+                buttonFriendStatus.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getResources().getDrawable(R.drawable.ic_check_white_24dp), null);
+                buttonFriendStatus.setText(context.getString(R.string.friend));
+                break;
+            case NOT_FRIEND:
+                buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_blue);
+                buttonFriendStatus.setText(context.getString(R.string.friendy));
+                break;
+            case REQUEST_REJECTED:
+                buttonFriendStatus.setBackgroundResource(R.drawable.selector_button_shape_red);
+                buttonFriendStatus.setText(context.getString(R.string.friendy));
+                break;
+            case REQUEST_SENT:
+                buttonFriendStatus.setEnabled(false);
+                buttonFriendStatus.setBackgroundResource(R.drawable.shape_button_gray);
+                buttonFriendStatus.setText(context.getString(R.string.wating_for_comfirm));
+                break;
+        }
+    }
+
+
 }
