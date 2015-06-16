@@ -37,13 +37,10 @@ public class ActivityBusinessOther extends CharsooActivity implements IWebservic
 
     @Override
     public void notifyRefresh() {
-        if (posts != null) {
-            status = Status.REFRESHING;
-            posts.clear();
-            new GetBusinessHomeInfo(ActivityBusinessOther.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusinessOther.this), ActivityBusinessOther.this).execute();
-        }
-        else
-            pullToRefreshGridView.onRefreshComplete();
+        if (posts == null)
+            posts=new ArrayList<>();
+        status = Status.REFRESHING;
+        new GetBusinessHomeInfo(ActivityBusinessOther.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusinessOther.this), ActivityBusinessOther.this).execute();
     }
 
     @Override
@@ -81,17 +78,22 @@ public class ActivityBusinessOther extends CharsooActivity implements IWebservic
         if (result instanceof Business) {
             //this is GetBusinessHomeInfo's result
 
-            gridView.setVisibility(View.VISIBLE);
             progressDialog.dismiss();
             gridView.setVisibility(View.VISIBLE);
             business = (Business) result;
 
-            if (pullToRefreshGridView.isRefreshing())
-                gridView.removeHeaderView(gridView.getHeaderView());
+//            if (pullToRefreshGridView.isRefreshing())
+//                gridView.removeHeaderView(gridView.getHeaderView());
 
             boolean beThreeColumn = gridViewBusiness == null ? true : gridViewBusiness.isThreeColumn;
-            gridViewBusiness = new GridViewBusinessOther(ActivityBusinessOther.this, business, gridView);
-            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
+            if (gridViewBusiness==null) {
+                gridViewBusiness = new GridViewBusinessOther(ActivityBusinessOther.this, business, gridView);
+                gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
+            }
+            else
+                gridViewBusiness.refreshBusinessData(business);
+            if (posts==null)
+                posts=new ArrayList<>();
             new GetBusinessPosts(ActivityBusinessOther.this, LoginInfo.getUserId(ActivityBusinessOther.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessOther.this).execute();
         }
         if (result instanceof ArrayList) {
@@ -109,6 +111,7 @@ public class ActivityBusinessOther extends CharsooActivity implements IWebservic
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
+        pullToRefreshGridView.onRefreshComplete();
         new DialogMessage(ActivityBusinessOther.this, ServerAnswer.getError(ActivityBusinessOther.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 

@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
@@ -36,11 +38,12 @@ public class ActivityLogin extends CharsooActivity implements View.OnClickListen
         setTitle(getString(R.string.login));
 
         //for the test I need to disable automatically going to ActivityMain
-       /* if (LoginInfo.isLoggedIn(this)) {
+        if ((LoginInfo.isLoggedIn(this))&&(!Params.isTestVersion)) {
             Intent intent = new Intent(this, ActivityMain.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-            return;
-        }*/
+            finish();
+        }
 
         myApplication = (MyApplication) getApplication();
         myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);

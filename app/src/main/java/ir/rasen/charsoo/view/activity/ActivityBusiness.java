@@ -93,14 +93,21 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
             ((MyApplication) getApplication()).business = business;
 
             boolean beThreeColumn = gridViewBusiness == null ? true : gridViewBusiness.isThreeColumn;
-            gridViewBusiness = new GridViewBusiness(this, business, gridView);
-            gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
-
+            if (gridViewBusiness==null) {
+                gridViewBusiness = new GridViewBusiness(this, business, gridView);
+                gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
+            }
+            else
+                gridViewBusiness.refreshBusinessData(business);
+            if (posts==null)
+                posts = new ArrayList<>();
             new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
         }
         if (result instanceof ArrayList) {
             //this is GetBusinessPosts' result
-            posts = (ArrayList<Post>) result;
+            if (pullToRefreshGridView.isRefreshing())
+                posts.clear();
+            posts= (ArrayList<Post>) result;
             pullToRefreshGridView.setResultSize(posts.size());
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
@@ -114,6 +121,7 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
+        pullToRefreshGridView.onRefreshComplete();
         new DialogMessage(ActivityBusiness.this, ServerAnswer.getError(ActivityBusiness.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
@@ -123,7 +131,8 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
 
         if (resultCode == RESULT_OK) {
             if (requestCode == Params.ACTION_ADD_POST) {
-                gridViewBusiness.notifyDataSetChanged(((MyApplication) getApplication()).post);
+                Post p =((MyApplication) getApplication()).post;
+                gridViewBusiness.notifyDataSetChanged(p);
             } else if (requestCode == Params.ACTION_EDIT_BUSINESS) {
                 if (data.getStringExtra(Params.TYPE).equals(Business.ChangeType.EDIT.name())) {
                     String picture = data.getStringExtra(Params.PROFILE_PICTURE);
@@ -160,11 +169,9 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
 
     @Override
     public void notifyRefresh() {
-        if (posts != null) {
-            posts.clear();
-            new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
-        } else
-            pullToRefreshGridView.onRefreshComplete();
+        if (posts==null)
+            posts=new ArrayList<>();
+        new GetBusinessHomeInfo(ActivityBusiness.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusiness.this), ActivityBusiness.this).execute();
     }
 
     @Override

@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.helper.Hashtag;
 import ir.rasen.charsoo.controller.helper.Params;
@@ -45,6 +48,14 @@ public class AddPost extends AsyncTask<Void, Void, Post> {
             serverAnswer = webservicePOST.execute(context);
             if (serverAnswer.getSuccessStatus()) {
                 post.id = Integer.valueOf(serverAnswer.getResult().getString(Params.POST_ID_INT));
+                // TODO bad az eslahe webservice tarikhe Ejade post ra az pasokhe webservice daryaft konim
+                try {
+                    Date d=new Date();
+                    DateFormat.getDateTimeInstance().format(d);
+                    post.creationDate=d;
+                }catch(Exception ee){
+                    ee.getMessage();
+                }
                 return post;
             }
         } catch (Exception e) {

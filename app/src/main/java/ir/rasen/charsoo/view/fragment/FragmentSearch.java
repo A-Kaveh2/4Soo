@@ -2,7 +2,10 @@ package ir.rasen.charsoo.view.fragment;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -26,9 +29,11 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LocationManagerTracker;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.object.Category;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.SubCategory;
+import ir.rasen.charsoo.model.NetworkConnectivityReciever;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupCategories;
 import ir.rasen.charsoo.view.dialog.PopupSubCategories;
@@ -37,6 +42,7 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 import ir.rasen.charsoo.view.activity.ActivitySearchBusinessResult;
@@ -45,7 +51,7 @@ import ir.rasen.charsoo.view.activity.ActivitySearchUser;
 import ir.rasen.charsoo.model.business.GetBusinessGategories;
 import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
 
-public class FragmentSearch extends Fragment implements IWebserviceResponse, ISelectCategory {
+public class FragmentSearch extends Fragment implements IWebserviceResponse, ISelectCategory, NetworkStateChangeListener {
     public static final String TAG="FragmentSearch";
 
     EditTextFont editTextSearch;
@@ -56,6 +62,11 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
     LatLng choosedLatLng;
     ArrayList<String> subcategoriesStr;
     int subcategoryId = 0;
+
+    @Override
+    public void doOnNetworkConnected() {
+        recursivelyCallHandler();
+    }
 
     private enum SearchType {BUSINESSES, POSTS, USERS}
 
@@ -73,6 +84,7 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
         View view = inflater.inflate(R.layout.fragment_search,
                 container, false);
 
+        NetworkConnectivityReciever.setNetworkStateListener(TAG,FragmentSearch.this);
         iSelectCategory = this;
         searchType = SearchType.BUSINESSES;
 
@@ -212,11 +224,21 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse, ISe
             public void run() {
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
-                if (((MyApplication) getActivity().getApplication()).isHomeCreated) {
-                    ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
-                    new GetBusinessGategories(getActivity(), FragmentSearch.this).execute();
-                } else
-                    recursivelyCallHandler();
+
+                try { // agar pish az Ejad shodane search az app kharej shavim force midahad
+                    if (((MyApplication) getActivity().getApplication()).isHomeCreated) {
+                        ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
+                        new GetBusinessGategories(getActivity(), FragmentSearch.this).execute();
+                    } else {
+                        ConnectivityManager cm =
+                                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+                        if (netInfo != null && netInfo.isConnectedOrConnecting())
+                            recursivelyCallHandler();
+                    }
+                }catch(Exception e){
+
+                }
             }
         }, 500);
     }

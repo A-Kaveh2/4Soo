@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.LocalBroadcastManager;
@@ -27,6 +29,7 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.NetworkConnectivityReciever;
 import ir.rasen.charsoo.view.activity.ActivityBusiness;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegister;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
@@ -35,9 +38,10 @@ import ir.rasen.charsoo.view.adapter.AdapterUserBusinesses;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
 import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
 
-public class FragmentUserBusinesses extends Fragment implements IWebserviceResponse {
+public class FragmentUserBusinesses extends Fragment implements IWebserviceResponse,NetworkStateChangeListener {
     public static final String TAG="FragmentUserBusinesses";
 
     ArrayList<Business> userBusinesses;
@@ -52,6 +56,8 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_user_businesses,
                 container, false);
+
+        NetworkConnectivityReciever.setNetworkStateListener(TAG,FragmentUserBusinesses.this);
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -159,23 +165,30 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
             public void run() {
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
-                if (((MyApplication) getActivity().getApplication()).isUserCreated) {
-                    view.findViewById(R.id.progressBar).setVisibility(View.GONE);
-                    ArrayList<User.UserBusinesses> us = ((MyApplication) getActivity().getApplication()).userBusinesses;
+                try { // agar pish az Ejad shodane userBusinesses az app kharej shavim force midahad
+                    if (((MyApplication) getActivity().getApplication()).isUserCreated) {
+                        view.findViewById(R.id.progressBar).setVisibility(View.GONE);
+                        ArrayList<User.UserBusinesses> us = ((MyApplication) getActivity().getApplication()).userBusinesses;
 
-                    if (us.size() == 0)
-                        return;
+                        if (us.size() == 0)
+                            return;
 
-                    for (User.UserBusinesses businessItem : us) {
-                        Business business = new Business();
-                        business.id = businessItem.businessId;
-                        business.name = businessItem.businessIdentifier;
-                        userBusinesses.add(business);
+                        for (User.UserBusinesses businessItem : us) {
+                            Business business = new Business();
+                            business.id = businessItem.businessId;
+                            business.name = businessItem.businessIdentifier;
+                            userBusinesses.add(business);
+                        }
+                        adapterUserBusinesses.notifyDataSetChanged();
+
+                    } else {
+                        ConnectivityManager cm =
+                                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+                        if (netInfo != null && netInfo.isConnectedOrConnecting())
+                            recursivelyCallHandler();
                     }
-                    adapterUserBusinesses.notifyDataSetChanged();
-
-                } else
-                    recursivelyCallHandler();
+                }catch(Exception e){}
             }
         }, 500);
     }
@@ -254,4 +267,8 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
     }
 
 
+    @Override
+    public void doOnNetworkConnected() {
+        recursivelyCallHandler();
+    }
 }

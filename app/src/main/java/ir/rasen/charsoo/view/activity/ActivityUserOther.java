@@ -1,5 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -17,101 +18,42 @@ import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.fragment.FragmentUser;
+import ir.rasen.charsoo.view.fragment.FragmentUserOther;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.GridViewUserOther;
 import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
-public class ActivityUserOther extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
+public class ActivityUserOther extends CharsooActivity {
 
-    private HFGridView gridView;
-    private int visitedUserId;
-    ProgressDialog progressDialog;
-    private User user;
-    GridViewUserOther gridViewUser;
-    ArrayList<Post> posts = new ArrayList<>();
-
-    @Override
-    public void notifyRefresh() {
-        if (posts != null) {
-            status = Status.REFRESHING;
-            posts.clear();
-            new GetUserHomeInfo(ActivityUserOther.this, visitedUserId, LoginInfo.getUserId(ActivityUserOther.this), ActivityUserOther.this).execute();
-        }
-        else
-            pullToRefreshGridView.onRefreshComplete();
-    }
-
-    @Override
-    public void notifyLoadMore() {
-
-    }
-
-    private enum Status {FIRST_TIME, LOADING_MORE, REFRESHING, NONE}
-
-    private Status status;
-
-    //pull_to_refresh_lib
-    PullToRefreshGrid pullToRefreshGridView;
+    int visitedUserIntId,visitorIntId;
+    FragmentUserOther fragOther;
+    FragmentUser fragUser;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_other);
+        setContentView(R.layout.activity_user_other_new);
 
-        visitedUserId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
+        visitedUserIntId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
+        visitorIntId=LoginInfo.getUserId(this);
 
-        //set progress dialog
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage(getResources().getString(R.string.please_wait));
-
-        pullToRefreshGridView = new PullToRefreshGrid(ActivityUserOther.this, (PullToRefreshGridViewWithHeaderAndFooter) findViewById(R.id.gridView_HF), ActivityUserOther.this);
-        gridView = pullToRefreshGridView.getGridViewHeaderFooter();
-
-        progressDialog.show();
-        new GetUserHomeInfo(this, visitedUserId, LoginInfo.getUserId(this), this).execute();
-
-
-    }
-
-
-    @Override
-    public void getResult(Object result) {
-        if (result instanceof User) {
-            progressDialog.dismiss();
-
-            //GetUserHomeInfo result
-            user = (User) result;
-            gridView.setVisibility(View.VISIBLE);
-
-            boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
-            gridViewUser = new GridViewUserOther(ActivityUserOther.this, user, gridView);
-            if (pullToRefreshGridView.isRefreshing())
-                gridView.removeHeaderView(gridView.getHeaderView());
-            gridViewUser.InitialGridViewUser(new ArrayList<Post>(), beThreeColumn);
-            if (user.friendshipRelationStatus == FriendshipRelation.Status.FRIEND)
-                new GetSharedPosts(ActivityUserOther.this, visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityUserOther.this).execute();
-            else {
-                if (pullToRefreshGridView.isRefreshing())
-                    pullToRefreshGridView.onRefreshComplete();
-            }
-        } else if (result instanceof ArrayList) {
-            //GetSharedPosts result
-            posts = (ArrayList<Post>) result;
-            pullToRefreshGridView.setResultSize(posts.size());
-            if (pullToRefreshGridView.isRefreshing()) {
-                pullToRefreshGridView.onRefreshComplete();
-            }
-            gridViewUser.InitialGridViewUser(posts, gridViewUser.isThreeColumn);
+        if (visitorIntId==visitedUserIntId){
+            fragUser=new FragmentUser();
+            FragmentTransaction ft= getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContainer,fragUser);
+            ft.commit();
+        }
+        else
+        {
+            fragOther=new FragmentUserOther();
+            FragmentTransaction ft= getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragmentContainer,fragOther);
+            ft.commit();
         }
     }
 
-    @Override
-    public void getError(Integer errorCode,String callerStringID) {
-        progressDialog.dismiss();
-        new DialogMessage(ActivityUserOther.this, ServerAnswer.getError(ActivityUserOther.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
-    }
 }

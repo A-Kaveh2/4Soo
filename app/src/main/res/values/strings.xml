@@ -585,5 +585,16 @@
     <string name="txt_PleaseSelectCategory">لطفا دسته بندی را انتخاب کنید</string>
     <string name="txt_state">استان</string>
     <string name="txt_City">شهر</string>
+    <string name="txt_Year">سال</string>
+    <string name="txt_Month">ماه</string>
+    <string name="txt_Week">هفته</string>
+    <string name="txt_Yesterday">دیروز</string>
+    <string name="txt_Day">روز</string>
+    <string name="txt_Hour">ساعت</string>
+    <string name="txt_Minute">دقیقه</string>
+    <string name="txt_Second">ثانیه</string>
+    <string name="txt_MomentsAgo">لحظاتی پیش</string>
+    <string name="txt_Century">قرن</string>
+    <string name="txt_Ago">" پیش"</string>
 
 </resources>

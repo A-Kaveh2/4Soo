@@ -260,6 +260,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
+        gridViewHeader.setViewWidthIfItsZero(activity.getWindowManager().getDefaultDisplay().getWidth());
     }
 
     @Override
@@ -299,5 +300,29 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
         buttonFollowStatus.setText(activity.getString(R.string.follow));
         buttonFollowStatus.setTextColor(activity.getResources().getColor(R.color.material_blue));
         business.isFollowing = false;
+    }
+
+    public void refreshBusinessData(Business newBusiness){
+        if (this.business.profilePictureId != newBusiness.profilePictureId){
+            this.business=newBusiness;
+            SimpleLoader simpleLoader = new SimpleLoader(activity);
+            simpleLoader.loadImage(business.profilePictureId, Image_M.LARGE, Image_M.ImageType.BUSINESS, imageViewCover);
+        }
+        else
+            this.business=newBusiness;
+
+        textViewIdentifier.setText(String.valueOf(business.businessIdentifier));
+        textViewName.setText(String.valueOf(business.name));
+        textViewFollowersNumber.setText(String.valueOf(business.followersNumber) + " " + activity.getString(R.string.followers_num));
+
+        if (business.isFollowing) {
+            buttonFollowStatus.setText(activity.getString(R.string.followed_business_page));
+            buttonFollowStatus.setTextColor(activity.getResources().getColor(R.color.white));
+        } else {
+            buttonFollowStatus.setBackgroundColor(activity.getResources().getColor(R.color.white));
+            buttonFollowStatus.setText(activity.getString(R.string.follow));
+            buttonFollowStatus.setTextColor(activity.getResources().getColor(R.color.material_blue));
+        }
+
     }
 }
