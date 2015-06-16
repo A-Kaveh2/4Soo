@@ -51,7 +51,7 @@ public class GetFollowingBusinesses extends AsyncTask<Void, Void, ArrayList<Base
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     list.add(new BaseAdapterItem(context.getResources(),jsonObject.getInt(Params.BUSINESS_ID_STRING),
                             jsonObject.getInt(Params.SEARCH_PICTURE_ID),
-                            jsonObject.getString(Params.BUSINESS_USERNAME_STRING)));
+                            jsonObject.getString(Params.BUSINESS_NAME)));
                 }
                 return list;
             }

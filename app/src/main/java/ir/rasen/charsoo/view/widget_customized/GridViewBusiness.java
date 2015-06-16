@@ -268,12 +268,15 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
     public void getResult(Object result) {
         if (result instanceof ArrayList) {
             //GetBusinessPosts' result
-            ArrayList<Post> posts = (ArrayList<Post>) result;
+            ArrayList<Post> newPosts = (ArrayList<Post>) result;
+            posts.addAll(newPosts);
             listFooterView.setVisibility(View.GONE);
-            if (isThreeColumn)
-                adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
-            else
-                adapterPostBusiness.loadMore(posts);
+            if (isThreeColumn){
+                adapterPostGrid.loadMore(SearchItemPost.getItems(newPosts));
+            }
+            else{
+                adapterPostBusiness.loadMore(newPosts);
+            }
             isLoadingMore=false;
         }
 

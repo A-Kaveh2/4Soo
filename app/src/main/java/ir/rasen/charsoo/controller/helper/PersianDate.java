@@ -2,9 +2,13 @@ package ir.rasen.charsoo.controller.helper;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.widget.DatePicker;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import ir.rasen.charsoo.R;
 
@@ -156,7 +160,22 @@ public class PersianDate {
     public static String getCreationDate(Context context, Date date) {
         Resources resources = context.getResources();
         String creationDate = "";
-        int hours = 0;
+        long hours=0;
+        if (date!=null){
+            Date d=new Date();
+            DateFormat.getDateTimeInstance().format(d);
+            long diffInMs = d.getTime() - date.getTime();
+            hours = TimeUnit.MILLISECONDS.toHours(diffInMs);
+        }
+
+
+//        Calendar calendar = Calendar.getInstance();
+//        DatePicker datePicker=new DatePicker(context);
+//        datePicker.get
+//        calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
+//                timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
+//        long startTime = calendar.getTimeInMillis();
+//        int hours = 0;
         if (hours < 0) {
             //this is the future!
             creationDate = resources.getString(R.string.err_creation_date_invalid);

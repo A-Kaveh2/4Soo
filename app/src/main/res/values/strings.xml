@@ -113,6 +113,7 @@
     <string name="err_block_does_not_exist">BLOCK DOES NOT EXIST! Error: 11</string>
     <string name="err_user_businesses_not_exist">شما کسب و کاری ثبت نکرده اید</string>
     <string name="err_choose_one_state">ااستان را انتخاب کنید</string>
+    <string name="err_choose_city">لطفا شهر را انتخاب کنید</string>
     <string name="err_choose_location">محل کسب و کار خود را بر روی نقشه مشخص نمایید</string>
     <string name="err_choose_location_search">محدوده مکان جستجوی خود را مشخص کنید</string>
     <string name="err_comment_does_not_exist">COMMENT DOES NOT EXIST! Error: 12</string>
@@ -210,7 +211,7 @@
     <string name="filter_all">فیلتر: تمام موضوعات</string>
     <string name="search_businesses">جستجوی کسب و کار ها</string>
     <string name="search_products">جستجوی محصولات</string>
-    <string name="choose_category">انتخاب موضوع</string>
+    <string name="choose_category">دسته بندی را انتخاب کنید</string>
     <string name="choose_category_search">ددسته بندی کسب و کار را انتخاب کنید</string>
     <string name="selected_location">جستجوی مکان انتخابی</string>
     <string name="no_results_found">جستجو نتیجه ای در بر نداشت.</string>
@@ -511,7 +512,6 @@
 
 
     <string-array name="states">
-        <item>انتخاب استان</item>
         <item>آذربايجان شرقي</item>
         <item>آذربايجان غربي</item>
         <item>اردبيل</item>
@@ -544,6 +544,12 @@
         <item>يزد</item>
     </string-array>
 
+    <string-array name="default_CityList">
+        <item>شهر۱</item>
+        <item>شهر۲</item>
+    </string-array>
+
+
     <string name="pull_to_refresh_pull_label">Pull to refresh…</string>
     <string name="pull_to_refresh_release_label">Release to refresh…</string>
     <string name="pull_to_refresh_refreshing_label">بار گذاری ....</string>
@@ -552,5 +558,32 @@
     <string name="pull_to_refresh_from_bottom_pull_label">@string/pull_to_refresh_pull_label</string>
     <string name="pull_to_refresh_from_bottom_release_label">@string/pull_to_refresh_release_label</string>
     <string name="pull_to_refresh_from_bottom_refreshing_label">@string/pull_to_refresh_refreshing_label</string>
+    <string name="str_RegisterInCharsoo">ثبت نام در چارسو</string>
+    <string name="txt_StringIdentifierIsNotAvailable">نام کاربری در دسترس نیست</string>
+
+    <string-array name="categories_default">
+        <item>دسته بندی</item>
+
+    </string-array>
+
+    <string-array name="subcategories_default">
+        <item>زیر دسته بندی</item>
+
+    </string-array>
+
+    <string-array name="cities_default">
+        <item>شهر</item>
+    </string-array>
+
+    <string name="choose_state">استان را انتخاب کنید</string>
+    <string name="choose_city">شهر را انتخاب کنید</string>
+
+    <string name="choose_subcategory">زیر دسته بندی را انتخاب کنید</string>
+    <string name="txt_Subcategory">زیر دسته بندی</string>
+    <string name="txt_Category">دسته بندی</string>
+    <string name="txt_PleaseSelectSubcategory">لطفا زیر دسته بندی را انتخاب کنید</string>
+    <string name="txt_PleaseSelectCategory">لطفا دسته بندی را انتخاب کنید</string>
+    <string name="txt_state">استان</string>
+    <string name="txt_City">شهر</string>
 
 </resources>

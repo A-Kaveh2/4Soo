@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 
 import java.util.ArrayList;
 
@@ -36,6 +35,7 @@ import ir.rasen.charsoo.view.interface_m.ICancelFriendship;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.buttons.FloatButton;
+import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.HFGridView;
 
 /**
  * Created by android on 3/14/2015.
@@ -77,14 +77,15 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
     }
 
     public void InitialGridViewUser(ArrayList<Post> postList, boolean beThreeColumn) {
-
+        this.isThreeColumn = beThreeColumn;
         this.posts = postList;
         searchItemPosts = new ArrayList<>();
         for (Post post : posts)
             searchItemPosts.add(new SearchItemPost(post.id, post.pictureId, post.picture));
 
-        adapterPostGrid = new AdapterPostGrid(context, searchItemPosts,0, Post.GetPostType.SHARE);
-        adapterPostShared = new AdapterPostShared(context, posts);
+        adapterPostGrid = new AdapterPostGrid(activity, searchItemPosts, 0, Post.GetPostType.SHARE);
+
+        adapterPostShared = new AdapterPostShared(activity, posts, null);
 
         if (!headerInitialized) {
             viewHeader = ((Activity) context).getLayoutInflater().inflate(R.layout.layout_user_grid_header_another, null);
@@ -216,20 +217,18 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
                     gridViewHeader.setAdapter(adapterPostShared);
                     //now it has one column
                     isThreeColumn = false;
-                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
+                    switchList.setBackgroundColor(context.getResources().getColor(R.color.material_blue_light));
+                    switchGrid.setBackgroundColor(context.getResources().getColor(R.color.material_gray_light));
                 }
             });
             switchGrid.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    gridViewHeader.setNumColumns(1);
-                    gridViewHeader.setAdapter(adapterPostShared);
-                    //now it has one column
-                    isThreeColumn = false;
+                    prepareGridThreeColumn(gridViewHeader);
+                    gridViewHeader.setAdapter(adapterPostGrid);
                     // now it has three column
-                    switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
-                    switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
+                    switchGrid.setBackgroundColor(context.getResources().getColor(R.color.material_blue_light));
+                    switchList.setBackgroundColor(context.getResources().getColor(R.color.material_gray_light));
                 }
             });
 
@@ -273,16 +272,33 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
 
 
 
-        this.isThreeColumn = beThreeColumn;
 
         //if gridview is displaying the post or user has not any posts
         if (postList.size() != 0 || (headerInitialized && postList.size()==0))
             listFooterView.setVisibility(View.GONE);
-        if(isThreeColumn) {
-            gridViewHeader.setAdapter(adapterPostGrid);
+
+        if (isThreeColumn) {
+//            gridViewHeader.setNumColumns(3);
+//            gridViewHeader.setVerticalSpacing(3);
+//            gridViewHeader.setHorizontalSpacing(9);
+            //        gridViewHeader.setAdapter(adapterPostShared);
+            //now it has one column
+            //        isThreeColumn = false;
+            //        switchList.setBackgroundColor(activity.getResources().getColor(R.color.material_blue_light));
+            //        switchGrid.setBackgroundColor(activity.getResources().getColor(R.color.material_gray_light));
+//            gridViewHeader.setNumColumns(3);
+//            gridViewHeader.setVerticalSpacing(3);
+//            gridViewHeader.setHorizontalSpacing(9);
             prepareGridThreeColumn(gridViewHeader);
+            gridViewHeader.setAdapter(adapterPostGrid);
+            // now it has three column
+            switchGrid.setBackgroundColor(context.getResources().getColor(R.color.material_blue_light));
+            switchList.setBackgroundColor(context.getResources().getColor(R.color.material_gray_light));
         } else {
+            gridViewHeader.setNumColumns(1);
             gridViewHeader.setAdapter(adapterPostShared);
+            switchList.setBackgroundColor(context.getResources().getColor(R.color.material_blue_light));
+            switchGrid.setBackgroundColor(context.getResources().getColor(R.color.material_gray_light));
         }
 
     }
@@ -299,6 +315,8 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         gridViewHeader.setNumColumns(3);
         gridViewHeader.setVerticalSpacing(3);
         gridViewHeader.setHorizontalSpacing(9);
+        gridViewHeader.setViewWidthIfItsZero(context.getWindowManager().getDefaultDisplay().getWidth());
+        isThreeColumn = true;
     }
 
     @Override
@@ -313,13 +331,14 @@ public class GridViewUserOther implements IWebserviceResponse,ICancelFriendship 
         }
         else if (result instanceof ArrayList) {
             //GetBusinessPosts' result
-            ArrayList<Post> posts = (ArrayList<Post>) result;
+            ArrayList<Post> newposts = (ArrayList<Post>) result;
+            posts.addAll(newposts);
             listFooterView.setVisibility(View.GONE);
             if (isThreeColumn)
-                adapterPostGrid.loadMore(SearchItemPost.getItems(posts));
+                adapterPostGrid.loadMore(SearchItemPost.getItems(newposts));
             else
-                adapterPostShared.loadMore(posts);
-            isLoadingMore=false;
+                adapterPostShared.loadMore(newposts);
+            isLoadingMore = false;
         }
     }
 

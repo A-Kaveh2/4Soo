@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingTop="50dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="100"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_States"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:background="@drawable/shape_edit_text_back"
+                    android:prompt="@string/choose_state"
+                    android:spinnerMode="dialog"
+                    style="@style/spinner_style" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:weightSum="100"
+                android:layout_marginTop="15dp">
+
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_Cities"
+                    android:entries="@array/cities_default"
+                    android:gravity="center_vertical|center|center_horizontal"
+                    android:background="@drawable/shape_edit_text_back"
+                    android:prompt="@string/choose_city"
+                    style="@style/spinner_style"
+                    android:spinnerMode="dialog" />
+            </LinearLayout>
+
+            <!--<ir.rasen.charsoo.view.widget_customized.EditTextFont-->
+                <!--android:id="@+id/edt_city"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="@string/city"-->
+
+                <!--android:gravity="right|center_vertical"-->
+                <!--android:textColor="@color/Black"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:maxLength="@integer/restriction_identifier_length"-->
+                <!--android:singleLine="true"-->
+                <!--android:layout_marginRight="5dp"-->
+                <!--/>-->
+
+
+            <ir.rasen.charsoo.view.widget_customized.EditTextFont
+                android:id="@+id/edt_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/street"
+                android:textColorHint="@color/Black"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/Black"
+                android:singleLine="true"
+                android:layout_marginTop="30dp"
+                />
+
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_large_x"
+                android:text="@string/location_on_map"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                android:textColor="@color/Black" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/map_height" />
+            <ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont
+                android:id="@+id/btn_map"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:text="@string/choose_location_on_map"
+                android:layout_marginTop="40dp"
+                android:background="@color/OrangeRed" />
+
+            <ir.rasen.charsoo.view.widget_customized.TextViewFont
+                android:id="@+id/textView_play_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:text="@string/play_services_guide"
+                android:layout_marginBottom="30dp"
+                android:gravity="center_vertical|center_horizontal" />
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -89,9 +89,9 @@ public class ActivityLogin extends CharsooActivity implements View.OnClickListen
                 break;
             case R.id.btn_login_register:
                 //The main function commented here because of the test
-                /*Intent intent = new Intent(ActivityLogin.this, ActivityUserRegister.class);
+                /*Intent intent = new Intent(ActivityLogin.this, NOT_USED___ActivityUserRegister.class);
                 startActivity(intent);*/
-                Intent intent = new Intent(this, ActivityMain.class);
+                Intent intent = new Intent(this, ActivityUserRegister.class);
                 startActivity(intent);
                 break;
         }

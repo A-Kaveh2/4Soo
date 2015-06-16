@@ -209,8 +209,6 @@ public class Post {
         post.id = jsonObject.getInt(Params.POST_ID_INT);
         post.businessID = jsonObject.getInt(Params.BUSINESS_ID_STRING_TIMELINE);
         post.businessUserName = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
-        post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
-        post.userName = jsonObject.getString(Params.USER_NAME_STRING);
         post.type = getType(jsonObject.getInt(Params.TYPE));
         post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
         if (post.type == Type.Complete) {
@@ -236,6 +234,8 @@ public class Post {
 
             post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
         } else if (post.type == Type.Follow) {
+            post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
+            post.userName = jsonObject.getString(Params.USER_NAME_STRING);
 
         } else if (post.type == Type.Review) {
             String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);

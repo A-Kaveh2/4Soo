@@ -18,7 +18,7 @@
             android:layout_margin="15dp">
 
             <Spinner
-                android:id="@+id/spinner_states"
+                android:id="@+id/spinner_States"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_edit_text_back"

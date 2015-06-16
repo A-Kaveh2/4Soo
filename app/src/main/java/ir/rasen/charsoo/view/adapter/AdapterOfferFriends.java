@@ -1,3 +1,4 @@
+/*
 package ir.rasen.charsoo.view.adapter;
 
 import android.content.Context;
@@ -31,31 +32,27 @@ import ir.rasen.charsoo.model.post.Share;
 import ir.rasen.charsoo.model.post.Unlike;
 import ir.rasen.charsoo.view.dialog.DialogCancelShareConfirmationUserShared;
 import ir.rasen.charsoo.view.dialog.PopupReportCancelSharePost;
-import ir.rasen.charsoo.view.interface_m.ISharePostChange;
 import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
+*/
 /**
  * Created by android on 3/7/2015.
- */
-public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpdateTimeLine {
+ *//*
+
+public class AdapterOfferFriends extends BaseAdapter {
 
     private ArrayList<Post> items;
     private Context context;
     SimpleLoader simpleLoader;
-    private IReportPost iReportPost;
-    IUpdateTimeLine iUpdateTimeLine;
-    ISharePostChange parentListener;
 
-    public AdapterPostShared(Context context, ArrayList<Post> items,ISharePostChange delegate) {
+
+    public AdapterOfferFriends(Context context, ArrayList<Post> items) {
         this.context = context;
         this.items = items;
         simpleLoader = new SimpleLoader(context);
-        iReportPost = this;
-        this.iUpdateTimeLine = this;
-        this.iReportPost = this;
-        parentListener=delegate;
+
     }
 
     public void loadMore(ArrayList<Post> newItem) {
@@ -87,7 +84,7 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
 
             if (view == null) {
                 holder = new Holder();
-                view = LayoutInflater.from(context).inflate(R.layout.item_post_adapter_list, viewGroup, false);
+                view = LayoutInflater.from(context).inflate(R.layout.item_friend_suggestion, viewGroup, false);
 
 
                 holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_profile_picture);
@@ -253,10 +250,12 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
                 public void onClick(View view) {
                     if (items.get(position).isShared) {
                         //cancel share the post
-             /*           new CancelShare(context, LoginInfo.getUserId(context), items.get(position).id, iUpdateTimeLine).execute();
+             */
+/*           new CancelShare(context, LoginInfo.getUserId(context), items.get(position).id, iUpdateTimeLine).execute();
                         items.get(position).isShared = false;
-                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);*/
-                        new DialogCancelShareConfirmationUserShared(context, items.get(position).id, AdapterPostShared.this).show();
+                        holder.imageViewShare.setImageResource(R.drawable.ic_reply_grey);*//*
+
+                        new DialogCancelShareConfirmationUserShared(context, items.get(position).id, AdapterOfferFriends.this).show();
                     } else {
                         //share the post
                         new Share(context, LoginInfo.getUserId(context), items.get(position).id, iUpdateTimeLine).execute();
@@ -300,9 +299,13 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
         intent.putExtra(Params.POST_ID_INT, postId);
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-        removePostByIntID(postId);
-        if (parentListener!=null)
-            parentListener.notifyOnShareCanceled(postId);
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).id == postId) {
+                items.remove(i);
+                notifyDataSetChanged();
+                break;
+            }
+        }
     }
 
 
@@ -339,13 +342,6 @@ public class AdapterPostShared extends BaseAdapter implements IReportPost, IUpda
 
     }
 
-    public void removePostByIntID(int postID_int){
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).id == postID_int) {
-                items.remove(i);
-                notifyDataSetChanged();
-                break;
-            }
-        }
-    }
+
 }
+*/

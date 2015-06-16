@@ -35,9 +35,9 @@ import ir.rasen.charsoo.model.business.UpdateBusinessProfileInfo;
 import ir.rasen.charsoo.view.dialog.DialogDeleteBusinessConfirmation;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterBaseInfo;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterContactInfo;
-import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterLocationInfo;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessEditBaseInfo;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessEditContactInfo;
+import ir.rasen.charsoo.view.fragment.FragmentBusinessEditLocationInfo;
 import ir.rasen.charsoo.view.interface_m.IChangeBusiness;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
@@ -46,9 +46,9 @@ import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
 
 public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture, IChangeBusiness {
 
-    FragmentBusinessRegisterBaseInfo fragmentBaseInfo;
-    FragmentBusinessRegisterContactInfo fragmentContactInfo;
-    FragmentBusinessRegisterLocationInfo fragmentLocationInfo;
+    FragmentBusinessEditBaseInfo fragmentBaseInfo;
+    FragmentBusinessEditContactInfo fragmentContactInfo;
+    FragmentBusinessEditLocationInfo fragmentLocationInfo;
     ProgressDialog progressDialog;
     String filePath, businessPictureString;
 
@@ -79,9 +79,9 @@ public class ActivityBusinessRegisterEdit extends CharsooActivity implements IWe
         llIndicatorContact = (LinearLayout) findViewById(R.id.ll_indicator_contact);
         llIndicatorLocation = (LinearLayout) findViewById(R.id.ll_indicator_location);
 
-        fragmentBaseInfo = new FragmentBusinessRegisterBaseInfo();
-        fragmentContactInfo = new FragmentBusinessRegisterContactInfo();
-        fragmentLocationInfo = new FragmentBusinessRegisterLocationInfo();
+        fragmentBaseInfo = new FragmentBusinessEditBaseInfo();
+        fragmentContactInfo = new FragmentBusinessEditContactInfo();
+        fragmentLocationInfo = new FragmentBusinessEditLocationInfo();
         fragmentCurrent = Fragments.BASE_INFO;
 
 

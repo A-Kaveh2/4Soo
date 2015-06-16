@@ -21,7 +21,7 @@ import ir.rasen.charsoo.view.widget_customized.buttons.ButtonFont;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.activity.ActivityBusinessWorkTime;
 
-public class FragmentBusinessRegisterContactInfo extends Fragment {
+public class FragmentBusinessEditContactInfo extends Fragment {
 
 
     EditTextFont editTextPhone, editTextMobile, editTextWebsite, editTextEmail;

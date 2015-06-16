@@ -40,8 +40,8 @@ import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widget_customized.EditTextFont;
 import ir.rasen.charsoo.view.widget_customized.TextViewFont;
 
-public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
-    public static final String TAG="FragmentBusinessRegisterBaseInfo";
+public class FragmentBusinessEditBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
+    public static final String TAG="FragmentBusinessEditBaseInfo";
 
     private ProgressDialog progressDialog;
     private EditTextFont editTextName, editTextIdentifier, editTextDescription, editTextHashtags;
@@ -150,7 +150,7 @@ public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebse
         myApplication.setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
 
         progressDialog.show();
-        new GetBusinessGategories(getActivity(), FragmentBusinessRegisterBaseInfo.this).execute();
+        new GetBusinessGategories(getActivity(), FragmentBusinessEditBaseInfo.this).execute();
 
         Business b = ((MyApplication) getActivity().getApplication()).business;
 
@@ -261,7 +261,7 @@ public class FragmentBusinessRegisterBaseInfo extends Fragment implements IWebse
         textViewCategories.setText(categories.get(categoryListPosition).name);
         progressDialog.show();
         ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
-        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, FragmentBusinessRegisterBaseInfo.this).execute();
+        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, FragmentBusinessEditBaseInfo.this).execute();
     }
 
     @Override
