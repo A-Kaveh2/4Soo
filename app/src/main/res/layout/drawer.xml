@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/drawer_profile"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/drawer_header_height"
+            android:background="@color/material_blue">
+
+            <ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle
+                android:id="@+id/drawer_user_pic"
+                android:layout_width="@dimen/drawer_profile"
+                android:layout_height="@dimen/drawer_profile"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_half" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_toLeftOf="@+id/drawer_user_pic"
+                android:orientation="vertical">
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/drawer_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_gravity="right"/>
+
+                <ir.rasen.charsoo.view.widgets.TextViewFont
+                    android:id="@+id/drawer_user_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/material_blue_light"
+                    android:layout_gravity="right"/>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_centerVertical="true"
+                android:src="@drawable/arrow_left"/>
+
+        </RelativeLayout>
+
+        <!-- HOME -->
+        <RelativeLayout
+            android:id="@+id/drawer_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_home_blue_36dp" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/home" />
+        </RelativeLayout>
+        <!-- MANAGEMENT -->
+        <RelativeLayout
+            android:id="@+id/drawer_businesses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_home_blue_36dp" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/management" />
+        </RelativeLayout>
+        <!-- new business -->
+        <RelativeLayout
+            android:id="@+id/drawer_new_business"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_app" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/new_business" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/material_divider" />
+        <!-- invite friends -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_app" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/invite_friends" />
+        </RelativeLayout>
+        <!-- send feedback -->
+        <RelativeLayout
+            android:id="@+id/drawer_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_app" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/send_feedback" />
+        </RelativeLayout>
+        <!-- settings -->
+        <RelativeLayout
+            android:id="@+id/drawer_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_app" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/settings" />
+        </RelativeLayout>
+        <!-- help -->
+        <RelativeLayout
+            android:id="@+id/drawer_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_app" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/help" />
+        </RelativeLayout>
+        <!-- exit -->
+        <RelativeLayout
+            android:id="@+id/drawer_exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_header_inner_items_height"
+                android:layout_height="@dimen/drawer_header_inner_items_height"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:src="@drawable/ic_app" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
+                android:text="@string/exit" />
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

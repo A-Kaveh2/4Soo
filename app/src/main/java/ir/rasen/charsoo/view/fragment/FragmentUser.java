@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,15 +10,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import ir.rasen.charsoo.model.NetworkConnectivityReciever;
-import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
 
@@ -31,14 +26,19 @@ import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.NetworkConnectivityReciever;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
 import ir.rasen.charsoo.model.user.GetUserHomeInfo;
+import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
 import ir.rasen.charsoo.view.widgets.GridViewUser;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh, NetworkStateChangeListener {
 
@@ -152,6 +152,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 /*        if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
             return;
         boolean hasRequest = false;*/
+        ((ActivityMain) getActivity()).setUserDrawer(user);
 
         boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
         boolean hasHeader = gridViewUser == null ? false : gridViewUser.hasHeader;

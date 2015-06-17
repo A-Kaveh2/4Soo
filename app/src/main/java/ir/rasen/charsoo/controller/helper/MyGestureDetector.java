@@ -10,13 +10,13 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Animation;
 import android.widget.ImageView;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.model.post.Like;
-import ir.rasen.charsoo.view.widgets.animations.ResizeAnimation;
 
 /**
  * Created by android on 5/11/2015.
@@ -52,9 +52,8 @@ public class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
     @Override
     public boolean onDoubleTap(MotionEvent e) {
 
-
         //if (postLikeStatus) {
-            //unlike the post
+        //unlike the post
             /*imageViewPostLike.setImageResource(R.drawable.ic_like);
             imageViewPostLike.setVisibility(View.VISIBLE);
             Handler handler = new Handler();
@@ -70,42 +69,49 @@ public class MyGestureDetector extends GestureDetector.SimpleOnGestureListener {
             imageViewLike.setImageResource(R.drawable.ic_like);*/
         //} else {
 
-            int TIME_ANIM_MOVING = 500;
-            // like animation
+        int TIME_ANIM_MOVING = 300;
+        int LIKE_SIZE = 20; // (% of picture)
+        // like animation
 
-            int width;//imageViewPostLike.getLayoutParams().width;
+        int width;//imageViewPostLike.getLayoutParams().width;
 
-            WindowManager w = ((Activity) context).getWindowManager();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-                Point size = new Point();
-                w.getDefaultDisplay().getSize(size);
-                width = size.x;
-            } else {
-                Display d = w.getDefaultDisplay();
-                width = d.getWidth();
+        WindowManager w = ((Activity) context).getWindowManager();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            Point size = new Point();
+            w.getDefaultDisplay().getSize(size);
+            width = size.x;
+        } else {
+            Display d = w.getDefaultDisplay();
+            width = d.getWidth();
+        }
+
+        //Animation anim_zoom = new ResizeAnimation(imageViewPostLike, 0, 0, width * LIKE_SIZE / 100, width * LIKE_SIZE / 100, TIME_ANIM_MOVING);
+        // logo animations
+        //animationSet.addAnimation(anim_toTop);
+        //anim_zoom.setInterpolator(new AccelerateInterpolator());
+
+        //like the post
+        //imageViewPostLike.startAnimation(anim_zoom);
+        YoYo.with(Techniques.ZoomIn)
+                .duration(700)
+                .playOn(imageViewPostLike);
+        imageViewPostLike.setVisibility(View.VISIBLE);
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                imageViewPostLike.setVisibility(View.INVISIBLE);
+                //Animation anim_zoom = new ResizeAnimation(imageViewPostLike, 0, 0, 0, 0, 1);
+                //imageViewPostLike.startAnimation(anim_zoom);
             }
-
-            Animation anim_zoom = new ResizeAnimation(imageViewPostLike, 0, 0, width*3/4, width*3/4, TIME_ANIM_MOVING);
-            // logo animations
-            //animationSet.addAnimation(anim_toTop);
-            anim_zoom.setInterpolator(new AccelerateInterpolator());
-
-            //like the post
-            imageViewPostLike.startAnimation(anim_zoom);
-            imageViewPostLike.setVisibility(View.VISIBLE);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    imageViewPostLike.setVisibility(View.INVISIBLE);
-                    Animation anim_zoom = new ResizeAnimation(imageViewPostLike, 0, 0, 0, 0, 1);
-                    imageViewPostLike.startAnimation(anim_zoom);
-                }
-            }, 1000);
-            //Anim.fadeOut(imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE,View.INVISIBLE);
-            if(!postLikeStatus) new Like(context, LoginInfo.getUserId(context), postId).execute();
-            postLikeStatus = true;
-            imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
+        }, 700);
+        //Anim.fadeOut(imageViewPostLike,0,Anim.Duration.MEDIUM,Anim.Interpolate.ACCELERATE_DECELERATE,View.INVISIBLE);
+        if (!postLikeStatus) new Like(context, LoginInfo.getUserId(context), postId).execute();
+        postLikeStatus = true;
+        imageViewLike.setImageResource(R.drawable.ic_favorite_blue);
+        YoYo.with(Techniques.Shake)
+                .duration(700)
+                .playOn(imageViewLike);
         //}
         return true;
     }

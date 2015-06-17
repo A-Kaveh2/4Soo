@@ -27,6 +27,7 @@
     <dimen name="user_profile_margin">15dp</dimen>
     <dimen name="work_time_margi">5dp</dimen>
     <dimen name="work_time_layouts_margin">10dp</dimen>
+    <dimen name="post_like">100dp</dimen>
     <!--Margins-->
 
     <!--Font sized-->
@@ -78,10 +79,9 @@
     <dimen name="header_switch_footer_hight_halft">15dp</dimen>
     <dimen name="drawer_header_height_blue_section">180dp</dimen>
     <dimen name="drawer_header_business_height_blue_section">80dp</dimen>
-    <dimen name="drawer_header_height">48dp</dimen>
     <dimen name="drawer_header_business_height">120dp</dimen>
     <dimen name="drawer_user_picture_height">100dp</dimen>
-    <dimen name="drawer_header_inner_items_height">40dp</dimen>
+    <dimen name="drawer_header_inner_items_height">32dp</dimen>
     <dimen name="drawer_header_inner_items_with_icons_height">40dp</dimen>
     <dimen name="register_profile_picture_height">100dp</dimen>
     <dimen name="user_profile_picture_height">80dp</dimen>
@@ -106,6 +106,7 @@
     <dimen name="activity_horizontal_margin_2x">32dp</dimen>
     <dimen name="activity_horizontal_margin_half">8dp</dimen>
     <dimen name="activity_horizontal_margin_1of4">4dp</dimen>
+    <dimen name="activity_horizontal_margin_sx">72dp</dimen>
     <dimen name="activity_vertical_margin_2x">32dp</dimen>
     <dimen name="activity_vertical_margin_half">8dp</dimen>
     <dimen name="activity_vertical_margin_1of4">4dp</dimen>
@@ -139,7 +140,8 @@
     <dimen name="corner_size_dialog">20dp</dimen>
     <dimen name="corner_size">2dp</dimen>
 
-    <dimen name="drawer_width">200dp</dimen>
+    <dimen name="drawer_header_height">100dp</dimen>
+    <dimen name="drawer_profile">64dp</dimen>
 
     <dimen name="dialog_body_height">72dp</dimen>
 

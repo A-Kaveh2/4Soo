@@ -1,6 +1,5 @@
 package ir.rasen.charsoo.view.fragment;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -10,33 +9,35 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
-
-import ir.rasen.charsoo.model.NetworkConnectivityReciever;
-import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.model.post.GetTimeLinePost;
-import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.Post;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.model.NetworkConnectivityReciever;
+import ir.rasen.charsoo.model.post.GetTimeLinePost;
+import ir.rasen.charsoo.model.post.GetTimeLinePosts;
+import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IGetNewTimeLinePost;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.model.post.GetTimeLinePosts;
+import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
+import ir.rasen.charsoo.view.widgets.buttons.FloatButton;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 public class FragmentHome extends Fragment implements IWebserviceResponse, IPullToRefresh, IGetNewTimeLinePost,NetworkStateChangeListener {
 
@@ -73,7 +74,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home,
+        final View view = inflater.inflate(R.layout.fragment_home,
                 container, false);
 
         NetworkConnectivityReciever.setNetworkStateListener(TAG,FragmentHome.this);
@@ -92,7 +93,19 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
 
         pullToRefreshListView = new PullToRefreshList(getActivity(), (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list), FragmentHome.this);
         listView = pullToRefreshListView.getListView();
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
+
+            @Override
+            public void onScroll(AbsListView v, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (v.getId() == listView.getId()) {
+                    ((FloatButton) view.findViewById(R.id.btn_search)).onScroll(v, firstVisibleItem, visibleItemCount, totalItemCount);
+                }
+            }
+        });
 
         status = Status.FIRST_TIME;
         progressDialog.show();

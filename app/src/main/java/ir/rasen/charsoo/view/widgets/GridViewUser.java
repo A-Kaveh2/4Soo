@@ -24,11 +24,10 @@ import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.post.GetSharedPosts;
-import ir.rasen.charsoo.view.activity.ActivityMain;
-import ir.rasen.charsoo.view.activity.ActivityUserProfile;
 import ir.rasen.charsoo.view.activity.ActivitySearchUser;
 import ir.rasen.charsoo.view.activity.ActivityUserFollowingBusinesses;
 import ir.rasen.charsoo.view.activity.ActivityUserFriends;
+import ir.rasen.charsoo.view.activity.ActivityUserProfile;
 import ir.rasen.charsoo.view.activity.ActivityUserReviews;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.adapter.AdapterPostShared;
@@ -92,9 +91,6 @@ public class GridViewUser implements IWebserviceResponse, ISharePostChange {
         this.isThreeColumn = beThreeColumn;
         this.hasHeader = hasHeader;
         this.posts = postList;
-
-        if (activity instanceof ActivityMain)
-            ((ActivityMain) activity).initPopupWindowUser();
 
         searchItemPosts = new ArrayList<>();
         for (Post post : posts)

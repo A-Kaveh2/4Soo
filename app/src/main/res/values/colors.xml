@@ -21,6 +21,7 @@
     <color name="material_gray_dark">#626262</color>
     <color name="material_gray">#727272</color>
     <color name="material_gray_light">#ededed</color>
+    <color name="material_divider">#b6b6b6</color>
     <color name="material_blue_light">#B3E5Fc</color>
     <color name="material_black">#212121</color>
 </resources>

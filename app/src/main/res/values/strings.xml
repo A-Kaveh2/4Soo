@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- MAIN -->
+    <string name="home">خانه</string>
+    <string name="management">مدیریت کسب و کار ها</string>
+    <string name="invite_friends">دعوت از دوستان</string>
+    <string name="send_feedback">ارسال بازخورد</string>
+    <string name="app_info">چارسو مسیری آسان به سوی کسب و کارهایی که می پسندید</string>
+
     <!-- SolarCalendar -->
     <string name="Sat">شنبه</string>
     <string name="Sun">یکشنبه</string>

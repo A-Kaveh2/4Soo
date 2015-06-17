@@ -1,4 +1,4 @@
-package ir.rasen.charsoo.view.widgets.animations;
+/*package ir.rasen.charsoo.view.widgets.animations;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +8,7 @@ import android.view.animation.Transformation;
 /**
  * an animation for resizing the view.
  */
-public class ResizeAnimation extends Animation {
+/*public class ResizeAnimation extends Animation {
     private View mView;
     private float mToHeight;
     private float mFromHeight;
@@ -35,4 +35,4 @@ public class ResizeAnimation extends Animation {
         p.width = (int) width;
         mView.requestLayout();
     }
-}
+}*/

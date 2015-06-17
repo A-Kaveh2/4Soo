@@ -18,11 +18,10 @@
         android:background="@color/OrangeRed"
         materialdesign:iconDrawable="@drawable/ic_add"
         materialdesign:animate="false"
-        android:layout_marginRight="@dimen/activity_horizontal_margin_2x"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin_2x"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentLeft="true"/>
 
     <ProgressBar
         android:layout_width="wrap_content"

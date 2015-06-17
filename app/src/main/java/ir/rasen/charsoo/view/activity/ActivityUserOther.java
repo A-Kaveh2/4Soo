@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 
 import ir.rasen.charsoo.R;
@@ -27,14 +27,14 @@ public class ActivityUserOther extends CharsooActivity {
 
         if (visitorIntId==visitedUserIntId){
             fragUser=new FragmentUser();
-            FragmentTransaction ft= getFragmentManager().beginTransaction();
+            FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContainer,fragUser);
             ft.commit();
         }
         else
         {
             fragOther=new FragmentUserOther();
-            FragmentTransaction ft= getFragmentManager().beginTransaction();
+            FragmentTransaction ft= getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContainer,fragOther);
             ft.commit();
         }

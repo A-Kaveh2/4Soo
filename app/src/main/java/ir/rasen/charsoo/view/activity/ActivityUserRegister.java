@@ -1,7 +1,7 @@
 package ir.rasen.charsoo.view.activity;
 
 
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -46,7 +46,7 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         setTitle(getString(R.string.str_RegisterInCharsoo));
         fragOne=new FragmentUserRegisterPageOne();
         fragTwo=new FragmentUserRegisterPageTwo();
-        ft=getFragmentManager().beginTransaction();
+        ft=getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragmentContainer,fragOne);
         currentFragment=FIRST_PAGE;
         ft.commit();
@@ -98,7 +98,7 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
             case SECOND_PAGE:
                 //back to prev fragment
 
-                ft=getFragmentManager().beginTransaction();
+                ft=getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragmentContainer,fragOne);
 
                 currentFragment=FIRST_PAGE;
@@ -172,7 +172,7 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         if (tempStringOne!=null) {
             userFullName=tempStringOne[0];
             userStringId=tempStringOne[1];
-            ft=getFragmentManager().beginTransaction();
+            ft=getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentContainer,fragTwo);
             currentFragment=SECOND_PAGE;
             ft.commit();

@@ -79,9 +79,10 @@
 
                     <ImageView
                         android:id="@+id/imageView_post_like"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="@dimen/post_like"
+                        android:layout_height="@dimen/post_like"
                         android:scaleType="fitXY"
+                        android:src="@drawable/ic_favorite_like"
                         android:layout_centerInParent="true"
                         android:visibility="invisible" />
 

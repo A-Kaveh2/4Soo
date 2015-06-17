@@ -17,9 +17,13 @@ import ir.rasen.charsoo.view.widgets.TextViewFontActionBarTitle;
  */
 public class CharsooActivity extends ActionBarActivity {
 
-    Toolbar toolbar;
-    View movingObject;
-    boolean actionBarSet = false;
+    private Toolbar toolbar;
+    // moving variables::
+    //private View movingObject;
+    private boolean actionBarSet = false;
+    //private static int MOVING_TIME = 200;
+    //private View content;
+    //private boolean scrollMovement = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,26 @@ public class CharsooActivity extends ActionBarActivity {
             ((TextViewFontActionBarTitle) v.findViewById(R.id.textView_title)).setText(title);
             actionBar.setCustomView(v);
         }
+
+        /*final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                content = findViewById(R.id.content);
+                if(content!=null) {
+                    ViewGroup.LayoutParams params = content.getLayoutParams();
+                    if(content.getHeight()>0) {
+                        params.height = content.getHeight() + movingObject.getHeight();
+                        ViewPropertyAnimator.animate(movingObject).translationY(0).setDuration(MOVING_TIME);
+                        ViewPropertyAnimator.animate(content).translationY(0).setDuration(MOVING_TIME);
+                        content.setLayoutParams(params);
+                        scrollMovement = true;
+                    } else {
+                        handler.postDelayed(this, 50);
+                    }
+                } else scrollMovement = true;
+            }
+        }, 50);*/
     }
 
     @Override
@@ -56,7 +80,7 @@ public class CharsooActivity extends ActionBarActivity {
         }
         actionBarSet = true;
         this.toolbar = toolbar;
-        this.movingObject = toolbar;
+        //this.movingObject = toolbar;
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setSupportActionBar(toolbar);
         customizeActionbar();
@@ -75,22 +99,54 @@ public class CharsooActivity extends ActionBarActivity {
         }
     }
 
-    public void hideToolbar() {
-        if(movingObject==null)
-            return;
-        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-        //    movingObject.animate().translationY(-movingObject.getBottom()).setInterpolator(new AccelerateInterpolator());
-    }
+    //public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+/*        switch (scrollState) {
+            case AbsListView.SCROLL_AXIS_NONE:
+                floatHiding = false;
+                floatShowing = false;
+                ViewPropertyAnimator.animate(movingObject).translationY(0).setDuration(MOVING_TIME);
+                try {
+                    ViewPropertyAnimator.animate(content).translationY(0).setDuration(MOVING_TIME);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+        }*/
+    //}
 
-    public void showToolbar() {
-        if(movingObject==null)
+    //private boolean floatHiding = false, floatShowing = false;
+    //private int mLastFirstVisibleItem;
+    //public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+/*
+        if(!scrollMovement)
             return;
-        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-        //    movingObject.animate().translationY(0).setInterpolator(new DecelerateInterpolator());
-    }
 
-    public void setMovingObject(View view) {
-        movingObject = view;
-    }
+        if (mLastFirstVisibleItem < firstVisibleItem) {
+
+            if (floatShowing) floatShowing = false;
+            if (!floatHiding) {
+                ViewPropertyAnimator.animate(movingObject).translationY(-movingObject.getHeight()).setDuration(MOVING_TIME);
+                if(content!=null)
+                    ViewPropertyAnimator.animate(content).translationY(-movingObject.getHeight()).setDuration(MOVING_TIME);
+                floatHiding = true;
+            }
+        }
+        if (mLastFirstVisibleItem > firstVisibleItem) {
+            if (floatHiding) {
+                floatHiding = false;
+            }
+            if (!floatShowing) {
+                ViewPropertyAnimator.animate(movingObject).translationY(0).setDuration(MOVING_TIME);
+                if(content!=null)
+                    ViewPropertyAnimator.animate(content).translationY(0).setDuration(MOVING_TIME);
+                floatShowing = true;
+            }
+        }
+        mLastFirstVisibleItem = firstVisibleItem;*/
+    //}
+
+//    public void setMovingObject(View view) {
+//        movingObject = view;
+//    }
 
 }

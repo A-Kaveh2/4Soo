@@ -85,10 +85,11 @@
 
                 <ImageView
                     android:id="@+id/imageView_post_like"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="@dimen/post_like"
+                    android:layout_height="@dimen/post_like"
                     android:layout_centerInParent="true"
                     android:scaleType="fitXY"
+                    android:src="@drawable/ic_favorite_like"
                     android:visibility="invisible" />
 
             </RelativeLayout>
@@ -195,7 +196,7 @@
                 android:id="@+id/ll_price_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_vertical_margin"
+                android:layout_margin="@dimen/activity_vertical_margin_half"
                 android:gravity="right"
                 android:orientation="horizontal">
 
@@ -223,7 +224,7 @@
                 android:id="@+id/ll_code_section"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/activity_vertical_margin"
+                android:layout_margin="@dimen/activity_vertical_margin_half"
                 android:gravity="right"
                 android:orientation="horizontal">
 
@@ -340,7 +341,7 @@
         android:layout_margin="@dimen/activity_horizontal_margin_half"
         android:background="@color/White"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

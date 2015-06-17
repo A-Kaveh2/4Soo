@@ -5,14 +5,14 @@ package ir.rasen.charsoo.view.activity;
  */
 
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -82,7 +82,7 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
         fragTwo=new FragmentBusinessRegisterPageTwo();
         fragThree=new FragmentBusinessRegisterPageThree();
 
-        fm = getFragmentManager();
+        fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         currentFragment=FRAG_ONE;
         ft.replace(R.id.fragmentContainer, fragOne);

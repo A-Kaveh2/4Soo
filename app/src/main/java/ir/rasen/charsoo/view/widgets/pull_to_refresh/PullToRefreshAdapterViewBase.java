@@ -35,7 +35,6 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.internal.EmptyViewMethodAccessor;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.internal.IndicatorLayout;
 
@@ -125,16 +124,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
             updateIndicatorViewsVisibility();
         }
 
-        int currentFirstVisibleItem = firstVisibleItem;
-        if (currentFirstVisibleItem > lastFirstVisibleItem) {
-            if (getContext() instanceof CharsooActivity)
-                ((CharsooActivity) getContext()).hideToolbar();
-        } else if (currentFirstVisibleItem < lastFirstVisibleItem) {
-            // getSherlockActivity().getSupportActionBar().show();
-            if (getContext() instanceof CharsooActivity)
-                ((CharsooActivity) getContext()).showToolbar();
-        }
-        lastFirstVisibleItem = currentFirstVisibleItem;
+        //((CharsooActivity) getContext()).onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
 
         // Finally call OnScrollListener if we have one
         if (null != mOnScrollListener) {
@@ -154,6 +144,7 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
         if (null != mOnScrollListener) {
             mOnScrollListener.onScrollStateChanged(view, state);
         }
+        //((CharsooActivity) getContext()).onScrollStateChanged(view, state);
     }
 
     /**

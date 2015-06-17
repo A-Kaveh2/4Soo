@@ -3,6 +3,7 @@ package ir.rasen.charsoo.view.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,11 +76,11 @@ public class ActivityLogin extends CharsooActivity implements View.OnClickListen
         switch (view.getId()) {
             case R.id.btn_login_login:
                 if (!Validation.validateEmail(ActivityLogin.this, editTextEmail.getText().toString()).isValid()) {
-                    editTextEmail.setError(Validation.getErrorMessage());
+                    ((TextInputLayout) findViewById(R.id.til_email)).setError(Validation.getErrorMessage());
                     return;
                 }
                 if (!Validation.validatePassword(ActivityLogin.this, editTextPassword.getText().toString()).isValid()) {
-                    editTextPassword.setError(Validation.getErrorMessage());
+                    ((TextInputLayout) findViewById(R.id.til_password)).setError(Validation.getErrorMessage());
                     return;
                 }
                 progressDialog.show();

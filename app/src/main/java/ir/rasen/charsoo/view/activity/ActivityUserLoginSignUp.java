@@ -5,8 +5,8 @@ package ir.rasen.charsoo.view.activity;
  */
 
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
@@ -60,7 +60,7 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
         fragmentPicture = new FragmentUserSignUpePicture();
 
         fragmentCurrent = Fragments.LOGIN;
-        fm = getFragmentManager();
+        fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
         ft.add(R.id.fragmentContainer, fragmentUserLogin);
 

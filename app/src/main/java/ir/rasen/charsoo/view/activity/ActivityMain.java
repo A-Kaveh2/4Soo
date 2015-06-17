@@ -1,46 +1,54 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogExit;
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widgets.buttons.NoShadowFloatButton;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
-
+import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
 public class ActivityMain extends CharsooActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs {
 
-    PopupWindow popupWindow;
+    private static final int FRAG_HOME=0, FRAG_SEARCH=1, FRAG_BUSINESS=2, FRAG_USER=3;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private View btnHome;
 
-    boolean footerHome=true, footerUser, footerSearch, footerBusiness, popupWindowDS=false;
+    boolean footerHome=true, footerUser, footerSearch, footerBusiness;
 
-    NoShadowFloatButton btnHome, btnSearch, btnUser, btnBusiness;
     FragmentManager fm;
     FragmentTransaction ft;
     ProgressDialog progressDialog;
     int screenWidth;
 
+    @Override
+    public void onClick(View v) {
+
+    }
 
     public enum FragmentTag {HOME, SEARCH, BUSINESSES, USER}
 
@@ -56,8 +64,9 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        btnHome = toolbar.findViewById(R.id.btn_home);
 
-        fm = getFragmentManager();
+        fm = getSupportFragmentManager();
         ft = fm.beginTransaction();
 
         ft.show(fm.findFragmentById(R.id.frag_home));
@@ -70,17 +79,10 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
        /* ft.add(R.id.fragmentContainer, fragmentHome);
         ft.commit();*/
 
-        btnHome = (NoShadowFloatButton) findViewById(R.id.btn_home);
-        btnSearch = (NoShadowFloatButton) findViewById(R.id.btn_search);
-        btnUser = (NoShadowFloatButton) findViewById(R.id.btn_user);
-        btnBusiness = (NoShadowFloatButton) findViewById(R.id.btn_businesses2);
-
-        btnHome.setOnClickListener(this);
-        btnSearch.setOnClickListener(this);
-        btnUser.setOnClickListener(this);
-        btnBusiness.setOnClickListener(this);
-
         screenWidth = getResources().getDisplayMetrics().widthPixels;
+
+        initDrawerLayout();
+        initNavigationView();
 
         if (LoginInfo.hasBusiness(this)) {
             //if user has any business, display four tab
@@ -90,22 +92,15 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
             makeItThree();
         }
 
-
     }
 
     public void setFragment(FragmentTag fragmentTag) {
         switch (fragmentTag) {
             case HOME:
-                setSelection(btnHome.getId(), true);
-                break;
-            case BUSINESSES:
-                setSelection(btnBusiness.getId(), true);
+                setSelection(FRAG_HOME);
                 break;
             case SEARCH:
-                setSelection(btnSearch.getId(), true);
-                break;
-            case USER:
-                setSelection(btnUser.getId(), true);
+                setSelection(FRAG_SEARCH);
                 break;
         }
 
@@ -119,7 +114,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     }
 
     private void checkBack() {
-        switch (fragmentTagList.size()) {
+/*        switch (fragmentTagList.size()) {
             case 0:
                 exit();
                 break;
@@ -133,7 +128,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 fragmentTagList.remove(fragmentTagList.size() - 1);
                 setFragment(fragmentTagList.get(fragmentTagList.size()-1));
                 break;
-        }
+        }*/
     }
 
     private void addFragment(FragmentTag fragmentTag) {
@@ -225,20 +220,15 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         }, 500);
     }
 
-    private void setSelection(int relativeLayoutId, boolean autoSetBackground) {
+    private void setSelection(int relativeLayoutId) {
+        drawerLayout.closeDrawer(Gravity.RIGHT);
         switch (relativeLayoutId) {
-            case R.id.btn_home:
+            case FRAG_HOME:
                 if (footerHome)
                     return;
                 //getSupportActionBar().show();
-                nothingChoseInHeader();
 
                 addFragment(FragmentTag.HOME);
-                btnHome.setDrawableIcon(R.drawable.ic_home_blue_36dp);
-                if(autoSetBackground)
-                    btnHome.setBackgroundColor(getResources().getColor(android.R.color.white));
-                else
-                    btnHome.setFillWithRipple(true);
 
                 footerHome=true;
                 footerBusiness=false;
@@ -254,20 +244,15 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
                 ft.commit();
 
+                btnHome.setVisibility(View.GONE);
+
                 break;
-            case R.id.btn_search:
+            case FRAG_SEARCH:
                 if (footerSearch)
                     return;
 
                 //getSupportActionBar().hide();
                 addFragment(FragmentTag.SEARCH);
-
-                nothingChoseInHeader();
-                btnSearch.setDrawableIcon(R.drawable.ic_search_blue_36dp);
-                if(autoSetBackground)
-                    btnSearch.setBackgroundColor(getResources().getColor(android.R.color.white));
-                else
-                    btnSearch.setFillWithRipple(true);
 
                 footerHome = false;
                 footerBusiness=false;
@@ -291,6 +276,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                     recursivelyCallHandlerSearchFragment();*/
                 if (!((MyApplication) getApplication()).isSearchCreated)
                     recursivelyCallHandlerSearchFragment();
+                btnHome.setVisibility(View.VISIBLE);
                 break;
                 /*if (footerSearch)
                     return;
@@ -318,19 +304,12 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 } else
                     recursivelyCallHandlerSearchFragment();
                 break;*/
-            case R.id.btn_user:
+            case FRAG_USER:
                 if (footerUser)
                     return;
 
                 //getSupportActionBar().hide();
                 addFragment(FragmentTag.USER);
-
-                nothingChoseInHeader();
-                btnUser.setDrawableIcon(R.drawable.ic_person_blue_36dp);
-                if(autoSetBackground)
-                    btnUser.setBackgroundColor(getResources().getColor(android.R.color.white));
-                else
-                    btnUser.setFillWithRipple(true);
 
                 footerHome = false;
                 footerBusiness=false;
@@ -347,6 +326,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 if (((MyApplication) getApplication()).isUserCreated)
                     recursivelyCallHandlerUserFragment();
+                btnHome.setVisibility(View.VISIBLE);
                 break;
 
                     //old code
@@ -376,34 +356,27 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 } else
                     recursivelyCallHandlerUserFragment();
                 break;*/
-            case R.id.btn_businesses2:
+            case FRAG_BUSINESS:
                 //getSupportActionBar().hide();
                 if (footerBusiness)
                     return;
                 addFragment(FragmentTag.BUSINESSES);
-                initialUserBusinessesTab(autoSetBackground);
+                initialUserBusinessesTab();
+                btnHome.setVisibility(View.VISIBLE);
                 break;
         }
     }
 
-
     private void makeItThree() {
-        btnBusiness.setVisibility(View.GONE);
+        navigationView.findViewById(R.id.drawer_businesses).setVisibility(View.GONE);
     }
 
     private void makeItFour() {
-        btnBusiness.setVisibility(View.VISIBLE);
+        navigationView.findViewById(R.id.drawer_businesses).setVisibility(View.VISIBLE);
     }
 
 
-    public void initialUserBusinessesTab(boolean autoSetBackground) {
-        nothingChoseInHeader();
-
-        btnBusiness.setDrawableIcon(R.drawable.ic_store_mall_directory_blue_36dp);
-        if(autoSetBackground)
-            btnBusiness.setBackgroundColor(getResources().getColor(android.R.color.white));
-        else
-            btnBusiness.setFillWithRipple(true);
+    public void initialUserBusinessesTab() {
 
         footerHome = false;
         footerBusiness=true;
@@ -445,26 +418,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
             recursivelyCallHandlerUserBusinessesFragment();*/
     }
 
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_home:
-                setSelection(btnHome.getId(), false);
-                break;
-            case R.id.btn_user:
-                setSelection(btnUser.getId(), false);
-                break;
-            case R.id.btn_search:
-                setSelection(btnSearch.getId(), false);
-                break;
-            case R.id.btn_businesses2:
-                setSelection(btnBusiness.getId(), false);
-                break;
-        }
-    }
-
-
     @Override
     public void getResult(Object result) {
 
@@ -477,23 +430,19 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
     @Override
     public void onBackPressed() {
-        if(popupWindow!=null && popupWindow.isShowing()) {
-            popupWindow.dismiss();
-            return;
-        }
-        checkBack();
+//        checkBack();
     }
 
     @Override
     public void notifyMakeThreeTab() {
         makeItThree();
-        setSelection(btnUser.getId(), false);
+        setSelection(FRAG_USER);
     }
 
     @Override
     public void notifyMakeFourTabsWithInitialize() {
         makeItFour();
-        initialUserBusinessesTab(true);
+        initialUserBusinessesTab();
     }
 
     @Override
@@ -512,25 +461,9 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
             if (fragmentUserBusinesses != null)
                 fragmentUserBusinesses.goToRegisterBusinessActivity();
         } else {
-            initialUserBusinessesTab(true);
+            initialUserBusinessesTab();
         }
     }
-
-    private void nothingChoseInHeader() {
-        btnHome.setDrawableIcon(R.drawable.ic_home_white_36dp);
-        btnHome.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        btnHome.setFillWithRipple(true);
-        btnUser.setDrawableIcon(R.drawable.ic_person_white_36dp);
-        btnUser.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        btnUser.setFillWithRipple(true);
-        btnSearch.setDrawableIcon(R.drawable.ic_search_white_36dp);
-        btnSearch.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        btnSearch.setFillWithRipple(true);
-        btnBusiness.setDrawableIcon(R.drawable.ic_store_mall_directory_white_36dp);
-        btnBusiness.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        btnBusiness.setFillWithRipple(true);
-    }
-
 
     private void initialPopupOptionsUser(View view, final PopupWindow popupWindow) {
 /*        (view.findViewById(R.id.imageView_drawer_edit)).setOnClickListener(new View.OnClickListener() {
@@ -541,7 +474,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 popupWindow.dismiss();
             }
         });
-*/
+
         (view.findViewById(R.id.ll_drawer_businesses)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -588,43 +521,116 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
             public void onClick(View view) {
                 popupWindow.dismiss();
             }
-        });
+        });*/
+    }
+    public void switchPopupWindow(View view) {
+        drawerLayout.openDrawer(Gravity.RIGHT);
     }
 
-    public void initPopupWindowUser() {
-        popupWindow = new PopupWindow(ActivityMain.this);
-        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.popup_options_user, null, false);
-        popupWindow.setContentView(view);
+    private void initDrawerLayout() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    }
+    private void initNavigationView() {
+        //Initializing NavigationView
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        initialPopupOptionsUser(view, popupWindow);
-
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+        (navigationView.findViewById(R.id.drawer_profile)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDismiss() {
-                popupWindowDS=true;
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        popupWindowDS = false;
-                    }
-                }, 100);
+            public void onClick(View view) {
+                setSelection(FRAG_USER);
             }
         });
-        popupWindow.setWindowLayoutMode(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
+        (navigationView.findViewById(R.id.drawer_home)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setSelection(FRAG_HOME);
+            }
+        });
+        (navigationView.findViewById(R.id.drawer_new_business)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityMain.this, ActivityBusinessRegisterEdit.class);
+                startActivityForResult(intent, Params.ACTION_REGISTER_BUSINESS);
+                notifyGo();
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        });
+        (navigationView.findViewById(R.id.drawer_businesses)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setSelection(FRAG_BUSINESS);
+            }
+        });
+        (navigationView.findViewById(R.id.drawer_feedback)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_contact_us)));
+                startActivity(browserIntent);
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        });
+        (navigationView.findViewById(R.id.drawer_settings)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityMain.this, ActivityUserSetting.class);
+                startActivity(intent);
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        });
+        (navigationView.findViewById(R.id.drawer_help)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_guide)));
+                startActivity(browserIntent);
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        });
+        (navigationView.findViewById(R.id.drawer_exit)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DialogExit(ActivityMain.this).show();
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        });
+        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+/*        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
+            // This method will trigger on item Click of navigation menu
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+
+                //Checking if the item is in checked state or not, if not make it in checked state
+                if(menuItem.isChecked()) menuItem.setChecked(false);
+                else menuItem.setChecked(true);
+
+                //Closing drawer on item click
+                drawerLayout.closeDrawers();
+
+                //Check to see which item was being clicked and perform appropriate action
+                switch (menuItem.getItemId()){
+                    case R.id.home:
+                    default:
+                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
+                        return true;
+
+                }
+            }
+        });*/
     }
 
-    public void switchPopupWindow(View view) {
-        // SHOW POPUP
-        if(popupWindow==null)
-            initPopupWindowUser();
-        if(!popupWindow.isShowing() && !popupWindowDS)
-            popupWindow.showAsDropDown(view);
+    public void setUserDrawer(User user) {
+        SimpleLoader simpleLoader = new SimpleLoader(this);
+        simpleLoader.loadImage(user.profilePictureId, Image_M.SMALL, Image_M.ImageType.USER
+                , (ImageViewCircle) navigationView.findViewById(R.id.drawer_user_pic));
+        ((TextViewFont) navigationView.findViewById(R.id.drawer_user_name)).setText(user.name);
+        ((TextViewFont) navigationView.findViewById(R.id.drawer_user_id)).setText(user.userIdentifier);
+    }
+    public void toHome(View view) {
+        setSelection(FRAG_HOME);
+    }
+    public void toSearch(View view) {
+        setSelection(FRAG_SEARCH);
     }
 
 }

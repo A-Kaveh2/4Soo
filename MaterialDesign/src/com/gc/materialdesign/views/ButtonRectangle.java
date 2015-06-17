@@ -99,12 +99,6 @@ public class ButtonRectangle extends Button {
 			int textColor = attrs.getAttributeResourceValue(ANDROIDXML,"textColor",-1);
 			if(textColor != -1){
 				textButton.setTextColor(textColor);
-			}else{
-				// Color by hexadecimal
-				// Color by hexadecimal
-				textColor = attrs.getAttributeIntValue(ANDROIDXML, "textColor", -1);
-				if (textColor != -1)
-					textButton.setTextColor(textColor);
 			}
 			int[] array = {android.R.attr.textSize};
 			TypedArray values = getContext().obtainStyledAttributes(attrs, array);

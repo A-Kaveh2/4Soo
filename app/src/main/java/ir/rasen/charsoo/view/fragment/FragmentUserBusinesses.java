@@ -1,7 +1,7 @@
 package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -58,6 +56,7 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                 container, false);
 
         NetworkConnectivityReciever.setNetworkStateListener(TAG,FragmentUserBusinesses.this);
+        addBtn = (FloatButton) (view.findViewById(R.id.btn_creat_new_business));
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -68,7 +67,6 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
             }
         });
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int mLastFirstVisibleItem = 0;
 
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -77,39 +75,10 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (view.getId() == listView.getId()) {
-                    final int currentFirstVisibleItem = listView.getFirstVisiblePosition();
-
-                    if (currentFirstVisibleItem > mLastFirstVisibleItem) {
-                        // getSherlockActivity().getSupportActionBar().hide();
-                        Animation slide = null;
-                        slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
-                                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                                0.0f, Animation.RELATIVE_TO_SELF, +3.0f);
-
-                        slide.setDuration(200);
-                        slide.setFillAfter(true);
-                        slide.setFillEnabled(true);
-                        addBtn.startAnimation(slide);
-
-                    } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
-                        // getSherlockActivity().getSupportActionBar().show();
-                        Animation slide = null;
-                        slide = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
-                                Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF,
-                                +3.0f, Animation.RELATIVE_TO_SELF, 0.0f);
-
-                        slide.setDuration(200);
-                        slide.setFillAfter(true);
-                        slide.setFillEnabled(true);
-                        addBtn.startAnimation(slide);
-
-                    }
-
-                    mLastFirstVisibleItem = currentFirstVisibleItem;
+                    addBtn.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
                 }
             }
         });
-        addBtn = (FloatButton) (view.findViewById(R.id.btn_creat_new_business));
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,7 +106,6 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
             }
         };
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(deleteBusinessReciever, new IntentFilter(Params.DELETE_BUSINESS));
-
 
         return view;
     }
@@ -188,7 +156,9 @@ public class FragmentUserBusinesses extends Fragment implements IWebserviceRespo
                         if (netInfo != null && netInfo.isConnectedOrConnecting())
                             recursivelyCallHandler();
                     }
-                }catch(Exception e){}
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         }, 500);
     }

@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/navigation_item_1"
+                android:checked="true"
+                android:icon="@drawable/ic_home_blue_36dp"
+                android:title="@string/home"/>
+            <item
+                android:id="@+id/navigation_item_2"
+                android:icon="@drawable/ic_share"
+                android:title="@string/management"/>
+        </group>
+
+        <item
+            android:id="@+id/navigation_subheader"
+            android:title="@string/sample_latitude">
+            <menu>
+                <item
+                    android:id="@+id/navigation_sub_item_1"
+                    android:icon="@drawable/ic_favorite_grey"
+                    android:title="@string/fill"/>
+                <item
+                    android:id="@+id/navigation_sub_item_2"
+                    android:icon="@drawable/common_signin_btn_icon_normal_light"
+                    android:title="@string/save"/>
+            </menu>
+        </item>!-->
+</menu>
