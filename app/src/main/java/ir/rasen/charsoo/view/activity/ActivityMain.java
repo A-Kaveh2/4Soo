@@ -394,6 +394,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         //if user.businesses in intialized
         if (((MyApplication) getApplication()).isUserCreated)
             recursivelyCallHandlerUserBusinessesFragment();
+
+        btnHome.setVisibility(View.VISIBLE);
         /*nothingChoseInHeader();
 
         imageViewBusinesses.setImageResource(R.drawable.ic_store_mall_directory_blue_36dp);
@@ -430,6 +432,10 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
     @Override
     public void onBackPressed() {
+        if(btnHome.getVisibility()==View.VISIBLE)
+            toHome(null);
+        else
+            finish();
 //        checkBack();
     }
 
