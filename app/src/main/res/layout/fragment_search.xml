@@ -7,7 +7,7 @@
         android:id="@+id/ll_header"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:background="@color/DeepSkyBlue"
+        android:background="@color/material_blue"
         android:layout_height="@dimen/button_height">
 
         <ir.rasen.charsoo.view.widgets.EditTextFont
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_below="@+id/ll_header"
-        android:background="@color/DeepSkyBlue"
+        android:background="@color/material_blue"
         android:weightSum="100">
 
         <RelativeLayout
@@ -56,7 +56,7 @@
                 android:id="@+id/ll_indicator_businesses"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/indicator_height"
-                android:background="@color/DarkOrange"
+                android:background="@android:color/white"
                 android:orientation="horizontal"
                 android:layout_alignParentBottom="true" />
         </RelativeLayout>
@@ -64,7 +64,7 @@
         <RelativeLayout
             android:id="@+id/rl_posts"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="33.33333">
 
             <ir.rasen.charsoo.view.widgets.TextViewFont

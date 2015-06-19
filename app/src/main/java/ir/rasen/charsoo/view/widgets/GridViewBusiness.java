@@ -19,12 +19,14 @@ import ir.rasen.charsoo.controller.helper.SearchItemPost;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Business;
+import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.post.GetBusinessPosts;
+import ir.rasen.charsoo.view.activity.ActivityBusiness;
+import ir.rasen.charsoo.view.activity.ActivityBusinessContactInfo;
 import ir.rasen.charsoo.view.activity.ActivityBusinessFollowers;
 import ir.rasen.charsoo.view.activity.ActivityBusinessRegisterEdit;
 import ir.rasen.charsoo.view.activity.ActivityBusinessReviews;
-import ir.rasen.charsoo.view.activity.ActivityPostAddEdit;
 import ir.rasen.charsoo.view.adapter.AdapterPostBusiness;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
@@ -166,11 +168,10 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
                 @Override
                 public void onClick(View view) {
                     //commented for the test
-                   /* Intent intent = new Intent(activity, ActivityBusinessContactInfo.class);
+                    Intent intent = new Intent(activity, ActivityBusinessContactInfo.class);
                     MyApplication myApplication = (MyApplication) ((Activity) activity).getApplication();
                     myApplication.business = business;
-                    activity.startActivity(intent);*/
-                    addNewPost();
+                    activity.startActivity(intent);
                 }
             });
 
@@ -209,6 +210,7 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
             listFooterView = ((LayoutInflater) activity.getSystemService(activity.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.layout_loading_more, null, false);
             //listFooterView.setVisibility(View.GONE);
             gridViewHeader.addFooterView(listFooterView);
+
         } else {
             listFooterView.setVisibility(View.GONE);
         }
@@ -222,15 +224,14 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         }
 
         gridViewHeader.setOnScrollListener(new AbsListView.OnScrollListener() {
-            int currentFirstVisibleItem
-                    ,
-                    currentVisibleItemCount
-                    ,
+            int currentFirstVisibleItem,
+                    currentVisibleItemCount,
                     currentScrollState;
 
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 this.currentFirstVisibleItem = firstVisibleItem;
                 this.currentVisibleItemCount = visibleItemCount;
+                ((ActivityBusiness) activity).onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
             }
 
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -301,12 +302,6 @@ public class GridViewBusiness implements IWebserviceResponse, IDeletePost {
         adapterPostBusiness.notifyDataSetChanged();
         adapterPostGrid.notifyDataSetChanged();
 
-    }
-
-    private void addNewPost() {
-        Intent intent = new Intent(activity, ActivityPostAddEdit.class);
-        intent.putExtra(Params.BUSINESS_ID_STRING, business.id);
-        activity.startActivityForResult(intent, Params.ACTION_ADD_POST);
     }
 
     public void refreshBusinessData(Business newBusiness){

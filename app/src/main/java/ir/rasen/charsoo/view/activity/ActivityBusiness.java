@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
+import android.widget.AbsListView;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.GridViewBusiness;
+import ir.rasen.charsoo.view.widgets.buttons.FloatButton;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
@@ -41,8 +43,9 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
     BroadcastReceiver deletePost;
 
     //pull_to_refresh_lib
-    PullToRefreshGrid pullToRefreshGridView;
+    private PullToRefreshGrid pullToRefreshGridView;
 
+    private FloatButton btnAddPost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +72,15 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
         };
         LocalBroadcastManager.getInstance(this).registerReceiver(deletePost, new IntentFilter(Params.DELETE_POST_FROM_ACTIVITY));
 
+        btnAddPost = (FloatButton) findViewById(R.id.btn_new_post);
+        btnAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActivityBusiness.this, ActivityPostAddEdit.class);
+                intent.putExtra(Params.BUSINESS_ID_STRING, business.id);
+                startActivityForResult(intent, Params.ACTION_ADD_POST);
+            }
+        });
 
     }
 
@@ -93,13 +105,12 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
             ((MyApplication) getApplication()).business = business;
 
             boolean beThreeColumn = gridViewBusiness == null ? true : gridViewBusiness.isThreeColumn;
-            if (gridViewBusiness==null) {
+            if (gridViewBusiness == null) {
                 gridViewBusiness = new GridViewBusiness(this, business, gridView);
                 gridViewBusiness.InitialGridViewBusiness(new ArrayList<Post>(), beThreeColumn);
-            }
-            else
+            } else
                 gridViewBusiness.refreshBusinessData(business);
-            if (posts==null)
+            if (posts == null)
                 posts = new ArrayList<>();
             new GetBusinessPosts(ActivityBusiness.this, LoginInfo.getUserId(ActivityBusiness.this), business.id, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusiness.this).execute();
         }
@@ -107,7 +118,7 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
             //this is GetBusinessPosts' result
             if (pullToRefreshGridView.isRefreshing())
                 posts.clear();
-            posts= (ArrayList<Post>) result;
+            posts = (ArrayList<Post>) result;
             pullToRefreshGridView.setResultSize(posts.size());
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
@@ -119,10 +130,10 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
     }
 
     @Override
-    public void getError(Integer errorCode,String callerStringID) {
+    public void getError(Integer errorCode, String callerStringID) {
         progressDialog.dismiss();
         pullToRefreshGridView.onRefreshComplete();
-        new DialogMessage(ActivityBusiness.this, ServerAnswer.getError(ActivityBusiness.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+        new DialogMessage(ActivityBusiness.this, ServerAnswer.getError(ActivityBusiness.this, errorCode, callerStringID + ">" + this.getLocalClassName())).show();
     }
 
     @Override
@@ -131,7 +142,7 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
 
         if (resultCode == RESULT_OK) {
             if (requestCode == Params.ACTION_ADD_POST) {
-                Post p =((MyApplication) getApplication()).post;
+                Post p = ((MyApplication) getApplication()).post;
                 gridViewBusiness.notifyDataSetChanged(p);
             } else if (requestCode == Params.ACTION_EDIT_BUSINESS) {
                 if (data.getStringExtra(Params.TYPE).equals(Business.ChangeType.EDIT.name())) {
@@ -145,11 +156,10 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
                     setResult(RESULT_OK, i);
                     finish();
                 }
-            }
-            else if (requestCode == Params.ACTION_EDIT_POST) {
+            } else if (requestCode == Params.ACTION_EDIT_POST) {
                 Post updatedPost = ((MyApplication) getApplication()).post;
-                for(int i = 0;i<posts.size();i++){
-                    if(posts.get(i).id == updatedPost.id){
+                for (int i = 0; i < posts.size(); i++) {
+                    if (posts.get(i).id == updatedPost.id) {
                         Post p = posts.get(i);
                         p.title = updatedPost.title;
                         p.description = updatedPost.description;
@@ -169,8 +179,8 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
 
     @Override
     public void notifyRefresh() {
-        if (posts==null)
-            posts=new ArrayList<>();
+        if (posts == null)
+            posts = new ArrayList<>();
         new GetBusinessHomeInfo(ActivityBusiness.this, selectedBusinessId, LoginInfo.getUserId(ActivityBusiness.this), ActivityBusiness.this).execute();
     }
 
@@ -181,5 +191,9 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
 
     public void onClick(View view) {
         // to set null onClick, please don't clean this function
+    }
+
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        btnAddPost.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount);
     }
 }

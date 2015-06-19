@@ -1,10 +1,11 @@
 package ir.rasen.charsoo.view.widgets.charsoo_activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import ir.rasen.charsoo.view.widgets.TextViewFontActionBarTitle;
 /**
  * Created by Sina on 5/21/15.
  */
-public class CharsooActivity extends ActionBarActivity {
+public class CharsooActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     // moving variables::
@@ -149,4 +150,15 @@ public class CharsooActivity extends ActionBarActivity {
 //        movingObject = view;
 //    }
 
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        //overridePendingTransition(R.anim.anim_right_to_0, R.anim.anim_0_to_left);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        //overridePendingTransition(R.anim.anim_0_to_right, R.anim.anim_left_to_0);
+    }
 }

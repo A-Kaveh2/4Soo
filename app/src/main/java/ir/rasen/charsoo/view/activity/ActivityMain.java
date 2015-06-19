@@ -234,6 +234,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home_active);
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
+                findViewById(R.id.drawer_home).setBackgroundColor(getResources().getColor(R.color.material_gray_light));
+                findViewById(R.id.drawer_businesses).setBackgroundResource(R.drawable.bg_menu);
 
                 btnHome.setVisibility(View.GONE);
 
@@ -270,6 +272,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home);
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
+                findViewById(R.id.drawer_home).setBackgroundResource(R.drawable.bg_menu);
+                findViewById(R.id.drawer_businesses).setBackgroundResource(R.drawable.bg_menu);
 
                 btnHome.setVisibility(View.VISIBLE);
                 break;
@@ -324,6 +328,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home);
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
+                findViewById(R.id.drawer_home).setBackgroundResource(R.drawable.bg_menu);
+                findViewById(R.id.drawer_businesses).setBackgroundResource(R.drawable.bg_menu);
 
                 btnHome.setVisibility(View.VISIBLE);
                 break;
@@ -364,6 +370,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home);
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business_active);
+                findViewById(R.id.drawer_home).setBackgroundResource(R.drawable.bg_menu);
+                findViewById(R.id.drawer_businesses).setBackgroundColor(getResources().getColor(R.color.material_gray_light));
 
                 btnHome.setVisibility(View.VISIBLE);
                 break;
@@ -514,6 +522,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     private void initNavigationView() {
         //Initializing NavigationView
 
+        findViewById(R.id.drawer_home).setBackgroundColor(getResources().getColor(R.color.material_gray_light));
         (findViewById(R.id.drawer_profile)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -532,14 +541,14 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 setSelection(FRAG_BUSINESS);
             }
         });
-        //(findViewById(R.id.drawer_feedback)).setOnClickListener(new View.OnClickListener() {
-          //  @Override
-            //public void onClick(View view) {
-              //  Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_contact_us)));
-           //     startActivity(browserIntent);
-             //   drawerLayout.closeDrawer(Gravity.RIGHT);
-//            }
-  //      });
+        (findViewById(R.id.drawer_feedback)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_contact_us)));
+                startActivity(browserIntent);
+                drawerLayout.closeDrawer(Gravity.RIGHT);
+            }
+        });
         (findViewById(R.id.drawer_settings)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

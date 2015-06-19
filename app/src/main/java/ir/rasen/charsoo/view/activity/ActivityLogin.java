@@ -42,8 +42,8 @@ public class ActivityLogin extends CharsooActivity implements View.OnClickListen
         if ((LoginInfo.isLoggedIn(this))&&(!Params.isTestVersion)) {
             Intent intent = new Intent(this, ActivityMain.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
             finish();
+            startActivity(intent);
         }
 
         myApplication = (MyApplication) getApplication();

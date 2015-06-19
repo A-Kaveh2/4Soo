@@ -94,7 +94,6 @@
 
             </RelativeLayout>
 
-
             <LinearLayout
                 android:id="@+id/ll_numbers"
                 android:layout_width="match_parent"

@@ -146,4 +146,5 @@
     <dimen name="dialog_body_height">72dp</dimen>
     <dimen name="float_button">56dp</dimen>
 
+    <dimen name="search_header_height">48dp</dimen>
 </resources>

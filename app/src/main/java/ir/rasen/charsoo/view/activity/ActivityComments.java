@@ -7,8 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
-
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -27,6 +25,7 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 
 public class ActivityComments extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
@@ -95,7 +94,7 @@ public class ActivityComments extends CharsooActivity implements IWebserviceResp
 
         editTextComment = (EditTextFont) findViewById(R.id.edt_comment);
 
-        (findViewById(R.id.imageView_send)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.btn_send)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 commentText = editTextComment.getText().toString();

@@ -267,12 +267,12 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
         new GetPost(this, LoginInfo.getUserId(this), businessId, postId, getPostType, this).execute();
 
         if (getPostType == Post.GetPostType.BUSINESS) {
-            imageViewLike.setBackgroundResource(R.drawable.selector_edit_button_grey);
-            imageViewShare.setBackgroundResource(R.drawable.selector_delete_button);
+            imageViewLike.setImageResource(R.drawable.selector_edit_button_grey);
+            imageViewShare.setImageResource(R.drawable.selector_delete_button);
             imageViewMore.setVisibility(View.GONE);
         } else {
-            imageViewLike.setBackgroundResource(R.drawable.selector_post_button_like);
-            imageViewShare.setBackgroundResource(R.drawable.selector_post_button_share1);
+            imageViewLike.setImageResource(R.drawable.ic_like);
+            imageViewShare.setImageResource(R.drawable.ic_share);
             imageViewMore.setVisibility(View.VISIBLE);
         }
 

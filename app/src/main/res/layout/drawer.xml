@@ -56,10 +56,11 @@
         </RelativeLayout>
 
         <!-- HOME -->
-        <ir.rasen.charsoo.view.widgets.RippleViewMenu
+        <RelativeLayout
             android:id="@+id/drawer_home"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu">
 
             <ImageView
                 android:id="@+id/drawer_home_img"
@@ -77,12 +78,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
                 android:text="@string/home" />
-        </ir.rasen.charsoo.view.widgets.RippleViewMenu>
+        </RelativeLayout>
         <!-- MANAGEMENT -->
-        <ir.rasen.charsoo.view.widgets.RippleViewMenu
+        <RelativeLayout
             android:id="@+id/drawer_businesses"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu">
 
             <ImageView
                 android:id="@+id/drawer_businesses_img"
@@ -100,16 +102,17 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
                 android:text="@string/management" />
-        </ir.rasen.charsoo.view.widgets.RippleViewMenu>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/material_divider" />
         <!-- invite friends -->
-        <ir.rasen.charsoo.view.widgets.RippleViewMenu
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu">
 
             <ImageView
                 android:layout_width="@dimen/drawer_header_inner_items_height"
@@ -126,12 +129,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
                 android:text="@string/invite_friends" />
-        </ir.rasen.charsoo.view.widgets.RippleViewMenu>
+        </RelativeLayout>
         <!-- send feedback -->
-        <ir.rasen.charsoo.view.widgets.RippleViewMenu
+        <RelativeLayout
             android:id="@+id/drawer_feedback"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu">
             <ImageView
                 android:layout_width="@dimen/drawer_header_inner_items_height"
                 android:layout_height="@dimen/drawer_header_inner_items_height"
@@ -147,12 +151,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
                 android:text="@string/send_feedback" />
-        </ir.rasen.charsoo.view.widgets.RippleViewMenu>
+        </RelativeLayout>
         <!-- settings -->
-        <ir.rasen.charsoo.view.widgets.RippleViewMenu
+        <RelativeLayout
             android:id="@+id/drawer_settings"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu">
 
             <ImageView
                 android:layout_width="@dimen/drawer_header_inner_items_height"
@@ -169,12 +174,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
                 android:text="@string/settings" />
-        </ir.rasen.charsoo.view.widgets.RippleViewMenu>
+        </RelativeLayout>
         <!-- help -->
-        <ir.rasen.charsoo.view.widgets.RippleViewMenu
+        <RelativeLayout
             android:id="@+id/drawer_help"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu">
 
             <ImageView
                 android:layout_width="@dimen/drawer_header_inner_items_height"
@@ -191,12 +197,13 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
                 android:text="@string/help" />
-        </ir.rasen.charsoo.view.widgets.RippleViewMenu>
+        </RelativeLayout>
         <!-- exit -->
-        <ir.rasen.charsoo.view.widgets.RippleViewMenu
+        <RelativeLayout
             android:id="@+id/drawer_exit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_menu">
 
             <ImageView
                 android:layout_width="@dimen/drawer_header_inner_items_height"
@@ -213,6 +220,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin_sx"
                 android:text="@string/exit" />
-        </ir.rasen.charsoo.view.widgets.RippleViewMenu>
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>
