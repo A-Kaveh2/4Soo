@@ -2,11 +2,9 @@ package ir.rasen.charsoo.controller.helper;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.widget.DatePicker;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -179,41 +177,43 @@ public class PersianDate {
             hours = TimeUnit.MILLISECONDS.toHours(diffInMs);
         }
 
-        if ((int) (diffInMs / CENTURY_BOUND_IN_MILISECOND) > 0)
+        if ((int) (diffInMs/SECOND_BOUND_IN_MILISECOND)<0)
         {
-            creationDate = String.valueOf((int) (diffInMs / CENTURY_BOUND_IN_MILISECOND))+ " "
-                    + context.getString(R.string.txt_Century)+context.getString(R.string.txt_Ago);
+
         }
-        else if ((int)(diffInMs/YEAR_BOUND_IN_MILISECOND) > 0){
-            creationDate = String.valueOf((int)(diffInMs/YEAR_BOUND_IN_MILISECOND))+" "
-                    +context.getString(R.string.txt_Year)+context.getString(R.string.txt_Ago);
+        else if ((int) (diffInMs/MINUTE_BOUND_IN_MILISECOND)<=0){
+            creationDate = context.getString(R.string.txt_MomentsAgo);
         }
-        else if ((int) (diffInMs/MONTH_BOUND_IN_MILISECOND)>0){
-            creationDate = String.valueOf((int) (diffInMs/MONTH_BOUND_IN_MILISECOND))+" "
-                    + context.getString(R.string.txt_Month)+context.getString(R.string.txt_Ago);
+        else if ((int) (diffInMs/HOUR_BOUND_IN_MILISECOND)<=0){
+            creationDate = String.valueOf((int) (diffInMs/MINUTE_BOUND_IN_MILISECOND))+" "
+                    + context.getString(R.string.txt_Minute)+context.getString(R.string.txt_Ago);
         }
-        else if ((int) (diffInMs/WEEK_BOUND_IN_MILISECOND)>0){
-            creationDate = String.valueOf((int) (diffInMs/WEEK_BOUND_IN_MILISECOND))+" "
-                    + context.getString(R.string.txt_Week)+context.getString(R.string.txt_Ago);
+        else if ((int) (diffInMs/DAY_BOUND_IN_MILISECOND)<=0){
+            creationDate = String.valueOf((int) (diffInMs/HOUR_BOUND_IN_MILISECOND))+" "
+                    +context.getString(R.string.txt_Hour)+context.getString(R.string.txt_Ago);
         }
-        else if ((int) (diffInMs/DAY_BOUND_IN_MILISECOND)>0){
+        else if ((int) (diffInMs/WEEK_BOUND_IN_MILISECOND)<=0){
             if ((int) (diffInMs/DAY_BOUND_IN_MILISECOND) == 1)
                 creationDate = context.getString(R.string.txt_Yesterday);
             else
                 creationDate = String.valueOf((int) (diffInMs/DAY_BOUND_IN_MILISECOND))+" "
                         + context.getString(R.string.txt_Day)+context.getString(R.string.txt_Ago);
         }
-        else if ((int) (diffInMs/HOUR_BOUND_IN_MILISECOND)>0){
-            creationDate = String.valueOf((int) (diffInMs/HOUR_BOUND_IN_MILISECOND))+" "
-                    +context.getString(R.string.txt_Hour)+context.getString(R.string.txt_Ago);
+        else if ((int) (diffInMs/MONTH_BOUND_IN_MILISECOND)<=0){
+            creationDate = String.valueOf((int) (diffInMs/WEEK_BOUND_IN_MILISECOND))+" "
+                    + context.getString(R.string.txt_Week)+context.getString(R.string.txt_Ago);
         }
-        else if ((int) (diffInMs/MINUTE_BOUND_IN_MILISECOND)>0){
-            creationDate = String.valueOf((int) (diffInMs/MINUTE_BOUND_IN_MILISECOND))+" "
-                    + context.getString(R.string.txt_Minute)+context.getString(R.string.txt_Ago);
+        else if ((int)(diffInMs/YEAR_BOUND_IN_MILISECOND) <= 0){
+            creationDate = String.valueOf((int) (diffInMs/MONTH_BOUND_IN_MILISECOND))+" "
+                    + context.getString(R.string.txt_Month)+context.getString(R.string.txt_Ago);
         }
-        else {
-            creationDate = context.getString(R.string.txt_MomentsAgo);
+        else if ((int) (diffInMs / CENTURY_BOUND_IN_MILISECOND) <= 0){
+            creationDate = String.valueOf((int)(diffInMs/YEAR_BOUND_IN_MILISECOND))+" "
+                    +context.getString(R.string.txt_Year)+context.getString(R.string.txt_Ago);
         }
+
+
+
 //        Calendar calendar = Calendar.getInstance();
 //        DatePicker datePicker=new DatePicker(context);
 //        datePicker.get

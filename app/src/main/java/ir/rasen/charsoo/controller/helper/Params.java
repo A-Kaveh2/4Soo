@@ -231,10 +231,12 @@ public class Params {
     public static enum UpdateTimeLineType{SHARE,CANCEL_SHARE,LIKE,CANCEL_LIKE,REPORT,ADD_COMMENT,DELETE_COMMENT,UPDATE_COMMENT};
 
 
+
     /**
      * Created by MHFathi
      */
 
+    public static final String HAS_REMAINIG_FRIEND_REQUESTS_STRING="hasRemainingFriendRequests";
     public static final String FULL_NAME= "fullName";
     public static final String STRING_IDENTIFIER="stringIdentifier";
     public static final String STRING_PICTURE="stringPicture";

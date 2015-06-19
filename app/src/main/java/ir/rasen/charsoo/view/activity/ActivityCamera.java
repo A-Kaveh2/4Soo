@@ -1,86 +1,34 @@
 package ir.rasen.charsoo.view.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
+import java.io.File;
+
+import eu.janmuller.android.simplecropimage.CropImage;
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.CustomeCamera;
-import ir.rasen.charsoo.view.interface_m.ICropResult;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
-
-public class ActivityCamera extends CharsooActivity implements ICropResult {
+public class ActivityCamera extends CharsooActivity {
 
     private static String TAG = "CameraActivity";
-    FrameLayout cameraPreview;
-    CustomeCamera customeCamera;
-    RelativeLayout rl_camera_cover;
-    ImageView picView;
-    ImageView imageView_capture;
     public static String FILE_PATH = "file_path";
-    public static Integer CAPTURE_PHOTO = 1;
+    public static final int CAPTURE_PHOTO = 123;
+    private String filePath;
+    private static final int PIC_CROP = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_camera);
-
-
-        cameraPreview = (FrameLayout) findViewById(R.id.camera_preview);
-        imageView_capture = (ImageView) findViewById(R.id.imageView_capture);
-        rl_camera_cover = (RelativeLayout) findViewById(R.id.rl_camera_cover);
-
-        DisplayMetrics displaymetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-        int width = displaymetrics.widthPixels;
-        int height = displaymetrics.heightPixels;
-        int actionBarHeight = 0;
-        TypedValue tv = new TypedValue();
-        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-        }
-
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(width, height - width - actionBarHeight);
-        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        rl_camera_cover.setLayoutParams(lp);
-
-
-        try {
-            customeCamera = new CustomeCamera(this, cameraPreview, getResources().getInteger(R.integer.image_size), getResources().getInteger(R.integer.image_quality));
-            customeCamera.delegate = this;
-        } catch (Exception e) {
-            //new DialogMessage(ActivityCamera.this, e.getMessage()).show();
-            String s = e.getMessage();
-        }
-
-        imageView_capture.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            customeCamera.capturePhoto();
-                        } catch (Exception e) {
-                            Log.d(TAG, e.getMessage());
-                        }
-
-                    }
-                }
-        );
+        takePhoto();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        customeCamera.stopPreview();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -91,12 +39,46 @@ public class ActivityCamera extends CharsooActivity implements ICropResult {
             return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void getResult(String filePath) {
 
-        Intent i = getIntent();
-        i.putExtra(ActivityCamera.FILE_PATH, filePath);
-        setResult(RESULT_OK, i);
-        finish();
+    public void takePhoto() {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        filePath=Environment.getExternalStorageDirectory()+"/"+ "4352643565.jpg";
+        File photo = new File(filePath);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(photo));
+        startActivityForResult(intent, CAPTURE_PHOTO);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case CAPTURE_PHOTO:
+                if (resultCode == Activity.RESULT_OK) {
+                    Intent intent = new Intent(this, CropImage.class);
+                    intent.putExtra(CropImage.IMAGE_PATH, filePath);
+
+                    // allow CropImage activity to rescale image
+                    intent.putExtra(CropImage.SCALE, true);
+
+                    // if the aspect ratio is fixed to ratio 1/1
+                    intent.putExtra(CropImage.ASPECT_X, 1);
+                    intent.putExtra(CropImage.ASPECT_Y, 1);
+
+                    // start activity CropImage with certain request code and listen
+                    // for result
+                    startActivityForResult(intent, PIC_CROP);
+                }
+                break;
+            case PIC_CROP:
+                String path = data.getStringExtra(CropImage.IMAGE_PATH);
+                Intent i = getIntent();
+                i.putExtra(ActivityCamera.FILE_PATH, path);
+                setResult(RESULT_OK, i);
+                finish();
+                break;
+        }
+    }
+
+
 }

@@ -2,6 +2,7 @@ package ir.rasen.charsoo.view.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
@@ -18,9 +23,8 @@ import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.AnswerRequestFriendship;
-import ir.rasen.charsoo.view.interface_m.IFriendRequest;
-import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
+import ir.rasen.charsoo.view.widget_customized.TextViewFont;
+import ir.rasen.charsoo.view.widget_customized.imageviews.ImageViewCircle;
 
 /**
  * Created by android on 3/7/2015.
@@ -32,15 +36,19 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
     SimpleLoader simpleLoader;
     ListView listView;
     ArrayList<BaseAdapterItem> acceptedUsers;
-    IFriendRequest iFriendRequest;
 
+
+
+    public ArrayList<BaseAdapterItem> getRemainingFriendRequests(){
+        return items;
+    }
 
     public AdapterUserFriendshipRequest(Context context, ArrayList<BaseAdapterItem> items) {
         this.context = context;
         this.items = items;
         simpleLoader = new SimpleLoader(context);
         acceptedUsers = new ArrayList<>();
-        this.iFriendRequest = iFriendRequest;
+
     }
 
     public void loadMore(ArrayList<BaseAdapterItem> newItem){
@@ -116,12 +124,28 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
 
     }
 
-    private void answerYes(int position, Holder holder) {
+    private void answerYes(final int position, Holder holder) {
         holder.imageViewYes.setImageResource(R.drawable.ic_check_green);
         holder.imageViewNo.setVisibility(View.GONE);
         acceptedUsers.add(items.get(position));
         new AnswerRequestFriendship(context,LoginInfo.getUserId(context), items.get(position).getId(), true).execute();
-
+        new AsyncTask<Integer, Void, Void>() {
+            @Override
+            protected Void doInBackground(Integer... integers) {
+                int p=Integer.valueOf(integers[0]);
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                items.remove(p);
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void result) {
+                notifyDataSetChanged();
+            }
+        }.execute(position);
     }
 
     public ArrayList<BaseAdapterItem> getAcceptedUsers() {
@@ -134,4 +158,5 @@ public class AdapterUserFriendshipRequest extends BaseAdapter {
         ImageView imageViewYes;
         ImageView imageViewNo;
     }
+
 }
