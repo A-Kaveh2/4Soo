@@ -9,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -27,9 +26,8 @@ import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widget_customized.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widget_customized.pull_to_refresh.PullToRefreshListView;
-
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 public class ActivityUserFriends extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
