@@ -21,8 +21,7 @@
             <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/camera"
-                android:textSize="@dimen/popup_font" />
+                android:text="@string/camera" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -47,8 +46,7 @@
             <ir.rasen.charsoo.view.widgets.TextViewFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/gallery"
-                android:textSize="@dimen/popup_font" />
+                android:text="@string/gallery" />
 
             <ImageView
                 android:layout_width="wrap_content"

@@ -144,5 +144,6 @@
     <dimen name="drawer_profile">64dp</dimen>
 
     <dimen name="dialog_body_height">72dp</dimen>
+    <dimen name="float_button">56dp</dimen>
 
 </resources>

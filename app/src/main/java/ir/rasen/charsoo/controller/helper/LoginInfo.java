@@ -12,7 +12,6 @@ import ir.rasen.charsoo.controller.object.MyApplication;
 
 public class LoginInfo {
 
-
     public int userID;
     public String accessToken;
 
@@ -88,7 +87,6 @@ public class LoginInfo {
                 return true;
         return false;
     }
-
 
     public static int getUserId(Context context) {
 

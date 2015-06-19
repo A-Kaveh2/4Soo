@@ -33,8 +33,6 @@ public class PopupBlockUser extends MyPopup {
         textViewUnfriend.setLayoutParams(params);
         textViewUnfriend.setText(context.getResources().getString(R.string.block_follower));
         textViewUnfriend.setBackgroundResource(R.drawable.selector_popup_one_item);
-        textViewUnfriend.setTextSize(context.getResources().getDimension(R.dimen.popup_font));
-
 
         LinearLayout ll_body = getBody();
         ll_body.addView(textViewUnfriend);

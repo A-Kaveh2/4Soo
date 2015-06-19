@@ -5,37 +5,33 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.controller.helper.LoginInfo;
-import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogExit;
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
-import ir.rasen.charsoo.view.interface_m.IChangeTabs;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
-public class ActivityMain extends CharsooActivity implements View.OnClickListener, IWebserviceResponse, IChangeTabs {
+public class ActivityMain extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {//, IChangeTabs {
 
     private static final int FRAG_HOME=0, FRAG_SEARCH=1, FRAG_BUSINESS=2, FRAG_USER=3;
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private View btnHome;
 
     boolean footerHome=true, footerUser, footerSearch, footerBusiness;
@@ -83,14 +79,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
         initDrawerLayout();
         initNavigationView();
-
-        if (LoginInfo.hasBusiness(this)) {
-            //if user has any business, display four tab
-            makeItFour();
-        } else {
-            //display three tab
-            makeItThree();
-        }
 
     }
 
@@ -244,6 +232,9 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
                 ft.commit();
 
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home_active);
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
+
                 btnHome.setVisibility(View.GONE);
 
                 break;
@@ -276,6 +267,10 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                     recursivelyCallHandlerSearchFragment();*/
                 if (!((MyApplication) getApplication()).isSearchCreated)
                     recursivelyCallHandlerSearchFragment();
+
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home);
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
+
                 btnHome.setVisibility(View.VISIBLE);
                 break;
                 /*if (footerSearch)
@@ -326,6 +321,10 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
                 if (((MyApplication) getApplication()).isUserCreated)
                     recursivelyCallHandlerUserFragment();
+
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home);
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
+
                 btnHome.setVisibility(View.VISIBLE);
                 break;
 
@@ -362,19 +361,14 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                     return;
                 addFragment(FragmentTag.BUSINESSES);
                 initialUserBusinessesTab();
+
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home);
+                ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business_active);
+
                 btnHome.setVisibility(View.VISIBLE);
                 break;
         }
     }
-
-    private void makeItThree() {
-        navigationView.findViewById(R.id.drawer_businesses).setVisibility(View.GONE);
-    }
-
-    private void makeItFour() {
-        navigationView.findViewById(R.id.drawer_businesses).setVisibility(View.VISIBLE);
-    }
-
 
     public void initialUserBusinessesTab() {
 
@@ -437,25 +431,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         else
             finish();
 //        checkBack();
-    }
-
-    @Override
-    public void notifyMakeThreeTab() {
-        makeItThree();
-        setSelection(FRAG_USER);
-    }
-
-    @Override
-    public void notifyMakeFourTabsWithInitialize() {
-        makeItFour();
-        initialUserBusinessesTab();
-    }
-
-    @Override
-    public void notifyMakeFourTabs() {
-        makeItFour();
-        ft.show(fm.findFragmentById(R.id.frag_user_businesses));
-
     }
 
     public void notifyGo() {
@@ -538,44 +513,34 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     }
     private void initNavigationView() {
         //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        (navigationView.findViewById(R.id.drawer_profile)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.drawer_profile)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setSelection(FRAG_USER);
             }
         });
-        (navigationView.findViewById(R.id.drawer_home)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.drawer_home)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setSelection(FRAG_HOME);
             }
         });
-        (navigationView.findViewById(R.id.drawer_new_business)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ActivityMain.this, ActivityBusinessRegisterEdit.class);
-                startActivityForResult(intent, Params.ACTION_REGISTER_BUSINESS);
-                notifyGo();
-                drawerLayout.closeDrawer(Gravity.RIGHT);
-            }
-        });
-        (navigationView.findViewById(R.id.drawer_businesses)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.drawer_businesses)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setSelection(FRAG_BUSINESS);
             }
         });
-        (navigationView.findViewById(R.id.drawer_feedback)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_contact_us)));
-                startActivity(browserIntent);
-                drawerLayout.closeDrawer(Gravity.RIGHT);
-            }
-        });
-        (navigationView.findViewById(R.id.drawer_settings)).setOnClickListener(new View.OnClickListener() {
+        //(findViewById(R.id.drawer_feedback)).setOnClickListener(new View.OnClickListener() {
+          //  @Override
+            //public void onClick(View view) {
+              //  Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_contact_us)));
+           //     startActivity(browserIntent);
+             //   drawerLayout.closeDrawer(Gravity.RIGHT);
+//            }
+  //      });
+        (findViewById(R.id.drawer_settings)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityMain.this, ActivityUserSetting.class);
@@ -583,7 +548,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });
-        (navigationView.findViewById(R.id.drawer_help)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.drawer_help)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.url_guide)));
@@ -591,7 +556,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });
-        (navigationView.findViewById(R.id.drawer_exit)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.drawer_exit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new DialogExit(ActivityMain.this).show();
@@ -599,7 +564,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
             }
         });
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-/*        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+/*        setNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
 
             // This method will trigger on item Click of navigation menu
             @Override
@@ -628,9 +593,9 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     public void setUserDrawer(User user) {
         SimpleLoader simpleLoader = new SimpleLoader(this);
         simpleLoader.loadImage(user.profilePictureId, Image_M.SMALL, Image_M.ImageType.USER
-                , (ImageViewCircle) navigationView.findViewById(R.id.drawer_user_pic));
-        ((TextViewFont) navigationView.findViewById(R.id.drawer_user_name)).setText(user.name);
-        ((TextViewFont) navigationView.findViewById(R.id.drawer_user_id)).setText(user.userIdentifier);
+                , (ImageViewCircle) findViewById(R.id.drawer_user_pic));
+        ((TextViewFont) findViewById(R.id.drawer_user_name)).setText(user.name);
+        ((TextViewFont) findViewById(R.id.drawer_user_id)).setText(user.userIdentifier);
     }
     public void toHome(View view) {
         setSelection(FRAG_HOME);

@@ -36,7 +36,6 @@ public class PopupDeleteCommentBlockUser extends MyPopup {
         textViewEdit.setLayoutParams(params);
         textViewEdit.setText(context.getResources().getString(R.string.delete));
         textViewEdit.setBackgroundResource(R.drawable.selector_popup_top_item);
-        textViewEdit.setTextSize(context.getResources().getDimension(R.dimen.popup_font));
 
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width,1);
         TextViewFont textViewDevider = new TextViewFont(context);
@@ -49,7 +48,6 @@ public class PopupDeleteCommentBlockUser extends MyPopup {
         textViewDelete.setLayoutParams(params);
         textViewDelete.setText(context.getResources().getString(R.string.block));
         textViewDelete.setBackgroundResource(R.drawable.selector_popup_bottom_item);
-        textViewDelete.setTextSize(context.getResources().getDimension(R.dimen.popup_font));
 
         LinearLayout ll_body = getBody();
         ll_body.addView(textViewEdit);

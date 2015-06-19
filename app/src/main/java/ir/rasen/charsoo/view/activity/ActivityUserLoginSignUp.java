@@ -1,11 +1,13 @@
-package ir.rasen.charsoo.view.activity;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+
+/*package ir.rasen.charsoo.view.activity;
 
 /**
  * Created by android on 3/28/2015.
  */
 
 
-import android.support.v4.app.FragmentManager;
+/*import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -52,7 +54,6 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
 
         llIndicatorLogin = (LinearLayout) findViewById(R.id.ll_indicator_base);
         llIndicatorSignUp = (LinearLayout) findViewById(R.id.ll_indicator_sign_up);
-
 
         fragmentUserLogin = new FragmentUserLogin();
         fragmentEmailID = new FragmentUserSignUpeEmailID();
@@ -193,4 +194,4 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
     private void register() {
 
     }
-}
+}*/

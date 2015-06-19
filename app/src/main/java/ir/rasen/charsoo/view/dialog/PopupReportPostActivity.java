@@ -41,8 +41,6 @@ public class PopupReportPostActivity extends MyPopup implements  IWebserviceResp
         textViewReport.setLayoutParams(params);
         textViewReport.setText(context.getResources().getString(R.string.report));
         textViewReport.setBackgroundResource(R.drawable.selector_popup_one_item);
-        textViewReport.setTextSize(context.getResources().getDimension(R.dimen.popup_font));
-
 
         LinearLayout ll_body = getBody();
         ll_body.addView(textViewReport);

@@ -36,7 +36,6 @@ public class PopupEditDeleteBusiness extends MyPopup {
         textViewEdit.setLayoutParams(params);
         textViewEdit.setText(activity.getResources().getString(R.string.edit_profile));
         textViewEdit.setBackgroundResource(R.drawable.selector_popup_top_item);
-        textViewEdit.setTextSize(activity.getResources().getDimension(R.dimen.popup_font));
 
         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(width, 1);
         TextViewFont textViewDevider = new TextViewFont(activity);
@@ -49,7 +48,6 @@ public class PopupEditDeleteBusiness extends MyPopup {
         textViewDelete.setLayoutParams(params);
         textViewDelete.setText(activity.getResources().getString(R.string.delete));
         textViewDelete.setBackgroundResource(R.drawable.selector_popup_bottom_item);
-        textViewDelete.setTextSize(activity.getResources().getDimension(R.dimen.popup_font));
 
         LinearLayout ll_body = getBody();
         ll_body.addView(textViewEdit);
