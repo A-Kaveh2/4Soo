@@ -9,6 +9,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import ir.rasen.charsoo.controller.helper.NetworkHandler;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.WebservicesHandler;
@@ -24,6 +26,18 @@ public class WebservicePOST {
 
     public WebservicePOST(String url) {
         httpclient = new DefaultHttpClient();
+        httpPost = new HttpPost(url);
+        jsonParams = new JSONObject();
+    }
+
+    public WebservicePOST(String url, ArrayList<String> paramsList) {
+        httpclient = new DefaultHttpClient();
+        if (paramsList != null) {
+            for (String param : paramsList) {
+                url += "/" + param;
+            }
+        }
+        url = url.replaceAll ( " ", "%20" );
         httpPost = new HttpPost(url);
         jsonParams = new JSONObject();
     }

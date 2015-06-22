@@ -31,6 +31,7 @@ public class URLs {
     public static String GET_USER_POST = MAIN_URL+"getUserPost";
     public static String GET_POST = MAIN_URL+"getPost";
     public static String GET_TIME_LINE_POSTS = MAIN_URL+"getWallPosts";
+    public static String GET_TIME_LINE_POSTS_NEW = MAIN_URL+"getWallPosts2";
     public static String GET_SHARED_POSTS = MAIN_URL+"getUserSharedPosts";
     public static String LIKE = MAIN_URL+"likePost";
     public static String DISLIKE = MAIN_URL+"dislikePost";
@@ -73,4 +74,5 @@ public class URLs {
     public static String CHECK_BUSINESS_IDENTIFIER = MAIN_URL + "checkBusinessIdentifier";
     public static String GET_COUNTRY_STATES = MAIN_URL+"getCountryStates";
     public static String GET_STATE_CITIES = MAIN_URL + "getStateCities";
+    public static String TAKE_CONTACT_LIST = MAIN_URL + "TakeContactList";
 }

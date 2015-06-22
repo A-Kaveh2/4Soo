@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/allContacts"
+        android:layout_weight="80" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_weight="20"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/selectedContacts"
+                android:layout_weight="50"
+                android:background="#ff5b5b5b"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ll_SelectedContactsContainer"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="8dp"></LinearLayout>
+            </HorizontalScrollView>
+
+            <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
+                android:id="@+id/btn_sendSMS"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="@string/txt_sendSMS"
+                android:background="@color/OrangeRed"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="50"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+

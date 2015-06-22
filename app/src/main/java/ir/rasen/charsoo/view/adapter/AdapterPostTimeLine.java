@@ -161,7 +161,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
             }
         });
 
-        if (items.get(position).type == Post.Type.Complete) {
+        if ((items.get(position).type == Post.Type.CompleteBusiness)||(items.get(position).type == Post.Type.CompleteFriend)) {
             //this post is not an announcement
             SimpleLoader simpleLoader = new SimpleLoader(context);
             simpleLoader.loadImage(items.get(position).businessProfilePictureId, Image_M.SMALL, Image_M.ImageType.BUSINESS, holder.imageViewProfileImage);

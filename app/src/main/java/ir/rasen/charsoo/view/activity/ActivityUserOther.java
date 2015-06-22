@@ -10,7 +10,7 @@ import ir.rasen.charsoo.view.fragment.FragmentUser;
 import ir.rasen.charsoo.view.fragment.FragmentUserOther;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
-public class ActivityUserOther extends CharsooActivity {
+public class ActivityUserOther extends ActivityMain {
 
     int visitedUserIntId,visitorIntId;
     FragmentUserOther fragOther;

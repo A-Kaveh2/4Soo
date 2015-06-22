@@ -175,7 +175,7 @@ public class ActivityUserProfile extends CharsooActivity implements View.OnClick
             editTextName.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateAboutMe(ActivityUserProfile.this, editTextAboutMe.getText().toString()).isValid()) {
+        if ((!editTextAboutMe.getText().toString().isEmpty())&&(!Validation.validateAboutMe(ActivityUserProfile.this, editTextAboutMe.getText().toString()).isValid())) {
             editTextAboutMe.setError(Validation.getErrorMessage());
             return false;
         }
@@ -183,22 +183,22 @@ public class ActivityUserProfile extends CharsooActivity implements View.OnClick
             editTextEmail.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateDay(ActivityUserProfile.this, editTextDay.getText().toString()).isValid()) {
+        if ((!editTextDay.getText().toString().isEmpty())&&(!Validation.validateDay(ActivityUserProfile.this, editTextDay.getText().toString()).isValid())) {
             editTextDay.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateMonth(ActivityUserProfile.this, editTextMonth.getText().toString()).isValid()) {
+        if ((!editTextMonth.getText().toString().isEmpty())&&(!Validation.validateMonth(ActivityUserProfile.this, editTextMonth.getText().toString()).isValid())) {
             editTextMonth.setError(Validation.getErrorMessage());
             return false;
         }
-        if (!Validation.validateYear(ActivityUserProfile.this, editTextYear.getText().toString()).isValid()) {
+        if ((!editTextYear.getText().toString().isEmpty())&&(!Validation.validateYear(ActivityUserProfile.this, editTextYear.getText().toString()).isValid())) {
             editTextYear.setError(Validation.getErrorMessage());
             return false;
         }
-        if (spinnerSex.getSelectedItemPosition() == 0) {
+        /*if (spinnerSex.getSelectedItemPosition() == 0) {
             new DialogMessage(ActivityUserProfile.this, getString(R.string.choose_user_sex)).show();
             return false;
-        }
+        }*/
         user.name = editTextName.getText().toString();
         user.aboutMe = editTextAboutMe.getText().toString();
         switch (spinnerSex.getSelectedItemPosition()) {

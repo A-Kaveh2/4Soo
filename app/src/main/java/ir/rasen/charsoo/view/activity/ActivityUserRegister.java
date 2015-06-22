@@ -1,24 +1,45 @@
 package ir.rasen.charsoo.view.activity;
 
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.database.Cursor;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.support.v4.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.List;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.controller.object.ContactEntry;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.friend.TakeContactList;
 import ir.rasen.charsoo.model.user.RegisterUser;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.fragment.FragmentUserRegisterOfferFriend;
 import ir.rasen.charsoo.view.fragment.FragmentUserRegisterPageOne;
 import ir.rasen.charsoo.view.fragment.FragmentUserRegisterPageTwo;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
@@ -32,11 +53,15 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
     FragmentTransaction ft;
     FragmentUserRegisterPageOne fragOne;
     FragmentUserRegisterPageTwo fragTwo;
+    FragmentUserRegisterOfferFriend fragThree;
     String userPictureString,userFullName,userStringId,userEmail,userPassword,userPhoneNumber;
     String filePath,currentFragment;
     MenuItem menuItemNext;
     Bitmap tempUserPicture;
     ProgressDialog progressDialog;
+    public int userIntId;
+    public ArrayList<ContactEntry> noneCharsooEmailContactsList, noneCharsooPhoneNumberContactsList, charsooContactsList;
+
 
 
     @Override
@@ -44,8 +69,13 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_register_new);
         setTitle(getString(R.string.str_RegisterInCharsoo));
+//        noneCharsooEmailContactsList=new ArrayList<>();
+//        noneCharsooPhoneNumberContactsList=new ArrayList<>();
+//        charsooContactsList=new ArrayList<>();
+
         fragOne=new FragmentUserRegisterPageOne();
         fragTwo=new FragmentUserRegisterPageTwo();
+        fragThree=new FragmentUserRegisterOfferFriend();
         ft=getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragmentContainer,fragOne);
         currentFragment=FIRST_PAGE;
@@ -53,7 +83,7 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-
+//            getContactList();
     }
 
 
@@ -129,7 +159,11 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         } else if (item.getItemId() == R.id.action_next) {
             switch (currentFragment) {
                 case FIRST_PAGE:
-                    switchToSecondPage();
+//                    switchToSecondPage();
+                    ft=getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragmentContainer,fragThree);
+                    currentFragment=FIRST_PAGE;
+                    ft.commit();
                     break;
                 case SECOND_PAGE:
                     //register User
@@ -198,4 +232,11 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
             new RegisterUser(ActivityUserRegister.this,user,ActivityUserRegister.this).execute();
         }
     }
+
+
+
+
+//    public ArrayList<ArrayList<ContactEntry>> getUserContacts(){
+//
+//    }
 }

@@ -603,5 +603,9 @@
     <string name="txt_MomentsAgo">لحظاتی پیش</string>
     <string name="txt_Century">قرن</string>
     <string name="txt_Ago">" پیش"</string>
+    <string name="txt_FriendRequest">درخواست دوستی</string>
+    <string name="txt_InviteFriends">دعوت از دوستان</string>
+    <string name="txt_SendSMS">پیامک بزنید</string>
+    <string name="txt_sendSMS">ارسال پیامک</string>
 
 </resources>

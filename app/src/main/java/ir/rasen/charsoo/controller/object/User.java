@@ -25,6 +25,7 @@ public class User {
     public String userIdentifier;
     public String name;
     public String email;
+    public String phoneNumber;
     public boolean isEmailConfirmed;
     public String password;
     public String aboutMe;
@@ -41,6 +42,9 @@ public class User {
     public int followedBusinessesNumber;
     public int friendsNumber;
     public ArrayList<UserBusinesses> businesses;
+
+    public boolean isUserSeenInSuggestion;
+
 
 
 

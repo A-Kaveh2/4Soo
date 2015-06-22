@@ -11,6 +11,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
@@ -21,6 +25,7 @@ import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.AnswerRequestFriendship;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
+
 
 /**
  * Created by android on 3/7/2015.

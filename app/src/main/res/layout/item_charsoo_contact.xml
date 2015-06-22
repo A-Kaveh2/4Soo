@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_list_view_item">
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/adapter_item_margin"
+        android:layout_height="@dimen/base_adapter_item_height">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:id="@+id/ll_addButton"
+            android:gravity="center_vertical">
+
+            <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
+                android:id="@+id/btn_requestFriendship"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/button_height"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:text="@string/friend_request"
+                android:layout_centerHorizontal="true"
+                android:background="@color/OrangeRed"
+                android:layout_below="@+id/editText_password_repeat"
+                android:layout_gravity="center_vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/ll_image"
+            android:layout_toRightOf="@id/ll_addButton"
+            android:weightSum="100"
+            android:gravity="right"
+            android:id="@+id/ll_name">
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="right|bottom"
+                android:textSize="@dimen/font_size_adapter_item_title"
+                android:text="Large Text"
+                android:layout_margin="@dimen/base_adapter_item_text_margin"
+                android:layout_toLeftOf="@+id/ll_image"
+                android:id="@+id/textView_ContactName"
+                android:layout_weight="50" />
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="right|top"
+                android:textSize="@dimen/font_size_adapter_item_title"
+                android:text="Large Text"
+                android:layout_margin="@dimen/base_adapter_item_text_margin"
+                android:layout_toLeftOf="@+id/ll_image"
+                android:id="@+id/textView_ContactData"
+                android:layout_weight="50" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_image"
+            android:layout_width="@dimen/adapter_item_height"
+            android:layout_height="@dimen/adapter_item_height"
+            android:layout_alignParentRight="true"
+            android:gravity="center">
+
+            <ir.rasen.charsoo.view.widgets.imageviews.RoundedSquareImageView
+                android:layout_width="@dimen/adapter_user_image_height"
+                android:layout_height="@dimen/adapter_user_image_height"
+                android:id="@+id/imageView_base_adapter_item_image" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

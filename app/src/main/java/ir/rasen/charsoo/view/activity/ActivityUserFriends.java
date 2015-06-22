@@ -9,6 +9,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.model.user.GetUserHomeInfo;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -19,15 +23,13 @@ import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.GetUserFriends;
-import ir.rasen.charsoo.model.user.GetUserHomeInfo;
 import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
+
 
 public class ActivityUserFriends extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
@@ -37,7 +39,6 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
     ListView listView;
     ArrayList<BaseAdapterItem> friends;
     ArrayList<BaseAdapterItem> sampleFriends;
-    //boolean hasRequest = false;
 
     @Override
     public void notifyRefresh() {
@@ -65,14 +66,15 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
         setTitle(getString(R.string.friends));
-
+        boolean hasRequest = false;
         try {
             sampleFriends = TestUnit.getBaseAdapterItems(getResources());
-            // hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
+            hasRequest = getIntent().getBooleanExtra(Params.HAS_REQUEST, false);
         } catch (Exception e) {
 
         }
-
+        friends = new ArrayList<>();
+        status = Status.FIRST_TIME;
         visitedUserId = getIntent().getExtras().getInt(Params.VISITED_USER_ID);
         (findViewById(R.id.btn_friend_requests)).setVisibility(View.GONE);
         if (visitedUserId == LoginInfo.getUserId(this))
@@ -82,8 +84,7 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
         }
 
 
-        friends = new ArrayList<>();
-        status = Status.FIRST_TIME;
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
@@ -148,6 +149,8 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                 listView.setAdapter(adapterFriends);
             } else if (status == Status.REFRESHING) {
                 friends.clear();
+                if (adapterFriends==null)
+                    adapterFriends = new AdapterUserFriends(ActivityUserFriends.this, visitedUserId, friends);
                 adapterFriends.notifyDataSetChanged();
                 friends.addAll(temp);
                 adapterFriends.notifyDataSetChanged();
@@ -185,7 +188,7 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
                     friends.addAll(0,((MyApplication)getApplication()).newFriends);
                     adapterFriends.notifyDataSetChanged();
                 }
-                if(data.getExtras().getBoolean(Params.HAS_REMAINIG_FRIEND_REQUESTS_STRING)){
+                if(data.getExtras().getBoolean(Params.HAS_REMAINIG_FRIEND_REQUESTS)){
                     // hasRequest=false;
                     (findViewById(R.id.btn_friend_requests)).setVisibility(View.VISIBLE);
                 }

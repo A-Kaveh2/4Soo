@@ -236,7 +236,12 @@ public class Params {
      * Created by MHFathi
      */
 
-    public static final String HAS_REMAINIG_FRIEND_REQUESTS_STRING="hasRemainingFriendRequests";
+    public static final String BUSINESS_POST_FOR_TIMELINE="businessPost";
+    public static final String FRIEND_SHARED_POST_FOR_TIMELINE="friendSharedPost";
+    public static final String FRIEND_FOLLOW_ANNOUNCE_FOR_TIMELINE="friendFollowAnnounce";
+    public static final String FRIEND_REVIEW_ANNOUNCE_FOR_TIMELINE="friendReviewAnnounce";
+
+    public static final String HAS_REMAINIG_FRIEND_REQUESTS="hasRemainingFriendRequests";
     public static final String FULL_NAME= "fullName";
     public static final String STRING_IDENTIFIER="stringIdentifier";
     public static final String STRING_PICTURE="stringPicture";
@@ -251,6 +256,22 @@ public class Params {
     public static final String LOC_LATITUDE="locationLatitude";
     public static final String LOC_LONGITUDE="locationLongitude";
 
+    public static final String WHATSAPP = "WhatsApp";
+    public static final String LINE="LINE";
+    public static final String TELEGRAM="Telegram";
+    public static final String VIBER="Viber";
+    public static final String SHARE="Share";
+    public static final String EMAIL_INVITE="Email";
+
+    public static final String EMAILS="Emails";
+    public static final String PHONE_NUMBERS="PhoneNumbers";
+    public static final String DATA_TYPE="DataType";
+    public static final String DATA_VALUE="DataValue";
+    public static final String EMAIL_FOR_TAKECONTACTLIST="Email";
+    public static final String PHONE_NUMBER="PhoneNumber";
+    public static final String MATCHED_FIELD_TYPE="MatchedFieldType";
+    public static final String MATCHED_FIELD_DATA="MatchedFieldData";
+    public static final String IS_USER_SEEN_BOOL="IsUserSeenBool";
 
     public static final boolean isTestVersion=true;
 

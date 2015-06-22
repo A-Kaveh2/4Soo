@@ -6,13 +6,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import java.io.File;
 
 import eu.janmuller.android.simplecropimage.CropImage;
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.CustomeCamera;
+import ir.rasen.charsoo.view.interface_m.ICropResult;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+
 
 public class ActivityCamera extends CharsooActivity {
 
@@ -42,7 +52,7 @@ public class ActivityCamera extends CharsooActivity {
 
     public void takePhoto() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        filePath=Environment.getExternalStorageDirectory()+"/"+ "4352643565.jpg";
+        filePath= Environment.getExternalStorageDirectory()+"/"+ "4352643565.jpg";
         File photo = new File(filePath);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
                 Uri.fromFile(photo));
@@ -79,6 +89,4 @@ public class ActivityCamera extends CharsooActivity {
                 break;
         }
     }
-
-
 }

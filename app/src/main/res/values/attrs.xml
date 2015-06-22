@@ -126,4 +126,16 @@
         <attr name="ptrDrawableBottom" format="reference" />
     </declare-styleable>
 
+
+        <declare-styleable name="MaterialTabHost">
+
+            <!-- Custom attributes -->
+            <attr name="hasIcons" format="boolean" />
+            <attr name="materialTabsPrimaryColor" format="color" />
+            <attr name="accentColor" format="color" />
+            <attr name="iconColor" format="color" />
+            <attr name="textColor" format="color"  />
+
+        </declare-styleable>
+
 </resources>

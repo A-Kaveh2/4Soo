@@ -102,7 +102,7 @@ public class Validation {
             return new Validation(false, context.getResources().getString(R.string.enter_non_empty_value));
 
         int d = Integer.valueOf(day);
-        if (d < 0 || d > 31)
+        if (d < 1 || d > 31)
             return new Validation(false, context.getResources().getString(R.string.enter_correct_value));
         else
             return new Validation(true, "null");
@@ -113,7 +113,7 @@ public class Validation {
             return new Validation(false, context.getResources().getString(R.string.enter_non_empty_value));
 
         int m = Integer.valueOf(month);
-        if (m < 0 || m > 12)
+        if (m < 1 || m > 12)
             return new Validation(false, context.getResources().getString(R.string.enter_correct_value));
         else
             return new Validation(true, "null");
@@ -162,6 +162,14 @@ public class Validation {
         else
             return new Validation(true, "null");
 
+    }
+
+    public static Validation checkNumberIfIsMobile(String mobileNumber){
+        if ((mobileNumber.startsWith("9"))||(mobileNumber.startsWith("09"))
+                ||(mobileNumber.startsWith("00989"))||(mobileNumber.startsWith("+989")))
+            return new Validation(true,"");
+        else
+            return new Validation(false,"");
     }
 
     public static Validation validateWebsite(Context context, String website) {

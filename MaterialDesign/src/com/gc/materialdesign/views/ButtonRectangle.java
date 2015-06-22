@@ -113,6 +113,7 @@ public class ButtonRectangle extends Button {
 				"rippleSpeed", Utils.dpToPx(6, getResources()));
 	}
 
+
 //	/**
 //	 * Center text in button
 //	 */

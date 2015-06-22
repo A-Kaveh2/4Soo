@@ -10,6 +10,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
+
+import javax.xml.transform.Result;
 
 import ir.rasen.charsoo.view.activity.ActivityPost;
 import ir.rasen.charsoo.controller.helper.Hashtag;
@@ -51,7 +54,7 @@ public class Post {
     public int commentNumber;
     public int shareNumber;
 
-    public enum Type {Complete, Follow, Review}
+    public enum Type {CompleteBusiness, Follow, Review, CompleteFriend}
 
     public enum GetPostType {TIMELINE, SHARE, BUSINESS, SEARCH}
 
@@ -78,24 +81,28 @@ public class Post {
     public static Type getType(int type) {
         switch (type) {
             case 1:
-                return Type.Complete;
+                return Type.CompleteBusiness;
             case 2:
                 return Type.Follow;
             case 3:
                 return Type.Review;
+            case 4:
+                return Type.CompleteFriend;
         }
 
-        return Type.Complete;
+        return Type.CompleteBusiness;
     }
 
     public static int getTypeCode(Type type) {
         switch (type) {
-            case Complete:
+            case CompleteBusiness:
                 return 1;
             case Follow:
                 return 2;
             case Review:
                 return 3;
+            case CompleteFriend:
+                return 4;
         }
 
         return 0;
@@ -217,7 +224,7 @@ public class Post {
         post.businessUserName = jsonObject.getString(Params.BUSINESS_USERNAME_STRING);
         post.type = getType(jsonObject.getInt(Params.TYPE));
         post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
-        if (post.type == Type.Complete) {
+        if (post.type == Type.CompleteBusiness) {
             //post.businessProfilePictureId = jsonObject.getInt(Params.BUSINESS_PROFILE_PICUTE_ID_INT);
             post.title = jsonObject.getString(Params.POST_TITLE_STRING);
             post.creationDate = setCreationDate(jsonObject);
@@ -245,6 +252,23 @@ public class Post {
 
         } else if (post.type == Type.Review) {
             String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+        }
+        else if (post.type ==Type.CompleteFriend){
+            post.title = jsonObject.getString(Params.POST_TITLE_STRING);
+            post.creationDate = setCreationDate(jsonObject);
+            post.pictureId = jsonObject.getInt(Params.POST_PICTURE_ID_INT);
+            post.description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+            post.code = jsonObject.getString(Params.POST_CODE_STRING);
+            post.price = jsonObject.getString(Params.POST_PRICE_STRING);
+            post.isLiked = jsonObject.getBoolean(Params.POST_IS_LIKED);
+            post.isReported = jsonObject.getBoolean(Params.POST_IS_REPORTED);
+            post.isShared = jsonObject.getBoolean(Params.POST_IS_SHARED);
+            String comments = jsonObject.getString(Params.Post_COMMENTS_STRING);
+            JSONArray jsonArrayComments = new JSONArray(comments);
+
+            //
+            post.lastThreeComments = Comment.getFromJSONArray(jsonArrayComments);
+            post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
         }
         return post;
     }
@@ -288,11 +312,44 @@ public class Post {
                 return i;
         }
 
+
         //there is not such a post in the posts
         return -1;
     }
 
 
+    public static Hashtable<String,Integer> getLastLoadedTimelineItems(ArrayList<Post> loadedItems){
+        Hashtable<String,Integer> result=new Hashtable<>();
+        for (int i = loadedItems.size()-1; i >=0 ; i++) {
+            Post p=loadedItems.get(i);
+            if ((!result.containsKey(Params.BUSINESS_POST_FOR_TIMELINE))&&(p.type == Type.CompleteBusiness)){
+                result.put(Params.BUSINESS_POST_FOR_TIMELINE,p.id);
+            }
+            else if ((!result.containsKey(Params.FRIEND_SHARED_POST_FOR_TIMELINE))&&(p.type == Type.CompleteFriend)){
+                result.put(Params.FRIEND_SHARED_POST_FOR_TIMELINE,p.id);
+            }
+            else if ((!result.containsKey(Params.FRIEND_FOLLOW_ANNOUNCE_FOR_TIMELINE))&&(p.type == Type.Follow)){
+                result.put(Params.FRIEND_FOLLOW_ANNOUNCE_FOR_TIMELINE,p.id);
+            }
+            else if ((!result.containsKey(Params.FRIEND_REVIEW_ANNOUNCE_FOR_TIMELINE))&&(p.type == Type.Review)){
+                result.put(Params.FRIEND_REVIEW_ANNOUNCE_FOR_TIMELINE,p.id);
+            }
+            else if (result.size() == 4)
+                break;
+        }
+        if (!result.containsKey(Params.BUSINESS_POST_FOR_TIMELINE))
+            result.put(Params.BUSINESS_POST_FOR_TIMELINE,0);
 
+        if (!result.containsKey(Params.FRIEND_SHARED_POST_FOR_TIMELINE))
+            result.put(Params.FRIEND_SHARED_POST_FOR_TIMELINE,0);
+
+        if (!result.containsKey(Params.FRIEND_FOLLOW_ANNOUNCE_FOR_TIMELINE))
+            result.put(Params.FRIEND_FOLLOW_ANNOUNCE_FOR_TIMELINE,0);
+
+        if (!result.containsKey(Params.FRIEND_REVIEW_ANNOUNCE_FOR_TIMELINE))
+            result.put(Params.FRIEND_REVIEW_ANNOUNCE_FOR_TIMELINE,0);
+
+        return result;
+    }
 
 }

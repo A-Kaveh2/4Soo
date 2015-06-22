@@ -152,7 +152,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 /*        if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
             return;
         boolean hasRequest = false;*/
-        ((ActivityMain) getActivity()).setUserDrawer(user);
+//        ((ActivityMain) getActivity()).setUserDrawer(user);
 
         boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
         boolean hasHeader = gridViewUser == null ? false : gridViewUser.hasHeader;

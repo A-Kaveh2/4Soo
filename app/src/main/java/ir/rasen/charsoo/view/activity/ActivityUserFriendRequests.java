@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
+
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -26,7 +28,7 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
+
 
 public class ActivityUserFriendRequests extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
@@ -176,9 +178,8 @@ public class ActivityUserFriendRequests extends CharsooActivity implements IWebs
                 break;
             }
         }
-        i.putExtra(Params.HAS_REMAINIG_FRIEND_REQUESTS_STRING,hasRemainingRequests);
+        i.putExtra(Params.HAS_REMAINIG_FRIEND_REQUESTS,hasRemainingRequests);
         setResult(RESULT_OK, i);
         finish();
     }
-
 }

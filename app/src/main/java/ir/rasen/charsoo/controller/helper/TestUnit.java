@@ -187,7 +187,7 @@ public class TestUnit {
             post.businessProfilePictureId = 2022;
             post.businessUserName = "business1";
             post.businessID = 1;
-            post.type = Post.Type.Complete;
+            post.type = Post.Type.CompleteBusiness;
             post.pictureId = 2022;
             //post.creationDate = -10;
             post.likeNumber = 325485;
@@ -269,7 +269,7 @@ public class TestUnit {
             post.businessProfilePictureId = 2022;
             post.businessUserName = "business1";
             post.businessID = 1;
-            post.type = Post.Type.Complete;
+            post.type = Post.Type.CompleteBusiness;
             post.pictureId = 2022;
             //post.creationDate = -10;
             post.likeNumber = 325485;

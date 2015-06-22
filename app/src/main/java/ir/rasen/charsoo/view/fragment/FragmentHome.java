@@ -18,6 +18,7 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
@@ -29,7 +30,8 @@ import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.NetworkConnectivityReciever;
 import ir.rasen.charsoo.model.post.GetTimeLinePost;
-import ir.rasen.charsoo.model.post.GetTimeLinePosts;
+//import ir.rasen.charsoo.model.post.GetTimeLinePosts;
+import ir.rasen.charsoo.model.post.GetTimeLinePosts_new;
 import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IGetNewTimeLinePost;
@@ -109,7 +111,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
 
         status = Status.FIRST_TIME;
         progressDialog.show();
-        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+        new GetTimeLinePosts_new(getActivity(), LoginInfo.getUserId(getActivity()),0,0,0,0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
 
         timeLineUpdateReceiver = new BroadcastReceiver() {
             @Override
@@ -166,7 +168,12 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
         pullToRefreshListView.setFooterVisibility(View.VISIBLE);
-        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), results.get(results.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+        Hashtable<String,Integer> lastLoadedItems=Post.getLastLoadedTimelineItems(results);
+//        new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), results.get(results.size() - 1).id, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+        new GetTimeLinePosts_new(getActivity(),LoginInfo.getUserId(getActivity()),lastLoadedItems.get(Params.BUSINESS_POST_FOR_TIMELINE),
+                lastLoadedItems.get(Params.FRIEND_SHARED_POST_FOR_TIMELINE),lastLoadedItems.get(Params.FRIEND_FOLLOW_ANNOUNCE_FOR_TIMELINE),
+                lastLoadedItems.get(Params.FRIEND_REVIEW_ANNOUNCE_FOR_TIMELINE),getResources().getInteger(R.integer.lazy_load_limitation),
+                FragmentHome.this).execute();
     }
 
     @Override
@@ -220,7 +227,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
         if (((MyApplication) getActivity().getApplication()).isHomeCreated) {
             status = Status.REFRESHING;
             results.clear();
-            new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+            new GetTimeLinePosts_new(getActivity(), LoginInfo.getUserId(getActivity()),0,0,0,0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
         }
         else
             pullToRefreshListView.onRefreshComplete();
@@ -244,7 +251,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
             @Override
             public void run() {
                 if (!((MyApplication) getActivity().getApplication()).isHomeCreated) {
-                    new GetTimeLinePosts(getActivity(), LoginInfo.getUserId(getActivity()), 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
+                    new GetTimeLinePosts_new(getActivity(), LoginInfo.getUserId(getActivity()),0,0,0,0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentHome.this).execute();
                 } else {
                     ConnectivityManager cm =
                             (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
