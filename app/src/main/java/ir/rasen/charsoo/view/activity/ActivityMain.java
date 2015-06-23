@@ -1,5 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,7 +10,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
@@ -77,6 +82,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
         initDrawerLayout();
         initNavigationView();
+
+        setUpGeneralFeatures(this.findViewById(android.R.id.content));
 
     }
 
@@ -470,6 +477,24 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
     private void initDrawerLayout() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.setDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                hideSoftKeyboard();
+            }
+        });
     }
     private void initNavigationView() {
         //Initializing NavigationView
@@ -565,4 +590,28 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         setSelection(FRAG_SEARCH);
     }
 
+
+    private void setUpGeneralFeatures(View view) {
+        //Set up touch listener for non-text box views to hide keyboard.
+        if(!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    hideSoftKeyboard();
+                    return false;
+                }
+
+            });
+        }
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setUpGeneralFeatures(innerView);
+            }
+        }
+    }
+    public void hideSoftKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
 }
