@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
-
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -20,22 +18,24 @@ import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.model.business.GetBusinessFollowers;
-import ir.rasen.charsoo.view.adapter.AdapterBusinessFollowers;
+import ir.rasen.charsoo.view.adapter.AdapterUsersFromBAItems;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 
 public class ActivityBusinessFollowers extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int businessId;
-    AdapterBusinessFollowers adapterFollowers;
+    AdapterUsersFromBAItems adapterFollowers;
     ListView listView;
     ArrayList<BaseAdapterItem> followers;
     //for the test
     ArrayList<BaseAdapterItem> sampleFollowers;
+    private int ownerId;
 
     @Override
     public void notifyRefresh() {
@@ -69,6 +69,7 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
         }
         businessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
         int userId = getIntent().getExtras().getInt(Params.USER_ID_INT);
+        ownerId = getIntent().getExtras().getInt(Params.POST_OWNER_BUSINESS_ID);
         if (userId != LoginInfo.getUserId(this))
             (findViewById(R.id.btn_blocked_users)).setVisibility(View.GONE);
         followers = new ArrayList<>();
@@ -132,7 +133,9 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
             pullToRefreshListView.setResultSize(followers.size());
 
             if (status == Status.FIRST_TIME) {
-                adapterFollowers = new AdapterBusinessFollowers(ActivityBusinessFollowers.this, followers);
+                AdapterUsersFromBAItems.Mode mode =
+                        ownerId==LoginInfo.getUserId(this) ? AdapterUsersFromBAItems.Mode.OWN_FOLLOWERS : AdapterUsersFromBAItems.Mode.USERS;
+                adapterFollowers = new AdapterUsersFromBAItems(ActivityBusinessFollowers.this, 0, followers, mode);
                 listView.setAdapter(adapterFollowers);
             } else if (status == Status.REFRESHING) {
                 adapterFollowers.notifyDataSetChanged();

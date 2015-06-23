@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/view_bg"
     android:padding="@dimen/margin_minimum_x2">
 
     <ir.rasen.charsoo.view.widgets.imageviews.SquareImageView

@@ -9,10 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.user.GetUserHomeInfo;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
-
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -23,19 +19,22 @@ import ir.rasen.charsoo.controller.helper.PullToRefreshList;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.TestUnit;
 import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.model.friend.GetUserFriends;
-import ir.rasen.charsoo.view.adapter.AdapterUserFriends;
+import ir.rasen.charsoo.model.user.GetUserHomeInfo;
+import ir.rasen.charsoo.view.adapter.AdapterUsersFromBAItems;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 
 public class ActivityUserFriends extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
     ProgressDialog progressDialog;
     int visitedUserId;
-    AdapterUserFriends adapterFriends;
+    AdapterUsersFromBAItems adapterFriends;
     ListView listView;
     ArrayList<BaseAdapterItem> friends;
     ArrayList<BaseAdapterItem> sampleFriends;
@@ -145,12 +144,12 @@ public class ActivityUserFriends extends CharsooActivity implements IWebserviceR
             pullToRefreshListView.setResultSize(friends.size());
 
             if (status == Status.FIRST_TIME) {
-                adapterFriends = new AdapterUserFriends(ActivityUserFriends.this, visitedUserId, friends);
+                adapterFriends = new AdapterUsersFromBAItems(ActivityUserFriends.this, visitedUserId, friends, AdapterUsersFromBAItems.Mode.USERS);
                 listView.setAdapter(adapterFriends);
             } else if (status == Status.REFRESHING) {
                 friends.clear();
                 if (adapterFriends==null)
-                    adapterFriends = new AdapterUserFriends(ActivityUserFriends.this, visitedUserId, friends);
+                    adapterFriends = new AdapterUsersFromBAItems(ActivityUserFriends.this, visitedUserId, friends, AdapterUsersFromBAItems.Mode.USERS);
                 adapterFriends.notifyDataSetChanged();
                 friends.addAll(temp);
                 adapterFriends.notifyDataSetChanged();

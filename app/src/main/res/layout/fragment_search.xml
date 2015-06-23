@@ -25,7 +25,7 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:drawableRight="@android:drawable/ic_menu_search"
             android:drawablePadding="@dimen/activity_horizontal_margin"
-            android:gravity="right"/>
+            android:gravity="right|center_vertical"/>
 
         <ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip
             android:id="@id/tabs"

@@ -16,7 +16,7 @@ import ir.rasen.charsoo.controller.helper.BaseAdapterItem;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.model.search.SearchUser;
-import ir.rasen.charsoo.view.adapter.AdapterUserSearchResult;
+import ir.rasen.charsoo.view.adapter.AdapterUsersFromBAItems;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
@@ -26,7 +26,7 @@ public class ActivitySearchUser extends CharsooActivity implements IWebserviceRe
 
     ProgressDialog progressDialog;
     int visitedUserId;
-    AdapterUserSearchResult adapterUserSearchResult;
+    AdapterUsersFromBAItems adapterUserSearchResult;
     ListView listView;
     ArrayList<BaseAdapterItem> results;
     ArrayList<BaseAdapterItem> sampleResults;
@@ -144,9 +144,8 @@ public class ActivitySearchUser extends CharsooActivity implements IWebserviceRe
 
             results.addAll(temp);
 
-
             if (status == Status.FIRST_TIME) {
-                adapterUserSearchResult = new AdapterUserSearchResult(ActivitySearchUser.this, results);
+                adapterUserSearchResult = new AdapterUsersFromBAItems(ActivitySearchUser.this, 0, results, AdapterUsersFromBAItems.Mode.USERS);
                 listView.setAdapter(adapterUserSearchResult);
             } else {
                 //it is loading more

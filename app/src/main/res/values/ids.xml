@@ -15,4 +15,19 @@
     <item name="special_product_img" type="id" />
     <item name="special_product_pb" type="id" />
     <item name="edt_search" type="id"/>
+    <item name="business_name" type="id" />
+    <item name="business_id" type="id" />
+    <item name="business_img" type="id" />
+    <item name="business_pb" type="id" />
+    <item name="business_prev_img1" type="id" />
+    <item name="business_prev_img2" type="id" />
+    <item name="business_prev_img3" type="id" />
+    <item name="user_name" type="id" />
+    <item name="user_id" type="id" />
+    <item name="user_img" type="id" />
+    <item name="user_pb" type="id" />
+    <item name="view_user" type="id" />
+    <item name="user_send_request" type="id" />
+    <item name="user_remove" type="id" />
+
 </resources>

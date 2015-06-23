@@ -94,6 +94,7 @@ public class FragmentSearch extends Fragment {
                 return false;
             }
         });
+        viewPager.setCurrentItem(1);
         setUpGeneralFeatures(view);
     }
 

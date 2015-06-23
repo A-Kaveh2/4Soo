@@ -9,33 +9,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
-import ir.rasen.charsoo.controller.object.Post;
+import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.widgets.MaterialProgressBar;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.view.widgets.imageviews.SquareImageView;
+import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
-public class AdapterSpecialProductsGrid extends BaseAdapter {
+public class AdapterUsers extends BaseAdapter {
     private Activity activity;
-    ArrayList<Post> items;
+    ArrayList<User> items;
     //private int screedWidth;
     SimpleLoader simpleLoader;
 
     // Constructor
-    public AdapterSpecialProductsGrid(Activity activity, ArrayList<Post> Posts) {
+    public AdapterUsers(Activity activity, ArrayList<User> useres) {
         this.activity = activity;
-        items = Posts;
+        items = useres;
         //screedWidth = activity.getResources().getDisplayMetrics().widthPixels;
         simpleLoader = new SimpleLoader(activity);
     }
 
-    public void loadMore(ArrayList<Post> newItems) {
+    public void loadMore(ArrayList<User> newItems) {
         this.items.addAll(newItems);
         notifyDataSetChanged();
     }
@@ -57,43 +56,42 @@ public class AdapterSpecialProductsGrid extends BaseAdapter {
         final Holder holder;
         if (view == null) {
             holder = new Holder();
-            view = LayoutInflater.from(activity).inflate(R.layout.item_special_product_grid, parent, false);
-            holder.imageView = (SquareImageView) view.findViewById(R.id.special_product_img);
-            holder.progressBar = (MaterialProgressBar) view.findViewById(R.id.special_product_pb);
-            holder.title = (TextViewFont) view.findViewById(R.id.special_product_title);
+            view = LayoutInflater.from(activity).inflate(R.layout.item_user, parent, false);
+            holder.imageView = (ImageViewCircle) view.findViewById(R.id.user_img);
+            holder.name = (TextViewFont) view.findViewById(R.id.user_name);
+            holder.id = (TextViewFont) view.findViewById(R.id.user_id);
+            holder.progressBar = (MaterialProgressBar) view.findViewById(R.id.user_pb);
+
         } else
             holder = (Holder) view.getTag();
 
         if(holder!=null) {
-            Post post = items.get(position);
-            if (post.pictureId == 0 && post.picture != null && !post.picture.equals(""))
-                holder.imageView.setImageBitmap(Image_M.getBitmapFromString(post.picture));
+            User user = items.get(position);
+            if (user.coverPictureId == 0 && user.coverPicture != null && !user.coverPicture.equals(""))
+                holder.imageView.setImageBitmap(Image_M.getBitmapFromString(user.coverPicture));
             else
-                simpleLoader.loadImage(post.pictureId, Image_M.MEDIUM, Image_M.ImageType.POST, holder.imageView, holder.progressBar);
+                simpleLoader.loadImage(user.coverPictureId, Image_M.MEDIUM, Image_M.ImageType.POST, holder.imageView, holder.progressBar);
             holder.imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Post post = items.get(position);
-                    if (post.getPostType == Post.GetPostType.SHARE)
-                        Post.goPostPageFromUserHome(activity, post.id, post.businessID, post.getPostType);
-                    else
-                        Post.goPostPage(activity, post.id, post.businessID, post.getPostType);
-
+                    User.goUserHomeInfoPage(activity, items.get(position).id);
                 }
             });
-            if (post.title != null)
-                holder.title.setText(post.title);
-            else
-                holder.title.setText("");
+            holder.name.setText(
+                    user.name != null ? user.name : ""
+            );
+            holder.id.setText(
+                    user.userIdentifier != null ? user.userIdentifier : ""
+            );
         }
 
         return view;
     }
 
     private class Holder {
-        ImageView imageView;
+        ImageViewCircle imageView;
         MaterialProgressBar progressBar;
-        TextViewFont title;
+        TextViewFont name, id;
     }
 
 }

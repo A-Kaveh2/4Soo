@@ -1,6 +1,5 @@
 package ir.rasen.charsoo.view.adapter;
 
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -22,22 +21,25 @@ import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 /**
  * Created by android on 3/7/2015.
  */
-public class AdapterBusinessFollowers extends BaseAdapter {
+public class UNUSED_AdapterUserSearchResult extends BaseAdapter {
 
     private ArrayList<BaseAdapterItem> items;
     private Context context;
     SimpleLoader simpleLoader;
     ListView listView;
 
-
-    public AdapterBusinessFollowers(Context context, ArrayList<BaseAdapterItem> items) {
+    public UNUSED_AdapterUserSearchResult(Context context, ArrayList<BaseAdapterItem> items) {
         this.context = context;
         this.items = items;
         simpleLoader = new SimpleLoader(context);
     }
-
-    public void loadMore(ArrayList<BaseAdapterItem> newItems){
-        this.items.addAll(newItems);
+    public void notifyRemoveAllItems(){
+        items.clear();
+        notifyDataSetChanged();
+    }
+    public void loadMore(ArrayList<BaseAdapterItem> newItem){
+        //this.items.addAll(newItem);
+        int i = items.size();
         notifyDataSetChanged();
     }
 
@@ -74,15 +76,23 @@ public class AdapterBusinessFollowers extends BaseAdapter {
         } else
             holder = (Holder) view.getTag();
 
-        //download image with customized class via imageId
-        simpleLoader.loadImage(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage);
-        holder.textViewUserIdentifier.setText(items.get(position).getTitle());
         holder.textViewUserIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               User.goUserHomeInfoPage(context,items.get(position).getId());
+                User.goUserHomeInfoPage(context,items.get(position).getId());
             }
         });
+        holder.imageViewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User.goUserHomeInfoPage(context, items.get(position).getId());
+            }
+        });
+
+        //download image with customized class via imageId
+        simpleLoader.loadImage(items.get(position).getImageId(), Image_M.SMALL, Image_M.ImageType.USER, holder.imageViewImage);
+        holder.textViewUserIdentifier.setText(items.get(position).getTitle());
+
         return view;
     }
 

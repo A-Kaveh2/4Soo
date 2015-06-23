@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
-
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
@@ -36,6 +34,7 @@ import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.buttons.ButtonFont;
 import ir.rasen.charsoo.view.widgets.buttons.FloatButton;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 
 /**
  * Created by android on 3/14/2015.
@@ -155,7 +154,7 @@ public class GridViewBusinessOther implements IWebserviceResponse, IUnfollowBusi
                     Intent intent1 = new Intent(activity, ActivityBusinessFollowers.class);
                     intent1.putExtra(Params.BUSINESS_ID_STRING, business.id);
                     intent1.putExtra(Params.USER_ID_INT, business.userID);
-
+                    intent1.putExtra(Params.BUSINESS_OWNER, business.userID);
                     activity.startActivity(intent1);
                 }
             });
