@@ -1,19 +1,20 @@
 package ir.rasen.charsoo.view.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,15 +29,12 @@ import java.util.Collections;
 import java.util.Hashtable;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.object.ContactEntry;
 import ir.rasen.charsoo.model.friend.TakeContactList;
 import ir.rasen.charsoo.view.activity.ActivityUserRegister;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
-import ir.rasen.charsoo.view.widgets.CustomViewPager;
-import ir.rasen.charsoo.view.widgets.SlidingTabLayout;
-
+import ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip;
 
 /**
  * Created by hossein-pc on 6/9/2015.
@@ -59,13 +57,10 @@ public class FragmentUserRegisterOfferFriend extends Fragment {
      * A custom {@link android.support.v4.view.ViewPager} title strip which looks much like Tabs present in Android v4.0 and
      * above, but is designed to give continuous feedback to the user when scrolling.
      */
-    private SlidingTabLayout mSlidingTabLayout;
-    Context context;
+    private PagerSlidingTabStrip tabs;
+    Activity context;
 
-    /**
-     * A {@link android.support.v4.view.ViewPager} which will be used in conjunction with the {@link SlidingTabLayout} above.
-     */
-    private CustomViewPager mViewPager;
+    private ViewPager mViewPager;
 
     private View fragAddView,fragInviteView,fragSMSView;
     /**
@@ -84,6 +79,7 @@ public class FragmentUserRegisterOfferFriend extends Fragment {
 
         progressDialog = new ProgressDialog(context);
         progressDialog.setMessage(context.getResources().getString(R.string.please_wait));
+        progressDialog.show();
         View view = inflater.inflate(R.layout.fragment_user_register_offer_friends,
                 container, false);
 //        resultFragView= getActivity().getLayoutInflater().inflate(R.layout.fragment_result,
@@ -106,47 +102,23 @@ public class FragmentUserRegisterOfferFriend extends Fragment {
 
     }
 
-    // BEGIN_INCLUDE (fragment_onviewcreated)
-    /**
-     * This is called after the {@link #onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)} has finished.
-     * Here we can pick out the {@link android.view.View}s we need to configure from the content view.
-     *
-     * We set the {@link android.support.v4.view.ViewPager}'s adapter to be an instance of {@link }. The
-     * {@link SlidingTabLayout} is then given the {@link android.support.v4.view.ViewPager} so that it can populate itself.
-     *
-     * @param view View created in {@link #onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)}
-     */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // BEGIN_INCLUDE (setup_viewpager)
         // Get the ViewPager and set it's PagerAdapter so that it can display items
-        progressDialog.show();
-        mViewPager = (CustomViewPager) view.findViewById(R.id.viewpager);
+        mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mViewPager.setAdapter(new ViewPagerAdapter(getFragmentManager()));
-        mViewPager.setScrollDurationFactor(0.3);
         // END_INCLUDE (setup_viewpager)
 
 
         // BEGIN_INCLUDE (setup_slidingtablayout)
         // Give the SlidingTabLayout the ViewPager, this must be done AFTER the ViewPager has had
         // it's PagerAdapter set.
-        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
-        mSlidingTabLayout.setViewPager(mViewPager);
+        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.sliding_tabs);
+        tabs.setViewPager(mViewPager);
         // END_INCLUDE (setup_slidingtablayout)
     }
     // END_INCLUDE (fragment_onviewcreated)
-
-
-
-
-
-    /**
-     * The {@link android.support.v4.view.PagerAdapter} used to display pages in this sample.
-     * The individual pages are simple and just display two lines of text. The important section of
-     * this class is the {@link #getPageTitle(int)} method which controls what is displayed in the
-     * {@link SlidingTabLayout}.
-     */
-
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 

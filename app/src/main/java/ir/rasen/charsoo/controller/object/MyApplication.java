@@ -23,7 +23,7 @@ public class MyApplication extends Application {
     public ArrayList<BaseAdapterItem> searchUserResult;
     public ArrayList<BaseAdapterItem> newFriends;
     public ArrayList<User.UserBusinesses> userBusinesses;
-    public boolean isHomeCreated, isSearchCreated, isUserCreated;
+    public boolean isHomeCreated, isUserCreated;
     public ArrayList<Post> homePosts;
     public int userProfilePictureId = 0;
     public String userIdentifier = "";
@@ -45,7 +45,6 @@ public class MyApplication extends Application {
         alarm_m.set(getApplicationContext());
 
         isHomeCreated = false;
-        isSearchCreated = false;
         isUserCreated = false;
         homePosts = new ArrayList<>();
 

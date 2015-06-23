@@ -31,7 +31,6 @@ public class LoginInfo {
         edit.commit();
 
         ((MyApplication) activity.getApplication()).isHomeCreated = false;
-        ((MyApplication) activity.getApplication()).isSearchCreated = false;
         ((MyApplication) activity.getApplication()).isUserCreated = false;
 
         //go to the welcome activity

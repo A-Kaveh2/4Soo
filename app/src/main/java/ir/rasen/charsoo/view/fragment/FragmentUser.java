@@ -6,8 +6,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -42,7 +40,7 @@ import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHe
 
 public class FragmentUser extends Fragment implements IWebserviceResponse, IUpdateUserProfile, IPullToRefresh, NetworkStateChangeListener {
 
-    public static final String TAG="FragmentUser";
+    public static final String TAG = "FragmentUser";
     private HFGridView gridView;
     private int visitedUserId;
     ProgressDialog progressDialog;
@@ -64,7 +62,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             view = inflater.inflate(R.layout.fragment_user,
                     container, false);
 
-            NetworkConnectivityReciever.setNetworkStateListener(TAG,FragmentUser.this);
+            NetworkConnectivityReciever.setNetworkStateListener(TAG, FragmentUser.this);
             visitedUserId = LoginInfo.getUserId(getActivity());
             iUpdateUserProfile = this;
 
@@ -130,20 +128,13 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
                 try {  // agar pish az Ejad shodane user az app kharej shavim force midahad
-                    if (((MyApplication) getActivity().getApplication()).isSearchCreated) {
-                        if ((((MyApplication) getActivity().getApplication()).isUserCreated) && (user != null))
-                            initializeUser();
-                        else {
-                            new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
-                        }
-                    } else {
-                        ConnectivityManager cm =
-                                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-                        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-                        if (netInfo != null && netInfo.isConnectedOrConnecting())
-                            recursivelyCallHandler();
+                    if ((((MyApplication) getActivity().getApplication()).isUserCreated) && (user != null))
+                        initializeUser();
+                    else {
+                        new GetUserHomeInfo(getActivity(), visitedUserId, LoginInfo.getUserId(getActivity()), FragmentUser.this).execute();
                     }
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
             }
         }, 500);
     }
@@ -152,15 +143,15 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 /*        if (!(getActivity() instanceof IGoToRegisterBusinessActivity))
             return;
         boolean hasRequest = false;*/
-//        ((ActivityMain) getActivity()).setUserDrawer(user);
+        ((ActivityMain) getActivity()).setUserDrawer(user);
 
         boolean beThreeColumn = gridViewUser == null ? true : gridViewUser.isThreeColumn;
         boolean hasHeader = gridViewUser == null ? false : gridViewUser.hasHeader;
-        if ((gridViewUser!=null) && (hasHeader))
-            gridViewUser.refreshUserData(user,visitedUserId);
+        if ((gridViewUser != null) && (hasHeader))
+            gridViewUser.refreshUserData(user, visitedUserId);
         else
             gridViewUser = new GridViewUser(getActivity(), user, visitedUserId, gridView);
-        if ((((MyApplication) getActivity().getApplication()).isUserCreated)&&(sharedPosts!=null)) {
+        if ((((MyApplication) getActivity().getApplication()).isUserCreated) && (sharedPosts != null)) {
             try {
                 gridViewUser.InitialGridViewUser(sharedPosts, beThreeColumn, hasHeader);
                 gridViewUser.hideLoader();
@@ -175,8 +166,8 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
 
                 }
             }
-            if (sharedPosts==null)
-                sharedPosts=new ArrayList<>();
+            if (sharedPosts == null)
+                sharedPosts = new ArrayList<>();
             new GetSharedPosts(getActivity(), visitedUserId, 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentUser.this).execute();
             ((MyApplication) getActivity().getApplication()).isUserCreated = true;
         }
@@ -207,7 +198,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             //GetSharedPosts result
             if (pullToRefreshGridView.isRefreshing())
                 sharedPosts.clear();
-            sharedPosts=(ArrayList<Post>) result;
+            sharedPosts = (ArrayList<Post>) result;
             if (sharedPosts.size() == 0)
                 new DialogMessage(getActivity(), "Empty posts").show();
             pullToRefreshGridView.setResultSize(sharedPosts.size());
@@ -220,10 +211,10 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     }
 
     @Override
-    public void getError(Integer errorCode,String callerStringID) {
+    public void getError(Integer errorCode, String callerStringID) {
         progressDialog.dismiss();
         pullToRefreshGridView.onRefreshComplete();
-        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode,callerStringID+">"+TAG)).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode, callerStringID + ">" + TAG)).show();
     }
 
 

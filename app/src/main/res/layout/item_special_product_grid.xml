@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_minimum_x2">
+
+    <ir.rasen.charsoo.view.widgets.imageviews.SquareImageView
+        android:id="@id/special_product_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ir.rasen.charsoo.view.widgets.TextViewFont
+        android:id="@id/special_product_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray_transparent"
+        android:textColor="@android:color/white"
+        android:visibility="gone"/>
+    <ir.rasen.charsoo.view.widgets.MaterialProgressBar
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:background="@color/material_blue"
+        android:layout_centerInParent="true"
+        android:id="@id/special_product_pb"/>
+
+</RelativeLayout>

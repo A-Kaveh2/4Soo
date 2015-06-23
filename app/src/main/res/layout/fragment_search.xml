@@ -1,173 +1,45 @@
-<RelativeLayout
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <LinearLayout
-        android:id="@+id/ll_header"
-        android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/material_blue"
-        android:layout_height="@dimen/button_height">
-
-        <ir.rasen.charsoo.view.widgets.EditTextFont
-            android:imeOptions="actionSearch"
-            android:id="@+id/edt_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/search_title"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="right|center_vertical"
-            android:textColor="@color/Black"
-            android:singleLine="true"
-            android:inputType="text"
-            android:maxLength="@integer/restriction_identifier_length"
-            android:background="@color/White"
-            android:drawableRight="@drawable/ic_search_black_24dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/ll_header"
-        android:background="@color/material_blue"
-        android:weightSum="100">
+        android:orientation="vertical"
+        android:background="@color/material_blue">
 
-        <RelativeLayout
-            android:id="@+id/rl_businesses"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="33.33333">
+        <ir.rasen.charsoo.view.widgets.EditTextFont
+            android:id="@id/edt_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_header_height"
+            android:background="@drawable/bg_edittext"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_1of4"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin_1of4"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:drawableRight="@android:drawable/ic_menu_search"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:gravity="right"/>
 
-            <ir.rasen.charsoo.view.widgets.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/White"
-                android:textSize="@dimen/font_large"
-                android:text="@string/businesses" />
-
-            <LinearLayout
-                android:id="@+id/ll_indicator_businesses"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/indicator_height"
-                android:background="@android:color/white"
-                android:orientation="horizontal"
-                android:layout_alignParentBottom="true" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_posts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="33.33333">
-
-            <ir.rasen.charsoo.view.widgets.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/White"
-                android:textSize="@dimen/font_large"
-                android:text="@string/posts" />
-
-            <LinearLayout
-                android:id="@+id/ll_indicator_posts"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/indicator_height"
-                android:background="@color/DarkOrange"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:layout_alignParentBottom="true" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_users"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="33.33333">
-
-            <ir.rasen.charsoo.view.widgets.TextViewFont
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:textColor="@color/White"
-                android:textSize="@dimen/font_large"
-                android:text="@string/users" />
-
-            <LinearLayout
-                android:id="@+id/ll_indicator_users"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/indicator_height"
-                android:background="@color/DarkOrange"
-                android:orientation="horizontal"
-                android:visibility="gone"
-                android:layout_alignParentBottom="true" />
-        </RelativeLayout>
-
+        <ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip
+            android:id="@id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:background="@color/material_blue"
+            android:visibility="visible"
+            app:pstsFitToScreen="true" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_filters"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_tab"
-        android:layout_margin="20dp">
-
-        <ir.rasen.charsoo.view.widgets.TextViewFont
-            android:id="@+id/textViewFilters"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/filters"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:textSize="@dimen/font_large"
-            android:textColor="@color/Black" />
-
-        <ir.rasen.charsoo.view.widgets.TextViewFont
-            android:id="@+id/textView_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/category"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/textViewFilters"
-            android:background="@drawable/shape_edit_text_back"
-            android:gravity="right" />
-
-        <ir.rasen.charsoo.view.widgets.TextViewFont
-            android:id="@+id/textView_sub_category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/subcategory"
-            android:layout_below="@+id/textView_category"
-            android:background="@drawable/shape_edit_text_back"
-            android:gravity="right" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_height="match_parent"
-            android:layout_below="@id/textView_sub_category">
-
-            <ir.rasen.charsoo.view.widgets.TextViewFont
-                android:id="@+id/textView_map_error"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone"
-                android:text="@string/err_map_loading_description"
-                android:gravity="right|center_vertical" />
-
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/map"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </RelativeLayout>
-    </RelativeLayout>
-</RelativeLayout>
-
+        android:layout_below="@id/tabs"
+        android:visibility="visible" />
+</LinearLayout>

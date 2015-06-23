@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -37,7 +36,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     boolean footerHome=true, footerUser, footerSearch, footerBusiness;
 
     FragmentManager fm;
-    FragmentTransaction ft;
     ProgressDialog progressDialog;
     int screenWidth;
 
@@ -63,13 +61,13 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         btnHome = toolbar.findViewById(R.id.btn_home);
 
         fm = getSupportFragmentManager();
-        ft = fm.beginTransaction();
 
-        ft.show(fm.findFragmentById(R.id.frag_home));
-        ft.hide(fm.findFragmentById(R.id.frag_search));
-        ft.hide(fm.findFragmentById(R.id.frag_user));
-        ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-        ft.commit();
+        fm.beginTransaction()
+        .show(fm.findFragmentById(R.id.frag_home))
+        .hide(fm.findFragmentById(R.id.frag_search))
+        .hide(fm.findFragmentById(R.id.frag_user))
+        .hide(fm.findFragmentById(R.id.frag_user_businesses))
+        .commit();
         fragmentTagList.add(FragmentTag.HOME);
 
        /* ft.add(R.id.fragmentContainer, fragmentHome);
@@ -99,24 +97,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-    }
-
-    private void checkBack() {
-/*        switch (fragmentTagList.size()) {
-            case 0:
-                exit();
-                break;
-            case 1:
-                if (fragmentTagList.get(0) == FragmentTag.HOME)
-                    exit();
-                fragmentTagList.remove(0);
-                setFragment(FragmentTag.HOME);
-                break;
-            default:
-                fragmentTagList.remove(fragmentTagList.size() - 1);
-                setFragment(fragmentTagList.get(fragmentTagList.size()-1));
-                break;
-        }*/
     }
 
     private void addFragment(FragmentTag fragmentTag) {
@@ -149,12 +129,12 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 //first HomeFragment, second SearchFragment and last UserFragment
                 if (((MyApplication) getApplication()).isUserCreated) {
                     if (footerBusiness) {
-                        ft = fm.beginTransaction();
-                        ft.show(fm.findFragmentById(R.id.frag_user_businesses));
-                        ft.hide(fm.findFragmentById(R.id.frag_search));
-                        ft.hide(fm.findFragmentById(R.id.frag_home));
-                        ft.hide(fm.findFragmentById(R.id.frag_user));
-                        ft.commit();
+                        fm.beginTransaction()
+                        .show(fm.findFragmentById(R.id.frag_user_businesses))
+                        .hide(fm.findFragmentById(R.id.frag_search))
+                        .hide(fm.findFragmentById(R.id.frag_home))
+                        .hide(fm.findFragmentById(R.id.frag_user))
+                        .commit();
                     }
                 } else
                     recursivelyCallHandlerUserBusinessesFragment();
@@ -170,40 +150,14 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
             public void run() {
                 //We don't want to run all webservices together
                 //first HomeFragment, second SearchFragment and last UserFragment
-                if (((MyApplication) getApplication()).isSearchCreated) {
                     if (footerUser) {
-                        ft = fm.beginTransaction();
-                        ft.show(fm.findFragmentById(R.id.frag_user));
-                        ft.hide(fm.findFragmentById(R.id.frag_search));
-                        ft.hide(fm.findFragmentById(R.id.frag_home));
-                        ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-                        ft.commit();
+                        fm.beginTransaction()
+                        .show(fm.findFragmentById(R.id.frag_user))
+                        .hide(fm.findFragmentById(R.id.frag_search))
+                        .hide(fm.findFragmentById(R.id.frag_home))
+                        .hide(fm.findFragmentById(R.id.frag_user_businesses))
+                        .commit();
                     }
-                } else
-                    recursivelyCallHandlerUserFragment();
-            }
-        }, 500);
-    }
-
-    Handler handlerSearchFragment = new Handler();
-
-    public void recursivelyCallHandlerSearchFragment() {
-        handlerSearchFragment.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //We don't want to run all webservices together
-                //first HomeFragment, second SearchFragment and last UserFragment
-                if (((MyApplication) getApplication()).isSearchCreated) {
-                    if (footerSearch) {
-                        ft = fm.beginTransaction();
-                        ft.show(fm.findFragmentById(R.id.frag_search));
-                        ft.hide(fm.findFragmentById(R.id.frag_home));
-                        ft.hide(fm.findFragmentById(R.id.frag_user));
-                        ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-                        ft.commit();
-                    }
-                } else
-                    recursivelyCallHandlerSearchFragment();
             }
         }, 500);
     }
@@ -224,13 +178,13 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 footerUser=false;
 
 
-                ft = fm.beginTransaction();
+                fm.beginTransaction()
                 //ft.replace(R.id.fragmentContainer, fragmentHome);
-                ft.show(fm.findFragmentById(R.id.frag_home));
-                ft.hide(fm.findFragmentById(R.id.frag_search));
-                ft.hide(fm.findFragmentById(R.id.frag_user));
-                ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-                ft.commit();
+                .show(fm.findFragmentById(R.id.frag_home))
+                .hide(fm.findFragmentById(R.id.frag_search))
+                .hide(fm.findFragmentById(R.id.frag_user))
+                .hide(fm.findFragmentById(R.id.frag_user_businesses))
+                .commit();
 
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home_active);
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
@@ -252,12 +206,12 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 footerSearch=true;
                 footerUser=false;
 
-                ft = fm.beginTransaction();
-                ft.show(fm.findFragmentById(R.id.frag_search));
-                ft.hide(fm.findFragmentById(R.id.frag_home));
-                ft.hide(fm.findFragmentById(R.id.frag_user));
-                ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-                ft.commit();
+                fm.beginTransaction()
+                .show(fm.findFragmentById(R.id.frag_search))
+                .hide(fm.findFragmentById(R.id.frag_home))
+                .hide(fm.findFragmentById(R.id.frag_user))
+                .hide(fm.findFragmentById(R.id.frag_user_businesses))
+                .commit();
                 //ft.replace(R.id.fragmentContainer, fragmentSearch);
                 /*if (((MyApplication) getApplication()).isSearchCreated) {
                     ft.show(fm.findFragmentById(R.id.frag_search));
@@ -267,8 +221,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                     ft.commit();
                 } else
                     recursivelyCallHandlerSearchFragment();*/
-                if (!((MyApplication) getApplication()).isSearchCreated)
-                    recursivelyCallHandlerSearchFragment();
 
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_home_img)).setImageResource(R.mipmap.ic_home);
                 ((ImageView) drawerLayout.findViewById(R.id.drawer_businesses_img)).setImageResource(R.mipmap.ic_business);
@@ -315,12 +267,12 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 footerSearch=false;
                 footerUser=true;
 
-                ft = fm.beginTransaction();
-                ft.show(fm.findFragmentById(R.id.frag_user));
-                ft.hide(fm.findFragmentById(R.id.frag_search));
-                ft.hide(fm.findFragmentById(R.id.frag_home));
-                ft.hide(fm.findFragmentById(R.id.frag_user_businesses));
-                ft.commit();
+                fm.beginTransaction()
+                .show(fm.findFragmentById(R.id.frag_user))
+                .hide(fm.findFragmentById(R.id.frag_search))
+                .hide(fm.findFragmentById(R.id.frag_home))
+                .hide(fm.findFragmentById(R.id.frag_user_businesses))
+                .commit();
                 //ft.replace(R.id.fragmentContainer, fragmentUser);
 
                 if (((MyApplication) getApplication()).isUserCreated)
@@ -385,12 +337,12 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         footerSearch=false;
         footerUser=false;
 
-        ft = fm.beginTransaction();
-        ft.hide(fm.findFragmentById(R.id.frag_search));
-        ft.hide(fm.findFragmentById(R.id.frag_home));
-        ft.hide(fm.findFragmentById(R.id.frag_user));
-        ft.show(fm.findFragmentById(R.id.frag_user_businesses));
-        ft.commit();
+        fm.beginTransaction()
+        .hide(fm.findFragmentById(R.id.frag_search))
+        .hide(fm.findFragmentById(R.id.frag_home))
+        .hide(fm.findFragmentById(R.id.frag_user))
+        .show(fm.findFragmentById(R.id.frag_user_businesses))
+        .commit();
         //ft.replace(R.id.fragmentContainer, fragmentUser);
 
         //if user.businesses in intialized
