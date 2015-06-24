@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +28,7 @@ import ir.rasen.charsoo.view.dialog.DialogExit;
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
@@ -41,7 +41,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     boolean footerHome=true, footerUser, footerSearch, footerBusiness;
 
     FragmentManager fm;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int screenWidth;
 
     @Override
@@ -59,7 +59,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -549,31 +549,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-/*        setNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
 
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if(menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-
-                //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()){
-                    case R.id.home:
-                    default:
-                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
-                        return true;
-
-                }
-            }
-        });*/
     }
 
     public void setUserDrawer(User user) {

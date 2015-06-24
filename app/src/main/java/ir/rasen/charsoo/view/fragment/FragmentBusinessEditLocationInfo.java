@@ -123,7 +123,7 @@ public class FragmentBusinessEditLocationInfo extends Fragment {
 
     public boolean isVerified() {
         if (spinnerStates.getSelectedItemPosition() == 0) {
-            new DialogMessage(getActivity(), getString(R.string.err_choose_one_state)).show();
+            new DialogMessage(getActivity(), R.string.profile_edit_business, getString(R.string.err_choose_one_state)).show();
             return false;
         }
         if (!Validation.validateCity(getActivity(), editTextCity.getText().toString()).isValid()) {
@@ -138,7 +138,7 @@ public class FragmentBusinessEditLocationInfo extends Fragment {
             ((MyApplication) getActivity().getApplication()).business.location_m = business.location_m;
         else {
             if (latitude == null || longitude == null) {
-                new DialogMessage(getActivity(), getString(R.string.err_choose_location)).show();
+                new DialogMessage(getActivity(), R.string.profile_edit_business, getString(R.string.err_choose_location)).show();
                 return false;
             }
         }

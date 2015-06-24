@@ -12,7 +12,6 @@ dependencies {
     compile 'se.emilsjolander:stickylistheaders:2.5.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile project(':libs:crop-lib')
-    compile project(':MaterialDesign')
     compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'

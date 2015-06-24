@@ -3,7 +3,7 @@ package ir.rasen.charsoo.view.widgets.buttons;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.gc.materialdesign.views.ButtonRectangle;
+import ir.rasen.charsoo.view.widgets.material_library.views.ButtonRectangle;
 
 public class RectangleButton extends ButtonRectangle {
 

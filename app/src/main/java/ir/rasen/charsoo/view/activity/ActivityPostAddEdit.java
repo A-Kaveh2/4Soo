@@ -198,7 +198,7 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
             return;
         }
         if (postId == 0 && postPictureString.equals("")) {
-            new DialogMessage(ActivityPostAddEdit.this, getString(R.string.choose_post_picture)).show();
+            new DialogMessage(ActivityPostAddEdit.this, R.string.product_info, getString(R.string.choose_post_picture)).show();
             return;
         }
 

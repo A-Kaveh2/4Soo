@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.widgets.charsoo_activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -103,7 +102,21 @@ public class CharsooActivity extends AppCompatActivity {
         }
     }
 
-    //public void onScrollStateChanged(AbsListView absListView, int scrollState) {
+/*    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        //overridePendingTransition(R.anim.anim_right_to_0, R.anim.anim_0_to_left);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        //overridePendingTransition(R.anim.anim_0_to_right, R.anim.anim_left_to_0);
+    }*/
+}
+
+
+//public void onScrollStateChanged(AbsListView absListView, int scrollState) {
 /*        switch (scrollState) {
             case AbsListView.SCROLL_AXIS_NONE:
                 floatHiding = false;
@@ -116,11 +129,11 @@ public class CharsooActivity extends AppCompatActivity {
                 }
                 break;
         }*/
-    //}
+//}
 
-    //private boolean floatHiding = false, floatShowing = false;
-    //private int mLastFirstVisibleItem;
-    //public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+//private boolean floatHiding = false, floatShowing = false;
+//private int mLastFirstVisibleItem;
+//public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
 /*
         if(!scrollMovement)
             return;
@@ -147,21 +160,8 @@ public class CharsooActivity extends AppCompatActivity {
             }
         }
         mLastFirstVisibleItem = firstVisibleItem;*/
-    //}
+//}
 
 //    public void setMovingObject(View view) {
 //        movingObject = view;
 //    }
-
-    @Override
-    public void startActivity(Intent intent) {
-        super.startActivity(intent);
-        //overridePendingTransition(R.anim.anim_right_to_0, R.anim.anim_0_to_left);
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        //overridePendingTransition(R.anim.anim_0_to_right, R.anim.anim_left_to_0);
-    }
-}

@@ -163,9 +163,7 @@
     <string name="err_location_service_title">سرویس های مکان یابی</string>
     <string name="err_fill_search_box">لطفا متن جستجو را وارد کنید.</string>
     <string name="err_location_service_body">تنظیمات مربوط به سرویس های مکان یابی فعال نشده است. آیا مایل به مشاهده تنظیمات هستید؟</string>
-
-    <!-- ERRORS -->
-
+    <string name="ops">ناممکن</string>
 
     <!-- EDIT -->
     <string name="share">به اشتراک گذاری</string>
@@ -210,7 +208,7 @@
     <!-- SEARCH -->
     <string name="search_in">جستجو در</string>
     <string name="nearby">نزدیک من</string>
-    <string name="searching_for">جستجوی</string>
+    <string name="searching_for">در حال جستجوی</string>
     <string name="in">در</string>
     <string name="search_nearby">جستجوی اطراف</string>
     <string name="filter">فیلتر:</string>
@@ -421,7 +419,7 @@
     <string name="reviewed">را نقد کرد.</string>
     <string name="followed">را دنبال میکند.</string>
     <string name="loading">دریافت اطلاعات</string>
-    <string name="please_wait">لطفا صبر کنید...</string>
+    <string name="please_wait">در حال بارگذاری</string>
     <string name="distance">فاصله از محل تعیین شده:</string>
     <string name="user">کاربر</string>
     <string name="your_friend">دوست شما</string>

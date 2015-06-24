@@ -7,8 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.gc.materialdesign.views.CheckBox;
-
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Permission;
@@ -19,6 +17,7 @@ import ir.rasen.charsoo.model.user.UpdateSetting;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.checkbox.CheckBox;
 
 
 public class ActivityUserSetting extends CharsooActivity implements IWebserviceResponse {

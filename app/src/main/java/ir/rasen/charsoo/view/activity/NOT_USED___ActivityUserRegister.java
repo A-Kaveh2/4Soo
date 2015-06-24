@@ -118,7 +118,7 @@ public class NOT_USED___ActivityUserRegister extends CharsooActivity implements 
                     return;
                 }
                 if(userPictureString == null){
-                    new DialogMessage(NOT_USED___ActivityUserRegister.this,getString(R.string.choose_user_picture)).show();
+                    new DialogMessage(NOT_USED___ActivityUserRegister.this, R.string.register, getString(R.string.choose_user_picture)).show();
                     return;
                 }
                 User user = new User();

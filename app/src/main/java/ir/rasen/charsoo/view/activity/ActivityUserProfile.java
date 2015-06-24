@@ -128,7 +128,7 @@ public class ActivityUserProfile extends CharsooActivity implements View.OnClick
             }
         } else if (result instanceof ResultStatus) {
             //UpdateUserProfileInfo result
-            new DialogMessage(ActivityUserProfile.this, getString(R.string.dialog_success)).show();
+            new DialogMessage(ActivityUserProfile.this, R.string.profile_edit, getString(R.string.dialog_success)).show();
             if (userPictureString != null) {
                 Intent intent = new Intent(Params.UPDATE_USER_PROFILE_PCITURE);
                 intent.putExtra(Params.USER_PICUTE,userPictureString);
@@ -196,7 +196,7 @@ public class ActivityUserProfile extends CharsooActivity implements View.OnClick
             return false;
         }
         /*if (spinnerSex.getSelectedItemPosition() == 0) {
-            new DialogMessage(ActivityUserProfile.this, getString(R.string.choose_user_sex)).show();
+            DialogMessage.error(ActivityUserProfile.this, getString(R.string.choose_user_sex)).show();
             return false;
         }*/
         user.name = editTextName.getText().toString();

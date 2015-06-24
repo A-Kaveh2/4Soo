@@ -1,53 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_rootView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#55000000"
+    android:padding="32dp" >
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:id="@+id/contentDialog"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center">
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_background"
+        android:padding="24dp">
 
-        <LinearLayout
-            android:id="@+id/ll_dialog"
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <ir.rasen.charsoo.view.widgets.TextViewFont
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/White"
-            android:orientation="vertical">
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:text="Title"
+            android:textSize="@dimen/font_large_x"
+            android:textColor="#000" />
+
+        <ScrollView
+            android:id="@+id/message_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:paddingBottom="50dp"
+            android:scrollbarSize="2dp"
+            android:scrollbarThumbVertical="@color/thumbColor" >
 
             <LinearLayout
-                android:id="@+id/ll_dialog_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/my_app_theme"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
 
                 <ir.rasen.charsoo.view.widgets.TextViewFont
-                    android:id="@+id/tv_dialog_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="right|center_vertical"
-                    android:paddingRight="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/font_circle_button"/>
-
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
             </LinearLayout>
+        </ScrollView>
 
-            <RelativeLayout
-                android:id="@+id/rl_dialog_body"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/message_scrollView"
+            android:layout_marginTop="24dp"
+            android:gravity="left"
+            android:orientation="horizontal" >
+
+            <ir.rasen.charsoo.view.widgets.buttons.FlatButton
+                android:id="@+id/button_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/shape_bg_context_dialog"
-                android:orientation="vertical">
+                android:text="@string/ok"
+                android:background="@android:color/transparent"
+                android:textColor="#1E88E5" />
 
-            </RelativeLayout>
-
+            <ir.rasen.charsoo.view.widgets.buttons.FlatButton
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:background="#000000"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 
-</FrameLayout>
+</RelativeLayout>

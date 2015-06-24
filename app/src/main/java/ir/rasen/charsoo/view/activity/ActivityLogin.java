@@ -1,6 +1,5 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -21,13 +20,14 @@ import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivityLogin extends CharsooActivity implements View.OnClickListener, IWebserviceResponse {
 
     EditTextFont editTextEmail, editTextPassword;
     Validation validation;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     MyApplication myApplication;
 
 
@@ -48,7 +48,7 @@ public class ActivityLogin extends CharsooActivity implements View.OnClickListen
 
         myApplication = (MyApplication) getApplication();
         myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(ActivityLogin.this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         //edit texts
@@ -123,7 +123,7 @@ public class ActivityLogin extends CharsooActivity implements View.OnClickListen
             myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
             finish();
         } else if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.FORGET_PASSWORD) {
-            new DialogMessage(ActivityLogin.this, getResources().getString(R.string.forgot_password_sent)).show();
+            new DialogMessage(ActivityLogin.this, R.string.forgot_password, getResources().getString(R.string.forgot_password_sent)).show();
             myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
         }
     }

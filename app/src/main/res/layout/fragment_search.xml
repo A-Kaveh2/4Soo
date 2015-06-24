@@ -30,7 +30,7 @@
         <ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip
             android:id="@id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="48dip"
+            android:layout_height="@dimen/actionbar_height"
             android:background="@color/material_blue"
             android:visibility="visible"
             app:pstsFitToScreen="true" />

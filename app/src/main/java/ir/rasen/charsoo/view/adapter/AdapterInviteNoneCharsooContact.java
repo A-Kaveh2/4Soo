@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +8,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.Image_M;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.ContactEntry;
 import ir.rasen.charsoo.view.interface_m.IFragInviteSelectionListener;
@@ -97,9 +92,9 @@ public class AdapterInviteNoneCharsooContact extends BaseAdapter {
 //        else;
 //            holder.imageViewProfileImage.setImageDrawable(items.get(position).contactPhotoDrawable);
 
-        holder.checkBoxSelect.setOncheckListener(new com.gc.materialdesign.views.CheckBox.OnCheckListener() {
+        holder.checkBoxSelect.setOncheckListener(new CheckBox.OnCheckListener() {
             @Override
-            public void onCheck(com.gc.materialdesign.views.CheckBox view, boolean check) {
+            public void onCheck(ir.rasen.charsoo.view.widgets.material_library.views.CheckBox view, boolean check) {
                 if (isItemChecked.get(position))
                     isItemChecked.put(position, false);
                 else
