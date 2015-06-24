@@ -7,33 +7,49 @@ package ir.rasen.charsoo.view.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.model.search.SearchBusinessesLocation;
+import ir.rasen.charsoo.model.search.SearchPost;
 import ir.rasen.charsoo.model.search.SearchUser;
 import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.adapter.AdapterSearchTabs;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
+import ir.rasen.charsoo.view.fragment.search.FragmentSearchBusiness;
+import ir.rasen.charsoo.view.fragment.search.FragmentSearchProduct;
+import ir.rasen.charsoo.view.fragment.search.FragmentSearchUser;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip;
+import ir.rasen.charsoo.view.widgets.TextViewFont;
 
-public class FragmentSearch extends Fragment implements IWebserviceResponse{
+public class FragmentSearch extends Fragment implements IWebserviceResponse {
     public static final String TAG = "FragmentSearch";
 
-    private enum SearchType {BUSINESSES, PRODUCTS, USERS}
+    public enum SearchType {BUSINESSES, PRODUCTS, USERS}
 
     private SearchType searchType;
 
     private PagerSlidingTabStrip tabs;
     private ViewPager viewPager;
+    private AdapterSearchTabs adapter;
     private EditTextFont search;
+    private TextViewFont status;
+    private View waitView;
 
     private ActivityMain activityMain;
+    private boolean searching = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,10 +67,13 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse{
         tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPager.setOffscreenPageLimit(3);
-        AdapterSearchTabs adapter = new AdapterSearchTabs(getFragmentManager(), getActivity());
+        adapter = new AdapterSearchTabs(getFragmentManager(), getActivity());
         viewPager.setAdapter(adapter);
         tabs.setViewPager(viewPager);
         search = (EditTextFont) view.findViewById(R.id.edt_search);
+        waitView = view.findViewById(R.id.waitView);
+        status = (TextViewFont) waitView.findViewById(R.id.waitView_status);
+        waitView.setVisibility(View.GONE);
         tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -64,16 +83,31 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse{
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        search.setHint(R.string.search_products);
+                        search.setHint(getHint(position));
                         searchType = SearchType.PRODUCTS;
+                        FragmentSearchProduct fragmentSearchProduct =
+                                ((FragmentSearchProduct) adapter.getFragment(searchType));
+                        if (fragmentSearchProduct != null)
+                            if (!fragmentSearchProduct.getCurrentResultIsFor().equals(search.getText().toString()))
+                                searchNow();
                         break;
                     case 1:
-                        search.setHint(R.string.search_businesses);
+                        search.setHint(getHint(position));
                         searchType = SearchType.BUSINESSES;
+                        FragmentSearchBusiness fragmentSearchBusiness =
+                                ((FragmentSearchBusiness) adapter.getFragment(searchType));
+                        if (fragmentSearchBusiness != null)
+                            if (!fragmentSearchBusiness.getCurrentResultIsFor().equals(search.getText().toString()))
+                                searchNow();
                         break;
                     case 2:
-                        search.setHint(R.string.search_users);
+                        search.setHint(getHint(position));
                         searchType = SearchType.USERS;
+                        FragmentSearchUser fragmentSearchUser =
+                                ((FragmentSearchUser) adapter.getFragment(searchType));
+                        if (fragmentSearchUser != null)
+                            if (!fragmentSearchUser.getCurrentResultIsFor().equals(search.getText().toString()))
+                                searchNow();
                         break;
                 }
             }
@@ -82,7 +116,15 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse{
             public void onPageScrollStateChanged(int state) {
             }
         });
-        viewPager.requestFocus();
+        search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchNow();
+                }
+                return false;
+            }
+        });
         search.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -130,67 +172,82 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse{
         String searchKey = search.getText().toString().trim();
         search.setText(searchKey);
 
-        if(searchKey.length()==0) {
+        if (searchKey.length() == 0) {
             new DialogMessage(getActivity(), R.string.search, R.string.err_fill_search_box).show();
+            return;
         }
+
+        searchStarted();
 
         switch (searchType) {
             case BUSINESSES:
-            /*if (subcategoryId == 0) {
-                DialogMessage.error(getActivity(), getString(R.string.choose_category_search)).show();
-                return false;
-            }*/
-                //if (choosedLatLng == null) {
-                //    DialogMessage.error(getActivity(), getString(R.string.err_choose_location_search)).show();
-                //    return false;
-                //}
-/*
-                Intent intent = new Intent(getActivity(), ActivitySearchBusinessResult.class);
-                intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
-                intent.putExtra(Params.LATITUDE, String.valueOf(choosedLatLng.latitude));
-                intent.putExtra(Params.LONGITUDE, String.valueOf(choosedLatLng.longitude));
-                intent.putExtra(Params.SUB_CATEGORY_ID, subcategoryId);
-                startActivity(intent);*/
+                new SearchBusinessesLocation(getActivity(),searchKey,0,"35.463900","48.873900",0,getResources().getInteger(R.integer.lazy_load_limitation),FragmentSearch.this).execute();
+                ((FragmentSearchBusiness) adapter.getFragment(searchType)).setCurrentResultIsFor(searchKey);
+                ((FragmentSearchBusiness) adapter.getFragment(searchType)).reset();
                 break;
             case PRODUCTS:
-                /*Intent intent = new Intent(getActivity(), ActivitySearchPostResult.class);
-                intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
-                startActivity(intent);*/
+                new SearchPost(getActivity(), searchKey, 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentSearch.this).execute();
+                ((FragmentSearchProduct) adapter.getFragment(searchType)).setCurrentResultIsFor(searchKey);
+                ((FragmentSearchProduct) adapter.getFragment(searchType)).reset();
                 break;
             case USERS:
-                new SearchUser(getActivity(),searchKey,0,getResources().getInteger(R.integer.lazy_load_limitation),FragmentSearch.this).execute();
+                new SearchUser(getActivity(), searchKey, 0, getResources().getInteger(R.integer.lazy_load_limitation), FragmentSearch.this).execute();
+                ((FragmentSearchUser) adapter.getFragment(searchType)).setCurrentResultIsFor(searchKey);
+                ((FragmentSearchUser) adapter.getFragment(searchType)).reset();
+                break;
         }
     }
 
     @Override
     public void getResult(Object result) {
-/*        progressDialog.dismiss();
         if (result instanceof ArrayList) {
-            ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
-            if(temp.size()== 0) {
-                (findViewById(R.id.textView_no_result)).setVisibility(View.VISIBLE);
-                return;
+            switch (searchType) {
+                case USERS:
+                    ((FragmentSearchUser) adapter.getFragment(searchType)).getResult(result);
+                    break;
+                case BUSINESSES:
+                    ((FragmentSearchBusiness) adapter.getFragment(searchType)).getResult(result);
+                    break;
+                case PRODUCTS:
+                    ((FragmentSearchProduct) adapter.getFragment(searchType)).getResult(result);
+                    break;
             }
-
-            results.addAll(temp);
-
-            if (status == Status.FIRST_TIME) {
-                adapterUserSearchResult = new AdapterUsersFromBAItems(ActivitySearchUser.this, 0, results, AdapterUsersFromBAItems.Mode.USERS);
-                listView.setAdapter(adapterUserSearchResult);
-            } else {
-                //it is loading more
-                listFooterView.setVisibility(View.GONE);
-                adapterUserSearchResult.loadMore(temp);
-            }
-            status = Status.NONE;
-        }*/
+        }
     }
 
     @Override
-    public void getError(Integer errorCode,String callerStringID) {
+    public void getError(Integer errorCode, String callerStringID) {
+        searchFinished();
         //progressDialog.dismiss();
-        //DialogMessage.error(ActivitySearchUser.this, ServerAnswer.getError(ActivitySearchUser.this, errorCode, callerStringID + ">" + this.getLocalClassName())).show();
+        new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode, callerStringID + ">" )).show();
     }
 
+    private String getHint(int position) {
+        switch (position) {
+            case 0:
+                return getString(R.string.search_products);
+            case 1:
+                return getString(R.string.search_businesses);
+            case 2:
+                return getString(R.string.search_users);
+            default:
+                return null;
+        }
+    }
+
+    public void searchStarted() {
+        searching = true;
+        status.setText(getString(R.string.doing) + " " + getHint(viewPager.getCurrentItem()));
+        waitView.setVisibility(View.VISIBLE);
+    }
+
+    public void searchFinished() {
+        searching = false;
+        waitView.setVisibility(View.GONE);
+    }
+
+    public boolean isSearching() {
+        return searching;
+    }
 }
 

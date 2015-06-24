@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.adapter;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ import ir.rasen.charsoo.view.dialog.PopupEditDeleteComment;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
 /**
@@ -41,12 +41,12 @@ public class AdapterPostComments extends BaseAdapter implements ICommentChange, 
     private Activity context;
     SimpleLoader simpleLoader;
     IWebserviceResponse iWebserviceResponse;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int postOwnerBusinessId, postId;
     private ICommentChange iCommentChange;
     boolean isUserOwner;
 
-    public AdapterPostComments(Activity context, boolean isUserOwner, int postId, int postOwnerBusinessId, ArrayList<Comment> comments, ProgressDialog progressDialog) {
+    public AdapterPostComments(Activity context, boolean isUserOwner, int postId, int postOwnerBusinessId, ArrayList<Comment> comments, WaitDialog progressDialog) {
         this.context = context;
         this.comments = comments;
         simpleLoader = new SimpleLoader(context);

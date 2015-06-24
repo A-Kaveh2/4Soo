@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.adapter;
 
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +21,7 @@ import ir.rasen.charsoo.view.dialog.PopupEditDeleteReview;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.imageviews.RoundedImageView;
 
 /**
@@ -33,10 +34,10 @@ public class AdapterUserReview extends BaseAdapter implements  IReviewChange {
     SimpleLoader simpleLoader;
     IWebserviceResponse iWebserviceResponse;
     IReviewChange iReviewChange;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int visitedUserId;
 
-    public AdapterUserReview(Context context,int visitedUserId, ArrayList<Review> reviews, IWebserviceResponse iWebserviceResponse, ProgressDialog progressDialog) {
+    public AdapterUserReview(Context context,int visitedUserId, ArrayList<Review> reviews, IWebserviceResponse iWebserviceResponse, WaitDialog progressDialog) {
         this.context = context;
         this.reviews = reviews;
         simpleLoader = new SimpleLoader(context);

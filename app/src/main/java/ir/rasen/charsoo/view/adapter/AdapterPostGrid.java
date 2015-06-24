@@ -81,20 +81,22 @@ public class AdapterPostGrid extends BaseAdapter {
         } else
             holder = (Holder) view.getTag();
 
-        if (items.get(position).postPictureId == 0 && items.get(position).postPicture != null && !items.get(position).postPicture.equals(""))
-            holder.imageView.setImageBitmap(Image_M.getBitmapFromString(items.get(position).postPicture));
-        else
-            simpleLoader.loadImage(items.get(position).postPictureId, Image_M.MEDIUM, Image_M.ImageType.POST, holder.imageView, holder.progressBar);
-        if (holder.imageView != null)
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (getPostType == Post.GetPostType.SHARE)
-                        Post.goPostPageFromUserHome(activity, items.get(position).postId, businessIdForBusinessPosts, getPostType);
-                    else
-                        Post.goPostPage(activity, items.get(position).postId, businessIdForBusinessPosts, getPostType);
-                }
-            });
+        if(holder!=null) {
+            if (items.get(position).postPictureId == 0 && items.get(position).postPicture != null && !items.get(position).postPicture.equals(""))
+                holder.imageView.setImageBitmap(Image_M.getBitmapFromString(items.get(position).postPicture));
+            else
+                simpleLoader.loadImage(items.get(position).postPictureId, Image_M.MEDIUM, Image_M.ImageType.POST, holder.imageView, holder.progressBar);
+            if (holder.imageView != null)
+                holder.imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (getPostType == Post.GetPostType.SHARE)
+                            Post.goPostPageFromUserHome(activity, items.get(position).postId, businessIdForBusinessPosts, getPostType);
+                        else
+                            Post.goPostPage(activity, items.get(position).postId, businessIdForBusinessPosts, getPostType);
+                    }
+                });
+        }
 
         return view;
     }

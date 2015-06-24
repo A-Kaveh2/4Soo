@@ -1,14 +1,12 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
-
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.Footer;
 
 import java.util.ArrayList;
 
@@ -21,12 +19,14 @@ import ir.rasen.charsoo.model.business.GetBlockedUsers;
 import ir.rasen.charsoo.view.adapter.AdapterBlockedUsers;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.Footer;
 
 
 public class ActivityBusinessBlockedUsers extends CharsooActivity implements IWebserviceResponse {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int businessId;
     AdapterBlockedUsers adapterBlockedUsers;
     ListView listView;
@@ -57,7 +57,7 @@ public class ActivityBusinessBlockedUsers extends CharsooActivity implements IWe
         blockedUsers = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
 

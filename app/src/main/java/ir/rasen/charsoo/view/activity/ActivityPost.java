@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
@@ -46,13 +46,14 @@ import ir.rasen.charsoo.view.interface_m.IReportPost;
 import ir.rasen.charsoo.view.interface_m.IUpdateTimeLine;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityPost extends CharsooActivity implements IWebserviceResponse, IReportPost, IDeletePost, IUpdateTimeLine {
 
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     ImageView imageViewProfileImage;
     TextViewFont textViewBusinessIdentifier;
     TextViewFont textViewDate;
@@ -104,7 +105,7 @@ public class ActivityPost extends CharsooActivity implements IWebserviceResponse
 
         simpleLoader = new SimpleLoader(this);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
         //downloadImages = new DownloadImages(this);
 

@@ -44,6 +44,7 @@ public class WaitDialog extends android.app.Dialog {
         view = findViewById(R.id.waitView);
         messageTextView = (TextViewFont) view.findViewById(R.id.waitView_status);
         messageTextView.setText(message);
+        view.setOnClickListener(null);
     }
 
     @Override
@@ -51,7 +52,7 @@ public class WaitDialog extends android.app.Dialog {
         // TODO 自动生成的方法存根
         super.show();
         // set dialog enter animations
-        //view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.dialog_main_show_amination));
+        view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.dialog_main_show_amination));
     }
 
     // GETERS & SETTERS
@@ -99,7 +100,8 @@ public class WaitDialog extends android.app.Dialog {
             }
         });
 
-        view.startAnimation(anim);
+        if(view!=null)
+            view.startAnimation(anim);
     }
 
 }

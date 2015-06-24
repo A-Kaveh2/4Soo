@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.adapter;
 
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +19,7 @@ import ir.rasen.charsoo.controller.object.Business;
 import ir.rasen.charsoo.view.dialog.PopupUnfollowBusiness;
 import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.imageviews.RoundedImageView;
 
 /**
@@ -31,10 +32,10 @@ public class AdapterUserFollowingBusinesses extends BaseAdapter implements IUnfo
     SimpleLoader simpleLoader;
     IUnfollowBusiness iUnfollowBusiness;
     //IWebserviceResponse iWebserviceResponse;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int visitedUserId;
 
-    public AdapterUserFollowingBusinesses(Context context, int visitedUserId, ArrayList<BaseAdapterItem> items, ProgressDialog progressDialog) {
+    public AdapterUserFollowingBusinesses(Context context, int visitedUserId, ArrayList<BaseAdapterItem> items, WaitDialog progressDialog) {
         this.context = context;
         this.items = items;
         simpleLoader = new SimpleLoader(context);

@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -13,6 +12,7 @@ import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class PopupEditDeleteReview extends MyPopup {
@@ -21,7 +21,7 @@ public class PopupEditDeleteReview extends MyPopup {
 
 
     @SuppressLint("NewApi")
-    public PopupEditDeleteReview(final Context context, final Review review, final IWebserviceResponse iWebserviceResponse, final ProgressDialog progressDialog, final IReviewChange iReviewChange) {
+    public PopupEditDeleteReview(final Context context, final Review review, final IWebserviceResponse iWebserviceResponse, final WaitDialog progressDialog, final IReviewChange iReviewChange) {
         super(context);
 
         this.context = context;

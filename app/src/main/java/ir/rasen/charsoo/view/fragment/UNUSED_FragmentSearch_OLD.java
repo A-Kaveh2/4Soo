@@ -1,13 +1,12 @@
 package ir.rasen.charsoo.view.fragment;
 
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -29,33 +28,34 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LocationManagerTracker;
+import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.controller.helper.ServerAnswer;
+import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.controller.object.Category;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.SubCategory;
 import ir.rasen.charsoo.model.NetworkConnectivityReciever;
+import ir.rasen.charsoo.model.business.GetBusinessGategories;
+import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
+import ir.rasen.charsoo.view.activity.UNUSED_ActivitySearchBusinessResult;
+import ir.rasen.charsoo.view.activity.UNUSED_ActivitySearchPostResult;
+import ir.rasen.charsoo.view.activity.ActivitySearchUser;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.dialog.PopupCategories;
 import ir.rasen.charsoo.view.dialog.PopupSubCategories;
-import ir.rasen.charsoo.controller.helper.Params;
-import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.controller.helper.WebservicesHandler;
 import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.view.activity.ActivitySearchBusinessResult;
-import ir.rasen.charsoo.view.activity.ActivitySearchPostResult;
-import ir.rasen.charsoo.view.activity.ActivitySearchUser;
-import ir.rasen.charsoo.model.business.GetBusinessGategories;
-import ir.rasen.charsoo.model.business.GetBusinessSubcategories;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
-public class FragmentSearch_OLD extends Fragment implements IWebserviceResponse, ISelectCategory, NetworkStateChangeListener {
+public class UNUSED_FragmentSearch_OLD extends Fragment implements IWebserviceResponse, ISelectCategory, NetworkStateChangeListener {
     public static final String TAG="FragmentSearch";
 
     EditTextFont editTextSearch;
     LinearLayout llIndicatorBusinesses, llIndicatorPosts, llIndicatorUsers;
-    private ProgressDialog progressDialog;
+    private WaitDialog progressDialog;
     private GoogleMap googleMap;
     MapView mapView;
     LatLng choosedLatLng;
@@ -80,14 +80,14 @@ public class FragmentSearch_OLD extends Fragment implements IWebserviceResponse,
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_old,
+        View view = inflater.inflate(R.layout.unused_fragment_search_old,
                 container, false);
 
-        NetworkConnectivityReciever.setNetworkStateListener(TAG,FragmentSearch_OLD.this);
+        NetworkConnectivityReciever.setNetworkStateListener(TAG,UNUSED_FragmentSearch_OLD.this);
         iSelectCategory = this;
         searchType = SearchType.BUSINESSES;
 
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new WaitDialog(getActivity());
         progressDialog.setMessage("Loading SearchFragment");
 
         textViewCategories = (TextViewFont) view.findViewById(R.id.textView_category);
@@ -227,7 +227,7 @@ public class FragmentSearch_OLD extends Fragment implements IWebserviceResponse,
                 try { // agar pish az Ejad shodane search az app kharej shavim force midahad
                     if (((MyApplication) getActivity().getApplication()).isHomeCreated) {
                         ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_CATEGORY);
-                        new GetBusinessGategories(getActivity(), FragmentSearch_OLD.this).execute();
+                        new GetBusinessGategories(getActivity(), UNUSED_FragmentSearch_OLD.this).execute();
                     } else {
                         ConnectivityManager cm =
                                 (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -280,7 +280,7 @@ public class FragmentSearch_OLD extends Fragment implements IWebserviceResponse,
                 return false;
             }
 
-            Intent intent = new Intent(getActivity(), ActivitySearchBusinessResult.class);
+            Intent intent = new Intent(getActivity(), UNUSED_ActivitySearchBusinessResult.class);
             intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
             intent.putExtra(Params.LATITUDE, String.valueOf(choosedLatLng.latitude));
             intent.putExtra(Params.LONGITUDE, String.valueOf(choosedLatLng.longitude));
@@ -288,7 +288,7 @@ public class FragmentSearch_OLD extends Fragment implements IWebserviceResponse,
             startActivity(intent);
 
         } else if (searchType == SearchType.POSTS) {
-            Intent intent = new Intent(getActivity(), ActivitySearchPostResult.class);
+            Intent intent = new Intent(getActivity(), UNUSED_ActivitySearchPostResult.class);
             intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
             startActivity(intent);
         } else if (searchType == SearchType.USERS) {
@@ -313,7 +313,7 @@ public class FragmentSearch_OLD extends Fragment implements IWebserviceResponse,
         textViewCategories.setText(categories.get(categoryListPosition).name);
         progressDialog.show();
         ((MyApplication) getActivity().getApplication()).setCurrentWebservice(WebservicesHandler.Webservices.GET_BUSINESS_SUB_CATEGORY);
-        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, FragmentSearch_OLD.this).execute();
+        new GetBusinessSubcategories(getActivity(), categories.get(categoryListPosition).id, UNUSED_FragmentSearch_OLD.this).execute();
     }
 
     @Override

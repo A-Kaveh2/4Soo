@@ -1,10 +1,9 @@
 package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 /**
  * Created by hossein-pc on 6/14/2015.
@@ -30,7 +30,7 @@ import ir.rasen.charsoo.view.widgets.EditTextFont;
 public class FragmentBusinessRegisterPageOne extends Fragment implements IWebserviceResponse {
     public static final String TAG="FragmentBusinessRegisterPageOne";
 
-    private ProgressDialog progressDialog;
+    private WaitDialog progressDialog;
     private EditTextFont editTextName, editTextIdentifier;
 
 
@@ -61,7 +61,7 @@ public class FragmentBusinessRegisterPageOne extends Fragment implements IWebser
         View view = inflater.inflate(R.layout.fragment_business_register_page_one,
                 container, false);
 
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new WaitDialog(getActivity());
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
 

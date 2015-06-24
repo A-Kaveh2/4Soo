@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,13 +37,14 @@ import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.view.interface_m.IChangePassword;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityUserProfile extends CharsooActivity implements View.OnClickListener, IWebserviceResponse, IChangePassword {
 
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     ImageView imageViewCover;
     EditTextFont editTextAboutMe, editTextEmail, editTextDay, editTextMonth, editTextYear, editTextName, editTextIdentifier;
     Spinner spinnerSex;
@@ -58,7 +59,7 @@ public class ActivityUserProfile extends CharsooActivity implements View.OnClick
         setContentView(R.layout.activity_user_profile);
         setTitle(getString(R.string.user_profile));
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         (findViewById(R.id.btn_change_password)).setOnClickListener(this);

@@ -208,7 +208,7 @@
     <!-- SEARCH -->
     <string name="search_in">جستجو در</string>
     <string name="nearby">نزدیک من</string>
-    <string name="searching_for">در حال جستجوی</string>
+    <string name="doing">درحال</string>
     <string name="in">در</string>
     <string name="search_nearby">جستجوی اطراف</string>
     <string name="filter">فیلتر:</string>

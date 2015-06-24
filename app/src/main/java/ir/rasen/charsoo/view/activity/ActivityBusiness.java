@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +27,7 @@ import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.ISelectBusiness;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.GridViewBusiness;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.buttons.FloatButton;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
@@ -34,7 +35,7 @@ import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHe
 
 
 public class ActivityBusiness extends CharsooActivity implements ISelectBusiness, IWebserviceResponse, IPullToRefresh {
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int selectedBusinessId, businessProfilePictureId;
     HFGridView gridView;
     Business business;
@@ -54,7 +55,7 @@ public class ActivityBusiness extends CharsooActivity implements ISelectBusiness
 
         selectedBusinessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         pullToRefreshGridView = new PullToRefreshGrid(ActivityBusiness.this, (PullToRefreshGridViewWithHeaderAndFooter) findViewById(R.id.gridView_HF), ActivityBusiness.this);

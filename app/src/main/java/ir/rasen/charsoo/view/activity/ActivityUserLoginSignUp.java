@@ -9,7 +9,7 @@ import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 /*import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,7 +33,7 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
     FragmentUserSignUpeEmailID fragmentEmailID;
     FragmentUserSignUpeNamePassword fragmentNamePassword;
     FragmentUserSignUpePicture fragmentPicture;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
 
     private enum Fragments {LOGIN, REGISTER_EMAIL_ID, REGISTER_NAME_PASSWORD, REGISTER_PICTURE}
 
@@ -49,7 +49,7 @@ public class ActivityUserLoginSignUp extends CharsooActivity implements IWebserv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_login_register);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         llIndicatorLogin = (LinearLayout) findViewById(R.id.ll_indicator_base);

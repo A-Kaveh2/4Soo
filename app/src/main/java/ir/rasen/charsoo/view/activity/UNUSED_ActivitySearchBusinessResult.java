@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,12 +20,13 @@ import ir.rasen.charsoo.model.search.SearchBusinessesLocation;
 import ir.rasen.charsoo.view.adapter.AdapterBusinessSearchResult;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
-public class ActivitySearchBusinessResult extends CharsooActivity implements IWebserviceResponse {
+public class UNUSED_ActivitySearchBusinessResult extends CharsooActivity implements IWebserviceResponse {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int visitedUserId;
     AdapterBusinessSearchResult adapterBusinessSearchResult;
     ListView listView;
@@ -64,7 +65,7 @@ public class ActivitySearchBusinessResult extends CharsooActivity implements IWe
         results = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         listView = (ListView) findViewById(R.id.listView);
@@ -100,7 +101,7 @@ public class ActivitySearchBusinessResult extends CharsooActivity implements IWe
         listView.addFooterView(listFooterView, null, false);
 
         progressDialog.show();
-        new SearchBusinessesLocation(ActivitySearchBusinessResult.this,searchKeyWord,subCategoryId,latitude,longitude,0,getResources().getInteger(R.integer.lazy_load_limitation),ActivitySearchBusinessResult.this).execute();
+        new SearchBusinessesLocation(UNUSED_ActivitySearchBusinessResult.this,searchKeyWord,subCategoryId,latitude,longitude,0,getResources().getInteger(R.integer.lazy_load_limitation),UNUSED_ActivitySearchBusinessResult.this).execute();
 
 
     }
@@ -111,7 +112,7 @@ public class ActivitySearchBusinessResult extends CharsooActivity implements IWe
         // LOAD MORE DATA HERE...
         status = Status.LOADING_MORE;
         listFooterView.setVisibility(View.VISIBLE);
-        new SearchBusinessesLocation(ActivitySearchBusinessResult.this,searchKeyWord,subCategoryId,latitude,longitude,results.get(results.size()-1).getId(),getResources().getInteger(R.integer.lazy_load_limitation),ActivitySearchBusinessResult.this).execute();
+        new SearchBusinessesLocation(UNUSED_ActivitySearchBusinessResult.this,searchKeyWord,subCategoryId,latitude,longitude,results.get(results.size()-1).getId(),getResources().getInteger(R.integer.lazy_load_limitation),UNUSED_ActivitySearchBusinessResult.this).execute();
 
     }
 
@@ -146,7 +147,7 @@ public class ActivitySearchBusinessResult extends CharsooActivity implements IWe
 
 
             if (status == Status.FIRST_TIME) {
-                adapterBusinessSearchResult = new AdapterBusinessSearchResult(ActivitySearchBusinessResult.this,results);
+                adapterBusinessSearchResult = new AdapterBusinessSearchResult(UNUSED_ActivitySearchBusinessResult.this,results);
                 listView.setAdapter(adapterBusinessSearchResult);
             } else {
                 //it is loading more
@@ -161,7 +162,7 @@ public class ActivitySearchBusinessResult extends CharsooActivity implements IWe
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivitySearchBusinessResult.this, ServerAnswer.getError(ActivitySearchBusinessResult.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+        new DialogMessage(UNUSED_ActivitySearchBusinessResult.this, ServerAnswer.getError(UNUSED_ActivitySearchBusinessResult.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
 }

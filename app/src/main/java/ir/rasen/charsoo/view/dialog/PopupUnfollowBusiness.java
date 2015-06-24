@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.widget.LinearLayout;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class PopupUnfollowBusiness extends MyPopup {
@@ -18,7 +18,7 @@ public class PopupUnfollowBusiness extends MyPopup {
 
 
     @SuppressLint("NewApi")
-    public PopupUnfollowBusiness(final Context context, final int businessId, final ProgressDialog progressDialog, final IUnfollowBusiness iUnfollowBusiness) {
+    public PopupUnfollowBusiness(final Context context, final int businessId, final WaitDialog progressDialog, final IUnfollowBusiness iUnfollowBusiness) {
         super(context);
 
         this.context = context;

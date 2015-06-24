@@ -1,11 +1,9 @@
 package ir.rasen.charsoo.model;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
@@ -25,7 +23,6 @@ import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.object.ContactEntry;
 import ir.rasen.charsoo.model.friend.TakeContactList;
-import ir.rasen.charsoo.view.activity.ActivityUserRegister;
 import ir.rasen.charsoo.view.interface_m.IGetContactListener;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 

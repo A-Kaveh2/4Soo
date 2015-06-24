@@ -1,9 +1,8 @@
 package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +15,7 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.view.activity.ActivityUserRegister;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 /**
  * Created by hossein-pc on 6/9/2015.
@@ -25,7 +25,7 @@ public class FragmentUserRegisterPageTwo extends Fragment {
     public static final String TAG="SecondPage";
 
     EditTextFont editTextEmail, editTextPassword,editTextPhoneNumber;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
 
 //        TextViewFont persianLicenseTextView,englishLicenseTextView;
 

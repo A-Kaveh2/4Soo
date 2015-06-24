@@ -13,7 +13,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.view.widgets.material_library.utils.Utils;
@@ -45,19 +44,13 @@ public class CheckBox extends CustomView {
 
 		// Set background Color
 		// Color by resource
-		int bacgroundColor = attrs.getAttributeResourceValue(ANDROIDXML,
-				"background", -1);
+		int bacgroundColor = attrs != null ? attrs.getAttributeResourceValue(ANDROIDXML,
+				"background", -1) : -1;
 		if (bacgroundColor != -1) {
 			setBackgroundColor(getResources().getColor(bacgroundColor));
-		} else {
-			// Color by hexadecimal
-			// Color by hexadecimal
-			int background = attrs.getAttributeIntValue(ANDROIDXML, "background", -1);
-			if (background != -1)
-				setBackgroundColor(background);
 		}
 
-		final boolean check = attrs.getAttributeBooleanValue(MATERIALDESIGNXML,
+		final boolean check = attrs != null && attrs.getAttributeBooleanValue(MATERIALDESIGNXML,
 				"check", false);
 			post(new Runnable() {
 
@@ -71,13 +64,13 @@ public class CheckBox extends CustomView {
 			});
 
 		checkView = new Check(getContext());
-        checkView.setId(View.generateViewId());
+        //checkView.setId(View.generateViewId());
 		LayoutParams params = new LayoutParams(Utils.dpToPx(20,
 				getResources()), Utils.dpToPx(20, getResources()));
 		params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 		checkView.setLayoutParams(params);
 		addView(checkView);
-
+/*
         // Adding text view to checkbox
         int textResource = attrs.getAttributeResourceValue(ANDROIDXML, "text", -1);
         String text = null;
@@ -102,6 +95,7 @@ public class CheckBox extends CustomView {
 
             addView(textView);
         }
+        */
 	}
 
 	@Override

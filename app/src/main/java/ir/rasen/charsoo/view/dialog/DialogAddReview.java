@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -12,10 +11,11 @@ import android.widget.RatingBar;
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.helper.Params;
+import ir.rasen.charsoo.model.review.ReviewBusiness;
 import ir.rasen.charsoo.view.interface_m.IAddReview;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.model.review.ReviewBusiness;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class DialogAddReview extends MyDialogOkCancel {
@@ -23,7 +23,7 @@ public class DialogAddReview extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogAddReview(final Context context,final int businessId, final IAddReview iAddReview, final ProgressDialog progressDialog) {
+    public DialogAddReview(final Context context,final int businessId, final IAddReview iAddReview, final WaitDialog progressDialog) {
         super(context, context.getResources().getString(R.string.edit_review),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.edit));

@@ -1,13 +1,11 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 import java.util.ArrayList;
 
@@ -25,12 +23,14 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IAddReview;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 
 public class ActivityBusinessReviews extends CharsooActivity implements IWebserviceResponse, IAddReview, IPullToRefresh {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     private int businessId;
     AdapterBusinessReview adapterBusinessReview;
     ListView listView;
@@ -77,7 +77,7 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
         results = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityBusinessReviews.this);

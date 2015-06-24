@@ -1,14 +1,12 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
-
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 
 import java.util.ArrayList;
 
@@ -23,11 +21,13 @@ import ir.rasen.charsoo.model.search.SearchPost;
 import ir.rasen.charsoo.view.adapter.AdapterPostGrid;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 
-public class ActivitySearchPostResult extends CharsooActivity implements IWebserviceResponse {
+public class UNUSED_ActivitySearchPostResult extends CharsooActivity implements IWebserviceResponse {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     AdapterPostGrid adapterPostGrid;
     HFGridView gridView;
     ArrayList<SearchItemPost> results;
@@ -61,7 +61,7 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
         results = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         gridView = (HFGridView) findViewById(R.id.gridView);
@@ -97,7 +97,7 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
         gridView.addFooterView(listFooterView);
 
         progressDialog.show();
-        new SearchPost(ActivitySearchPostResult.this,searchKeyWord,0,getResources().getInteger(R.integer.lazy_load_limitation),ActivitySearchPostResult.this).execute();
+        new SearchPost(UNUSED_ActivitySearchPostResult.this,searchKeyWord,0,getResources().getInteger(R.integer.lazy_load_limitation),UNUSED_ActivitySearchPostResult.this).execute();
 
 
     }
@@ -109,7 +109,7 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
         status = Status.LOADING_MORE;
         listFooterView.setVisibility(View.VISIBLE);
 
-        new SearchBusinessesLocation(ActivitySearchPostResult.this,searchKeyWord,subCategoryId,latitude,longitude,results.get(results.size()-1).postId,getResources().getInteger(R.integer.lazy_load_limitation),ActivitySearchPostResult.this).execute();
+        new SearchBusinessesLocation(UNUSED_ActivitySearchPostResult.this,searchKeyWord,subCategoryId,latitude,longitude,results.get(results.size()-1).postId,getResources().getInteger(R.integer.lazy_load_limitation),UNUSED_ActivitySearchPostResult.this).execute();
 
     }
 
@@ -145,7 +145,7 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
 
 
             if (status == Status.FIRST_TIME) {
-                adapterPostGrid = new AdapterPostGrid(ActivitySearchPostResult.this,results,0, Post.GetPostType.SEARCH);
+                adapterPostGrid = new AdapterPostGrid(UNUSED_ActivitySearchPostResult.this,results,0, Post.GetPostType.SEARCH);
                 gridView.setAdapter(adapterPostGrid);
             } else {
                 //it is loading more
@@ -159,7 +159,7 @@ public class ActivitySearchPostResult extends CharsooActivity implements IWebser
     @Override
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivitySearchPostResult.this, ServerAnswer.getError(ActivitySearchPostResult.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+        new DialogMessage(UNUSED_ActivitySearchPostResult.this, ServerAnswer.getError(UNUSED_ActivitySearchPostResult.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }
 
 }

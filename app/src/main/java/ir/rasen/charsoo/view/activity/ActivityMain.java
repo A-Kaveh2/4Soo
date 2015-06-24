@@ -25,10 +25,10 @@ import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.User;
 import ir.rasen.charsoo.view.dialog.DialogExit;
+import ir.rasen.charsoo.view.fragment.FragmentSearch;
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
@@ -41,7 +41,6 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     boolean footerHome=true, footerUser, footerSearch, footerBusiness;
 
     FragmentManager fm;
-    WaitDialog progressDialog;
     int screenWidth;
 
     @Override
@@ -53,13 +52,10 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
 
     ArrayList<FragmentTag> fragmentTagList = new ArrayList<FragmentTag>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        progressDialog = new WaitDialog(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -553,6 +549,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     }
 
     public void setUserDrawer(User user) {
+        if(findViewById(R.id.drawer_user_pic)==null)
+            return;
         SimpleLoader simpleLoader = new SimpleLoader(this);
         simpleLoader.loadImage(user.profilePictureId, Image_M.SMALL, Image_M.ImageType.USER
                 , (ImageViewCircle) findViewById(R.id.drawer_user_pic));
@@ -589,5 +587,9 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     public void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager)  getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public FragmentSearch getFragmentSearch() {
+        return (FragmentSearch) getSupportFragmentManager().findFragmentById(R.id.frag_search);
     }
 }

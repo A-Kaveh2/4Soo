@@ -1,13 +1,9 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
-import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
-import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 import java.util.ArrayList;
 
@@ -25,10 +21,14 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.GridViewBusinessOther;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
+import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
+import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
 public class ActivityBusinessOther extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int selectedBusinessId;
     private HFGridView gridView;
     Business business;
@@ -62,7 +62,7 @@ public class ActivityBusinessOther extends CharsooActivity implements IWebservic
 
         selectedBusinessId = getIntent().getExtras().getInt(Params.BUSINESS_ID_STRING);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         pullToRefreshGridView = new PullToRefreshGrid(ActivityBusinessOther.this, (PullToRefreshGridViewWithHeaderAndFooter) findViewById(R.id.gridView_HF), ActivityBusinessOther.this);

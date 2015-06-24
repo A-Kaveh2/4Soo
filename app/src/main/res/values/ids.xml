@@ -31,5 +31,6 @@
     <item name="user_remove" type="id" />
     <item name="waitView" type="id" />
     <item name="waitView_status" type="id" />
+    <item name="search_status" type="id" />
 
 </resources>

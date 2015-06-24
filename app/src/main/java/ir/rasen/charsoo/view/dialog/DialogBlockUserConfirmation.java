@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -10,9 +9,10 @@ import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.object.Comment;
+import ir.rasen.charsoo.model.business.BlockUser;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.model.business.BlockUser;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class DialogBlockUserConfirmation extends MyDialogOkCancel {
@@ -20,7 +20,7 @@ public class DialogBlockUserConfirmation extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogBlockUserConfirmation(final Context context, final int ownerBusinessId, final Comment comment, final IWebserviceResponse IWebserviceResponse, final ProgressDialog progressDialog) {
+    public DialogBlockUserConfirmation(final Context context, final int ownerBusinessId, final Comment comment, final IWebserviceResponse IWebserviceResponse, final WaitDialog progressDialog) {
         super(context, context.getResources().getString(R.string.popup_warning),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.block));

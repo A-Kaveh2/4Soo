@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -13,6 +12,7 @@ import ir.rasen.charsoo.controller.object.Comment;
 import ir.rasen.charsoo.view.interface_m.ICommentChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class PopupDeleteCommentBlockUser extends MyPopup {
@@ -21,7 +21,7 @@ public class PopupDeleteCommentBlockUser extends MyPopup {
 
 
     @SuppressLint("NewApi")
-    public PopupDeleteCommentBlockUser(final Context context,final int postOwnerBusinessId, final Comment comment, final IWebserviceResponse IWebserviceResponse,final ProgressDialog progressDialog,final ICommentChange iCommentChange ) {
+    public PopupDeleteCommentBlockUser(final Context context,final int postOwnerBusinessId, final Comment comment, final IWebserviceResponse IWebserviceResponse,final WaitDialog progressDialog,final ICommentChange iCommentChange ) {
         super(context);
 
         this.context = context;
