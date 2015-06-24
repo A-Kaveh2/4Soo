@@ -1,59 +1,47 @@
 package ir.rasen.charsoo.view.activity;
 
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.database.Cursor;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.support.v4.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Hashtable;
-import java.util.List;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.GetInstalledApps;
 import ir.rasen.charsoo.controller.helper.Image_M;
-import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
-import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.object.ContactEntry;
+import ir.rasen.charsoo.controller.object.PackageInfoCustom;
 import ir.rasen.charsoo.controller.object.User;
-import ir.rasen.charsoo.model.friend.TakeContactList;
+import ir.rasen.charsoo.model.GetContactData;
 import ir.rasen.charsoo.model.user.RegisterUser;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.fragment.FragmentUserRegisterOfferFriend;
 import ir.rasen.charsoo.view.fragment.FragmentUserRegisterPageOne;
 import ir.rasen.charsoo.view.fragment.FragmentUserRegisterPageTwo;
+import ir.rasen.charsoo.view.interface_m.IGetContactListener;
+import ir.rasen.charsoo.view.interface_m.IGetInstalledAppsListener;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
-public class ActivityUserRegister extends CharsooActivity implements IWebserviceResponse {
+public class ActivityUserRegister extends CharsooActivity implements IWebserviceResponse,IGetContactListener,IGetInstalledAppsListener {
 
 
     public static final String FIRST_PAGE="FirstPage";
     public static final String SECOND_PAGE="SecondPage";
+    public static final String THIRD_PAGE_OFFER_FRIEND="ThirdPage";
     FragmentTransaction ft;
     FragmentUserRegisterPageOne fragOne;
     FragmentUserRegisterPageTwo fragTwo;
-    FragmentUserRegisterOfferFriend fragThree;
+    FragmentUserRegisterOfferFriend fragThree_OfferFriends;
     String userPictureString,userFullName,userStringId,userEmail,userPassword,userPhoneNumber;
     String filePath,currentFragment;
     MenuItem menuItemNext;
@@ -71,17 +59,18 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         setTitle(getString(R.string.str_RegisterInCharsoo));
 //        noneCharsooEmailContactsList=new ArrayList<>();
 //        noneCharsooPhoneNumberContactsList=new ArrayList<>();
-//        charsooContactsList=new ArrayList<>();
-
+//        charsooContactsList=new ArrayList<>()
         fragOne=new FragmentUserRegisterPageOne();
         fragTwo=new FragmentUserRegisterPageTwo();
-        fragThree=new FragmentUserRegisterOfferFriend();
+        fragThree_OfferFriends =new FragmentUserRegisterOfferFriend();
         ft=getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragmentContainer,fragOne);
         currentFragment=FIRST_PAGE;
         ft.commit();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
+        new GetContactData(this,ActivityUserRegister.this).execute();
+        new GetInstalledApps(this,ActivityUserRegister.this).execute();
 
 //            getContactList();
     }
@@ -137,6 +126,15 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
                 menuItemNext.setIcon(R.drawable.ic_arrow_next_white_24dp);
 
                 break;
+            case THIRD_PAGE_OFFER_FRIEND:
+                Intent intent= new Intent(this, ActivityLogin.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                this.startActivity(intent);
+                break;
+            default:
+                finish();
+                break;
+
         }
     }
 
@@ -161,14 +159,20 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
                 case FIRST_PAGE:
 //                    switchToSecondPage();
                     ft=getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragmentContainer,fragThree);
-                    currentFragment=FIRST_PAGE;
+                    ft.replace(R.id.fragmentContainer, fragThree_OfferFriends);
+                    currentFragment=THIRD_PAGE_OFFER_FRIEND;
                     ft.commit();
                     break;
                 case SECOND_PAGE:
                     //register User
                     doRegisterUser();
                     break;
+                case THIRD_PAGE_OFFER_FRIEND:
+                    Intent intent = new Intent(ActivityUserRegister.this,ActivityMain.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                    break;
+
             }
             return true;
         } else return super.onOptionsItemSelected(item);
@@ -177,9 +181,10 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
     @Override
     public void getResult(Object result) {
         progressDialog.dismiss();
-        Intent intent = new Intent(ActivityUserRegister.this,ActivityMain.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        ft=getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragmentContainer, fragThree_OfferFriends);
+        currentFragment=THIRD_PAGE_OFFER_FRIEND;
+        ft.commit();
     }
 
     @Override
@@ -233,10 +238,19 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         }
     }
 
+    @Override
+    public void getContacts(ArrayList<ContactEntry> charsooContacts, ArrayList<ContactEntry> noneCharsooPhoneContacts, ArrayList<ContactEntry> noneCharsooEmailContacts) {
+        fragThree_OfferFriends.setContactLists(charsooContacts,noneCharsooPhoneContacts,noneCharsooEmailContacts);
+    }
 
+    @Override
+    public void setAppResults(ArrayList<PackageInfoCustom> appList) {
+        fragThree_OfferFriends.setApplicationList(appList);
+    }
 
 
 //    public ArrayList<ArrayList<ContactEntry>> getUserContacts(){
 //
 //    }
+
 }

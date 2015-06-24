@@ -2,77 +2,67 @@ package ir.rasen.charsoo.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.ResolveInfo;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.GetInstalledApps;
 import ir.rasen.charsoo.controller.helper.Params;
 import ir.rasen.charsoo.controller.object.PackageInfoCustom;
 import ir.rasen.charsoo.view.adapter.AdapterInviteFriendsByApp;
+import ir.rasen.charsoo.view.interface_m.IGetInstalledAppsListener;
 import ir.rasen.charsoo.view.interface_m.IInviteFriendByAppListener;
-import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.view.widgets.imageviews.RoundedSquareImageView;
 
 /**
  * Created by hossein-pc on 6/9/2015.
  */
-public class FragmentUserRegisterOfferFriendInvite extends Fragment implements IInviteFriendByAppListener {
+public class FragmentUserRegisterOfferFriendInvite extends Fragment implements IInviteFriendByAppListener,IGetInstalledAppsListener {
 
     public static final String TAG="OfferFriendInviteFriend";
     public static Context context;
 //    adapter
 
 //        TextViewFont persianLicenseTextView,englishLicenseTextView;
-
-    public ArrayList<PackageInfoCustom> applications;
-    ListView applicationList;
+    ArrayList<PackageInfoCustom> applicationList;
+    Hashtable<String,PackageInfoCustom> applicationsHashtable;
+    ListView listViewApplication;
     AdapterInviteFriendsByApp listViewAdapter;
-    Hashtable<String,PackageInfoCustom> apps;
+    LinearLayout linearLayoutProgressBar;
+    View view;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_register_offer_friends_invite,
+        view = inflater.inflate(R.layout.fragment_user_register_offer_friends_invite,
                 container, false);
         context=getActivity();
-        applicationList=(ListView) view.findViewById(R.id.applicationsListView);
-        if (apps==null)
-            apps=new Hashtable<>();
-        if (applications==null) {
-            applications = new ArrayList<>();
+        listViewApplication =(ListView) view.findViewById(R.id.applicationsListView);
+        linearLayoutProgressBar=(LinearLayout) view.findViewById(R.id.ll_ProgressBar);
+        if (applicationList ==null) {
             listViewAdapter = new AdapterInviteFriendsByApp(getActivity(), new ArrayList<PackageInfoCustom>(),FragmentUserRegisterOfferFriendInvite.this);
-            PackageInfoCustom emailP=new PackageInfoCustom();
-            emailP.appname=Params.EMAIL_INVITE;
-            emailP.icon=BitmapFactory.decodeResource(getResources(),R.drawable.ic_email_blue);
-            applications.add(emailP);
+            new GetInstalledApps(getActivity(),FragmentUserRegisterOfferFriendInvite.this).execute();
         }
         else {
             if (listViewAdapter==null)
-                listViewAdapter = new AdapterInviteFriendsByApp(getActivity(), applications,FragmentUserRegisterOfferFriendInvite.this);
+                listViewAdapter = new AdapterInviteFriendsByApp(getActivity(), applicationList,FragmentUserRegisterOfferFriendInvite.this);
+            linearLayoutProgressBar.setVisibility(View.GONE);
         }
-        applicationList.setAdapter(listViewAdapter);
+        listViewApplication.setAdapter(listViewAdapter);
 //        hasApplicationX=new Hashtable<>();
 //        new GetInstalledApps(getActivity()).execute();
-        new GetInstalledApps(getActivity()).execute();
+
         return view;
 
     }
@@ -82,7 +72,7 @@ public class FragmentUserRegisterOfferFriendInvite extends Fragment implements I
         Intent myIntent;
         switch (itemTag)
         {
-            case Params.EMAIL_INVITE:
+            case Params.EMAIL_APP:
                 startActivity(createEmailIntent("","subject","Body"));
 //                String[] s=new String[]{"mhfathi.charsoo@gmail.com","cemhfathi@gmail.com"};
 ////                composeEmail(s,"this is subject","this is body");
@@ -93,7 +83,7 @@ public class FragmentUserRegisterOfferFriendInvite extends Fragment implements I
 //                myIntent.putExtra(Intent.EXTRA_TEXT, "I'm email body.");
 //                startActivity(Intent.createChooser(myIntent, "Send Email"));
                 break;
-            case Params.SHARE:
+            case Params.SHARE_APP:
                 myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/html");
                 myIntent.putExtra(Intent.EXTRA_TEXT, "Test Message");//
@@ -102,25 +92,12 @@ public class FragmentUserRegisterOfferFriendInvite extends Fragment implements I
             default:
                 myIntent = new Intent(Intent.ACTION_SEND);
                 myIntent.setType("text/plain");
-                String s2=apps.get(itemTag).pname;
+                String s2= applicationsHashtable.get(itemTag).pname;
                 myIntent.setPackage(s2);
                 myIntent.putExtra(Intent.EXTRA_TEXT, "Test Message");//
                 getActivity().startActivity(Intent.createChooser(myIntent, "Share with"));
                 break;
         }
-
-
-
-//        switch (itemTag){
-//            case Params.TELEGRAM:
-//                Intent myIntent = new Intent(Intent.ACTION_SEND);
-//                myIntent.setType("text/plain");
-//                String s=apps.get(itemTag).pname;
-//                myIntent.setPackage(s);
-//                myIntent.putExtra(Intent.EXTRA_TEXT, "Test Message");//
-//                getActivity().startActivity(Intent.createChooser(myIntent, "Share with"));
-//                break;
-//        }
     }
 
     public static Intent createEmailIntent(final String toEmail,
@@ -155,103 +132,37 @@ public class FragmentUserRegisterOfferFriendInvite extends Fragment implements I
     }
 
 
-    public void composeEmail(String[] addresses, String subject,String body) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT,body);
-        startActivity(Intent.createChooser(intent,"mail to"));
+//    public void composeEmail(String[] addresses, String subject,String body) {
+//        Intent intent = new Intent(Intent.ACTION_SEND);
+//        intent.setData(Uri.parse("mailto:")); // only email appNames should handle this
+//        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+//        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+//        intent.putExtra(Intent.EXTRA_TEXT,body);
+//        startActivity(Intent.createChooser(intent, "mail to"));
+//    }
+
+    @Override
+    public void setAppResults(ArrayList<PackageInfoCustom> appList) {
+        setApplicationList(appList);
     }
 
+    private void doOnApplicationListReady(){
+        if(listViewAdapter!=null)
+            listViewAdapter.resetItems(applicationList);
+        if (linearLayoutProgressBar!=null)
+            linearLayoutProgressBar.setVisibility(View.GONE);
+    }
 
-    private class GetInstalledApps extends AsyncTask<Void,Void,Void> {
-
-        Context context;
-
-        public GetInstalledApps(Context c){
-            this.context=c;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
-            for(int i=0;i<packs.size();i++) {
-                PackageInfo p = packs.get(i);
-                /*if ((!getSysPackages) && (p.versionName == null)) {
-                    continue ;
-                }*/
-                PackageInfoCustom newInfo = new PackageInfoCustom();
-                newInfo.appname = p.applicationInfo.loadLabel(context.getPackageManager()).toString();
-                newInfo.pname = p.packageName;
-                newInfo.versionName = p.versionName;
-                newInfo.versionCode = p.versionCode;
-                newInfo.icon = Image_M.drawableToBitmap(p.applicationInfo.loadIcon(context.getPackageManager()));
-
-                if (newInfo.appname.equalsIgnoreCase(Params.WHATSAPP))
-                {
-                    newInfo.appname=Params.WHATSAPP;
-                    applications.add(newInfo);
-                    apps.put(newInfo.appname,newInfo);
-                }
-                else if (newInfo.appname.equalsIgnoreCase(Params.LINE))
-                {
-                    newInfo.appname=Params.LINE;
-                    applications.add(newInfo);
-                    apps.put(newInfo.appname, newInfo);
-                }
-                else if (newInfo.appname.equalsIgnoreCase(Params.VIBER))
-                {
-                    newInfo.appname=Params.VIBER;
-                    applications.add(newInfo);
-                    apps.put(newInfo.appname, newInfo);
-                }
-                else if (newInfo.appname.equalsIgnoreCase(Params.TELEGRAM))
-                {
-                    newInfo.appname=Params.TELEGRAM;
-                    applications.add(newInfo);
-                    apps.put(newInfo.appname, newInfo);
-                }
+    public void setApplicationList(ArrayList<PackageInfoCustom> appList){
+        if (applicationList==null){
+            applicationList =appList;
+            applicationsHashtable=new Hashtable<>();
+            for (int i = 0; i < applicationList.size(); i++) {
+                applicationsHashtable.put(applicationList.get(i).appname, applicationList.get(i));
             }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result){
-//            if (res!=null) {
-//                for (PInfo p : res){
-//                    p.prettyPrint();
-//                }
-//            }
-            PackageInfoCustom shareP=new PackageInfoCustom();
-            shareP.appname= Params.SHARE;
-            shareP.icon= BitmapFactory.decodeResource(getResources(),R.drawable.ic_share_black_48dp);
-            applications.add(shareP);
-
-            listViewAdapter.loadMore(applications);
-
-//            for (String s: applications.keySet()){
-//                View view=LayoutInflater.from(context).inflate(R.layout.item_application_to_invite,null);
-//                Holder holder=new Holder();
-//                holder.imageViewAppIcone=(RoundedSquareImageView) view.findViewById(R.id.imageView_ApplicationIcone);
-//                holder.textViewAppName=(TextViewFont) view.findViewById(R.id.textViewFont_ApplicationName);
-//                holder.textViewAppName.setText(s);
-//
-//                holder.imageViewAppIcone.setImageBitmap(drawableToBitmap(applications.get(s).icon));
-//                holder.TAG=s;
-//            }
+            doOnApplicationListReady();
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 }

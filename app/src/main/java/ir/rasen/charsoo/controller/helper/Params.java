@@ -260,8 +260,8 @@ public class Params {
     public static final String LINE="LINE";
     public static final String TELEGRAM="Telegram";
     public static final String VIBER="Viber";
-    public static final String SHARE="Share";
-    public static final String EMAIL_INVITE="Email";
+    public static final String SHARE_APP ="Share";
+    public static final String EMAIL_APP ="Email";
 
     public static final String EMAILS="Emails";
     public static final String PHONE_NUMBERS="PhoneNumbers";
@@ -273,6 +273,7 @@ public class Params {
     public static final String MATCHED_FIELD_DATA="MatchedFieldData";
     public static final String IS_USER_SEEN_BOOL="IsUserSeenBool";
 
+    public static final int PROFILE_ROUNDED_THUMBNAIL_DIP=38;
     public static final boolean isTestVersion=true;
 
 }

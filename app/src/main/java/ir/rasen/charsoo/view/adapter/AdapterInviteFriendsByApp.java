@@ -49,6 +49,13 @@ public class AdapterInviteFriendsByApp extends BaseAdapter {
         }
     }
 
+    public void resetItems(ArrayList<PackageInfoCustom> newItem) {
+        if (newItem!=null) {
+            this.items.addAll(newItem);
+            notifyDataSetChanged();
+        }
+    }
+
 
     @Override
     public int getCount() {

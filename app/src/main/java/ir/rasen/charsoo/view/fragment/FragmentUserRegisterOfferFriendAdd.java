@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,9 @@ public class FragmentUserRegisterOfferFriendAdd extends Fragment implements IWeb
     ListView sc;
     AdapterInviteFriendsBySMS af;
 
-    View view;
+    boolean hasCharsooContacts=false;
+    LinearLayout hasNoFriend;
+    LinearLayout linearLayoutProgressBar;
     private ArrayList<ContactEntry> charsooContactList;
 
     public void getContactsHaveCharsoo(){
@@ -34,24 +37,42 @@ public class FragmentUserRegisterOfferFriendAdd extends Fragment implements IWeb
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_user_register_offer_friends_add,
+        View view = inflater.inflate(R.layout.fragment_user_register_offer_friends_add,
                 container, false);
+        hasNoFriend=(LinearLayout) view.findViewById(R.id.ll_hasNoFriend);
+        linearLayoutProgressBar=(LinearLayout) view.findViewById(R.id.ll_ProgressBar);
+        if (charsooContactList==null){
 
-//        hasApplicationX=new Hashtable<>();
-//        new GetInstalledApps(getActivity()).execute();
-        if (charsooContactList==null);
-//            af=new AdapterInviteFriendsBySMS(getActivity(),new ArrayList<ContactEntry>());
-        else{
-//            af=new AdapterInviteFriendsBySMS(getActivity(),charsooContactList);
+        }
+        else
+        {
             if (charsooContactList.isEmpty())
                 ((LinearLayout) view.findViewById(R.id.ll_hasNoFriend)).setVisibility(View.VISIBLE);
+            linearLayoutProgressBar.setVisibility(View.GONE);
         }
-        sc=(ListView) view.findViewById(R.id.listView2);
+//        hasApplicationX=new Hashtable<>();
+//        new GetInstalledApps(getActivity()).execute();
+
 //        sc.setAdapter(af);
 
         return view;
 
     }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+//        if (charsooContactList==null);
+////            af=new AdapterInviteFriendsBySMS(getActivity(),new ArrayList<ContactEntry>());
+//        else{
+////            af=new AdapterInviteFriendsBySMS(getActivity(),charsooContactList);
+//            if (charsooContactList.isEmpty())
+//                ((LinearLayout) view.findViewById(R.id.ll_hasNoFriend)).setVisibility(View.VISIBLE);
+//            else
+//                af.resetItems(charsooContactList);
+//        }
+        sc=(ListView) view.findViewById(R.id.listView2);
+    }
+
 
     @Override
     public void getResult(Object result) {
@@ -64,13 +85,19 @@ public class FragmentUserRegisterOfferFriendAdd extends Fragment implements IWeb
     }
 
 
-    public void getCharsooContacts(ArrayList<ContactEntry> charsooContacts){
-        if (charsooContacts.isEmpty())
-            ((LinearLayout) view.findViewById(R.id.ll_hasNoFriend)).setVisibility(View.VISIBLE);
-        else{
-            af.loadMore(charsooContacts);
+    public void setCharsooContacts(ArrayList<ContactEntry> charsooContacts){
+        charsooContactList=new ArrayList<>(charsooContacts);
+        if (charsooContactList.isEmpty()){
+            if (hasNoFriend!=null)
+                hasNoFriend.setVisibility(View.VISIBLE);
         }
-        charsooContactList=charsooContacts;
+        if (linearLayoutProgressBar!=null)
+            linearLayoutProgressBar.setVisibility(View.GONE);
+        if (af != null){
+//            if (af.getCount()<=0)
+                af.resetItems(charsooContactList);
+        }
+
     }
 
 

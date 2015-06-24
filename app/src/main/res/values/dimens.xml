@@ -7,6 +7,8 @@
     <dimen name="adapter_user_image_height">48dp</dimen>
     <dimen name="adapter_business_image_height_margin_bottom">24dp</dimen>
     <dimen name="adapter_item_height">66dp</dimen>
+    <dimen name="profile_pic_thumbnail_container_widthheigth">72dp</dimen>
+    <dimen name="profile_pic_thumbnail_widthheight">38dp</dimen>
     <dimen name="adapter_friend_request_item_width">122dp</dimen>
     <dimen name="comment_notification_adapter_post_image_height">52dp</dimen>
     <dimen name="post_adapter_small_icon">20dp</dimen>

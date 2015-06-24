@@ -3,6 +3,7 @@ package ir.rasen.charsoo.view.widgets.charsoo_activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -85,13 +86,15 @@ public class CharsooActivity extends AppCompatActivity {
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         setSupportActionBar(toolbar);
         customizeActionbar();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            toolbar.setElevation(0);
     }
 
     private void customizeActionbar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null && toolbar == null) {
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.DeepSkyBlue)));
+            actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.primaryColor)));
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowCustomEnabled(true);
             setTitle(getTitle());

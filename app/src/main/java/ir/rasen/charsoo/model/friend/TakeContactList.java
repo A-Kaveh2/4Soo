@@ -96,7 +96,8 @@ public class TakeContactList extends AsyncTask<Void, Void, ArrayList<ContactEntr
             webservicePOST.addParam(Params.PHONE_NUMBERS,phoneNumbers);
 
 
-            serverAnswer = webservicePOST.execute(context);
+//            serverAnswer = webservicePOST.execute(context);
+            // TODO: yek Arayeye Sort shode tahvil bedim.
             return null;
 //            if (serverAnswer.getSuccessStatus()) {
 //                JSONArray jsonArray = serverAnswer.getResultList();
@@ -131,7 +132,9 @@ public class TakeContactList extends AsyncTask<Void, Void, ArrayList<ContactEntr
 
     @Override
     protected void onPostExecute(ArrayList<ContactEntry> result) {
+
         delegate.getResult(new ArrayList<ContactEntry>());
+
 //        if (serverAnswer == null) {
 //            delegate.getError(ServerAnswer.EXECUTION_ERROR,TAG);
 //            return;

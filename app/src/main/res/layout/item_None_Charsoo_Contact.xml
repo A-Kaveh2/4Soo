@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_margin="@dimen/adapter_item_margin"
-        android:layout_height="@dimen/base_adapter_item_height">
+        android:layout_height="@dimen/profile_pic_thumbnail_container_widthheigth">
 
 
         <RelativeLayout
@@ -58,14 +58,14 @@
 
         <LinearLayout
             android:id="@+id/ll_image"
-            android:layout_width="@dimen/adapter_item_height"
-            android:layout_height="@dimen/adapter_item_height"
+            android:layout_width="@dimen/profile_pic_thumbnail_container_widthheigth"
+            android:layout_height="@dimen/profile_pic_thumbnail_container_widthheigth"
             android:layout_alignParentRight="true"
             android:gravity="center">
 
             <ir.rasen.charsoo.view.widgets.imageviews.RoundedSquareImageView
-                android:layout_width="@dimen/adapter_user_image_height"
-                android:layout_height="@dimen/adapter_user_image_height"
+                android:layout_width="@dimen/profile_pic_thumbnail_widthheight"
+                android:layout_height="@dimen/profile_pic_thumbnail_widthheight"
                 android:id="@+id/imageView_base_adapter_item_image" />
         </LinearLayout>
 

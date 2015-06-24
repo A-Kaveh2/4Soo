@@ -49,6 +49,11 @@ public class AdapterInviteFriendsBySMS extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void resetItems(ArrayList<ContactEntry> newItem){
+        this.items=new ArrayList<>(newItem);
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getCount() {
@@ -89,8 +94,8 @@ public class AdapterInviteFriendsBySMS extends BaseAdapter {
         holder.checkBoxSelect.setChecked(isItemChecked.get(position));
         if (items.get(position).contactPhoto != null)
             holder.imageViewProfileImage.setImageBitmap(items.get(position).contactPhoto);
-        else
-            holder.imageViewProfileImage.setImageDrawable(items.get(position).contactPhotoDrawable);
+//        else;
+//            holder.imageViewProfileImage.setImageDrawable(items.get(position).contactPhotoDrawable);
 
         holder.checkBoxSelect.setOncheckListener(new com.gc.materialdesign.views.CheckBox.OnCheckListener() {
             @Override

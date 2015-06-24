@@ -29,8 +29,8 @@
                 android:layout_height="0dp"
                 android:id="@+id/selectedContacts"
                 android:layout_weight="50"
-                android:background="#ff5b5b5b"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:background="#dd727272">
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -41,20 +41,44 @@
                     android:paddingLeft="8dp"></LinearLayout>
             </HorizontalScrollView>
 
-            <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
-                android:id="@+id/btn_sendSMS"
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="@string/txt_sendSMS"
                 android:background="@color/OrangeRed"
-                android:layout_gravity="center_vertical"
                 android:layout_weight="50"
-                android:visibility="gone" />
+                android:id="@+id/ll_SendButtonContainer"
+                android:visibility="gone">
+
+                <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
+                    android:id="@+id/btn_sendSMS"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/txt_sendSMS"
+                    android:background="@color/OrangeRed"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="gone" />
+            </LinearLayout>
 
         </LinearLayout>
 
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:id="@+id/ll_ProgressBar"
+        android:background="#cc727272" >
+
+        <ProgressBar
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:indeterminate="false" />
+    </LinearLayout>
 
 
 </RelativeLayout>

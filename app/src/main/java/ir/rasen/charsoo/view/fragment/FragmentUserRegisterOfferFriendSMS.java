@@ -2,18 +2,15 @@ package ir.rasen.charsoo.view.fragment;
 
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -32,23 +29,22 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
 
     public static final String TAG="OfferFriendInviteFriend";
 
-    int remainingSMSCount;
+    int remainingSMSCount=0;
     AdapterInviteFriendsBySMS adapterInviteFriends;
     ListView listViewAllContacts;
     Hashtable<Integer,ContactEntry> selectedContactsToInvite;
     Hashtable<Integer,Integer> positionMapForSelectedContacts;
-//    adapter
+    //    adapter
     ArrayList<ContactEntry> noneCharsooContactsList;
     LinearLayout selectedContactsLayout;
     ButtonFont sendSMS;
-
-
+    LinearLayout linearLayoutProgressBar,linearLayoutSendButtonContainer;
     HorizontalScrollView selectedScrollView;
     int selectedItemHeight,selectedItemMargin;
     LinearLayout.LayoutParams params;
 
-//        TextViewFont persianLicenseTextView,englishLicenseTextView;
 
+//        TextViewFont persianLicenseTextView,englishLicenseTextView;
 
 
     @Override
@@ -56,8 +52,11 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_register_offer_friends_invite_sms,
                 container, false);
+        linearLayoutProgressBar=(LinearLayout) view.findViewById(R.id.ll_ProgressBar);
+        linearLayoutSendButtonContainer=(LinearLayout) view.findViewById(R.id.ll_SendButtonContainer);
         if (selectedContactsToInvite==null)
             selectedContactsToInvite=new Hashtable<>();
+
         if (positionMapForSelectedContacts==null)
             positionMapForSelectedContacts=new Hashtable<>();
 
@@ -65,54 +64,92 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
             if (adapterInviteFriends == null)
                 adapterInviteFriends = new AdapterInviteFriendsBySMS(getActivity(), new ArrayList<ContactEntry>(), FragmentUserRegisterOfferFriendSMS.this);
         }
-        else if (adapterInviteFriends==null)
-                adapterInviteFriends=new AdapterInviteFriendsBySMS(getActivity(),noneCharsooContactsList,FragmentUserRegisterOfferFriendSMS.this);
-        listViewAllContacts=(ListView) view.findViewById(R.id.allContacts);
-        listViewAllContacts.setAdapter(adapterInviteFriends);
+        else{
+            if (adapterInviteFriends==null)
+                adapterInviteFriends = new AdapterInviteFriendsBySMS(getActivity(), noneCharsooContactsList, FragmentUserRegisterOfferFriendSMS.this);
+            linearLayoutProgressBar.setVisibility(View.GONE);
+        }
+
         selectedScrollView=(HorizontalScrollView) view.findViewById(R.id.selectedContacts);
         selectedContactsLayout=(LinearLayout) view.findViewById(R.id.ll_SelectedContactsContainer);
 
         sendSMS=(ButtonFont) view.findViewById(R.id.btn_sendSMS);
 
 
+
 //        hasApplicationX=new Hashtable<>();
 //        new GetInstalledApps(getActivity()).execute();
-        remainingSMSCount=50;
-        recursivelyCallHandler();
+        if (remainingSMSCount==0){
+            // TODO: try getting remaining sms count from server
+        }
 
         selectedItemHeight =getSizeInPixelFromDp(38);
         selectedItemMargin=getSizeInPixelFromDp(16);
         params=new LinearLayout.LayoutParams(selectedItemHeight,selectedItemHeight);
         params.setMargins(0, 0, selectedItemMargin,0);
+
+
         return view;
 
     }
 
-    Handler handler = new Handler();
+//    Handler handler = new Handler();
+//
+//    public void recursivelyCallHandler() {
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                //We don't want to run all webservices together
+//                //first HomeFragment, second SearchFragment and last UserFragment
+//
+//                if (!selectedContactsToInvite.isEmpty())
+//                {
+//                    int i=3;
+//                }
+//                recursivelyCallHandler();
+//            }
+//        }, 500);
+//    }
 
-    public void recursivelyCallHandler() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //We don't want to run all webservices together
-                //first HomeFragment, second SearchFragment and last UserFragment
 
-                if (!selectedContactsToInvite.isEmpty())
-                {
-                    int i=3;
-                }
-                recursivelyCallHandler();
-            }
-        }, 500);
-    }
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+//        if (noneCharsooContactsList!=null)
+//            adapterInviteFriends.loadMore(noneCharsooContactsList);
+        listViewAllContacts=(ListView) view.findViewById(R.id.allContacts);
+        listViewAllContacts.setAdapter(adapterInviteFriends);
+
+        if (!selectedContactsToInvite.isEmpty())
+        {
+            selectedScrollView.setVisibility(View.VISIBLE);
+            sendSMS.setVisibility(View.VISIBLE);
+            linearLayoutSendButtonContainer.setVisibility(View.VISIBLE);
+            positionMapForSelectedContacts=new Hashtable<>();
+            ArrayList<Integer> keys=new ArrayList<>(selectedContactsToInvite.keySet());
+            for (Integer i = 0; i < keys.size() ; i++) {
+                positionMapForSelectedContacts.put(keys.get(i),i);
+                RoundedSquareImageView r=new RoundedSquareImageView(getActivity());
+
+                r.setLayoutParams(params);
+                if (selectedContactsToInvite.get(keys.get(i)).contactPhoto!=null){
+                    r.setImageBitmap(selectedContactsToInvite.get(keys.get(i)).contactPhoto);
+                }
+                selectedContactsLayout.addView(r);
+            }
+
+        }
     }
 
 
-    public void getNoneCharsooContacts(ArrayList<ContactEntry> noneCharsooContacts){
-        adapterInviteFriends.loadMore(noneCharsooContacts);
-        noneCharsooContactsList=noneCharsooContacts;
+    public void setNoneCharsooContacts(ArrayList<ContactEntry> noneCharsooContacts){
+        noneCharsooContactsList=new ArrayList<>(noneCharsooContacts);
+        if (adapterInviteFriends!=null){
+//            if (adapterInviteFriends.getCount()<=0)
+            adapterInviteFriends.resetItems(noneCharsooContactsList);
+        }
+        if (linearLayoutProgressBar!=null)
+            linearLayoutProgressBar.setVisibility(View.GONE);
+//        delegate.updateViews();
     }
 
     @Override
@@ -141,7 +178,8 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
             }
             else
             {
-                r.setImageDrawable(selectedContactsToInvite.get(position).contactPhotoDrawable);
+//                r.setImageDrawable(selectedContactsToInvite.get(position).contactPhotoDrawable);
+
             }
             selectedContactsLayout.addView(r);
         }
@@ -149,14 +187,17 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
         if (!selectedContactsToInvite.isEmpty()){
             selectedScrollView.setVisibility(View.VISIBLE);
             sendSMS.setVisibility(View.VISIBLE);
-
+            linearLayoutSendButtonContainer.setVisibility(View.VISIBLE);
         }
         else
         {
             selectedScrollView.setVisibility(View.GONE);
             sendSMS.setVisibility(View.GONE);
+            linearLayoutSendButtonContainer.setVisibility(View.GONE);
         }
     }
+
+
 //    private class GetInstalledApps extends AsyncTask<Void,Void,Void> {
 //
 //        ArrayList<PInfo> res;
@@ -221,4 +262,6 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpToConvert, r.getDisplayMetrics());
         return (int) px;
     }
+
+
 }
