@@ -102,7 +102,7 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
         return view;
 
     }
-    
+
 
 
     @Override
