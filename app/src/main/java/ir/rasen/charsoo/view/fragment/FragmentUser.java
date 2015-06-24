@@ -200,7 +200,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
                 sharedPosts.clear();
             sharedPosts = (ArrayList<Post>) result;
             if (sharedPosts.size() == 0)
-                new DialogMessage(getActivity(), "Empty posts").show();
+                new DialogMessage(getActivity(), R.string.user, "Empty posts").show();
             pullToRefreshGridView.setResultSize(sharedPosts.size());
             if (pullToRefreshGridView.isRefreshing()) {
                 pullToRefreshGridView.onRefreshComplete();
@@ -216,7 +216,6 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
         pullToRefreshGridView.onRefreshComplete();
         new DialogMessage(getActivity(), ServerAnswer.getError(getActivity(), errorCode, callerStringID + ">" + TAG)).show();
     }
-
 
     @Override
     public void notifyUpdateUserProfile(String userPictureString) {

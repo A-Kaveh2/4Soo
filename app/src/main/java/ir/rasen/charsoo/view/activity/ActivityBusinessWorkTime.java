@@ -178,7 +178,7 @@ public class ActivityBusinessWorkTime extends CharsooActivity implements View.On
             case R.id.btn_submit:
                 //if user doesn't choose any days
                 if (!(sat || sun || mon || tue || wed || thr || fri)) {
-                    new DialogMessage(ActivityBusinessWorkTime.this, getString(R.string.err_choose_days)).show();
+                    new DialogMessage(ActivityBusinessWorkTime.this, R.string.work_time, getString(R.string.err_choose_days)).show();
                     return;
                 }
 

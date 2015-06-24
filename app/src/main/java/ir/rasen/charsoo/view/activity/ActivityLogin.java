@@ -123,7 +123,7 @@ public class ActivityLogin extends CharsooActivity implements View.OnClickListen
             myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
             finish();
         } else if (myApplication.getCurrentWebservice() == WebservicesHandler.Webservices.FORGET_PASSWORD) {
-            new DialogMessage(ActivityLogin.this, getResources().getString(R.string.forgot_password_sent)).show();
+            new DialogMessage(ActivityLogin.this, R.string.forgot_password, getResources().getString(R.string.forgot_password_sent)).show();
             myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);
         }
     }

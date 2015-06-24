@@ -549,31 +549,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
                 drawerLayout.closeDrawer(Gravity.RIGHT);
             }
         });
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
-/*        setNavigationItemSelectedListener(new OnNavigationItemSelectedListener() {
 
-            // This method will trigger on item Click of navigation menu
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-
-                //Checking if the item is in checked state or not, if not make it in checked state
-                if(menuItem.isChecked()) menuItem.setChecked(false);
-                else menuItem.setChecked(true);
-
-                //Closing drawer on item click
-                drawerLayout.closeDrawers();
-
-                //Check to see which item was being clicked and perform appropriate action
-                switch (menuItem.getItemId()){
-                    case R.id.home:
-                    default:
-                        Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
-                        return true;
-
-                }
-            }
-        });*/
     }
 
     public void setUserDrawer(User user) {

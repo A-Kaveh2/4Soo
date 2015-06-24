@@ -14,15 +14,17 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.model.search.SearchUser;
 import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.adapter.AdapterSearchTabs;
+import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip;
 
-public class FragmentSearch extends Fragment {
+public class FragmentSearch extends Fragment implements IWebserviceResponse{
     public static final String TAG = "FragmentSearch";
 
-    private enum SearchType {BUSINESSES, POSTS, USERS}
+    private enum SearchType {BUSINESSES, PRODUCTS, USERS}
 
     private SearchType searchType;
 
@@ -62,12 +64,15 @@ public class FragmentSearch extends Fragment {
                 switch (position) {
                     case 0:
                         search.setHint(R.string.search_products);
+                        searchType = SearchType.PRODUCTS;
                         break;
                     case 1:
                         search.setHint(R.string.search_businesses);
+                        searchType = SearchType.BUSINESSES;
                         break;
                     case 2:
                         search.setHint(R.string.search_users);
+                        searchType = SearchType.USERS;
                         break;
                 }
             }
@@ -99,26 +104,92 @@ public class FragmentSearch extends Fragment {
     }
 
     private void setUpGeneralFeatures(View view) {
-            //Set up touch listener for non-text box views to hide keyboard.
-            if(!(view instanceof EditText)) {
-                view.setOnTouchListener(new View.OnTouchListener() {
-                    public boolean onTouch(View v, MotionEvent event) {
-                        activityMain.hideSoftKeyboard();
-                        return false;
-                    }
-
-                });
-            }
-            //If a layout container, iterate over children and seed recursion.
-            if (view instanceof ViewGroup) {
-                for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-                    View innerView = ((ViewGroup) view).getChildAt(i);
-                    setUpGeneralFeatures(innerView);
+        //Set up touch listener for non-text box views to hide keyboard.
+        if (!(view instanceof EditText)) {
+            view.setOnTouchListener(new View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+                    activityMain.hideSoftKeyboard();
+                    return false;
                 }
+
+            });
+        }
+        //If a layout container, iterate over children and seed recursion.
+        if (view instanceof ViewGroup) {
+            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
+                View innerView = ((ViewGroup) view).getChildAt(i);
+                setUpGeneralFeatures(innerView);
             }
+        }
     }
 
     private void searchNow() {
         activityMain.hideSoftKeyboard();
+
+        String searchKey = search.getText().toString().trim();
+        search.setText(searchKey);
+
+        if(searchKey.length()==0) {
+
+        }
+
+        switch (searchType) {
+            case BUSINESSES:
+            /*if (subcategoryId == 0) {
+                DialogMessage.error(getActivity(), getString(R.string.choose_category_search)).show();
+                return false;
+            }*/
+                //if (choosedLatLng == null) {
+                //    DialogMessage.error(getActivity(), getString(R.string.err_choose_location_search)).show();
+                //    return false;
+                //}
+/*
+                Intent intent = new Intent(getActivity(), ActivitySearchBusinessResult.class);
+                intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
+                intent.putExtra(Params.LATITUDE, String.valueOf(choosedLatLng.latitude));
+                intent.putExtra(Params.LONGITUDE, String.valueOf(choosedLatLng.longitude));
+                intent.putExtra(Params.SUB_CATEGORY_ID, subcategoryId);
+                startActivity(intent);*/
+                break;
+            case PRODUCTS:
+                /*Intent intent = new Intent(getActivity(), ActivitySearchPostResult.class);
+                intent.putExtra(Params.SEARCH_KEY_WORD, editTextSearch.getText().toString());
+                startActivity(intent);*/
+                break;
+            case USERS:
+                new SearchUser(getActivity(),searchKey,0,getResources().getInteger(R.integer.lazy_load_limitation),FragmentSearch.this).execute();
+        }
     }
+
+    @Override
+    public void getResult(Object result) {
+/*        progressDialog.dismiss();
+        if (result instanceof ArrayList) {
+            ArrayList<BaseAdapterItem> temp = (ArrayList<BaseAdapterItem>) result;
+            if(temp.size()== 0) {
+                (findViewById(R.id.textView_no_result)).setVisibility(View.VISIBLE);
+                return;
+            }
+
+            results.addAll(temp);
+
+            if (status == Status.FIRST_TIME) {
+                adapterUserSearchResult = new AdapterUsersFromBAItems(ActivitySearchUser.this, 0, results, AdapterUsersFromBAItems.Mode.USERS);
+                listView.setAdapter(adapterUserSearchResult);
+            } else {
+                //it is loading more
+                listFooterView.setVisibility(View.GONE);
+                adapterUserSearchResult.loadMore(temp);
+            }
+            status = Status.NONE;
+        }*/
+    }
+
+    @Override
+    public void getError(Integer errorCode,String callerStringID) {
+        //progressDialog.dismiss();
+        //DialogMessage.error(ActivitySearchUser.this, ServerAnswer.getError(ActivitySearchUser.this, errorCode, callerStringID + ">" + this.getLocalClassName())).show();
+    }
+
 }
+

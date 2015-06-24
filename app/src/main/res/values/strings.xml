@@ -163,9 +163,7 @@
     <string name="err_location_service_title">سرویس های مکان یابی</string>
     <string name="err_fill_search_box">لطفا متن جستجو را وارد کنید.</string>
     <string name="err_location_service_body">تنظیمات مربوط به سرویس های مکان یابی فعال نشده است. آیا مایل به مشاهده تنظیمات هستید؟</string>
-
-    <!-- ERRORS -->
-
+    <string name="ops">ناممکن</string>
 
     <!-- EDIT -->
     <string name="share">به اشتراک گذاری</string>
