@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -10,10 +9,11 @@ import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Validation;
+import ir.rasen.charsoo.model.user.ForgetPassword;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.model.user.ForgetPassword;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class DialogForgetPassword extends MyDialogOkCancel {
@@ -21,7 +21,7 @@ public class DialogForgetPassword extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogForgetPassword(final Context context, final IWebserviceResponse IWebserviceResponse, final ProgressDialog progressDialog) {
+    public DialogForgetPassword(final Context context, final IWebserviceResponse IWebserviceResponse, final WaitDialog progressDialog) {
         super(context, context.getResources().getString(R.string.dialog_forget_password),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.retrieval));

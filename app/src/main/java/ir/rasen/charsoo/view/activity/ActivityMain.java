@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +28,7 @@ import ir.rasen.charsoo.view.dialog.DialogExit;
 import ir.rasen.charsoo.view.fragment.FragmentUserBusinesses;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
@@ -41,7 +41,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
     boolean footerHome=true, footerUser, footerSearch, footerBusiness;
 
     FragmentManager fm;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int screenWidth;
 
     @Override
@@ -59,7 +59,7 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

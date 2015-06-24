@@ -1,32 +1,32 @@
 package ir.rasen.charsoo.view.fragment;
 
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.controller.object.MyApplication;
-import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
-import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.controller.helper.ResultStatus;
 import ir.rasen.charsoo.controller.helper.ServerAnswer;
 import ir.rasen.charsoo.controller.helper.Validation;
 import ir.rasen.charsoo.controller.helper.WebservicesHandler;
+import ir.rasen.charsoo.controller.object.MyApplication;
+import ir.rasen.charsoo.model.user.Login;
+import ir.rasen.charsoo.view.activity.ActivityMain;
+import ir.rasen.charsoo.view.dialog.DialogForgetPassword;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
-import ir.rasen.charsoo.view.activity.ActivityMain;
-import ir.rasen.charsoo.model.user.Login;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 public class UNUSED_FragmentUserLogin extends Fragment implements IWebserviceResponse {
     public static final String TAG ="FragmentUserLogin";
     EditTextFont editTextEmail, editTextPassword;
     Validation validation;
     MyApplication myApplication;
-    private ProgressDialog progressDialog;
+    private WaitDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +34,7 @@ public class UNUSED_FragmentUserLogin extends Fragment implements IWebserviceRes
         View view = inflater.inflate(R.layout.fragment_user_login,
                 container, false);
 
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new WaitDialog(getActivity());
 
         myApplication = (MyApplication) getActivity().getApplication();
         myApplication.setCurrentWebservice(WebservicesHandler.Webservices.NONE);

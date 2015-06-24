@@ -17,6 +17,7 @@ import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.model.search.SearchUser;
 import ir.rasen.charsoo.view.activity.ActivityMain;
 import ir.rasen.charsoo.view.adapter.AdapterSearchTabs;
+import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip;
@@ -130,7 +131,7 @@ public class FragmentSearch extends Fragment implements IWebserviceResponse{
         search.setText(searchKey);
 
         if(searchKey.length()==0) {
-
+            new DialogMessage(getActivity(), R.string.search, R.string.err_fill_search_box).show();
         }
 
         switch (searchType) {

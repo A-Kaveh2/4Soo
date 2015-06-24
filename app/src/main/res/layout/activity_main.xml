@@ -112,9 +112,5 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <include
-        layout="@layout/drawer"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="right" />
+    <include layout="@layout/drawer" />
 </android.support.v4.widget.DrawerLayout>

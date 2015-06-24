@@ -146,6 +146,7 @@
     <dimen name="corner_size">2dp</dimen>
 
     <dimen name="drawer_header_height">100dp</dimen>
+    <dimen name="drawer_width">240dp</dimen>
     <dimen name="drawer_profile">64dp</dimen>
 
     <dimen name="dialog_body_height">72dp</dimen>
