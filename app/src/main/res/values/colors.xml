@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+            <!--Charsoo Colors-->
+    <color name="darkPrimaryColor">#0288d1</color>
     <color name="primaryColor">#03a9f5</color>
+    <color name="lightPrimaryColor">#b3e5fc</color>
+    <color name="textIconActiveColor">#ffffff</color>
+    <color name="accentColor">#ff4081</color>
+    <color name="primaryTextColor">#212121</color>
+    <color name="secondaryTextColor">#727272</color>
+    <color name="dividerColor">#b6b6b6</color>
 
+
+            <!--other Colors-->
     <color name="white">#FFFFFF</color>
     <color name="popup_back">#5d5d5d</color>
     <color name="background_light">#696D76</color>

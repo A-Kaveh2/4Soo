@@ -17,10 +17,12 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
+import ir.rasen.charsoo.controller.helper.GetInstalledApps;
 import ir.rasen.charsoo.controller.object.ContactEntry;
 import ir.rasen.charsoo.controller.object.PackageInfoCustom;
 import ir.rasen.charsoo.model.GetContactData;
 import ir.rasen.charsoo.view.interface_m.IGetContactListener;
+import ir.rasen.charsoo.view.interface_m.IGetInstalledAppsListener;
 import ir.rasen.charsoo.view.widgets.CustomViewPager;
 import ir.rasen.charsoo.view.widgets.SlidingTabLayout;
 
@@ -28,9 +30,12 @@ import ir.rasen.charsoo.view.widgets.SlidingTabLayout;
 /**
  * Created by hossein-pc on 6/9/2015.
  */
-public class FragmentUserRegisterOfferFriend extends Fragment implements IGetContactListener {
+public class FragmentUserRegisterOfferFriend extends Fragment implements IGetContactListener,IGetInstalledAppsListener {
 
     public static final String TAG="OfferFriend";
+
+    public String tabOneTitle,tabTwoTitle,tabThreeTitle;
+
 
     FragmentUserRegisterOfferFriendAdd fragAdd;
     FragmentUserRegisterOfferFriendInvite fragInvite;
@@ -69,8 +74,10 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
         fragAdd=new FragmentUserRegisterOfferFriendAdd();
         fragSMS=new FragmentUserRegisterOfferFriendSMS();
         fragInvite=new FragmentUserRegisterOfferFriendInvite();
-        if (applicationList!=null)
-            fragInvite.setApplicationList(applicationList);
+
+        initialStrings();
+
+
 
         view = inflater.inflate(R.layout.fragment_user_register_offer_friends,
                 container, false);
@@ -121,12 +128,28 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
         mSlidingTabLayout.setViewPager(mViewPager);
 
+
         // END_INCLUDE (setup_slidingtablayout)
+        if (applicationList!=null) {
+            fragInvite.setApplicationList(applicationList);
+        }else
+            new GetInstalledApps(getActivity(),FragmentUserRegisterOfferFriend.this);
+
         if (charsooContactsList==null) {
             new GetContactData(context,FragmentUserRegisterOfferFriend.this).execute();
         }
         else
             doOnContactListReady();
+
+        if ((applicationList!=null) && (charsooContactsList!=null))
+            (view.findViewById(R.id.ll_ProgressBar)).setVisibility(View.GONE);
+
+    }
+
+    private void initialStrings(){
+        tabOneTitle=context.getString(R.string.txt_FindFriends);
+        tabTwoTitle=context.getString(R.string.txt_InviteFriends);
+        tabThreeTitle=context.getString(R.string.txt_sendSMS);
     }
 
     @Override
@@ -150,8 +173,16 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
 
             fragAdd.setCharsooContacts(charsooContactsList);
             fragSMS.setNoneCharsooContacts(noneCharsooPhoneNumberContactsList);
+            fragInvite.setNoneCharsooContacts(noneCharsooEmailContactsList);
+            if (applicationList!=null)
+                (view.findViewById(R.id.ll_ProgressBar)).setVisibility(View.GONE);
         }
 //        progressDialog.dismiss();
+    }
+
+    @Override
+    public void setAppResults(ArrayList<PackageInfoCustom> appList)  {
+        setApplicationList(appList);
     }
     // END_INCLUDE (fragment_onviewcreated)
 
@@ -192,11 +223,11 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
         public CharSequence getPageTitle(int position) {
             switch (position){
                 case 0:
-                    return context.getString(R.string.txt_FriendRequest);
+                    return tabOneTitle;
                 case 1:
-                    return context.getString(R.string.txt_InviteFriends);
+                    return tabTwoTitle;
                 case 2:
-                    return context.getString(R.string.txt_SendSMS);
+                    return tabThreeTitle;
                 default:
                     return "";
             }
@@ -227,6 +258,7 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
             noneCharsooPhoneNumberContactsList=noneCharsooPhoneContacts;
             haveContactList=true;
             doOnContactListReady();
+
         }
     }
 
@@ -234,6 +266,19 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
         applicationList=appList;
         if (fragInvite!=null){
             fragInvite.setApplicationList(applicationList);
+        }
+    }
+
+    public boolean isEmailListVisible(){
+        if (fragInvite!=null)
+            return fragInvite.isEmailListVisible();
+        else
+            return false;
+    }
+
+    public void hideEmailList(){
+        if (fragInvite!=null){
+            fragInvite.hideEmailList();
         }
     }
 }

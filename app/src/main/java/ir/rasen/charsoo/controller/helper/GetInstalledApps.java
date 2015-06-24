@@ -31,10 +31,7 @@ public class GetInstalledApps extends AsyncTask<Void,Void,Void> {
     @Override
     protected Void doInBackground(Void... params) {
 
-        PackageInfoCustom customPackage=new PackageInfoCustom();
-        customPackage.appname=Params.EMAIL_APP;
-        customPackage.icon=BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_email_blue);
-        applicationList.add(customPackage);
+
 
 
         List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
@@ -72,11 +69,14 @@ public class GetInstalledApps extends AsyncTask<Void,Void,Void> {
             }
 
         }
-        customPackage=new PackageInfoCustom();
+        PackageInfoCustom customPackage=new PackageInfoCustom();
         customPackage.appname= Params.SHARE_APP;
         customPackage.icon= BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_share_black_48dp);
         applicationList.add(customPackage);
-
+        customPackage=new PackageInfoCustom();
+        customPackage.appname=Params.EMAIL_APP;
+        customPackage.icon=BitmapFactory.decodeResource(context.getResources(),R.drawable.ic_email_blue);
+        applicationList.add(customPackage);
         return null;
     }
 

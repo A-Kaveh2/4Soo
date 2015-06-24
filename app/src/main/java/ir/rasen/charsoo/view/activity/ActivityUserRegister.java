@@ -127,9 +127,13 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
 
                 break;
             case THIRD_PAGE_OFFER_FRIEND:
-                Intent intent= new Intent(this, ActivityLogin.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                this.startActivity(intent);
+                if (fragThree_OfferFriends.isEmailListVisible())
+                    fragThree_OfferFriends.hideEmailList();
+                else {
+                    Intent intent = new Intent(this, ActivityLogin.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    this.startActivity(intent);
+                }
                 break;
             default:
                 finish();

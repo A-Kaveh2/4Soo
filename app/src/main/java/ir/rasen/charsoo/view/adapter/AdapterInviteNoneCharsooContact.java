@@ -24,7 +24,7 @@ import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.view.widgets.checkbox.CheckBox;
 
 
-public class AdapterInviteFriendsBySMS extends BaseAdapter {
+public class AdapterInviteNoneCharsooContact extends BaseAdapter {
 
     private ArrayList<ContactEntry> items;
     private Context context;
@@ -34,7 +34,7 @@ public class AdapterInviteFriendsBySMS extends BaseAdapter {
 
 
 
-    public AdapterInviteFriendsBySMS(Context context, ArrayList<ContactEntry> items,IFragInviteSelectionListener delegate) {
+    public AdapterInviteNoneCharsooContact(Context context, ArrayList<ContactEntry> items, IFragInviteSelectionListener delegate) {
         this.delegate=delegate;
         this.context = context;
         this.items = items;
@@ -86,7 +86,7 @@ public class AdapterInviteFriendsBySMS extends BaseAdapter {
             holder.textViewContactName = (TextViewFont) view.findViewById(R.id.textView_ContactName);
             holder.textViewContaceData = (TextViewFont) view.findViewById(R.id.textView_ContactData);
             holder.checkBoxSelect = (CheckBox) view.findViewById(R.id.checkBox_SelectContactToInvite);
-            holder.checkBoxSelect.setChecked(false);
+//            holder.checkBoxSelect.setChecked(false);
             view.setTag(holder);
 
         } else

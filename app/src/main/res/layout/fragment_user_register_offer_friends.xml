@@ -1,19 +1,39 @@
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ir.rasen.charsoo.view.widgets.SlidingTabLayout
-        android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ir.rasen.charsoo.view.widgets.CustomViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1"
-        android:background="@android:color/white"/>
+        <ir.rasen.charsoo.view.widgets.SlidingTabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ir.rasen.charsoo.view.widgets.CustomViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/white"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/ll_ProgressBar"
+                android:background="#cc727272" >
+
+                <ProgressBar
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerInParent="true"
+                    android:indeterminate="false" />
+            </LinearLayout>
+        </RelativeLayout>
 
 </LinearLayout>

@@ -9,27 +9,63 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:id="@+id/ll_ProgressBar"
-            android:background="#cc727272" >
-
-            <ProgressBar
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerInParent="true"
-                android:indeterminate="false" />
-        </LinearLayout>
-
         <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/applicationsListView" />
 
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ll_EmailListContainer"
+            android:visibility="gone">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="1"
+                android:background="#ffffffff">
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/allContactsListView"
+                    android:layout_weight="1" />
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_pic_thumbnail_container_widthheigth"
+                    android:id="@+id/selectedContactsScrollView"
+                    android:background="#ee727272"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/ll_SelectedContactsContainer"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="8dp"></LinearLayout>
+                </HorizontalScrollView>
+
+                <ir.rasen.charsoo.view.widgets.buttons.ButtonFont
+                    android:id="@+id/btn_SendEmail"
+                    android:layout_width="match_parent"
+                    android:background="@color/primaryColor"
+                    android:layout_height="@dimen/profile_pic_thumbnail_container_widthheigth"
+                    android:text="@string/txt_SendEmail"
+                    android:layout_gravity="center_vertical" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+
+
     </RelativeLayout>
+
 </LinearLayout>
 
     <!--

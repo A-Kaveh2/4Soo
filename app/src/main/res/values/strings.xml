@@ -607,5 +607,11 @@
     <string name="txt_InviteFriends">دعوت از دوستان</string>
     <string name="txt_SendSMS">پیامک بزنید</string>
     <string name="txt_sendSMS">ارسال پیامک</string>
+    <string name="txt_SendEmail">ارسال ایمیل</string>
+
+    <string name="txt_FindFriends">یافتن دوستان</string>
+    <string name="txt_SendSMSPayamak">ارسال پیامک</string>
+    <string name="txt_SendFreeSMS">ارسال پیامک رایگان</string>
+    <string name="txt_SMSBodyText">متن امتحانی اسمس</string>
 
 </resources>

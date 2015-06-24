@@ -1,13 +1,15 @@
 package ir.rasen.charsoo.view.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -17,7 +19,7 @@ import java.util.Hashtable;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.object.ContactEntry;
-import ir.rasen.charsoo.view.adapter.AdapterInviteFriendsBySMS;
+import ir.rasen.charsoo.view.adapter.AdapterInviteNoneCharsooContact;
 import ir.rasen.charsoo.view.interface_m.IFragInviteSelectionListener;
 import ir.rasen.charsoo.view.widgets.buttons.ButtonFont;
 import ir.rasen.charsoo.view.widgets.imageviews.RoundedSquareImageView;
@@ -29,8 +31,12 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
 
     public static final String TAG="OfferFriendInviteFriend";
 
-    int remainingSMSCount=0;
-    AdapterInviteFriendsBySMS adapterInviteFriends;
+    public String freeSMSButtonText, chargeSMSButtonText;
+    public String smsText;
+
+
+    int remainingSMSCount=5;
+    AdapterInviteNoneCharsooContact adapterInviteFriends;
     ListView listViewAllContacts;
     Hashtable<Integer,ContactEntry> selectedContactsToInvite;
     Hashtable<Integer,Integer> positionMapForSelectedContacts;
@@ -38,7 +44,7 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
     ArrayList<ContactEntry> noneCharsooContactsList;
     LinearLayout selectedContactsLayout;
     ButtonFont sendSMS;
-    LinearLayout linearLayoutProgressBar,linearLayoutSendButtonContainer;
+    LinearLayout linearLayoutSendButtonContainer;
     HorizontalScrollView selectedScrollView;
     int selectedItemHeight,selectedItemMargin;
     LinearLayout.LayoutParams params;
@@ -52,7 +58,7 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_register_offer_friends_invite_sms,
                 container, false);
-        linearLayoutProgressBar=(LinearLayout) view.findViewById(R.id.ll_ProgressBar);
+        initialStrings(getActivity());
         linearLayoutSendButtonContainer=(LinearLayout) view.findViewById(R.id.ll_SendButtonContainer);
         if (selectedContactsToInvite==null)
             selectedContactsToInvite=new Hashtable<>();
@@ -62,19 +68,23 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
 
         if (noneCharsooContactsList==null) {
             if (adapterInviteFriends == null)
-                adapterInviteFriends = new AdapterInviteFriendsBySMS(getActivity(), new ArrayList<ContactEntry>(), FragmentUserRegisterOfferFriendSMS.this);
+                adapterInviteFriends = new AdapterInviteNoneCharsooContact(getActivity(), new ArrayList<ContactEntry>(), FragmentUserRegisterOfferFriendSMS.this);
         }
         else{
             if (adapterInviteFriends==null)
-                adapterInviteFriends = new AdapterInviteFriendsBySMS(getActivity(), noneCharsooContactsList, FragmentUserRegisterOfferFriendSMS.this);
-            linearLayoutProgressBar.setVisibility(View.GONE);
+                adapterInviteFriends = new AdapterInviteNoneCharsooContact(getActivity(), noneCharsooContactsList, FragmentUserRegisterOfferFriendSMS.this);
         }
 
         selectedScrollView=(HorizontalScrollView) view.findViewById(R.id.selectedContacts);
         selectedContactsLayout=(LinearLayout) view.findViewById(R.id.ll_SelectedContactsContainer);
 
         sendSMS=(ButtonFont) view.findViewById(R.id.btn_sendSMS);
-
+        sendSMS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSendSMS();
+            }
+        });
 
 
 //        hasApplicationX=new Hashtable<>();
@@ -92,24 +102,7 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
         return view;
 
     }
-
-//    Handler handler = new Handler();
-//
-//    public void recursivelyCallHandler() {
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //We don't want to run all webservices together
-//                //first HomeFragment, second SearchFragment and last UserFragment
-//
-//                if (!selectedContactsToInvite.isEmpty())
-//                {
-//                    int i=3;
-//                }
-//                recursivelyCallHandler();
-//            }
-//        }, 500);
-//    }
+    
 
 
     @Override
@@ -137,9 +130,39 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
                 selectedContactsLayout.addView(r);
             }
 
+            if (selectedContactsToInvite.size()<=remainingSMSCount){
+                sendSMS.setText(freeSMSButtonText + "(" + Integer.toString(remainingSMSCount - selectedContactsToInvite.size()) + ")");
+            }
+            else{
+                sendSMS.setText(chargeSMSButtonText);
+            }
         }
     }
 
+    private void initialStrings(Context context){
+        freeSMSButtonText=context.getString(R.string.txt_SendFreeSMS);
+        chargeSMSButtonText=context.getString(R.string.txt_SendSMSPayamak);
+        smsText=context.getString(R.string.txt_SMSBodyText);
+    }
+
+    private void doSendSMS(){
+        if (selectedContactsToInvite.size()>0) {
+            if (selectedContactsToInvite.size() <= remainingSMSCount) {
+                // TODO: SEND SMS REQUEST TO SERVER
+            } else {
+                String numbers;
+                ArrayList<Integer> keys=new ArrayList<>(selectedContactsToInvite.keySet());
+                numbers=selectedContactsToInvite.get(keys.get(0)).contactData;
+                for (int i=1;i<keys.size();i++){
+                    numbers +=";";
+                    numbers += selectedContactsToInvite.get(keys.get(i)).contactData;
+                }
+                Intent smsIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+numbers));
+                smsIntent.putExtra("sms_body", "Body of Message");
+                startActivity(smsIntent);
+            }
+        }
+    }
 
     public void setNoneCharsooContacts(ArrayList<ContactEntry> noneCharsooContacts){
         noneCharsooContactsList=new ArrayList<>(noneCharsooContacts);
@@ -147,9 +170,7 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
 //            if (adapterInviteFriends.getCount()<=0)
             adapterInviteFriends.resetItems(noneCharsooContactsList);
         }
-        if (linearLayoutProgressBar!=null)
-            linearLayoutProgressBar.setVisibility(View.GONE);
-//        delegate.updateViews();
+
     }
 
     @Override
@@ -166,6 +187,8 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
                 }
             }
             positionMapForSelectedContacts.remove(position);
+
+
         }
         else{
             selectedContactsToInvite.put(position,noneCharsooContactsList.get(position));
@@ -184,6 +207,13 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
             selectedContactsLayout.addView(r);
         }
 
+        if (selectedContactsToInvite.size()<=remainingSMSCount){
+            sendSMS.setText(freeSMSButtonText + "(" + Integer.toString(remainingSMSCount - selectedContactsToInvite.size()) + ")");
+        }
+        else{
+            sendSMS.setText(chargeSMSButtonText);
+        }
+
         if (!selectedContactsToInvite.isEmpty()){
             selectedScrollView.setVisibility(View.VISIBLE);
             sendSMS.setVisibility(View.VISIBLE);
@@ -196,66 +226,6 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
             linearLayoutSendButtonContainer.setVisibility(View.GONE);
         }
     }
-
-
-//    private class GetInstalledApps extends AsyncTask<Void,Void,Void> {
-//
-//        ArrayList<PInfo> res;
-//        Context context;
-//
-//        public GetInstalledApps(Context c){
-//            this.context=c;
-//        }
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//            res = new ArrayList<PInfo>();
-//            List<PackageInfo> packs = context.getPackageManager().getInstalledPackages(0);
-//            for(int i=0;i<packs.size();i++) {
-//                PackageInfo p = packs.get(i);
-//                /*if ((!getSysPackages) && (p.versionName == null)) {
-//                    continue ;
-//                }*/
-//                PInfo newInfo = new PInfo();
-//                newInfo.appname = p.applicationInfo.loadLabel(context.getPackageManager()).toString();
-//                newInfo.pname = p.packageName;
-//                newInfo.versionName = p.versionName;
-//                newInfo.versionCode = p.versionCode;
-//                newInfo.icon = p.applicationInfo.loadIcon(context.getPackageManager());
-//                if ((newInfo.appname.equalsIgnoreCase(Params.WHATSAPP))||(newInfo.appname.equalsIgnoreCase(Params.LINE))||
-//                        (newInfo.appname.equalsIgnoreCase(Params.VIBER))||(newInfo.appname.equalsIgnoreCase(Params.TELEGRAM))) {
-//                    hasApplicationX.put(newInfo.appname,true);
-//                    res.add(newInfo);
-//                }
-//            }
-//
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result){
-////            if (res!=null) {
-////                for (PInfo p : res){
-////                    p.prettyPrint();
-////                }
-////            }
-//
-//            for (String s: hasApplicationX.keySet()){
-//
-//            }
-//        }
-//    }
-//
-//    class PInfo {
-//        private String appname = "";
-//        private String pname = "";
-//        private String versionName = "";
-//        private int versionCode = 0;
-//        private Drawable icon;
-//        private void prettyPrint() {
-//            Log.v(appname + "\t" + pname + "\t" + versionName + "\t" + versionCode, "");
-//        }
-//    }
 
     public int getSizeInPixelFromDp(int dpToConvert){
         Resources r = getResources();
