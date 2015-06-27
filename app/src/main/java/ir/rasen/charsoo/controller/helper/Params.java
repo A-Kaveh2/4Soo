@@ -273,6 +273,8 @@ public class Params {
     public static final String MATCHED_FIELD_DATA="MatchedFieldData";
     public static final String IS_USER_SEEN_BOOL="IsUserSeenBool";
 
+    public static final int IMAGE_MAX_WIDTH_HEIGHT_PIX=640;
+
     public static final int PROFILE_ROUNDED_THUMBNAIL_DIP=38;
     public static final boolean isTestVersion=true;
 

@@ -1,9 +1,9 @@
 .gradle
 /local.properties
-/.idea/
+/.idea/*
 
 .DS_Store
 /build
 /MaterialDesign/build
 /libs/crop-lib/build
-.iml
+/*/.iml

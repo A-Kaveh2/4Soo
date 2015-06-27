@@ -44,7 +44,8 @@ public class AddPost extends AsyncTask<Void, Void, Post> {
             webservicePOST.addParam(Params.POST_PRICE_STRING, post.price);
             webservicePOST.addParam(Params.POST_CODE_STRING, post.code);
             webservicePOST.addParam(Params.HASHTAG_LIST, Hashtag.getStringFromList(post.hashtagList));
-
+            int i=post.picture.length();
+            int j = i+1;
             serverAnswer = webservicePOST.execute(context);
             if (serverAnswer.getSuccessStatus()) {
                 post.id = Integer.valueOf(serverAnswer.getResult().getString(Params.POST_ID_INT));
