@@ -45,7 +45,6 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
     @Override
     public void notifyRefresh() {
         status = Status.REFRESHING;
-        results.clear();
         new GetBusinessReviews(ActivityBusinessReviews.this, visitorIntId,businessId, 0, getResources().getInteger(R.integer.lazy_load_limitation), ActivityBusinessReviews.this).execute();
     }
 
@@ -139,6 +138,9 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
                 adapterBusinessReview = new AdapterBusinessReview(ActivityBusinessReviews.this, results);
                 listView.setAdapter(adapterBusinessReview);
             } else if (status == Status.REFRESHING) {
+                results.clear();
+                adapterBusinessReview.notifyDataSetChanged();
+                results.addAll(temp);
                 adapterBusinessReview.notifyDataSetChanged();
                 pullToRefreshListView.onRefreshComplete();
             } else {
@@ -155,6 +157,10 @@ public class ActivityBusinessReviews extends CharsooActivity implements IWebserv
     public void getError(Integer errorCode,String callerStringID) {
         progressDialog.dismiss();
         pullToRefreshListView.onRefreshComplete();
+        if (status == Status.FIRST_TIME) {
+            adapterBusinessReview = new AdapterBusinessReview(ActivityBusinessReviews.this, results);
+            listView.setAdapter(adapterBusinessReview);
+        }
         if (errorCode != 18)
             new DialogMessage(ActivityBusinessReviews.this, ServerAnswer.getError(ActivityBusinessReviews.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
     }

@@ -147,6 +147,7 @@ public class AdapterPostTimeLine extends BaseAdapter implements IReportPost {
 
         holder.textViewDate.setText(PersianDate.getCreationDate(context, items.get(position).creationDate));
         holder.textViewBusinessIdentifier.setText(items.get(position).businessUserName);
+//        holder.textViewBusinessIdentifier.setText(items.get(position).businessName);
         holder.textViewBusinessIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

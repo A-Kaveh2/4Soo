@@ -173,22 +173,47 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
 
     }
 
-    @Override
-    public void onItemCheckBoxClicked(int position) {
-        if (selectedContactsToInvite.containsKey(position)){
-            selectedContactsToInvite.remove(position);
-            int removePosition=positionMapForSelectedContacts.get(position);
-            selectedContactsLayout.removeViewAt(removePosition);
-            for (int i:positionMapForSelectedContacts.keySet())
-            {
-                int tempInt=positionMapForSelectedContacts.get(i);
-                if (tempInt>removePosition){
-                    positionMapForSelectedContacts.put(i,tempInt-1);
-                }
+
+    private void addNewlySelectedContact(){
+
+    }
+
+    private void removeSelectedContact(int itemPosition){
+        selectedContactsToInvite.remove(itemPosition);
+        int removePosition=positionMapForSelectedContacts.get(itemPosition);
+        selectedContactsLayout.removeViewAt(removePosition);
+        for (int i:positionMapForSelectedContacts.keySet())
+        {
+            int tempInt=positionMapForSelectedContacts.get(i);
+            if (tempInt>removePosition){
+                positionMapForSelectedContacts.put(i,tempInt-1);
             }
-            positionMapForSelectedContacts.remove(position);
+        }
+        positionMapForSelectedContacts.remove(itemPosition);
 
+        if (selectedContactsToInvite.size()<=remainingSMSCount){
+            sendSMS.setText(freeSMSButtonText + "(" + Integer.toString(remainingSMSCount - selectedContactsToInvite.size()) + ")");
+        }
+        else{
+            sendSMS.setText(chargeSMSButtonText);
+        }
 
+        if (!selectedContactsToInvite.isEmpty()){
+            selectedScrollView.setVisibility(View.VISIBLE);
+            sendSMS.setVisibility(View.VISIBLE);
+            linearLayoutSendButtonContainer.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            selectedScrollView.setVisibility(View.GONE);
+            sendSMS.setVisibility(View.GONE);
+            linearLayoutSendButtonContainer.setVisibility(View.GONE);
+        }
+    }
+    @Override
+    public void onItemCheckBoxClicked(final int position) {
+        if (selectedContactsToInvite.containsKey(position)){
+            removeSelectedContact(position);
         }
         else{
             selectedContactsToInvite.put(position,noneCharsooContactsList.get(position));
@@ -196,6 +221,13 @@ public class FragmentUserRegisterOfferFriendSMS extends Fragment implements IFra
             RoundedSquareImageView r=new RoundedSquareImageView(getActivity());
 
             r.setLayoutParams(params);
+            r.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapterInviteFriends.setUncheckedViewAt(position);
+                    removeSelectedContact(position);
+                }
+            });
             if (selectedContactsToInvite.get(position).contactPhoto!=null){
                 r.setImageBitmap(selectedContactsToInvite.get(position).contactPhoto);
             }

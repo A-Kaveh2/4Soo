@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.Image_M;
+import ir.rasen.charsoo.controller.helper.LoginInfo;
 import ir.rasen.charsoo.controller.image_loader.SimpleLoader;
 import ir.rasen.charsoo.controller.object.Review;
 import ir.rasen.charsoo.controller.object.User;
+import ir.rasen.charsoo.view.dialog.PopupEditDeleteReview;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
 import ir.rasen.charsoo.view.widgets.imageviews.ImageViewCircle;
 
@@ -83,11 +86,27 @@ public class AdapterBusinessReview extends BaseAdapter  {
         holder.textViewText.setText(reviews.get(position).text);
         holder.ratingBar.setRating(reviews.get(position).rate);
 
+//        if(visitedUserId == LoginInfo.getUserId(context))
+//            holder.imgMore.setVisibility(View.VISIBLE);
+//        holder.imgMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                PopupEditDeleteReview p = new PopupEditDeleteReview(context, reviews.get(position), iWebserviceResponse, progressDialog, iReviewChange);
+//                p.show();
+//            }
+//        });
         //if(reviews.get(position).userID)
         holder.textViewIdentifier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //GetBusinessHomeInfo via comment.businessID
+                User.goUserHomeInfoPage(context,reviews.get(position).userID);
+            }
+        });
+
+        holder.imageViewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 User.goUserHomeInfoPage(context,reviews.get(position).userID);
             }
         });
@@ -100,5 +119,6 @@ public class AdapterBusinessReview extends BaseAdapter  {
         TextViewFont textViewIdentifier;
         TextViewFont textViewText;
         RatingBar ratingBar;
+        ImageView imgMore;
     }
 }

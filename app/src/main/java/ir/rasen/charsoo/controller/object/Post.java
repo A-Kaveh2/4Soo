@@ -30,6 +30,10 @@ public class Post {
     public String businessUserName;
     public String businessIdentifier;
     public int businessProfilePictureId;
+    public String businessName;
+
+    public int friendIdInt;
+    public String friendIdStr;
 
     //here is 3 types of post: ordinary post, follow announcement post and review annoucement post
     //follow announcement post fields: businessID,businessUserName,userId,userName,type
@@ -240,18 +244,21 @@ public class Post {
 
             //
             post.lastThreeComments = Comment.getFromJSONArray(jsonArrayComments);
-            //post.likeNumber = jsonObject.getInt(Params.LIKE_NUMBER);
-            //post.commentNumber = jsonObject.getInt(Params.COMMENT_NUMBER);
-            //post.shareNumber = jsonObject.getInt(Params.SHARE_NUMBER);
+            post.likeNumber = jsonObject.getInt(Params.LIKE_NUMBER);
+            post.commentNumber = jsonObject.getInt(Params.COMMENT_NUMBER);
+            post.shareNumber = jsonObject.getInt(Params.SHARE_NUMBER);
 
 
             post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
         } else if (post.type == Type.Follow) {
-            post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
-            post.userName = jsonObject.getString(Params.USER_NAME_STRING);
-
+            post.friendIdInt=jsonObject.getInt(Params.FRIEND_ID_INT);
+            post.friendIdStr=jsonObject.getString(Params.FRIEND_ID_STR);
+//            post.userId = jsonObject.getInt(Params.USER_ID_INT);//business owner' user.id
+//            post.userName = jsonObject.getString(Params.USER_NAME_STRING);
         } else if (post.type == Type.Review) {
-            String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+//            String description = jsonObject.getString(Params.POST_DESCRIPTION_STRING);
+            post.friendIdInt=jsonObject.getInt(Params.FRIEND_ID_INT);
+            post.friendIdStr=jsonObject.getString(Params.FRIEND_ID_STR);
         }
         else if (post.type ==Type.CompleteFriend){
             post.title = jsonObject.getString(Params.POST_TITLE_STRING);
@@ -267,8 +274,14 @@ public class Post {
             JSONArray jsonArrayComments = new JSONArray(comments);
 
             //
-            post.lastThreeComments = Comment.getFromJSONArray(jsonArrayComments);
             post.hashtagList = Hashtag.getListFromString(jsonObject.getString(Params.HASHTAG_LIST));
+            post.lastThreeComments = Comment.getFromJSONArray(jsonArrayComments);
+            post.likeNumber = jsonObject.getInt(Params.LIKE_NUMBER);
+            post.commentNumber = jsonObject.getInt(Params.COMMENT_NUMBER);
+            post.shareNumber = jsonObject.getInt(Params.SHARE_NUMBER);
+
+            post.friendIdInt=jsonObject.getInt(Params.FRIEND_ID_INT);
+            post.friendIdStr=jsonObject.getString(Params.FRIEND_ID_STR);
         }
         return post;
     }

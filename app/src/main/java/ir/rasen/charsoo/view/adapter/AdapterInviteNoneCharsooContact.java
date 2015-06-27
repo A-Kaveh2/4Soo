@@ -5,6 +5,8 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
@@ -26,7 +28,7 @@ public class AdapterInviteNoneCharsooContact extends BaseAdapter {
     SimpleLoader simpleLoader;
     private Hashtable<Integer,Boolean> isItemChecked;
     IFragInviteSelectionListener delegate;
-
+    int prevProsition=0;
 
 
     public AdapterInviteNoneCharsooContact(Context context, ArrayList<ContactEntry> items, IFragInviteSelectionListener delegate) {
@@ -49,6 +51,14 @@ public class AdapterInviteNoneCharsooContact extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void setUncheckedViewAt(int position){
+        try{
+            isItemChecked.put(position,false);
+            notifyDataSetChanged();
+        }catch(Exception ed){
+
+        }
+    }
 
     @Override
     public int getCount() {
@@ -60,6 +70,8 @@ public class AdapterInviteNoneCharsooContact extends BaseAdapter {
         return items.get(position);
     }
 
+
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -68,25 +80,42 @@ public class AdapterInviteNoneCharsooContact extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
 
-        Holder holder;
+        final Holder holder=new Holder();
+        View v=view;
+
+        boolean flag=false;
+        if (v==null){
+            v = LayoutInflater.from(context).inflate(R.layout.item_none_charsoo_contact, viewGroup, false);
+            flag=true;
+        }
         if (!isItemChecked.containsKey(position)) {
             isItemChecked.put(position, false);
         }
-        if (view == null) {
-            holder = new Holder();
-            view = LayoutInflater.from(context).inflate(R.layout.item_none_charsoo_contact, viewGroup, false);
+//        if (view == null) {
+//            holder = new Holder();
+//            view = LayoutInflater.from(context).inflate(R.layout.item_none_charsoo_contact, viewGroup, false);
+//
+//
+//            holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_base_adapter_item_image);
+//            holder.textViewContactName = (TextViewFont) view.findViewById(R.id.textView_ContactName);
+//            holder.textViewContaceData = (TextViewFont) view.findViewById(R.id.textView_ContactData);
+//            holder.checkBoxSelect = (CheckBox) view.findViewById(R.id.checkBox_SelectContactToInvite);
+////            holder.checkBoxSelect.setChecked(false);
+//            view.setTag(holder);
+//
+//        } else
+//            holder = (Holder) view.getTag();
+        holder.imageViewProfileImage = (ImageView) v.findViewById(R.id.imageView_base_adapter_item_image);
+        holder.textViewContactName = (TextViewFont) v.findViewById(R.id.textView_ContactName);
+        holder.textViewContaceData = (TextViewFont) v.findViewById(R.id.textView_ContactData);
+        holder.checkBoxSelect = (CheckBox) v.findViewById(R.id.checkBox_SelectContactToInvite);
 
-
-            holder.imageViewProfileImage = (ImageView) view.findViewById(R.id.imageView_base_adapter_item_image);
-            holder.textViewContactName = (TextViewFont) view.findViewById(R.id.textView_ContactName);
-            holder.textViewContaceData = (TextViewFont) view.findViewById(R.id.textView_ContactData);
-            holder.checkBoxSelect = (CheckBox) view.findViewById(R.id.checkBox_SelectContactToInvite);
-//            holder.checkBoxSelect.setChecked(false);
-            view.setTag(holder);
-
-        } else
-            holder = (Holder) view.getTag();
-        holder.checkBoxSelect.setChecked(isItemChecked.get(position));
+        holder.checkBoxSelect.post(new Runnable() {
+            @Override
+            public void run() {
+                holder.checkBoxSelect.setChecked(isItemChecked.get(position));
+            }
+        });
         if (items.get(position).contactPhoto != null)
             holder.imageViewProfileImage.setImageBitmap(items.get(position).contactPhoto);
 //        else;
@@ -106,13 +135,12 @@ public class AdapterInviteNoneCharsooContact extends BaseAdapter {
         holder.textViewContactName.setText(items.get(position).fullName);
         holder.textViewContaceData.setText(items.get(position).contactData);
 
-        try {
 
-
-        } catch (Exception e) {
-            String s = e.getMessage();
-        }
-        return view;
+        if (position>prevProsition){
+            prevProsition=position;
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        v.startAnimation(animation);}
+        return v;
     }
 
 

@@ -94,18 +94,22 @@ public class ActivityGallery extends CharsooActivity {
 //            String filePath = getRealPathFromURI(uri);
             try {
                 String filePath = getPath(this, uri);
-                intent.putExtra(CropImage.IMAGE_PATH, filePath);
+                if (filePath==null)
+                    filePath=getRealPathFromURI(uri);
+                if (filePath!=null) {
+                    intent.putExtra(CropImage.IMAGE_PATH, filePath);
 
-                // allow CropImage activity to rescale image
-                intent.putExtra(CropImage.SCALE, true);
+                    // allow CropImage activity to rescale image
+                    intent.putExtra(CropImage.SCALE, true);
 
-                // if the aspect ratio is fixed to ratio 1/1
-                intent.putExtra(CropImage.ASPECT_X, 1);
-                intent.putExtra(CropImage.ASPECT_Y, 1);
+                    // if the aspect ratio is fixed to ratio 1/1
+                    intent.putExtra(CropImage.ASPECT_X, 1);
+                    intent.putExtra(CropImage.ASPECT_Y, 1);
 
-                // start activity CropImage with certain request code and listen
-                // for result
-                startActivityForResult(intent, PIC_CROP);
+                    // start activity CropImage with certain request code and listen
+                    // for result
+                    startActivityForResult(intent, PIC_CROP);
+                }
             }
             catch(Exception e1){
 
@@ -146,6 +150,20 @@ public class ActivityGallery extends CharsooActivity {
         return mediaFile;
     }
 
+    private String getRealPathFromURI(Uri contentURI) {
+        String result = "";
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            if (idx >= 0)
+                result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
     /*private String getRealPathFromURI(Uri contentURI) {
         String result;
         Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);

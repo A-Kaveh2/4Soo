@@ -122,6 +122,8 @@ public class Params {
     public static String PICTURE_SMALL= "PictureSmall";
     public static String DESCRIPTION_STRING = "Description";
     public static String POST_DESCRIPTION_STRING = "Description";
+    public static String FRIEND_ID_INT="FriendUser_Id";
+    public static String FRIEND_ID_STR="FriendUserId";
 
     public static String POST_PRICE_STRING = "Price";
     public static String POST_CODE_STRING = "Code";

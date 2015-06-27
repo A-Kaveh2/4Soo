@@ -268,37 +268,18 @@ public class FragmentUserRegisterOfferFriendInvite extends Fragment implements I
         }
     }
 
-    @Override
-    public void onItemCheckBoxClicked(int position) {
-        if (selectedContactsToInvite.containsKey(position)){
-            selectedContactsToInvite.remove(position);
-            int removePosition=positionMapForSelectedContacts.get(position);
-            selectedContactsContainer.removeViewAt(removePosition);
-            for (int i:positionMapForSelectedContacts.keySet())
-            {
-                int tempInt=positionMapForSelectedContacts.get(i);
-                if (tempInt>removePosition){
-                    positionMapForSelectedContacts.put(i,tempInt-1);
-                }
+    private void removeSelectedContact(int itemPosition){
+        selectedContactsToInvite.remove(itemPosition);
+        int removePosition=positionMapForSelectedContacts.get(itemPosition);
+        selectedContactsContainer.removeViewAt(removePosition);
+        for (int i:positionMapForSelectedContacts.keySet())
+        {
+            int tempInt=positionMapForSelectedContacts.get(i);
+            if (tempInt>removePosition){
+                positionMapForSelectedContacts.put(i,tempInt-1);
             }
-            positionMapForSelectedContacts.remove(position);
         }
-        else{
-            selectedContactsToInvite.put(position,noneCharsooContactList.get(position));
-            positionMapForSelectedContacts.put(position,selectedContactsContainer.getChildCount());
-            RoundedSquareImageView r=new RoundedSquareImageView(getActivity());
-
-            r.setLayoutParams(params);
-            if (selectedContactsToInvite.get(position).contactPhoto!=null){
-                r.setImageBitmap(selectedContactsToInvite.get(position).contactPhoto);
-            }
-            else
-            {
-//                r.setImageDrawable(selectedContactsToInvite.get(position).contactPhotoDrawable);
-
-            }
-            selectedContactsContainer.addView(r);
-        }
+        positionMapForSelectedContacts.remove(itemPosition);
 
         if (!selectedContactsToInvite.isEmpty()){
             selectedContactsScrollView.setVisibility(View.VISIBLE);
@@ -309,6 +290,47 @@ public class FragmentUserRegisterOfferFriendInvite extends Fragment implements I
             selectedContactsScrollView.setVisibility(View.GONE);
 
         }
+    }
+
+    @Override
+    public void onItemCheckBoxClicked(final int position) {
+        if (selectedContactsToInvite.containsKey(position)){
+            removeSelectedContact(position);
+        }
+        else{
+            selectedContactsToInvite.put(position,noneCharsooContactList.get(position));
+            positionMapForSelectedContacts.put(position,selectedContactsContainer.getChildCount());
+            RoundedSquareImageView r=new RoundedSquareImageView(getActivity());
+
+            r.setLayoutParams(params);
+            r.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    noneCharsooEmailContactsAdapter.setUncheckedViewAt(position);
+                    removeSelectedContact(position);
+                }
+            });
+            if (selectedContactsToInvite.get(position).contactPhoto!=null){
+                r.setImageBitmap(selectedContactsToInvite.get(position).contactPhoto);
+            }
+            else
+            {
+//                r.setImageDrawable(selectedContactsToInvite.get(position).contactPhotoDrawable);
+
+            }
+            selectedContactsContainer.addView(r);
+
+            if (!selectedContactsToInvite.isEmpty()){
+                selectedContactsScrollView.setVisibility(View.VISIBLE);
+
+            }
+            else
+            {
+                selectedContactsScrollView.setVisibility(View.GONE);
+
+            }
+        }
+
     }
 
 
