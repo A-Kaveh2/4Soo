@@ -558,6 +558,8 @@ public class ActivityMain extends CharsooActivity implements View.OnClickListene
         ((TextViewFont) findViewById(R.id.drawer_user_id)).setText(user.userIdentifier);
     }
     public void toHome(View view) {
+        if(getFragmentSearch().back())
+            return;
         setSelection(FRAG_HOME);
     }
     public void toSearch(View view) {

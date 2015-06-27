@@ -108,6 +108,16 @@ public class FragmentSearchUser extends Fragment implements IWebserviceResponse 
                 }
             }
         });
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                ((ActivityMain) getActivity()).getFragmentSearch().onScroll(firstVisibleItem);
+            }
+        });
     }
 
     // LOAD MORE DATA

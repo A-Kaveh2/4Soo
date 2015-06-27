@@ -153,4 +153,6 @@
     <dimen name="float_button">56dp</dimen>
 
     <dimen name="search_header_height">55dp</dimen>
+    <dimen name="search_header_place_height">45dp</dimen>
+    <dimen name="search_headers_height">107dp</dimen>
 </resources>

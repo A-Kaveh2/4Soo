@@ -7,53 +7,100 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:visibility="visible" />
+
+    <com.google.android.gms.maps.MapView
+        android:id="@id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@id/view_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/material_blue_transparent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <ir.rasen.charsoo.view.widgets.EditTextFont
+            android:id="@id/edt_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/material_blue"
-            android:orientation="vertical">
-
-            <ir.rasen.charsoo.view.widgets.EditTextFont
-                android:id="@id/edt_search"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/search_header_height"
-                android:layout_marginBottom="@dimen/activity_horizontal_margin_1of4"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
-                android:layout_marginRight="@dimen/activity_horizontal_margin_half"
-                android:layout_marginTop="@dimen/activity_horizontal_margin_1of4"
-                android:background="@drawable/bg_edittext"
-                android:drawablePadding="@dimen/activity_horizontal_margin"
-                android:drawableRight="@android:drawable/ic_menu_search"
-                android:gravity="right|center_vertical"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLength="@integer/restriction_identifier_length"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:singleLine="true" />
-
-        </LinearLayout>
+            android:layout_height="@dimen/search_header_height"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin_half"
+            android:layout_marginRight="@dimen/activity_horizontal_margin_half"
+            android:layout_marginTop="@dimen/activity_horizontal_margin_1of4"
+            android:background="@drawable/bg_edittext"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:drawableRight="@mipmap/ic_search_drw"
+            android:gravity="right|center_vertical"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLength="@integer/restriction_identifier_length"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:singleLine="true" />
 
         <ir.rasen.charsoo.view.widgets.PagerSlidingTabStrip
             android:id="@id/tabs"
             android:layout_width="match_parent"
             android:layout_height="@dimen/btn_height"
-            android:background="@color/material_blue"
             app:pstsFitToScreen="true" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible" />
     </LinearLayout>
 
-    <include layout="@layout/wait" />
+    <LinearLayout
+        android:id="@id/view_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/material_blue_transparent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <ir.rasen.charsoo.view.widgets.buttons.ButtonFontStandard
+            android:id="@id/edt_place"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_header_place_height"
+            android:background="@drawable/bg_edittext"
+            android:drawableLeft="@mipmap/ic_map"
+            android:drawablePadding="@dimen/activity_horizontal_margin"
+            android:drawableRight="@mipmap/ic_explore"
+            android:gravity="right|center_vertical"
+            android:hint="@string/nearby"
+            android:textSize="@dimen/font_small_x" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_header_place_height"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_minimum_x2"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center"
+                android:hint="@string/subcategory" />
+
+            <ir.rasen.charsoo.view.widgets.TextViewFont
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_minimum_x2"
+                android:layout_weight="1"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center"
+                android:hint="@string/category" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        layout="@layout/wait"
+        android:visibility="gone" />
 
 </RelativeLayout>

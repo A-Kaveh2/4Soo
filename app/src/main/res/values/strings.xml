@@ -45,7 +45,8 @@
     <string name="products">محصولات</string>
     <string name="product">محصول</string>
     <string name="enter_search_keywords">متنی را جهت جستجو وارد نمایید.</string>
-    <string name="no_location_found">مکان شما تشخیص داده نشده است, لطفأ مکانی را جهت جستجو انتخاب نمایید.</string>
+    <string name="activate_location_services">آیا مایلید جهت تشخیص موقعیت شما، سرویس مکان یابی گوشی خود را فعال کنید؟</string>
+    <string name="no_location_found">مکانی انتخاب نشده است، آیا مایلید از روی نقشه مکانی را انتخاب کنید؟</string>
 
     <!-- PROFILE -->
     <string name="profile">حساب کاربری</string>
@@ -158,12 +159,13 @@
     <string name="err_permission_friends">کاربر مورد نظر اجازه مشاهده لیست دوستان خود را به دوستان اعطا نکرده است</string>
     <string name="err_permission_reviews">کاربر مورد نظر اجازه مشاهده لیست نقدهای انجام شده خود را به دوستان اعطا نکرده است</string>
     <string name="err_map_loading">خطای بارگزاری نقشه</string>
-    <string name="err_map_loading_description">جستجوی کسب و کارها نیازمند مشخص کردن مکان کسب و کار بر روی نقشه است. جهت نمایش نقشه نرم افزار Google Play Store را نصب و یا به روز رسانی کنید و مجددا سعی کنید.</string>
+    <string name="err_map_loading_description">جهت نمایش نقشه نرم افزار Google Play Store را نصب و یا به روز رسانی کنید و مجددا سعی کنید.</string>
     <string name="err">خطا</string>
     <string name="err_location_service_title">سرویس های مکان یابی</string>
     <string name="err_fill_search_box">لطفا متن جستجو را وارد کنید.</string>
     <string name="err_location_service_body">تنظیمات مربوط به سرویس های مکان یابی فعال نشده است. آیا مایل به مشاهده تنظیمات هستید؟</string>
     <string name="ops">ناممکن</string>
+    <string name="install_now">نصب نرم افزار</string>
 
     <!-- EDIT -->
     <string name="share">به اشتراک گذاری</string>
@@ -471,7 +473,7 @@
     <string name="map">نمایش آدرس</string>
     <string name="from">از</string>
     <string name="until">تا</string>
-    <string name="google_maps_key">AIzaSyCFGTYo_hUDls88JpynlDMVR0-jSdoUJdE</string>
+    <string name="google_maps_key">AIzaSyBq8JuEKGDPjIjqgh39Qv5IklMEirkkSJ0</string>
     <string name="title_activity_maps">Map</string>
     <string name="sample_latitude">31.825265</string>
     <string name="sample_longitude">54.122469</string>

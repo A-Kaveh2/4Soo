@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 public class FragmentSearchBusiness extends Fragment implements IWebserviceResponse {
     public static final String TAG = "FragmentSearchBusiness";
 
+    private static String SPACE_HEIGHT = "space_height";
 
     private ListView listView;
     private AdapterBusinessSearchResult adapter;
@@ -85,6 +87,16 @@ public class FragmentSearchBusiness extends Fragment implements IWebserviceRespo
         listView = (ListView) view.findViewById(R.id.listView);
         AdapterSpecialBusinesses adapterSpecialBusinesses = new AdapterSpecialBusinesses(getActivity(), businesses);
         listView.setAdapter(adapterSpecialBusinesses);
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                ((ActivityMain) getActivity()).getFragmentSearch().onScroll(firstVisibleItem);
+            }
+        });
     }
 
     // LOAD MORE DATA
