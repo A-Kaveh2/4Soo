@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -10,9 +9,10 @@ import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.helper.LoginInfo;
+import ir.rasen.charsoo.model.user.UnFollowBusiness;
 import ir.rasen.charsoo.view.interface_m.IUnfollowBusiness;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.model.user.UnFollowBusiness;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class DialogUnfollowBusinessConfirmation extends MyDialogOkCancel {
@@ -20,7 +20,7 @@ public class DialogUnfollowBusinessConfirmation extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogUnfollowBusinessConfirmation(final Context context, final int buisnessId, final ProgressDialog progressDialog, final IUnfollowBusiness iUnfollowBusiness ) {
+    public DialogUnfollowBusinessConfirmation(final Context context, final int buisnessId, final WaitDialog progressDialog, final IUnfollowBusiness iUnfollowBusiness ) {
         super(context, context.getResources().getString(R.string.popup_warning),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.unfollow));

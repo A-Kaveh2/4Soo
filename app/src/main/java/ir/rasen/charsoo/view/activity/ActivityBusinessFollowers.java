@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,13 +22,14 @@ import ir.rasen.charsoo.view.adapter.AdapterUsersFromBAItems;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
 
 
 public class ActivityBusinessFollowers extends CharsooActivity implements IWebserviceResponse, IPullToRefresh {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int businessId;
     AdapterUsersFromBAItems adapterFollowers;
     ListView listView;
@@ -75,7 +76,7 @@ public class ActivityBusinessFollowers extends CharsooActivity implements IWebse
         followers = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         pullToRefreshListView = new PullToRefreshList(this, (PullToRefreshListView) findViewById(R.id.pull_refresh_list), ActivityBusinessFollowers.this);

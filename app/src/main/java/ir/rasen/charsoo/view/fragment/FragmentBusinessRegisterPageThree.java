@@ -1,10 +1,10 @@
 package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +32,7 @@ import ir.rasen.charsoo.view.activity.ActivityMapChoose;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.buttons.ButtonFont;
 
 /**
@@ -55,7 +56,7 @@ public class FragmentBusinessRegisterPageThree extends Fragment implements IWebs
 
     String selectedState, selectedCity, streetAddress="";
     List<String> stateList, cityList;
-    private android.app.ProgressDialog progressDialog;
+    private WaitDialog progressDialog;
 
 
     @Override
@@ -64,7 +65,7 @@ public class FragmentBusinessRegisterPageThree extends Fragment implements IWebs
         View view = inflater.inflate(R.layout.fragment_business_register_page_three,
                 container, false);
 
-        progressDialog = new android.app.ProgressDialog(getActivity());
+        progressDialog = new WaitDialog(getActivity());
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         spinnerStates = (Spinner) view.findViewById(R.id.spinner_States);

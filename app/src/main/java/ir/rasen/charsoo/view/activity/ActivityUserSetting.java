@@ -1,10 +1,12 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import ir.rasen.charsoo.R;
@@ -16,6 +18,7 @@ import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.model.user.UpdateSetting;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 import ir.rasen.charsoo.view.widgets.checkbox.CheckBox;
 
@@ -23,7 +26,7 @@ import ir.rasen.charsoo.view.widgets.checkbox.CheckBox;
 public class ActivityUserSetting extends CharsooActivity implements IWebserviceResponse {
 
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     MyApplication myApplication;
     private Permission permission;
 
@@ -35,44 +38,85 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
         setTitle(getString(R.string.settings));
 
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
-        final CheckBox checkBoxFriends, checkBoxReviews, checkBoxBusinesses;
-        checkBoxBusinesses = (CheckBox) findViewById(R.id.checkBox_businesses);
-        checkBoxFriends = (CheckBox) findViewById(R.id.checkBox_friends);
-        checkBoxReviews = (CheckBox) findViewById(R.id.checkBox_reviews);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) { // on pre-lollipop devices
+            final CheckBox
+                    checkBoxFriends = new CheckBox(this, null), checkBoxReviews = new CheckBox(this, null), checkBoxBusinesses = new CheckBox(this, null);
 
-        myApplication = (MyApplication)getApplication();
-        permission = myApplication.getPermission();
-        checkBoxBusinesses.post(new Runnable() {
-            @Override
-            public void run() {
-                checkBoxBusinesses.setChecked(permission.followedBusiness);
-            }
-        });
-        checkBoxFriends.post(new Runnable() {
-            @Override
-            public void run() {
-                checkBoxFriends.setChecked(permission.friends);
-            }
-        });
-        checkBoxReviews.post(new Runnable() {
-            @Override
-            public void run() {
-                checkBoxReviews.setChecked(permission.reviews);
-            }
-        });
+            ((FrameLayout) findViewById(R.id.checkBox_businesses)).addView(checkBoxBusinesses);
+            ((FrameLayout) findViewById(R.id.checkBox_friends)).addView(checkBoxFriends);
+            ((FrameLayout) findViewById(R.id.checkBox_reviews)).addView(checkBoxReviews);
+
+            myApplication = (MyApplication) getApplication();
+            permission = myApplication.getPermission();
+            checkBoxBusinesses.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkBoxBusinesses.setChecked(permission.followedBusiness);
+                }
+            });
+            checkBoxFriends.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkBoxFriends.setChecked(permission.friends);
+                }
+            });
+            checkBoxReviews.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkBoxReviews.setChecked(permission.reviews);
+                }
+            });
 
 
-        (findViewById(R.id.btn_submit)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                progressDialog.show();
-                permission = new Permission(checkBoxBusinesses.isCheck(), checkBoxFriends.isCheck(), checkBoxReviews.isCheck());
-                new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), permission, ActivityUserSetting.this).execute();
-            }
-        });
+            (findViewById(R.id.btn_submit)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    progressDialog.show();
+                    permission = new Permission(checkBoxBusinesses.isCheck(), checkBoxFriends.isCheck(), checkBoxReviews.isCheck());
+                    new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), permission, ActivityUserSetting.this).execute();
+                }
+            });
+        } else { // on lollipop devices
+            final android.widget.CheckBox
+                    checkBoxFriends = new android.widget.CheckBox(this, null), checkBoxReviews = new android.widget.CheckBox(this, null), checkBoxBusinesses = new android.widget.CheckBox(this, null);
+
+            ((FrameLayout) findViewById(R.id.checkBox_businesses)).addView(checkBoxBusinesses);
+            ((FrameLayout) findViewById(R.id.checkBox_friends)).addView(checkBoxFriends);
+            ((FrameLayout) findViewById(R.id.checkBox_reviews)).addView(checkBoxReviews);
+            myApplication = (MyApplication) getApplication();
+            permission = myApplication.getPermission();
+            checkBoxBusinesses.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkBoxBusinesses.setChecked(permission.followedBusiness);
+                }
+            });
+            checkBoxFriends.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkBoxFriends.setChecked(permission.friends);
+                }
+            });
+            checkBoxReviews.post(new Runnable() {
+                @Override
+                public void run() {
+                    checkBoxReviews.setChecked(permission.reviews);
+                }
+            });
+
+
+            (findViewById(R.id.btn_submit)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    progressDialog.show();
+                    permission = new Permission(checkBoxBusinesses.isChecked(), checkBoxFriends.isChecked(), checkBoxReviews.isChecked());
+                    new UpdateSetting(ActivityUserSetting.this, LoginInfo.getUserId(ActivityUserSetting.this), permission, ActivityUserSetting.this).execute();
+                }
+            });
+        }
     }
 
 
@@ -106,8 +150,8 @@ public class ActivityUserSetting extends CharsooActivity implements IWebserviceR
     }
 
     @Override
-    public void getError(Integer errorCode,String callerStringID) {
+    public void getError(Integer errorCode, String callerStringID) {
         progressDialog.dismiss();
-        new DialogMessage(ActivityUserSetting.this, ServerAnswer.getError(ActivityUserSetting.this, errorCode,callerStringID+">"+this.getLocalClassName())).show();
+        new DialogMessage(ActivityUserSetting.this, ServerAnswer.getError(ActivityUserSetting.this, errorCode, callerStringID + ">" + this.getLocalClassName())).show();
     }
 }

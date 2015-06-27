@@ -10,13 +10,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import ir.rasen.charsoo.R;
-import ir.rasen.charsoo.view.fragment.FragmentSearchBusiness;
-import ir.rasen.charsoo.view.fragment.FragmentSearchProduct;
-import ir.rasen.charsoo.view.fragment.FragmentSearchUser;
+import ir.rasen.charsoo.view.fragment.FragmentSearch;
+import ir.rasen.charsoo.view.fragment.search.FragmentSearchBusiness;
+import ir.rasen.charsoo.view.fragment.search.FragmentSearchProduct;
+import ir.rasen.charsoo.view.fragment.search.FragmentSearchUser;
 
 public class AdapterSearchTabs extends FragmentPagerAdapter {
     private static int NUM_ITEMS = 3;
     private Context context;
+
+    private FragmentSearchProduct fragmentSearchProduct;
+    private FragmentSearchUser fragmentSearchUser;
+    private FragmentSearchBusiness fragmentSearchBusiness;
 
     public AdapterSearchTabs(FragmentManager fragmentManager, Context context) {
         super(fragmentManager);
@@ -34,11 +39,14 @@ public class AdapterSearchTabs extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return FragmentSearchProduct.newInstance();
+                fragmentSearchProduct = FragmentSearchProduct.newInstance();
+                return fragmentSearchProduct;
             case 1:
-                return FragmentSearchBusiness.newInstance();
+                fragmentSearchBusiness = FragmentSearchBusiness.newInstance();
+                return fragmentSearchBusiness;
             case 2:
-                return FragmentSearchUser.newInstance();
+                fragmentSearchUser = FragmentSearchUser.newInstance();
+                return fragmentSearchUser;
             default:
                 return null;
         }
@@ -53,6 +61,19 @@ public class AdapterSearchTabs extends FragmentPagerAdapter {
                 return context.getString(R.string.businesses);
             case 2:
                 return context.getString(R.string.users);
+            default:
+                return null;
+        }
+    }
+
+    public Fragment getFragment(FragmentSearch.SearchType searchType) {
+        switch (searchType) {
+            case PRODUCTS:
+                return fragmentSearchProduct;
+            case BUSINESSES:
+                return fragmentSearchBusiness;
+            case USERS:
+                return fragmentSearchUser;
             default:
                 return null;
         }

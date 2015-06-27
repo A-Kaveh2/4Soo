@@ -70,16 +70,18 @@ public class AdapterSpecialBusinesses extends BaseAdapter {
 
         if(holder!=null) {
             Business business = items.get(position);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Business.goBusinessHomeInfoPage(activity,items.get(position).id);
+                }
+            });
+
             if (business.coverPictureId == 0 && business.coverPicture != null && !business.coverPicture.equals(""))
                 holder.imageView.setImageBitmap(Image_M.getBitmapFromString(business.coverPicture));
             else
                 simpleLoader.loadImage(business.coverPictureId, Image_M.MEDIUM, Image_M.ImageType.POST, holder.imageView, holder.progressBar);
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Business.goBusinessHomeInfoPage(activity,items.get(position).id);
-                }
-            });
             holder.name.setText(
                     business.name != null ? business.name : ""
             );

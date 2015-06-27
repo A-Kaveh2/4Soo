@@ -1,18 +1,16 @@
 package ir.rasen.charsoo.view.fragment;
 
-import android.app.ProgressDialog;
+
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
@@ -25,6 +23,7 @@ import ir.rasen.charsoo.view.interface_m.IGetContactListener;
 import ir.rasen.charsoo.view.interface_m.IGetInstalledAppsListener;
 import ir.rasen.charsoo.view.widgets.CustomViewPager;
 import ir.rasen.charsoo.view.widgets.SlidingTabLayout;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 /**
@@ -43,7 +42,7 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
     //    static final String LOG_TAG = "FragmentContainer";
     public ArrayList<ContactEntry> noneCharsooEmailContactsList, noneCharsooPhoneNumberContactsList, charsooContactsList;
     ArrayList<PackageInfoCustom> applicationList;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
 
     boolean haveContactList=false;
     /**
@@ -69,7 +68,7 @@ public class FragmentUserRegisterOfferFriend extends Fragment implements IGetCon
                              Bundle savedInstanceState) {
 
         context=getActivity();
-        progressDialog = new ProgressDialog(context);
+        progressDialog = new WaitDialog(context);
         progressDialog.setMessage(context.getResources().getString(R.string.please_wait));
         fragAdd=new FragmentUserRegisterOfferFriendAdd();
         fragSMS=new FragmentUserRegisterOfferFriendSMS();

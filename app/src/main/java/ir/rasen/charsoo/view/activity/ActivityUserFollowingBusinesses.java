@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,12 +20,13 @@ import ir.rasen.charsoo.model.user.GetFollowingBusinesses;
 import ir.rasen.charsoo.view.adapter.AdapterUserFollowingBusinesses;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityUserFollowingBusinesses extends CharsooActivity implements IWebserviceResponse {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int visitedUserId;
     AdapterUserFollowingBusinesses adapterFollowingBusinesses;
     ListView listView;
@@ -56,7 +57,7 @@ public class ActivityUserFollowingBusinesses extends CharsooActivity implements 
         businesses = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
 

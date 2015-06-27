@@ -5,13 +5,12 @@ package ir.rasen.charsoo.view.activity;
  */
 
 
-import android.support.v4.app.FragmentManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -39,6 +38,7 @@ import ir.rasen.charsoo.view.fragment.FragmentBusinessRegisterPageTwo;
 import ir.rasen.charsoo.view.interface_m.IGetCallForTakePicture;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFontActionBarTitle;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivityBusinessRegister extends CharsooActivity implements IWebserviceResponse, IGetCallForTakePicture {
@@ -51,7 +51,7 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
     FragmentBusinessRegisterPageOne fragOne;
     FragmentBusinessRegisterPageTwo fragTwo;
     FragmentBusinessRegisterPageThree fragThree;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     String filePath;
     String currentFragment;
 
@@ -74,7 +74,7 @@ public class ActivityBusinessRegister extends CharsooActivity implements IWebser
         View v = inflater.inflate(R.layout.layout_action_bar_home, null);
 
         unregisteredBusiness=new Business();
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
 

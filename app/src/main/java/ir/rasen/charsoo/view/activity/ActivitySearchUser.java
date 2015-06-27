@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,12 +19,13 @@ import ir.rasen.charsoo.model.search.SearchUser;
 import ir.rasen.charsoo.view.adapter.AdapterUsersFromBAItems;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivitySearchUser extends CharsooActivity implements IWebserviceResponse {
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     int visitedUserId;
     AdapterUsersFromBAItems adapterUserSearchResult;
     ListView listView;
@@ -51,7 +52,7 @@ public class ActivitySearchUser extends CharsooActivity implements IWebserviceRe
         results = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         listView = (ListView) findViewById(R.id.listView);
@@ -111,6 +112,7 @@ public class ActivitySearchUser extends CharsooActivity implements IWebserviceRe
         listFooterView.setVisibility(View.VISIBLE);
 
         new SearchUser(ActivitySearchUser.this,searchKeyWord,results.get(results.size()-1).getId(),getResources().getInteger(R.integer.lazy_load_limitation),ActivitySearchUser.this).execute();
+
 
     }
 

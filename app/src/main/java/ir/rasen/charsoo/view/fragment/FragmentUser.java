@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.fragment;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +34,7 @@ import ir.rasen.charsoo.view.interface_m.IUpdateUserProfile;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
 import ir.rasen.charsoo.view.widgets.GridViewUser;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
@@ -43,7 +43,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
     public static final String TAG = "FragmentUser";
     private HFGridView gridView;
     private int visitedUserId;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     private User user;
     GridViewUser gridViewUser;
     static IUpdateUserProfile iUpdateUserProfile;
@@ -67,7 +67,7 @@ public class FragmentUser extends Fragment implements IWebserviceResponse, IUpda
             iUpdateUserProfile = this;
 
             //set progress dialog
-            progressDialog = new ProgressDialog(getActivity());
+            progressDialog = new WaitDialog(getActivity());
             progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
             pullToRefreshGridView = new PullToRefreshGrid(getActivity(), (PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF), FragmentUser.this);

@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.fragment;
 
-import android.app.ProgressDialog;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -30,7 +30,6 @@ import ir.rasen.charsoo.controller.object.MyApplication;
 import ir.rasen.charsoo.controller.object.Post;
 import ir.rasen.charsoo.model.NetworkConnectivityReciever;
 import ir.rasen.charsoo.model.post.GetTimeLinePost;
-//import ir.rasen.charsoo.model.post.GetTimeLinePosts;
 import ir.rasen.charsoo.model.post.GetTimeLinePosts_new;
 import ir.rasen.charsoo.view.adapter.AdapterPostTimeLine;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
@@ -38,14 +37,17 @@ import ir.rasen.charsoo.view.interface_m.IGetNewTimeLinePost;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.interface_m.NetworkStateChangeListener;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.buttons.FloatButton;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshListView;
+
+//import ir.rasen.charsoo.model.post.GetTimeLinePosts;
 
 public class FragmentHome extends Fragment implements IWebserviceResponse, IPullToRefresh, IGetNewTimeLinePost,NetworkStateChangeListener {
 
     public static final String TAG="FragmentHome";
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     AdapterPostTimeLine adapterPostTimeLine;
     ListView listView;
     ArrayList<Post> results;
@@ -90,8 +92,7 @@ public class FragmentHome extends Fragment implements IWebserviceResponse, IPull
         results = new ArrayList<>();
         status = Status.FIRST_TIME;
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Loading TimeLine");
+        progressDialog = new WaitDialog(getActivity());
 
         pullToRefreshListView = new PullToRefreshList(getActivity(), (PullToRefreshListView) view.findViewById(R.id.pull_refresh_list), FragmentHome.this);
         listView = pullToRefreshListView.getListView();

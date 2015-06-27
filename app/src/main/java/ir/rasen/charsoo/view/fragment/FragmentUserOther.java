@@ -1,8 +1,7 @@
 package ir.rasen.charsoo.view.fragment;
 
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IPullToRefresh;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.GridViewUserOther;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.HFGridView;
 import ir.rasen.charsoo.view.widgets.pull_to_refresh.PullToRefreshGridViewWithHeaderAndFooter;
 
@@ -31,7 +31,7 @@ public class FragmentUserOther extends Fragment implements IWebserviceResponse, 
 
     private HFGridView gridView;
     private int visitedUserId;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     private User user;
     GridViewUserOther gridViewUser;
     ArrayList<Post> posts = new ArrayList<>();
@@ -73,7 +73,7 @@ public class FragmentUserOther extends Fragment implements IWebserviceResponse, 
         visitedUserId = parentActivity.getIntent().getExtras().getInt(Params.VISITED_USER_ID);
 
         //set progress dialog
-        progressDialog = new ProgressDialog(parentActivity);
+        progressDialog = new WaitDialog(parentActivity);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         pullToRefreshGridView = new PullToRefreshGrid(parentActivity, (PullToRefreshGridViewWithHeaderAndFooter) view.findViewById(R.id.gridView_HF), FragmentUserOther.this);

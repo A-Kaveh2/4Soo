@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -18,13 +18,14 @@ import ir.rasen.charsoo.model.business.GetBusinessContactInfo;
 import ir.rasen.charsoo.view.dialog.DialogMessage;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
 public class ActivityBusinessContactInfo extends CharsooActivity implements IWebserviceResponse {
 
 
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     Business business;
 
     @Override
@@ -33,7 +34,7 @@ public class ActivityBusinessContactInfo extends CharsooActivity implements IWeb
         setContentView(R.layout.activity_business_contact_info);
         setTitle(getResources().getString(R.string.call_info));
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         progressDialog.show();

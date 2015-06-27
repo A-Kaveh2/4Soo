@@ -31,5 +31,10 @@
     <item name="user_remove" type="id" />
     <item name="waitView" type="id" />
     <item name="waitView_status" type="id" />
+    <item name="search_status" type="id" />
+    <item name="edt_place" type="id" />
+    <item name="mapView" type="id" />
+    <item name="view_filter" type="id" />
+    <item name="view_header" type="id" />
 
 </resources>

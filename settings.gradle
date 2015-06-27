@@ -1,2 +1,2 @@
-include ':app', ':MaterialDesign', ':libs'
+include ':app', ':libs'
 include ':libs:crop-lib'

@@ -1,6 +1,6 @@
 package ir.rasen.charsoo.view.activity;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,6 +34,7 @@ import ir.rasen.charsoo.view.dialog.PopupSelectCameraGallery;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.EditTextFontPasteDisabled;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 
@@ -42,7 +43,7 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
 
     EditTextFont editTextTitle, editTextDescription, editTextCode, editTextHashtags;
     EditTextFontPasteDisabled editTextPrice;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     ImageView imageViewPostPicture;
     String filePath, postPictureString;
     int businessId;
@@ -64,7 +65,7 @@ public class ActivityPostAddEdit extends CharsooActivity implements View.OnClick
         }
         postPictureString = "";
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         imageViewPostPicture = (ImageView) findViewById(R.id.imageView_user_picture);

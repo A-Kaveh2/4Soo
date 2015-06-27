@@ -2,10 +2,9 @@ package ir.rasen.charsoo.view.fragment;
 
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
-import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -39,11 +38,12 @@ import ir.rasen.charsoo.view.interface_m.ISelectCategory;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.EditTextFont;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 public class FragmentBusinessEditBaseInfo extends Fragment implements IWebserviceResponse,ISelectCategory {
     public static final String TAG="FragmentBusinessEditBaseInfo";
 
-    private ProgressDialog progressDialog;
+    private WaitDialog progressDialog;
     private EditTextFont editTextName, editTextIdentifier, editTextDescription, editTextHashtags;
     TextViewFont textViewCategories,textViewSubcategories;
     private MyApplication myApplication;
@@ -80,7 +80,7 @@ public class FragmentBusinessEditBaseInfo extends Fragment implements IWebservic
         iSelectCategory = this;
         isEditing = getArguments().getBoolean(Params.IS_EDITTING);
 
-        progressDialog = new ProgressDialog(getActivity());
+        progressDialog = new WaitDialog(getActivity());
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
 
         editTextDescription = (EditTextFont) view.findViewById(R.id.edt_description);

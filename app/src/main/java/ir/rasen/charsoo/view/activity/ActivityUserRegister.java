@@ -1,12 +1,11 @@
 package ir.rasen.charsoo.view.activity;
 
 
-import android.support.v4.app.FragmentTransaction;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +29,7 @@ import ir.rasen.charsoo.view.fragment.FragmentUserRegisterPageTwo;
 import ir.rasen.charsoo.view.interface_m.IGetContactListener;
 import ir.rasen.charsoo.view.interface_m.IGetInstalledAppsListener;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 import ir.rasen.charsoo.view.widgets.charsoo_activity.CharsooActivity;
 
 public class ActivityUserRegister extends CharsooActivity implements IWebserviceResponse,IGetContactListener,IGetInstalledAppsListener {
@@ -46,7 +46,7 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
     String filePath,currentFragment;
     MenuItem menuItemNext;
     Bitmap tempUserPicture;
-    ProgressDialog progressDialog;
+    WaitDialog progressDialog;
     public int userIntId;
     public ArrayList<ContactEntry> noneCharsooEmailContactsList, noneCharsooPhoneNumberContactsList, charsooContactsList;
 
@@ -67,7 +67,7 @@ public class ActivityUserRegister extends CharsooActivity implements IWebservice
         ft.replace(R.id.fragmentContainer,fragOne);
         currentFragment=FIRST_PAGE;
         ft.commit();
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new WaitDialog(this);
         progressDialog.setMessage(getResources().getString(R.string.please_wait));
         new GetContactData(this,ActivityUserRegister.this).execute();
         new GetInstalledApps(this,ActivityUserRegister.this).execute();

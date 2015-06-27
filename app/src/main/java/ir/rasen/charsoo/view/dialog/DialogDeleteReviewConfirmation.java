@@ -1,7 +1,6 @@
 package ir.rasen.charsoo.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
@@ -10,10 +9,11 @@ import android.widget.LinearLayout;
 
 import ir.rasen.charsoo.R;
 import ir.rasen.charsoo.controller.object.Review;
+import ir.rasen.charsoo.model.review.DeleteReview;
 import ir.rasen.charsoo.view.interface_m.IReviewChange;
 import ir.rasen.charsoo.view.interface_m.IWebserviceResponse;
 import ir.rasen.charsoo.view.widgets.TextViewFont;
-import ir.rasen.charsoo.model.review.DeleteReview;
+import ir.rasen.charsoo.view.widgets.WaitDialog;
 
 
 public class DialogDeleteReviewConfirmation extends MyDialogOkCancel {
@@ -21,7 +21,7 @@ public class DialogDeleteReviewConfirmation extends MyDialogOkCancel {
 
 
     @SuppressLint("NewApi")
-    public DialogDeleteReviewConfirmation(final Context context, final Review review, final IWebserviceResponse iWebserviceResponse, final ProgressDialog progressDialog, final IReviewChange iReviewChange) {
+    public DialogDeleteReviewConfirmation(final Context context, final Review review, final IWebserviceResponse iWebserviceResponse, final WaitDialog progressDialog, final IReviewChange iReviewChange) {
         super(context, context.getResources().getString(R.string.popup_warning),
                 context.getResources().getString(R.string.cancel),
                 context.getResources().getString(R.string.delete));

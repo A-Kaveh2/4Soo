@@ -32,7 +32,7 @@ public class AdapterUsersFromBAItems extends BaseAdapter implements ICancelFrien
     SimpleLoader simpleLoader;
     ICancelFriendship iCancelFriendship;
     //IWebserviceResponse iWebserviceResponse;
-    //ProgressDialog progressDialog;
+    //WaitDialog progressDialog;
     int visitedId;
     Mode mode;
 
